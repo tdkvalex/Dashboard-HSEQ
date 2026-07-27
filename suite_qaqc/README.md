@@ -5,7 +5,7 @@ ejecutiva: una portada que cruza **proyectos × módulos** y, dentro, cada dashb
 
 | Módulo | Qué mide | Escala | Estado |
 |---|---|---|---|
-| **Protocolos** | Control documental | % pendiente — **menos es mejor** | activo |
+| **Protocolos** | Registros constructivos | % pendiente — **menos es mejor** | activo |
 | **Cierre QAQC** | Carpetas · caminatas · detalles de terminación | % cierre — **más es mejor** | activo |
 | **No Conformidades** | Hallazgos y su corrección | por definir | por construir |
 
@@ -57,9 +57,11 @@ Fue la decisión clave: permite integrarlos **sin reescribir ninguno**.
 **Los módulos se montan al abrir su pestaña**, no al cargar la página. Por eso la portada abre
 en ~0,4 s aunque el archivo pese 5,6 MB.
 
-**Una sola franja superior** (41 px) con logo, título, módulos y corte. Al empaquetar cada
-módulo se le inyecta un `<style>` que **oculta su propio logo**, para que el corporativo
-aparezca una sola vez en pantalla; el resto de su cabecera —título y botones— queda intacto.
+**Una sola franja superior** (41 px) con el logo, los módulos y el corte. Al empaquetar cada
+módulo se le inyecta un `<style>` que **oculta su propio logo y su propio título**: el logo
+corporativo aparece una sola vez, y el título lo pinta la suite en una banda común para que
+quede con el mismo tamaño, posición y encuadre al pasar de un módulo a otro. Los botones, el
+corte y las pestañas de proyecto de cada dashboard quedan intactos.
 
 **La portada no lee los módulos en vivo**: `armar_suite.js` extrae los KPI en el momento de
 armar y los deja en un bloque `KPIS`. Así la portada no depende de que los iframes estén
@@ -112,12 +114,35 @@ Cada cifra de la portada se contrastó contra lo que muestra el propio módulo:
 
 | Control | Suite | Módulo |
 |---|---|---|
+| Protocolos · universo | 61.264 | 61.264 |
 | Protocolos · KPI corporativo | 0,3% | 0,3% |
-| Protocolos · Desaladora | 0% | 0,0% |
-| Protocolos · Talabre | 0,9% | 0,9% |
-| Protocolos · Arqueros | 0% | 0,0% |
+| Protocolos · estado (P) | 11 | 11 |
+| Protocolos · estado (AP) | 109 | 109 |
+| Protocolos · estado (AE) | 5.420 | 5.420 |
+| Protocolos · estado (C) | 38.694 | 38.694 |
 | Cierre QAQC · P1 | 65,1% | 65,1% |
 | Cierre QAQC · detalles | 6.300 · 1.286 atrasados | 6.300 · 1.286 |
+
+### Cómo se calcula el KPI de Protocolos
+
+Se replica la lógica del propio dashboard, para que las cifras digan lo mismo en los dos lados:
+
+```
+Universo      = S + C + P + AP + AE + rv       (61.264)
+En falta      = AP + P                         (120)
+Base del KPI  = AP + P + AE + C                (44.234 = universo − S − rv)
+KPI           = En falta / Base = % pendiente  (0,3% — menos es mejor)
+```
+
+Dos detalles que hay que respetar, o las cifras se van:
+
+- **`AP` ya viene neto de `rv`** (protocolos en revisión del cliente), así que **no** se le
+  vuelve a restar. Pero el `rv` **sí suma al universo**: si no se devuelve, el universo queda
+  corto — eran los 148 de diferencia contra el módulo.
+- **`S` (remanente) queda fuera del KPI** pero dentro del universo. Reportar la base del KPI
+  como si fuera el universo fue el error original.
+- En un nodo con hijos **no** se suman sus propios estados, solo los de los hijos (así lo hace
+  el `sumCh()` del dashboard); el `rv` del padre sí se acumula.
 
 **Rendimiento:** portada 0,37 s · Protocolos 0,70 s · Cierre QAQC 0,60 s · volver a un módulo
 ya montado 0,19 s · 18 MB de memoria JS.

@@ -49,10 +49,6 @@
   .marca { display:flex; align-items:center; gap:11px; flex-shrink:0;
     padding:0 18px 0 clamp(12px,2vw,22px); border-right:1px solid var(--bdr); }
   .logo { height:26px; width:auto; display:block; }
-  .marca .tit { font-family:'Rajdhani',sans-serif; font-size:12.5px; font-weight:700;
-    letter-spacing:1px; text-transform:uppercase; line-height:1.15; white-space:nowrap; }
-  .marca .tit span { display:block; font-family:'IBM Plex Sans',sans-serif; font-size:8.5px;
-    font-weight:400; letter-spacing:.3px; color:var(--t3); text-transform:none; margin-top:1px; }
 
   nav { display:flex; align-items:stretch; flex:1; min-width:0; }
   .mtab { appearance:none; background:none; border:none; border-bottom:2px solid transparent;
@@ -83,6 +79,18 @@
     border:1px solid rgba(248,189,25,.45); border-radius:6px; padding:4px 11px; transition:all .2s; }
   .btn:hover { background: linear-gradient(135deg, rgba(40,80,160,.9), rgba(248,189,25,.2));
     border-color: rgba(248,189,25,.7); }
+
+  /* ── banda de título del módulo ──
+     La pinta la suite, no el módulo: así el título queda al mismo tamaño,
+     posición y encuadre al pasar de un módulo a otro. El título propio de
+     cada dashboard se oculta al empaquetarlo. */
+  #tituloMod { display:none; flex-shrink:0; text-align:center; padding:13px 20px 12px;
+    background: linear-gradient(180deg, rgba(30,61,123,.14), transparent);
+    border-bottom:1px solid var(--bdr); }
+  #tituloMod.on { display:block; }
+  #tituloMod .t { font-family:'Rajdhani',sans-serif; font-size:21px; font-weight:700;
+    letter-spacing:1.4px; text-transform:uppercase; line-height:1.1; }
+  #tituloMod .s { font-size:11px; color:var(--t2); margin-top:3px; }
 
   /* ── contenedor ── */
   main { flex:1; min-height:0; display:flex; flex-direction:column; }
@@ -186,13 +194,12 @@
 <header>
   <span class="marca">
     <img class="logo" id="logo" alt="Besalco Montajes">
-    <span class="tit">Suite QAQC<span id="hdSub">Gestión de Calidad</span></span>
   </span>
   <nav id="nav" role="tablist">
     <button class="mtab mtab-home" role="tab" data-v="home" aria-selected="true">
       Resumen<span class="sub">Los 3 módulos</span></button>
     <button class="mtab" role="tab" data-v="protocolos" aria-selected="false">
-      Protocolos<span class="sub">Control documental</span></button>
+      Protocolos<span class="sub">Registros Constructivos</span></button>
     <button class="mtab" role="tab" data-v="cierre" aria-selected="false">
       Cierre QAQC<span class="sub">Carpetas · caminatas · detalles</span></button>
     <button class="mtab" role="tab" data-v="nc" aria-selected="false">
@@ -202,6 +209,8 @@
     <span class="corte">Corte <b id="corte"></b></span>
   </span>
 </header>
+
+<div id="tituloMod"><div class="t"></div><div class="s"></div></div>
 
 <main>
   <div class="vista on" id="vHome"><div class="wrap">
@@ -301,10 +310,22 @@ function montar(clave, contenedor) {
 
 /* ---------- navegación ---------- */
 const VISTAS = { home:'vHome', protocolos:'vProtocolos', cierre:'vCierre', nc:'vNc' };
+// Título de cada módulo, centrado y con el mismo encuadre en los tres.
+const TITULOS = {
+  protocolos: ['Control de Protocolos', 'Registros constructivos · Besalco Montajes'],
+  cierre:     ['Control de Cierre QAQC', 'Carpetas · caminatas · detalles de terminación'],
+  nc:         ['Control de No Conformidades', 'Hallazgos y su corrección'],
+};
 function ver(v) {
   for (const [k, id] of Object.entries(VISTAS)) $(id).classList.toggle('on', k === v);
   document.querySelectorAll('.mtab').forEach(b =>
     b.setAttribute('aria-selected', b.dataset.v === v ? 'true' : 'false'));
+  const t = TITULOS[v];
+  $('tituloMod').classList.toggle('on', Boolean(t));
+  if (t) {
+    $('tituloMod').querySelector('.t').textContent = t[0];
+    $('tituloMod').querySelector('.s').textContent = t[1];
+  }
   if (v === 'protocolos') montar('protocolos', $('vProtocolos'));
   if (v === 'cierre') montar('cierre', $('vCierre'));
 }
@@ -316,7 +337,6 @@ document.querySelectorAll('.mtab').forEach(b =>
   if (!KPIS) return;
   const P = KPIS.proyectos, M = KPIS.modulos;
 
-  $('hdSub').textContent = `Besalco Montajes · ${P.length} proyectos`;
   const cortes = P.map(p => p.cierre && p.cierre.corte).filter(Boolean);
   const iso = (t) => { const [d,m,a] = String(t).split('-'); return `${a}${m}${d}`; };
   $('corte').textContent = cortes.sort((a,b) => iso(a).localeCompare(iso(b))).pop() || '—';
@@ -333,7 +353,7 @@ document.querySelectorAll('.mtab').forEach(b =>
     tarjeta('protocolos', 'Protocolos', M.protocolos.activo ? pc(M.protocolos.kpi) : '—',
       M.protocolos.activo ? 'pendiente' : '',
       M.protocolos.activo
-        ? `<b>${nf(M.protocolos.protocolos)}</b> protocolos · <b>${nf(M.protocolos.pendientes)}</b> pendientes<br>
+        ? `<b>${nf(M.protocolos.universo)}</b> de universo · <b>${nf(M.protocolos.enFalta)}</b> en falta<br>
            ${M.protocolos.proyectos} proyectos · actualizado ${M.protocolos.actualizado || '—'}`
         : 'Módulo no incluido', M.protocolos.activo) +
     tarjeta('cierre', 'Cierre QAQC',
@@ -364,7 +384,7 @@ document.querySelectorAll('.mtab').forEach(b =>
   for (const p of P) {
     r += `<tr><td><div class="pj">${p.nombre}</div><div class="cli">${p.cliente}</div></td>
       <td class="c">${p.protocolos ? celda(pc(p.protocolos.kpi),
-          `${nf(p.protocolos.pendientes)} de ${nf(p.protocolos.protocolos)}`, p.protocolos.sem) : celda(null,null,null)}</td>
+          `${nf(p.protocolos.enFalta)} en falta de ${nf(p.protocolos.base)}`, p.protocolos.sem) : celda(null,null,null)}</td>
       <td class="c">${p.cierre ? celda(pc(p.cierre.cierrePct),
           `${nf(p.cierre.p1.atrasados)} P1 atrasados`, p.cierre.sem) : celda(null,null,null)}</td>
       <td class="c">${celda(null,null,null)}</td></tr>`;

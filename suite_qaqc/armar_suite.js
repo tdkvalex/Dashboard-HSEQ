@@ -56,11 +56,13 @@ function leerProtocolos() {
   try { P = eval("(" + lit + ")"); }
   catch (e) { console.log("Aviso: no se pudo leer PROJECTS —", e.message); return null; }
 
-  // Suma recursiva de los estados de cada fila (algunas tienen hijos).
+  // Suma recursiva, replicando el sumCh() del propio dashboard: en un nodo con
+  // hijos NO se suman sus propios estados (solo los de los hijos), y el rv del
+  // padre sí se acumula.
   const acum = (filas, t) => {
     for (const r of filas || []) {
-      if (r.children) acum(r.children, t);
-      else for (const k of ["S", "C", "P", "AP", "AE"]) t[k] += r[k] || 0;
+      if (r.children) { acum(r.children, t); t.rv += r.rv || 0; }
+      else for (const k of ["S", "C", "P", "AP", "AE", "rv"]) t[k] += r[k] || 0;
     }
     return t;
   };
@@ -68,13 +70,27 @@ function leerProtocolos() {
   const out = {};
   for (const [id, p] of Object.entries(P)) {
     if (p.status && p.status !== "active") continue;
-    const t = acum(p.rows, { S: 0, C: 0, P: 0, AP: 0, AE: 0 });
-    // KPI del dashboard de Protocolos: (AP + P) / (AP + P + AE + C) = % pendiente.
-    // Es un indicador donde MENOS es mejor: 0% = cumple.
-    const num = t.AP + t.P, den = t.AP + t.P + t.AE + t.C;
+    const t = acum(p.rows, { S: 0, C: 0, P: 0, AP: 0, AE: 0, rv: 0 });
+    // Mismas definiciones que muestra el dashboard, para que las cifras de la
+    // suite y las del módulo digan lo mismo:
+    //   Universo   = S + C + P + AP + AE + rv
+    //   En falta   = AP + P                (AP ya viene NETO de rv)
+    //   Avance     = C + AE
+    //   Remanente  = S                     (queda fuera del KPI)
+    //   KPI        = (AP + P) / (AP + P + AE + C) = % pendiente, menos es mejor
+    //
+    // El rv (protocolos en revisión del cliente) SUMA al universo aunque no
+    // esté en el AP: el AP se guarda neto de rv, así que si no se devuelve al
+    // universo, este queda corto — era la diferencia de 148 contra el módulo.
+    const universo = t.S + t.C + t.P + t.AP + t.AE + t.rv;
+    const enFalta = t.AP + t.P;
+    const den = t.AP + t.P + t.AE + t.C;
     out[id] = {
       nombre: p.name, cliente: p.client, actualizado: p.updated,
-      estados: t, protocolos: den, pendientes: num, kpi: pct1(num, den),
+      estados: t,                 // S, C, P, AP, AE, rv — para poder auditarlo
+      universo, enFalta, avance: t.C + t.AE, remanente: t.S,
+      base: den,                  // denominador del KPI: universo SIN el remanente
+      kpi: pct1(enFalta, den),
     };
   }
   return out;
@@ -143,8 +159,10 @@ const filas = PROYECTOS.map((p) => {
   const b = cierre && cierre[p.qaqc];
   return {
     ...p,
-    protocolos: a ? { kpi: a.kpi, protocolos: a.protocolos, pendientes: a.pendientes,
-                      actualizado: a.actualizado, sem: semProtocolos(a.kpi) } : null,
+    protocolos: a ? { kpi: a.kpi, universo: a.universo, enFalta: a.enFalta,
+                      avance: a.avance, remanente: a.remanente, base: a.base,
+                      estados: a.estados, actualizado: a.actualizado,
+                      sem: semProtocolos(a.kpi) } : null,
     cierre: b ? { ...b, cierrePct: pct1(b.p1.cerrados, b.p1.total), sem: semCierre(b) } : null,
     noConformidades: null,     // módulo aún por construir
   };
@@ -158,8 +176,11 @@ const datos = {
     protocolos: prot ? {
       activo: true,
       proyectos: filas.filter((f) => f.protocolos).length,
-      protocolos: sum((x) => x.protocolos && x.protocolos.protocolos),
-      pendientes: sum((x) => x.protocolos && x.protocolos.pendientes),
+      universo: sum((x) => x.protocolos && x.protocolos.universo),
+      enFalta: sum((x) => x.protocolos && x.protocolos.enFalta),
+      avance: sum((x) => x.protocolos && x.protocolos.avance),
+      remanente: sum((x) => x.protocolos && x.protocolos.remanente),
+      base: sum((x) => x.protocolos && x.protocolos.base),
       actualizado: (filas.find((f) => f.protocolos) || {}).protocolos?.actualizado || null,
     } : { activo: false },
     cierre: cierre ? {
@@ -177,8 +198,8 @@ const datos = {
     noConformidades: { activo: false },
   },
 };
-datos.modulos.protocolos.kpi = pct1(datos.modulos.protocolos.pendientes,
-                                    datos.modulos.protocolos.protocolos);
+datos.modulos.protocolos.kpi = pct1(datos.modulos.protocolos.enFalta,
+                                    datos.modulos.protocolos.base);
 
 fs.writeFileSync(path.join(AQUI, "kpis_suite.json"), JSON.stringify(datos, null, 1), "utf8");
 
@@ -207,10 +228,16 @@ const CENTINELA = "@@CIERRE_SCRIPT_a7f3@@";
 // El logo corporativo ya va en la franja superior de la suite. Se oculta el de
 // cada módulo para que no aparezca dos veces en pantalla; el resto de su
 // cabecera (título y botones) se conserva intacto.
+// Se oculta el logo (va en la franja superior) y el título propio del módulo
+// (lo pinta la suite en una banda común, para que los tres queden con el mismo
+// tamaño, posición y encuadre). El resto de la cabecera —botones, corte,
+// pestañas de proyecto— se conserva intacto.
 const OCULTAR_LOGO =
-  "<style>/* suite: el logo va en la franja superior */" +
+  "<style>/* suite: logo y título los pinta el shell */" +
   ".header-logo,#headerLogo,.brandbox,#brandLogo{display:none!important}" +
-  ".hd-l{padding:0!important;min-width:0!important}<\/style>";
+  ".hd-center,.hd-title,.hd-sub{display:none!important}" +
+  ".hd-l{padding:0!important;min-width:0!important}" +
+  "header.top,.header{padding-top:6px!important;padding-bottom:6px!important}<\/style>";
 
 function empaquetar(html, archivo) {
   if (html.includes(CENTINELA))
@@ -275,7 +302,8 @@ for (const f of filas) {
   console.log(`${f.nombre.padEnd(14)}${f.cliente.padEnd(24)}${a.padStart(16)}${b.padStart(18)}`);
 }
 const M = datos.modulos;
-console.log(`\nProtocolos   ${nf(M.protocolos.protocolos)} protocolos · ${nf(M.protocolos.pendientes)} pendientes · KPI ${M.protocolos.kpi}%`);
+console.log(`\nProtocolos   universo ${nf(M.protocolos.universo)} · en falta ${nf(M.protocolos.enFalta)} ` +
+            `(base KPI ${nf(M.protocolos.base)} = universo − ${nf(M.protocolos.remanente)} remanente) · KPI ${M.protocolos.kpi}%`);
 console.log(`Cierre QAQC  ${nf(M.cierre.subs)} subsistemas · ${nf(M.cierre.detalles)} detalles · ` +
             `${nf(M.cierre.cerrados)} cerrados · ${nf(M.cierre.atrasados)} atrasados`);
 console.log(`No Conform.  módulo por construir`);

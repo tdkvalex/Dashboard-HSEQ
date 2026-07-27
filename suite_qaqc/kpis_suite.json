@@ -1,5 +1,5 @@
 {
- "generado": "2026-07-27 18:53",
+ "generado": "2026-07-27 19:10",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -7,8 +7,19 @@
    "cliente": "Antofagasta Minerals",
    "protocolos": {
     "kpi": 0,
-    "protocolos": 10265,
-    "pendientes": 3,
+    "universo": 18317,
+    "enFalta": 3,
+    "avance": 10262,
+    "remanente": 8052,
+    "base": 10265,
+    "estados": {
+     "S": 8052,
+     "C": 9042,
+     "P": 0,
+     "AP": 3,
+     "AE": 1220,
+     "rv": 0
+    },
     "actualizado": "27-jul-2026",
     "sem": [
      "good",
@@ -56,8 +67,19 @@
    "cliente": "Codelco",
    "protocolos": {
     "kpi": 0.9,
-    "protocolos": 11418,
-    "pendientes": 107,
+    "universo": 12974,
+    "enFalta": 107,
+    "avance": 11311,
+    "remanente": 1408,
+    "base": 11418,
+    "estados": {
+     "S": 1408,
+     "C": 10680,
+     "P": 6,
+     "AP": 101,
+     "AE": 631,
+     "rv": 148
+    },
     "actualizado": "27-jul-2026",
     "sem": [
      "good",
@@ -105,8 +127,19 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0,
-    "protocolos": 22551,
-    "pendientes": 10,
+    "universo": 29973,
+    "enFalta": 10,
+    "avance": 22541,
+    "remanente": 7422,
+    "base": 22551,
+    "estados": {
+     "S": 7422,
+     "C": 18972,
+     "P": 5,
+     "AP": 5,
+     "AE": 3569,
+     "rv": 0
+    },
     "actualizado": "27-jul-2026",
     "sem": [
      "good",
@@ -151,8 +184,11 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "protocolos": 44234,
-   "pendientes": 120,
+   "universo": 61264,
+   "enFalta": 120,
+   "avance": 44114,
+   "remanente": 16882,
+   "base": 44234,
    "actualizado": "27-jul-2026",
    "kpi": 0.3
   },
