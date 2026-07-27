@@ -236,6 +236,10 @@ const OCULTAR_LOGO =
   "<style>/* suite: logo y título los pinta el shell */" +
   ".header-logo,#headerLogo,.brandbox,#brandLogo{display:none!important}" +
   ".hd-center,.hd-title,.hd-sub{display:none!important}" +
+  // Al ocultar logo y título quedan menos elementos en la cabecera, y con
+  // justify-content:space-between el grupo que sobra se va a la izquierda.
+  // Se lo empuja a la derecha para que los tres módulos se vean igual.
+  ".headmeta,.hd-r{margin-left:auto!important}" +
   ".hd-l{padding:0!important;min-width:0!important}" +
   "header.top,.header{padding-top:6px!important;padding-bottom:6px!important}<\/style>";
 
