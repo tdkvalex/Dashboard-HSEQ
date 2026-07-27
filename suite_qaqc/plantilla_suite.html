@@ -34,52 +34,55 @@
   ::-webkit-scrollbar-track { background: var(--s1); }
   ::-webkit-scrollbar-thumb { background: var(--bdr2); border-radius:3px; }
 
-  /* ── cabecera ── */
+  /* ── franja superior única: logo + módulos + corte ──
+     Todo en una sola banda para no gastar dos filas de alto y para que el
+     logo corporativo aparezca UNA sola vez en pantalla (el de cada módulo
+     se oculta al empaquetarlo). */
   header {
-    display:flex; align-items:center; justify-content:space-between; gap:14px;
-    flex-wrap:wrap; padding:11px clamp(12px,2vw,26px); flex-shrink:0;
+    display:flex; align-items:stretch; gap:0; flex-wrap:nowrap; flex-shrink:0;
     background: rgba(8,13,24,.97); backdrop-filter: blur(12px);
     border-bottom:2px solid transparent;
     border-image: linear-gradient(90deg, var(--corp), var(--corp2), rgba(248,189,25,.4)) 1;
+    overflow-x:auto; scrollbar-width:none;
   }
-  .logo { height:30px; width:auto; display:block; flex-shrink:0; }
-  .hd-c { flex:1; min-width:220px; text-align:center; }
-  h1 { font-family:'Rajdhani', sans-serif; font-size:clamp(15px,1.55vw,20px);
-       font-weight:700; letter-spacing:.8px; margin:0; text-transform:uppercase; }
-  .hd-sub { font-size:11px; color:var(--t2); margin-top:2px; }
-  .hd-r { display:inline-flex; align-items:center; gap:9px; flex-wrap:wrap; }
-  .corte { display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
-    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; letter-spacing:.5px; }
-  .corte::before { content:''; width:7px; height:7px; border-radius:50%;
-    background:var(--green); animation:pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.35)} }
-  .corte b { color: var(--gold); }
-  .btn { font-family:'Rajdhani',sans-serif; font-weight:600; font-size:11px; letter-spacing:.3px;
-    cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:var(--gold);
-    background: linear-gradient(135deg, rgba(30,61,123,.85), rgba(20,45,90,.9));
-    border:1px solid rgba(248,189,25,.45); border-radius:6px; padding:5px 14px; transition:all .2s; }
-  .btn:hover { background: linear-gradient(135deg, rgba(40,80,160,.9), rgba(248,189,25,.2));
-    border-color: rgba(248,189,25,.7); }
+  header::-webkit-scrollbar { display:none; }
+  .marca { display:flex; align-items:center; gap:11px; flex-shrink:0;
+    padding:0 18px 0 clamp(12px,2vw,22px); border-right:1px solid var(--bdr); }
+  .logo { height:26px; width:auto; display:block; }
+  .marca .tit { font-family:'Rajdhani',sans-serif; font-size:12.5px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase; line-height:1.15; white-space:nowrap; }
+  .marca .tit span { display:block; font-family:'IBM Plex Sans',sans-serif; font-size:8.5px;
+    font-weight:400; letter-spacing:.3px; color:var(--t3); text-transform:none; margin-top:1px; }
 
-  /* ── barra de módulos ── */
-  nav { display:flex; align-items:stretch; overflow-x:auto; flex-shrink:0;
-    background: rgba(15,22,35,.85); border-bottom:1px solid var(--bdr);
-    padding:0 clamp(12px,2vw,26px); scrollbar-width:none; }
-  nav::-webkit-scrollbar { display:none; }
+  nav { display:flex; align-items:stretch; flex:1; min-width:0; }
   .mtab { appearance:none; background:none; border:none; border-bottom:2px solid transparent;
-    cursor:pointer; white-space:nowrap; text-align:left; padding:9px 22px; transition:all .2s;
-    font-family:'Rajdhani',sans-serif; font-size:13.5px; font-weight:600;
-    letter-spacing:.8px; color:var(--t3); text-transform:uppercase; }
+    cursor:pointer; white-space:nowrap; text-align:left; padding:7px 15px; transition:all .2s;
+    font-family:'Rajdhani',sans-serif; font-size:11.5px; font-weight:600;
+    letter-spacing:.6px; color:var(--t3); text-transform:uppercase; }
   .mtab:hover:not(:disabled) { color:var(--t2); }
-  .mtab[aria-selected="true"] { color:var(--t1); border-bottom-color: rgba(248,189,25,.55); }
-  .mtab:disabled { opacity:.4; cursor:not-allowed; }
-  .mtab .sub { display:block; font-family:'IBM Plex Sans',sans-serif; font-size:9.5px;
-    font-weight:400; letter-spacing:.3px; color:var(--t3); opacity:.65; margin-top:2px;
+  .mtab[aria-selected="true"] { color:var(--t1); border-bottom-color: rgba(248,189,25,.6); }
+  .mtab .sub { display:block; font-family:'IBM Plex Sans',sans-serif; font-size:8.5px;
+    font-weight:400; letter-spacing:.2px; color:var(--t3); opacity:.6; margin-top:1px;
     text-transform:none; }
   .mtab[aria-selected="true"] .sub { opacity:1; color: rgba(248,189,25,.55); }
   .mtab-home { color: var(--teal); }
   .mtab-home[aria-selected="true"] { color: var(--teal); border-bottom-color: var(--purple); }
   .mtab-home[aria-selected="true"] .sub { color: var(--purple); }
+
+  .hd-r { display:flex; align-items:center; gap:9px; flex-shrink:0;
+    padding:0 clamp(12px,2vw,22px) 0 16px; border-left:1px solid var(--bdr); }
+  .corte { display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:12px; letter-spacing:.4px; }
+  .corte::before { content:''; width:6px; height:6px; border-radius:50%;
+    background:var(--green); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.35)} }
+  .corte b { color: var(--gold); }
+  .btn { font-family:'Rajdhani',sans-serif; font-weight:600; font-size:10.5px; letter-spacing:.3px;
+    cursor:pointer; display:inline-flex; align-items:center; gap:5px; color:var(--gold);
+    background: linear-gradient(135deg, rgba(30,61,123,.85), rgba(20,45,90,.9));
+    border:1px solid rgba(248,189,25,.45); border-radius:6px; padding:4px 11px; transition:all .2s; }
+  .btn:hover { background: linear-gradient(135deg, rgba(40,80,160,.9), rgba(248,189,25,.2));
+    border-color: rgba(248,189,25,.7); }
 
   /* ── contenedor ── */
   main { flex:1; min-height:0; display:flex; flex-direction:column; }
@@ -181,27 +184,24 @@
 <body>
 
 <header>
-  <img class="logo" id="logo" alt="Besalco Montajes">
-  <div class="hd-c">
-    <h1>Suite QAQC — Gestión de Calidad</h1>
-    <div class="hd-sub" id="hdSub"></div>
-  </div>
-  <div class="hd-r">
+  <span class="marca">
+    <img class="logo" id="logo" alt="Besalco Montajes">
+    <span class="tit">Suite QAQC<span id="hdSub">Gestión de Calidad</span></span>
+  </span>
+  <nav id="nav" role="tablist">
+    <button class="mtab mtab-home" role="tab" data-v="home" aria-selected="true">
+      Resumen<span class="sub">Los 3 módulos</span></button>
+    <button class="mtab" role="tab" data-v="protocolos" aria-selected="false">
+      Protocolos<span class="sub">Control documental</span></button>
+    <button class="mtab" role="tab" data-v="cierre" aria-selected="false">
+      Cierre QAQC<span class="sub">Carpetas · caminatas · detalles</span></button>
+    <button class="mtab" role="tab" data-v="nc" aria-selected="false">
+      No Conformidades<span class="sub">Por construir</span></button>
+  </nav>
+  <span class="hd-r">
     <span class="corte">Corte <b id="corte"></b></span>
-    <button class="btn" id="btnHome" type="button">◀ Resumen</button>
-  </div>
+  </span>
 </header>
-
-<nav id="nav" role="tablist">
-  <button class="mtab mtab-home" role="tab" data-v="home" aria-selected="true">
-    Resumen ejecutivo<span class="sub">Los 3 módulos</span></button>
-  <button class="mtab" role="tab" data-v="protocolos" aria-selected="false">
-    Protocolos<span class="sub">Control documental</span></button>
-  <button class="mtab" role="tab" data-v="cierre" aria-selected="false">
-    Cierre QAQC<span class="sub">Carpetas · caminatas · detalles</span></button>
-  <button class="mtab" role="tab" data-v="nc" aria-selected="false">
-    No Conformidades<span class="sub">Por construir</span></button>
-</nav>
 
 <main>
   <div class="vista on" id="vHome"><div class="wrap">
@@ -305,21 +305,18 @@ function ver(v) {
   for (const [k, id] of Object.entries(VISTAS)) $(id).classList.toggle('on', k === v);
   document.querySelectorAll('.mtab').forEach(b =>
     b.setAttribute('aria-selected', b.dataset.v === v ? 'true' : 'false'));
-  $('btnHome').style.display = v === 'home' ? 'none' : 'inline-flex';
   if (v === 'protocolos') montar('protocolos', $('vProtocolos'));
   if (v === 'cierre') montar('cierre', $('vCierre'));
 }
 document.querySelectorAll('.mtab').forEach(b =>
   b.addEventListener('click', () => ver(b.dataset.v)));
-$('btnHome').addEventListener('click', () => ver('home'));
 
 /* ---------- portada ejecutiva ---------- */
 (function(){
   if (!KPIS) return;
   const P = KPIS.proyectos, M = KPIS.modulos;
 
-  $('hdSub').innerHTML = `Besalco Montajes · 3 módulos · ` +
-    P.map(p => `<b>${p.nombre}</b>`).join(' · ');
+  $('hdSub').textContent = `Besalco Montajes · ${P.length} proyectos`;
   const cortes = P.map(p => p.cierre && p.cierre.corte).filter(Boolean);
   const iso = (t) => { const [d,m,a] = String(t).split('-'); return `${a}${m}${d}`; };
   $('corte').textContent = cortes.sort((a,b) => iso(a).localeCompare(iso(b))).pop() || '—';

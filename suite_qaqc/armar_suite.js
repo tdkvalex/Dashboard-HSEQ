@@ -203,10 +203,22 @@ function bloque(txt, ini, fin, contenido) {
 // "</script" reales y cerrarían el bloque antes de tiempo, rompiendo el módulo.
 // Por eso se usa un centinela que se verifica ausente antes de empaquetar.
 const CENTINELA = "@@CIERRE_SCRIPT_a7f3@@";
+
+// El logo corporativo ya va en la franja superior de la suite. Se oculta el de
+// cada módulo para que no aparezca dos veces en pantalla; el resto de su
+// cabecera (título y botones) se conserva intacto.
+const OCULTAR_LOGO =
+  "<style>/* suite: el logo va en la franja superior */" +
+  ".header-logo,#headerLogo,.brandbox,#brandLogo{display:none!important}" +
+  ".hd-l{padding:0!important;min-width:0!important}<\/style>";
+
 function empaquetar(html, archivo) {
   if (html.includes(CENTINELA))
     throw new Error(`${archivo} contiene el centinela ${CENTINELA}; cambiarlo en armar_suite.js`);
-  return html.replace(/<\/script/gi, CENTINELA);
+  // Se inyecta al final del <head> para que gane a los estilos del módulo.
+  const i = html.search(/<\/head>/i);
+  const con = i === -1 ? OCULTAR_LOGO + html : html.slice(0, i) + OCULTAR_LOGO + html.slice(i);
+  return con.replace(/<\/script/gi, CENTINELA);
 }
 
 const plantilla = path.join(AQUI, "plantilla_suite.html");

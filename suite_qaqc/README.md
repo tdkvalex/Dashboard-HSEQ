@@ -54,6 +54,10 @@ Fue la decisión clave: permite integrarlos **sin reescribir ninguno**.
 **Los módulos se montan al abrir su pestaña**, no al cargar la página. Por eso la portada abre
 en ~0,4 s aunque el archivo pese 5,6 MB.
 
+**Una sola franja superior** (41 px) con logo, título, módulos y corte. Al empaquetar cada
+módulo se le inyecta un `<style>` que **oculta su propio logo**, para que el corporativo
+aparezca una sola vez en pantalla; el resto de su cabecera —título y botones— queda intacto.
+
 **La portada no lee los módulos en vivo**: `armar_suite.js` extrae los KPI en el momento de
 armar y los deja en un bloque `KPIS`. Así la portada no depende de que los iframes estén
 montados ni de comunicación entre documentos.
