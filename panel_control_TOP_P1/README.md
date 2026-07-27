@@ -235,6 +235,21 @@ caminatas, la 1 está casi completa pero la 2 va en 77,6%, concentrando el rezag
 > sea alto: en la versión manual previa estaba marcada como *Atención*, lo que era
 > inconsistente con el criterio declarado.
 
+## Identidad visual
+
+El panel usa el **mismo sistema de diseño que el dashboard corporativo de Protocolos** de
+Besalco Montajes: base oscura (`#080d18`), acento dorado corporativo (`#F8BD19`), borde
+superior en degradado azul→dorado, tipografía **Rajdhani** para cifras y titulares e **IBM Plex
+Sans** para el cuerpo. Las pestañas, tarjetas KPI (con su barra de acento superior), cabeceras
+de bloque con filete dorado y tablas replican los componentes de ese dashboard, de modo que los
+dos tableros se lean como un mismo producto.
+
+El **modo oscuro es el predeterminado**. Se mantiene un modo claro —con el dorado oscurecido
+para que contraste sobre blanco— para imprimir o proyectar sobre fondo claro.
+
+No hay dependencias externas: el panel sigue siendo **un solo archivo portable** y las
+tipografías degradan a la fuente del sistema si no están instaladas.
+
 ## Nota de accesibilidad (colores)
 
 La paleta fue verificada con un validador de contraste y daltonismo. Los estados de las
