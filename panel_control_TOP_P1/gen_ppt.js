@@ -952,7 +952,56 @@ if (fs.existsSync(rutaTal)) {
   console.log("No se encontró datos_talabre.json — la PPT sale sin Talabre.");
 }
 
+// =====================================================================
+// Se escribe la PPT y se embebe en index.html para que el panel la ofrezca
+// con el botón «Descargar Informe» sin depender de archivos sueltos.
+// =====================================================================
+const MARCA_INI = "<!-- === PPT:INICIO ===";
+const MARCA_FIN = "<!-- === PPT:FIN === -->";
+
+function embeber(archivo) {
+  const html = path.join(AQUI, "index.html");
+  if (!fs.existsSync(html)) {
+    console.log("Aviso: no se encontró index.html; la PPT quedó solo como archivo.");
+    return;
+  }
+  const txt = fs.readFileSync(html, "utf8");
+  const i = txt.indexOf(MARCA_INI), f = txt.indexOf(MARCA_FIN);
+  if (i === -1 || f === -1 || f < i) {
+    console.log("Aviso: no se encontraron las marcas PPT en index.html; " +
+                "el panel quedó con el informe anterior.");
+    return;
+  }
+  const bin = fs.readFileSync(archivo);
+  // El nombre del archivo descargado lleva el corte más reciente de los tres
+  // proyectos, en DDMMAA, para no pisar informes de semanas distintas en la
+  // carpeta de descargas de quien lo abra.
+  const cortes = [D.meta.corte_texto];
+  for (const r of ["datos_desaladora.json", "datos_talabre.json"]) {
+    const f2 = path.join(AQUI, r);
+    if (!fs.existsSync(f2)) continue;
+    const j = JSON.parse(fs.readFileSync(f2, "utf8"));
+    // «hoy» es la fecha de referencia real del corte; corteTexto puede ser una
+    // fecha de agenda futura en algún proyecto, así que se prefiere hoy.
+    if (j.meta) cortes.push(j.meta.hoy || j.meta.corteTexto);
+  }
+  const aIso = (t) => { const [d, m, a] = String(t).split("-"); return `${a}${m}${d}`; };
+  const corteMax = cortes.filter(Boolean).sort((a, b) => aIso(a).localeCompare(aIso(b))).pop();
+  const [dd, mm, aaaa] = String(corteMax || "").split("-");
+  const meta = {
+    nombre: `Panel_CRP_${dd && mm && aaaa ? dd + mm + aaaa.slice(2) : "actual"}.pptx`,
+    corte: corteMax,
+    laminas: nSlide - 1,
+    peso: `${(bin.length / 1024 / 1024).toFixed(1)} MB`,
+    b64: bin.toString("base64"),
+  };
+  const bloque = MARCA_INI + " (la PPT del corte, embebida por gen_ppt.js — no editar a mano) -->\n" +
+    "<script>\nconst PPTX = " + JSON.stringify(meta) + ";\n<\/script>\n";
+  fs.writeFileSync(html, txt.slice(0, i) + bloque + txt.slice(f), "utf8");
+  console.log(`Informe embebido en index.html (${meta.nombre} · ${meta.laminas} láminas · ${meta.peso}).`);
+}
+
 const salida = path.join(AQUI, "Panel_Control_TOP_P1.pptx");
 p.writeFile({ fileName: salida })
-  .then((f) => console.log("PPT generada:", f))
+  .then((f) => { console.log("PPT generada:", f); embeber(salida); })
   .catch((e) => { console.error(e); process.exit(1); });

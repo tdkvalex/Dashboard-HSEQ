@@ -484,9 +484,13 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
     return {
         "meta": {
             **PROYECTO,
-            "corte": corte.strftime("%Y-%m-%d") if corte else None,
-            "corteTexto": corte.strftime("%d-%m-%Y") if corte else "sin fecha",
+            # El corte de Talabre es la fecha de referencia con la que se
+            # calculan los atrasos. La caminata agendada más lejana se guarda
+            # aparte: es una fecha futura y no debe confundirse con el corte.
+            "corte": hoy.strftime("%Y-%m-%d"),
+            "corteTexto": hoy.strftime("%d-%m-%Y"),
             "hoy": hoy.strftime("%d-%m-%Y"),
+            "ultimaAgenda": corte.strftime("%d-%m-%Y") if corte else None,
             "generado": datetime.now().strftime("%Y-%m-%d %H:%M"),
         },
         "subsistemas": {"total": len(subs), "porArea": {a: sum(1 for s in subs if s["area"] == a)
@@ -557,7 +561,7 @@ def main():
     print("=" * 70)
     print(f"  {m['nombre'].upper()} — {m['descripcion']}")
     print(f"  {m['cliente']}   ·   contrato {m['contrato']}")
-    print(f"  Última caminata agendada: {m['corteTexto']}   ·   atrasos al {m['hoy']}")
+    print(f"  Corte: {m['corteTexto']}   ·   última caminata agendada: {m['ultimaAgenda'] or '—'}")
     print("=" * 70)
 
     print(f"\nSUBSISTEMAS: {S['total']} en {len(datos['areas'])} áreas")

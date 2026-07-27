@@ -1,4 +1,4 @@
-# Panel de Control — Carpetas · Caminatas · Detalles de Terminación P1
+# Control de Cierre QAQC — Gestión de Calidad
 
 Entregable ejecutivo multiproyecto para medir el estatus de **armado y entrega de carpetas**,
 el **avance de caminatas** y los **detalles de terminación en condición P1**, con resumen
@@ -70,7 +70,7 @@ tilde), así que un cambio de redacción en la planilla no rompe el tablero.
 
 | Archivo | Qué es |
 |---|---|
-| `index.html` | Panel interactivo con **una pestaña por proyecto**, en **un solo archivo portable** (se puede enviar por correo tal cual). Modo claro/oscuro, tooltips y tablas de detalle. |
+| `index.html` | Panel interactivo con **una pestaña por proyecto**, en **un solo archivo portable** (se puede enviar por correo tal cual). Lleva la PPT del corte embebida y descargable con el botón **Descargar Informe**. Modo claro/oscuro, tooltips y tablas de detalle. |
 | `Panel_Control_TOP_P1.pptx` | Presentación ejecutiva de 17 láminas: 7 de MASA + 5 de Desaladora + 5 de Talabre. |
 | `actualizar.py` | **Punto de entrada de MASA.** Lee el Excel, recalcula todo y actualiza el panel. |
 | `desaladora.py` | **Punto de entrada de Desaladora.** Lee el reporte gerencial y el punch list, valida el cruce entre ambos y actualiza el panel. |
@@ -234,6 +234,19 @@ caminatas, la 1 está casi completa pero la 2 va en 77,6%, concentrando el rezag
 > figura como *Crítico* (caminata 100% = 50%, bajo el umbral de 60%) aunque su cierre de P1
 > sea alto: en la versión manual previa estaba marcada como *Atención*, lo que era
 > inconsistente con el criterio declarado.
+
+## Descargar el informe desde el panel
+
+El panel trae un botón **📊 Descargar Informe** en la cabecera que entrega la PPT del corte
+**sin necesidad de servidor ni de archivos sueltos**: `gen_ppt.js` la genera y la deja embebida
+dentro del propio `index.html`, así que el panel se puede enviar por correo y quien lo reciba
+descarga la presentación desde ahí.
+
+El archivo se descarga como `Panel_CRP_DDMMAA.pptx`, con el corte más reciente de los tres
+proyectos, para que informes de semanas distintas no se pisen en la carpeta de descargas.
+
+Esto suma unos 2,3 MB al panel (queda en ~2,5 MB). Si todavía no se ha corrido `gen_ppt.js`,
+el botón aparece deshabilitado explicando qué falta, en vez de fallar al hacer clic.
 
 ## Formato de la PPT (fijo)
 
