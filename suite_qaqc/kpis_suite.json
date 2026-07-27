@@ -1,5 +1,5 @@
 {
- "generado": "2026-07-27 19:28",
+ "generado": "2026-07-27 19:47",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -59,7 +59,26 @@
      "Atención"
     ]
    },
-   "noConformidades": null
+   "noConformidades": {
+    "nombre": "Desaladora",
+    "cliente": "Minera Los Pelambres",
+    "obra": true,
+    "total": 95,
+    "cerradas": 92,
+    "abiertas": 3,
+    "atrasadas": 0,
+    "pctCierre": 96.8,
+    "internas": 56,
+    "externas": 38,
+    "costo": 1573.2,
+    "conCosto": 69,
+    "medianaCierre": 19,
+    "maxCierre": 250,
+    "sem": [
+     "good",
+     "Al día"
+    ]
+   }
   },
   {
    "id": "TALABRE",
@@ -119,7 +138,26 @@
      "Al día"
     ]
    },
-   "noConformidades": null
+   "noConformidades": {
+    "nombre": "Talabre",
+    "cliente": "Codelco",
+    "obra": true,
+    "total": 239,
+    "cerradas": 213,
+    "abiertas": 26,
+    "atrasadas": 0,
+    "pctCierre": 89.1,
+    "internas": 53,
+    "externas": 186,
+    "costo": 5818.3,
+    "conCosto": 143,
+    "medianaCierre": 22,
+    "maxCierre": 269,
+    "sem": [
+     "crit",
+     "Crítico"
+    ]
+   }
   },
   {
    "id": "ARQUEROS",
@@ -177,7 +215,26 @@
      "Crítico"
     ]
    },
-   "noConformidades": null
+   "noConformidades": {
+    "nombre": "Arqueros",
+    "cliente": "MASA",
+    "obra": true,
+    "total": 94,
+    "cerradas": 93,
+    "abiertas": 1,
+    "atrasadas": 0,
+    "pctCierre": 98.9,
+    "internas": 53,
+    "externas": 41,
+    "costo": 3391.8,
+    "conCosto": 44,
+    "medianaCierre": 139,
+    "maxCierre": 313,
+    "sem": [
+     "good",
+     "Al día"
+    ]
+   }
   }
  ],
  "modulos": {
@@ -205,7 +262,17 @@
    "p1Atrasados": 596
   },
   "noConformidades": {
-   "activo": false
+   "activo": true,
+   "proyectos": 3,
+   "total": 428,
+   "cerradas": 398,
+   "abiertas": 30,
+   "pctCierre": 93,
+   "costo": 10783.4,
+   "medianaCierre": 28,
+   "conOficina": 436,
+   "atrasoCalculable": false,
+   "corte": "27-07-2026"
   }
  }
 }

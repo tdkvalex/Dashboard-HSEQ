@@ -7,7 +7,7 @@ ejecutiva: una portada que cruza **proyectos × módulos** y, dentro, cada dashb
 |---|---|---|---|
 | **Protocolos** | Registros constructivos | % pendiente — **menos es mejor** | activo |
 | **Cierre QAQC** | Carpetas · caminatas · detalles de terminación | % cierre — **más es mejor** | activo |
-| **No Conformidades** | Hallazgos y su corrección | por definir | por construir |
+| **No Conformidades** | Hallazgos de calidad y su corrección | % cerrado — **más es mejor** | activo |
 
 Los tres cubren **los mismos tres proyectos**, con distinto nombre en cada módulo:
 
@@ -101,22 +101,23 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 | `plantilla_suite.html` | Shell ejecutivo: portada, navegación y montaje de módulos |
 | `modulos/protocolos.html` | Dashboard de Protocolos, tal cual |
 | `modulos/cierre_qaqc.html` | Opcional: si no está, se usa `panel_control_TOP_P1/index.html` |
+| `modulos/no_conformidades.html` | Opcional: si no está, se usa `modulo_nc/index.html` |
 | `kpis_suite.json` | KPI extraídos, para consultar sin abrir la suite |
 | `besalco_logo*.png` | Logo corporativo (versión blanca para fondo oscuro) |
 
 ---
 
-## Agregar No Conformidades
+## Consolidado al corte
 
-El módulo entra sin tocar los otros dos si cumple:
+| Módulo | Indicador | Valor |
+|---|---|---|
+| Protocolos | % pendiente | **0,3%** — 120 en falta de 44.234 |
+| Cierre QAQC | % detalles cerrados | **59,1%** — 1.286 atrasados |
+| No Conformidades | % hallazgos cerrados | **93%** — 30 abiertos de 428 |
 
-1. Un **HTML autocontenido** con 4 pestañas: resumen corporativo + los 3 proyectos.
-2. Mismo sistema de diseño (base oscura, acento dorado, Rajdhani + IBM Plex Sans).
-3. Un **script que procese los Excel** e inyecte los datos en bloques marcados, como
-   `actualizar.py` o `talabre.py`.
-4. Un **JSON por proyecto**, para que `armar_suite.js` lea su KPI sin abrir el módulo.
-5. Se deja en `modulos/no_conformidades.html` y se agrega a la lista `mods` de
-   `armar_suite.js`, más su lector de KPI.
+**Lo que muestra el cruce:** la documentación va muy por delante del cierre físico. Protocolos
+está prácticamente al día mientras el cierre de detalles P1 arrastra 596 ítems atrasados. El
+cuello de botella no está en el papel: está en terreno.
 
 ---
 

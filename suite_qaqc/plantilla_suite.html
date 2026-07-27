@@ -191,7 +191,7 @@
     <button class="mtab" role="tab" data-v="cierre" aria-selected="false">
       Cierre QAQC<span class="sub">Carpetas · caminatas · detalles</span></button>
     <button class="mtab" role="tab" data-v="nc" aria-selected="false">
-      No Conformidades<span class="sub">Por construir</span></button>
+      No Conformidades<span class="sub">Hallazgos y su corrección</span></button>
   </nav>
   <span class="hd-r">
     <span class="corte">Corte <b id="corte"></b></span>
@@ -225,23 +225,7 @@
   <div class="vista" id="vProtocolos"></div>
   <div class="vista" id="vCierre"></div>
 
-  <div class="vista" id="vNc"><div class="vacio">
-    <div class="ic">🧭</div>
-    <h3>No Conformidades</h3>
-    <p>Módulo aún por construir. Cuando esté, entra en esta misma suite sin tocar los otros dos:
-       cada módulo vive aislado en su propio documento.</p>
-    <div class="contrato">
-      <h4>Contrato del módulo</h4>
-      <ol>
-        <li>Un <b>archivo HTML autocontenido</b> con 4 pestañas: resumen corporativo + los 3 proyectos.</li>
-        <li>Mismo sistema de diseño (base oscura, acento dorado, Rajdhani + IBM Plex Sans).</li>
-        <li>Un <b>script que procese los Excel de origen</b> e inyecte los datos en bloques marcados,
-            como <code>actualizar.py</code> o <code>talabre.py</code>.</li>
-        <li>Un <b>JSON de datos</b> por proyecto, para que la suite pueda leer su KPI sin abrir el módulo.</li>
-        <li>Se deja en <code>modulos/no_conformidades.html</code> y <code>armar_suite.js</code> lo toma solo.</li>
-      </ol>
-    </div>
-  </div></div>
+  <div class="vista" id="vNc"></div>
 </main>
 
 <!-- === KPIS:INICIO === -->
@@ -302,6 +286,7 @@ function ver(v) {
     b.setAttribute('aria-selected', b.dataset.v === v ? 'true' : 'false'));
   if (v === 'protocolos') montar('protocolos', $('vProtocolos'));
   if (v === 'cierre') montar('cierre', $('vCierre'));
+  if (v === 'nc') montar('nc', $('vNc'));
 }
 document.querySelectorAll('.mtab').forEach(b =>
   b.addEventListener('click', () => ver(b.dataset.v)));
@@ -337,8 +322,12 @@ document.querySelectorAll('.mtab').forEach(b =>
         ? `<b>${nf(M.cierre.detalles)}</b> detalles · <b>${nf(M.cierre.atrasados)}</b> atrasados<br>
            ${nf(M.cierre.subs)} subsistemas en ${M.cierre.proyectos} proyectos`
         : 'Módulo no incluido', M.cierre.activo) +
-    tarjeta('nc', 'No Conformidades', '—', '',
-      'Módulo por construir.<br>Entra en la suite sin tocar los otros dos.', false);
+    tarjeta('nc', 'No Conformidades', M.noConformidades.activo ? pc(M.noConformidades.pctCierre) : '—',
+      M.noConformidades.activo ? 'cerrado' : '',
+      M.noConformidades.activo
+        ? `<b>${nf(M.noConformidades.total)}</b> hallazgos · <b>${nf(M.noConformidades.abiertas)}</b> abiertos<br>
+           mediana de cierre ${nf(M.noConformidades.medianaCierre)} días · ${nf(Math.round(M.noConformidades.costo))} UF`
+        : 'Módulo no incluido', M.noConformidades.activo);
 
   document.querySelectorAll('.mod[data-ir]').forEach(el => {
     const v = el.dataset.ir;
@@ -354,14 +343,16 @@ document.querySelectorAll('.mtab').forEach(b =>
   let r = `<tr><th>Proyecto</th>
     <th class="mod-h">Protocolos<span>% pendiente · menos es mejor</span></th>
     <th class="mod-h">Cierre QAQC<span>% cierre de P1 · más es mejor</span></th>
-    <th class="mod-h">No Conformidades<span>por construir</span></th></tr>`;
+    <th class="mod-h">No Conformidades<span>% cerrado · más es mejor</span></th></tr>`;
   for (const p of P) {
     r += `<tr><td><div class="pj">${p.nombre}</div><div class="cli">${p.cliente}</div></td>
       <td class="c">${p.protocolos ? celda(pc(p.protocolos.kpi),
           `${nf(p.protocolos.enFalta)} en falta de ${nf(p.protocolos.base)}`, p.protocolos.sem) : celda(null,null,null)}</td>
       <td class="c">${p.cierre ? celda(pc(p.cierre.cierrePct),
           `${nf(p.cierre.p1.atrasados)} P1 atrasados`, p.cierre.sem) : celda(null,null,null)}</td>
-      <td class="c">${celda(null,null,null)}</td></tr>`;
+      <td class="c">${p.noConformidades ? celda(pc(p.noConformidades.pctCierre),
+          `${nf(p.noConformidades.abiertas)} abiertos de ${nf(p.noConformidades.total)}`,
+          p.noConformidades.sem) : celda(null,null,null)}</td></tr>`;
   }
   $('matriz').innerHTML = r;
   $('subMatriz').textContent =
@@ -384,10 +375,23 @@ document.querySelectorAll('.mtab').forEach(b =>
       con los protocolos en ${pc(peorCie.protocolos ? peorCie.protocolos.kpi : null)} de pendiente:
       el papel está listo, falta ejecutar.</p>`;
     if (peorProt && peorProt.protocolos.kpi > 0) h += `<p><b>En protocolos, ${peorProt.nombre} es el único con pendiente relevante</b>
-      (${pc(peorProt.protocolos.kpi)}, ${nf(peorProt.protocolos.pendientes)} de ${nf(peorProt.protocolos.protocolos)}).
+      (${pc(peorProt.protocolos.kpi)}, ${nf(peorProt.protocolos.enFalta)} en falta de ${nf(peorProt.protocolos.base)}).
       Los otros están en cero.</p>`;
-    h += `<p><b>No Conformidades falta</b> para cerrar la vista: hoy se ve qué está documentado y qué está
-      ejecutado, pero no qué se hizo mal y sigue sin corregirse.</p>`;
+    if (M.noConformidades.activo) {
+      const peorNC = P.filter(x => x.noConformidades)
+        .sort((a,b) => a.noConformidades.pctCierre - b.noConformidades.pctCierre)[0];
+      h += `<p><b>En no conformidades el cierre global va ${pc(M.noConformidades.pctCierre)}</b>,
+        con ${nf(M.noConformidades.abiertas)} hallazgos abiertos de ${nf(M.noConformidades.total)}` +
+        (peorNC ? ` — ${peorNC.nombre} concentra ${nf(peorNC.noConformidades.abiertas)}` : '') +
+        `. La mediana de cierre es de ${nf(M.noConformidades.medianaCierre)} días
+        y el costo declarado suma ${nf(Math.round(M.noConformidades.costo))} UF.</p>`;
+      if (!M.noConformidades.atrasoCalculable)
+        h += `<p><b>Ojo con el atraso de las NC:</b> no es calculable hoy porque las abiertas no traen
+          fecha de cierre comprometida. El módulo reporta la antigüedad de cada una en su lugar.</p>`;
+    } else {
+      h += `<p><b>No Conformidades falta</b> para cerrar la vista: hoy se ve qué está documentado y qué está
+        ejecutado, pero no qué se hizo mal y sigue sin corregirse.</p>`;
+    }
     $('lectura').innerHTML = h;
   })();
 
@@ -395,9 +399,10 @@ document.querySelectorAll('.mtab').forEach(b =>
   (function(){
     let r = `<tr><th>Proyecto</th><th class="num">Protocolos</th><th class="num">Pendientes</th>
       <th class="num">KPI</th><th class="num">Subsist.</th><th class="num">Detalles</th>
-      <th class="num">Cerrados</th><th class="num">Atrasados</th><th class="num">P1 % cierre</th></tr>`;
+      <th class="num">Cerrados</th><th class="num">Atrasados</th><th class="num">P1 % cierre</th>
+      <th class="num">NC</th><th class="num">NC abiertas</th><th class="num">NC % cierre</th></tr>`;
     for (const p of P) {
-      const a = p.protocolos, b = p.cierre;
+      const a = p.protocolos, b = p.cierre, c = p.noConformidades;
       r += `<tr><td><div class="pj">${p.nombre}</div><div class="cli">${p.cliente}</div></td>
         <td class="num">${a ? nf(a.protocolos) : '—'}</td>
         <td class="num">${a ? nf(a.pendientes) : '—'}</td>
@@ -406,7 +411,10 @@ document.querySelectorAll('.mtab').forEach(b =>
         <td class="num">${b ? nf(b.det.total) : '—'}</td>
         <td class="num">${b ? nf(b.det.cerrados) : '—'}</td>
         <td class="num">${b ? nf(b.det.atrasados) : '—'}</td>
-        <td class="num">${b ? pc(b.cierrePct) : '—'}</td></tr>`;
+        <td class="num">${b ? pc(b.cierrePct) : '—'}</td>
+        <td class="num">${c ? nf(c.total) : '—'}</td>
+        <td class="num">${c ? nf(c.abiertas) : '—'}</td>
+        <td class="num">${c ? pc(c.pctCierre) : '—'}</td></tr>`;
     }
     const s = (f) => P.reduce((a,x) => a + (f(x) || 0), 0);
     r += `<tr><td><b>Consolidado</b></td>
@@ -417,7 +425,10 @@ document.querySelectorAll('.mtab').forEach(b =>
       <td class="num"><b>${nf(M.cierre.detalles)}</b></td>
       <td class="num"><b>${nf(M.cierre.cerrados)}</b></td>
       <td class="num"><b>${nf(M.cierre.atrasados)}</b></td>
-      <td class="num"><b>${pc(Math.round(1000*M.cierre.p1Cerrados/M.cierre.p1Total)/10)}</b></td></tr>`;
+      <td class="num"><b>${pc(Math.round(1000*M.cierre.p1Cerrados/M.cierre.p1Total)/10)}</b></td>
+      <td class="num"><b>${M.noConformidades.activo ? nf(M.noConformidades.total) : '—'}</b></td>
+      <td class="num"><b>${M.noConformidades.activo ? nf(M.noConformidades.abiertas) : '—'}</b></td>
+      <td class="num"><b>${M.noConformidades.activo ? pc(M.noConformidades.pctCierre) : '—'}</b></td></tr>`;
     $('detalle').innerHTML = r;
   })();
 
@@ -428,6 +439,8 @@ document.querySelectorAll('.mtab').forEach(b =>
     `(0% cumple · 1–3% aceptable · 4–15% medianamente · 16–50% deficiente · >50% no cumple). ` +
     `<b>Cierre QAQC:</b> % de detalles P1 cerrados, donde <b>más es mejor</b>; atrasado = ítem abierto ` +
     `con su fecha comprometida ya cumplida. ` +
+    `<b>No Conformidades:</b> % de hallazgos cerrados, donde <b>más es mejor</b>. El consolidado del ` +
+    `módulo son los 3 proyectos; Oficina Central se informa dentro del propio módulo. ` +
     `<b>Las escalas no se mezclan:</b> cada módulo mide una cosa distinta y no se promedian entre sí. ` +
     `Los módulos abren en su propio documento aislado; para el detalle de cada uno, entrar a su pestaña. ` +
     `Generado el ${KPIS.generado}.`;

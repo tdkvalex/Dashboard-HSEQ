@@ -136,12 +136,33 @@ function leerCierre() {
   return Object.keys(out).length ? out : null;
 }
 
+// ------------------------------------------------- módulo · No Conformidades
+function leerNC() {
+  const r = path.join(AQUI, "..", "modulo_nc", "datos_nc.json");
+  if (!fs.existsSync(r)) return null;
+  const J = JSON.parse(fs.readFileSync(r, "utf8"));
+  const out = {};
+  for (const [id, p] of Object.entries(J.proyectos || {})) {
+    out[id] = { nombre: p.nombre, cliente: p.cliente, obra: p.obra, ...p.resumen };
+  }
+  // Oficina Central genera NC pero no es obra: se guarda aparte para no
+  // mezclarla con los tres proyectos en la matriz de la portada.
+  return { proyectos: out, global: J.global.resumen, obra: J.obra.resumen,
+           corte: J.meta.hoy, control: J.control };
+}
+
 // ---------------------------------------------------------------- semáforos
 // Cada módulo tiene su propia escala; no se mezclan.
 const semProtocolos = (kpi) =>            // % pendiente: menos es mejor
   kpi === 0 ? ["good", "Cumple"] : kpi <= 3 ? ["good", "Aceptable"]
   : kpi <= 15 ? ["warn", "Medianamente"] : kpi <= 50 ? ["crit", "Deficiente"]
   : ["crit", "No cumple"];
+
+const semNC = (v) => {                    // % de hallazgos cerrados: más es mejor
+  if (v.abiertas > 15 || v.pctCierre < 85) return ["crit", "Crítico"];
+  if (v.abiertas > 3 || v.pctCierre < 95) return ["warn", "Atención"];
+  return ["good", "Al día"];
+};
 
 const semCierre = (v) => {                // % cierre de P1: más es mejor
   const c = pct1(v.p1.cerrados, v.p1.total);
@@ -153,6 +174,7 @@ const semCierre = (v) => {                // % cierre de P1: más es mejor
 // ---------------------------------------------------------------------- main
 const prot = leerProtocolos();
 const cierre = leerCierre();
+const nc = leerNC();
 
 const filas = PROYECTOS.map((p) => {
   const a = prot && prot[p.protocolos];
@@ -164,7 +186,10 @@ const filas = PROYECTOS.map((p) => {
                       estados: a.estados, actualizado: a.actualizado,
                       sem: semProtocolos(a.kpi) } : null,
     cierre: b ? { ...b, cierrePct: pct1(b.p1.cerrados, b.p1.total), sem: semCierre(b) } : null,
-    noConformidades: null,     // módulo aún por construir
+    noConformidades: (() => {
+      const c = nc && nc.proyectos[p.id];
+      return c ? { ...c, sem: semNC(c) } : null;
+    })(),
   };
 });
 
@@ -195,7 +220,21 @@ const datos = {
       p1Cerrados: sum((x) => x.cierre && x.cierre.p1.cerrados),
       p1Atrasados: sum((x) => x.cierre && x.cierre.p1.atrasados),
     } : { activo: false },
-    noConformidades: { activo: false },
+    noConformidades: nc ? {
+      activo: true,
+      proyectos: filas.filter((f) => f.noConformidades).length,
+      // El consolidado del módulo son los TRES proyectos, sin Oficina Central:
+      // es lo comparable con los otros dos módulos de la suite.
+      total: nc.obra.total,
+      cerradas: nc.obra.cerradas,
+      abiertas: nc.obra.abiertas,
+      pctCierre: nc.obra.pctCierre,
+      costo: nc.obra.costo,
+      medianaCierre: nc.obra.medianaCierre,
+      conOficina: nc.global.total,
+      atrasoCalculable: nc.control.atrasoCalculable,
+      corte: nc.corte,
+    } : { activo: false },
   },
 };
 datos.modulos.protocolos.kpi = pct1(datos.modulos.protocolos.enFalta,
@@ -293,6 +332,8 @@ if (!fs.existsSync(plantilla)) {
     { clave: "protocolos", rutas: [path.join(MODULOS, "protocolos.html")] },
     { clave: "cierre", rutas: [path.join(MODULOS, "cierre_qaqc.html"),
                                path.join(AQUI, "..", "panel_control_TOP_P1", "index.html")] },
+    { clave: "nc", rutas: [path.join(MODULOS, "no_conformidades.html"),
+                           path.join(AQUI, "..", "modulo_nc", "index.html")] },
   ];
   let bloques = "<!-- === MODULOS:INICIO === -->\n", pesos = [];
   for (const { clave, rutas } of mods) {
@@ -317,16 +358,21 @@ const nf = (n) => (n || 0).toLocaleString("es-CL");
 console.log("=".repeat(72));
 console.log("  SUITE QAQC — resumen ejecutivo");
 console.log("=".repeat(72));
-console.log(`\n${"PROYECTO".padEnd(14)}${"CLIENTE".padEnd(24)}${"PROTOCOLOS".padStart(16)}${"CIERRE QAQC".padStart(18)}`);
+console.log(`\n${"PROYECTO".padEnd(14)}${"CLIENTE".padEnd(22)}${"PROTOCOLOS".padStart(15)}${"CIERRE QAQC".padStart(17)}${"NO CONFORM.".padStart(17)}`);
 for (const f of filas) {
   const a = f.protocolos ? `${f.protocolos.kpi}% pend. ${f.protocolos.sem[1]}` : "—";
   const b = f.cierre ? `${f.cierre.cierrePct}% P1 ${f.cierre.sem[1]}` : "—";
-  console.log(`${f.nombre.padEnd(14)}${f.cliente.padEnd(24)}${a.padStart(16)}${b.padStart(18)}`);
+  const c = f.noConformidades ? `${f.noConformidades.pctCierre}% NC ${f.noConformidades.sem[1]}` : "—";
+  console.log(`${f.nombre.padEnd(14)}${f.cliente.padEnd(22)}${a.padStart(15)}${b.padStart(17)}${c.padStart(17)}`);
 }
 const M = datos.modulos;
 console.log(`\nProtocolos   universo ${nf(M.protocolos.universo)} · en falta ${nf(M.protocolos.enFalta)} ` +
             `(base KPI ${nf(M.protocolos.base)} = universo − ${nf(M.protocolos.remanente)} remanente) · KPI ${M.protocolos.kpi}%`);
 console.log(`Cierre QAQC  ${nf(M.cierre.subs)} subsistemas · ${nf(M.cierre.detalles)} detalles · ` +
             `${nf(M.cierre.cerrados)} cerrados · ${nf(M.cierre.atrasados)} atrasados`);
-console.log(`No Conform.  módulo por construir`);
+const N = M.noConformidades;
+console.log(N.activo
+  ? `No Conform.  ${nf(N.total)} hallazgos · ${nf(N.abiertas)} abiertos · cierre ${N.pctCierre}% ` +
+    `· mediana ${N.medianaCierre} d · ${nf(Math.round(N.costo))} UF`
+  : `No Conform.  módulo por construir`);
 console.log(`\nEscrito: kpis_suite.json`);

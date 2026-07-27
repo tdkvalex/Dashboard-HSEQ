@@ -5,8 +5,8 @@ Contiene **dos cosas independientes**:
 ## 0 · `suite_qaqc/` — Suite QAQC (consola ejecutiva)
 
 Reúne los dashboards de calidad en un solo archivo con portada que cruza **proyectos ×
-módulos**: Protocolos, Cierre QAQC y No Conformidades (por construir). Los tres cubren los
-mismos tres proyectos: Desaladora (P2416), Talabre (P2407) y Arqueros/MASA (P2342).
+módulos**: Protocolos, Cierre QAQC y No Conformidades. Los tres cubren los mismos tres
+proyectos: Desaladora (P2416), Talabre (P2407) y Arqueros/MASA (P2342).
 
 Ver [`suite_qaqc/README.md`](suite_qaqc/README.md). Punto de entrada:
 
@@ -21,7 +21,21 @@ Detalle crítico: los módulos se empaquetan con un centinela en lugar de `</scr
 como `<\/script>` **rompe Protocolos**, que ya trae esa secuencia propia. Está explicado en el
 README.
 
-## 1 · `panel_control_TOP_P1/` — Control de Cierre QAQC
+## 1 · `modulo_nc/` — Control de No Conformidades
+
+Módulo de la suite. Un solo Excel de origen (`Data_NCR.xlsx`, hoja «Observaciones»).
+Ver [`modulo_nc/README.md`](modulo_nc/README.md).
+
+```bash
+cd modulo_nc && python3 no_conformidades.py --data <Data_NCR.xlsx>
+```
+
+**Ojo con el atraso:** la regla es «abierta con la fecha comprometida vencida», pero la columna
+«Fecha De Cierre» del Excel **solo se llena al cerrar**, así que ninguna NC abierta tiene fecha
+y el atraso NO es calculable. El panel lo declara y usa la antigüedad en su lugar. Si algún día
+agregan una columna de fecha comprometida, el script ya la calcula sin cambios.
+
+## 2 · `panel_control_TOP_P1/` — Control de Cierre QAQC
 
 Entregable semanal de Besalco Montajes: panel HTML + PPT ejecutiva del cierre QAQC de tres
 proyectos (MASA, Desaladora, Talabre).
@@ -41,7 +55,7 @@ python3 talabre.py     --status  <TalabreSTATUS_PEC>   --dt    <TalabreCuadro_DT
 node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el panel
 ```
 
-## 2 · `src/`, `config/`, `reports/` — Monitor de cartera BTG
+## 3 · `src/`, `config/`, `reports/` — Monitor de cartera BTG
 
 Motor de reglas en Python para monitorear cartera de acciones (CL/US) y detectar
 oportunidades. Ver [`README.md`](README.md). No tiene relación con el panel QAQC.
