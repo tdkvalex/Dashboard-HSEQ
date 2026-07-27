@@ -34,18 +34,57 @@ habitual en volumen; lo que no es habitual es que **ninguna** sea de autodetecci
 
 ```bash
 python3 no_conformidades.py --data /ruta/Data_NCR.xlsx
-```
-
-Acepta `--hoy AAAA-MM-DD` para fijar la fecha de referencia. Escribe `datos_nc.json`, inyecta
-los datos en `index.html` y avisa de todo lo que no pueda clasificar.
-
-Después, para que la suite lo tome:
-
-```bash
+node gen_ppt.js                       # SIEMPRE después del script de Python
 cd ../suite_qaqc && node armar_suite.js
 ```
 
-No hay que copiar nada: el generador lee `modulo_nc/index.html` directamente.
+`no_conformidades.py` acepta `--hoy AAAA-MM-DD` para fijar la fecha de referencia. Escribe
+`datos_nc.json`, inyecta los datos en `index.html` y avisa de todo lo que no pueda clasificar.
+
+`gen_ppt.js` va **después** porque regenera la PPT desde `datos_nc.json`, la **embebe** en
+`index.html` (botón «Descargar Informe») y embebe los logos. Correrlo antes deja el informe
+descargable desfasado respecto de las pestañas. Necesita `npm install` una sola vez.
+
+Para la suite no hay que copiar nada: el generador lee `modulo_nc/index.html` directamente.
+
+---
+
+## La PPT ejecutiva — 16 láminas
+
+Mismo formato y metodología que la del módulo de Cierre QAQC
+(`panel_control_TOP_P1/gen_ppt.js`), para que el mazo se lea igual venga del módulo que venga.
+
+| Láminas | Contenido |
+|---|---|
+| 1 | Portada del consolidado |
+| 2 | Resumen ejecutivo — 4 tarjetas + lectura del período |
+| 3 | Semáforo por frente (los 3 proyectos + Oficina Central + total de obra) |
+| 4 | Levantados en la última semana — ritmo de 8 semanas y detalle uno a uno |
+| 5 | Origen del hallazgo — interna, cliente y subcontrato · autodetección por frente |
+| 6 | Antigüedad de lo abierto + por qué el atraso no es calculable + velocidad de cierre |
+| 7 | Foco de gestión |
+| 8-16 | Portada + 2 láminas por proyecto (estado · pendiente y novedades) |
+
+Reglas del formato, iguales a las del otro módulo:
+
+- **Logo** en todas: grande (`x9.14 y0.46`) en portadas y láminas azules, menor (`x9.97 y0.24`)
+  en contenido. Se busca en esta carpeta y, si no está, en `panel_control_TOP_P1/`.
+- **Etiqueta del proyecto** al pie de cada lámina de contenido; las portadas no la llevan.
+- **Numeración correlativa automática** (`nSlide`), no escrita a mano.
+- **Etiquetas de gráficos**: constante `ETIQ` — blanco, negrita, 11 pt. Los colores de segmento
+  dan **≥4,5:1 con texto blanco** (el peor es `warnD`, 4,68:1). El cobre original daba 3,4:1 y
+  el número quedaba invisible: para eso está `copperD`.
+- **Valores 0** envueltos en `z()` para que no se dibujen.
+- **Nunca se recorta en silencio**: si una semana trae más hallazgos de los que caben en la
+  tabla, la lámina dice cuántos se listan y cuántos hay.
+
+La PPT viaja **embebida en base64 dentro de `index.html`**, así el panel sigue siendo un solo
+archivo: se envía por correo y quien lo reciba descarga el informe sin servidor. El archivo
+descargado se llama `Panel_NC_DDMMAA.pptx` con la fecha del corte, para no pisar informes de
+semanas distintas.
+
+**LibreOffice de este contenedor no abre PPTX** (falta el filtro de Impress). Para verificar,
+leer el XML con `python-pptx` / `unzip`, no intentar renderizar.
 
 ---
 
@@ -104,7 +143,20 @@ Desaladora, pese a tener solo 1 NC abierta. Cierra todo, pero tarde.
 
 | Archivo | Qué es |
 |---|---|
-| `index.html` | El dashboard, un solo archivo portable con 4 pestañas |
+| `index.html` | El dashboard, un solo archivo portable con 4 pestañas y la PPT embebida |
 | `no_conformidades.py` | **Punto de entrada.** Procesa el Excel y actualiza el dashboard |
+| `gen_ppt.js` | Genera la PPT y la embebe en el dashboard. Va después del script de Python |
 | `datos_nc.json` | Datos consolidados; la suite lee de aquí su KPI |
-| `besalco_logo*.png` | Logo corporativo (versión blanca para fondo oscuro) |
+| `Panel_No_Conformidades.pptx` | La PPT del corte, también disponible como archivo suelto |
+| `package.json` | La única dependencia: `pptxgenjs`. `npm install` una vez |
+| `besalco_logo*.png` | Logo corporativo. No versionados: se usan los de `panel_control_TOP_P1/` |
+
+### Bloques marcados de `index.html`
+
+Los scripts reemplazan solo su bloque; el resto del archivo se edita a mano.
+
+| Marca | La escribe | Contiene |
+|---|---|---|
+| `NC:INICIO/FIN` | `no_conformidades.py` | `const NC` — todos los datos |
+| `LOGO:INICIO/FIN` | `gen_ppt.js` | `const LOGOS` — logos en base64 |
+| `PPT:INICIO/FIN` | `gen_ppt.js` | `const PPTX` — la PPT en base64 |

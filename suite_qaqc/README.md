@@ -9,6 +9,9 @@ ejecutiva: una portada que cruza **proyectos × módulos** y, dentro, cada dashb
 | **Cierre QAQC** | Carpetas · caminatas · detalles de terminación | % cierre — **más es mejor** | activo |
 | **No Conformidades** | Hallazgos de calidad y su corrección | % cerrado — **más es mejor** | activo |
 
+Cierre QAQC y No Conformidades traen además su **PPT ejecutiva embebida**: el botón «Descargar
+Informe» de cada módulo entrega el mazo del corte (17 y 16 láminas) sin salir de la suite.
+
 Los tres cubren **los mismos tres proyectos**, con distinto nombre en cada módulo:
 
 | Proyecto | Cliente | En Protocolos | En Cierre QAQC |
@@ -29,11 +32,20 @@ python3 desaladora.py --reporte <REPORTE_GERENCIAL_*> --punch <Listado_Puntos_Pu
 python3 talabre.py    --status  <TalabreSTATUS_PEC>   --dt    <TalabreCuadro_DT>
 node gen_ppt.js
 
-# 2 · dejar el dashboard de Protocolos actualizado y rearmar la suite
+# 2 · actualizar el módulo No Conformidades (ver modulo_nc/README.md)
+cd ../modulo_nc
+python3 no_conformidades.py --data <Data_NCR.xlsx>
+node gen_ppt.js
+
+# 3 · dejar el dashboard de Protocolos actualizado y rearmar la suite
 cd ../suite_qaqc
 cp <dashboard_protocolos_actualizado>.html modulos/protocolos.html
 node armar_suite.js
 ```
+
+En los dos módulos el `node gen_ppt.js` va **al final**: regenera la PPT y la embebe en el
+`index.html` del módulo, que es lo que después empaqueta la suite. Correrlo antes deja el
+informe descargable desfasado respecto de las pestañas.
 
 `armar_suite.js` hace todo lo demás: extrae el KPI de cada proyecto en cada módulo, escribe
 `kpis_suite.json` y ensambla `Suite_QAQC.html` con la portada y los módulos dentro.
@@ -96,7 +108,7 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 
 | Archivo | Qué es |
 |---|---|
-| `Suite_QAQC.html` | **El entregable.** Un solo archivo, ~5,6 MB, sin dependencias externas |
+| `Suite_QAQC.html` | **El entregable.** Un solo archivo, ~8,1 MB, sin dependencias externas |
 | `armar_suite.js` | Extrae los KPI y ensambla la suite. **Punto de entrada** |
 | `plantilla_suite.html` | Shell ejecutivo: portada, navegación y montaje de módulos |
 | `modulos/protocolos.html` | Dashboard de Protocolos, tal cual |

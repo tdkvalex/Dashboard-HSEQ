@@ -27,7 +27,9 @@ Módulo de la suite. Un solo Excel de origen (`Data_NCR.xlsx`, hoja «Observacio
 Ver [`modulo_nc/README.md`](modulo_nc/README.md).
 
 ```bash
-cd modulo_nc && python3 no_conformidades.py --data <Data_NCR.xlsx>
+cd modulo_nc
+python3 no_conformidades.py --data <Data_NCR.xlsx>
+node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el panel
 ```
 
 El panel abre con **«Levantados en la última semana»** (cuántos, de qué disciplina, internos o
