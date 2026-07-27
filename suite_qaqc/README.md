@@ -29,15 +29,18 @@ python3 desaladora.py --reporte <REPORTE_GERENCIAL_*> --punch <Listado_Puntos_Pu
 python3 talabre.py    --status  <TalabreSTATUS_PEC>   --dt    <TalabreCuadro_DT>
 node gen_ppt.js
 
-# 2 · copiar los módulos actualizados y rearmar la suite
+# 2 · dejar el dashboard de Protocolos actualizado y rearmar la suite
 cd ../suite_qaqc
-cp ../panel_control_TOP_P1/index.html modulos/cierre_qaqc.html
 cp <dashboard_protocolos_actualizado>.html modulos/protocolos.html
 node armar_suite.js
 ```
 
 `armar_suite.js` hace todo lo demás: extrae el KPI de cada proyecto en cada módulo, escribe
 `kpis_suite.json` y ensambla `Suite_QAQC.html` con la portada y los módulos dentro.
+
+El módulo Cierre QAQC **no hay que copiarlo**: si no está en `modulos/`, el generador lo toma
+directo de `../panel_control_TOP_P1/index.html`. Solo Protocolos hay que dejarlo, porque lo
+genera otro equipo.
 
 Si falta un módulo, avisa y la suite sale sin él: su tarjeta queda apagada, la matriz muestra
 «Sin módulo» y los demás siguen funcionando.
@@ -83,7 +86,7 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 | `armar_suite.js` | Extrae los KPI y ensambla la suite. **Punto de entrada** |
 | `plantilla_suite.html` | Shell ejecutivo: portada, navegación y montaje de módulos |
 | `modulos/protocolos.html` | Dashboard de Protocolos, tal cual |
-| `modulos/cierre_qaqc.html` | Copia de `panel_control_TOP_P1/index.html` |
+| `modulos/cierre_qaqc.html` | Opcional: si no está, se usa `panel_control_TOP_P1/index.html` |
 | `kpis_suite.json` | KPI extraídos, para consultar sin abrir la suite |
 | `besalco_logo*.png` | Logo corporativo (versión blanca para fondo oscuro) |
 
