@@ -4,11 +4,14 @@ Entregable ejecutivo multiproyecto para medir el estatus de **armado y entrega d
 el **avance de caminatas** y los **detalles de terminación en condición P1**, con resumen
 general y desglose por área/zona y disciplina.
 
-El panel tiene una **pestaña por proyecto**. Cada uno conserva sus propios conceptos —no se
-fuerza una equivalencia que no existe— y solo se homologa lo que sí es comparable.
+El panel abre en una pestaña de **resumen corporativo** que consolida los tres proyectos, y
+tiene además **una pestaña por proyecto** con su detalle. Cada proyecto conserva sus propios
+conceptos —no se fuerza una equivalencia que no existe— y solo se consolida lo que sí es
+comparable.
 
 | Pestaña | Proyecto | Cliente | Corte | Fuente |
 |---|---|---|---|---|
+| **Resumen corporativo** | Los 3 proyectos | Besalco Montajes | — | se calcula desde los otros tres |
 | MASA | Planta Concentradora | MASA | 26-07-2026 | `Estatus_Resumen_General_QAQC.xlsx` |
 | Desaladora | PV3 Ampliación Desaladora | Minera Los Pelambres (AMSA) | 27-07-2026 | `REPORTE_GERENCIAL_*.xlsx` + `Listado_Puntos_Punch_Consolidado_*.xlsx` |
 | Talabre | Captación de agua, pozos y estaciones de bombeo | Codelco | 27-07-2026 | `TalabreSTATUS_PEC.xlsx` + `TalabreCuadro_DT.xlsx` |
@@ -234,6 +237,43 @@ caminatas, la 1 está casi completa pero la 2 va en 77,6%, concentrando el rezag
 > figura como *Crítico* (caminata 100% = 50%, bajo el umbral de 60%) aunque su cierre de P1
 > sea alto: en la versión manual previa estaba marcada como *Atención*, lo que era
 > inconsistente con el criterio declarado.
+
+## Resumen corporativo — qué se consolida y qué no
+
+La primera pestaña compara los tres proyectos. La homologación se calcula en el propio panel
+desde los datos de cada proyecto, así que **no hay cifras duplicadas**: si cambia un proyecto,
+el consolidado cambia solo.
+
+| Concepto | MASA | Desaladora | Talabre | Cómo se consolida |
+|---|---|---|---|---|
+| **Caminatas** | «80%» y «100%» | Caminata 1, 2 y 3 | CAMINATA 1 y 2 | Por **número**, nunca por el porcentaje que representan. Se compara la *caminata vigente* que cada proyecto declara como indicador |
+| **Detalles** | Detalles de terminación | Punch list | DT | Son lo mismo: **se suman** |
+| **Prioridad** | P1/P2/P3 | P0/P1A/P2B/P3C | P1/P2/P3/P4 | Al dígito: P1A→P1, P2B→P2, P3C→P3. P0 y P4 aparte |
+| **Atraso** | Vencido | Atrasado | Atrasado | Mismo concepto — abierto con su fecha comprometida cumplida: **se suman** |
+| **Carpetas** | Estatus CTOP | Certificado de entrega | % PEC (avance) | **No se consolidan** (ver abajo) |
+| **Disciplinas** | Piping, Eléctrica… | Piping, Eléctrica… | CANERIAS, ELECTRICOS… | Se unifican los sinónimos |
+
+**Las carpetas no se suman a propósito.** MASA y Desaladora miden *estado de aprobación* ante
+el cliente; Talabre mide *porcentaje de avance* de la carpeta. Un promedio entre ambas cosas no
+significaría nada, así que la pestaña muestra la métrica nativa de cada proyecto, etiquetada, y
+solo consolida a los dos que sí son comparables (66 de 232 carpetas entregadas, 28,4%).
+
+**Caminata vigente** es la que cada proyecto usa como su indicador: MASA la Caminata 2 (su
+«100%»), Talabre la Caminata 2, y Desaladora una por tipo de subsistema (Operables por la 2,
+Facility por la 1), sumando lo realizado de cada tipo.
+
+### Consolidado al corte actual
+
+| Indicador | Valor |
+|---|---|
+| Subsistemas en control | **451** (MASA 135 · Desaladora 97 · Talabre 219) |
+| Caminata vigente realizada | **313/451 · 69,4%** |
+| Detalles de terminación levantados | **6.300** |
+| Cierre de detalles (todas las prioridades) | **3.721/6.300 · 59,1%** |
+| Cierre de detalles P1 | **2.053/3.152 · 65,1%** |
+| Detalles abiertos / de ellos atrasados | **2.494 / 1.286 (51,6%)** |
+
+**Semáforo:** MASA *Crítico* · Desaladora *Atención* · Talabre *Al día*.
 
 ## Descargar el informe desde el panel
 
