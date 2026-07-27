@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suite QAQC — Besalco Montajes</title>
+<style>
+  /* ═══════════════════════════════════════════════════════════════
+     Suite QAQC — shell ejecutivo
+     Mismo sistema de diseño que los módulos: base oscura, acento
+     dorado corporativo, Rajdhani para cifras e IBM Plex Sans para el
+     cuerpo. El shell solo pinta la portada; cada módulo vive aislado
+     dentro de su propio iframe y conserva sus estilos.
+     ═══════════════════════════════════════════════════════════════ */
+  :root {
+    --page:#080d18; --s1:#0f1623; --s2:#141d2e;
+    --bdr:#1d2d44; --bdr2:#243350;
+    --t1:#e8eeff; --t2:#7a93bb; --t3:#5a78a8;
+    --blue:#3b82f6; --green:#10b981; --amber:#f59e0b;
+    --red:#ef4444; --teal:#06b6d4; --purple:#8b5cf6;
+    --corp:#1e3d7b; --corp2:#2a52a0; --gold:#F8BD19;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin:0; padding:0; height:100%; }
+  body {
+    background: var(--page); color: var(--t1); min-height:100vh;
+    font-family:'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", sans-serif;
+    display:flex; flex-direction:column;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(59,130,246,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 85% 100%, rgba(16,185,129,.05) 0%, transparent 60%);
+  }
+  ::-webkit-scrollbar { width:6px; height:6px; }
+  ::-webkit-scrollbar-track { background: var(--s1); }
+  ::-webkit-scrollbar-thumb { background: var(--bdr2); border-radius:3px; }
+
+  /* ── cabecera ── */
+  header {
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    flex-wrap:wrap; padding:11px clamp(12px,2vw,26px); flex-shrink:0;
+    background: rgba(8,13,24,.97); backdrop-filter: blur(12px);
+    border-bottom:2px solid transparent;
+    border-image: linear-gradient(90deg, var(--corp), var(--corp2), rgba(248,189,25,.4)) 1;
+  }
+  .logo { height:30px; width:auto; display:block; flex-shrink:0; }
+  .hd-c { flex:1; min-width:220px; text-align:center; }
+  h1 { font-family:'Rajdhani', sans-serif; font-size:clamp(15px,1.55vw,20px);
+       font-weight:700; letter-spacing:.8px; margin:0; text-transform:uppercase; }
+  .hd-sub { font-size:11px; color:var(--t2); margin-top:2px; }
+  .hd-r { display:inline-flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .corte { display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; letter-spacing:.5px; }
+  .corte::before { content:''; width:7px; height:7px; border-radius:50%;
+    background:var(--green); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.35)} }
+  .corte b { color: var(--gold); }
+  .btn { font-family:'Rajdhani',sans-serif; font-weight:600; font-size:11px; letter-spacing:.3px;
+    cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:var(--gold);
+    background: linear-gradient(135deg, rgba(30,61,123,.85), rgba(20,45,90,.9));
+    border:1px solid rgba(248,189,25,.45); border-radius:6px; padding:5px 14px; transition:all .2s; }
+  .btn:hover { background: linear-gradient(135deg, rgba(40,80,160,.9), rgba(248,189,25,.2));
+    border-color: rgba(248,189,25,.7); }
+
+  /* ── barra de módulos ── */
+  nav { display:flex; align-items:stretch; overflow-x:auto; flex-shrink:0;
+    background: rgba(15,22,35,.85); border-bottom:1px solid var(--bdr);
+    padding:0 clamp(12px,2vw,26px); scrollbar-width:none; }
+  nav::-webkit-scrollbar { display:none; }
+  .mtab { appearance:none; background:none; border:none; border-bottom:2px solid transparent;
+    cursor:pointer; white-space:nowrap; text-align:left; padding:9px 22px; transition:all .2s;
+    font-family:'Rajdhani',sans-serif; font-size:13.5px; font-weight:600;
+    letter-spacing:.8px; color:var(--t3); text-transform:uppercase; }
+  .mtab:hover:not(:disabled) { color:var(--t2); }
+  .mtab[aria-selected="true"] { color:var(--t1); border-bottom-color: rgba(248,189,25,.55); }
+  .mtab:disabled { opacity:.4; cursor:not-allowed; }
+  .mtab .sub { display:block; font-family:'IBM Plex Sans',sans-serif; font-size:9.5px;
+    font-weight:400; letter-spacing:.3px; color:var(--t3); opacity:.65; margin-top:2px;
+    text-transform:none; }
+  .mtab[aria-selected="true"] .sub { opacity:1; color: rgba(248,189,25,.55); }
+  .mtab-home { color: var(--teal); }
+  .mtab-home[aria-selected="true"] { color: var(--teal); border-bottom-color: var(--purple); }
+  .mtab-home[aria-selected="true"] .sub { color: var(--purple); }
+
+  /* ── contenedor ── */
+  main { flex:1; min-height:0; display:flex; flex-direction:column; }
+  .vista { display:none; flex:1; min-height:0; }
+  .vista.on { display:flex; flex-direction:column; }
+  #vHome { overflow-y:auto; padding:0 clamp(12px,2vw,26px) 40px; }
+  .wrap { width:100%; max-width:1680px; margin:0 auto; }
+  iframe { width:100%; flex:1; border:0; background:var(--page); min-height:0; }
+
+  /* ── portada ejecutiva ── */
+  .mods { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:13px; margin:16px 0 14px; }
+  .mod { position:relative; overflow:hidden; border-radius:12px; padding:18px 17px 16px;
+    background: linear-gradient(160deg,#090f1e,#0c1828); border:1px solid rgba(30,61,123,.5);
+    box-shadow: inset 0 1px 0 rgba(248,189,25,.04), 0 4px 20px rgba(0,0,0,.3);
+    cursor:pointer; transition: border-color .2s, transform .15s; }
+  .mod:hover { border-color: rgba(59,130,246,.7); transform: translateY(-2px); }
+  .mod.off { cursor:default; opacity:.72; }
+  .mod.off:hover { border-color: rgba(30,61,123,.5); transform:none; }
+  .mod::before { content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--green), var(--teal)); }
+  .mod.off::before { background: linear-gradient(90deg, var(--t3), var(--bdr2)); }
+  .mod .n { font-size:10px; color:var(--t2); text-transform:uppercase;
+    letter-spacing:1.6px; margin-bottom:7px; }
+  .mod .v { font-family:'Rajdhani',sans-serif; font-size:38px; font-weight:700; line-height:1; }
+  .mod .v small { font-family:'IBM Plex Sans',sans-serif; font-size:12px;
+    font-weight:500; color:var(--t2); margin-left:6px; }
+  .mod .d { font-size:11px; color:var(--t2); margin-top:9px; line-height:1.5; }
+  .mod .d b { color: var(--t1); }
+  .mod .ir { position:absolute; right:15px; top:16px; font-size:10px; color:var(--t3);
+    font-family:'Rajdhani',sans-serif; font-weight:600; letter-spacing:.5px; }
+
+  section.blk { background:var(--s1); border:1px solid var(--bdr); border-radius:12px;
+    margin-bottom:14px; overflow:hidden; }
+  section.blk > h2 { font-family:'Rajdhani',sans-serif; font-size:13px; font-weight:700;
+    text-transform:uppercase; letter-spacing:2px; margin:0; padding:11px 16px 9px;
+    background: linear-gradient(90deg, rgba(30,61,123,.12), transparent);
+    border-bottom:1px solid rgba(30,61,123,.4); border-left:3px solid rgba(248,189,25,.35); }
+  section.blk > .sub { font-size:11px; color:var(--t2); padding:10px 18px 2px; line-height:1.5; }
+  .inner { padding:8px 18px 16px; overflow-x:auto; }
+
+  table { width:100%; border-collapse:collapse; font-size:11.5px; }
+  th { text-align:left; font-weight:700; font-size:9px; color:var(--t2); text-transform:uppercase;
+    letter-spacing:.8px; white-space:nowrap; background: rgba(59,130,246,.07);
+    border-bottom:1px solid var(--bdr); padding:8px 10px; }
+  td { padding:10px; border-bottom:1px solid rgba(255,255,255,.04); vertical-align:middle; }
+  tr:hover td { background: rgba(59,130,246,.05); }
+  tr:last-child td { border-bottom:none; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums;
+    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:12.5px; }
+  td.c { text-align:center; }
+  .pj { font-family:'Rajdhani',sans-serif; font-size:14px; font-weight:700; letter-spacing:.5px; }
+  .cli { font-size:10px; color:var(--t3); }
+  .chip { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700;
+    padding:2px 8px; border-radius:4px; white-space:nowrap; }
+  .chip.good { color:var(--green); background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.3); }
+  .chip.warn { color:var(--amber); background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.3); }
+  .chip.crit { color:var(--red);   background:rgba(239,68,68,.12);  border:1px solid rgba(239,68,68,.3); }
+  .chip.na   { color:var(--t3);    background:rgba(90,120,168,.10); border:1px solid rgba(90,120,168,.25); }
+  .celda { display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .celda .k { font-family:'Rajdhani',sans-serif; font-size:17px; font-weight:700; }
+  .celda .l { font-size:9.5px; color:var(--t3); }
+  th.mod-h { text-align:center; font-size:10px; color:var(--t1); letter-spacing:1px; }
+  th.mod-h span { display:block; font-size:8.5px; color:var(--t3); font-weight:400;
+    letter-spacing:.3px; text-transform:none; margin-top:2px; }
+
+  .lectura { background: var(--s2); border:1px solid var(--bdr); border-radius:10px;
+    padding:14px 16px; margin:0 18px 16px; }
+  .lectura .t { font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:1.5px; color:var(--gold); text-transform:uppercase; margin-bottom:9px; }
+  .lectura p { margin:0 0 8px; font-size:11.5px; line-height:1.6; color:var(--t2); }
+  .lectura p:last-child { margin-bottom:0; }
+  .lectura b { color: var(--t1); }
+
+  .foot { font-size:10px; color:var(--t3); line-height:1.65; margin-top:16px;
+    border-top:1px solid var(--bdr); padding-top:14px; }
+  .foot b { color: var(--t2); }
+
+  .vacio { display:flex; flex-direction:column; align-items:center; justify-content:center;
+    flex:1; gap:14px; padding:60px 24px; text-align:center; }
+  .vacio .ic { font-size:44px; opacity:.5; }
+  .vacio h3 { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700;
+    letter-spacing:1px; margin:0; text-transform:uppercase; }
+  .vacio p { max-width:660px; margin:0; font-size:12.5px; line-height:1.7; color:var(--t2); }
+  .vacio .contrato { text-align:left; background:var(--s1); border:1px solid var(--bdr);
+    border-radius:10px; padding:16px 20px; max-width:680px; margin-top:6px; }
+  .vacio .contrato h4 { font-family:'Rajdhani',sans-serif; font-size:11px; letter-spacing:1.5px;
+    color:var(--gold); margin:0 0 10px; text-transform:uppercase; }
+  .vacio .contrato ol { margin:0; padding-left:18px; font-size:11.5px; line-height:1.8; color:var(--t2); }
+  .vacio .contrato b { color: var(--t1); }
+
+  @media (max-width:768px) {
+    header { padding:8px 14px; } h1 { font-size:13px; letter-spacing:.3px; }
+    .logo { height:24px; } .mtab { padding:9px 13px; font-size:11.5px; }
+    .mod .v { font-size:30px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo" id="logo" alt="Besalco Montajes">
+  <div class="hd-c">
+    <h1>Suite QAQC — Gestión de Calidad</h1>
+    <div class="hd-sub" id="hdSub"></div>
+  </div>
+  <div class="hd-r">
+    <span class="corte">Corte <b id="corte"></b></span>
+    <button class="btn" id="btnHome" type="button">◀ Resumen</button>
+  </div>
+</header>
+
+<nav id="nav" role="tablist">
+  <button class="mtab mtab-home" role="tab" data-v="home" aria-selected="true">
+    Resumen ejecutivo<span class="sub">Los 3 módulos</span></button>
+  <button class="mtab" role="tab" data-v="protocolos" aria-selected="false">
+    Protocolos<span class="sub">Control documental</span></button>
+  <button class="mtab" role="tab" data-v="cierre" aria-selected="false">
+    Cierre QAQC<span class="sub">Carpetas · caminatas · detalles</span></button>
+  <button class="mtab" role="tab" data-v="nc" aria-selected="false">
+    No Conformidades<span class="sub">Por construir</span></button>
+</nav>
+
+<main>
+  <div class="vista on" id="vHome"><div class="wrap">
+    <div class="mods" id="mods"></div>
+
+    <section class="blk">
+      <h2>Estado por proyecto y módulo</h2>
+      <p class="sub" id="subMatriz"></p>
+      <div class="inner"><table id="matriz"></table></div>
+    </section>
+
+    <section class="blk">
+      <h2>Lectura ejecutiva</h2>
+      <div class="lectura" id="lectura"></div>
+    </section>
+
+    <section class="blk">
+      <h2>Detalle por proyecto</h2>
+      <p class="sub">Cifras de cada módulo, sin consolidar entre ellos: miden cosas distintas.</p>
+      <div class="inner"><table id="detalle"></table></div>
+    </section>
+
+    <p class="foot" id="notas"></p>
+  </div></div>
+
+  <div class="vista" id="vProtocolos"></div>
+  <div class="vista" id="vCierre"></div>
+
+  <div class="vista" id="vNc"><div class="vacio">
+    <div class="ic">🧭</div>
+    <h3>No Conformidades</h3>
+    <p>Módulo aún por construir. Cuando esté, entra en esta misma suite sin tocar los otros dos:
+       cada módulo vive aislado en su propio documento.</p>
+    <div class="contrato">
+      <h4>Contrato del módulo</h4>
+      <ol>
+        <li>Un <b>archivo HTML autocontenido</b> con 4 pestañas: resumen corporativo + los 3 proyectos.</li>
+        <li>Mismo sistema de diseño (base oscura, acento dorado, Rajdhani + IBM Plex Sans).</li>
+        <li>Un <b>script que procese los Excel de origen</b> e inyecte los datos en bloques marcados,
+            como <code>actualizar.py</code> o <code>talabre.py</code>.</li>
+        <li>Un <b>JSON de datos</b> por proyecto, para que la suite pueda leer su KPI sin abrir el módulo.</li>
+        <li>Se deja en <code>modulos/no_conformidades.html</code> y <code>armar_suite.js</code> lo toma solo.</li>
+      </ol>
+    </div>
+  </div></div>
+</main>
+
+<!-- === KPIS:INICIO === -->
+<script>const KPIS = null;</script>
+<!-- === KPIS:FIN === -->
+
+<!-- === LOGO:INICIO === -->
+<script>const LOGO = null;</script>
+<!-- === LOGO:FIN === -->
+
+<!-- Los módulos van como texto plano: el navegador no los interpreta hasta que
+     se abre la pestaña, y ahí se montan en un iframe con documento propio. Eso
+     da aislamiento total de CSS y JS sin tener que reescribir ninguno. -->
+<!-- === MODULOS:INICIO === -->
+<script type="text/plain" id="mod-protocolos"></script>
+<script type="text/plain" id="mod-cierre"></script>
+<!-- === MODULOS:FIN === -->
+
+<script>
+const $ = (id) => document.getElementById(id);
+const nf = (n) => (n == null ? "—" : n.toLocaleString('es-CL'));
+const pc = (v) => (v == null ? "—" : v.toLocaleString('es-CL') + "%");
+
+if (LOGO) $('logo').src = LOGO; else $('logo').style.display = 'none';
+
+/* ---------- montaje de módulos ----------
+   Cada módulo se monta una sola vez, la primera vez que se abre su pestaña.
+   Se usa un Blob con documento propio: el módulo queda completamente aislado
+   (su CSS global y sus variables JS no pueden chocar con los del shell ni con
+   los del otro módulo). */
+const montado = {};
+function montar(clave, contenedor) {
+  if (montado[clave]) return;
+  const src = $('mod-' + clave);
+  if (!src || !src.textContent.trim()) {
+    contenedor.innerHTML = '<div class="vacio"><div class="ic">📄</div>' +
+      '<h3>Módulo no incluido</h3><p>Este módulo no venía en el archivo. ' +
+      'Dejarlo en <code>modulos/</code> y volver a correr <code>armar_suite.js</code>.</p></div>';
+    montado[clave] = true;
+    return;
+  }
+  // Se restaura el centinela que armar_suite.js puso en lugar de los cierres
+  // de etiqueta. El centinela se verifica ausente al empaquetar, así que la
+  // sustitución es exactamente reversible.
+  const html = src.textContent.split('@@CIERRE_SCRIPT_a7f3@@').join('<\/script');
+  const f = document.createElement('iframe');
+  f.setAttribute('title', clave);
+  f.src = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+  contenedor.appendChild(f);
+  montado[clave] = true;
+}
+
+/* ---------- navegación ---------- */
+const VISTAS = { home:'vHome', protocolos:'vProtocolos', cierre:'vCierre', nc:'vNc' };
+function ver(v) {
+  for (const [k, id] of Object.entries(VISTAS)) $(id).classList.toggle('on', k === v);
+  document.querySelectorAll('.mtab').forEach(b =>
+    b.setAttribute('aria-selected', b.dataset.v === v ? 'true' : 'false'));
+  $('btnHome').style.display = v === 'home' ? 'none' : 'inline-flex';
+  if (v === 'protocolos') montar('protocolos', $('vProtocolos'));
+  if (v === 'cierre') montar('cierre', $('vCierre'));
+}
+document.querySelectorAll('.mtab').forEach(b =>
+  b.addEventListener('click', () => ver(b.dataset.v)));
+$('btnHome').addEventListener('click', () => ver('home'));
+
+/* ---------- portada ejecutiva ---------- */
+(function(){
+  if (!KPIS) return;
+  const P = KPIS.proyectos, M = KPIS.modulos;
+
+  $('hdSub').innerHTML = `Besalco Montajes · 3 módulos · ` +
+    P.map(p => `<b>${p.nombre}</b>`).join(' · ');
+  const cortes = P.map(p => p.cierre && p.cierre.corte).filter(Boolean);
+  const iso = (t) => { const [d,m,a] = String(t).split('-'); return `${a}${m}${d}`; };
+  $('corte').textContent = cortes.sort((a,b) => iso(a).localeCompare(iso(b))).pop() || '—';
+
+  /* tarjetas de módulo */
+  const tarjeta = (clave, nombre, valor, unidad, det, activo) =>
+    `<div class="mod ${activo ? '' : 'off'}" data-ir="${clave}">
+       <div class="ir">${activo ? 'Abrir ▸' : 'Por construir'}</div>
+       <div class="n">${nombre}</div>
+       <div class="v">${valor}<small>${unidad}</small></div>
+       <div class="d">${det}</div></div>`;
+
+  $('mods').innerHTML =
+    tarjeta('protocolos', 'Protocolos', M.protocolos.activo ? pc(M.protocolos.kpi) : '—',
+      M.protocolos.activo ? 'pendiente' : '',
+      M.protocolos.activo
+        ? `<b>${nf(M.protocolos.protocolos)}</b> protocolos · <b>${nf(M.protocolos.pendientes)}</b> pendientes<br>
+           ${M.protocolos.proyectos} proyectos · actualizado ${M.protocolos.actualizado || '—'}`
+        : 'Módulo no incluido', M.protocolos.activo) +
+    tarjeta('cierre', 'Cierre QAQC',
+      M.cierre.activo ? pc(Math.round(1000*M.cierre.cerrados/M.cierre.detalles)/10) : '—',
+      M.cierre.activo ? 'cerrado' : '',
+      M.cierre.activo
+        ? `<b>${nf(M.cierre.detalles)}</b> detalles · <b>${nf(M.cierre.atrasados)}</b> atrasados<br>
+           ${nf(M.cierre.subs)} subsistemas en ${M.cierre.proyectos} proyectos`
+        : 'Módulo no incluido', M.cierre.activo) +
+    tarjeta('nc', 'No Conformidades', '—', '',
+      'Módulo por construir.<br>Entra en la suite sin tocar los otros dos.', false);
+
+  document.querySelectorAll('.mod[data-ir]').forEach(el => {
+    const v = el.dataset.ir;
+    if (el.classList.contains('off') && v === 'nc') { el.addEventListener('click', () => ver('nc')); return; }
+    if (!el.classList.contains('off')) el.addEventListener('click', () => ver(v));
+  });
+
+  /* matriz proyecto × módulo */
+  const celda = (k, l, sem) => sem
+    ? `<div class="celda"><span class="k">${k}</span><span class="l">${l}</span>
+       <span class="chip ${sem[0]}">${sem[1]}</span></div>`
+    : `<div class="celda"><span class="chip na">Sin módulo</span></div>`;
+  let r = `<tr><th>Proyecto</th>
+    <th class="mod-h">Protocolos<span>% pendiente · menos es mejor</span></th>
+    <th class="mod-h">Cierre QAQC<span>% cierre de P1 · más es mejor</span></th>
+    <th class="mod-h">No Conformidades<span>por construir</span></th></tr>`;
+  for (const p of P) {
+    r += `<tr><td><div class="pj">${p.nombre}</div><div class="cli">${p.cliente}</div></td>
+      <td class="c">${p.protocolos ? celda(pc(p.protocolos.kpi),
+          `${nf(p.protocolos.pendientes)} de ${nf(p.protocolos.protocolos)}`, p.protocolos.sem) : celda(null,null,null)}</td>
+      <td class="c">${p.cierre ? celda(pc(p.cierre.cierrePct),
+          `${nf(p.cierre.p1.atrasados)} P1 atrasados`, p.cierre.sem) : celda(null,null,null)}</td>
+      <td class="c">${celda(null,null,null)}</td></tr>`;
+  }
+  $('matriz').innerHTML = r;
+  $('subMatriz').textContent =
+    'Cada módulo tiene su propia escala y no se promedian entre sí: Protocolos mide documentación pendiente y Cierre QAQC, avance físico.';
+
+  /* lectura ejecutiva — se redacta desde los números */
+  (function(){
+    const conProt = P.filter(p => p.protocolos), conCie = P.filter(p => p.cierre);
+    const peorCie = [...conCie].sort((a,b) => a.cierre.cierrePct - b.cierre.cierrePct)[0];
+    const peorProt = [...conProt].sort((a,b) => b.protocolos.kpi - a.protocolos.kpi)[0];
+    const atras = conCie.reduce((a,p) => a + p.cierre.p1.atrasados, 0);
+    const brecha = conProt.length && conCie.length && M.protocolos.kpi <= 3;
+    let h = '<div class="t">Lo que muestra el cruce</div>';
+    if (brecha) h += `<p><b>La documentación va muy por delante del cierre físico.</b>
+      Protocolos está en ${pc(M.protocolos.kpi)} de pendiente global —prácticamente al día— mientras
+      el cierre de detalles P1 va en ${pc(Math.round(1000*M.cierre.p1Cerrados/M.cierre.p1Total)/10)}
+      con <b>${nf(atras)} ítems atrasados</b>. El cuello de botella no está en los protocolos: está en terreno.</p>`;
+    if (peorCie) h += `<p><b>${peorCie.nombre} es la ruta crítica.</b>
+      Cierra ${pc(peorCie.cierre.cierrePct)} de sus P1 y arrastra ${nf(peorCie.cierre.p1.atrasados)} atrasados,
+      con los protocolos en ${pc(peorCie.protocolos ? peorCie.protocolos.kpi : null)} de pendiente:
+      el papel está listo, falta ejecutar.</p>`;
+    if (peorProt && peorProt.protocolos.kpi > 0) h += `<p><b>En protocolos, ${peorProt.nombre} es el único con pendiente relevante</b>
+      (${pc(peorProt.protocolos.kpi)}, ${nf(peorProt.protocolos.pendientes)} de ${nf(peorProt.protocolos.protocolos)}).
+      Los otros están en cero.</p>`;
+    h += `<p><b>No Conformidades falta</b> para cerrar la vista: hoy se ve qué está documentado y qué está
+      ejecutado, pero no qué se hizo mal y sigue sin corregirse.</p>`;
+    $('lectura').innerHTML = h;
+  })();
+
+  /* detalle por proyecto */
+  (function(){
+    let r = `<tr><th>Proyecto</th><th class="num">Protocolos</th><th class="num">Pendientes</th>
+      <th class="num">KPI</th><th class="num">Subsist.</th><th class="num">Detalles</th>
+      <th class="num">Cerrados</th><th class="num">Atrasados</th><th class="num">P1 % cierre</th></tr>`;
+    for (const p of P) {
+      const a = p.protocolos, b = p.cierre;
+      r += `<tr><td><div class="pj">${p.nombre}</div><div class="cli">${p.cliente}</div></td>
+        <td class="num">${a ? nf(a.protocolos) : '—'}</td>
+        <td class="num">${a ? nf(a.pendientes) : '—'}</td>
+        <td class="num">${a ? pc(a.kpi) : '—'}</td>
+        <td class="num">${b ? nf(b.subs) : '—'}</td>
+        <td class="num">${b ? nf(b.det.total) : '—'}</td>
+        <td class="num">${b ? nf(b.det.cerrados) : '—'}</td>
+        <td class="num">${b ? nf(b.det.atrasados) : '—'}</td>
+        <td class="num">${b ? pc(b.cierrePct) : '—'}</td></tr>`;
+    }
+    const s = (f) => P.reduce((a,x) => a + (f(x) || 0), 0);
+    r += `<tr><td><b>Consolidado</b></td>
+      <td class="num"><b>${nf(s(x => x.protocolos && x.protocolos.protocolos))}</b></td>
+      <td class="num"><b>${nf(s(x => x.protocolos && x.protocolos.pendientes))}</b></td>
+      <td class="num"><b>${pc(M.protocolos.kpi)}</b></td>
+      <td class="num"><b>${nf(M.cierre.subs)}</b></td>
+      <td class="num"><b>${nf(M.cierre.detalles)}</b></td>
+      <td class="num"><b>${nf(M.cierre.cerrados)}</b></td>
+      <td class="num"><b>${nf(M.cierre.atrasados)}</b></td>
+      <td class="num"><b>${pc(Math.round(1000*M.cierre.p1Cerrados/M.cierre.p1Total)/10)}</b></td></tr>`;
+    $('detalle').innerHTML = r;
+  })();
+
+  $('notas').innerHTML =
+    `<b>Alcance:</b> 3 módulos sobre los mismos 3 proyectos — Desaladora (AMSA), Talabre (Codelco) ` +
+    `y Arqueros/MASA. En Protocolos se llaman P2416, P2407 y P2342. ` +
+    `<b>Protocolos:</b> KPI = (AP + P) / (AP + P + AE + C) = % pendiente, donde <b>menos es mejor</b> ` +
+    `(0% cumple · 1–3% aceptable · 4–15% medianamente · 16–50% deficiente · >50% no cumple). ` +
+    `<b>Cierre QAQC:</b> % de detalles P1 cerrados, donde <b>más es mejor</b>; atrasado = ítem abierto ` +
+    `con su fecha comprometida ya cumplida. ` +
+    `<b>Las escalas no se mezclan:</b> cada módulo mide una cosa distinta y no se promedian entre sí. ` +
+    `Los módulos abren en su propio documento aislado; para el detalle de cada uno, entrar a su pestaña. ` +
+    `Generado el ${KPIS.generado}.`;
+})();
+
+ver('home');
+</script>
+</body>
+</html>

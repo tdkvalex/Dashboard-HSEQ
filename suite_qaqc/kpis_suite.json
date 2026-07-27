@@ -1,0 +1,175 @@
+{
+ "generado": "2026-07-27 18:47",
+ "proyectos": [
+  {
+   "id": "DESALADORA",
+   "nombre": "Desaladora",
+   "cliente": "Antofagasta Minerals",
+   "protocolos": {
+    "kpi": 0,
+    "protocolos": 10265,
+    "pendientes": 3,
+    "actualizado": "27-jul-2026",
+    "sem": [
+     "good",
+     "Cumple"
+    ]
+   },
+   "qaqc": "DES",
+   "cierre": {
+    "corte": "27-07-2026",
+    "subs": 97,
+    "cam": {
+     "realizada": 53,
+     "aplica": 97
+    },
+    "p1": {
+     "total": 829,
+     "cerrados": 592,
+     "abiertos": 237,
+     "atrasados": 178
+    },
+    "det": {
+     "total": 1386,
+     "cerrados": 960,
+     "abiertos": 426,
+     "atrasados": 332,
+     "enPlazo": 65,
+     "sinFecha": 29
+    },
+    "carpeta": {
+     "tipo": "estado",
+     "entregadas": 39,
+     "total": 97
+    },
+    "cierrePct": 71.4,
+    "sem": [
+     "warn",
+     "Atención"
+    ]
+   },
+   "noConformidades": null
+  },
+  {
+   "id": "TALABRE",
+   "nombre": "Talabre",
+   "cliente": "Codelco",
+   "protocolos": {
+    "kpi": 0.9,
+    "protocolos": 11418,
+    "pendientes": 107,
+    "actualizado": "27-jul-2026",
+    "sem": [
+     "good",
+     "Aceptable"
+    ]
+   },
+   "qaqc": "TAL",
+   "cierre": {
+    "corte": "27-07-2026",
+    "subs": 219,
+    "cam": {
+     "realizada": 170,
+     "aplica": 219
+    },
+    "p1": {
+     "total": 335,
+     "cerrados": 313,
+     "abiertos": 22,
+     "atrasados": 13
+    },
+    "det": {
+     "total": 1951,
+     "cerrados": 1446,
+     "abiertos": 505,
+     "atrasados": 206,
+     "enPlazo": 299,
+     "sinCompromiso": 215
+    },
+    "carpeta": {
+     "tipo": "avance",
+     "promedio": 91.1,
+     "total": 219
+    },
+    "cierrePct": 93.4,
+    "sem": [
+     "good",
+     "Al día"
+    ]
+   },
+   "noConformidades": null
+  },
+  {
+   "id": "ARQUEROS",
+   "nombre": "Arqueros",
+   "cliente": "MASA",
+   "protocolos": {
+    "kpi": 0,
+    "protocolos": 22551,
+    "pendientes": 10,
+    "actualizado": "27-jul-2026",
+    "sem": [
+     "good",
+     "Cumple"
+    ]
+   },
+   "qaqc": "MASA",
+   "cierre": {
+    "corte": "26-07-2026",
+    "subs": 135,
+    "cam": {
+     "realizada": 90,
+     "aplica": 135
+    },
+    "p1": {
+     "total": 1988,
+     "cerrados": 1148,
+     "abiertos": 830,
+     "atrasados": 405
+    },
+    "det": {
+     "total": 2963,
+     "cerrados": 1315,
+     "abiertos": 1563,
+     "atrasados": 748
+    },
+    "carpeta": {
+     "tipo": "estado",
+     "entregadas": 27,
+     "total": 135
+    },
+    "cierrePct": 57.7,
+    "sem": [
+     "crit",
+     "Crítico"
+    ]
+   },
+   "noConformidades": null
+  }
+ ],
+ "modulos": {
+  "protocolos": {
+   "activo": true,
+   "proyectos": 3,
+   "protocolos": 44234,
+   "pendientes": 120,
+   "actualizado": "27-jul-2026",
+   "kpi": 0.3
+  },
+  "cierre": {
+   "activo": true,
+   "proyectos": 3,
+   "subs": 451,
+   "detalles": 6300,
+   "cerrados": 3721,
+   "abiertos": 2494,
+   "atrasados": 1286,
+   "p1Total": 3152,
+   "p1Cerrados": 2053,
+   "p1Atrasados": 596
+  },
+  "noConformidades": {
+   "activo": false
+  }
+ }
+}

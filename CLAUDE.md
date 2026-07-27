@@ -2,6 +2,25 @@
 
 Contiene **dos cosas independientes**:
 
+## 0 · `suite_qaqc/` — Suite QAQC (consola ejecutiva)
+
+Reúne los dashboards de calidad en un solo archivo con portada que cruza **proyectos ×
+módulos**: Protocolos, Cierre QAQC y No Conformidades (por construir). Los tres cubren los
+mismos tres proyectos: Desaladora (P2416), Talabre (P2407) y Arqueros/MASA (P2342).
+
+Ver [`suite_qaqc/README.md`](suite_qaqc/README.md). Punto de entrada:
+
+```bash
+cd suite_qaqc
+cp ../panel_control_TOP_P1/index.html modulos/cierre_qaqc.html   # tras actualizar el módulo
+node armar_suite.js
+```
+
+Cada módulo va aislado en su propio iframe, así que se integran **sin reescribir ninguno**.
+Detalle crítico: los módulos se empaquetan con un centinela en lugar de `</script`; escaparlos
+como `<\/script>` **rompe Protocolos**, que ya trae esa secuencia propia. Está explicado en el
+README.
+
 ## 1 · `panel_control_TOP_P1/` — Control de Cierre QAQC
 
 Entregable semanal de Besalco Montajes: panel HTML + PPT ejecutiva del cierre QAQC de tres
