@@ -1,7 +1,8 @@
 {
  "meta": {
-  "corte": "2026-07-16",
-  "fuente": "Estatus.xlsx (BD Caminatas-CTOP / BD Detalles Terminación)"
+  "corte": "2026-07-26",
+  "corte_texto": "26-07-2026",
+  "generado": "2026-07-27 14:50"
  },
  "areas": [
   "2000",
@@ -9,694 +10,648 @@
   "4000",
   "8000"
  ],
- "area_names": {
+ "areaNames": {
   "2000": "Chancado (Área Seca)",
   "3000": "Molienda–Flotación (Área Húmeda)",
   "4000": "Espesamiento y Relaves",
   "8000": "Salas de Control"
  },
- "caminatas": {
+ "cam": {
   "global": {
    "subs": 135,
    "c80": 135,
    "c100": 90,
-   "c100_prox": 9,
-   "c100_prog": 36
+   "prox": 44,
+   "prog": 1
   },
-  "by_area": {
+  "byArea": {
    "2000": {
     "subs": 35,
     "c80": 35,
     "c100": 35,
-    "c100_prox": 0,
-    "c100_prog": 0
+    "prox": 0,
+    "prog": 0
    },
    "3000": {
     "subs": 76,
     "c80": 76,
     "c100": 35,
-    "c100_prox": 5,
-    "c100_prog": 36
+    "prox": 40,
+    "prog": 1
    },
    "4000": {
     "subs": 22,
     "c80": 22,
     "c100": 19,
-    "c100_prox": 3,
-    "c100_prog": 0
+    "prox": 3,
+    "prog": 0
    },
    "8000": {
     "subs": 2,
     "c80": 2,
     "c100": 1,
-    "c100_prox": 1,
-    "c100_prog": 0
+    "prox": 1,
+    "prog": 0
    }
   },
-  "pendientes_100": [
-   {
-    "area": "3000",
-    "sub": "3000-3200-F03 Estructuras Metálicas",
-    "estado": "Próxima a Realizar",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3663/3664-F03 Estructuras Metálicas",
-    "estado": "Programar",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3700-F03 Estructuras Metálicas",
-    "estado": "Próxima a Realizar",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3100-S01 Molino de Bolas",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3100-S04 Sistema de Izamiento Molienda",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3100-S06 Analizador de Partículas",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S01 Flotación Rougher",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S03 Flotación Rougher – Scavenger",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S06 Alimentación Hidrociclones de Remolienda",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S09 Molino de Remolienda",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S11 Flotación 2 – 1 Cleaner",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S13 Flotación Cleaner – Scavenger",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S16 Transferencia Relave Final a Relaveducto",
-    "estado": "Próxima a Realizar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S18 Flotación de Limpieza",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S19 Sistema para Derrames",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S20 Sistema de Muestreo en Línea",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S21 Analizadores en Línea",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S22 Sistema de Izamiento Flotación",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S02 Espesador de Concentrado",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S03 Transferencia Concentrado Espesado a Filtro Prensa",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S04 Filtro Prensa de Concentrado",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S05 Sistema de Lavado de Telas Filtro Prensa",
-    "estado": "Próxima a Realizar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S06 Sistema de Compresores Filtro Prensa",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S07 Sistema de Pesaje de Camiones",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S10 Sistema para Derrames",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S01 Planta de NaSH",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S02 Planta Colector",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S03 Planta Espumante MIBC",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S05 Planta de Tratamiento de Agua Potable",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S06 Duchas de Emergencia",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S07 Sala de Compresores",
-    "estado": "Próxima a Realizar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S09 Suministro de Agua de Sello",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S10 Sistema Contra Incendios",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S11 Piscina de Agua Fresca",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S12 Piscina de Agua de Procesos",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S13 Piscina de Emergencia de Derrame de Pulpas",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3600-S14 Piscina de Emergencia de Concentrado",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3700-S01 Sala Eléctrica Planta Concentradora",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "4000",
-    "sub": "4000-4200-S01 Alimentación a Espesador de Relaves",
-    "estado": "Próxima a Realizar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "4000",
-    "sub": "4000-4200-S02 Espesador de Relaves",
-    "estado": "Próxima a Realizar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "4000",
-    "sub": "4000-4700-S03 Sistema Alumbrado y alimentación Eléctrica",
-    "estado": "Próxima a Realizar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3700-S02 NIOs y JB Area Húmeda",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3700-S03 Sistema de Alumbrado y Alimentación Eléctrica",
-    "estado": "Programar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "8000",
-    "sub": "8000-8200-S01 Sala de Telecomunicaciones",
-    "estado": "Próxima a Realizar",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "Luminarias y enchufes piscinas y planta de agua potable",
-    "estado": "Programar",
-    "clasif": "Operable"
-   }
+  "pend": [
+   [
+    "3000",
+    "3000-3200-F03 Estructuras Metálicas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3663/3664-F03 Estructuras Metálicas",
+    "Por programar"
+   ],
+   [
+    "3000",
+    "3000-3700-F03 Estructuras Metálicas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3100-S01 Molino de Bolas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3100-S04 Sistema de Izamiento Molienda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3100-S06 Analizador de Partículas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S01 Flotación Rougher",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S03 Flotación Rougher – Scavenger",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S06 Alimentación Hidrociclones de Remolienda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S09 Molino de Remolienda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S11 Flotación 2 – 1 Cleaner",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S13 Flotación Cleaner – Scavenger",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S16 Transferencia Relave Final a Relaveducto",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S18 Flotación de Limpieza",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S19 Sistema para Derrames",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S20 Sistema de Muestreo en Línea",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S21 Analizadores en Línea",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S22 Sistema de Izamiento Flotación",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S02 Espesador de Concentrado",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S03 Transferencia Concentrado Espesado a Filtro Prensa",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S04 Filtro Prensa de Concentrado",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S05 Sistema de Lavado de Telas Filtro Prensa",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S06 Sistema de Compresores Filtro Prensa",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S07 Sistema de Pesaje de Camiones",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S10 Sistema para Derrames",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S01 Planta de NaSH",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S02 Planta Colector",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S03 Planta Espumante MIBC",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S05 Planta de Tratamiento de Agua Potable",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S06 Duchas de Emergencia",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S07 Sala de Compresores",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S09 Suministro de Agua de Sello",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S10 Sistema Contra Incendios",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S11 Piscina de Agua Fresca",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S12 Piscina de Agua de Procesos",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S13 Piscina de Emergencia de Derrame de Pulpas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S14 Piscina de Emergencia de Concentrado",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3700-S01 Sala Eléctrica Planta Concentradora",
+    "Próxima a realizar"
+   ],
+   [
+    "4000",
+    "4000-4200-S01 Alimentación a Espesador de Relaves",
+    "Próxima a realizar"
+   ],
+   [
+    "4000",
+    "4000-4200-S02 Espesador de Relaves",
+    "Próxima a realizar"
+   ],
+   [
+    "4000",
+    "4000-4700-S03 Sistema Alumbrado y alimentación Eléctrica",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3700-S02 NIOs y JB Area Húmeda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3700-S03 Sistema de Alumbrado y Alimentación Eléctrica",
+    "Próxima a realizar"
+   ],
+   [
+    "8000",
+    "8000-8200-S01 Sala de Telecomunicaciones",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "Luminarias y enchufes piscinas y planta de agua potable",
+    "Próxima a realizar"
+   ]
   ]
  },
  "ctop": {
   "global": {
-   "En Revisión": 17,
-   "Rechazado": 8,
-   "Sin Entregar": 109,
-   "Observada": 1
+   "total": 135,
+   "entregadas": 27,
+   "rev": 14,
+   "obs": 1,
+   "rech": 12,
+   "aprob": 0,
+   "pend": 108
   },
-  "by_area": {
+  "byArea": {
    "2000": {
-    "En Revisión": 15,
-    "Rechazado": 2,
-    "Sin Entregar": 18
+    "total": 35,
+    "rev": 14,
+    "obs": 0,
+    "rech": 4,
+    "aprob": 0
    },
    "3000": {
-    "Sin Entregar": 68,
-    "En Revisión": 1,
-    "Rechazado": 6,
-    "Observada": 1
+    "total": 76,
+    "rev": 0,
+    "obs": 1,
+    "rech": 7,
+    "aprob": 0
    },
    "4000": {
-    "Sin Entregar": 21,
-    "En Revisión": 1
+    "total": 22,
+    "rev": 0,
+    "obs": 0,
+    "rech": 1,
+    "aprob": 0
    },
    "8000": {
-    "Sin Entregar": 2
+    "total": 2,
+    "rev": 0,
+    "obs": 0,
+    "rech": 0,
+    "aprob": 0
    }
   },
-  "detalle_entregadas": [
-   {
-    "area": "2000",
-    "sub": "2000-2100-F01-F02 Movimiento de Tierras - Hormigón",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2100-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2200/2300-F01-F02 Movimiento de Tierras - Hormigón",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2200/2300-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2400-F01-F02 Movimiento de Tierras - Hormigón",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2400-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2500-F01-F02 Movimiento de Tierras - Hormigón",
-    "estatus": "Rechazado",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2500-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2600-F01-F02 Movimiento de Tierras - Hormigón",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2600-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2700-F01-F02 Movimiento de Tierras - Hormigón",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2700-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3661/3662-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "4000",
-    "sub": "4000-4600-F03 Estructuras Metálicas",
-    "estatus": "En Revisión",
-    "clasif": "No Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2100-S03 Sistema de Izamiento Chancado Primario",
-    "estatus": "Rechazado",
-    "clasif": "Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2400-S02 Correa de Transporte 2400-CV-001",
-    "estatus": "En Revisión",
-    "clasif": "Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2600-S01 Sistema de Aire Comprimido",
-    "estatus": "En Revisión",
-    "clasif": "Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2600-S04 Suministro de Agua Fresca",
-    "estatus": "En Revisión",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3100-S08 Cajón de Distribución",
-    "estatus": "Rechazado",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S04 Transferencia Concentrado Rougher – Scavenger a Remolienda",
-    "estatus": "Rechazado",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S05 Transferencia Cola Rougher – Scavenger a Cajón de Transferencia Relave Final",
-    "estatus": "Observada",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S14 Transferencia de Concentrado Cleaner – Scavenger a Remolienda",
-    "estatus": "Rechazado",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3200-S15 Transferencia Cola Cleaner – Scavenger a Relaves",
-    "estatus": "Rechazado",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S01 Transferencia Concentrado a Espesamiento",
-    "estatus": "Rechazado",
-    "clasif": "Operable"
-   },
-   {
-    "area": "3000",
-    "sub": "3000-3300-S08 Sistema de Almacenamiento y Distribución Agua Recuperada Filtros",
-    "estatus": "Rechazado",
-    "clasif": "Operable"
-   },
-   {
-    "area": "2000",
-    "sub": "2000-2700-S02 NIOs y JB Area Seca",
-    "estatus": "En Revisión",
-    "clasif": "Operable"
-   }
+  "detalle": [
+   [
+    "2000",
+    "2000-2100-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2100-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2200/2300-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2200/2300-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2400-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2400-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2500-F01-F02 Movimiento de Tierras - Hormigón",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2500-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2600-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2600-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2700-F01-F02 Movimiento de Tierras - Hormigón",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2700-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "3000",
+    "3000-3661/3662-F03 Estructuras Metálicas",
+    "Rechazada"
+   ],
+   [
+    "4000",
+    "4000-4600-F03 Estructuras Metálicas",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2100-S01 Recepción y Chancado Primario",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2100-S03 Sistema de Izamiento Chancado Primario",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2400-S02 Correa de Transporte 2400-CV-001",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2600-S01 Sistema de Aire Comprimido",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2600-S04 Suministro de Agua Fresca",
+    "En revisión"
+   ],
+   [
+    "3000",
+    "3000-3100-S08 Cajón de Distribución",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3200-S04 Transferencia Concentrado Rougher – Scavenger a Remolienda",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3200-S05 Transferencia Cola Rougher – Scavenger a Cajón de Transferencia Relave Final",
+    "Observada"
+   ],
+   [
+    "3000",
+    "3000-3200-S14 Transferencia de Concentrado Cleaner – Scavenger a Remolienda",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3200-S15 Transferencia Cola Cleaner – Scavenger a Relaves",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3300-S01 Transferencia Concentrado a Espesamiento",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3300-S08 Sistema de Almacenamiento y Distribución Agua Recuperada Filtros",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2700-S02 NIOs y JB Area Seca",
+    "En revisión"
+   ]
   ]
  },
  "dt": {
   "global": {
    "total": 2963,
-   "cerrados": 1314,
-   "listo": 86,
+   "cerrados": 1315,
+   "tramite": 85,
    "abiertos": 1563,
-   "vencidos": 732
+   "vencidos": 748
   },
-  "por_tipo": {
+  "tipos": {
    "P1": {
     "total": 1988,
-    "cerrados": 1147,
-    "listo": 11,
+    "cerrados": 1148,
+    "tramite": 10,
     "abiertos": 830,
-    "vencidos": 401
+    "vencidos": 405
    },
    "P2": {
     "total": 811,
     "cerrados": 165,
-    "listo": 75,
+    "tramite": 75,
     "abiertos": 571,
-    "vencidos": 311
+    "vencidos": 323
    },
    "P3": {
     "total": 164,
     "cerrados": 2,
-    "listo": 0,
+    "tramite": 0,
     "abiertos": 162,
     "vencidos": 20
    }
   },
-  "p1": {
-   "global": {
-    "total": 1988,
-    "cerrados": 1147,
-    "listo": 11,
-    "abiertos": 830,
-    "vencidos": 401
+  "p1Esp": {
+   "Piping": {
+    "total": 430,
+    "cerrados": 179,
+    "tramite": 0,
+    "abiertos": 251,
+    "vencidos": 74
    },
-   "por_especialidad": {
-    "Eléctrica": {
-     "total": 422,
-     "cerrados": 203,
-     "listo": 3,
-     "abiertos": 216,
-     "vencidos": 98
-    },
-    "Estructura": {
-     "total": 137,
-     "cerrados": 101,
-     "listo": 0,
-     "abiertos": 36,
-     "vencidos": 17
-    },
-    "Instrumentación y Control": {
-     "total": 426,
-     "cerrados": 241,
-     "listo": 4,
-     "abiertos": 181,
-     "vencidos": 128
-    },
-    "Mecánica": {
-     "total": 503,
-     "cerrados": 373,
-     "listo": 4,
-     "abiertos": 126,
-     "vencidos": 84
-    },
-    "Obras Civiles": {
-     "total": 70,
-     "cerrados": 50,
-     "listo": 0,
-     "abiertos": 20,
-     "vencidos": 0
-    },
-    "Piping": {
-     "total": 430,
-     "cerrados": 179,
-     "listo": 0,
-     "abiertos": 251,
-     "vencidos": 74
-    }
+   "Eléctrica": {
+    "total": 422,
+    "cerrados": 203,
+    "tramite": 3,
+    "abiertos": 216,
+    "vencidos": 98
    },
-   "por_area": {
-    "2000": {
-     "total": 570,
-     "cerrados": 523,
-     "listo": 9,
-     "abiertos": 38,
-     "vencidos": 15
-    },
-    "3000": {
-     "total": 1049,
-     "cerrados": 342,
-     "listo": 0,
-     "abiertos": 707,
-     "vencidos": 366
-    },
-    "4000": {
-     "total": 357,
-     "cerrados": 271,
-     "listo": 2,
-     "abiertos": 84,
-     "vencidos": 19
-    },
-    "8000": {
-     "total": 12,
-     "cerrados": 11,
-     "listo": 0,
-     "abiertos": 1,
-     "vencidos": 1
-    }
+   "Instrumentación y Control": {
+    "total": 426,
+    "cerrados": 242,
+    "tramite": 3,
+    "abiertos": 181,
+    "vencidos": 128
    },
-   "abiertos_esp_area": {
-    "Eléctrica": {
-     "2000": 17,
-     "3000": 165,
-     "4000": 33,
-     "8000": 1
-    },
-    "Estructura": {
-     "2000": 0,
-     "3000": 36,
-     "4000": 0,
-     "8000": 0
-    },
-    "Instrumentación y Control": {
-     "2000": 3,
-     "3000": 147,
-     "4000": 31,
-     "8000": 0
-    },
-    "Mecánica": {
-     "2000": 18,
-     "3000": 103,
-     "4000": 5,
-     "8000": 0
-    },
-    "Obras Civiles": {
-     "2000": 0,
-     "3000": 20,
-     "4000": 0,
-     "8000": 0
-    },
-    "Piping": {
-     "2000": 0,
-     "3000": 236,
-     "4000": 15,
-     "8000": 0
-    }
+   "Mecánica": {
+    "total": 503,
+    "cerrados": 373,
+    "tramite": 4,
+    "abiertos": 126,
+    "vencidos": 88
    },
-   "abiertos_por_origen": {
-    "Caminata 1 (80%)": 678,
-    "Caminata 2 (100%)": 152
+   "Estructura": {
+    "total": 137,
+    "cerrados": 101,
+    "tramite": 0,
+    "abiertos": 36,
+    "vencidos": 17
+   },
+   "Obras Civiles": {
+    "total": 70,
+    "cerrados": 50,
+    "tramite": 0,
+    "abiertos": 20,
+    "vencidos": 0
    }
   },
-  "por_area": {
+  "p1Area": {
    "2000": {
-    "total": 912,
-    "cerrados": 637,
-    "listo": 31,
-    "abiertos": 244,
-    "vencidos": 105
+    "total": 570,
+    "cerrados": 524,
+    "tramite": 8,
+    "abiertos": 38,
+    "vencidos": 19
    },
    "3000": {
-    "total": 1471,
-    "cerrados": 380,
-    "listo": 8,
-    "abiertos": 1083,
-    "vencidos": 514
+    "total": 1049,
+    "cerrados": 342,
+    "tramite": 0,
+    "abiertos": 707,
+    "vencidos": 366
    },
    "4000": {
-    "total": 567,
-    "cerrados": 286,
-    "listo": 47,
-    "abiertos": 234,
-    "vencidos": 111
+    "total": 357,
+    "cerrados": 271,
+    "tramite": 2,
+    "abiertos": 84,
+    "vencidos": 19
    },
    "8000": {
-    "total": 13,
+    "total": 12,
     "cerrados": 11,
-    "listo": 0,
-    "abiertos": 2,
-    "vencidos": 2
+    "tramite": 0,
+    "abiertos": 1,
+    "vencidos": 1
    }
+  },
+  "hm": {
+   "esp": [
+    "Piping",
+    "Eléctrica",
+    "Instr. y Control",
+    "Mecánica",
+    "Estructura",
+    "Obras Civiles"
+   ],
+   "vals": [
+    [
+     0,
+     236,
+     15,
+     0
+    ],
+    [
+     17,
+     165,
+     33,
+     1
+    ],
+    [
+     3,
+     147,
+     31,
+     0
+    ],
+    [
+     18,
+     103,
+     5,
+     0
+    ],
+    [
+     0,
+     36,
+     0,
+     0
+    ],
+    [
+     0,
+     20,
+     0,
+     0
+    ]
+   ]
+  },
+  "p1AbiertosPorOrigen": {
+   "Caminata 1 (80%)": 678,
+   "Caminata 2 (100%)": 152
   }
+ },
+ "semaforo": {
+  "2000": [
+   "good",
+   "Al día"
+  ],
+  "3000": [
+   "crit",
+   "Crítico"
+  ],
+  "4000": [
+   "warn",
+   "Atención"
+  ],
+  "8000": [
+   "crit",
+   "Crítico"
+  ]
+ },
+ "previo": {
+  "corte": "2026-07-16",
+  "corte_texto": "16-07-2026",
+  "cam80": 135,
+  "cam100": 90,
+  "subs": 135,
+  "camProx": 9,
+  "camProg": 36,
+  "topEntregadas": 26,
+  "topRev": 17,
+  "topObs": 1,
+  "topRech": 8,
+  "topAprob": 0,
+  "p1Total": 1988,
+  "p1Cerrados": 1147,
+  "p1Abiertos": 830,
+  "p1Vencidos": 401
  }
 }

@@ -16,20 +16,16 @@
     --baseline:    #c3c2b7;
     --border:      rgba(11,11,11,0.10);
     --track:       #ecebe6;
-    /* series */
-    --blue:        #2a78d6;   /* en revisión / en plazo / realizada(oscuro abajo) */
-    --yellow:      #eda100;   /* observada */
-    --red:         #e34948;   /* rechazada / vencidos */
-    /* ordinal caminatas (validado --ordinal) */
-    --ord-1:       #1c5cab;   /* realizada */
-    --ord-2:       #5598e7;   /* próxima a realizar */
-    --ord-3:       #86b6ef;   /* por programar */
-    /* status (fijos) */
+    --blue:        #2a78d6;
+    --amber:       #eda100;
+    --red:         #e34948;
+    --ord-1:       #1c5cab;
+    --ord-2:       #5598e7;
+    --ord-3:       #86b6ef;
     --st-good:     #0ca30c;
     --st-warn:     #fab219;
     --st-crit:     #d03b3b;
     --st-good-txt: #006300;
-    /* heatmap seq blue */
     --seq-100: #cde2fb; --seq-200: #9ec5f4; --seq-300: #6da7ec;
     --seq-450: #2a78d6; --seq-600: #184f95; --seq-700: #0d366b;
   }
@@ -46,7 +42,7 @@
       --border:    rgba(255,255,255,0.10);
       --track:     #262624;
       --blue:      #3987e5;
-      --yellow:    #c98500;
+      --amber:     #c98500;
       --red:       #e66767;
       --st-good-txt: #0ca30c;
     }
@@ -63,7 +59,7 @@
     --border:    rgba(255,255,255,0.10);
     --track:     #262624;
     --blue:      #3987e5;
-    --yellow:    #c98500;
+    --amber:     #c98500;
     --red:       #e66767;
     --st-good-txt: #0ca30c;
   }
@@ -74,7 +70,7 @@
     min-height: 100vh; padding: clamp(18px, 2.4vw, 34px) clamp(16px, 3vw, 44px) 48px;
   }
   .wrap { width: 100%; max-width: 1600px; margin: 0 auto; }
-  header.top { position: relative; display: flex; flex-direction: column; align-items: center;
+  header.top { display: flex; flex-direction: column; align-items: center;
     text-align: center; gap: 6px; margin: 4px 0 26px; }
   .brandbox { background: #ffffff; border-radius: 12px; padding: 9px 20px; display: inline-flex;
     align-items: center; box-shadow: 0 1px 4px rgba(11,11,11,0.16); margin-bottom: 12px; }
@@ -90,7 +86,7 @@
   .theme-btn { font: inherit; font-size: 12px; color: var(--ink-2); background: var(--surface-1);
     border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; cursor: pointer; }
 
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); gap: 12px; margin-bottom: 14px; }
   .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px 13px; }
   .card .lbl { font-size: 12.5px; color: var(--ink-2); margin-bottom: 6px; }
   .card .val { font-size: 32px; font-weight: 600; line-height: 1.05; }
@@ -99,13 +95,14 @@
   .card .det .alert { color: var(--st-crit); font-weight: 600; }
   .meter { height: 6px; border-radius: 3px; background: var(--track); margin-top: 9px; overflow: hidden; }
   .meter > i { display: block; height: 100%; border-radius: 3px; }
+  .trend { font-size: 11.5px; margin-top: 6px; display: flex; align-items: center; gap: 5px; color: var(--ink-muted); }
+  .trend b.up { color: var(--st-good-txt); } .trend b.down { color: var(--st-crit); }
 
   section.block { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px 14px; margin-bottom: 14px; }
   .block h2 { font-size: 14.5px; margin: 0 0 2px; }
   .block .h2sub { font-size: 12px; color: var(--ink-muted); margin: 0 0 12px; }
 
-  /* semáforo por área */
-  table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; color: var(--ink-1); }
   .tbl th { text-align: left; font-weight: 600; font-size: 11.5px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em;
     border-bottom: 1px solid var(--baseline); padding: 4px 10px 6px; }
   .tbl td { padding: 8px 10px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
@@ -118,18 +115,20 @@
   .chip.crit { color: var(--st-crit);    background: color-mix(in srgb, var(--st-crit) 14%, transparent); }
 
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
 
-  /* barras apiladas HTML */
   .rows { display: grid; gap: 10px; margin-top: 4px; }
-  .row { display: grid; grid-template-columns: 118px 1fr; gap: 10px; align-items: center; }
+  .row { display: grid; grid-template-columns: minmax(110px, 150px) 1fr; gap: 10px; align-items: center; }
   .row .rlab { font-size: 12.5px; color: var(--ink-2); line-height: 1.25; }
   .row .rlab b { color: var(--ink-1); font-weight: 600; display: block; }
   .barline { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .bar { display: flex; height: 20px; flex: 1; min-width: 0; }
+  /* pista de ancho completo: la barra ocupa un % de ella, así los valores
+     pequeños nunca colapsan (evita anchos negativos por restar px). */
+  .track2 { flex: 1; min-width: 0; display: flex; }
+  .track2 > .bar { flex: none; }
   .seg { height: 100%; position: relative; margin-right: 2px; min-width: 0; }
   .seg:last-child { margin-right: 0; border-radius: 0 4px 4px 0; }
-  .seg:first-child { border-radius: 0; }
   .seg span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     font-size: 11px; font-weight: 600; overflow: hidden; }
   .endlab { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -138,12 +137,11 @@
   .legend .k { display: inline-flex; align-items: center; gap: 6px; }
   .legend .sw { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
 
-  /* heatmap */
   .hm { display: grid; gap: 2px; margin-top: 6px; font-size: 12px; }
   .hm .hcell { padding: 9px 4px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; border-radius: 3px; }
   .hm .hlab { display: flex; align-items: center; font-size: 12px; color: var(--ink-2); padding-right: 6px; }
   .hm .htop { text-align: center; font-size: 11.5px; color: var(--ink-muted); padding-bottom: 4px; }
-  .hm-note { font-size: 11.5px; color: var(--ink-muted); margin-top: 10px; display: flex; align-items: center; gap: 8px; }
+  .hm-note { font-size: 11.5px; color: var(--ink-muted); margin-top: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .ramp { display: inline-flex; height: 8px; border-radius: 4px; overflow: hidden; }
   .ramp i { width: 18px; }
 
@@ -155,13 +153,11 @@
   .foot { font-size: 11.5px; color: var(--ink-muted); line-height: 1.55; margin-top: 18px; }
   .foot b { color: var(--ink-2); }
 
-  /* tooltip */
   #tip { position: fixed; z-index: 50; pointer-events: none; background: var(--surface-1); color: var(--ink-1);
     border: 1px solid var(--border); box-shadow: 0 4px 14px rgba(0,0,0,.18); border-radius: 8px;
-    padding: 8px 11px; font-size: 12px; max-width: 300px; display: none; }
+    padding: 8px 11px; font-size: 12px; max-width: 320px; display: none; }
   #tip .t1 { font-weight: 600; margin-bottom: 3px; }
   #tip .t2 { color: var(--ink-2); }
-  table.tbl { color: var(--ink-1); }
 </style>
 </head>
 <body>
@@ -174,9 +170,9 @@
            onerror="this.closest('.brandbox').style.display='none'">
     </span>
     <h1>Panel de Control — Carpetas TOP · Caminatas · Detalles de Terminación P1</h1>
-    <div class="sub">Planta Concentradora · Áreas <b>2000</b> Chancado · <b>3000</b> Molienda–Flotación · <b>4000</b> Espesamiento y Relaves · <b>8000</b> Salas de Control</div>
+    <div class="sub" id="subtitulo"></div>
     <div class="headmeta">
-      <span class="corte">Corte: <b>16-jul-2026</b></span>
+      <span class="corte">Corte: <b id="corteTxt"></b></span>
       <button class="theme-btn" id="themeBtn" type="button">Modo oscuro</button>
     </div>
   </header>
@@ -192,25 +188,25 @@
   <div class="grid2">
     <section class="block">
       <h2>Caminatas 100% por área</h2>
-      <p class="h2sub">Subsistemas con caminata de detalles al 100% realizada — caminatas 80%: 135/135 completadas</p>
+      <p class="h2sub" id="subCam"></p>
       <div class="rows" id="chCam"></div>
       <div class="legend" id="lgCam"></div>
     </section>
     <section class="block">
       <h2>Carpetas TOP por área</h2>
-      <p class="h2sub">Estatus de armado y entrega — 26 de 135 entregadas · 0 aprobadas a la fecha</p>
+      <p class="h2sub" id="subTop"></p>
       <div class="rows" id="chTop"></div>
       <div class="legend" id="lgTop"></div>
     </section>
     <section class="block">
       <h2>Detalles P1 abiertos por disciplina</h2>
-      <p class="h2sub">830 P1 abiertos; 401 con fecha de vencimiento cumplida al corte</p>
+      <p class="h2sub" id="subEsp"></p>
       <div class="rows" id="chEsp"></div>
       <div class="legend" id="lgEsp"></div>
     </section>
     <section class="block">
       <h2>Concentración de P1 abiertos — disciplina × área</h2>
-      <p class="h2sub">El área 3000 concentra 707 de los 830 P1 abiertos (85%)</p>
+      <p class="h2sub" id="subHm"></p>
       <div class="hm" id="chHm"></div>
       <div class="hm-note" id="hmNote"></div>
     </section>
@@ -218,108 +214,696 @@
 
   <section class="block">
     <h2>Avance de cierre P1 por área</h2>
-    <p class="h2sub">Cerrados / total P1 levantados (el estatus "Listo para revisión" se muestra aparte)</p>
+    <p class="h2sub">Cerrados sobre el total de P1 levantados. Los ítems en trámite (listos para revisión o cierre) se detallan en el tooltip.</p>
     <div class="rows" id="chP1Area"></div>
     <div class="legend" id="lgP1Area"></div>
   </section>
 
   <details>
-    <summary>Detalle — Caminatas 100% pendientes (45 subsistemas)</summary>
+    <summary id="sumCam"></summary>
     <div class="inner"><table class="tbl" id="tbCam"></table></div>
   </details>
   <details>
-    <summary>Detalle — Carpetas TOP entregadas (26) y su estatus</summary>
+    <summary id="sumTop"></summary>
     <div class="inner"><table class="tbl" id="tbTop"></table></div>
   </details>
   <details>
-    <summary>Detalle — Detalles de terminación por prioridad y disciplina (tabla completa)</summary>
+    <summary>Detalle — Detalles de terminación por prioridad y disciplina</summary>
     <div class="inner"><table class="tbl" id="tbDt"></table></div>
   </details>
 
-  <p class="foot">
-    <b>Fuente:</b> Estatus.xlsx — hojas «BD Caminatas-CTOP» (135 subsistemas) y «BD Detalles Terminación» (2.963 registros), corte 16-jul-2026.
-    <b>Definiciones:</b> Abierto = Trabajo requerido + Iniciado + Trabajo no aceptado · Vencido = abierto con fecha de vencimiento anterior al corte ·
-    % cierre = Cerrados / Total levantados · CTOP entregada = con estatus En Revisión, Observada, Rechazada o Aprobada.
-    <b>Criterio semáforo:</b> Crítico si caminata 100% &lt; 60% o P1 cierre &lt; 50% · Atención si algún frente entre 60–90% o carpetas TOP sin entregar · Al día si caminatas completas y P1 ≥ 90%.
-    <b>Notas:</b> El resumen del Excel reporta 134 carpetas TOP (excluye 1 alcance adicional sin código); este panel usa el universo completo de 135 subsistemas, por lo que el % de entrega
-    puede diferir en una décima. De los P1 abiertos, 678 provienen de la caminata 80% y 152 de la caminata 100%.
-  </p>
+  <p class="foot" id="notas"></p>
 </div>
 <div id="tip"></div>
 </div>
+
+<!-- === DATOS:INICIO === (bloque generado por actualizar.py — no editar a mano) -->
 <script>
 const D = {
- areas: ["2000","3000","4000","8000"],
- areaNames: {"2000":"Chancado (Área Seca)","3000":"Molienda–Flotación (Área Húmeda)","4000":"Espesamiento y Relaves","8000":"Salas de Control"},
- cam: { global: {subs:135,c80:135,c100:90,prox:9,prog:36},
-   byArea: {"2000":{subs:35,c80:35,c100:35,prox:0,prog:0},"3000":{subs:76,c80:76,c100:35,prox:5,prog:36},
-            "4000":{subs:22,c80:22,c100:19,prox:3,prog:0},"8000":{subs:2,c80:2,c100:1,prox:1,prog:0}},
-   pend: [
-    ["3000","3000-3200-F03 Estructuras Metálicas","Próxima a Realizar"],["3000","3000-3663/3664-F03 Estructuras Metálicas","Programar"],
-    ["3000","3000-3700-F03 Estructuras Metálicas","Próxima a Realizar"],["3000","3000-3100-S01 Molino de Bolas","Programar"],
-    ["3000","3000-3100-S04 Sistema de Izamiento Molienda","Programar"],["3000","3000-3100-S06 Analizador de Partículas","Programar"],
-    ["3000","3000-3200-S01 Flotación Rougher","Programar"],["3000","3000-3200-S03 Flotación Rougher – Scavenger","Programar"],
-    ["3000","3000-3200-S06 Alimentación Hidrociclones de Remolienda","Programar"],["3000","3000-3200-S09 Molino de Remolienda","Programar"],
-    ["3000","3000-3200-S11 Flotación 2 – 1 Cleaner","Programar"],["3000","3000-3200-S13 Flotación Cleaner – Scavenger","Programar"],
-    ["3000","3000-3200-S16 Transferencia Relave Final a Relaveducto","Próxima a Realizar"],["3000","3000-3200-S18 Flotación de Limpieza","Programar"],
-    ["3000","3000-3200-S19 Sistema para Derrames","Programar"],["3000","3000-3200-S20 Sistema de Muestreo en Línea","Programar"],
-    ["3000","3000-3200-S21 Analizadores en Línea","Programar"],["3000","3000-3200-S22 Sistema de Izamiento Flotación","Programar"],
-    ["3000","3000-3300-S02 Espesador de Concentrado","Programar"],["3000","3000-3300-S03 Transferencia Concentrado Espesado a Filtro Prensa","Programar"],
-    ["3000","3000-3300-S04 Filtro Prensa de Concentrado","Programar"],["3000","3000-3300-S05 Sistema de Lavado de Telas Filtro Prensa","Próxima a Realizar"],
-    ["3000","3000-3300-S06 Sistema de Compresores Filtro Prensa","Programar"],["3000","3000-3300-S07 Sistema de Pesaje de Camiones","Programar"],
-    ["3000","3000-3300-S10 Sistema para Derrames","Programar"],["3000","3000-3600-S01 Planta de NaSH","Programar"],
-    ["3000","3000-3600-S02 Planta Colector","Programar"],["3000","3000-3600-S03 Planta Espumante MIBC","Programar"],
-    ["3000","3000-3600-S05 Planta de Tratamiento de Agua Potable","Programar"],["3000","3000-3600-S06 Duchas de Emergencia","Programar"],
-    ["3000","3000-3600-S07 Sala de Compresores","Próxima a Realizar"],["3000","3000-3600-S09 Suministro de Agua de Sello","Programar"],
-    ["3000","3000-3600-S10 Sistema Contra Incendios","Programar"],["3000","3000-3600-S11 Piscina de Agua Fresca","Programar"],
-    ["3000","3000-3600-S12 Piscina de Agua de Procesos","Programar"],["3000","3000-3600-S13 Piscina de Emergencia de Derrame de Pulpas","Programar"],
-    ["3000","3000-3600-S14 Piscina de Emergencia de Concentrado","Programar"],["3000","3000-3700-S01 Sala Eléctrica Planta Concentradora","Programar"],
-    ["3000","3000-3700-S02 NIOs y JB Area Húmeda","Programar"],["3000","3000-3700-S03 Sistema de Alumbrado y Alimentación Eléctrica","Programar"],
-    ["3000","Luminarias y enchufes piscinas y planta de agua potable","Programar"],
-    ["4000","4000-4200-S01 Alimentación a Espesador de Relaves","Próxima a Realizar"],["4000","4000-4200-S02 Espesador de Relaves","Próxima a Realizar"],
-    ["4000","4000-4700-S03 Sistema Alumbrado y alimentación Eléctrica","Próxima a Realizar"],
-    ["8000","8000-8200-S01 Sala de Telecomunicaciones","Próxima a Realizar"]]
+ "meta": {
+  "corte": "2026-07-26",
+  "corte_texto": "26-07-2026",
+  "generado": "2026-07-27 14:50"
  },
- ctop: { global: {rev:17,obs:1,rech:8,pend:109,total:135},
-   byArea: {"2000":{rev:15,obs:0,rech:2,total:35},"3000":{rev:1,obs:1,rech:6,total:76},"4000":{rev:1,obs:0,rech:0,total:22},"8000":{rev:0,obs:0,rech:0,total:2}},
-   detalle: [
-    ["2000","2000-2100-F01-F02 Movimiento de Tierras - Hormigón","En Revisión"],["2000","2000-2100-F03 Estructuras Metálicas","En Revisión"],
-    ["2000","2000-2200/2300-F01-F02 Movimiento de Tierras - Hormigón","En Revisión"],["2000","2000-2200/2300-F03 Estructuras Metálicas","En Revisión"],
-    ["2000","2000-2400-F01-F02 Movimiento de Tierras - Hormigón","En Revisión"],["2000","2000-2400-F03 Estructuras Metálicas","En Revisión"],
-    ["2000","2000-2500-F01-F02 Movimiento de Tierras - Hormigón","Rechazada"],["2000","2000-2500-F03 Estructuras Metálicas","En Revisión"],
-    ["2000","2000-2600-F01-F02 Movimiento de Tierras - Hormigón","En Revisión"],["2000","2000-2600-F03 Estructuras Metálicas","En Revisión"],
-    ["2000","2000-2700-F01-F02 Movimiento de Tierras - Hormigón","En Revisión"],["2000","2000-2700-F03 Estructuras Metálicas","En Revisión"],
-    ["2000","2000-2100-S03 Sistema de Izamiento Chancado Primario","Rechazada"],["2000","2000-2400-S02 Correa de Transporte 2400-CV-001","En Revisión"],
-    ["2000","2000-2600-S01 Sistema de Aire Comprimido","En Revisión"],["2000","2000-2600-S04 Suministro de Agua Fresca","En Revisión"],
-    ["2000","2000-2700-S02 NIOs y JB Area Seca","En Revisión"],
-    ["3000","3000-3661/3662-F03 Estructuras Metálicas","En Revisión"],["3000","3000-3100-S08 Cajón de Distribución","Rechazada"],
-    ["3000","3000-3200-S04 Transferencia Concentrado Rougher – Scavenger a Remolienda","Rechazada"],
-    ["3000","3000-3200-S05 Transferencia Cola Rougher – Scavenger a Cajón Relave Final","Observada"],
-    ["3000","3000-3200-S14 Transferencia de Concentrado Cleaner – Scavenger a Remolienda","Rechazada"],
-    ["3000","3000-3200-S15 Transferencia Cola Cleaner – Scavenger a Relaves","Rechazada"],
-    ["3000","3000-3300-S01 Transferencia Concentrado a Espesamiento","Rechazada"],
-    ["3000","3000-3300-S08 Sist. Almacenamiento y Distribución Agua Recuperada Filtros","Rechazada"],
-    ["4000","4000-4600-F03 Estructuras Metálicas","En Revisión"]]
+ "areas": [
+  "2000",
+  "3000",
+  "4000",
+  "8000"
+ ],
+ "areaNames": {
+  "2000": "Chancado (Área Seca)",
+  "3000": "Molienda–Flotación (Área Húmeda)",
+  "4000": "Espesamiento y Relaves",
+  "8000": "Salas de Control"
  },
- dt: {
-   tipos: { P1:{total:1988,cer:1147,listo:11,ab:830,ven:401}, P2:{total:811,cer:165,listo:75,ab:571,ven:311}, P3:{total:164,cer:2,listo:0,ab:162,ven:20} },
-   p1Esp: {
-     "Piping":{total:430,cer:179,listo:0,ab:251,ven:74},
-     "Eléctrica":{total:422,cer:203,listo:3,ab:216,ven:98},
-     "Instrumentación y Control":{total:426,cer:241,listo:4,ab:181,ven:128},
-     "Mecánica":{total:503,cer:373,listo:4,ab:126,ven:84},
-     "Estructura":{total:137,cer:101,listo:0,ab:36,ven:17},
-     "Obras Civiles":{total:70,cer:50,listo:0,ab:20,ven:0}},
-   p1Area: {"2000":{total:570,cer:523,listo:9,ab:38,ven:15},"3000":{total:1049,cer:342,listo:0,ab:707,ven:366},
-            "4000":{total:357,cer:271,listo:2,ab:84,ven:19},"8000":{total:12,cer:11,listo:0,ab:1,ven:1}},
-   hm: { esp: ["Piping","Eléctrica","Instr. y Control","Mecánica","Estructura","Obras Civiles"],
-         vals: [[0,236,15,0],[17,165,33,1],[3,147,31,0],[18,103,5,0],[0,36,0,0],[0,20,0,0]] }
+ "cam": {
+  "global": {
+   "subs": 135,
+   "c80": 135,
+   "c100": 90,
+   "prox": 44,
+   "prog": 1
+  },
+  "byArea": {
+   "2000": {
+    "subs": 35,
+    "c80": 35,
+    "c100": 35,
+    "prox": 0,
+    "prog": 0
+   },
+   "3000": {
+    "subs": 76,
+    "c80": 76,
+    "c100": 35,
+    "prox": 40,
+    "prog": 1
+   },
+   "4000": {
+    "subs": 22,
+    "c80": 22,
+    "c100": 19,
+    "prox": 3,
+    "prog": 0
+   },
+   "8000": {
+    "subs": 2,
+    "c80": 2,
+    "c100": 1,
+    "prox": 1,
+    "prog": 0
+   }
+  },
+  "pend": [
+   [
+    "3000",
+    "3000-3200-F03 Estructuras Metálicas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3663/3664-F03 Estructuras Metálicas",
+    "Por programar"
+   ],
+   [
+    "3000",
+    "3000-3700-F03 Estructuras Metálicas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3100-S01 Molino de Bolas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3100-S04 Sistema de Izamiento Molienda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3100-S06 Analizador de Partículas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S01 Flotación Rougher",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S03 Flotación Rougher – Scavenger",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S06 Alimentación Hidrociclones de Remolienda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S09 Molino de Remolienda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S11 Flotación 2 – 1 Cleaner",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S13 Flotación Cleaner – Scavenger",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S16 Transferencia Relave Final a Relaveducto",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S18 Flotación de Limpieza",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S19 Sistema para Derrames",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S20 Sistema de Muestreo en Línea",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S21 Analizadores en Línea",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S22 Sistema de Izamiento Flotación",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S02 Espesador de Concentrado",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S03 Transferencia Concentrado Espesado a Filtro Prensa",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S04 Filtro Prensa de Concentrado",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S05 Sistema de Lavado de Telas Filtro Prensa",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S06 Sistema de Compresores Filtro Prensa",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S07 Sistema de Pesaje de Camiones",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3300-S10 Sistema para Derrames",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S01 Planta de NaSH",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S02 Planta Colector",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S03 Planta Espumante MIBC",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S05 Planta de Tratamiento de Agua Potable",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S06 Duchas de Emergencia",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S07 Sala de Compresores",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S09 Suministro de Agua de Sello",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S10 Sistema Contra Incendios",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S11 Piscina de Agua Fresca",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S12 Piscina de Agua de Procesos",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S13 Piscina de Emergencia de Derrame de Pulpas",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3600-S14 Piscina de Emergencia de Concentrado",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3700-S01 Sala Eléctrica Planta Concentradora",
+    "Próxima a realizar"
+   ],
+   [
+    "4000",
+    "4000-4200-S01 Alimentación a Espesador de Relaves",
+    "Próxima a realizar"
+   ],
+   [
+    "4000",
+    "4000-4200-S02 Espesador de Relaves",
+    "Próxima a realizar"
+   ],
+   [
+    "4000",
+    "4000-4700-S03 Sistema Alumbrado y alimentación Eléctrica",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3700-S02 NIOs y JB Area Húmeda",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3700-S03 Sistema de Alumbrado y Alimentación Eléctrica",
+    "Próxima a realizar"
+   ],
+   [
+    "8000",
+    "8000-8200-S01 Sala de Telecomunicaciones",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "Luminarias y enchufes piscinas y planta de agua potable",
+    "Próxima a realizar"
+   ]
+  ]
+ },
+ "ctop": {
+  "global": {
+   "total": 135,
+   "entregadas": 27,
+   "rev": 14,
+   "obs": 1,
+   "rech": 12,
+   "aprob": 0,
+   "pend": 108
+  },
+  "byArea": {
+   "2000": {
+    "total": 35,
+    "rev": 14,
+    "obs": 0,
+    "rech": 4,
+    "aprob": 0
+   },
+   "3000": {
+    "total": 76,
+    "rev": 0,
+    "obs": 1,
+    "rech": 7,
+    "aprob": 0
+   },
+   "4000": {
+    "total": 22,
+    "rev": 0,
+    "obs": 0,
+    "rech": 1,
+    "aprob": 0
+   },
+   "8000": {
+    "total": 2,
+    "rev": 0,
+    "obs": 0,
+    "rech": 0,
+    "aprob": 0
+   }
+  },
+  "detalle": [
+   [
+    "2000",
+    "2000-2100-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2100-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2200/2300-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2200/2300-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2400-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2400-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2500-F01-F02 Movimiento de Tierras - Hormigón",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2500-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2600-F01-F02 Movimiento de Tierras - Hormigón",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2600-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2700-F01-F02 Movimiento de Tierras - Hormigón",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2700-F03 Estructuras Metálicas",
+    "En revisión"
+   ],
+   [
+    "3000",
+    "3000-3661/3662-F03 Estructuras Metálicas",
+    "Rechazada"
+   ],
+   [
+    "4000",
+    "4000-4600-F03 Estructuras Metálicas",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2100-S01 Recepción y Chancado Primario",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2100-S03 Sistema de Izamiento Chancado Primario",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2400-S02 Correa de Transporte 2400-CV-001",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2600-S01 Sistema de Aire Comprimido",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2600-S04 Suministro de Agua Fresca",
+    "En revisión"
+   ],
+   [
+    "3000",
+    "3000-3100-S08 Cajón de Distribución",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3200-S04 Transferencia Concentrado Rougher – Scavenger a Remolienda",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3200-S05 Transferencia Cola Rougher – Scavenger a Cajón de Transferencia Relave Final",
+    "Observada"
+   ],
+   [
+    "3000",
+    "3000-3200-S14 Transferencia de Concentrado Cleaner – Scavenger a Remolienda",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3200-S15 Transferencia Cola Cleaner – Scavenger a Relaves",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3300-S01 Transferencia Concentrado a Espesamiento",
+    "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3300-S08 Sistema de Almacenamiento y Distribución Agua Recuperada Filtros",
+    "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2700-S02 NIOs y JB Area Seca",
+    "En revisión"
+   ]
+  ]
+ },
+ "dt": {
+  "global": {
+   "total": 2963,
+   "cerrados": 1315,
+   "tramite": 85,
+   "abiertos": 1563,
+   "vencidos": 748
+  },
+  "tipos": {
+   "P1": {
+    "total": 1988,
+    "cerrados": 1148,
+    "tramite": 10,
+    "abiertos": 830,
+    "vencidos": 405
+   },
+   "P2": {
+    "total": 811,
+    "cerrados": 165,
+    "tramite": 75,
+    "abiertos": 571,
+    "vencidos": 323
+   },
+   "P3": {
+    "total": 164,
+    "cerrados": 2,
+    "tramite": 0,
+    "abiertos": 162,
+    "vencidos": 20
+   }
+  },
+  "p1Esp": {
+   "Piping": {
+    "total": 430,
+    "cerrados": 179,
+    "tramite": 0,
+    "abiertos": 251,
+    "vencidos": 74
+   },
+   "Eléctrica": {
+    "total": 422,
+    "cerrados": 203,
+    "tramite": 3,
+    "abiertos": 216,
+    "vencidos": 98
+   },
+   "Instrumentación y Control": {
+    "total": 426,
+    "cerrados": 242,
+    "tramite": 3,
+    "abiertos": 181,
+    "vencidos": 128
+   },
+   "Mecánica": {
+    "total": 503,
+    "cerrados": 373,
+    "tramite": 4,
+    "abiertos": 126,
+    "vencidos": 88
+   },
+   "Estructura": {
+    "total": 137,
+    "cerrados": 101,
+    "tramite": 0,
+    "abiertos": 36,
+    "vencidos": 17
+   },
+   "Obras Civiles": {
+    "total": 70,
+    "cerrados": 50,
+    "tramite": 0,
+    "abiertos": 20,
+    "vencidos": 0
+   }
+  },
+  "p1Area": {
+   "2000": {
+    "total": 570,
+    "cerrados": 524,
+    "tramite": 8,
+    "abiertos": 38,
+    "vencidos": 19
+   },
+   "3000": {
+    "total": 1049,
+    "cerrados": 342,
+    "tramite": 0,
+    "abiertos": 707,
+    "vencidos": 366
+   },
+   "4000": {
+    "total": 357,
+    "cerrados": 271,
+    "tramite": 2,
+    "abiertos": 84,
+    "vencidos": 19
+   },
+   "8000": {
+    "total": 12,
+    "cerrados": 11,
+    "tramite": 0,
+    "abiertos": 1,
+    "vencidos": 1
+   }
+  },
+  "hm": {
+   "esp": [
+    "Piping",
+    "Eléctrica",
+    "Instr. y Control",
+    "Mecánica",
+    "Estructura",
+    "Obras Civiles"
+   ],
+   "vals": [
+    [
+     0,
+     236,
+     15,
+     0
+    ],
+    [
+     17,
+     165,
+     33,
+     1
+    ],
+    [
+     3,
+     147,
+     31,
+     0
+    ],
+    [
+     18,
+     103,
+     5,
+     0
+    ],
+    [
+     0,
+     36,
+     0,
+     0
+    ],
+    [
+     0,
+     20,
+     0,
+     0
+    ]
+   ]
+  },
+  "p1AbiertosPorOrigen": {
+   "Caminata 1 (80%)": 678,
+   "Caminata 2 (100%)": 152
+  }
+ },
+ "semaforo": {
+  "2000": [
+   "good",
+   "Al día"
+  ],
+  "3000": [
+   "crit",
+   "Crítico"
+  ],
+  "4000": [
+   "warn",
+   "Atención"
+  ],
+  "8000": [
+   "crit",
+   "Crítico"
+  ]
+ },
+ "previo": {
+  "corte": "2026-07-16",
+  "corte_texto": "16-07-2026",
+  "cam80": 135,
+  "cam100": 90,
+  "subs": 135,
+  "camProx": 9,
+  "camProg": 36,
+  "topEntregadas": 26,
+  "topRev": 17,
+  "topObs": 1,
+  "topRech": 8,
+  "topAprob": 0,
+  "p1Total": 1988,
+  "p1Cerrados": 1147,
+  "p1Abiertos": 830,
+  "p1Vencidos": 401
  }
 };
+</script>
+<!-- === DATOS:FIN === -->
 
+<script>
 const $ = (id) => document.getElementById(id);
 const pct = (a,b) => b ? Math.round(1000*a/b)/10 : 0;
-const fmt = (n) => n.toLocaleString('es-CL');
+const pctTxt = (a,b) => pct(a,b).toLocaleString('es-CL') + '%';
+const fmt = (n) => (n||0).toLocaleString('es-CL');
 const css = (v) => getComputedStyle(document.querySelector('.viz-root')).getPropertyValue(v).trim();
 
 /* ---------- tooltip ---------- */
@@ -337,43 +921,89 @@ function bindTip(el, t1, t2) {
   el.addEventListener('mouseleave', () => tip.style.display = 'none');
 }
 
+/* ---------- cabecera ---------- */
+$('corteTxt').textContent = D.meta.corte_texto;
+$('subtitulo').innerHTML = 'Planta Concentradora · ' +
+  D.areas.map(a => `<b>${a}</b> ${D.areaNames[a].replace(/\s*\(.*\)/,'')}`).join(' · ');
+
 /* ---------- KPIs ---------- */
-function kpi(lbl, num, den, detHtml, fillVar, pctOverride) {
-  const p = pctOverride !== undefined ? pctOverride : pct(num, den);
+function kpi(lbl, num, den, detHtml, fillVar, prevNum) {
+  const p = pct(num, den);
+  let trend = '';
+  if (D.previo && typeof prevNum === 'number') {
+    const d = num - prevNum;
+    trend = d === 0
+      ? `<div class="trend">Sin variación vs. ${D.previo.corte_texto}</div>`
+      : `<div class="trend"><b class="${d > 0 ? 'up' : 'down'}">${d > 0 ? '▲' : '▼'} ${d > 0 ? '+' : ''}${fmt(d)}</b> vs. ${D.previo.corte_texto}</div>`;
+  }
   return `<div class="card"><div class="lbl">${lbl}</div>
-    <div class="val">${p.toLocaleString('es-CL')}% <small>${fmt(num)} / ${fmt(den)}</small></div>
+    <div class="val">${p.toLocaleString('es-CL')}% <small>${fmt(num)} / ${fmt(den)}</small></div>
     <div class="meter"><i style="width:${Math.min(p,100)}%;background:var(${fillVar})"></i></div>
-    <div class="det">${detHtml}</div></div>`;
+    <div class="det">${detHtml}</div>${trend}</div>`;
 }
-$('kpis').innerHTML =
-  kpi('Caminatas 80% realizadas', 135, 135, 'Frente completado en las 4 áreas', '--st-good') +
-  kpi('Caminatas 100% realizadas', 90, 135, '45 pendientes — 41 en área 3000', '--blue') +
-  kpi('Carpetas TOP entregadas', 26, 135, '<span class="alert">0 aprobadas</span> · 8 rechazadas · 17 en revisión', '--blue') +
-  kpi('Cierre de detalles P1', 1147, 1988, '830 abiertos · <span class="alert">401 vencidos</span> · 11 listos p/ revisión', '--blue');
+(function(){
+  const c = D.cam.global, t = D.ctop.global, p1 = D.dt.tipos.P1;
+  const camDet = c.c80 === c.subs ? 'Frente completado en las 4 áreas'
+                                  : `${fmt(c.subs - c.c80)} pendientes`;
+  const c100Det = `${fmt(c.prox)} próximas a realizar · ${fmt(c.prog)} por programar`;
+  const topDet = (t.aprob === 0 ? '<span class="alert">0 aprobadas</span>' : `${fmt(t.aprob)} aprobadas`)
+    + ` · ${fmt(t.rech)} rechazadas · ${fmt(t.rev)} en revisión`;
+  const p1Det = `${fmt(p1.abiertos)} abiertos · <span class="alert">${fmt(p1.vencidos)} vencidos</span>`
+    + (p1.tramite ? ` · ${fmt(p1.tramite)} en trámite` : '');
+  const pv = D.previo;
+  $('kpis').innerHTML =
+    kpi('Caminatas 80% realizadas', c.c80, c.subs, camDet,
+        c.c80===c.subs ? '--st-good' : '--blue', pv && pv.cam80) +
+    kpi('Caminatas 100% realizadas', c.c100, c.subs, c100Det, '--blue', pv && pv.cam100) +
+    kpi('Carpetas TOP entregadas', t.entregadas, t.total, topDet, '--blue', pv && pv.topEntregadas) +
+    kpi('Cierre de detalles P1', p1.cerrados, p1.total, p1Det, '--blue', pv && pv.p1Cerrados);
+})();
+
+/* ---------- subtítulos dinámicos ---------- */
+(function(){
+  const c = D.cam.global, t = D.ctop.global, p1 = D.dt.tipos.P1;
+  $('subCam').textContent =
+    `Subsistemas con caminata de detalles al 100% realizada — caminatas 80%: ${fmt(c.c80)}/${fmt(c.subs)} completadas`;
+  $('subTop').textContent =
+    `Estatus de armado y entrega — ${fmt(t.entregadas)} de ${fmt(t.total)} entregadas · ${fmt(t.aprob)} aprobadas a la fecha`;
+  $('subEsp').textContent =
+    `${fmt(p1.abiertos)} P1 abiertos; ${fmt(p1.vencidos)} con fecha de vencimiento cumplida al corte`;
+  // área con más P1 abiertos, calculada
+  let top = null;
+  for (const a of D.areas) {
+    const v = D.dt.p1Area[a]; if (!v) continue;
+    if (!top || v.abiertos > top.v) top = { a, v: v.abiertos };
+  }
+  $('subHm').textContent = top
+    ? `El área ${top.a} concentra ${fmt(top.v)} de los ${fmt(p1.abiertos)} P1 abiertos (${pctTxt(top.v, p1.abiertos)})`
+    : '';
+  $('sumCam').textContent = `Detalle — Caminatas 100% pendientes (${fmt(D.cam.pend.length)} subsistemas)`;
+  $('sumTop').textContent = `Detalle — Carpetas TOP entregadas (${fmt(D.ctop.detalle.length)}) y su estatus`;
+})();
 
 /* ---------- semáforo ---------- */
-const estado = {
-  "2000": ['good','✓','Al día'],
-  "3000": ['crit','✕','Crítico'],
-  "4000": ['warn','▲','Atención'],
-  "8000": ['warn','▲','Atención']
-};
-let rows = `<tr><th>Área</th><th class="num">Subsist.</th><th class="num">Caminata 100%</th><th class="num">TOP entregadas</th><th class="num">P1 % cierre</th><th class="num">P1 abiertos (vencidos)</th><th>Estado</th></tr>`;
-for (const a of D.areas) {
-  const c = D.cam.byArea[a], t = D.ctop.byArea[a], p = D.dt.p1Area[a];
-  const ent = t.rev + t.obs + t.rech;
-  const [cl, ic, lb] = estado[a];
-  rows += `<tr><td><b>${a}</b><br><span class="areaname">${D.areaNames[a]}</span></td>
-    <td class="num">${c.subs}</td>
-    <td class="num">${c.c100}/${c.subs} · ${pct(c.c100,c.subs).toLocaleString('es-CL')}%</td>
-    <td class="num">${ent}/${t.total} · ${pct(ent,t.total).toLocaleString('es-CL')}%</td>
-    <td class="num">${pct(p.cer,p.total).toLocaleString('es-CL')}%</td>
-    <td class="num">${fmt(p.ab)} (${fmt(p.ven)})</td>
-    <td><span class="chip ${cl}">${ic} ${lb}</span></td></tr>`;
-}
-$('semaforo').innerHTML = rows;
+(function(){
+  const icono = { good:'✓', warn:'▲', crit:'✕' };
+  let rows = `<tr><th>Área</th><th class="num">Subsist.</th><th class="num">Caminata 100%</th>
+    <th class="num">TOP entregadas</th><th class="num">P1 % cierre</th>
+    <th class="num">P1 abiertos (vencidos)</th><th>Estado</th></tr>`;
+  for (const a of D.areas) {
+    const c = D.cam.byArea[a], t = D.ctop.byArea[a], p = D.dt.p1Area[a];
+    if (!c || !t || !p) continue;
+    const ent = t.rev + t.obs + t.rech + t.aprob;
+    const [cl, lb] = D.semaforo[a] || ['warn','Atención'];
+    rows += `<tr><td><b>${a}</b><br><span class="areaname">${D.areaNames[a]}</span></td>
+      <td class="num">${fmt(c.subs)}</td>
+      <td class="num">${fmt(c.c100)}/${fmt(c.subs)} · ${pctTxt(c.c100,c.subs)}</td>
+      <td class="num">${fmt(ent)}/${fmt(t.total)} · ${pctTxt(ent,t.total)}</td>
+      <td class="num">${pctTxt(p.cerrados,p.total)}</td>
+      <td class="num">${fmt(p.abiertos)} (${fmt(p.vencidos)})</td>
+      <td><span class="chip ${cl}">${icono[cl]||''} ${lb}</span></td></tr>`;
+  }
+  $('semaforo').innerHTML = rows;
+})();
 
-/* ---------- barras apiladas genéricas ---------- */
+/* ---------- barras apiladas ---------- */
 function stackRow(container, labHtml, total, segs, endHtml, rowTipTitle) {
   const row = document.createElement('div'); row.className = 'row';
   row.innerHTML = `<div class="rlab">${labHtml}</div>`;
@@ -386,20 +1016,18 @@ function stackRow(container, labHtml, total, segs, endHtml, rowTipTitle) {
     el.style.flex = `${s.v} 0 0`;
     el.style.background = s.track ? 'var(--track)' : s.c;
     if (s.inkLabel !== undefined) el.innerHTML = `<span style="color:${s.inkLabel}">${s.v}</span>`;
-    bindTip(el, rowTipTitle, `${s.name}: <b>${fmt(s.v)}</b> de ${fmt(total)} (${pct(s.v,total).toLocaleString('es-CL')}%)`);
+    bindTip(el, rowTipTitle, `${s.name}: <b>${fmt(s.v)}</b> de ${fmt(total)} (${pctTxt(s.v,total)})`);
     bar.appendChild(el);
   }
   line.appendChild(bar);
   if (endHtml) { const e = document.createElement('div'); e.className = 'endlab'; e.innerHTML = endHtml; line.appendChild(e); }
   row.appendChild(line);
   container.appendChild(row);
-  return bar;
 }
 function legend(el, items) {
-  el.innerHTML = items.map(([c, t, track]) =>
+  el.innerHTML = items.filter(Boolean).map(([c, t, track]) =>
     `<span class="k"><span class="sw" style="background:${track ? 'var(--track)' : c}"></span>${t}</span>`).join('');
 }
-/* etiquetas inline sólo si caben (medición post-render) */
 function pruneInlineLabels() {
   document.querySelectorAll('.seg span').forEach(sp => {
     if (sp.parentElement.clientWidth < sp.scrollWidth + 10) sp.remove();
@@ -409,78 +1037,86 @@ function pruneInlineLabels() {
 function render() {
   ['chCam','chTop','chEsp','chP1Area'].forEach(id => $(id).innerHTML = '');
   const ord1 = css('--ord-1'), ord2 = css('--ord-2'), ord3 = css('--ord-3');
-  const blue = css('--blue'), yellow = css('--yellow'), red = css('--red');
+  const blue = css('--blue'), amber = css('--amber'), red = css('--red'), good = css('--st-good');
 
   /* caminatas 100% */
   for (const a of D.areas) {
-    const c = D.cam.byArea[a];
+    const c = D.cam.byArea[a]; if (!c) continue;
     stackRow($('chCam'), `<b>${a}</b>${D.areaNames[a]}`, c.subs, [
       {v:c.c100, c:ord1, name:'Realizada', inkLabel:'#ffffff'},
       {v:c.prox, c:ord2, name:'Próxima a realizar', inkLabel:'#0b0b0b'},
       {v:c.prog, c:ord3, name:'Por programar', inkLabel:'#0b0b0b'}
-    ], `<b>${pct(c.c100,c.subs).toLocaleString('es-CL')}%</b>`, `Área ${a} — Caminata 100% (${c.subs} subsistemas)`);
+    ], `<b>${pctTxt(c.c100,c.subs)}</b>`, `Área ${a} — Caminata 100% (${fmt(c.subs)} subsistemas)`);
   }
   legend($('lgCam'), [[ord1,'Realizada'],[ord2,'Próxima a realizar'],[ord3,'Por programar']]);
 
   /* carpetas TOP */
+  const hayAprob = D.ctop.global.aprob > 0;
   for (const a of D.areas) {
-    const t = D.ctop.byArea[a];
-    const ent = t.rev + t.obs + t.rech;
+    const t = D.ctop.byArea[a]; if (!t) continue;
+    const ent = t.rev + t.obs + t.rech + t.aprob;
     stackRow($('chTop'), `<b>${a}</b>${D.areaNames[a]}`, t.total, [
-      {v:t.rech, c:red, name:'Rechazada', inkLabel:'#ffffff'},
-      {v:t.rev, c:blue, name:'En revisión', inkLabel:'#ffffff'},
-      {v:t.obs, c:yellow, name:'Observada', inkLabel:'#0b0b0b'},
+      {v:t.aprob, c:good,  name:'Aprobada', inkLabel:'#ffffff'},
+      {v:t.rev,   c:blue,  name:'En revisión', inkLabel:'#ffffff'},
+      {v:t.obs,   c:amber, name:'Observada', inkLabel:'#0b0b0b'},
+      {v:t.rech,  c:red,   name:'Rechazada', inkLabel:'#ffffff'},
       {v:t.total-ent, name:'Sin entregar', track:true}
-    ], `<b>${ent}</b>/${t.total}`, `Área ${a} — Carpetas TOP (${t.total} subsistemas)`);
+    ], `<b>${fmt(ent)}</b>/${fmt(t.total)}`, `Área ${a} — Carpetas TOP (${fmt(t.total)} subsistemas)`);
   }
-  legend($('lgTop'), [[red,'Rechazada'],[blue,'En revisión'],[yellow,'Observada'],[null,'Sin entregar',true]]);
+  legend($('lgTop'), [
+    hayAprob ? [good,'Aprobada'] : null,
+    [blue,'En revisión'], [amber,'Observada'], [red,'Rechazada'], [null,'Sin entregar',true]
+  ]);
 
-  /* P1 por disciplina */
-  const esps = Object.entries(D.dt.p1Esp).sort((x,y) => y[1].ab - x[1].ab);
-  const maxAb = Math.max(...esps.map(([,v]) => v.ab));
+  /* P1 abiertos por disciplina */
+  const esps = Object.entries(D.dt.p1Esp).sort((x,y) => y[1].abiertos - x[1].abiertos);
+  const maxAb = Math.max(1, ...esps.map(([,v]) => v.abiertos));
   for (const [e,v] of esps) {
     const row = document.createElement('div'); row.className = 'row';
     row.innerHTML = `<div class="rlab"><b>${e}</b></div>`;
     const line = document.createElement('div'); line.className = 'barline';
+    const track = document.createElement('div'); track.className = 'track2';
     const bar = document.createElement('div'); bar.className = 'bar';
-    bar.style.flex = 'none'; bar.style.width = `calc(${100*v.ab/maxAb}% - 60px)`;
-    for (const s of [{v:v.ven, c:red, name:'Vencidos', inkLabel:'#ffffff'},
-                     {v:v.ab-v.ven, c:blue, name:'En plazo', inkLabel:'#ffffff'}]) {
+    bar.style.width = `${Math.max(1.5, 100*v.abiertos/maxAb)}%`;
+    for (const s of [{v:v.vencidos, c:red, name:'Vencidos', inkLabel:'#ffffff'},
+                     {v:v.abiertos-v.vencidos, c:blue, name:'En plazo', inkLabel:'#ffffff'}]) {
       if (s.v <= 0) continue;
       const el = document.createElement('div'); el.className = 'seg';
       el.style.flex = `${s.v} 0 0`; el.style.background = s.c;
       el.innerHTML = `<span style="color:${s.inkLabel}">${s.v}</span>`;
-      bindTip(el, `${e} — P1 abiertos: ${fmt(v.ab)}`, `${s.name}: <b>${fmt(s.v)}</b> · Cerrados a la fecha: ${fmt(v.cer)}/${fmt(v.total)} (${pct(v.cer,v.total).toLocaleString('es-CL')}%)`);
+      bindTip(el, `${e} — P1 abiertos: ${fmt(v.abiertos)}`,
+        `${s.name}: <b>${fmt(s.v)}</b> · Cerrados: ${fmt(v.cerrados)}/${fmt(v.total)} (${pctTxt(v.cerrados,v.total)})`);
       bar.appendChild(el);
     }
-    line.appendChild(bar);
-    const e2 = document.createElement('div'); e2.className = 'endlab'; e2.innerHTML = `<b>${fmt(v.ab)}</b>`;
+    track.appendChild(bar);
+    line.appendChild(track);
+    const e2 = document.createElement('div'); e2.className = 'endlab';
+    e2.style.minWidth = '46px'; e2.innerHTML = `<b>${fmt(v.abiertos)}</b>`;
     line.appendChild(e2);
     row.appendChild(line);
     $('chEsp').appendChild(row);
   }
   legend($('lgEsp'), [[red,'Vencidos al corte'],[blue,'En plazo']]);
 
-  /* cierre P1 por área (meter) */
+  /* cierre P1 por área */
   for (const a of D.areas) {
-    const p = D.dt.p1Area[a];
+    const p = D.dt.p1Area[a]; if (!p) continue;
     stackRow($('chP1Area'), `<b>${a}</b>${D.areaNames[a]}`, p.total, [
-      {v:p.cer, c:blue, name:'Cerrados', inkLabel:'#ffffff'},
-      {v:p.total-p.cer, name:'No cerrados (abiertos + listos p/ revisión)', track:true}
-    ], `<b>${pct(p.cer,p.total).toLocaleString('es-CL')}%</b> · ${fmt(p.cer)}/${fmt(p.total)}`, `Área ${a} — Detalles P1`);
+      {v:p.cerrados, c:blue, name:'Cerrados', inkLabel:'#ffffff'},
+      {v:p.total-p.cerrados, name:`No cerrados (${fmt(p.abiertos)} abiertos + ${fmt(p.tramite)} en trámite)`, track:true}
+    ], `<b>${pctTxt(p.cerrados,p.total)}</b> · ${fmt(p.cerrados)}/${fmt(p.total)}`, `Área ${a} — Detalles P1`);
   }
   legend($('lgP1Area'), [[blue,'Cerrados'],[null,'No cerrados',true]]);
 
   /* heatmap */
   const hm = $('chHm'); hm.innerHTML = '';
-  hm.style.gridTemplateColumns = `128px repeat(${D.areas.length}, 1fr)`;
+  hm.style.gridTemplateColumns = `minmax(96px,128px) repeat(${D.areas.length}, 1fr)`;
   hm.appendChild(document.createElement('div'));
   for (const a of D.areas) { const h = document.createElement('div'); h.className = 'htop'; h.textContent = a; hm.appendChild(h); }
-  const flat = D.dt.hm.vals.flat(); const mx = Math.max(...flat);
+  const flat = (D.dt.hm.vals || []).flat();
+  const mx = Math.max(1, ...flat);
   const steps = [css('--seq-100'), css('--seq-200'), css('--seq-300'), css('--seq-450'), css('--seq-600'), css('--seq-700')];
-  const dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
-    (matchMedia('(prefers-color-scheme: dark)').matches && document.documentElement.getAttribute('data-theme') !== 'light');
-  D.dt.hm.esp.forEach((e, i) => {
+  (D.dt.hm.esp || []).forEach((e, i) => {
     const l = document.createElement('div'); l.className = 'hlab'; l.textContent = e; hm.appendChild(l);
     D.areas.forEach((a, j) => {
       const v = D.dt.hm.vals[i][j];
@@ -500,30 +1136,52 @@ function render() {
   requestAnimationFrame(pruneInlineLabels);
 }
 
-/* ---------- tablas detalle ---------- */
-$('tbCam').innerHTML = `<tr><th>Área</th><th>Subsistema</th><th>Estado</th></tr>` +
-  D.cam.pend.map(([a,s,e]) => `<tr><td>${a}</td><td>${s}</td><td>${e}</td></tr>`).join('');
-$('tbTop').innerHTML = `<tr><th>Área</th><th>Subsistema</th><th>Estatus CTOP</th></tr>` +
-  D.ctop.detalle.map(([a,s,e]) => `<tr><td>${a}</td><td>${s}</td><td>${e}</td></tr>`).join('');
-let dtRows = `<tr><th>Prioridad</th><th class="num">Levantados</th><th class="num">Cerrados</th><th class="num">Listo p/ revisión</th><th class="num">Abiertos</th><th class="num">Vencidos</th><th class="num">% cierre</th></tr>`;
-for (const [t,v] of Object.entries(D.dt.tipos))
-  dtRows += `<tr><td><b>${t}</b></td><td class="num">${fmt(v.total)}</td><td class="num">${fmt(v.cer)}</td><td class="num">${fmt(v.listo)}</td><td class="num">${fmt(v.ab)}</td><td class="num">${fmt(v.ven)}</td><td class="num">${pct(v.cer,v.total).toLocaleString('es-CL')}%</td></tr>`;
-dtRows += `<tr><td colspan="7" style="padding-top:12px"><b>P1 por disciplina</b></td></tr>`;
-for (const [e,v] of Object.entries(D.dt.p1Esp))
-  dtRows += `<tr><td>${e}</td><td class="num">${fmt(v.total)}</td><td class="num">${fmt(v.cer)}</td><td class="num">${fmt(v.listo)}</td><td class="num">${fmt(v.ab)}</td><td class="num">${fmt(v.ven)}</td><td class="num">${pct(v.cer,v.total).toLocaleString('es-CL')}%</td></tr>`;
-$('tbDt').innerHTML = dtRows;
+/* ---------- tablas de detalle ---------- */
+(function(){
+  $('tbCam').innerHTML = `<tr><th>Área</th><th>Subsistema</th><th>Estado</th></tr>` +
+    D.cam.pend.map(([a,s,e]) => `<tr><td>${a}</td><td>${s}</td><td>${e}</td></tr>`).join('');
+  $('tbTop').innerHTML = `<tr><th>Área</th><th>Subsistema</th><th>Estatus CTOP</th></tr>` +
+    D.ctop.detalle.map(([a,s,e]) => `<tr><td>${a}</td><td>${s}</td><td>${e}</td></tr>`).join('');
+
+  let r = `<tr><th>Prioridad</th><th class="num">Levantados</th><th class="num">Cerrados</th>
+    <th class="num">En trámite</th><th class="num">Abiertos</th><th class="num">Vencidos</th><th class="num">% cierre</th></tr>`;
+  const fila = (nom, v, bold) => `<tr><td>${bold?`<b>${nom}</b>`:nom}</td>
+    <td class="num">${fmt(v.total)}</td><td class="num">${fmt(v.cerrados)}</td>
+    <td class="num">${fmt(v.tramite)}</td><td class="num">${fmt(v.abiertos)}</td>
+    <td class="num">${fmt(v.vencidos)}</td><td class="num">${pctTxt(v.cerrados,v.total)}</td></tr>`;
+  for (const [t,v] of Object.entries(D.dt.tipos)) r += fila(t, v, true);
+  r += `<tr><td colspan="7" style="padding-top:12px"><b>P1 por disciplina</b></td></tr>`;
+  for (const [e,v] of Object.entries(D.dt.p1Esp)) r += fila(e, v, false);
+  $('tbDt').innerHTML = r;
+})();
+
+/* ---------- notas al pie ---------- */
+(function(){
+  const g = D.dt.global, c = D.cam.global, origen = D.dt.p1AbiertosPorOrigen || {};
+  const orig = Object.entries(origen).map(([k,v]) => `${fmt(v)} de «${k}»`).join(' y ');
+  $('notas').innerHTML =
+    `<b>Fuente:</b> Estatus_Resumen_General_QAQC.xlsx — hojas «BD Caminatas-CTOP» (${fmt(c.subs)} subsistemas) ` +
+    `y «BD Detalles Terminación» (${fmt(g.total)} registros), corte ${D.meta.corte_texto}. ` +
+    `<b>Definiciones:</b> Abierto = Trabajo requerido + Iniciado + Trabajo no aceptado · ` +
+    `En trámite = Listo para revisión o Listo para cerrar (no cuenta como cerrado) · ` +
+    `Vencido = ítem abierto con fecha de vencimiento anterior al corte · ` +
+    `% cierre = Cerrados / Total levantados · CTOP entregada = con estatus En revisión, Observada, Rechazada o Aprobada. ` +
+    `<b>Criterio semáforo:</b> Crítico si caminata 100% &lt; 60% o cierre P1 &lt; 50% · ` +
+    `Atención si algún frente queda entre 60–90% o restan carpetas TOP por entregar · ` +
+    `Al día si caminatas ≥ 90% y P1 ≥ 90%. ` +
+    (orig ? `<b>Nota:</b> de los P1 abiertos, ${orig}. ` : '') +
+    `Todas las cifras se recalculan desde el Excel con <b>actualizar.py</b>; ninguna está escrita a mano.`;
+})();
 
 /* ---------- tema ---------- */
 const btn = $('themeBtn');
-function syncBtn() {
+function esOscuro() {
   const t = document.documentElement.getAttribute('data-theme');
-  const dark = t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches);
-  btn.textContent = dark ? 'Modo claro' : 'Modo oscuro';
+  return t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches);
 }
+function syncBtn() { btn.textContent = esOscuro() ? 'Modo claro' : 'Modo oscuro'; }
 btn.addEventListener('click', () => {
-  const t = document.documentElement.getAttribute('data-theme');
-  const dark = t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches);
-  document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', esOscuro() ? 'light' : 'dark');
   syncBtn(); render();
 });
 syncBtn(); render();
