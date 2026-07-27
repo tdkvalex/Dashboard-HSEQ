@@ -235,6 +235,37 @@ caminatas, la 1 está casi completa pero la 2 va en 77,6%, concentrando el rezag
 > sea alto: en la versión manual previa estaba marcada como *Atención*, lo que era
 > inconsistente con el criterio declarado.
 
+## Formato de la PPT (fijo)
+
+La presentación tiene **17 láminas** con esta estructura, que se mantiene corte a corte:
+
+| Láminas | Contenido |
+|---|---|
+| 1 | Portada **Proyecto 01 · MASA** |
+| 2–7 | MASA: resumen, semáforo, caminatas, carpetas TOP, detalles P1, foco de gestión |
+| 8 | Portada **Proyecto 02 · Desaladora** |
+| 9–12 | Desaladora: resumen, frentes 1 y 2, frente 3, foco de gestión |
+| 13 | Portada **Proyecto 03 · Talabre** |
+| 14–17 | Talabre: resumen, frentes 1 y 2, frente 3, foco de gestión |
+
+Reglas de formato que `gen_ppt.js` aplica solo:
+
+- **Logo corporativo** en todas las láminas, desde `besalco_logo.png`: grande
+  (3,88 × 0,84 pulg. en `x9.14 y0.46`) en portadas y láminas de fondo azul; menor
+  (3,03 × 0,65 en `x9.97 y0.24`) en las de contenido. Si el archivo no está, la PPT
+  se genera igual, sin logo.
+- **Etiqueta del proyecto** al pie de cada lámina de contenido (`PROYECTO MASA`,
+  `PROYECTO DESALADORA`, `PROYECTO TALABRE`), alineada a la derecha en 8,5 pt. Las
+  portadas no la llevan porque ya muestran el nombre en grande.
+- **Numeración correlativa** automática: al agregar o quitar láminas no hay que
+  renumerar a mano.
+- **Etiquetas de los gráficos**: número blanco en negrita a 11 pt sobre segmentos
+  cuyo color garantiza contraste ≥ 4,5:1. Los valores 0 **no** se dibujan, para que
+  no quede un «0» pegado al eje pisando la etiqueta vecina.
+
+> El nombre de contrato que aparece en la portada de MASA está en `PROY_MASA`, al
+> inicio de `gen_ppt.js`; si el JSON llega a traer `meta.proyecto`, se usa ese.
+
 ## Identidad visual
 
 El panel usa el **mismo sistema de diseño que el dashboard corporativo de Protocolos** de

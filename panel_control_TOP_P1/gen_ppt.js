@@ -28,8 +28,30 @@ const C = {
   copper: "C87A32", copperL: "E3A55B",
   good: "2E9E5B", goodD: "1F7A44", warn: "E0A32E", crit: "C0392B",
   blue: "2E6FB5", blueL: "9DBDE0", track: "D9DFE6",
+  // Gris para el segmento "sin entregar / pendiente / sin programar" DENTRO de
+  // los gráficos: tiene que ser lo bastante oscuro para que el número blanco
+  // impreso encima se lea (el track claro dejaba la cifra invisible).
+  neutral: "5B6B7C",
+  // Variantes oscurecidas de blueL y warn: las originales eran demasiado claras
+  // y el número blanco impreso encima quedaba ilegible.
+  blueM: "3A6FA8", warnD: "9A6B0F",
 };
+
 const FT = "Calibri", FH = "Cambria";
+// Los valores 0 no se dibujan: si se dejan, PowerPoint imprime un «0» pegado
+// al eje que se pisa con la etiqueta vecina y ensucia la lectura.
+const z = (v) => (v > 0 ? v : null);
+
+// Etiquetas comunes de los gráficos de barras: número blanco, en negrita y de
+// buen tamaño, sobre segmentos que siempre tienen contraste suficiente.
+const ETIQ = { showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT,
+  dataLabelFontSize: 11, dataLabelColor: "FFFFFF", dataLabelFontBold: true };
+
+
+// Nombre del contrato de MASA para la portada del proyecto. Se toma del JSON
+// si algún día viene en los datos; si no, se usa este.
+const PROY_MASA = (D.meta && D.meta.proyecto) ||
+  "Proyecto Arqueros — Contrato Electromecánico Planta Concentradora y de Espesado";
 const CAP = `Fuente: Estatus_Resumen_General_QAQC.xlsx · Corte ${D.meta.corte_texto} · Áreas ${D.areas.join("/")}`;
 
 const p = new pptxgen();
@@ -39,11 +61,58 @@ p.author = "Control de Proyecto";
 p.title = "Panel de Control — Carpetas TOP · Caminatas · Detalles P1";
 
 const bg = (s, color) => { s.background = { color }; };
-function footer(s, n, dark, cap) {
+
+// ---------- logo corporativo ----------
+// Se lee de besalco_logo.png (misma carpeta). Si no está, las láminas salen
+// igual, solo sin logo: nunca rompe la generación.
+const LOGO = path.join(AQUI, "besalco_logo.png");
+const HAY_LOGO = fs.existsSync(LOGO);
+if (!HAY_LOGO) console.log("Aviso: no se encontró besalco_logo.png — la PPT sale sin logo.");
+// En portadas (fondo azul) el logo va más grande; en láminas de contenido, menor.
+function logo(s, portada) {
+  if (!HAY_LOGO) return;
+  const g = portada ? { x: 9.14, y: 0.46, w: 3.88, h: 0.84 }
+                    : { x: 9.97, y: 0.24, w: 3.03, h: 0.65 };
+  s.addImage({ path: LOGO, ...g });
+}
+
+// Pie: fuente + proyecto al que pertenece la lámina + número de página.
+let nSlide = 1;
+function footer(s, dark, cap, proy) {
   s.addText(cap || CAP, { x: 0.5, y: 7.08, w: 10.6, h: 0.3, fontFace: FT, fontSize: 8.5,
     color: dark ? C.steel : C.ink2, align: "left", margin: 0 });
-  s.addText(String(n), { x: 12.5, y: 7.08, w: 0.4, h: 0.3, fontFace: FT, fontSize: 9,
+  if (proy) s.addText(`PROYECTO ${proy.toUpperCase()}`,
+    { x: 2.0, y: 7.09, w: 10.67, h: 0.3, fontFace: FT, fontSize: 8.5,
+      color: dark ? C.steel : C.ink2, align: "right", margin: 0 });
+  s.addText(String(nSlide++), { x: 12.5, y: 7.08, w: 0.4, h: 0.3, fontFace: FT, fontSize: 9,
     color: dark ? C.steel : C.ink2, align: "right", margin: 0 });
+}
+
+// ---------- portada de proyecto ----------
+// Misma estructura para los tres proyectos, para que el mazo se lea parejo.
+function portada(s, num, nombre, descripcion, detalle, kpis, pie, cap) {
+  bg(s, C.navy);
+  s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
+  s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
+  logo(s, true);
+  dot(s, 0.55, 1.35, C.copper, 0.22);
+  s.addText(`PROYECTO ${num}`, { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT, fontSize: 13,
+    bold: true, color: C.copperL, charSpacing: 3, margin: 0 });
+  s.addText(nombre, { x: 0.82, y: 1.72, w: 11.6, h: 1.1, fontFace: FH, fontSize: 46,
+    bold: true, color: C.white, margin: 0 });
+  s.addText(descripcion, { x: 0.85, y: 2.9, w: 10.5, h: 0.5, fontFace: FT, fontSize: 16,
+    color: C.ice, margin: 0 });
+  s.addText(detalle, { x: 0.85, y: 3.5, w: 9.6, h: 1.3, fontFace: FT, fontSize: 13.5,
+    color: C.steel, lineSpacing: 20, margin: 0, valign: "top" });
+  let kx = 0.85;
+  kpis.forEach(([v, l]) => {
+    s.addText(v, { x: kx, y: 5.3, w: 2.9, h: 0.7, fontFace: FH, fontSize: 34, bold: true, color: C.copperL, margin: 0 });
+    s.addText(l, { x: kx, y: 6.0, w: 2.9, h: 0.55, fontFace: FT, fontSize: 11.5, color: C.ice, margin: 0 });
+    kx += 3.0;
+  });
+  s.addText(pie, { x: 0.85, y: 6.75, w: 8, h: 0.3, fontFace: FT, fontSize: 11,
+    italic: true, color: C.steel, margin: 0 });
+  footer(s, true, cap);
 }
 const kicker = (s, txt, x, y, color) =>
   s.addText(txt.toUpperCase(), { x, y, w: 8, h: 0.28, fontFace: FT, fontSize: 11,
@@ -74,40 +143,25 @@ const espOrden = Object.entries(D.dt.p1Esp).sort((a, b) => b[1].abiertos - a[1].
 const espTopVenc = Object.entries(D.dt.p1Esp).sort((a, b) => b[1].vencidos - a[1].vencidos);
 
 // =====================================================================
-// 1 — Portada
+// 1 — Portada · Proyecto 01 MASA
 // =====================================================================
-let s = p.addSlide(); bg(s, C.navy);
-s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
-s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
-dot(s, 0.55, 1.35, C.copper, 0.22);
-s.addText("PANEL DE CONTROL DE AVANCE", { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT,
-  fontSize: 13, bold: true, color: C.copperL, charSpacing: 3, margin: 0 });
-s.addText([{ text: "Carpetas TOP, Caminatas y", options: { breakLine: true } },
-           { text: "Detalles de Terminación P1", options: {} }],
-  { x: 0.82, y: 1.75, w: 11.6, h: 2.0, fontFace: FH, fontSize: 44, bold: true,
-    color: C.white, lineSpacing: 48, margin: 0 });
-s.addText("Estatus de armado y entrega de carpetas TOP · avance de caminatas 80% / 100% · detalles de construcción en condición P1. Vista ejecutiva por área y disciplina.",
-  { x: 0.85, y: 3.95, w: 9.2, h: 1.0, fontFace: FT, fontSize: 15, color: C.ice, lineSpacing: 23, margin: 0 });
-
-const kp = [
-  [pct(cam.c80, cam.subs), "Caminatas 80%"],
-  [pct(cam.c100, cam.subs), "Caminatas 100%"],
-  [pct(top.entregadas, top.total), "Carpetas TOP entregadas"],
-  [pct(P1.cerrados, P1.total), "Cierre detalles P1"],
-];
-let kx = 0.85;
-kp.forEach(([v, l]) => {
-  s.addText(v, { x: kx, y: 5.35, w: 2.75, h: 0.7, fontFace: FH, fontSize: 34, bold: true, color: C.copperL, margin: 0 });
-  s.addText(l, { x: kx, y: 6.05, w: 2.75, h: 0.5, fontFace: FT, fontSize: 11.5, color: C.ice, margin: 0 });
-  kx += 3.0;
-});
-s.addText(`Corte: ${D.meta.corte_texto}` + (PREV ? `   ·   Corte anterior: ${PREV.corte_texto}` : ""),
-  { x: 0.85, y: 6.75, w: 8, h: 0.3, fontFace: FT, fontSize: 11, italic: true, color: C.steel, margin: 0 });
+let s = p.addSlide();
+portada(s, "01", "MASA", PROY_MASA,
+  `${nf(cam.subs)} subsistemas en ${D.areas.length} áreas (${D.areas.join(" · ")}) · ` +
+  `${nf(D.dt.global.total)} detalles de terminación levantados.\n` +
+  "Estatus de armado y entrega de carpetas TOP · avance de caminatas 80% / 100% · " +
+  "detalles de construcción en condición P1.",
+  [[pct(cam.c80, cam.subs), "Caminatas 80%"],
+   [pct(cam.c100, cam.subs), "Caminatas 100%"],
+   [pct(top.entregadas, top.total), "Carpetas TOP entregadas"],
+   [pct(P1.cerrados, P1.total), "Cierre detalles P1"]],
+  `Corte: ${D.meta.corte_texto}` + (PREV ? `   ·   Corte anterior: ${PREV.corte_texto}` : ""),
+  CAP);
 
 // =====================================================================
 // 2 — Resumen ejecutivo
 // =====================================================================
-s = p.addSlide(); bg(s, C.paper);
+s = p.addSlide(); bg(s, C.paper); logo(s, false);
 kicker(s, "Resumen ejecutivo", 0.5, 0.45);
 s.addText("Estado global de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 
@@ -172,12 +226,12 @@ reads.forEach(([h, d]) => {
     { x: 1.15, y: ry - 0.05, w: 11.4, h: 0.55, fontFace: FT, fontSize: 12.5, lineSpacing: 16, margin: 0, valign: "top" });
   ry += 0.56;
 });
-footer(s, 2, false);
+footer(s, false, CAP, "MASA");
 
 // =====================================================================
 // 3 — Semáforo por área
 // =====================================================================
-s = p.addSlide(); bg(s, C.paper);
+s = p.addSlide(); bg(s, C.paper); logo(s, false);
 kicker(s, "Estado por área", 0.5, 0.45);
 s.addText("Semáforo integrado de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 
@@ -220,12 +274,12 @@ D.areas.forEach((a, i) => {
 });
 s.addText("Criterio · Crítico: caminata 100% < 60% o cierre P1 < 50%   ·   Atención: algún frente entre 60–90% o carpetas TOP por entregar   ·   Al día: caminatas ≥ 90% y P1 ≥ 90%",
   { x: 0.5, y: 6.5, w: 12.3, h: 0.3, fontFace: FT, fontSize: 9.5, italic: true, color: C.ink2, margin: 0 });
-footer(s, 3, false);
+footer(s, false, CAP, "MASA");
 
 // =====================================================================
 // 4 — Caminatas
 // =====================================================================
-s = p.addSlide(); bg(s, C.paper);
+s = p.addSlide(); bg(s, C.paper); logo(s, false);
 kicker(s, "Frente 1 · Caminatas", 0.5, 0.45);
 s.addText("Avance de caminatas 80% y 100%", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 s.addText(`Las caminatas al 80% están cerradas en todas las áreas (${nf(cam.c80)}/${nf(cam.subs)}). ` +
@@ -234,14 +288,14 @@ s.addText(`Las caminatas al 80% están cerradas en todas las áreas (${nf(cam.c8
   { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
 
 s.addChart(p.ChartType.bar, [
-  { name: "Realizada", labels: D.areas, values: D.areas.map((a) => D.cam.byArea[a].c100) },
-  { name: "Próxima a realizar", labels: D.areas, values: D.areas.map((a) => D.cam.byArea[a].prox) },
-  { name: "Por programar", labels: D.areas, values: D.areas.map((a) => D.cam.byArea[a].prog) },
+  { name: "Realizada", labels: D.areas, values: D.areas.map((a) => z(D.cam.byArea[a].c100)) },
+  { name: "Próxima a realizar", labels: D.areas, values: D.areas.map((a) => z(D.cam.byArea[a].prox)) },
+  { name: "Por programar", labels: D.areas, values: D.areas.map((a) => z(D.cam.byArea[a].prog)) },
 ], {
   x: 0.5, y: 2.05, w: 7.6, h: 4.5, barDir: "bar", barGrouping: "stacked",
-  chartColors: [C.goodD, C.blue, C.blueL],
+  chartColors: [C.goodD, C.blue, C.blueM],
   showTitle: true, title: "Subsistemas por estado de caminata 100%", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-  showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 11, dataLabelColor: C.white, dataLabelFontBold: true,
+  ...ETIQ,
   showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
   catAxisLabelFontFace: FT, catAxisLabelFontSize: 13, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
   valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
@@ -261,12 +315,12 @@ s.addText([{ text: "Foco: ", options: { bold: true, color: C.copperL } },
              (dProg && dProg.d < 0 ? `. Las «por programar» bajaron ${nf(Math.abs(dProg.d))} en el período.` : "."),
              options: { color: C.ice } }],
   { x: 8.65, y: 5.55, w: 3.95, h: 0.9, fontFace: FT, fontSize: 11.5, lineSpacing: 15, margin: 0, valign: "top" });
-footer(s, 4, false);
+footer(s, false, CAP, "MASA");
 
 // =====================================================================
 // 5 — Carpetas TOP
 // =====================================================================
-s = p.addSlide(); bg(s, C.paper);
+s = p.addSlide(); bg(s, C.paper); logo(s, false);
 kicker(s, "Frente 2 · Carpetas TOP", 0.5, 0.45);
 s.addText("Estatus de armado y entrega", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 s.addText(`${nf(top.entregadas)} carpetas entregadas de ${nf(top.total)} (${pct(top.entregadas, top.total)}). ` +
@@ -275,24 +329,24 @@ s.addText(`${nf(top.entregadas)} carpetas entregadas de ${nf(top.total)} (${pct(
   { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
 
 const serieTop = [
-  { name: "Aprobada", key: "aprob", color: C.good },
+  { name: "Aprobada", key: "aprob", color: C.goodD },
   { name: "En revisión", key: "rev", color: C.blue },
-  { name: "Observada", key: "obs", color: C.warn },
+  { name: "Observada", key: "obs", color: C.warnD },
   { name: "Rechazada", key: "rech", color: C.crit },
 ].filter((x) => D.areas.some((a) => D.ctop.byArea[a][x.key] > 0));
-serieTop.push({ name: "Sin entregar", key: "_pend", color: C.track });
+serieTop.push({ name: "Sin entregar", key: "_pend", color: C.neutral });
 
 s.addChart(p.ChartType.bar, serieTop.map((x) => ({
   name: x.name, labels: D.areas,
   values: D.areas.map((a) => {
     const t = D.ctop.byArea[a];
-    return x.key === "_pend" ? t.total - (t.rev + t.obs + t.rech + t.aprob) : t[x.key];
+    return z(x.key === "_pend" ? t.total - (t.rev + t.obs + t.rech + t.aprob) : t[x.key]);
   }),
 })), {
   x: 0.5, y: 2.05, w: 7.6, h: 4.5, barDir: "bar", barGrouping: "stacked",
   chartColors: serieTop.map((x) => x.color),
   showTitle: true, title: "Carpetas TOP por área y estatus", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-  showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 10, dataLabelColor: C.white, dataLabelFontBold: true,
+  ...ETIQ,
   showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
   catAxisLabelFontFace: FT, catAxisLabelFontSize: 13, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
   valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
@@ -323,12 +377,12 @@ funnel.forEach(([l, v, c, dd, subirEsMalo]) => {
 });
 s.addText("Cuello de botella: la revisión del cliente devuelve más carpetas de las que aprueba. Convertir entregas en aprobaciones es el próximo hito.",
   { x: 8.6, y: 6.08, w: 4, h: 0.44, fontFace: FT, fontSize: 10, italic: true, color: C.ink2, margin: 0 });
-footer(s, 5, false);
+footer(s, false, CAP, "MASA");
 
 // =====================================================================
 // 6 — Detalles P1
 // =====================================================================
-s = p.addSlide(); bg(s, C.paper);
+s = p.addSlide(); bg(s, C.paper); logo(s, false);
 kicker(s, "Frente 3 · Detalles P1", 0.5, 0.45);
 s.addText("Detalles de terminación en condición P1", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 s.addText(`${nf(P1.total)} P1 levantados; ${pct(P1.cerrados, P1.total)} cerrados. ` +
@@ -337,13 +391,13 @@ s.addText(`${nf(P1.total)} P1 levantados; ${pct(P1.cerrados, P1.total)} cerrados
 
 const espLbl = espOrden.map(([e]) => (e === "Instrumentación y Control" ? "Instrum. y Control" : e));
 s.addChart(p.ChartType.bar, [
-  { name: "Vencidos al corte", labels: espLbl, values: espOrden.map(([, v]) => v.vencidos) },
-  { name: "En plazo", labels: espLbl, values: espOrden.map(([, v]) => v.abiertos - v.vencidos) },
+  { name: "Vencidos al corte", labels: espLbl, values: espOrden.map(([, v]) => z(v.vencidos)) },
+  { name: "En plazo", labels: espLbl, values: espOrden.map(([, v]) => z(v.abiertos - v.vencidos)) },
 ], {
   x: 0.5, y: 2.05, w: 7.7, h: 4.5, barDir: "bar", barGrouping: "stacked",
   chartColors: [C.crit, C.blue],
   showTitle: true, title: "P1 abiertos por disciplina", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-  showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 10, dataLabelColor: C.white, dataLabelFontBold: true,
+  ...ETIQ,
   showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
   catAxisLabelFontFace: FT, catAxisLabelFontSize: 11.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
   valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
@@ -377,12 +431,12 @@ s.addText([{ text: "Concentración por área\n", options: { bold: true, color: C
              (casiCerradas.length ? ` Áreas ${casiCerradas.join(" y ")} sobre 90% de cierre.` : ""),
              options: { color: C.ice, fontSize: 11.5 } }],
   { x: 8.68, y: 5.1, w: 3.95, h: 1.3, fontFace: FT, lineSpacing: 15, margin: 0, valign: "top" });
-footer(s, 6, true);
+footer(s, true, CAP, "MASA");
 
 // =====================================================================
 // 7 — Foco de gestión
 // =====================================================================
-s = p.addSlide(); bg(s, C.navy);
+s = p.addSlide(); bg(s, C.navy); logo(s, true);
 s.addShape(p.ShapeType.ellipse, { x: 10.8, y: -1.8, w: 4.6, h: 4.6, fill: { color: C.navy2 }, line: { type: "none" } });
 kicker(s, "Foco de gestión", 0.5, 0.5, C.copperL);
 s.addText("Dónde poner el esfuerzo esta semana", { x: 0.5, y: 0.78, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.white, margin: 0 });
@@ -409,14 +463,13 @@ focus.forEach((f, i) => {
   s.addText(f.t, { x: px + 1.35, y: py + 0.24, w: 6.0 - 1.6, h: 0.6, fontFace: FT, fontSize: 15, bold: true, color: C.white, margin: 0, valign: "middle" });
   s.addText(f.d, { x: px + 1.35, y: py + 0.88, w: 6.0 - 1.65, h: 1.1, fontFace: FT, fontSize: 11.5, color: C.ice, margin: 0, lineSpacing: 15, valign: "top" });
 });
-footer(s, 7, true);
+footer(s, true, CAP, "MASA");
 
 // =====================================================================
 // PROYECTO DESALADORA — se agrega solo si existe datos_desaladora.json
 // (lo genera desaladora.py). Las cifras salen íntegras de ese archivo.
 // =====================================================================
 const rutaDes = path.join(AQUI, "datos_desaladora.json");
-let nSlide = 8;
 if (fs.existsSync(rutaDes)) {
   const X = JSON.parse(fs.readFileSync(rutaDes, "utf8"));
   const XS = X.subsistemas, XC = X.caminatasPorTipo, XP = X.carpetas, XU = X.punch;
@@ -431,7 +484,7 @@ if (fs.existsSync(rutaDes)) {
   const discAbiertas = discOrden.filter(([, v]) => v.abiertos > 0);
 
   // ---------------- 8 · Portada de proyecto ----------------
-  s = p.addSlide(); bg(s, C.navy);
+  s = p.addSlide(); bg(s, C.navy); logo(s, true);
   s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
   s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
   dot(s, 0.55, 1.35, C.copper, 0.22);
@@ -459,10 +512,10 @@ if (fs.existsSync(rutaDes)) {
   });
   s.addText(`Corte: ${X.meta.corteTexto}`, { x: 0.85, y: 6.75, w: 8, h: 0.3, fontFace: FT,
     fontSize: 11, italic: true, color: C.steel, margin: 0 });
-  footer(s, nSlide++, true, CAPX);
+  footer(s, true, CAPX);
 
   // ---------------- 9 · Resumen ejecutivo ----------------
-  s = p.addSlide(); bg(s, C.paper);
+  s = p.addSlide(); bg(s, C.paper); logo(s, false);
   kicker(s, "Desaladora · Resumen ejecutivo", 0.5, 0.45);
   s.addText("Estado global de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 
@@ -516,10 +569,10 @@ if (fs.existsSync(rutaDes)) {
       { x: 1.15, y: ryx - 0.05, w: 11.4, h: 0.5, fontFace: FT, fontSize: 11.5, lineSpacing: 15, margin: 0, valign: "top" });
     ryx += 0.46;
   });
-  footer(s, nSlide++, false, CAPX);
+  footer(s, false, CAPX, "Desaladora");
 
   // ---------------- 10 · Caminatas y carpetas ----------------
-  s = p.addSlide(); bg(s, C.paper);
+  s = p.addSlide(); bg(s, C.paper); logo(s, false);
   kicker(s, "Desaladora · Frentes 1 y 2", 0.5, 0.45);
   s.addText("Caminatas y certificados de entrega", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
   s.addText(`Cada tipo de subsistema se mide con su propia caminata: los Operables por la Caminata ` +
@@ -530,13 +583,13 @@ if (fs.existsSync(rutaDes)) {
   const tiposCam = Object.entries(XC).filter(([, v]) => v[v.vigente] && v[v.vigente].aplica);
   const lblCam = tiposCam.map(([t, v]) => `${t} (C${v.vigente})`);
   s.addChart(p.ChartType.bar, [
-    { name: "Realizada", labels: lblCam, values: tiposCam.map(([, v]) => v[v.vigente].realizada) },
-    { name: "Pendiente", labels: lblCam, values: tiposCam.map(([, v]) => v[v.vigente].pendiente) },
+    { name: "Realizada", labels: lblCam, values: tiposCam.map(([, v]) => z(v[v.vigente].realizada)) },
+    { name: "Pendiente", labels: lblCam, values: tiposCam.map(([, v]) => z(v[v.vigente].pendiente)) },
   ], {
     x: 0.5, y: 2.05, w: 6.1, h: 4.5, barDir: "bar", barGrouping: "stacked",
-    chartColors: [C.goodD, C.track],
+    chartColors: [C.goodD, C.neutral],
     showTitle: true, title: "Subsistemas por estado de su caminata", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 11, dataLabelColor: C.ink, dataLabelFontBold: true,
+    ...ETIQ,
     showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
     catAxisLabelFontFace: FT, catAxisLabelFontSize: 12, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
     valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
@@ -565,10 +618,10 @@ if (fs.existsSync(rutaDes)) {
   s.addText(`${nf(XP.entregadas)} carpetas ya están en manos del cliente (${pct(XP.entregadas, XP.total)}) y ` +
     `${nf(XP.tarjetaVerde)} subsistemas tienen tarjeta verde. El grueso del pendiente todavía no sale de Besalco.`,
     { x: 7.1, y: 6.12, w: 5.5, h: 0.4, fontFace: FT, fontSize: 10, italic: true, color: C.ink2, lineSpacing: 12, margin: 0 });
-  footer(s, nSlide++, false, CAPX);
+  footer(s, false, CAPX, "Desaladora");
 
   // ---------------- 11 · Punch P1 ----------------
-  s = p.addSlide(); bg(s, C.paper);
+  s = p.addSlide(); bg(s, C.paper); logo(s, false);
   kicker(s, "Desaladora · Frente 3", 0.5, 0.45);
   s.addText("Punch list en condición P1", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
   s.addText(`${nf(xp1.total)} P1 levantados; ${pct(xp1.cerrados, xp1.total)} cerrados. ` +
@@ -577,13 +630,13 @@ if (fs.existsSync(rutaDes)) {
 
   const lblD = discAbiertas.map(([d]) => (X.discCorta && X.discCorta[d]) || d);
   s.addChart(p.ChartType.bar, [
-    { name: "Atrasados", labels: lblD, values: discAbiertas.map(([, v]) => v.atrasados) },
-    { name: "En plazo o sin fecha", labels: lblD, values: discAbiertas.map(([, v]) => v.abiertos - v.atrasados) },
+    { name: "Atrasados", labels: lblD, values: discAbiertas.map(([, v]) => z(v.atrasados)) },
+    { name: "En plazo o sin fecha", labels: lblD, values: discAbiertas.map(([, v]) => z(v.abiertos - v.atrasados)) },
   ], {
     x: 0.5, y: 2.05, w: 7.7, h: 4.5, barDir: "bar", barGrouping: "stacked",
     chartColors: [C.crit, C.blue],
     showTitle: true, title: "P1 abiertos por disciplina", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 10, dataLabelColor: C.white, dataLabelFontBold: true,
+    ...ETIQ,
     showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
     catAxisLabelFontFace: FT, catAxisLabelFontSize: 11.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
     valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
@@ -620,10 +673,10 @@ if (fs.existsSync(rutaDes)) {
                  : "Sin ítems atrasados al corte.",
                options: { color: C.ice, fontSize: 11.5 } }],
     { x: 8.68, y: 5.1, w: 3.95, h: 1.3, fontFace: FT, lineSpacing: 15, margin: 0, valign: "top" });
-  footer(s, nSlide++, true, CAPX);
+  footer(s, true, CAPX, "Desaladora");
 
   // ---------------- 12 · Foco de gestión ----------------
-  s = p.addSlide(); bg(s, C.navy);
+  s = p.addSlide(); bg(s, C.navy); logo(s, true);
   s.addShape(p.ShapeType.ellipse, { x: 10.8, y: -1.8, w: 4.6, h: 4.6, fill: { color: C.navy2 }, line: { type: "none" } });
   kicker(s, "Desaladora · Foco de gestión", 0.5, 0.5, C.copperL);
   s.addText("Dónde poner el esfuerzo esta semana", { x: 0.5, y: 0.78, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.white, margin: 0 });
@@ -654,7 +707,7 @@ if (fs.existsSync(rutaDes)) {
     s.addText(f.t, { x: px + 1.35, y: py + 0.2, w: 6.0 - 1.6, h: 0.66, fontFace: FT, fontSize: 14, bold: true, color: C.white, margin: 0, valign: "middle" });
     s.addText(f.d, { x: px + 1.35, y: py + 0.88, w: 6.0 - 1.65, h: 1.1, fontFace: FT, fontSize: 11, color: C.ice, margin: 0, lineSpacing: 14, valign: "top" });
   });
-  footer(s, nSlide++, true, CAPX);
+  footer(s, true, CAPX, "Desaladora");
 
   console.log(`Desaladora: 5 láminas agregadas (corte ${X.meta.corteTexto}).`);
 } else {
@@ -679,7 +732,7 @@ if (fs.existsSync(rutaTal)) {
   const areaFocoY = Object.entries(YT.porArea).sort((a, b) => b[1].abiertos - a[1].abiertos)[0];
 
   // ---------------- Portada de proyecto ----------------
-  s = p.addSlide(); bg(s, C.navy);
+  s = p.addSlide(); bg(s, C.navy); logo(s, true);
   s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
   s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
   dot(s, 0.55, 1.35, C.copper, 0.22);
@@ -707,10 +760,10 @@ if (fs.existsSync(rutaTal)) {
   });
   s.addText(`Atrasos calculados al ${Y.meta.hoy}`, { x: 0.85, y: 6.75, w: 8, h: 0.3, fontFace: FT,
     fontSize: 11, italic: true, color: C.steel, margin: 0 });
-  footer(s, nSlide++, true, CAPY);
+  footer(s, true, CAPY);
 
   // ---------------- Resumen ejecutivo ----------------
-  s = p.addSlide(); bg(s, C.paper);
+  s = p.addSlide(); bg(s, C.paper); logo(s, false);
   kicker(s, "Talabre · Resumen ejecutivo", 0.5, 0.45);
   s.addText("Estado global de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 
@@ -764,10 +817,10 @@ if (fs.existsSync(rutaTal)) {
       { x: 1.15, y: ryy - 0.05, w: 11.4, h: 0.5, fontFace: FT, fontSize: 11.5, lineSpacing: 15, margin: 0, valign: "top" });
     ryy += 0.46;
   });
-  footer(s, nSlide++, false, CAPY);
+  footer(s, false, CAPY, "Talabre");
 
   // ---------------- Caminatas y carpetas ----------------
-  s = p.addSlide(); bg(s, C.paper);
+  s = p.addSlide(); bg(s, C.paper); logo(s, false);
   kicker(s, "Talabre · Frentes 1 y 2", 0.5, 0.45);
   s.addText("Caminatas y avance de carpetas", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
   s.addText(`Caminata 2 realizada en ${nf(c2.realizada)} de ${nf(c2.total)} subsistemas (${pct(c2.realizada, c2.total)}). ` +
@@ -775,14 +828,14 @@ if (fs.existsSync(rutaTal)) {
     { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
 
   s.addChart(p.ChartType.bar, [
-    { name: "Realizada", labels: areasY, values: areasY.map((a) => Y.caminatasPorArea[a]["2"].realizada) },
-    { name: "Agendada", labels: areasY, values: areasY.map((a) => Y.caminatasPorArea[a]["2"].programada) },
-    { name: "Sin programar", labels: areasY, values: areasY.map((a) => Y.caminatasPorArea[a]["2"].pendiente) },
+    { name: "Realizada", labels: areasY, values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].realizada)) },
+    { name: "Agendada", labels: areasY, values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].programada)) },
+    { name: "Sin programar", labels: areasY, values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].pendiente)) },
   ], {
     x: 0.5, y: 2.05, w: 6.4, h: 4.5, barDir: "bar", barGrouping: "stacked",
-    chartColors: [C.goodD, C.blue, C.track],
+    chartColors: [C.goodD, C.blue, C.neutral],
     showTitle: true, title: "Caminata 2 por área", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 9.5, dataLabelColor: C.white, dataLabelFontBold: true,
+    ...ETIQ,
     showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 10.5, legendColor: C.ink2,
     catAxisLabelFontFace: FT, catAxisLabelFontSize: 9.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
     valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
@@ -790,23 +843,23 @@ if (fs.existsSync(rutaTal)) {
   });
 
   s.addChart(p.ChartType.bar, [
-    { name: "95% o más", labels: areasY, values: areasY.map((a) => YP.porArea[a].sobre95) },
-    { name: "80% a 95%", labels: areasY, values: areasY.map((a) => YP.porArea[a].sobre80 - YP.porArea[a].sobre95) },
-    { name: "Bajo 80%", labels: areasY, values: areasY.map((a) => YP.porArea[a].bajo80) },
+    { name: "95% o más", labels: areasY, values: areasY.map((a) => z(YP.porArea[a].sobre95)) },
+    { name: "80% a 95%", labels: areasY, values: areasY.map((a) => z(YP.porArea[a].sobre80 - YP.porArea[a].sobre95)) },
+    { name: "Bajo 80%", labels: areasY, values: areasY.map((a) => z(YP.porArea[a].bajo80)) },
   ], {
     x: 7.05, y: 2.05, w: 5.78, h: 4.5, barDir: "bar", barGrouping: "stacked",
-    chartColors: [C.good, C.blue, C.crit],
+    chartColors: [C.goodD, C.blue, C.crit],
     showTitle: true, title: "Avance PEC de carpetas por área", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 9.5, dataLabelColor: C.white, dataLabelFontBold: true,
+    ...ETIQ,
     showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 10.5, legendColor: C.ink2,
     catAxisLabelFontFace: FT, catAxisLabelFontSize: 9.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
     valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
     barGapWidthPct: 40, chartArea: { fill: { color: C.white } },
   });
-  footer(s, nSlide++, false, CAPY);
+  footer(s, false, CAPY, "Talabre");
 
   // ---------------- Detalles de terminación ----------------
-  s = p.addSlide(); bg(s, C.paper);
+  s = p.addSlide(); bg(s, C.paper); logo(s, false);
   kicker(s, "Talabre · Frente 3", 0.5, 0.45);
   s.addText("Detalles de terminación", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
   s.addText(`${nf(yg.total)} DT levantados; ${pct(yg.cerrados, yg.total)} cerrados. ` +
@@ -815,13 +868,13 @@ if (fs.existsSync(rutaTal)) {
 
   const lblDY = discOrden.map(([d]) => (Y.discCorta && Y.discCorta[d]) || d);
   s.addChart(p.ChartType.bar, [
-    { name: "Atrasados", labels: lblDY, values: discOrden.map(([, v]) => v.atrasados) },
-    { name: "En plazo o sin compromiso", labels: lblDY, values: discOrden.map(([, v]) => v.enPlazo) },
+    { name: "Atrasados", labels: lblDY, values: discOrden.map(([, v]) => z(v.atrasados)) },
+    { name: "En plazo o sin compromiso", labels: lblDY, values: discOrden.map(([, v]) => z(v.enPlazo)) },
   ], {
     x: 0.5, y: 2.05, w: 7.7, h: 4.5, barDir: "bar", barGrouping: "stacked",
     chartColors: [C.crit, C.blue],
     showTitle: true, title: "DT abiertos por disciplina", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
-    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 10, dataLabelColor: C.white, dataLabelFontBold: true,
+    ...ETIQ,
     showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
     catAxisLabelFontFace: FT, catAxisLabelFontSize: 11.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
     valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
@@ -853,10 +906,10 @@ if (fs.existsSync(rutaTal)) {
                  : "Sin DT atrasados al corte.",
                options: { color: C.ice, fontSize: 11 } }],
     { x: 8.68, y: pyy + 0.2, w: 3.95, h: 1.2, fontFace: FT, lineSpacing: 14, margin: 0, valign: "top" });
-  footer(s, nSlide++, true, CAPY);
+  footer(s, true, CAPY, "Talabre");
 
   // ---------------- Foco de gestión ----------------
-  s = p.addSlide(); bg(s, C.navy);
+  s = p.addSlide(); bg(s, C.navy); logo(s, true);
   s.addShape(p.ShapeType.ellipse, { x: 10.8, y: -1.8, w: 4.6, h: 4.6, fill: { color: C.navy2 }, line: { type: "none" } });
   kicker(s, "Talabre · Foco de gestión", 0.5, 0.5, C.copperL);
   s.addText("Dónde poner el esfuerzo esta semana", { x: 0.5, y: 0.78, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.white, margin: 0 });
@@ -892,7 +945,7 @@ if (fs.existsSync(rutaTal)) {
     s.addText(f.t, { x: px + 1.35, y: py + 0.2, w: 6.0 - 1.6, h: 0.66, fontFace: FT, fontSize: 13.5, bold: true, color: C.white, margin: 0, valign: "middle" });
     s.addText(f.d, { x: px + 1.35, y: py + 0.88, w: 6.0 - 1.65, h: 1.1, fontFace: FT, fontSize: 11, color: C.ice, margin: 0, lineSpacing: 14, valign: "top" });
   });
-  footer(s, nSlide++, true, CAPY);
+  footer(s, true, CAPY, "Talabre");
 
   console.log(`Talabre: 5 láminas agregadas (atrasos al ${Y.meta.hoy}).`);
 } else {
