@@ -11,6 +11,7 @@ fuerza una equivalencia que no existe— y solo se homologa lo que sí es compar
 |---|---|---|---|---|
 | MASA | Planta Concentradora | MASA | 26-07-2026 | `Estatus_Resumen_General_QAQC.xlsx` |
 | Desaladora | PV3 Ampliación Desaladora | Minera Los Pelambres (AMSA) | 27-07-2026 | `REPORTE_GERENCIAL_*.xlsx` + `Listado_Puntos_Punch_Consolidado_*.xlsx` |
+| Talabre | Captación de agua, pozos y estaciones de bombeo | Codelco | 27-07-2026 | `TalabreSTATUS_PEC.xlsx` + `TalabreCuadro_DT.xlsx` |
 
 ---
 
@@ -32,10 +33,20 @@ python3 desaladora.py \
 node gen_ppt.js
 ```
 
-`desaladora.py` acepta `--hoy AAAA-MM-DD` para fijar la fecha con la que se calculan los
-atrasos (por defecto usa el día en que se corre). `gen_ppt.js` regenera la PPT completa: toma
-MASA de `estatus_datos.json` y Desaladora de `datos_desaladora.json`, así que conviene correrlo
-al final, después de actualizar los proyectos que corresponda.
+**Talabre** (2 comandos):
+
+```bash
+python3 talabre.py \
+    --status /ruta/TalabreSTATUS_PEC.xlsx \
+    --dt     /ruta/TalabreCuadro_DT.xlsx
+node gen_ppt.js
+```
+
+`desaladora.py` y `talabre.py` aceptan `--hoy AAAA-MM-DD` para fijar la fecha con la que se
+calculan los atrasos (por defecto usan el día en que se corren). `gen_ppt.js` regenera la PPT
+completa leyendo los tres JSON, así que conviene correrlo al final, después de actualizar los
+proyectos que corresponda. Si falta el JSON de un proyecto, su pestaña queda deshabilitada y la
+PPT sale sin sus láminas, sin romperse.
 
 Eso es todo. `actualizar.py` recalcula **todos** los indicadores desde el Excel, inyecta los
 datos en `index.html` y registra el corte en `historial.json`; `gen_ppt.js` reconstruye la
@@ -60,17 +71,19 @@ tilde), así que un cambio de redacción en la planilla no rompe el tablero.
 | Archivo | Qué es |
 |---|---|
 | `index.html` | Panel interactivo con **una pestaña por proyecto**, en **un solo archivo portable** (se puede enviar por correo tal cual). Modo claro/oscuro, tooltips y tablas de detalle. |
-| `Panel_Control_TOP_P1.pptx` | Presentación ejecutiva de 12 láminas: 7 de MASA + 5 de Desaladora. |
+| `Panel_Control_TOP_P1.pptx` | Presentación ejecutiva de 17 láminas: 7 de MASA + 5 de Desaladora + 5 de Talabre. |
 | `actualizar.py` | **Punto de entrada de MASA.** Lee el Excel, recalcula todo y actualiza el panel. |
 | `desaladora.py` | **Punto de entrada de Desaladora.** Lee el reporte gerencial y el punch list, valida el cruce entre ambos y actualiza el panel. |
-| `gen_ppt.js` | Regenera la PPT completa desde los datos ya calculados de ambos proyectos. |
+| `talabre.py` | **Punto de entrada de Talabre.** Lee la hoja STATUS y el registro de DT, verifica la regla de atraso y actualiza el panel. |
+| `gen_ppt.js` | Regenera la PPT completa desde los datos ya calculados de los tres proyectos. |
 | `estatus_datos.json` | Datos consolidados de MASA. |
 | `datos_desaladora.json` | Datos consolidados de Desaladora. |
+| `datos_talabre.json` | Datos consolidados de Talabre. |
 | `historial.json` | Un registro por corte de MASA; alimenta la variación semana a semana. |
 
 ---
 
-## Indicadores al corte 26-07-2026
+## MASA — indicadores al corte 26-07-2026
 
 | Frente | Indicador | Valor | vs. 16-07 |
 |---|---|---|---|
@@ -89,8 +102,6 @@ pero la **ejecución no se movió**: las realizadas al 100% siguen en 90. En car
 rechazos crecen más rápido que las entregas y aún no hay ninguna aprobada. El cierre de P1
 está prácticamente detenido (+1 en el período) mientras la deuda vencida sube a 405.
 El área **3000** concentra 707 de los 830 P1 abiertos (85,2%).
-
----
 
 ---
 
@@ -146,6 +157,64 @@ los dos archivos de origen. Al corte actual:
   (P0: 41 vs 20). **El panel usa el punch list**, que es la fuente ítem a ítem; la diferencia
   queda documentada en pantalla en vez de resolverse en silencio.
 - 47 de los 97 subsistemas no tienen ningún punch levantado.
+
+---
+
+## Talabre — indicadores al corte 27-07-2026
+
+**219 subsistemas** en 9 áreas (Pozos 110, EBMS 26, Piscinas y Sedimentador 22, EBMP 20,
+Líneas Impulsión 14, PQS 13, Sala GAR 8, Cerro Verde/PS2 3, Impulsión Aducción 3).
+
+| Frente | Indicador | Valor |
+|---|---|---|
+| Caminatas | Caminata 1 realizada | **199/219 · 90,9%** |
+| Caminatas | Caminata 2 realizada | **170/219 · 77,6%** |
+| Carpetas | Avance PEC promedio | **91,1%** |
+| Carpetas | Sobre 95% / bajo 80% | **159 / 10** |
+| DT P1 | Cerrados | **313/335 · 93,4%** |
+| DT total | Cerrados | **1.446/1.951 · 74,1%** |
+| DT total | Abiertos (de ellos, atrasados) | **505 (206)** |
+
+**Semáforo:** Cerro Verde/PS2 y Piscinas y Sedimentador *Críticos* · Impulsión Aducción y
+Sala GAR *Al día* · el resto en *Atención*.
+
+**Lectura:** el perfil de Talabre es **el inverso al de Desaladora**. Aquí P1 está
+prácticamente cerrado (93,4%) y el volumen pendiente está en las prioridades menores: 265 DT
+abiertos en P2, 168 en P3 y **50 en P4 sin ni un solo cierre**. El atraso, en cambio, es más
+viejo que en los otros proyectos: mediana de 36 días y 29 ítems sobre los 90 días. En
+caminatas, la 1 está casi completa pero la 2 va en 77,6%, concentrando el rezago en
+**Piscinas y Sedimentador** (5/22) y **Cerro Verde/PS2** (0/3). Las carpetas avanzan bien
+—promedio 91,1%— con solo 10 subsistemas bajo 80%.
+
+### Criterios propios de Talabre
+
+- **Estado del DT:** Talabre **ya trae calculada** la columna *STATUS* (Cerrado / Abierto /
+  Atrasado). El panel la usa tal cual, pero `talabre.py` **verifica registro por registro** que
+  respete la misma regla que el resto de los proyectos (atrasado = sin fecha de cierre y con
+  fecha de compromiso vencida) y avisa si alguno no cuadra. **Al corte actual los 1.951
+  registros la respetan.**
+- Los **215 DT abiertos sin fecha de compromiso** no se dan por atrasados; se informan aparte.
+- **Caminatas:** `SI` = realizada · una fecha = agendada para esa fecha · `NO` = sin programar.
+  La hoja RESUMEN publica las caminatas «programadas», que **suman las realizadas más las
+  agendadas de la semana** (209 y 172). Este panel las informa por separado, porque una
+  caminata agendada no es una caminata hecha.
+- **Carpetas:** Talabre **no maneja estados de aprobación** como los otros dos proyectos: lleva
+  un **% de avance por subsistema (PEC)**. Se reporta como avance y por tramos, sin traducirlo
+  a «entregadas», para no inventar un concepto que el proyecto no usa. El archivo declara
+  además 0 carpetas en revisión del cliente.
+- **Disciplinas:** `CANERIAS → Piping` · `CIVIL` y `MOVIMIENTO DE TIERRAS → Obras Civiles` ·
+  `ELECTRICOS → Eléctrica` · `INSTRUMENTACION → Instrumentación y Control`.
+- **Áreas:** el registro de DT usa códigos más finos que la hoja STATUS (PBO-xx, PBBR-xx,
+  PBN-01, TB-01…). Todos pertenecen al sistema «Pozos Barrera Hidráulica» y se agrupan en
+  **POZOS**, igual que en STATUS.
+
+### Control de calidad del dato
+
+- **Cuadran:** total de subsistemas (219) y carpetas sobre 95% (159).
+- **Difiere:** el RESUMEN declara **206** carpetas sobre 80% y el detalle da **209**.
+- **Difiere:** los DT abiertos por subsistema de la hoja STATUS no coinciden con el registro
+  de DT (P1: 29 vs 22 · P2: 296 vs 265). **El panel usa el registro de DT**, que es la fuente
+  ítem a ítem.
 
 ---
 

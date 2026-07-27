@@ -197,6 +197,8 @@
       MASA<span class="tcli">Planta Concentradora</span></button>
     <button class="tab" type="button" role="tab" data-p="DES" aria-selected="false">
       Desaladora<span class="tcli">Minera Los Pelambres</span></button>
+    <button class="tab" type="button" role="tab" data-p="TAL" aria-selected="false">
+      Talabre<span class="tcli">Codelco</span></button>
   </nav>
 
 <div class="proyecto" id="panelMASA">
@@ -331,6 +333,80 @@
 
   <p class="foot" id="dNotas"></p>
 </div><!-- /panelDES -->
+
+<div class="proyecto" id="panelTAL" hidden>
+  <div class="cards" id="tKpis"></div>
+
+  <section class="block">
+    <h2>Semáforo por área</h2>
+    <p class="h2sub">Estado ejecutivo de cada frente según caminata 2, cierre de DT P1 y avance de carpeta (criterios en notas al pie)</p>
+    <div style="overflow-x:auto"><table class="tbl" id="tSemaforo"></table></div>
+  </section>
+
+  <div class="grid2">
+    <section class="block">
+      <h2>Caminata 2 por área</h2>
+      <p class="h2sub" id="tSubCam"></p>
+      <div class="rows" id="tChCam"></div>
+      <div class="legend" id="tLgCam"></div>
+    </section>
+    <section class="block">
+      <h2>Carpetas — avance PEC por área</h2>
+      <p class="h2sub" id="tSubCarp"></p>
+      <div class="rows" id="tChCarp"></div>
+      <div class="legend" id="tLgCarp"></div>
+    </section>
+    <section class="block">
+      <h2>DT abiertos por disciplina</h2>
+      <p class="h2sub" id="tSubDisc"></p>
+      <div class="rows" id="tChDisc"></div>
+      <div class="legend" id="tLgDisc"></div>
+    </section>
+    <section class="block">
+      <h2>Concentración de DT abiertos — disciplina × área</h2>
+      <p class="h2sub" id="tSubHm"></p>
+      <div class="hm" id="tChHm"></div>
+      <div class="hm-note" id="tHmNote"></div>
+    </section>
+  </div>
+
+  <section class="block">
+    <h2>Avance de cierre por prioridad</h2>
+    <p class="h2sub" id="tSubPrio"></p>
+    <div class="rows" id="tChPrio"></div>
+    <div class="legend" id="tLgPrio"></div>
+  </section>
+
+  <section class="block">
+    <h2>Antigüedad de los DT atrasados</h2>
+    <p class="h2sub" id="tSubAnt"></p>
+    <div class="rows" id="tChAnt"></div>
+    <div class="legend" id="tLgAnt"></div>
+  </section>
+
+  <details>
+    <summary id="tSumSub"></summary>
+    <div class="inner"><table class="tbl" id="tTbSub"></table></div>
+  </details>
+  <details>
+    <summary id="tSumCam"></summary>
+    <div class="inner"><table class="tbl" id="tTbCam"></table></div>
+  </details>
+  <details>
+    <summary id="tSumCarp"></summary>
+    <div class="inner"><table class="tbl" id="tTbCarp"></table></div>
+  </details>
+  <details>
+    <summary>Detalle — DT por prioridad y disciplina</summary>
+    <div class="inner"><table class="tbl" id="tTbDt"></table></div>
+  </details>
+  <details>
+    <summary id="tSumCtl"></summary>
+    <div class="inner"><table class="tbl" id="tTbCtl"></table></div>
+  </details>
+
+  <p class="foot" id="tNotas"></p>
+</div><!-- /panelTAL -->
 </div>
 <div id="tip"></div>
 </div>
@@ -2449,6 +2525,1619 @@ const DES = {
 </script>
 <!-- === DESALADORA:FIN === -->
 
+<!-- === TALABRE:INICIO === (bloque generado por talabre.py — no editar a mano) -->
+<script>
+const TAL = {
+ "meta": {
+  "id": "TALABRE",
+  "nombre": "Talabre",
+  "descripcion": "Captación de agua, pozos y estaciones de bombeo",
+  "cliente": "Codelco",
+  "contrato": "4600029355",
+  "corte": "2026-08-10",
+  "corteTexto": "10-08-2026",
+  "hoy": "27-07-2026",
+  "generado": "2026-07-27 16:39"
+ },
+ "subsistemas": {
+  "total": 219,
+  "porArea": {
+   "CERRO VERDE/PS2": 3,
+   "EBMP": 20,
+   "EBMS": 26,
+   "IMPULSIÓN ADUCCIÓN": 3,
+   "LÍNEAS IMPULSIÓN": 14,
+   "PISCINAS Y SEDIMENTADOR": 22,
+   "POZOS": 110,
+   "PQS": 13,
+   "SALA GAR": 8
+  }
+ },
+ "areas": [
+  "CERRO VERDE/PS2",
+  "EBMP",
+  "EBMS",
+  "IMPULSIÓN ADUCCIÓN",
+  "LÍNEAS IMPULSIÓN",
+  "PISCINAS Y SEDIMENTADOR",
+  "POZOS",
+  "PQS",
+  "SALA GAR"
+ ],
+ "caminatas": {
+  "1": {
+   "total": 219,
+   "realizada": 199,
+   "programada": 13,
+   "pendiente": 7,
+   "pct": 90.9
+  },
+  "2": {
+   "total": 219,
+   "realizada": 170,
+   "programada": 40,
+   "pendiente": 9,
+   "pct": 77.6
+  }
+ },
+ "caminatasPorArea": {
+  "CERRO VERDE/PS2": {
+   "subs": 3,
+   "1": {
+    "total": 3,
+    "realizada": 2,
+    "programada": 0,
+    "pendiente": 1
+   },
+   "2": {
+    "total": 3,
+    "realizada": 0,
+    "programada": 2,
+    "pendiente": 1
+   }
+  },
+  "EBMP": {
+   "subs": 20,
+   "1": {
+    "total": 20,
+    "realizada": 19,
+    "programada": 0,
+    "pendiente": 1
+   },
+   "2": {
+    "total": 20,
+    "realizada": 18,
+    "programada": 0,
+    "pendiente": 2
+   }
+  },
+  "EBMS": {
+   "subs": 26,
+   "1": {
+    "total": 26,
+    "realizada": 22,
+    "programada": 1,
+    "pendiente": 3
+   },
+   "2": {
+    "total": 26,
+    "realizada": 22,
+    "programada": 0,
+    "pendiente": 4
+   }
+  },
+  "IMPULSIÓN ADUCCIÓN": {
+   "subs": 3,
+   "1": {
+    "total": 3,
+    "realizada": 3,
+    "programada": 0,
+    "pendiente": 0
+   },
+   "2": {
+    "total": 3,
+    "realizada": 3,
+    "programada": 0,
+    "pendiente": 0
+   }
+  },
+  "LÍNEAS IMPULSIÓN": {
+   "subs": 14,
+   "1": {
+    "total": 14,
+    "realizada": 14,
+    "programada": 0,
+    "pendiente": 0
+   },
+   "2": {
+    "total": 14,
+    "realizada": 14,
+    "programada": 0,
+    "pendiente": 0
+   }
+  },
+  "PISCINAS Y SEDIMENTADOR": {
+   "subs": 22,
+   "1": {
+    "total": 22,
+    "realizada": 9,
+    "programada": 12,
+    "pendiente": 1
+   },
+   "2": {
+    "total": 22,
+    "realizada": 5,
+    "programada": 16,
+    "pendiente": 1
+   }
+  },
+  "POZOS": {
+   "subs": 110,
+   "1": {
+    "total": 110,
+    "realizada": 110,
+    "programada": 0,
+    "pendiente": 0
+   },
+   "2": {
+    "total": 110,
+    "realizada": 88,
+    "programada": 22,
+    "pendiente": 0
+   }
+  },
+  "PQS": {
+   "subs": 13,
+   "1": {
+    "total": 13,
+    "realizada": 12,
+    "programada": 0,
+    "pendiente": 1
+   },
+   "2": {
+    "total": 13,
+    "realizada": 12,
+    "programada": 0,
+    "pendiente": 1
+   }
+  },
+  "SALA GAR": {
+   "subs": 8,
+   "1": {
+    "total": 8,
+    "realizada": 8,
+    "programada": 0,
+    "pendiente": 0
+   },
+   "2": {
+    "total": 8,
+    "realizada": 8,
+    "programada": 0,
+    "pendiente": 0
+   }
+  }
+ },
+ "caminatasPendientes": [
+  {
+   "id": "5900I-001",
+   "area": "CERRO VERDE/PS2",
+   "alcance": "TELECOMUNICACIONES PS2",
+   "cam": 1,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.37
+  },
+  {
+   "id": "3716C-009",
+   "area": "EBMP",
+   "alcance": "Antiincrustante EBMP",
+   "cam": 1,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.53
+  },
+  {
+   "id": "3716B-010",
+   "area": "EBMS",
+   "alcance": "Antiincrustante EBMS",
+   "cam": 1,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.53
+  },
+  {
+   "id": "3716B-012",
+   "area": "EBMS",
+   "alcance": "Impulsión de agua Pipeline EBMS, Parte 2",
+   "cam": 1,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.8
+  },
+  {
+   "id": "3716B-028",
+   "area": "EBMS",
+   "alcance": "OO.CC. de línea de impulsión desde área de conexión hasta Manifold piscina de sedimentación",
+   "cam": 1,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0
+  },
+  {
+   "id": "3716D-022",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC. y movimiento de tierra de Piscinas de sedimentación geomembrana",
+   "cam": 1,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0
+  },
+  {
+   "id": "3716E-23-009",
+   "area": "PQS",
+   "alcance": "OO.CC. de piscina QS",
+   "cam": 1,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0
+  },
+  {
+   "id": "3716B-029",
+   "area": "EBMS",
+   "alcance": "Descarga Auxiliar de Agua a EBMS desde EBMN. Linea 215",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "01-08-2026",
+   "pec": 0
+  },
+  {
+   "id": "3716D-003",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Agua de lavadoMotobomba BBA-022 y Estanque 3716D-EST-004 / LINEA 505",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.91
+  },
+  {
+   "id": "3716D-004",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Agua de Lavado Pipeline hacia Sedimentador y Piscinas de Sedimentación",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.77
+  },
+  {
+   "id": "3716D-005",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Manifold de Distribución Sedimentador y Piscinas de Sedimentación 3716D-RW-36\"-C1-0400-N",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.82
+  },
+  {
+   "id": "3716D-006",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Piping de Sedimentador TAG 3716D-DRV-001",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.79
+  },
+  {
+   "id": "3716D-007",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Piping Piscinas de Regulación TAG 3716D-PSC-001 y 3716D-PSC-002",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716D-008",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Estanque TAG 3716D-EST-005 y Arranque de línea Aducción",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716D-009",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Alimentación Eléctrica",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.87
+  },
+  {
+   "id": "3716D-010",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Puesta a Tierra (SPT) y Protección Atmosférica (pararrayos).",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716D-011",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Alimentación Eléctrica - Canalizaciones de Fuerza y Control",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716D-012",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Alimentación Eléctrica - Iluminación",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "27-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716D-023",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Instrumentación",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "05-08-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716D-024",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Telecomunicación",
+   "cam": 1,
+   "estado": "Programada",
+   "fecha": "05-08-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "5900I-001",
+   "area": "CERRO VERDE/PS2",
+   "alcance": "TELECOMUNICACIONES PS2",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.37
+  },
+  {
+   "id": "3716C-009",
+   "area": "EBMP",
+   "alcance": "Antiincrustante EBMP",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.53
+  },
+  {
+   "id": "3716C-022",
+   "area": "EBMP",
+   "alcance": "OO.CC. de área de plataformas flotantes",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.95
+  },
+  {
+   "id": "3716B-010",
+   "area": "EBMS",
+   "alcance": "Antiincrustante EBMS",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.53
+  },
+  {
+   "id": "3716B-012",
+   "area": "EBMS",
+   "alcance": "Impulsión de agua Pipeline EBMS, Parte 2",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0.8
+  },
+  {
+   "id": "3716B-028",
+   "area": "EBMS",
+   "alcance": "OO.CC. de línea de impulsión desde área de conexión hasta Manifold piscina de sedimentación",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0
+  },
+  {
+   "id": "3716B-029",
+   "area": "EBMS",
+   "alcance": "Descarga Auxiliar de Agua a EBMS desde EBMN. Linea 215",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0
+  },
+  {
+   "id": "3716D-022",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC. y movimiento de tierra de Piscinas de sedimentación geomembrana",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0
+  },
+  {
+   "id": "3716E-23-009",
+   "area": "PQS",
+   "alcance": "OO.CC. de piscina QS",
+   "cam": 2,
+   "estado": "Pendiente",
+   "fecha": null,
+   "pec": 0
+  },
+  {
+   "id": "5900B-001",
+   "area": "CERRO VERDE/PS2",
+   "alcance": "JUMPER DE F.O EN GABINETE PS4 PARA CONEXIÓN DE SWITCHES CORE",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "26-07-2026",
+   "pec": 0.95
+  },
+  {
+   "id": "5900J-002",
+   "area": "CERRO VERDE/PS2",
+   "alcance": "CABLE DESDE MASTIL A PS4/F.O DESDE POSTE A PS4",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "26-07-2026",
+   "pec": 0.95
+  },
+  {
+   "id": "3716D-003",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Agua de lavadoMotobomba BBA-022 y Estanque 3716D-EST-004 / LINEA 505",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.91
+  },
+  {
+   "id": "3716D-004",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Agua de Lavado Pipeline hacia Sedimentador y Piscinas de Sedimentación",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.77
+  },
+  {
+   "id": "3716D-005",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Manifold de Distribución Sedimentador y Piscinas de Sedimentación 3716D-RW-36\"-C1-0400-N",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.82
+  },
+  {
+   "id": "3716D-006",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Piping de Sedimentador TAG 3716D-DRV-001",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.79
+  },
+  {
+   "id": "3716D-007",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Piping Piscinas de Regulación TAG 3716D-PSC-001 y 3716D-PSC-002",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716D-008",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Estanque TAG 3716D-EST-005 y Arranque de línea Aducción",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716D-009",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Alimentación Eléctrica",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.87
+  },
+  {
+   "id": "3716D-010",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Puesta a Tierra (SPT) y Protección Atmosférica (pararrayos).",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716D-011",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Alimentación Eléctrica - Canalizaciones de Fuerza y Control",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716D-012",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Alimentación Eléctrica - Iluminación",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "06-08-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716D-013",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC. de área de Manifold, estanque de lavado",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "28-07-2026",
+   "pec": 0.95
+  },
+  {
+   "id": "3716D-014",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC. líneas de distribución de Agua de lavado",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "28-07-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716D-016",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC.  piping de sedimentador",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "28-07-2026",
+   "pec": 0.87
+  },
+  {
+   "id": "3716D-020",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC. de sistema de eléctrico y de telecomunicaciones desde BD-03",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "28-07-2026",
+   "pec": 0.89
+  },
+  {
+   "id": "3716D-023",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Instrumentación",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "10-08-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716D-024",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "Telecomunicación",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "10-08-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-01-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-02-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-03-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-04-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-05-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-06-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-07-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-08-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-09-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-10-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-11-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "29-07-2026",
+   "pec": 0.88
+  },
+  {
+   "id": "3716E-12-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-13-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.86
+  },
+  {
+   "id": "3716E-14-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-15-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-16-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-17-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-18-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-19-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-20-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.83
+  },
+  {
+   "id": "3716E-21-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.85
+  },
+  {
+   "id": "3716E-22-003",
+   "area": "POZOS",
+   "alcance": "COMUNICACIONES",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "30-07-2026",
+   "pec": 0.85
+  }
+ ],
+ "carpetas": {
+  "tipo": "avance",
+  "total": 219,
+  "conDato": 219,
+  "promedio": 91.1,
+  "sobre95": 159,
+  "sobre80": 209,
+  "bajo80": 10,
+  "tramos": {
+   "95% o más": 159,
+   "80% a 95%": 50,
+   "Bajo 80%": 10
+  },
+  "enRevisionCliente": 0,
+  "porArea": {
+   "CERRO VERDE/PS2": {
+    "subs": 3,
+    "promedio": 75.7,
+    "sobre95": 2,
+    "sobre80": 2,
+    "bajo80": 1
+   },
+   "EBMP": {
+    "subs": 20,
+    "promedio": 93.0,
+    "sobre95": 18,
+    "sobre80": 19,
+    "bajo80": 1
+   },
+   "EBMS": {
+    "subs": 26,
+    "promedio": 84.7,
+    "sobre95": 16,
+    "sobre80": 23,
+    "bajo80": 3
+   },
+   "IMPULSIÓN ADUCCIÓN": {
+    "subs": 3,
+    "promedio": 96.3,
+    "sobre95": 3,
+    "sobre80": 3,
+    "bajo80": 0
+   },
+   "LÍNEAS IMPULSIÓN": {
+    "subs": 14,
+    "promedio": 92.5,
+    "sobre95": 10,
+    "sobre80": 13,
+    "bajo80": 1
+   },
+   "PISCINAS Y SEDIMENTADOR": {
+    "subs": 22,
+    "promedio": 83.9,
+    "sobre95": 6,
+    "sobre80": 19,
+    "bajo80": 3
+   },
+   "POZOS": {
+    "subs": 110,
+    "promedio": 93.8,
+    "sobre95": 88,
+    "sobre80": 110,
+    "bajo80": 0
+   },
+   "PQS": {
+    "subs": 13,
+    "promedio": 87.5,
+    "sobre95": 8,
+    "sobre80": 12,
+    "bajo80": 1
+   },
+   "SALA GAR": {
+    "subs": 8,
+    "promedio": 96.4,
+    "sobre95": 8,
+    "sobre80": 8,
+    "bajo80": 0
+   }
+  },
+  "rezagados": [
+   {
+    "id": "3716B-028",
+    "area": "EBMS",
+    "pec": 0,
+    "obs": "PENDIENTES TRABAJOS DE ACCIONA -"
+   },
+   {
+    "id": "3716B-029",
+    "area": "EBMS",
+    "pec": 0,
+    "obs": "LINEA 215 FUERA DEL ALCANCE DE BSMT, SOLAMENTE SE LLEGARA HASTA TEE + VALVULAS"
+   },
+   {
+    "id": "3716D-022",
+    "area": "PISCINAS Y SEDIMENTADOR",
+    "pec": 0,
+    "obs": ""
+   },
+   {
+    "id": "3716E-23-009",
+    "area": "PQS",
+    "pec": 0,
+    "obs": ""
+   },
+   {
+    "id": "5900I-001",
+    "area": "CERRO VERDE/PS2",
+    "pec": 37.0,
+    "obs": "PENDIENTES PLANOS AMARILLADOS"
+   },
+   {
+    "id": "3716B-010",
+    "area": "EBMS",
+    "pec": 53.0,
+    "obs": "Pendiente por terreno"
+   },
+   {
+    "id": "3716C-009",
+    "area": "EBMP",
+    "pec": 53.0,
+    "obs": ""
+   },
+   {
+    "id": "3716E-24-002",
+    "area": "LÍNEAS IMPULSIÓN",
+    "pec": 71.0,
+    "obs": ""
+   },
+   {
+    "id": "3716D-004",
+    "area": "PISCINAS Y SEDIMENTADOR",
+    "pec": 77.0,
+    "obs": ""
+   },
+   {
+    "id": "3716D-006",
+    "area": "PISCINAS Y SEDIMENTADOR",
+    "pec": 79.0,
+    "obs": ""
+   }
+  ]
+ },
+ "dt": {
+  "global": {
+   "total": 1951,
+   "cerrados": 1446,
+   "abiertos": 505,
+   "atrasados": 206,
+   "enPlazo": 299,
+   "sinCompromiso": 215
+  },
+  "porPrioridad": {
+   "P1": {
+    "total": 335,
+    "cerrados": 313,
+    "abiertos": 22,
+    "atrasados": 13,
+    "enPlazo": 9,
+    "sinCompromiso": 0
+   },
+   "P2": {
+    "total": 1318,
+    "cerrados": 1053,
+    "abiertos": 265,
+    "atrasados": 192,
+    "enPlazo": 73,
+    "sinCompromiso": 0
+   },
+   "P3": {
+    "total": 239,
+    "cerrados": 71,
+    "abiertos": 168,
+    "atrasados": 1,
+    "enPlazo": 167,
+    "sinCompromiso": 165
+   },
+   "P4": {
+    "total": 50,
+    "cerrados": 0,
+    "abiertos": 50,
+    "atrasados": 0,
+    "enPlazo": 50,
+    "sinCompromiso": 50
+   },
+   "Sin asignar": {
+    "total": 9,
+    "cerrados": 9,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  },
+  "porDisciplina": {
+   "Obras Civiles": {
+    "total": 662,
+    "cerrados": 458,
+    "abiertos": 204,
+    "atrasados": 85,
+    "enPlazo": 119,
+    "sinCompromiso": 56
+   },
+   "Piping": {
+    "total": 618,
+    "cerrados": 414,
+    "abiertos": 204,
+    "atrasados": 63,
+    "enPlazo": 141,
+    "sinCompromiso": 139
+   },
+   "Eléctrica": {
+    "total": 437,
+    "cerrados": 398,
+    "abiertos": 39,
+    "atrasados": 34,
+    "enPlazo": 5,
+    "sinCompromiso": 4
+   },
+   "Instrumentación y Control": {
+    "total": 161,
+    "cerrados": 140,
+    "abiertos": 21,
+    "atrasados": 18,
+    "enPlazo": 3,
+    "sinCompromiso": 3
+   },
+   "Estructura": {
+    "total": 73,
+    "cerrados": 36,
+    "abiertos": 37,
+    "atrasados": 6,
+    "enPlazo": 31,
+    "sinCompromiso": 13
+   }
+  },
+  "p1PorDisciplina": {
+   "Obras Civiles": {
+    "total": 30,
+    "cerrados": 20,
+    "abiertos": 10,
+    "atrasados": 6,
+    "enPlazo": 4,
+    "sinCompromiso": 0
+   },
+   "Piping": {
+    "total": 170,
+    "cerrados": 170,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   "Eléctrica": {
+    "total": 92,
+    "cerrados": 88,
+    "abiertos": 4,
+    "atrasados": 3,
+    "enPlazo": 1,
+    "sinCompromiso": 0
+   },
+   "Instrumentación y Control": {
+    "total": 36,
+    "cerrados": 32,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   "Estructura": {
+    "total": 7,
+    "cerrados": 3,
+    "abiertos": 4,
+    "atrasados": 0,
+    "enPlazo": 4,
+    "sinCompromiso": 0
+   }
+  },
+  "p1PorArea": {
+   "CERRO VERDE/PS2": {
+    "total": 0,
+    "cerrados": 0,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   "EBMP": {
+    "total": 60,
+    "cerrados": 49,
+    "abiertos": 11,
+    "atrasados": 11,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   "EBMS": {
+    "total": 61,
+    "cerrados": 61,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   "IMPULSIÓN ADUCCIÓN": {
+    "total": 0,
+    "cerrados": 0,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   "PISCINAS Y SEDIMENTADOR": {
+    "total": 8,
+    "cerrados": 0,
+    "abiertos": 8,
+    "atrasados": 0,
+    "enPlazo": 8,
+    "sinCompromiso": 0
+   },
+   "POZOS": {
+    "total": 193,
+    "cerrados": 190,
+    "abiertos": 3,
+    "atrasados": 2,
+    "enPlazo": 1,
+    "sinCompromiso": 0
+   },
+   "SALA GAR": {
+    "total": 13,
+    "cerrados": 13,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  },
+  "porArea": {
+   "CERRO VERDE/PS2": {
+    "total": 3,
+    "cerrados": 0,
+    "abiertos": 3,
+    "atrasados": 3,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   "EBMP": {
+    "total": 193,
+    "cerrados": 106,
+    "abiertos": 87,
+    "atrasados": 69,
+    "enPlazo": 18,
+    "sinCompromiso": 16
+   },
+   "EBMS": {
+    "total": 274,
+    "cerrados": 211,
+    "abiertos": 63,
+    "atrasados": 21,
+    "enPlazo": 42,
+    "sinCompromiso": 37
+   },
+   "IMPULSIÓN ADUCCIÓN": {
+    "total": 18,
+    "cerrados": 4,
+    "abiertos": 14,
+    "atrasados": 2,
+    "enPlazo": 12,
+    "sinCompromiso": 0
+   },
+   "PISCINAS Y SEDIMENTADOR": {
+    "total": 102,
+    "cerrados": 37,
+    "abiertos": 65,
+    "atrasados": 1,
+    "enPlazo": 64,
+    "sinCompromiso": 0
+   },
+   "POZOS": {
+    "total": 1282,
+    "cerrados": 1026,
+    "abiertos": 256,
+    "atrasados": 98,
+    "enPlazo": 158,
+    "sinCompromiso": 157
+   },
+   "SALA GAR": {
+    "total": 79,
+    "cerrados": 62,
+    "abiertos": 17,
+    "atrasados": 12,
+    "enPlazo": 5,
+    "sinCompromiso": 5
+   }
+  },
+  "porCaminata": {
+   "1": {
+    "total": 1247,
+    "cerrados": 1113,
+    "abiertos": 134,
+    "atrasados": 62,
+    "enPlazo": 72,
+    "sinCompromiso": 54
+   },
+   "2": {
+    "total": 704,
+    "cerrados": 333,
+    "abiertos": 371,
+    "atrasados": 144,
+    "enPlazo": 227,
+    "sinCompromiso": 161
+   }
+  },
+  "prioridades": [
+   "P1",
+   "P2",
+   "P3",
+   "P4",
+   "Sin asignar"
+  ],
+  "heatmap": {
+   "disc": [
+    "Obras Civiles",
+    "Piping",
+    "Eléctrica",
+    "Instrumentación y Control",
+    "Estructura"
+   ],
+   "cam": [
+    "1",
+    "2"
+   ],
+   "vals": [
+    [
+     2,
+     8
+    ],
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     4
+    ]
+   ]
+  },
+  "matriz": {
+   "Obras Civiles": {
+    "CERRO VERDE/PS2": 0,
+    "EBMP": 34,
+    "EBMS": 10,
+    "IMPULSIÓN ADUCCIÓN": 13,
+    "PISCINAS Y SEDIMENTADOR": 51,
+    "POZOS": 88,
+    "SALA GAR": 8
+   },
+   "Piping": {
+    "CERRO VERDE/PS2": 0,
+    "EBMP": 38,
+    "EBMS": 37,
+    "IMPULSIÓN ADUCCIÓN": 1,
+    "PISCINAS Y SEDIMENTADOR": 0,
+    "POZOS": 128,
+    "SALA GAR": 0
+   },
+   "Eléctrica": {
+    "CERRO VERDE/PS2": 3,
+    "EBMP": 11,
+    "EBMS": 9,
+    "IMPULSIÓN ADUCCIÓN": 0,
+    "PISCINAS Y SEDIMENTADOR": 0,
+    "POZOS": 11,
+    "SALA GAR": 5
+   },
+   "Instrumentación y Control": {
+    "CERRO VERDE/PS2": 0,
+    "EBMP": 4,
+    "EBMS": 0,
+    "IMPULSIÓN ADUCCIÓN": 0,
+    "PISCINAS Y SEDIMENTADOR": 0,
+    "POZOS": 13,
+    "SALA GAR": 4
+   },
+   "Estructura": {
+    "CERRO VERDE/PS2": 0,
+    "EBMP": 0,
+    "EBMS": 7,
+    "IMPULSIÓN ADUCCIÓN": 0,
+    "PISCINAS Y SEDIMENTADOR": 14,
+    "POZOS": 16,
+    "SALA GAR": 0
+   }
+  },
+  "antiguedad": {
+   "tramos": {
+    "1-30 días": 91,
+    "31-90 días": 86,
+    "91-180 días": 28,
+    ">180 días": 1
+   },
+   "max": 189,
+   "mediana": 36
+  },
+  "topSubsistemas": [
+   {
+    "sub": "1-3716C-023",
+    "total": 13,
+    "cerrados": 0,
+    "abiertos": 13,
+    "atrasados": 13,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716C-021",
+    "total": 12,
+    "cerrados": 0,
+    "abiertos": 12,
+    "atrasados": 12,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716E-24-001",
+    "total": 12,
+    "cerrados": 0,
+    "abiertos": 12,
+    "atrasados": 11,
+    "enPlazo": 1,
+    "sinCompromiso": 1
+   },
+   {
+    "sub": "1-3716E-23-015",
+    "total": 10,
+    "cerrados": 0,
+    "abiertos": 10,
+    "atrasados": 10,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716E-01-005",
+    "total": 6,
+    "cerrados": 0,
+    "abiertos": 6,
+    "atrasados": 6,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716C-008",
+    "total": 7,
+    "cerrados": 0,
+    "abiertos": 7,
+    "atrasados": 5,
+    "enPlazo": 2,
+    "sinCompromiso": 2
+   },
+   {
+    "sub": "1-3716C-022",
+    "total": 7,
+    "cerrados": 0,
+    "abiertos": 7,
+    "atrasados": 5,
+    "enPlazo": 2,
+    "sinCompromiso": 2
+   },
+   {
+    "sub": "1-3716E-23-008",
+    "total": 5,
+    "cerrados": 0,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-5900A-002",
+    "total": 5,
+    "cerrados": 0,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716E-01-001",
+    "total": 5,
+    "cerrados": 0,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716C-007",
+    "total": 6,
+    "cerrados": 0,
+    "abiertos": 6,
+    "atrasados": 4,
+    "enPlazo": 2,
+    "sinCompromiso": 2
+   },
+   {
+    "sub": "1-3716C-003",
+    "total": 6,
+    "cerrados": 0,
+    "abiertos": 6,
+    "atrasados": 4,
+    "enPlazo": 2,
+    "sinCompromiso": 2
+   }
+  ]
+ },
+ "semaforo": {
+  "CERRO VERDE/PS2": [
+   "crit",
+   "Crítico",
+   {
+    "total": 0,
+    "cerrados": 0,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  ],
+  "EBMP": [
+   "warn",
+   "Atención",
+   {
+    "total": 60,
+    "cerrados": 49,
+    "abiertos": 11,
+    "atrasados": 11,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  ],
+  "EBMS": [
+   "warn",
+   "Atención",
+   {
+    "total": 61,
+    "cerrados": 61,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  ],
+  "IMPULSIÓN ADUCCIÓN": [
+   "good",
+   "Al día",
+   {
+    "total": 0,
+    "cerrados": 0,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  ],
+  "LÍNEAS IMPULSIÓN": [
+   "warn",
+   "Atención",
+   {
+    "total": 0,
+    "cerrados": 0,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  ],
+  "PISCINAS Y SEDIMENTADOR": [
+   "crit",
+   "Crítico",
+   {
+    "total": 8,
+    "cerrados": 0,
+    "abiertos": 8,
+    "atrasados": 0,
+    "enPlazo": 8,
+    "sinCompromiso": 0
+   }
+  ],
+  "POZOS": [
+   "warn",
+   "Atención",
+   {
+    "total": 193,
+    "cerrados": 190,
+    "abiertos": 3,
+    "atrasados": 2,
+    "enPlazo": 1,
+    "sinCompromiso": 0
+   }
+  ],
+  "PQS": [
+   "warn",
+   "Atención",
+   {
+    "total": 0,
+    "cerrados": 0,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  ],
+  "SALA GAR": [
+   "good",
+   "Al día",
+   {
+    "total": 13,
+    "cerrados": 13,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   }
+  ]
+ },
+ "control": {
+  "contraste": [
+   {
+    "que": "Subsistemas",
+    "declarado": "219",
+    "calculado": "219",
+    "ok": true
+   },
+   {
+    "que": "Caminata 1 — el RESUMEN publica «programadas»",
+    "declarado": "209 programadas",
+    "calculado": "199 realizadas + 13 programadas",
+    "ok": true,
+    "nota": "el RESUMEN suma las agendadas de la semana; el panel las separa"
+   },
+   {
+    "que": "Caminata 2 — el RESUMEN publica «programadas»",
+    "declarado": "172 programadas",
+    "calculado": "170 realizadas + 40 programadas",
+    "ok": true,
+    "nota": "el RESUMEN suma las agendadas de la semana; el panel las separa"
+   },
+   {
+    "que": "Carpetas sobre 95%",
+    "declarado": "159",
+    "calculado": "159",
+    "ok": true
+   },
+   {
+    "que": "Carpetas sobre 80%",
+    "declarado": "206",
+    "calculado": "209",
+    "ok": false
+   }
+  ],
+  "incoherentes": 0,
+  "difDT": [
+   {
+    "prio": "P1",
+    "status": 29,
+    "registro": 22
+   },
+   {
+    "prio": "P2",
+    "status": 296,
+    "registro": 265
+   }
+  ],
+  "subsEnStatus": 219,
+  "areasStatus": 9,
+  "areasDT": 7,
+  "dtSinCompromiso": 215
+ },
+ "disciplinas": [
+  "Obras Civiles",
+  "Piping",
+  "Eléctrica",
+  "Instrumentación y Control",
+  "Estructura"
+ ],
+ "discCorta": {
+  "Instrumentación y Control": "Instr. y Control"
+ }
+};
+</script>
+<!-- === TALABRE:FIN === -->
+
 <script>
 const $ = (id) => document.getElementById(id);
 const pct = (a,b) => b ? Math.round(1000*a/b)/10 : 0;
@@ -3014,6 +4703,282 @@ function renderDES() {
   requestAnimationFrame(pruneInlineLabels);
 }
 
+/* =======================================================================
+   TALABRE — Captación de agua, pozos y estaciones de bombeo (Codelco)
+   Conceptos propios: caminatas 1 y 2 con estado SI / fecha agendada / NO;
+   la carpeta se mide como % de avance (PEC), no como estado de aprobación;
+   y el atraso del DT ya viene calculado en el archivo — el script verifica
+   que respete la misma regla que los otros proyectos.
+   ======================================================================= */
+function renderTAL() {
+  if (!TAL) return;
+  ['tChCam','tChCarp','tChDisc','tChPrio','tChAnt'].forEach(id => $(id).innerHTML = '');
+  const ord1 = css('--ord-1'), ord2 = css('--ord-2'), ord3 = css('--ord-3');
+  const blue = css('--blue'), amber = css('--amber'), red = css('--red'), good = css('--st-good');
+  const S = TAL.subsistemas, C = TAL.caminatas, CP = TAL.carpetas, T = TAL.dt;
+  const p1 = T.porPrioridad.P1 || {total:0,cerrados:0,abiertos:0,atrasados:0};
+  const g = T.global, areas = TAL.areas;
+
+  /* ---------- KPIs ---------- */
+  (function(){
+    const c1 = C['1'], c2 = C['2'];
+    $('tKpis').innerHTML =
+      kpiSimple('Caminata 1 realizada', c1.realizada, c1.total,
+        `${fmt(c1.programada)} agendadas · ${fmt(c1.pendiente)} sin programar`, '--blue') +
+      kpiSimple('Caminata 2 realizada', c2.realizada, c2.total,
+        `${fmt(c2.programada)} agendadas · ${fmt(c2.pendiente)} sin programar`, '--blue') +
+      kpiSimple('Carpetas sobre 95% PEC', CP.sobre95, CP.total,
+        `Avance promedio ${CP.promedio.toLocaleString('es-CL')}% · `
+        + `<span class="alert">${fmt(CP.bajo80)} bajo 80%</span>`, '--blue') +
+      kpiSimple('Cierre de DT P1', p1.cerrados, p1.total,
+        `${fmt(p1.abiertos)} abiertos · <span class="alert">${fmt(p1.atrasados)} atrasados</span>`, '--blue') +
+      kpiSimple('Cierre de DT total', g.cerrados, g.total,
+        `${fmt(g.abiertos)} abiertos · <span class="alert">${fmt(g.atrasados)} atrasados</span>`, '--blue');
+  })();
+
+  /* ---------- subtítulos ---------- */
+  (function(){
+    const c2 = C['2'];
+    $('tSubCam').textContent =
+      `Caminata 2 realizada en ${fmt(c2.realizada)} de ${fmt(c2.total)} subsistemas `
+      + `(${pctTxt(c2.realizada, c2.total)}); ${fmt(c2.programada)} ya tienen fecha agendada`;
+    $('tSubCarp').textContent =
+      `Talabre mide la carpeta como % de avance (PEC), no como estado de aprobación · `
+      + `promedio ${CP.promedio.toLocaleString('es-CL')}% · ${fmt(CP.sobre95)} sobre 95% · ${fmt(CP.bajo80)} bajo 80%`;
+    $('tSubDisc').textContent =
+      `${fmt(g.abiertos)} DT abiertos de todas las prioridades; ${fmt(g.atrasados)} con la fecha de compromiso vencida al ${TAL.meta.hoy}`;
+    let top = null;
+    for (const [a,v] of Object.entries(T.porArea))
+      if (!top || v.abiertos > top.v) top = { a, v: v.abiertos };
+    $('tSubHm').textContent = top && g.abiertos
+      ? `${top.a} concentra ${fmt(top.v)} de los ${fmt(g.abiertos)} DT abiertos (${pctTxt(top.v, g.abiertos)})`
+      : '';
+    $('tSubPrio').textContent =
+      `P1 está prácticamente cerrado (${pctTxt(p1.cerrados, p1.total)}); el volumen pendiente está en las prioridades menores`;
+    const a = T.antiguedad;
+    $('tSubAnt').textContent = a.max
+      ? `Mediana de ${fmt(a.mediana)} días vencidos · el más antiguo lleva ${fmt(a.max)} días`
+      : 'Sin DT atrasados al corte';
+    $('tSumSub').textContent = `Detalle — Subsistemas con más DT abiertos (${fmt((T.topSubsistemas||[]).length)})`;
+    $('tSumCam').textContent = `Detalle — Caminatas no realizadas (${fmt(TAL.caminatasPendientes.length)} casos)`;
+    $('tSumCarp').textContent = `Detalle — Carpetas bajo 80% de avance (${fmt(CP.rezagados.length)})`;
+    $('tSumCtl').textContent = 'Control de calidad del dato — cruce entre la hoja STATUS y el registro de DT';
+  })();
+
+  /* ---------- semáforo por área ---------- */
+  (function(){
+    const icono = { good:'✓', warn:'▲', crit:'✕' };
+    let rows = `<tr><th>Área</th><th class="num">Subsist.</th><th class="num">Caminata 1</th>
+      <th class="num">Caminata 2</th><th class="num">PEC promedio</th>
+      <th class="num">DT P1 abiertos (atras.)</th><th>Estado</th></tr>`;
+    for (const a of areas) {
+      const ca = TAL.caminatasPorArea[a], cp = CP.porArea[a];
+      const sem = TAL.semaforo[a] || ['warn','Atención',{}];
+      const r = sem[2] || {total:0,cerrados:0,abiertos:0,atrasados:0};
+      rows += `<tr><td><b>${a}</b></td>
+        <td class="num">${fmt(ca.subs)}</td>
+        <td class="num">${fmt(ca['1'].realizada)}/${fmt(ca['1'].total)} · ${pctTxt(ca['1'].realizada,ca['1'].total)}</td>
+        <td class="num">${fmt(ca['2'].realizada)}/${fmt(ca['2'].total)} · ${pctTxt(ca['2'].realizada,ca['2'].total)}</td>
+        <td class="num">${cp.promedio.toLocaleString('es-CL')}%${cp.bajo80 ? ` <span class="alert">(${fmt(cp.bajo80)} bajo 80%)</span>` : ''}</td>
+        <td class="num">${fmt(r.abiertos)} (${fmt(r.atrasados)})</td>
+        <td><span class="chip ${sem[0]}">${icono[sem[0]]||''} ${sem[1]}</span></td></tr>`;
+    }
+    $('tSemaforo').innerHTML = rows;
+  })();
+
+  /* ---------- caminata 2 por área ---------- */
+  for (const a of areas) {
+    const c = TAL.caminatasPorArea[a]['2'];
+    stackRow($('tChCam'), `<b>${a}</b>${fmt(c.total)} subsist.`, c.total, [
+      {v:c.realizada,  c:ord1, name:'Realizada', inkLabel:'#ffffff'},
+      {v:c.programada, c:ord2, name:'Agendada con fecha', inkLabel:'#0b0b0b'},
+      {v:c.pendiente,  name:'Sin programar', track:true}
+    ], `<b>${pctTxt(c.realizada,c.total)}</b>`, `${a} — Caminata 2 (${fmt(c.total)} subsistemas)`);
+  }
+  legend($('tLgCam'), [[ord1,'Realizada'],[ord2,'Agendada con fecha'],[null,'Sin programar',true]]);
+
+  /* ---------- carpetas por área ---------- */
+  for (const a of areas) {
+    const cp = CP.porArea[a];
+    const medio = cp.sobre80 - cp.sobre95;
+    stackRow($('tChCarp'), `<b>${a}</b>promedio ${cp.promedio.toLocaleString('es-CL')}%`, cp.subs, [
+      {v:cp.sobre95, c:good,  name:'95% o más', inkLabel:'#ffffff'},
+      {v:medio,      c:blue,  name:'80% a 95%', inkLabel:'#ffffff'},
+      {v:cp.bajo80,  c:red,   name:'Bajo 80%', inkLabel:'#ffffff'}
+    ], `<b>${fmt(cp.sobre95)}</b>/${fmt(cp.subs)}`, `${a} — avance PEC de carpeta`);
+  }
+  legend($('tLgCarp'), [[good,'95% o más'],[blue,'80% a 95%'],[red,'Bajo 80%']]);
+
+  /* ---------- DT abiertos por disciplina ---------- */
+  (function(){
+    const ds = Object.entries(T.porDisciplina).sort((x,y) => y[1].abiertos - x[1].abiertos);
+    const mx = Math.max(1, ...ds.map(([,v]) => v.abiertos));
+    for (const [e,v] of ds) {
+      const row = document.createElement('div'); row.className = 'row';
+      row.innerHTML = `<div class="rlab"><b>${(TAL.discCorta && TAL.discCorta[e]) || e}</b></div>`;
+      const line = document.createElement('div'); line.className = 'barline';
+      const track = document.createElement('div'); track.className = 'track2';
+      const bar = document.createElement('div'); bar.className = 'bar';
+      bar.style.width = `${Math.max(1.5, 100*v.abiertos/mx)}%`;
+      for (const s of [{v:v.atrasados, c:red, name:'Atrasados', inkLabel:'#ffffff'},
+                       {v:v.enPlazo, c:blue, name:'En plazo o sin compromiso', inkLabel:'#ffffff'}]) {
+        if (s.v <= 0) continue;
+        const el = document.createElement('div'); el.className = 'seg';
+        el.style.flex = `${s.v} 0 0`; el.style.background = s.c;
+        el.innerHTML = `<span style="color:${s.inkLabel}">${s.v}</span>`;
+        bindTip(el, `${e} — DT abiertos: ${fmt(v.abiertos)}`,
+          `${s.name}: <b>${fmt(s.v)}</b> · Cerrados: ${fmt(v.cerrados)}/${fmt(v.total)} (${pctTxt(v.cerrados,v.total)})`);
+        bar.appendChild(el);
+      }
+      track.appendChild(bar); line.appendChild(track);
+      const e2 = document.createElement('div'); e2.className = 'endlab';
+      e2.style.minWidth = '46px'; e2.innerHTML = `<b>${fmt(v.abiertos)}</b>`;
+      line.appendChild(e2); row.appendChild(line);
+      $('tChDisc').appendChild(row);
+    }
+    legend($('tLgDisc'), [[red,'Atrasados'],[blue,'En plazo o sin fecha de compromiso']]);
+  })();
+
+  /* ---------- cierre por prioridad ---------- */
+  for (const pr of T.prioridades) {
+    const v = T.porPrioridad[pr];
+    if (!v || !v.total) continue;
+    stackRow($('tChPrio'), `<b>${pr}</b>${fmt(v.total)} levantados`, v.total, [
+      {v:v.cerrados, c:blue, name:'Cerrados', inkLabel:'#ffffff'},
+      {v:v.atrasados, c:red, name:'Abiertos y atrasados', inkLabel:'#ffffff'},
+      {v:v.enPlazo, c:amber, name:'Abiertos en plazo o sin compromiso', inkLabel:'#0b0b0b'}
+    ], `<b>${pctTxt(v.cerrados,v.total)}</b> · ${fmt(v.cerrados)}/${fmt(v.total)}`,
+       `Prioridad ${pr} — ${fmt(v.total)} DT`);
+  }
+  legend($('tLgPrio'), [[blue,'Cerrados'],[red,'Abiertos y atrasados'],[amber,'Abiertos en plazo']]);
+
+  /* ---------- antigüedad ---------- */
+  (function(){
+    const tr = T.antiguedad.tramos || {};
+    const tot = Object.values(tr).reduce((a,b) => a+b, 0);
+    const cols = { '1-30 días':amber, '31-90 días':css('--seq-450'),
+                   '91-180 días':css('--seq-600'), '>180 días':red };
+    if (!tot) { $('tChAnt').innerHTML = '<p class="h2sub">Sin DT atrasados.</p>'; return; }
+    for (const [k,v] of Object.entries(tr)) {
+      if (!v) continue;
+      stackRow($('tChAnt'), `<b>${k}</b>`, tot, [
+        {v:v, c:cols[k]||blue, name:k, inkLabel: k==='1-30 días' ? '#0b0b0b' : '#ffffff'},
+        {v:tot-v, name:'Resto', track:true}
+      ], `<b>${fmt(v)}</b> · ${pctTxt(v,tot)}`, `Atrasados con ${k} de vencimiento`);
+    }
+    legend($('tLgAnt'), Object.entries(cols).filter(([k]) => tr[k]).map(([k,c]) => [c,k]));
+  })();
+
+  /* ---------- heatmap disciplina × área ---------- */
+  (function(){
+    const hm = $('tChHm'); hm.innerHTML = '';
+    // se muestran las 5 áreas con más DT abiertos, para que la grilla sea legible
+    const cols = Object.entries(T.porArea).sort((a,b) => b[1].abiertos - a[1].abiertos)
+                   .filter(([,v]) => v.abiertos > 0).slice(0,5).map(([a]) => a);
+    const discs = Object.keys(T.porDisciplina);
+    hm.style.gridTemplateColumns = `minmax(96px,150px) repeat(${cols.length}, 1fr)`;
+    hm.appendChild(document.createElement('div'));
+    for (const a of cols) { const h = document.createElement('div'); h.className = 'htop'; h.textContent = a; hm.appendChild(h); }
+    const vals = discs.map(d => cols.map(a => (T.matriz && T.matriz[d] && T.matriz[d][a]) || 0));
+    const mx = Math.max(1, ...vals.flat());
+    const steps = [css('--seq-100'), css('--seq-200'), css('--seq-300'), css('--seq-450'), css('--seq-600'), css('--seq-700')];
+    discs.forEach((e,i) => {
+      const l = document.createElement('div'); l.className = 'hlab';
+      l.textContent = (TAL.discCorta && TAL.discCorta[e]) || e; hm.appendChild(l);
+      cols.forEach((a,j) => {
+        const v = vals[i][j];
+        const cell = document.createElement('div'); cell.className = 'hcell';
+        if (v === 0) { cell.style.background = 'var(--track)'; cell.style.color = 'var(--ink-muted)'; cell.textContent = '—'; }
+        else {
+          const k = Math.min(steps.length-1, Math.floor(Math.pow(v/mx, .5) * steps.length));
+          cell.style.background = steps[k];
+          cell.style.color = (k >= 3) ? '#ffffff' : '#0b0b0b';
+          cell.textContent = v;
+        }
+        bindTip(cell, `${e} × ${a}`, `DT abiertos: <b>${fmt(v)}</b>`);
+        hm.appendChild(cell);
+      });
+    });
+    $('tHmNote').innerHTML = `Menos <span class="ramp">${steps.map(s=>`<i style="background:${s}"></i>`).join('')}</span> Más DT abiertos · «—» = 0 · se muestran las ${cols.length} áreas con más pendientes`;
+  })();
+
+  /* ---------- tablas de detalle ---------- */
+  (function(){
+    $('tTbSub').innerHTML =
+      `<tr><th>Subsistema</th><th class="num">Abiertos</th><th class="num">Atrasados</th>
+       <th class="num">En plazo</th></tr>` +
+      (T.topSubsistemas||[]).map(s => `<tr><td>${s.sub}</td>
+        <td class="num">${fmt(s.abiertos)}</td><td class="num">${fmt(s.atrasados)}</td>
+        <td class="num">${fmt(s.enPlazo)}</td></tr>`).join('');
+
+    $('tTbCam').innerHTML =
+      `<tr><th>Subsistema</th><th>Área</th><th class="num">Caminata</th><th>Estado</th><th>Fecha agendada</th><th>Alcance</th></tr>` +
+      TAL.caminatasPendientes.map(s => `<tr><td>${s.id}</td><td>${s.area}</td>
+        <td class="num">${s.cam}</td><td>${s.estado}</td><td>${s.fecha||'—'}</td>
+        <td>${(s.alcance||'').slice(0,70)}</td></tr>`).join('');
+
+    $('tTbCarp').innerHTML =
+      `<tr><th>Subsistema</th><th>Área</th><th class="num">% PEC</th><th>Observación</th></tr>` +
+      CP.rezagados.map(s => `<tr><td>${s.id}</td><td>${s.area}</td>
+        <td class="num">${s.pec.toLocaleString('es-CL')}%</td><td>${s.obs||''}</td></tr>`).join('');
+
+    let r = `<tr><th>Prioridad</th><th class="num">Levantados</th><th class="num">Cerrados</th>
+      <th class="num">Abiertos</th><th class="num">Atrasados</th><th class="num">% cierre</th></tr>`;
+    const fila = (nom, v, bold) => `<tr><td>${bold?`<b>${nom}</b>`:nom}</td>
+      <td class="num">${fmt(v.total)}</td><td class="num">${fmt(v.cerrados)}</td>
+      <td class="num">${fmt(v.abiertos)}</td><td class="num">${fmt(v.atrasados)}</td>
+      <td class="num">${pctTxt(v.cerrados,v.total)}</td></tr>`;
+    for (const pr of T.prioridades) r += fila(pr, T.porPrioridad[pr], true);
+    r += `<tr><td colspan="6" style="padding-top:12px"><b>Todas las prioridades, por disciplina</b></td></tr>`;
+    for (const [d,v] of Object.entries(T.porDisciplina)) r += fila(d, v, false);
+    r += `<tr><td colspan="6" style="padding-top:12px"><b>P1 por disciplina</b></td></tr>`;
+    for (const [d,v] of Object.entries(T.p1PorDisciplina)) r += fila(d, v, false);
+    $('tTbDt').innerHTML = r;
+
+    const K = TAL.control;
+    let c = `<tr><th>Control</th><th>Resultado</th></tr>`;
+    for (const x of (K.contraste||[])) {
+      c += `<tr><td>${x.que}</td>
+        <td>${x.ok ? '<span class="chip good">✓ Cuadra</span>' : '<span class="chip warn">▲ Difiere</span>'}
+        declara ${x.declarado} · calculado ${x.calculado}${x.nota ? ` — ${x.nota}` : ''}</td></tr>`;
+    }
+    for (const d of (K.difDT||[])) {
+      c += `<tr><td>DT ${d.prio} abiertos: hoja STATUS vs. registro de DT</td>
+        <td><span class="chip warn">▲ Difiere</span> STATUS ${fmt(d.status)} · registro ${fmt(d.registro)}
+        — el panel usa el registro, que es la fuente ítem a ítem</td></tr>`;
+    }
+    c += `<tr><td>Regla de atraso (abierto con fecha de compromiso vencida)</td>
+      <td>${K.incoherentes
+          ? `<span class="chip crit">✕ ${fmt(K.incoherentes)} inconsistentes</span>`
+          : '<span class="chip good">✓ Todos los DT la respetan</span>'}</td></tr>`;
+    c += `<tr><td>DT abiertos sin fecha de compromiso</td>
+      <td>${fmt(K.dtSinCompromiso)} — no se cuentan como atrasados</td></tr>`;
+    $('tTbCtl').innerHTML = c;
+  })();
+
+  /* ---------- notas ---------- */
+  (function(){
+    $('tNotas').innerHTML =
+      `<b>Fuente:</b> TalabreSTATUS_PEC.xlsx — hoja «STATUS» (${fmt(S.total)} subsistemas en ${areas.length} áreas) ` +
+      `y TalabreCuadro_DT.xlsx — hoja «DT» (${fmt(g.total)} registros). ` +
+      `<b>Definiciones:</b> Atrasado = DT abierto cuya fecha de compromiso de cierre ya venció al ${TAL.meta.hoy} — ` +
+      `el estado viene calculado en el archivo y el script verifica que respete esa regla · ` +
+      `los ${fmt(g.sinCompromiso)} abiertos sin fecha de compromiso no se dan por atrasados · ` +
+      `Caminata realizada = «SI»; agendada = tiene fecha asignada; sin programar = «NO». ` +
+      `<b>Carpetas:</b> Talabre no maneja estados de aprobación como los otros proyectos — lleva un ` +
+      `<b>% de avance por subsistema (PEC)</b>, y así se reporta aquí, sin traducirlo a «entregadas». ` +
+      (CP.enRevisionCliente !== null && CP.enRevisionCliente !== undefined
+        ? `El archivo declara ${fmt(CP.enRevisionCliente)} carpetas en revisión del cliente. ` : '') +
+      `<b>Nota:</b> la hoja RESUMEN publica las caminatas «programadas», que suman las realizadas más las agendadas ` +
+      `de la semana; este panel las informa por separado porque una caminata agendada no es una caminata hecha. ` +
+      `<b>Criterio semáforo:</b> Crítico si la caminata 2 baja de 60%, el cierre de P1 baja de 50% o hay más de 20 P1 atrasados · ` +
+      `Atención si algún frente queda bajo 90% o hay carpetas bajo 80% · Al día en caso contrario. ` +
+      `Todas las cifras se recalculan desde los Excel con <b>talabre.py</b>; ninguna está escrita a mano.`;
+  })();
+
+  requestAnimationFrame(pruneInlineLabels);
+}
+
 /* ---------- cabecera y selector de proyecto ---------- */
 const CAB = {
   MASA: () => ({
@@ -3025,6 +4990,11 @@ const CAB = {
     corte: DES ? DES.meta.corteTexto : '—',
     sub: DES ? `${DES.meta.descripcion} · ${DES.meta.cliente} · contrato ${DES.meta.contrato}`
              : 'Sin datos cargados — correr desaladora.py'
+  }),
+  TAL: () => ({
+    corte: TAL ? TAL.meta.hoy : '—',
+    sub: TAL ? `${TAL.meta.descripcion} · ${TAL.meta.cliente} · contrato ${TAL.meta.contrato}`
+             : 'Sin datos cargados — correr talabre.py'
   })
 };
 let activo = 'MASA';
@@ -3032,6 +5002,7 @@ function mostrar(p) {
   activo = p;
   $('panelMASA').hidden = (p !== 'MASA');
   $('panelDES').hidden  = (p !== 'DES');
+  $('panelTAL').hidden  = (p !== 'TAL');
   document.querySelectorAll('.tab').forEach(b =>
     b.setAttribute('aria-selected', b.dataset.p === p ? 'true' : 'false'));
   const c = CAB[p]();
@@ -3042,7 +5013,11 @@ function mostrar(p) {
 document.querySelectorAll('.tab').forEach(b =>
   b.addEventListener('click', () => mostrar(b.dataset.p)));
 
-function pintar() { if (activo === 'MASA') render(); else renderDES(); }
+function pintar() {
+  if (activo === 'MASA') render();
+  else if (activo === 'DES') renderDES();
+  else renderTAL();
+}
 
 /* ---------- tema ---------- */
 const btn = $('themeBtn');
@@ -3055,7 +5030,9 @@ btn.addEventListener('click', () => {
   document.documentElement.setAttribute('data-theme', esOscuro() ? 'light' : 'dark');
   syncBtn(); pintar();
 });
+// Una pestaña sin datos cargados queda deshabilitada en vez de romperse.
 if (!DES) { const t = document.querySelector('.tab[data-p="DES"]'); if (t) t.disabled = true; }
+if (!TAL) { const t = document.querySelector('.tab[data-p="TAL"]'); if (t) t.disabled = true; }
 syncBtn(); mostrar('MASA');
 window.addEventListener('resize', () => requestAnimationFrame(pruneInlineLabels));
 </script>

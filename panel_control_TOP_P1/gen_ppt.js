@@ -661,6 +661,244 @@ if (fs.existsSync(rutaDes)) {
   console.log("No se encontró datos_desaladora.json — la PPT sale solo con MASA.");
 }
 
+// =====================================================================
+// PROYECTO TALABRE — se agrega solo si existe datos_talabre.json
+// (lo genera talabre.py). Las cifras salen íntegras de ese archivo.
+// =====================================================================
+const rutaTal = path.join(AQUI, "datos_talabre.json");
+if (fs.existsSync(rutaTal)) {
+  const Y = JSON.parse(fs.readFileSync(rutaTal, "utf8"));
+  const YS = Y.subsistemas, YC = Y.caminatas, YP = Y.carpetas, YT = Y.dt;
+  const yp1 = YT.porPrioridad.P1 || { total: 0, cerrados: 0, abiertos: 0, atrasados: 0 };
+  const yg = YT.global;
+  const CAPY = `Fuente: TalabreSTATUS_PEC + TalabreCuadro_DT · ` +
+    `${nf(YS.total)} subsistemas · ${nf(yg.total)} DT · Atrasos al ${Y.meta.hoy}`;
+  const c1 = YC["1"], c2 = YC["2"];
+  const areasY = Y.areas;
+  const discOrden = Object.entries(YT.porDisciplina).sort((a, b) => b[1].abiertos - a[1].abiertos);
+  const areaFocoY = Object.entries(YT.porArea).sort((a, b) => b[1].abiertos - a[1].abiertos)[0];
+
+  // ---------------- Portada de proyecto ----------------
+  s = p.addSlide(); bg(s, C.navy);
+  s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
+  s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
+  dot(s, 0.55, 1.35, C.copper, 0.22);
+  s.addText("PROYECTO 03", { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT, fontSize: 13,
+    bold: true, color: C.copperL, charSpacing: 3, margin: 0 });
+  s.addText("Talabre", { x: 0.82, y: 1.72, w: 11.6, h: 1.1, fontFace: FH, fontSize: 46,
+    bold: true, color: C.white, margin: 0 });
+  s.addText(`${Y.meta.descripcion} · ${Y.meta.cliente}`, { x: 0.85, y: 2.9, w: 10.5, h: 0.5,
+    fontFace: FT, fontSize: 16, color: C.ice, margin: 0 });
+  s.addText(`Contrato ${Y.meta.contrato} · ${nf(YS.total)} subsistemas en ${areasY.length} áreas · ` +
+    `${nf(yg.total)} detalles de terminación levantados.`,
+    { x: 0.85, y: 3.45, w: 9.6, h: 0.9, fontFace: FT, fontSize: 13.5, color: C.steel, lineSpacing: 20, margin: 0 });
+
+  const kpy = [
+    [pct(c1.realizada, c1.total), "Caminata 1 realizada"],
+    [pct(c2.realizada, c2.total), "Caminata 2 realizada"],
+    [`${YP.promedio.toLocaleString("es-CL")}%`, "Avance PEC promedio"],
+    [pct(yg.cerrados, yg.total), "Cierre de DT"],
+  ];
+  let kxy = 0.85;
+  kpy.forEach(([v, l]) => {
+    s.addText(v, { x: kxy, y: 5.3, w: 2.9, h: 0.7, fontFace: FH, fontSize: 34, bold: true, color: C.copperL, margin: 0 });
+    s.addText(l, { x: kxy, y: 6.0, w: 2.9, h: 0.55, fontFace: FT, fontSize: 11.5, color: C.ice, margin: 0 });
+    kxy += 3.0;
+  });
+  s.addText(`Atrasos calculados al ${Y.meta.hoy}`, { x: 0.85, y: 6.75, w: 8, h: 0.3, fontFace: FT,
+    fontSize: 11, italic: true, color: C.steel, margin: 0 });
+  footer(s, nSlide++, true, CAPY);
+
+  // ---------------- Resumen ejecutivo ----------------
+  s = p.addSlide(); bg(s, C.paper);
+  kicker(s, "Talabre · Resumen ejecutivo", 0.5, 0.45);
+  s.addText("Estado global de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
+
+  const cardsY = [
+    { p: pct(c1.realizada, c1.total), v: `${nf(c1.realizada)}/${nf(c1.total)}`, t: "Caminata 1 realizada",
+      d: `${nf(c1.programada)} agendadas · ${nf(c1.pendiente)} sin programar`, c: C.blue },
+    { p: pct(c2.realizada, c2.total), v: `${nf(c2.realizada)}/${nf(c2.total)}`, t: "Caminata 2 realizada",
+      d: `${nf(c2.programada)} agendadas · ${nf(c2.pendiente)} sin programar`, c: C.blue },
+    { p: `${YP.promedio.toLocaleString("es-CL")}%`, v: `${nf(YP.sobre95)}/${nf(YP.total)} sobre 95%`,
+      t: "Avance PEC de carpetas", d: `${nf(YP.bajo80)} subsistemas bajo 80% de avance`, c: C.copper },
+    { p: pct(yp1.cerrados, yp1.total), v: `${nf(yp1.cerrados)}/${nf(yp1.total)}`, t: "Cierre de DT P1",
+      d: `${nf(yp1.abiertos)} abiertos · ${nf(yp1.atrasados)} atrasados`, c: C.crit },
+  ];
+  let cxy = 0.5;
+  cardsY.forEach((cd) => {
+    s.addShape(p.ShapeType.roundRect, { x: cxy, y: 1.6, w: 3.0, h: 2.5, rectRadius: 0.08,
+      fill: { color: C.white }, line: { color: "E4E9EF", width: 1 },
+      shadow: { type: "outer", color: "9AA7B5", blur: 7, offset: 2, angle: 90, opacity: 0.28 } });
+    dot(s, cxy + 0.28, 1.88, cd.c, 0.16);
+    s.addText(cd.p, { x: cxy + 0.28, y: 2.12, w: 2.5, h: 0.82, fontFace: FH, fontSize: 38, bold: true, color: cd.c, margin: 0 });
+    s.addText(cd.v, { x: cxy + 0.3, y: 2.95, w: 2.5, h: 0.32, fontFace: FT, fontSize: 13, bold: true, color: C.ink, margin: 0 });
+    s.addText(cd.t, { x: cxy + 0.3, y: 3.27, w: 2.45, h: 0.32, fontFace: FT, fontSize: 12, color: C.ink2, margin: 0 });
+    s.addText(cd.d, { x: cxy + 0.3, y: 3.58, w: 2.45, h: 0.46, fontFace: FT, fontSize: 9.5, color: C.ink2, lineSpacing: 12, margin: 0 });
+    cxy += 3.13;
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x: 0.5, y: 4.32, w: 12.33, h: 2.42, rectRadius: 0.06, fill: { color: C.navy }, line: { type: "none" } });
+  s.addText("LECTURA DEL PERÍODO", { x: 0.85, y: 4.5, w: 6, h: 0.3, fontFace: FT, fontSize: 11, bold: true, color: C.copperL, charSpacing: 2, margin: 0 });
+  const pMenores = ["P2", "P3", "P4"].map((k) => YT.porPrioridad[k]).filter(Boolean);
+  const abMenores = pMenores.reduce((a, v) => a + v.abiertos, 0);
+  const readsY = [
+    [`P1 está prácticamente cerrado; el volumen pendiente está en las prioridades menores.`,
+      `${pct(yp1.cerrados, yp1.total)} de cierre en P1 (${nf(yp1.abiertos)} abiertos), pero ${nf(abMenores)} DT ` +
+      `abiertos entre P2, P3 y P4 sobre un total de ${nf(yg.abiertos)}.`],
+    [`El atraso es más antiguo que el de los otros proyectos.`,
+      `${nf(yg.atrasados)} DT con la fecha de compromiso vencida; mediana de ${nf(YT.antiguedad.mediana)} días ` +
+      `y el más antiguo lleva ${nf(YT.antiguedad.max)}. Los ${nf(yg.sinCompromiso)} abiertos sin fecha de compromiso no se cuentan como atrasados.`],
+    [`Las caminatas 1 están casi completas, pero la 2 va ${pct(c2.realizada, c2.total)}.`,
+      `Caminata 1: ${nf(c1.realizada)}/${nf(c1.total)}. Caminata 2: ${nf(c2.realizada)}/${nf(c2.total)}, ` +
+      `con ${nf(c2.programada)} ya agendadas y ${nf(c2.pendiente)} sin programar.`],
+    [`Las carpetas avanzan bien salvo un grupo acotado.`,
+      `Avance promedio ${YP.promedio.toLocaleString("es-CL")}%: ${nf(YP.sobre95)} subsistemas sobre 95% y solo ` +
+      `${nf(YP.bajo80)} bajo 80%.` + (YP.enRevisionCliente !== null && YP.enRevisionCliente !== undefined
+        ? ` El archivo declara ${nf(YP.enRevisionCliente)} carpetas en revisión del cliente.` : "")],
+  ];
+  let ryy = 4.86;
+  readsY.forEach(([h, d]) => {
+    dot(s, 0.9, ryy + 0.06, C.copper, 0.12);
+    s.addText([{ text: h + "  ", options: { bold: true, color: C.white } },
+               { text: d, options: { color: C.ice } }],
+      { x: 1.15, y: ryy - 0.05, w: 11.4, h: 0.5, fontFace: FT, fontSize: 11.5, lineSpacing: 15, margin: 0, valign: "top" });
+    ryy += 0.46;
+  });
+  footer(s, nSlide++, false, CAPY);
+
+  // ---------------- Caminatas y carpetas ----------------
+  s = p.addSlide(); bg(s, C.paper);
+  kicker(s, "Talabre · Frentes 1 y 2", 0.5, 0.45);
+  s.addText("Caminatas y avance de carpetas", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
+  s.addText(`Caminata 2 realizada en ${nf(c2.realizada)} de ${nf(c2.total)} subsistemas (${pct(c2.realizada, c2.total)}). ` +
+    `Talabre mide la carpeta como % de avance (PEC), no como estado de aprobación.`,
+    { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
+
+  s.addChart(p.ChartType.bar, [
+    { name: "Realizada", labels: areasY, values: areasY.map((a) => Y.caminatasPorArea[a]["2"].realizada) },
+    { name: "Agendada", labels: areasY, values: areasY.map((a) => Y.caminatasPorArea[a]["2"].programada) },
+    { name: "Sin programar", labels: areasY, values: areasY.map((a) => Y.caminatasPorArea[a]["2"].pendiente) },
+  ], {
+    x: 0.5, y: 2.05, w: 6.4, h: 4.5, barDir: "bar", barGrouping: "stacked",
+    chartColors: [C.goodD, C.blue, C.track],
+    showTitle: true, title: "Caminata 2 por área", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
+    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 9.5, dataLabelColor: C.white, dataLabelFontBold: true,
+    showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 10.5, legendColor: C.ink2,
+    catAxisLabelFontFace: FT, catAxisLabelFontSize: 9.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
+    valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
+    barGapWidthPct: 40, chartArea: { fill: { color: C.white } },
+  });
+
+  s.addChart(p.ChartType.bar, [
+    { name: "95% o más", labels: areasY, values: areasY.map((a) => YP.porArea[a].sobre95) },
+    { name: "80% a 95%", labels: areasY, values: areasY.map((a) => YP.porArea[a].sobre80 - YP.porArea[a].sobre95) },
+    { name: "Bajo 80%", labels: areasY, values: areasY.map((a) => YP.porArea[a].bajo80) },
+  ], {
+    x: 7.05, y: 2.05, w: 5.78, h: 4.5, barDir: "bar", barGrouping: "stacked",
+    chartColors: [C.good, C.blue, C.crit],
+    showTitle: true, title: "Avance PEC de carpetas por área", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
+    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 9.5, dataLabelColor: C.white, dataLabelFontBold: true,
+    showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 10.5, legendColor: C.ink2,
+    catAxisLabelFontFace: FT, catAxisLabelFontSize: 9.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
+    valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
+    barGapWidthPct: 40, chartArea: { fill: { color: C.white } },
+  });
+  footer(s, nSlide++, false, CAPY);
+
+  // ---------------- Detalles de terminación ----------------
+  s = p.addSlide(); bg(s, C.paper);
+  kicker(s, "Talabre · Frente 3", 0.5, 0.45);
+  s.addText("Detalles de terminación", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
+  s.addText(`${nf(yg.total)} DT levantados; ${pct(yg.cerrados, yg.total)} cerrados. ` +
+    `Atrasado = DT abierto cuya fecha de compromiso de cierre ya venció al ${Y.meta.hoy}.`,
+    { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
+
+  const lblDY = discOrden.map(([d]) => (Y.discCorta && Y.discCorta[d]) || d);
+  s.addChart(p.ChartType.bar, [
+    { name: "Atrasados", labels: lblDY, values: discOrden.map(([, v]) => v.atrasados) },
+    { name: "En plazo o sin compromiso", labels: lblDY, values: discOrden.map(([, v]) => v.enPlazo) },
+  ], {
+    x: 0.5, y: 2.05, w: 7.7, h: 4.5, barDir: "bar", barGrouping: "stacked",
+    chartColors: [C.crit, C.blue],
+    showTitle: true, title: "DT abiertos por disciplina", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
+    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 10, dataLabelColor: C.white, dataLabelFontBold: true,
+    showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
+    catAxisLabelFontFace: FT, catAxisLabelFontSize: 11.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
+    valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
+    barGapWidthPct: 45, chartArea: { fill: { color: C.white } },
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x: 8.4, y: 2.05, w: 4.43, h: 4.5, rectRadius: 0.06, fill: { color: C.navy }, line: { type: "none" } });
+  s.addText("CIERRE POR PRIORIDAD", { x: 8.68, y: 2.28, w: 4, h: 0.3, fontFace: FT, fontSize: 11, bold: true, color: C.copperL, charSpacing: 1.2, margin: 0 });
+  let pyy = 2.72;
+  YT.prioridades.forEach((k) => {
+    const v = YT.porPrioridad[k];
+    if (!v || !v.total) return;
+    const w = 3.9, pctv = pctN(v.cerrados, v.total);
+    s.addText(k, { x: 8.68, y: pyy, w: 1.0, h: 0.26, fontFace: FT, fontSize: 11.5, bold: true, color: C.white, margin: 0 });
+    s.addText(`${nf(v.cerrados)}/${nf(v.total)}`, { x: 9.6, y: pyy, w: 1.6, h: 0.26, fontFace: FT,
+      fontSize: 10.5, color: C.ice, align: "right", margin: 0 });
+    s.addText(`${pctv.toLocaleString("es-CL")}%`, { x: 11.25, y: pyy, w: 1.35, h: 0.26, fontFace: FT,
+      fontSize: 11, bold: true, color: C.white, align: "right", margin: 0 });
+    s.addShape(p.ShapeType.rect, { x: 8.68, y: pyy + 0.3, w: w, h: 0.13, fill: { color: C.navy2 }, line: { type: "none" } });
+    if (pctv > 0) s.addShape(p.ShapeType.rect, { x: 8.68, y: pyy + 0.3, w: Math.max(0.03, w * pctv / 100), h: 0.13,
+      fill: { color: pctv >= 90 ? C.good : pctv >= 50 ? C.copperL : C.crit }, line: { type: "none" } });
+    pyy += 0.62;
+  });
+  s.addShape(p.ShapeType.line, { x: 8.68, y: pyy + 0.06, w: 3.9, h: 0, line: { color: C.navy2, width: 1 } });
+  s.addText([{ text: "Antigüedad del atraso\n", options: { bold: true, color: C.copperL, fontSize: 11.5 } },
+             { text: YT.antiguedad.max
+                 ? `Mediana de ${nf(YT.antiguedad.mediana)} días vencidos; el más antiguo lleva ${nf(YT.antiguedad.max)}. ` +
+                   Object.entries(YT.antiguedad.tramos).filter(([, v]) => v).map(([k, v]) => `${nf(v)} entre ${k}`).join(", ") + "."
+                 : "Sin DT atrasados al corte.",
+               options: { color: C.ice, fontSize: 11 } }],
+    { x: 8.68, y: pyy + 0.2, w: 3.95, h: 1.2, fontFace: FT, lineSpacing: 14, margin: 0, valign: "top" });
+  footer(s, nSlide++, true, CAPY);
+
+  // ---------------- Foco de gestión ----------------
+  s = p.addSlide(); bg(s, C.navy);
+  s.addShape(p.ShapeType.ellipse, { x: 10.8, y: -1.8, w: 4.6, h: 4.6, fill: { color: C.navy2 }, line: { type: "none" } });
+  kicker(s, "Talabre · Foco de gestión", 0.5, 0.5, C.copperL);
+  s.addText("Dónde poner el esfuerzo esta semana", { x: 0.5, y: 0.78, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.white, margin: 0 });
+
+  const p2 = YT.porPrioridad.P2 || { total: 0, cerrados: 0, abiertos: 0, atrasados: 0 };
+  const p4 = YT.porPrioridad.P4 || { total: 0, cerrados: 0, abiertos: 0 };
+  const camCrit = areasY.map((a) => [a, Y.caminatasPorArea[a]["2"]])
+    .filter(([, c]) => c.total && c.realizada / c.total < 0.6)
+    .sort((a, b) => (a[1].realizada / a[1].total) - (b[1].realizada / b[1].total));
+  const focusY = [
+    { n: "01", t: `Recuperar los ${nf(yg.atrasados)} DT atrasados`, c: C.crit,
+      d: `${nf(p2.atrasados)} son P2 y ${nf(yp1.atrasados)} son P1. La mediana de atraso es de ` +
+         `${nf(YT.antiguedad.mediana)} días y ${nf((YT.antiguedad.tramos["91-180 días"] || 0) + (YT.antiguedad.tramos[">180 días"] || 0))} ` +
+         `superan los 90 días.` },
+    { n: "02", t: camCrit.length ? `Ejecutar la caminata 2 en ${camCrit.slice(0, 2).map(([a]) => a).join(" y ")}` : "Completar la caminata 2", c: C.copper,
+      d: camCrit.length
+         ? camCrit.slice(0, 2).map(([a, c]) => `${a}: ${nf(c.realizada)}/${nf(c.total)} (${pct(c.realizada, c.total)})`).join(" · ") +
+           `. A nivel proyecto la caminata 2 va ${pct(c2.realizada, c2.total)} con ${nf(c2.programada)} ya agendadas.`
+         : `Van ${nf(c2.realizada)}/${nf(c2.total)} (${pct(c2.realizada, c2.total)}), con ${nf(c2.programada)} agendadas.` },
+    { n: "03", t: `Destrabar P4: ${nf(p4.abiertos)} abiertos y ninguno cerrado`, c: C.warn,
+      d: `De ${nf(p4.total)} DT levantados en P4 no se ha cerrado ninguno (${pct(p4.cerrados, p4.total)}). ` +
+         `P3 tampoco despega: ${pct((YT.porPrioridad.P3 || {}).cerrados || 0, (YT.porPrioridad.P3 || {}).total || 1)} de cierre.` },
+    { n: "04", t: areaFocoY ? `Atender ${areaFocoY[0]}` : "Atender el área crítica", c: C.good,
+      d: areaFocoY ? `Concentra ${nf(areaFocoY[1].abiertos)} de los ${nf(yg.abiertos)} DT abiertos ` +
+         `(${pct(areaFocoY[1].abiertos, yg.abiertos)}), con ${nf(areaFocoY[1].atrasados)} atrasados. ` +
+         `Además hay ${nf(YP.bajo80)} carpetas bajo 80% de avance que conviene cerrar en paralelo.` : "" },
+  ];
+  focusY.forEach((f, i) => {
+    const px = 0.5 + (i % 2) * (6.0 + 0.33);
+    const py = 1.75 + Math.floor(i / 2) * 2.35;
+    s.addShape(p.ShapeType.roundRect, { x: px, y: py, w: 6.0, h: 2.1, rectRadius: 0.07, fill: { color: C.navy2 }, line: { type: "none" } });
+    s.addText(f.n, { x: px + 0.3, y: py + 0.22, w: 1.1, h: 0.7, fontFace: FH, fontSize: 34, bold: true, color: f.c, margin: 0 });
+    s.addText(f.t, { x: px + 1.35, y: py + 0.2, w: 6.0 - 1.6, h: 0.66, fontFace: FT, fontSize: 13.5, bold: true, color: C.white, margin: 0, valign: "middle" });
+    s.addText(f.d, { x: px + 1.35, y: py + 0.88, w: 6.0 - 1.65, h: 1.1, fontFace: FT, fontSize: 11, color: C.ice, margin: 0, lineSpacing: 14, valign: "top" });
+  });
+  footer(s, nSlide++, true, CAPY);
+
+  console.log(`Talabre: 5 láminas agregadas (atrasos al ${Y.meta.hoy}).`);
+} else {
+  console.log("No se encontró datos_talabre.json — la PPT sale sin Talabre.");
+}
+
 const salida = path.join(AQUI, "Panel_Control_TOP_P1.pptx");
 p.writeFile({ fileName: salida })
   .then((f) => console.log("PPT generada:", f))
