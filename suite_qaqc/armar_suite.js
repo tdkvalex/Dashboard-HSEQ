@@ -232,23 +232,41 @@ const CENTINELA = "@@CIERRE_SCRIPT_a7f3@@";
 // (lo pinta la suite en una banda común, para que los tres queden con el mismo
 // tamaño, posición y encuadre). El resto de la cabecera —botones, corte,
 // pestañas de proyecto— se conserva intacto.
-const OCULTAR_LOGO =
-  "<style>/* suite: logo y título los pinta el shell */" +
+// Normalización de la cabecera de cada módulo:
+//   · se oculta su logo (el corporativo va en la franja superior de la suite);
+//   · su título se centra en TODA la franja y se lleva a la misma tipografía en
+//     los tres, para que no cambie de tamaño ni de lugar al saltar de módulo;
+//   · el corte y los botones quedan a la derecha, EN LA MISMA LÍNEA del título.
+// Así la cabecera del módulo ocupa una sola banda en vez de dos.
+//
+// El título va en posición absoluta para que quede centrado respecto del ancho
+// completo y no del hueco que dejan los botones, que miden distinto en cada
+// módulo. Lleva pointer-events:none para no tapar los botones que hay debajo.
+const NORMALIZAR = "<style>/* suite: cabecera de módulo en una sola línea */" +
   ".header-logo,#headerLogo,.brandbox,#brandLogo{display:none!important}" +
-  ".hd-center,.hd-title,.hd-sub{display:none!important}" +
-  // Al ocultar logo y título quedan menos elementos en la cabecera, y con
-  // justify-content:space-between el grupo que sobra se va a la izquierda.
-  // Se lo empuja a la derecha para que los tres módulos se vean igual.
-  ".headmeta,.hd-r{margin-left:auto!important}" +
-  ".hd-l{padding:0!important;min-width:0!important}" +
-  "header.top,.header{padding-top:6px!important;padding-bottom:6px!important}<\/style>";
+  // Altura fija, no min-height: los botones de cada módulo miden distinto y
+  // dejaban la franja 2 px desalineada entre uno y otro.
+  "header.top,.header{position:relative!important;height:48px!important;" +
+    "min-height:48px!important;box-sizing:border-box!important;align-items:center!important;" +
+    "padding:0 clamp(12px,2vw,22px)!important;gap:0!important;flex-wrap:nowrap!important}" +
+  ".hd-center{position:absolute!important;left:0!important;right:0!important;" +
+    "top:50%!important;transform:translateY(-50%)!important;" +
+    "text-align:center!important;pointer-events:none!important;margin:0!important;" +
+    "padding:0!important;width:auto!important;flex:none!important;z-index:1}" +
+  ".hd-center .hd-title,.hd-center h1{font-family:'Rajdhani',sans-serif!important;" +
+    "font-size:19px!important;font-weight:700!important;letter-spacing:1.3px!important;" +
+    "line-height:1.15!important;text-transform:uppercase!important;margin:0!important}" +
+  ".hd-center .hd-sub,.hd-center .sub{font-size:10.5px!important;line-height:1.3!important;" +
+    "margin:2px 0 0!important}" +
+  ".headmeta,.hd-r{margin-left:auto!important;position:relative!important;z-index:2}" +
+  ".hd-l{padding:0!important;min-width:0!important;flex:none!important}<\/style>";
 
 function empaquetar(html, archivo) {
   if (html.includes(CENTINELA))
     throw new Error(`${archivo} contiene el centinela ${CENTINELA}; cambiarlo en armar_suite.js`);
   // Se inyecta al final del <head> para que gane a los estilos del módulo.
   const i = html.search(/<\/head>/i);
-  const con = i === -1 ? OCULTAR_LOGO + html : html.slice(0, i) + OCULTAR_LOGO + html.slice(i);
+  const con = i === -1 ? NORMALIZAR + html : html.slice(0, i) + NORMALIZAR + html.slice(i);
   return con.replace(/<\/script/gi, CENTINELA);
 }
 

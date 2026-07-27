@@ -57,11 +57,23 @@ Fue la decisión clave: permite integrarlos **sin reescribir ninguno**.
 **Los módulos se montan al abrir su pestaña**, no al cargar la página. Por eso la portada abre
 en ~0,4 s aunque el archivo pese 5,6 MB.
 
-**Una sola franja superior** (41 px) con el logo, los módulos y el corte. Al empaquetar cada
-módulo se le inyecta un `<style>` que **oculta su propio logo y su propio título**: el logo
-corporativo aparece una sola vez, y el título lo pinta la suite en una banda común para que
-quede con el mismo tamaño, posición y encuadre al pasar de un módulo a otro. Los botones, el
-corte y las pestañas de proyecto de cada dashboard quedan intactos.
+**Dos franjas y nada más.** Arriba, la de la suite (41 px) con el logo, los módulos y el
+corte. Debajo, la del módulo (48 px) con su título centrado y, en la misma línea, su corte y
+sus botones a la derecha.
+
+Al empaquetar, cada módulo recibe un `<style>` que normaliza su cabecera:
+
+- **oculta su logo** — el corporativo va una sola vez, en la franja de la suite;
+- **centra su título respecto del ancho completo** (posición absoluta, no dentro del hueco que
+  dejan los botones, que miden distinto en cada módulo) y lo lleva a la misma tipografía en
+  todos, para que no salte de tamaño ni de lugar al cambiar de módulo;
+- **ancla el corte y los botones a la derecha** con `margin-left:auto`, que funciona sin
+  importar cuántos elementos queden visibles;
+- **fija la altura en 48 px** — con `min-height` la franja quedaba 2 px desalineada entre un
+  módulo y otro, porque sus botones miden distinto.
+
+El título lleva `pointer-events:none` para no tapar los botones que quedan debajo. Las
+pestañas de proyecto de cada dashboard quedan intactas.
 
 **La portada no lee los módulos en vivo**: `armar_suite.js` extrae los KPI en el momento de
 armar y los deja en un bloque `KPIS`. Así la portada no depende de que los iframes estén
@@ -143,6 +155,9 @@ Dos detalles que hay que respetar, o las cifras se van:
   como si fuera el universo fue el error original.
 - En un nodo con hijos **no** se suman sus propios estados, solo los de los hijos (así lo hace
   el `sumCh()` del dashboard); el `rv` del padre sí se acumula.
+
+**Encuadre de los módulos:** título a y=45, alto 22 px, centrado en el mismo eje, cabecera de
+48 px y controles terminando en x=1478 — idénticos en los dos módulos.
 
 **Rendimiento:** portada 0,37 s · Protocolos 0,70 s · Cierre QAQC 0,60 s · volver a un módulo
 ya montado 0,19 s · 18 MB de memoria JS.

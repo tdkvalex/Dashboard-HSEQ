@@ -80,18 +80,6 @@
   .btn:hover { background: linear-gradient(135deg, rgba(40,80,160,.9), rgba(248,189,25,.2));
     border-color: rgba(248,189,25,.7); }
 
-  /* ── banda de título del módulo ──
-     La pinta la suite, no el módulo: así el título queda al mismo tamaño,
-     posición y encuadre al pasar de un módulo a otro. El título propio de
-     cada dashboard se oculta al empaquetarlo. */
-  #tituloMod { display:none; flex-shrink:0; text-align:center; padding:13px 20px 12px;
-    background: linear-gradient(180deg, rgba(30,61,123,.14), transparent);
-    border-bottom:1px solid var(--bdr); }
-  #tituloMod.on { display:block; }
-  #tituloMod .t { font-family:'Rajdhani',sans-serif; font-size:21px; font-weight:700;
-    letter-spacing:1.4px; text-transform:uppercase; line-height:1.1; }
-  #tituloMod .s { font-size:11px; color:var(--t2); margin-top:3px; }
-
   /* ── contenedor ── */
   main { flex:1; min-height:0; display:flex; flex-direction:column; }
   .vista { display:none; flex:1; min-height:0; }
@@ -210,8 +198,6 @@
   </span>
 </header>
 
-<div id="tituloMod"><div class="t"></div><div class="s"></div></div>
-
 <main>
   <div class="vista on" id="vHome"><div class="wrap">
     <div class="mods" id="mods"></div>
@@ -310,22 +296,10 @@ function montar(clave, contenedor) {
 
 /* ---------- navegación ---------- */
 const VISTAS = { home:'vHome', protocolos:'vProtocolos', cierre:'vCierre', nc:'vNc' };
-// Título de cada módulo, centrado y con el mismo encuadre en los tres.
-const TITULOS = {
-  protocolos: ['Control de Protocolos', 'Registros constructivos · Besalco Montajes'],
-  cierre:     ['Control de Cierre QAQC', 'Carpetas · caminatas · detalles de terminación'],
-  nc:         ['Control de No Conformidades', 'Hallazgos y su corrección'],
-};
 function ver(v) {
   for (const [k, id] of Object.entries(VISTAS)) $(id).classList.toggle('on', k === v);
   document.querySelectorAll('.mtab').forEach(b =>
     b.setAttribute('aria-selected', b.dataset.v === v ? 'true' : 'false'));
-  const t = TITULOS[v];
-  $('tituloMod').classList.toggle('on', Boolean(t));
-  if (t) {
-    $('tituloMod').querySelector('.t').textContent = t[0];
-    $('tituloMod').querySelector('.s').textContent = t[1];
-  }
   if (v === 'protocolos') montar('protocolos', $('vProtocolos'));
   if (v === 'cierre') montar('cierre', $('vCierre'));
 }
