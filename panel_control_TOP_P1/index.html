@@ -158,6 +158,21 @@
     padding: 8px 11px; font-size: 12px; max-width: 320px; display: none; }
   #tip .t1 { font-weight: 600; margin-bottom: 3px; }
   #tip .t2 { color: var(--ink-2); }
+
+  /* ---- selector de proyecto ---- */
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 18px;
+          border-bottom: 1px solid var(--grid); padding-bottom: 0; }
+  .tab { appearance: none; border: 1px solid var(--grid); border-bottom: none;
+         background: var(--track); color: var(--ink-2);
+         font: 600 13.5px/1 inherit; letter-spacing: .01em;
+         padding: 10px 18px; border-radius: 8px 8px 0 0; cursor: pointer;
+         position: relative; top: 1px; transition: background .15s, color .15s; }
+  .tab:hover { color: var(--ink-1); }
+  .tab[aria-selected="true"] { background: var(--surface-1); color: var(--ink-1);
+         border-color: var(--grid); box-shadow: inset 0 3px 0 var(--blue); }
+  .tab .tcli { display: block; font-weight: 400; font-size: 11px;
+               color: var(--ink-muted); margin-top: 3px; letter-spacing: 0; }
+  .proyecto[hidden] { display: none; }
 </style>
 </head>
 <body>
@@ -169,7 +184,7 @@
            alt="Besalco Montajes — 80 años"
            onerror="this.closest('.brandbox').style.display='none'">
     </span>
-    <h1>Panel de Control — Carpetas TOP · Caminatas · Detalles de Terminación P1</h1>
+    <h1>Panel de Control — Carpetas · Caminatas · Detalles de Terminación P1</h1>
     <div class="sub" id="subtitulo"></div>
     <div class="headmeta">
       <span class="corte">Corte: <b id="corteTxt"></b></span>
@@ -177,6 +192,14 @@
     </div>
   </header>
 
+  <nav class="tabs" id="tabs" role="tablist">
+    <button class="tab" type="button" role="tab" data-p="MASA" aria-selected="true">
+      MASA<span class="tcli">Planta Concentradora</span></button>
+    <button class="tab" type="button" role="tab" data-p="DES" aria-selected="false">
+      Desaladora<span class="tcli">Minera Los Pelambres</span></button>
+  </nav>
+
+<div class="proyecto" id="panelMASA">
   <div class="cards" id="kpis"></div>
 
   <section class="block">
@@ -233,6 +256,81 @@
   </details>
 
   <p class="foot" id="notas"></p>
+</div><!-- /panelMASA -->
+
+<div class="proyecto" id="panelDES" hidden>
+  <div class="cards" id="dKpis"></div>
+
+  <section class="block">
+    <h2>Semáforo por zona</h2>
+    <p class="h2sub">Estado ejecutivo de cada frente según cierre de punch P1 y atrasos (criterios en notas al pie)</p>
+    <div style="overflow-x:auto"><table class="tbl" id="dSemaforo"></table></div>
+  </section>
+
+  <div class="grid2">
+    <section class="block">
+      <h2>Caminatas por tipo de subsistema</h2>
+      <p class="h2sub" id="dSubCam"></p>
+      <div class="rows" id="dChCam"></div>
+      <div class="legend" id="dLgCam"></div>
+    </section>
+    <section class="block">
+      <h2>Carpetas — certificado de entrega</h2>
+      <p class="h2sub" id="dSubCarp"></p>
+      <div class="rows" id="dChCarp"></div>
+      <div class="legend" id="dLgCarp"></div>
+    </section>
+    <section class="block">
+      <h2>Punch P1 abiertos por disciplina</h2>
+      <p class="h2sub" id="dSubDisc"></p>
+      <div class="rows" id="dChDisc"></div>
+      <div class="legend" id="dLgDisc"></div>
+    </section>
+    <section class="block">
+      <h2>Concentración de P1 abiertos — disciplina × caminata</h2>
+      <p class="h2sub" id="dSubHm"></p>
+      <div class="hm" id="dChHm"></div>
+      <div class="hm-note" id="dHmNote"></div>
+    </section>
+  </div>
+
+  <section class="block">
+    <h2>Avance de cierre por categoría</h2>
+    <p class="h2sub" id="dSubCat"></p>
+    <div class="rows" id="dChCat"></div>
+    <div class="legend" id="dLgCat"></div>
+  </section>
+
+  <section class="block">
+    <h2>Antigüedad de los ítems atrasados</h2>
+    <p class="h2sub" id="dSubAnt"></p>
+    <div class="rows" id="dChAnt"></div>
+    <div class="legend" id="dLgAnt"></div>
+  </section>
+
+  <details>
+    <summary id="dSumSub"></summary>
+    <div class="inner"><table class="tbl" id="dTbSub"></table></div>
+  </details>
+  <details>
+    <summary id="dSumCam"></summary>
+    <div class="inner"><table class="tbl" id="dTbCam"></table></div>
+  </details>
+  <details>
+    <summary id="dSumCarp"></summary>
+    <div class="inner"><table class="tbl" id="dTbCarp"></table></div>
+  </details>
+  <details>
+    <summary>Detalle — Punch por categoría y disciplina</summary>
+    <div class="inner"><table class="tbl" id="dTbPunch"></table></div>
+  </details>
+  <details>
+    <summary id="dSumCtl"></summary>
+    <div class="inner"><table class="tbl" id="dTbCtl"></table></div>
+  </details>
+
+  <p class="foot" id="dNotas"></p>
+</div><!-- /panelDES -->
 </div>
 <div id="tip"></div>
 </div>
@@ -899,6 +997,1458 @@ const D = {
 </script>
 <!-- === DATOS:FIN === -->
 
+<!-- === DESALADORA:INICIO === (bloque generado por desaladora.py — no editar a mano) -->
+<script>
+const DES = {
+ "meta": {
+  "id": "DESALADORA",
+  "nombre": "Desaladora",
+  "descripcion": "PV3 Montaje Electromecánico — Ampliación Desaladora",
+  "cliente": "Minera Los Pelambres (AMSA)",
+  "contrato": "VPP-1001-03-CC-088",
+  "corte": "2026-07-27",
+  "corteTexto": "27-07-2026",
+  "hoy": "27-07-2026",
+  "generado": "2026-07-27 16:14"
+ },
+ "subsistemas": {
+  "total": 97,
+  "porTipo": {
+   "Operable": 80,
+   "Componente": 2,
+   "Facility": 15
+  },
+  "porZona": {
+   "Desaladora": 75,
+   "EB-2": 22
+  },
+  "zonaNombres": {
+   "Desaladora": "Planta Desaladora",
+   "EB-2": "Estación de Bombeo 2"
+  }
+ },
+ "caminatas": {
+  "1": {
+   "aplica": 97,
+   "realizada": 13,
+   "pendiente": 84,
+   "noAplica": 0,
+   "pct": 13.4
+  },
+  "2": {
+   "aplica": 82,
+   "realizada": 43,
+   "pendiente": 39,
+   "noAplica": 15,
+   "pct": 52.4
+  },
+  "3": {
+   "aplica": 82,
+   "realizada": 1,
+   "pendiente": 81,
+   "noAplica": 15,
+   "pct": 1.2
+  }
+ },
+ "caminatasPorTipo": {
+  "Operable": {
+   "subs": 80,
+   "1": {
+    "aplica": 80,
+    "realizada": 1,
+    "pendiente": 79,
+    "pct": 1.3
+   },
+   "2": {
+    "aplica": 80,
+    "realizada": 41,
+    "pendiente": 39,
+    "pct": 51.3
+   },
+   "3": {
+    "aplica": 80,
+    "realizada": 1,
+    "pendiente": 79,
+    "pct": 1.3
+   },
+   "vigente": "2"
+  },
+  "Componente": {
+   "subs": 2,
+   "1": {
+    "aplica": 2,
+    "realizada": 2,
+    "pendiente": 0,
+    "pct": 100.0
+   },
+   "2": {
+    "aplica": 2,
+    "realizada": 2,
+    "pendiente": 0,
+    "pct": 100.0
+   },
+   "3": {
+    "aplica": 2,
+    "realizada": 0,
+    "pendiente": 2,
+    "pct": 0.0
+   },
+   "vigente": "2"
+  },
+  "Facility": {
+   "subs": 15,
+   "1": {
+    "aplica": 15,
+    "realizada": 10,
+    "pendiente": 5,
+    "pct": 66.7
+   },
+   "2": {
+    "aplica": 0,
+    "realizada": 0,
+    "pendiente": 0,
+    "pct": null
+   },
+   "3": {
+    "aplica": 0,
+    "realizada": 0,
+    "pendiente": 0,
+    "pct": null
+   },
+   "vigente": "1"
+  }
+ },
+ "caminatasPorZona": {
+  "Desaladora": {
+   "subs": 75,
+   "1": {
+    "aplica": 75,
+    "realizada": 8,
+    "pendiente": 67
+   },
+   "2": {
+    "aplica": 65,
+    "realizada": 34,
+    "pendiente": 31
+   },
+   "3": {
+    "aplica": 65,
+    "realizada": 0,
+    "pendiente": 65
+   }
+  },
+  "EB-2": {
+   "subs": 22,
+   "1": {
+    "aplica": 22,
+    "realizada": 5,
+    "pendiente": 17
+   },
+   "2": {
+    "aplica": 17,
+    "realizada": 9,
+    "pendiente": 8
+   },
+   "3": {
+    "aplica": 17,
+    "realizada": 1,
+    "pendiente": 16
+   }
+  }
+ },
+ "caminatasPendientes": [
+  {
+   "id": "0570-PW-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Distribución de Agua Potable",
+   "caminata": 2
+  },
+  {
+   "id": "0570-PFW-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Agua Contra Incendio",
+   "caminata": 2
+  },
+  {
+   "id": "0570-XP-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sumidero de drenajes",
+   "caminata": 2
+  },
+  {
+   "id": "0570-XH-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Drenajes",
+   "caminata": 2
+  },
+  {
+   "id": "0582-WO-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Captación de Agua de Mar - Sentina",
+   "caminata": 2
+  },
+  {
+   "id": "0582-WO-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Captación de Agua de Mar - Descarga de Salmuera",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 5, 0583-DF-7510",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 6, 0583-DF-7610",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-203",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 7, 0583-DF-7710",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-204",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 8, 0583-DF-7810",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-208",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "UF Tren 11, 0583-UF-7011",
+   "caminata": 2
+  },
+  {
+   "id": "0583-PA-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sopladores de FAD",
+   "caminata": 2
+  },
+  {
+   "id": "0584-WYT-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "SWRO Tren 3",
+   "caminata": 2
+  },
+  {
+   "id": "0584-WYT-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "SWRO Tren 4",
+   "caminata": 2
+  },
+  {
+   "id": "0584-WYT-203",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Paquete CIP UF y SWRO",
+   "caminata": 2
+  },
+  {
+   "id": "0584-PA-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Distribución de Aire de Instrumentación",
+   "caminata": 2
+  },
+  {
+   "id": "0585-WS-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Bombas de Agua de Lavado y Servicios",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Antiincrustante",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Cloruro Férrico",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-203",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Hipoclorito de Sodio",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-205",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Soda Cáustica",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-207",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Metabisulfito de Sodio",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-208",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Acido Sulfúrico",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-209",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Polímero",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-210",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Inhibidor de Corrosión",
+   "caminata": 2
+  },
+  {
+   "id": "0587-EWS-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Fibra Optica",
+   "caminata": 2
+  },
+  {
+   "id": "0587-EEC-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de CCTV Desalinizadora",
+   "caminata": 2
+  },
+  {
+   "id": "0587-JD-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Control de Proceso",
+   "caminata": 2
+  },
+  {
+   "id": "0587-JD-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema SCADA",
+   "caminata": 2
+  },
+  {
+   "id": "0587-EFD-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Voz y Data",
+   "caminata": 2
+  },
+  {
+   "id": "4511-WW-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Estación de Impulsión de Agua Desalinizada (EB-1)",
+   "caminata": 2
+  },
+  {
+   "id": "4515-WW-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Estación de Impulsión de Agua Desalinizada (EB-2)",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EVC-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Compensación Reactiva 4515-HF-6001",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EWS-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Fibra Optica",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EEC-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de CCTV / EB2",
+   "caminata": 2
+  },
+  {
+   "id": "4515-JD-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Control de Proceso",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EFD-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Voz y Data",
+   "caminata": 2
+  },
+  {
+   "id": "8280-ESC-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Distribución 33kV",
+   "caminata": 2
+  },
+  {
+   "id": "8280-JD-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema SCADA",
+   "caminata": 2
+  },
+  {
+   "id": "0570-NZ-201",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Utilidades Generales",
+   "caminata": 1
+  },
+  {
+   "id": "0580-NZ-203",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Sistema de Alumbrado Planta Desaladora",
+   "caminata": 1
+  },
+  {
+   "id": "0584-NZ-201",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Planta Desalinizadora",
+   "caminata": 1
+  },
+  {
+   "id": "0586-NZ-201",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Area Reactivos",
+   "caminata": 1
+  },
+  {
+   "id": "4515-NZ-203",
+   "tipo": "Facility",
+   "zona": "EB-2",
+   "desc": "Sistema de Alumbrado - Estación de Bombeo y Sub-Estación Electrica EB-2",
+   "caminata": 1
+  }
+ ],
+ "carpetas": {
+  "total": 97,
+  "estados": {
+   "Aprobada": 22,
+   "En revisión": 8,
+   "Rechazada": 9,
+   "En preparación": 14,
+   "Sin entregar": 44
+  },
+  "entregadas": 39,
+  "aprobadas": 22,
+  "rechazadas": 9,
+  "enRevision": 8,
+  "enPreparacion": 14,
+  "sinEntregar": 44,
+  "tarjetaVerde": 27,
+  "porZona": {
+   "Desaladora": {
+    "Aprobada": 17,
+    "En revisión": 4,
+    "Rechazada": 8,
+    "En preparación": 11,
+    "Sin entregar": 35
+   },
+   "EB-2": {
+    "Aprobada": 5,
+    "En revisión": 4,
+    "Rechazada": 1,
+    "En preparación": 3,
+    "Sin entregar": 9
+   }
+  },
+  "detalle": [
+   {
+    "id": "0580-NZ-202",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0582-PA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-NT-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-NTP-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-WR-206",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-WR-218",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-XP-202",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0584-ECMH-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0584-HA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0585-WYT-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-ESA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-ESL-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-ESL-201 Comp 1",
+    "zona": "Desaladora",
+    "tipo": "Componente",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4510-NZ-201",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4511-ECMH-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4511-ESA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4511-ESC-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4515-ECMH-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4515-ESL-201-Comp 1",
+    "zona": "EB-2",
+    "tipo": "Componente",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4515-NZ-202",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "8280-NZ-201",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-HA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0583-NTT-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0583-WR-205",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0585-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "En revisión"
+   },
+   {
+    "id": "4510-DRP-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "4515-ESA-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "8280-ESA-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "8280-ESA-202",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0582-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-209",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-210",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-212",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-213",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-XP-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "4511-JD-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "4511-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "4515-ESL-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-207",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-211",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-214",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-215",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-216",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-217",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-219",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-220",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0587-EEA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0587-EVC-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "4515-EEA-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "4515-JQ-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "4515-NZ-201",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "En preparación"
+   }
+  ]
+ },
+ "punch": {
+  "global": {
+   "total": 1386,
+   "cerrados": 960,
+   "abiertos": 426,
+   "atrasados": 332,
+   "enPlazo": 65,
+   "sinFecha": 29
+  },
+  "porCategoria": {
+   "P0": {
+    "total": 20,
+    "cerrados": 20,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "P1": {
+    "total": 829,
+    "cerrados": 592,
+    "abiertos": 237,
+    "atrasados": 178,
+    "enPlazo": 50,
+    "sinFecha": 9
+   },
+   "P2": {
+    "total": 492,
+    "cerrados": 329,
+    "abiertos": 163,
+    "atrasados": 134,
+    "enPlazo": 15,
+    "sinFecha": 14
+   },
+   "P3": {
+    "total": 44,
+    "cerrados": 18,
+    "abiertos": 26,
+    "atrasados": 20,
+    "enPlazo": 0,
+    "sinFecha": 6
+   },
+   "Sin categoría": {
+    "total": 1,
+    "cerrados": 1,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "porDisciplina": {
+   "Eléctrica": {
+    "total": 955,
+    "cerrados": 812,
+    "abiertos": 143,
+    "atrasados": 109,
+    "enPlazo": 25,
+    "sinFecha": 9
+   },
+   "Piping": {
+    "total": 222,
+    "cerrados": 86,
+    "abiertos": 136,
+    "atrasados": 106,
+    "enPlazo": 30,
+    "sinFecha": 0
+   },
+   "Obras Civiles": {
+    "total": 138,
+    "cerrados": 40,
+    "abiertos": 98,
+    "atrasados": 76,
+    "enPlazo": 4,
+    "sinFecha": 18
+   },
+   "Mecánica": {
+    "total": 36,
+    "cerrados": 13,
+    "abiertos": 23,
+    "atrasados": 20,
+    "enPlazo": 3,
+    "sinFecha": 0
+   },
+   "Estructura": {
+    "total": 21,
+    "cerrados": 1,
+    "abiertos": 20,
+    "atrasados": 15,
+    "enPlazo": 3,
+    "sinFecha": 2
+   },
+   "Instrumentación y Control": {
+    "total": 14,
+    "cerrados": 8,
+    "abiertos": 6,
+    "atrasados": 6,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "p1PorDisciplina": {
+   "Eléctrica": {
+    "total": 587,
+    "cerrados": 506,
+    "abiertos": 81,
+    "atrasados": 58,
+    "enPlazo": 19,
+    "sinFecha": 4
+   },
+   "Piping": {
+    "total": 153,
+    "cerrados": 56,
+    "abiertos": 97,
+    "atrasados": 72,
+    "enPlazo": 25,
+    "sinFecha": 0
+   },
+   "Obras Civiles": {
+    "total": 51,
+    "cerrados": 17,
+    "abiertos": 34,
+    "atrasados": 29,
+    "enPlazo": 1,
+    "sinFecha": 4
+   },
+   "Mecánica": {
+    "total": 21,
+    "cerrados": 5,
+    "abiertos": 16,
+    "atrasados": 13,
+    "enPlazo": 3,
+    "sinFecha": 0
+   },
+   "Estructura": {
+    "total": 10,
+    "cerrados": 1,
+    "abiertos": 9,
+    "atrasados": 6,
+    "enPlazo": 2,
+    "sinFecha": 1
+   },
+   "Instrumentación y Control": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "p1PorArea": {
+   "0580": {
+    "total": 21,
+    "cerrados": 20,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0582": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0582A": {
+    "total": 17,
+    "cerrados": 0,
+    "abiertos": 17,
+    "atrasados": 17,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0583": {
+    "total": 21,
+    "cerrados": 18,
+    "abiertos": 3,
+    "atrasados": 3,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0583A": {
+    "total": 274,
+    "cerrados": 136,
+    "abiertos": 138,
+    "atrasados": 105,
+    "enPlazo": 33,
+    "sinFecha": 0
+   },
+   "0583B": {
+    "total": 23,
+    "cerrados": 17,
+    "abiertos": 6,
+    "atrasados": 6,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0584": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0584B": {
+    "total": 4,
+    "cerrados": 4,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0585A": {
+    "total": 8,
+    "cerrados": 7,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0587": {
+    "total": 83,
+    "cerrados": 79,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0587A": {
+    "total": 12,
+    "cerrados": 5,
+    "abiertos": 7,
+    "atrasados": 3,
+    "enPlazo": 4,
+    "sinFecha": 0
+   },
+   "0587B": {
+    "total": 4,
+    "cerrados": 1,
+    "abiertos": 3,
+    "atrasados": 3,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4510A": {
+    "total": 12,
+    "cerrados": 12,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511": {
+    "total": 23,
+    "cerrados": 23,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511A": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511B": {
+    "total": 46,
+    "cerrados": 46,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511C": {
+    "total": 17,
+    "cerrados": 16,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4515": {
+    "total": 125,
+    "cerrados": 103,
+    "abiertos": 22,
+    "atrasados": 22,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4515A": {
+    "total": 23,
+    "cerrados": 3,
+    "abiertos": 20,
+    "atrasados": 2,
+    "enPlazo": 9,
+    "sinFecha": 9
+   },
+   "4515B": {
+    "total": 55,
+    "cerrados": 55,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4515C": {
+    "total": 11,
+    "cerrados": 2,
+    "abiertos": 9,
+    "atrasados": 5,
+    "enPlazo": 4,
+    "sinFecha": 0
+   },
+   "583": {
+    "total": 1,
+    "cerrados": 1,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "8280": {
+    "total": 28,
+    "cerrados": 23,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "porCaminata": {
+   "1": {
+    "total": 249,
+    "cerrados": 196,
+    "abiertos": 53,
+    "atrasados": 24,
+    "enPlazo": 0,
+    "sinFecha": 29
+   },
+   "2": {
+    "total": 1127,
+    "cerrados": 764,
+    "abiertos": 363,
+    "atrasados": 307,
+    "enPlazo": 56,
+    "sinFecha": 0
+   },
+   "3": {
+    "total": 9,
+    "cerrados": 0,
+    "abiertos": 9,
+    "atrasados": 0,
+    "enPlazo": 9,
+    "sinFecha": 0
+   },
+   "Sin asignar": {
+    "total": 1,
+    "cerrados": 0,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "categorias": [
+   "P0",
+   "P1",
+   "P2",
+   "P3",
+   "Sin categoría"
+  ],
+  "heatmap": {
+   "disc": [
+    "Eléctrica",
+    "Piping",
+    "Obras Civiles",
+    "Mecánica",
+    "Estructura",
+    "Instrumentación y Control"
+   ],
+   "cam": [
+    "1",
+    "2",
+    "3"
+   ],
+   "vals": [
+    [
+     5,
+     67,
+     8
+    ],
+    [
+     0,
+     96,
+     1
+    ],
+    [
+     9,
+     25,
+     0
+    ],
+    [
+     0,
+     16,
+     0
+    ],
+    [
+     1,
+     8,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "antiguedad": {
+   "tramos": {
+    "1-30 días": 281,
+    "31-90 días": 51,
+    "91-180 días": 0,
+    ">180 días": 0
+   },
+   "max": 78,
+   "mediana": 22
+  },
+  "topSubsistemas": [
+   {
+    "sub": "0583-WR-207",
+    "total": 46,
+    "cerrados": 6,
+    "abiertos": 40,
+    "atrasados": 40,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "4515-ESL-201",
+    "total": 114,
+    "cerrados": 92,
+    "abiertos": 22,
+    "atrasados": 22,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0582-NZ-201",
+    "total": 17,
+    "cerrados": 0,
+    "abiertos": 17,
+    "atrasados": 17,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-216",
+    "total": 17,
+    "cerrados": 2,
+    "abiertos": 15,
+    "atrasados": 15,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-NZ-201",
+    "total": 16,
+    "cerrados": 5,
+    "abiertos": 11,
+    "atrasados": 11,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-219",
+    "total": 43,
+    "cerrados": 34,
+    "abiertos": 9,
+    "atrasados": 9,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-XP-201",
+    "total": 23,
+    "cerrados": 17,
+    "abiertos": 6,
+    "atrasados": 6,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-217",
+    "total": 12,
+    "cerrados": 7,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "8280-NZ-201",
+    "total": 6,
+    "cerrados": 1,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "4515-JQ-201",
+    "total": 5,
+    "cerrados": 0,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0587-ESL-201",
+    "total": 57,
+    "cerrados": 53,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-211",
+    "total": 9,
+    "cerrados": 5,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  ]
+ },
+ "semaforo": {
+  "Desaladora": [
+   "crit",
+   "Crítico",
+   {
+    "total": 575,
+    "cerrados": 394,
+    "abiertos": 181,
+    "atrasados": 144,
+    "enPlazo": 37,
+    "sinFecha": 0
+   }
+  ],
+  "EB-2": [
+   "warn",
+   "Atención",
+   {
+    "total": 254,
+    "cerrados": 198,
+    "abiertos": 56,
+    "atrasados": 34,
+    "enPlazo": 13,
+    "sinFecha": 9
+   }
+  ]
+ },
+ "control": {
+  "punchTotal": 1386,
+  "subsEnReporte": 97,
+  "subsConPunch": 50,
+  "subsSinPunch": 47,
+  "punchSinSubsistemaEnReporte": [],
+  "nHuerfanos": 0,
+  "itemsHuerfanos": 0,
+  "contraste": [
+   {
+    "tipo": "Operable",
+    "caminata": "2",
+    "declarado": "41/80",
+    "calculado": "41/80",
+    "ok": true
+   },
+   {
+    "tipo": "Facility",
+    "caminata": "1",
+    "declarado": "10/15",
+    "calculado": "10/15",
+    "ok": true
+   }
+  ],
+  "difPunch": [
+   {
+    "cat": "P0",
+    "reporte": "16C / 25A",
+    "punch": "20C / 0A"
+   },
+   {
+    "cat": "P1",
+    "reporte": "586C / 232A",
+    "punch": "592C / 237A"
+   },
+   {
+    "cat": "P2",
+    "reporte": "325C / 158A",
+    "punch": "329C / 163A"
+   }
+  ]
+ },
+ "disciplinas": [
+  "Eléctrica",
+  "Piping",
+  "Obras Civiles",
+  "Mecánica",
+  "Estructura",
+  "Instrumentación y Control"
+ ],
+ "discCorta": {
+  "Instrumentación y Control": "Instr. y Control",
+  "Obras Civiles": "Obras Civiles"
+ }
+};
+</script>
+<!-- === DESALADORA:FIN === -->
+
 <script>
 const $ = (id) => document.getElementById(id);
 const pct = (a,b) => b ? Math.round(1000*a/b)/10 : 0;
@@ -921,10 +2471,7 @@ function bindTip(el, t1, t2) {
   el.addEventListener('mouseleave', () => tip.style.display = 'none');
 }
 
-/* ---------- cabecera ---------- */
-$('corteTxt').textContent = D.meta.corte_texto;
-$('subtitulo').innerHTML = 'Planta Concentradora · ' +
-  D.areas.map(a => `<b>${a}</b> ${D.areaNames[a].replace(/\s*\(.*\)/,'')}`).join(' · ');
+/* La cabecera (corte y subtítulo) la escribe mostrar(), según la pestaña activa. */
 
 /* ---------- KPIs ---------- */
 function kpi(lbl, num, den, detHtml, fillVar, prevNum) {
@@ -1173,6 +2720,330 @@ function render() {
     `Todas las cifras se recalculan desde el Excel con <b>actualizar.py</b>; ninguna está escrita a mano.`;
 })();
 
+/* =======================================================================
+   DESALADORA — PV3 Ampliación Desaladora (Minera Los Pelambres)
+   Mismo lenguaje visual que MASA, pero con los conceptos propios de este
+   proyecto: caminatas 1/2/3 (cada tipo de subsistema se mide con la suya),
+   certificado de entrega en vez de carpeta TOP, y punch atrasado según la
+   «Fecha Requerida Cierre».
+   ======================================================================= */
+function kpiSimple(lbl, num, den, detHtml, fillVar) {
+  const p = pct(num, den);
+  return `<div class="card"><div class="lbl">${lbl}</div>
+    <div class="val">${p.toLocaleString('es-CL')}% <small>${fmt(num)} / ${fmt(den)}</small></div>
+    <div class="meter"><i style="width:${Math.min(p,100)}%;background:var(${fillVar})"></i></div>
+    <div class="det">${detHtml}</div></div>`;
+}
+
+function renderDES() {
+  if (!DES) return;
+  ['dChCam','dChCarp','dChDisc','dChCat','dChAnt'].forEach(id => $(id).innerHTML = '');
+  const ord1 = css('--ord-1'), ord2 = css('--ord-2'), ord3 = css('--ord-3');
+  const blue = css('--blue'), amber = css('--amber'), red = css('--red'), good = css('--st-good');
+  const S = DES.subsistemas, C = DES.caminatasPorTipo, CP = DES.carpetas, P = DES.punch;
+  const p1 = P.porCategoria.P1 || {total:0,cerrados:0,abiertos:0,atrasados:0};
+  const zonas = Object.keys(S.porZona);
+
+  /* ---------- KPIs ---------- */
+  (function(){
+    const op = C.Operable, fa = C.Facility;
+    const opV = op && op[op.vigente], faV = fa && fa[fa.vigente];
+    const carpDet = `${fmt(CP.aprobadas)} aprobadas · ${fmt(CP.rechazadas)} rechazadas · `
+      + `${fmt(CP.enRevision)} en revisión`;
+    const p1Det = `${fmt(p1.abiertos)} abiertos · <span class="alert">${fmt(p1.atrasados)} atrasados</span>`;
+    const g = P.global;
+    $('dKpis').innerHTML =
+      (opV ? kpiSimple(`Caminata ${op.vigente} — Operables`, opV.realizada, opV.aplica,
+            `${fmt(opV.pendiente)} subsistemas por caminar`, '--blue') : '') +
+      (faV ? kpiSimple(`Caminata ${fa.vigente} — Facility`, faV.realizada, faV.aplica,
+            `${fmt(faV.pendiente)} facilities por caminar`, '--blue') : '') +
+      kpiSimple('Carpetas entregadas', CP.entregadas, CP.total, carpDet, '--blue') +
+      kpiSimple('Cierre de punch P1', p1.cerrados, p1.total, p1Det, '--blue') +
+      kpiSimple('Cierre de punch total', g.cerrados, g.total,
+            `${fmt(g.abiertos)} abiertos · <span class="alert">${fmt(g.atrasados)} atrasados</span>`
+            + (g.sinFecha ? ` · ${fmt(g.sinFecha)} sin fecha requerida` : ''), '--blue');
+  })();
+
+  /* ---------- subtítulos ---------- */
+  (function(){
+    const op = C.Operable;
+    $('dSubCam').textContent =
+      `Cada tipo de subsistema se mide con su propia caminata: los Operables por la `
+      + `Caminata ${op ? op.vigente : 2} y los Facility por la Caminata `
+      + `${C.Facility ? C.Facility.vigente : 1}`;
+    $('dSubCarp').textContent =
+      `${fmt(CP.entregadas)} de ${fmt(CP.total)} entregadas al cliente · `
+      + `${fmt(CP.tarjetaVerde)} con tarjeta verde · ${fmt(CP.sinEntregar)} sin entregar`;
+    $('dSubDisc').textContent =
+      `${fmt(p1.abiertos)} P1 abiertos; ${fmt(p1.atrasados)} con la fecha requerida de cierre vencida al ${DES.meta.hoy}`;
+    let top = null;
+    for (const [d,v] of Object.entries(P.p1PorDisciplina))
+      if (!top || v.abiertos > top.v) top = { d, v: v.abiertos };
+    $('dSubHm').textContent = top && p1.abiertos
+      ? `${top.d} concentra ${fmt(top.v)} de los ${fmt(p1.abiertos)} P1 abiertos (${pctTxt(top.v, p1.abiertos)})`
+      : '';
+    $('dSubCat').textContent =
+      `Cerrados sobre el total levantado en cada categoría — P0 es la más crítica del proyecto y P3 la de menor impacto`;
+    const a = P.antiguedad;
+    $('dSubAnt').textContent = a.max
+      ? `Mediana de ${fmt(a.mediana)} días vencidos · el más antiguo lleva ${fmt(a.max)} días`
+      : 'Sin ítems atrasados al corte';
+    $('dSumSub').textContent = `Detalle — Subsistemas con más P1 abiertos (${fmt((P.topSubsistemas||[]).length)})`;
+    $('dSumCam').textContent = `Detalle — Caminatas pendientes (${fmt(DES.caminatasPendientes.length)} subsistemas)`;
+    // El detalle lista toda carpeta con estatus registrado, incluidas las que
+    // aún están «En preparación» y por lo tanto NO cuentan como entregadas.
+    $('dSumCarp').textContent =
+      `Detalle — Carpetas con estatus registrado (${fmt(CP.detalle.length)}): `
+      + `${fmt(CP.entregadas)} entregadas al cliente + ${fmt(CP.enPreparacion)} en preparación`;
+    $('dSumCtl').textContent = 'Control de calidad del dato — cruce entre el reporte gerencial y el punch list';
+  })();
+
+  /* ---------- semáforo por zona ---------- */
+  (function(){
+    const icono = { good:'✓', warn:'▲', crit:'✕' };
+    let rows = `<tr><th>Zona</th><th class="num">Subsist.</th><th class="num">Caminata vigente</th>
+      <th class="num">Carpetas entregadas</th><th class="num">P1 % cierre</th>
+      <th class="num">P1 abiertos (atrasados)</th><th>Estado</th></tr>`;
+    for (const z of zonas) {
+      const cz = DES.caminatasPorZona[z], cp = CP.porZona[z] || {};
+      const sem = DES.semaforo[z] || ['warn','Atención',{}];
+      const r = sem[2] || {total:0,cerrados:0,abiertos:0,atrasados:0};
+      // la caminata vigente de la zona: la de mayor número con subsistemas que la aplican
+      let vig = '2', vd = cz['2'];
+      if (!vd || !vd.aplica) { vig = '1'; vd = cz['1']; }
+      const ent = (cp['Aprobada']||0) + (cp['En revisión']||0) + (cp['Rechazada']||0);
+      const tot = Object.values(cp).reduce((a,b) => a+b, 0);
+      rows += `<tr><td><b>${z}</b><br><span class="areaname">${S.zonaNombres[z]||''}</span></td>
+        <td class="num">${fmt(cz.subs)}</td>
+        <td class="num">C${vig}: ${fmt(vd.realizada)}/${fmt(vd.aplica)} · ${pctTxt(vd.realizada,vd.aplica)}</td>
+        <td class="num">${fmt(ent)}/${fmt(tot)} · ${pctTxt(ent,tot)}</td>
+        <td class="num">${r.total ? pctTxt(r.cerrados,r.total) : '—'}</td>
+        <td class="num">${fmt(r.abiertos)} (${fmt(r.atrasados)})</td>
+        <td><span class="chip ${sem[0]}">${icono[sem[0]]||''} ${sem[1]}</span></td></tr>`;
+    }
+    $('dSemaforo').innerHTML = rows;
+  })();
+
+  /* ---------- caminatas por tipo ---------- */
+  for (const [t, v] of Object.entries(C)) {
+    const d = v[v.vigente];
+    if (!d || !d.aplica) continue;
+    stackRow($('dChCam'), `<b>${t}</b>Caminata ${v.vigente} · ${fmt(v.subs)} subsist.`, d.aplica, [
+      {v:d.realizada, c:ord1, name:'Realizada', inkLabel:'#ffffff'},
+      {v:d.pendiente, name:'Pendiente', track:true}
+    ], `<b>${pctTxt(d.realizada,d.aplica)}</b> · ${fmt(d.realizada)}/${fmt(d.aplica)}`,
+       `${t} — Caminata ${v.vigente}`);
+  }
+  legend($('dLgCam'), [[ord1,'Realizada'],[null,'Pendiente',true]]);
+
+  /* ---------- carpetas por zona ---------- */
+  for (const z of zonas) {
+    const cp = CP.porZona[z] || {};
+    const tot = Object.values(cp).reduce((a,b) => a+b, 0);
+    stackRow($('dChCarp'), `<b>${z}</b>${S.zonaNombres[z]||''}`, tot, [
+      {v:cp['Aprobada']||0,       c:good,  name:'Aprobada', inkLabel:'#ffffff'},
+      {v:cp['En revisión']||0,    c:blue,  name:'En revisión', inkLabel:'#ffffff'},
+      {v:cp['Rechazada']||0,      c:red,   name:'Rechazada', inkLabel:'#ffffff'},
+      {v:cp['En preparación']||0, c:amber, name:'En preparación (interna)', inkLabel:'#0b0b0b'},
+      {v:cp['Sin entregar']||0,   name:'Sin entregar', track:true}
+    ], `<b>${fmt((cp['Aprobada']||0)+(cp['En revisión']||0)+(cp['Rechazada']||0))}</b>/${fmt(tot)}`,
+       `${z} — Certificado de entrega (${fmt(tot)} subsistemas)`);
+  }
+  legend($('dLgCarp'), [[good,'Aprobada'],[blue,'En revisión'],[red,'Rechazada'],
+                        [amber,'En preparación'],[null,'Sin entregar',true]]);
+
+  /* ---------- P1 abiertos por disciplina ---------- */
+  (function(){
+    const ds = Object.entries(P.p1PorDisciplina).sort((x,y) => y[1].abiertos - x[1].abiertos);
+    const mx = Math.max(1, ...ds.map(([,v]) => v.abiertos));
+    for (const [e,v] of ds) {
+      const row = document.createElement('div'); row.className = 'row';
+      row.innerHTML = `<div class="rlab"><b>${e}</b></div>`;
+      const line = document.createElement('div'); line.className = 'barline';
+      const track = document.createElement('div'); track.className = 'track2';
+      const bar = document.createElement('div'); bar.className = 'bar';
+      bar.style.width = `${Math.max(1.5, 100*v.abiertos/mx)}%`;
+      for (const s of [{v:v.atrasados, c:red, name:'Atrasados', inkLabel:'#ffffff'},
+                       {v:v.abiertos-v.atrasados, c:blue, name:'En plazo / sin fecha', inkLabel:'#ffffff'}]) {
+        if (s.v <= 0) continue;
+        const el = document.createElement('div'); el.className = 'seg';
+        el.style.flex = `${s.v} 0 0`; el.style.background = s.c;
+        el.innerHTML = `<span style="color:${s.inkLabel}">${s.v}</span>`;
+        bindTip(el, `${e} — P1 abiertos: ${fmt(v.abiertos)}`,
+          `${s.name}: <b>${fmt(s.v)}</b> · Cerrados: ${fmt(v.cerrados)}/${fmt(v.total)} (${pctTxt(v.cerrados,v.total)})`);
+        bar.appendChild(el);
+      }
+      track.appendChild(bar); line.appendChild(track);
+      const e2 = document.createElement('div'); e2.className = 'endlab';
+      e2.style.minWidth = '46px'; e2.innerHTML = `<b>${fmt(v.abiertos)}</b>`;
+      line.appendChild(e2); row.appendChild(line);
+      $('dChDisc').appendChild(row);
+    }
+    legend($('dLgDisc'), [[red,'Atrasados'],[blue,'En plazo o sin fecha requerida']]);
+  })();
+
+  /* ---------- cierre por categoría ---------- */
+  for (const c of P.categorias) {
+    const v = P.porCategoria[c];
+    if (!v || !v.total) continue;
+    stackRow($('dChCat'), `<b>${c}</b>${fmt(v.total)} levantados`, v.total, [
+      {v:v.cerrados, c:blue, name:'Cerrados', inkLabel:'#ffffff'},
+      {v:v.atrasados, c:red, name:'Abiertos y atrasados', inkLabel:'#ffffff'},
+      {v:v.abiertos-v.atrasados, c:amber, name:'Abiertos en plazo o sin fecha', inkLabel:'#0b0b0b'}
+    ], `<b>${pctTxt(v.cerrados,v.total)}</b> · ${fmt(v.cerrados)}/${fmt(v.total)}`,
+       `Categoría ${c} — ${fmt(v.total)} ítems`);
+  }
+  legend($('dLgCat'), [[blue,'Cerrados'],[red,'Abiertos y atrasados'],[amber,'Abiertos en plazo']]);
+
+  /* ---------- antigüedad de atrasados ---------- */
+  (function(){
+    const tr = P.antiguedad.tramos || {};
+    const tot = Object.values(tr).reduce((a,b) => a+b, 0);
+    const cols = { '1-30 días':amber, '31-90 días':css('--seq-450'),
+                   '91-180 días':css('--seq-600'), '>180 días':red };
+    if (!tot) { $('dChAnt').innerHTML = '<p class="h2sub">Sin ítems atrasados.</p>'; return; }
+    for (const [k,v] of Object.entries(tr)) {
+      if (!v) continue;
+      stackRow($('dChAnt'), `<b>${k}</b>`, tot, [
+        {v:v, c:cols[k]||blue, name:k, inkLabel: k==='1-30 días' ? '#0b0b0b' : '#ffffff'},
+        {v:tot-v, name:'Resto', track:true}
+      ], `<b>${fmt(v)}</b> · ${pctTxt(v,tot)}`, `Atrasados con ${k} de vencimiento`);
+    }
+    legend($('dLgAnt'), Object.entries(cols).filter(([k]) => tr[k]).map(([k,c]) => [c,k]));
+  })();
+
+  /* ---------- heatmap disciplina × caminata ---------- */
+  (function(){
+    const hm = $('dChHm'); hm.innerHTML = '';
+    const H = P.heatmap, cams = H.cam || [];
+    hm.style.gridTemplateColumns = `minmax(96px,150px) repeat(${cams.length}, 1fr)`;
+    hm.appendChild(document.createElement('div'));
+    for (const c of cams) { const h = document.createElement('div'); h.className = 'htop'; h.textContent = 'Caminata ' + c; hm.appendChild(h); }
+    const mx = Math.max(1, ...(H.vals||[]).flat());
+    const steps = [css('--seq-100'), css('--seq-200'), css('--seq-300'), css('--seq-450'), css('--seq-600'), css('--seq-700')];
+    (H.disc||[]).forEach((e,i) => {
+      const l = document.createElement('div'); l.className = 'hlab';
+      l.textContent = (DES.discCorta && DES.discCorta[e]) || e; hm.appendChild(l);
+      cams.forEach((c,j) => {
+        const v = H.vals[i][j];
+        const cell = document.createElement('div'); cell.className = 'hcell';
+        if (v === 0) { cell.style.background = 'var(--track)'; cell.style.color = 'var(--ink-muted)'; cell.textContent = '—'; }
+        else {
+          const k = Math.min(steps.length-1, Math.floor(Math.pow(v/mx, .5) * steps.length));
+          cell.style.background = steps[k];
+          cell.style.color = (k >= 3) ? '#ffffff' : '#0b0b0b';
+          cell.textContent = v;
+        }
+        bindTip(cell, `${e} × Caminata ${c}`, `P1 abiertos: <b>${fmt(v)}</b>`);
+        hm.appendChild(cell);
+      });
+    });
+    $('dHmNote').innerHTML = `Menos <span class="ramp">${steps.map(s=>`<i style="background:${s}"></i>`).join('')}</span> Más P1 abiertos · «—» = 0`;
+  })();
+
+  /* ---------- tablas de detalle ---------- */
+  (function(){
+    $('dTbSub').innerHTML =
+      `<tr><th>Subsistema</th><th class="num">P1 levantados</th><th class="num">Cerrados</th>
+       <th class="num">Abiertos</th><th class="num">Atrasados</th><th class="num">% cierre</th></tr>` +
+      (P.topSubsistemas||[]).map(s => `<tr><td>${s.sub}</td>
+        <td class="num">${fmt(s.total)}</td><td class="num">${fmt(s.cerrados)}</td>
+        <td class="num">${fmt(s.abiertos)}</td><td class="num">${fmt(s.atrasados)}</td>
+        <td class="num">${pctTxt(s.cerrados,s.total)}</td></tr>`).join('');
+
+    $('dTbCam').innerHTML = `<tr><th>Subsistema</th><th>Tipo</th><th>Zona</th><th>Descripción</th><th class="num">Caminata</th></tr>` +
+      DES.caminatasPendientes.map(s => `<tr><td>${s.id}</td><td>${s.tipo}</td><td>${s.zona}</td>
+        <td>${s.desc||''}</td><td class="num">${s.caminata}</td></tr>`).join('');
+
+    $('dTbCarp').innerHTML = `<tr><th>Subsistema</th><th>Zona</th><th>Tipo</th><th>Estatus del certificado</th></tr>` +
+      CP.detalle.map(s => `<tr><td>${s.id}</td><td>${s.zona}</td><td>${s.tipo}</td><td>${s.estado}</td></tr>`).join('');
+
+    let r = `<tr><th>Categoría</th><th class="num">Levantados</th><th class="num">Cerrados</th>
+      <th class="num">Abiertos</th><th class="num">Atrasados</th><th class="num">% cierre</th></tr>`;
+    const fila = (nom, v, bold) => `<tr><td>${bold?`<b>${nom}</b>`:nom}</td>
+      <td class="num">${fmt(v.total)}</td><td class="num">${fmt(v.cerrados)}</td>
+      <td class="num">${fmt(v.abiertos)}</td><td class="num">${fmt(v.atrasados)}</td>
+      <td class="num">${pctTxt(v.cerrados,v.total)}</td></tr>`;
+    for (const c of P.categorias) if (P.porCategoria[c] && P.porCategoria[c].total) r += fila(c, P.porCategoria[c], true);
+    r += `<tr><td colspan="6" style="padding-top:12px"><b>Todas las categorías, por disciplina</b></td></tr>`;
+    for (const [d,v] of Object.entries(P.porDisciplina)) r += fila(d, v, false);
+    r += `<tr><td colspan="6" style="padding-top:12px"><b>P1 por disciplina</b></td></tr>`;
+    for (const [d,v] of Object.entries(P.p1PorDisciplina)) r += fila(d, v, false);
+    $('dTbPunch').innerHTML = r;
+
+    /* control de calidad del dato */
+    const K = DES.control;
+    let c = `<tr><th>Control</th><th>Resultado</th></tr>`;
+    for (const x of (K.contraste||[])) {
+      c += `<tr><td>Caminata ${x.caminata} de ${x.tipo} — el archivo declara vs. lo calculado</td>
+        <td>${x.ok ? '<span class="chip good">✓ Cuadra</span>' : '<span class="chip crit">✕ Difiere</span>'}
+        declarado ${x.declarado} · calculado ${x.calculado}</td></tr>`;
+    }
+    c += `<tr><td>Subsistemas del reporte gerencial con punch asociado</td>
+      <td>${fmt(K.subsConPunch)} de ${fmt(K.subsEnReporte)} · ${fmt(K.subsSinPunch)} sin ningún punch levantado</td></tr>`;
+    if (K.nHuerfanos) c += `<tr><td>Subsistemas que aparecen en el punch pero no en el reporte gerencial</td>
+      <td><span class="chip warn">▲ ${fmt(K.nHuerfanos)}</span> ${K.punchSinSubsistemaEnReporte.join(', ')}</td></tr>`;
+    for (const d of (K.difPunch||[])) {
+      c += `<tr><td>Conteo de ${d.cat}: reporte gerencial vs. punch list</td>
+        <td><span class="chip warn">▲ Difiere</span> reporte ${d.reporte} · punch ${d.punch}
+        — el panel usa el punch list</td></tr>`;
+    }
+    $('dTbCtl').innerHTML = c;
+  })();
+
+  /* ---------- notas ---------- */
+  (function(){
+    const K = DES.control;
+    $('dNotas').innerHTML =
+      `<b>Fuente:</b> REPORTE_GERENCIAL (hoja «REPORTE GERENCIAL», ${fmt(S.total)} subsistemas, corte ${DES.meta.corteTexto}) ` +
+      `y Listado de Puntos Punch Consolidado (${fmt(P.global.total)} ítems). ` +
+      `<b>Definiciones:</b> Atrasado = ítem abierto cuya «Fecha Requerida Cierre» ya venció al ${DES.meta.hoy} · ` +
+      `los abiertos sin fecha requerida (${fmt(P.global.sinFecha)}) no se dan por atrasados y se informan aparte · ` +
+      `Carpeta entregada = certificado de entrega en revisión, aprobado o rechazado (queda fuera «En preparación», que aún es interna) · ` +
+      `las categorías P1A/P2B/P3C se muestran como P1/P2/P3 para poder compararlas con los otros proyectos. ` +
+      `<b>Caminatas:</b> cada tipo de subsistema se mide con la suya — Operables por la Caminata 2 y Facility por la Caminata 1 — ` +
+      `tal como lo declara la hoja «Resumen general» del propio archivo, contra la cual se valida el cálculo. ` +
+      `<b>Criterio semáforo:</b> Crítico si hay más de 40 P1 atrasados o el cierre P1 baja de 50% · ` +
+      `Atención si hay más de 10 atrasados o el cierre queda bajo 80% · Al día en caso contrario. ` +
+      (K.nHuerfanos || (K.difPunch||[]).length
+        ? `<b>Aviso:</b> hay diferencias entre los dos archivos de origen; se detallan en «Control de calidad del dato». `
+        : '') +
+      `Todas las cifras se recalculan desde los Excel con <b>desaladora.py</b>; ninguna está escrita a mano.`;
+  })();
+
+  requestAnimationFrame(pruneInlineLabels);
+}
+
+/* ---------- cabecera y selector de proyecto ---------- */
+const CAB = {
+  MASA: () => ({
+    corte: D.meta.corte_texto,
+    sub: 'Planta Concentradora · ' +
+      D.areas.map(a => `<b>${a}</b> ${D.areaNames[a].replace(/\s*\(.*\)/,'')}`).join(' · ')
+  }),
+  DES: () => ({
+    corte: DES ? DES.meta.corteTexto : '—',
+    sub: DES ? `${DES.meta.descripcion} · ${DES.meta.cliente} · contrato ${DES.meta.contrato}`
+             : 'Sin datos cargados — correr desaladora.py'
+  })
+};
+let activo = 'MASA';
+function mostrar(p) {
+  activo = p;
+  $('panelMASA').hidden = (p !== 'MASA');
+  $('panelDES').hidden  = (p !== 'DES');
+  document.querySelectorAll('.tab').forEach(b =>
+    b.setAttribute('aria-selected', b.dataset.p === p ? 'true' : 'false'));
+  const c = CAB[p]();
+  $('corteTxt').textContent = c.corte;
+  $('subtitulo').innerHTML = c.sub;
+  pintar();
+}
+document.querySelectorAll('.tab').forEach(b =>
+  b.addEventListener('click', () => mostrar(b.dataset.p)));
+
+function pintar() { if (activo === 'MASA') render(); else renderDES(); }
+
 /* ---------- tema ---------- */
 const btn = $('themeBtn');
 function esOscuro() {
@@ -1182,9 +3053,10 @@ function esOscuro() {
 function syncBtn() { btn.textContent = esOscuro() ? 'Modo claro' : 'Modo oscuro'; }
 btn.addEventListener('click', () => {
   document.documentElement.setAttribute('data-theme', esOscuro() ? 'light' : 'dark');
-  syncBtn(); render();
+  syncBtn(); pintar();
 });
-syncBtn(); render();
+if (!DES) { const t = document.querySelector('.tab[data-p="DES"]'); if (t) t.disabled = true; }
+syncBtn(); mostrar('MASA');
 window.addEventListener('resize', () => requestAnimationFrame(pruneInlineLabels));
 </script>
 </body>

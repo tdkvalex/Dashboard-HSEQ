@@ -39,8 +39,8 @@ p.author = "Control de Proyecto";
 p.title = "Panel de Control — Carpetas TOP · Caminatas · Detalles P1";
 
 const bg = (s, color) => { s.background = { color }; };
-function footer(s, n, dark) {
-  s.addText(CAP, { x: 0.5, y: 7.08, w: 10.6, h: 0.3, fontFace: FT, fontSize: 8.5,
+function footer(s, n, dark, cap) {
+  s.addText(cap || CAP, { x: 0.5, y: 7.08, w: 10.6, h: 0.3, fontFace: FT, fontSize: 8.5,
     color: dark ? C.steel : C.ink2, align: "left", margin: 0 });
   s.addText(String(n), { x: 12.5, y: 7.08, w: 0.4, h: 0.3, fontFace: FT, fontSize: 9,
     color: dark ? C.steel : C.ink2, align: "right", margin: 0 });
@@ -410,6 +410,256 @@ focus.forEach((f, i) => {
   s.addText(f.d, { x: px + 1.35, y: py + 0.88, w: 6.0 - 1.65, h: 1.1, fontFace: FT, fontSize: 11.5, color: C.ice, margin: 0, lineSpacing: 15, valign: "top" });
 });
 footer(s, 7, true);
+
+// =====================================================================
+// PROYECTO DESALADORA — se agrega solo si existe datos_desaladora.json
+// (lo genera desaladora.py). Las cifras salen íntegras de ese archivo.
+// =====================================================================
+const rutaDes = path.join(AQUI, "datos_desaladora.json");
+let nSlide = 8;
+if (fs.existsSync(rutaDes)) {
+  const X = JSON.parse(fs.readFileSync(rutaDes, "utf8"));
+  const XS = X.subsistemas, XC = X.caminatasPorTipo, XP = X.carpetas, XU = X.punch;
+  const xp1 = XU.porCategoria.P1 || { total: 0, cerrados: 0, abiertos: 0, atrasados: 0 };
+  const xg = XU.global;
+  const CAPX = `Fuente: REPORTE_GERENCIAL + Listado de Puntos Punch Consolidado · ` +
+    `Corte ${X.meta.corteTexto} · Atrasos al ${X.meta.hoy}`;
+  const opV = XC.Operable ? XC.Operable[XC.Operable.vigente] : null;
+  const faV = XC.Facility ? XC.Facility[XC.Facility.vigente] : null;
+  const zonas = Object.keys(XS.porZona);
+  const discOrden = Object.entries(XU.p1PorDisciplina).sort((a, b) => b[1].abiertos - a[1].abiertos);
+  const discAbiertas = discOrden.filter(([, v]) => v.abiertos > 0);
+
+  // ---------------- 8 · Portada de proyecto ----------------
+  s = p.addSlide(); bg(s, C.navy);
+  s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
+  s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
+  dot(s, 0.55, 1.35, C.copper, 0.22);
+  s.addText("PROYECTO 02", { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT, fontSize: 13,
+    bold: true, color: C.copperL, charSpacing: 3, margin: 0 });
+  s.addText("Desaladora", { x: 0.82, y: 1.72, w: 11.6, h: 1.1, fontFace: FH, fontSize: 46,
+    bold: true, color: C.white, margin: 0 });
+  s.addText(`${X.meta.descripcion} · ${X.meta.cliente}`, { x: 0.85, y: 2.9, w: 10.5, h: 0.5,
+    fontFace: FT, fontSize: 16, color: C.ice, margin: 0 });
+  s.addText(`Contrato ${X.meta.contrato} · ${nf(XS.total)} subsistemas ` +
+    `(${Object.entries(XS.porTipo).map(([k, v]) => `${nf(v)} ${k}`).join(" · ")}) en ${zonas.join(" y ")}.`,
+    { x: 0.85, y: 3.45, w: 9.6, h: 0.9, fontFace: FT, fontSize: 13.5, color: C.steel, lineSpacing: 20, margin: 0 });
+
+  const kpx = [
+    [opV ? pct(opV.realizada, opV.aplica) : "—", `Caminata ${XC.Operable ? XC.Operable.vigente : 2} · Operables`],
+    [faV ? pct(faV.realizada, faV.aplica) : "—", `Caminata ${XC.Facility ? XC.Facility.vigente : 1} · Facility`],
+    [pct(XP.entregadas, XP.total), "Carpetas entregadas"],
+    [pct(xp1.cerrados, xp1.total), "Cierre de punch P1"],
+  ];
+  let kxx = 0.85;
+  kpx.forEach(([v, l]) => {
+    s.addText(v, { x: kxx, y: 5.3, w: 2.9, h: 0.7, fontFace: FH, fontSize: 34, bold: true, color: C.copperL, margin: 0 });
+    s.addText(l, { x: kxx, y: 6.0, w: 2.9, h: 0.55, fontFace: FT, fontSize: 11.5, color: C.ice, margin: 0 });
+    kxx += 3.0;
+  });
+  s.addText(`Corte: ${X.meta.corteTexto}`, { x: 0.85, y: 6.75, w: 8, h: 0.3, fontFace: FT,
+    fontSize: 11, italic: true, color: C.steel, margin: 0 });
+  footer(s, nSlide++, true, CAPX);
+
+  // ---------------- 9 · Resumen ejecutivo ----------------
+  s = p.addSlide(); bg(s, C.paper);
+  kicker(s, "Desaladora · Resumen ejecutivo", 0.5, 0.45);
+  s.addText("Estado global de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
+
+  const cardsX = [
+    { p: opV ? pct(opV.realizada, opV.aplica) : "—", v: opV ? `${nf(opV.realizada)}/${nf(opV.aplica)}` : "—",
+      t: `Caminata ${XC.Operable ? XC.Operable.vigente : 2} · Operables`,
+      d: opV ? `${nf(opV.pendiente)} subsistemas por caminar` : "", c: C.blue },
+    { p: faV ? pct(faV.realizada, faV.aplica) : "—", v: faV ? `${nf(faV.realizada)}/${nf(faV.aplica)}` : "—",
+      t: `Caminata ${XC.Facility ? XC.Facility.vigente : 1} · Facility`,
+      d: faV ? `${nf(faV.pendiente)} facilities por caminar` : "", c: C.blue },
+    { p: pct(XP.entregadas, XP.total), v: `${nf(XP.entregadas)}/${nf(XP.total)}`, t: "Carpetas entregadas",
+      d: `${nf(XP.aprobadas)} aprobadas · ${nf(XP.rechazadas)} rechazadas · ${nf(XP.enPreparacion)} en preparación`, c: C.copper },
+    { p: pct(xp1.cerrados, xp1.total), v: `${nf(xp1.cerrados)}/${nf(xp1.total)}`, t: "Cierre de punch P1",
+      d: `${nf(xp1.abiertos)} abiertos · ${nf(xp1.atrasados)} atrasados`, c: C.crit },
+  ];
+  let cxx = 0.5;
+  cardsX.forEach((cd) => {
+    s.addShape(p.ShapeType.roundRect, { x: cxx, y: 1.6, w: 3.0, h: 2.5, rectRadius: 0.08,
+      fill: { color: C.white }, line: { color: "E4E9EF", width: 1 },
+      shadow: { type: "outer", color: "9AA7B5", blur: 7, offset: 2, angle: 90, opacity: 0.28 } });
+    dot(s, cxx + 0.28, 1.88, cd.c, 0.16);
+    s.addText(cd.p, { x: cxx + 0.28, y: 2.12, w: 2.5, h: 0.82, fontFace: FH, fontSize: 38, bold: true, color: cd.c, margin: 0 });
+    s.addText(cd.v, { x: cxx + 0.3, y: 2.95, w: 2.5, h: 0.32, fontFace: FT, fontSize: 14, bold: true, color: C.ink, margin: 0 });
+    s.addText(cd.t, { x: cxx + 0.3, y: 3.27, w: 2.45, h: 0.32, fontFace: FT, fontSize: 12, color: C.ink2, margin: 0 });
+    s.addText(cd.d, { x: cxx + 0.3, y: 3.58, w: 2.45, h: 0.46, fontFace: FT, fontSize: 9.5, color: C.ink2, lineSpacing: 12, margin: 0 });
+    cxx += 3.13;
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x: 0.5, y: 4.32, w: 12.33, h: 2.42, rectRadius: 0.06, fill: { color: C.navy }, line: { type: "none" } });
+  s.addText("LECTURA DEL PERÍODO", { x: 0.85, y: 4.5, w: 6, h: 0.3, fontFace: FT, fontSize: 11, bold: true, color: C.copperL, charSpacing: 2, margin: 0 });
+  const topDisc = discAbiertas[0];
+  const readsX = [
+    ["El punch cierra a buen ritmo, pero la deuda vencida es la mitad de lo abierto.",
+      `${nf(xg.cerrados)} de ${nf(xg.total)} ítems cerrados (${pct(xg.cerrados, xg.total)}); de los ${nf(xg.abiertos)} abiertos, ` +
+      `${nf(xg.atrasados)} ya pasaron su fecha requerida de cierre (${pct(xg.atrasados, xg.abiertos)}).`],
+    [`Las caminatas avanzan a distinta velocidad según el tipo de subsistema.`,
+      (opV ? `Operables ${nf(opV.realizada)}/${nf(opV.aplica)} por Caminata ${XC.Operable.vigente} (${pct(opV.realizada, opV.aplica)})` : "") +
+      (faV ? `; Facility ${nf(faV.realizada)}/${nf(faV.aplica)} por Caminata ${XC.Facility.vigente} (${pct(faV.realizada, faV.aplica)}).` : ".")],
+    [`Las carpetas están a ${pct(XP.entregadas, XP.total)} de entrega y el cuello está en el armado interno.`,
+      `${nf(XP.entregadas)} entregadas de ${nf(XP.total)}: ${nf(XP.aprobadas)} aprobadas, ${nf(XP.enRevision)} en revisión y ` +
+      `${nf(XP.rechazadas)} rechazadas. Quedan ${nf(XP.enPreparacion)} en preparación y ${nf(XP.sinEntregar)} sin iniciar.`],
+  ];
+  if (topDisc) readsX.push([`${topDisc[0]} concentra el pendiente de P1.`,
+    `${nf(topDisc[1].abiertos)} de los ${nf(xp1.abiertos)} P1 abiertos (${pct(topDisc[1].abiertos, xp1.abiertos)}), ` +
+    `con ${nf(topDisc[1].atrasados)} atrasados.`]);
+  let ryx = 4.86;
+  readsX.forEach(([h, d]) => {
+    dot(s, 0.9, ryx + 0.06, C.copper, 0.12);
+    s.addText([{ text: h + "  ", options: { bold: true, color: C.white } },
+               { text: d, options: { color: C.ice } }],
+      { x: 1.15, y: ryx - 0.05, w: 11.4, h: 0.5, fontFace: FT, fontSize: 11.5, lineSpacing: 15, margin: 0, valign: "top" });
+    ryx += 0.46;
+  });
+  footer(s, nSlide++, false, CAPX);
+
+  // ---------------- 10 · Caminatas y carpetas ----------------
+  s = p.addSlide(); bg(s, C.paper);
+  kicker(s, "Desaladora · Frentes 1 y 2", 0.5, 0.45);
+  s.addText("Caminatas y certificados de entrega", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
+  s.addText(`Cada tipo de subsistema se mide con su propia caminata: los Operables por la Caminata ` +
+    `${XC.Operable ? XC.Operable.vigente : 2} y los Facility por la Caminata ${XC.Facility ? XC.Facility.vigente : 1}, ` +
+    `tal como lo declara el propio reporte gerencial.`,
+    { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
+
+  const tiposCam = Object.entries(XC).filter(([, v]) => v[v.vigente] && v[v.vigente].aplica);
+  const lblCam = tiposCam.map(([t, v]) => `${t} (C${v.vigente})`);
+  s.addChart(p.ChartType.bar, [
+    { name: "Realizada", labels: lblCam, values: tiposCam.map(([, v]) => v[v.vigente].realizada) },
+    { name: "Pendiente", labels: lblCam, values: tiposCam.map(([, v]) => v[v.vigente].pendiente) },
+  ], {
+    x: 0.5, y: 2.05, w: 6.1, h: 4.5, barDir: "bar", barGrouping: "stacked",
+    chartColors: [C.goodD, C.track],
+    showTitle: true, title: "Subsistemas por estado de su caminata", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
+    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 11, dataLabelColor: C.ink, dataLabelFontBold: true,
+    showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
+    catAxisLabelFontFace: FT, catAxisLabelFontSize: 12, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
+    valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
+    barGapWidthPct: 55, chartArea: { fill: { color: C.white } },
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x: 6.85, y: 2.05, w: 5.98, h: 4.5, rectRadius: 0.06, fill: { color: C.white }, line: { color: "E4E9EF", width: 1 } });
+  s.addText(`CERTIFICADO DE ENTREGA (${nf(XP.total)} SUBSISTEMAS)`, { x: 7.1, y: 2.28, w: 5.5, h: 0.3,
+    fontFace: FT, fontSize: 11, bold: true, color: C.copper, charSpacing: 1, margin: 0 });
+  const escalera = [
+    ["Aprobada", XP.aprobadas, C.good],
+    ["En revisión del cliente", XP.enRevision, C.blue],
+    ["Rechazada", XP.rechazadas, C.crit],
+    ["En preparación (interna)", XP.enPreparacion, C.warn],
+    ["Sin entregar", XP.sinEntregar, C.steel],
+  ];
+  let fyx = 2.7;
+  escalera.forEach(([l, v, c]) => {
+    s.addShape(p.ShapeType.roundRect, { x: 7.1, y: fyx, w: 5.48, h: 0.62, rectRadius: 0.05, fill: { color: C.paper }, line: { type: "none" } });
+    s.addShape(p.ShapeType.ellipse, { x: 7.22, y: fyx + 0.19, w: 0.24, h: 0.24, fill: { color: c }, line: { type: "none" } });
+    s.addText(l, { x: 7.58, y: fyx, w: 2.9, h: 0.62, fontFace: FT, fontSize: 12.5, color: C.ink, valign: "middle", margin: 0 });
+    s.addText(pct(v, XP.total), { x: 10.4, y: fyx, w: 1.1, h: 0.62, fontFace: FT, fontSize: 11, color: C.ink2, align: "right", valign: "middle", margin: 0 });
+    s.addText(nf(v), { x: 11.55, y: fyx, w: 0.9, h: 0.62, fontFace: FH, fontSize: 22, bold: true, color: c, align: "right", valign: "middle", margin: 0 });
+    fyx += 0.68;
+  });
+  s.addText(`${nf(XP.entregadas)} carpetas ya están en manos del cliente (${pct(XP.entregadas, XP.total)}) y ` +
+    `${nf(XP.tarjetaVerde)} subsistemas tienen tarjeta verde. El grueso del pendiente todavía no sale de Besalco.`,
+    { x: 7.1, y: 6.12, w: 5.5, h: 0.4, fontFace: FT, fontSize: 10, italic: true, color: C.ink2, lineSpacing: 12, margin: 0 });
+  footer(s, nSlide++, false, CAPX);
+
+  // ---------------- 11 · Punch P1 ----------------
+  s = p.addSlide(); bg(s, C.paper);
+  kicker(s, "Desaladora · Frente 3", 0.5, 0.45);
+  s.addText("Punch list en condición P1", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
+  s.addText(`${nf(xp1.total)} P1 levantados; ${pct(xp1.cerrados, xp1.total)} cerrados. ` +
+    `Atrasado = ítem abierto cuya fecha requerida de cierre ya venció al ${X.meta.hoy}.`,
+    { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
+
+  const lblD = discAbiertas.map(([d]) => (X.discCorta && X.discCorta[d]) || d);
+  s.addChart(p.ChartType.bar, [
+    { name: "Atrasados", labels: lblD, values: discAbiertas.map(([, v]) => v.atrasados) },
+    { name: "En plazo o sin fecha", labels: lblD, values: discAbiertas.map(([, v]) => v.abiertos - v.atrasados) },
+  ], {
+    x: 0.5, y: 2.05, w: 7.7, h: 4.5, barDir: "bar", barGrouping: "stacked",
+    chartColors: [C.crit, C.blue],
+    showTitle: true, title: "P1 abiertos por disciplina", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
+    showValue: true, dataLabelPosition: "ctr", dataLabelFontFace: FT, dataLabelFontSize: 10, dataLabelColor: C.white, dataLabelFontBold: true,
+    showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 11, legendColor: C.ink2,
+    catAxisLabelFontFace: FT, catAxisLabelFontSize: 11.5, catAxisLabelColor: C.ink, catAxisLabelFontBold: true,
+    valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" },
+    barGapWidthPct: 45, chartArea: { fill: { color: C.white } },
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x: 8.4, y: 2.05, w: 4.43, h: 4.5, rectRadius: 0.06, fill: { color: C.navy }, line: { type: "none" } });
+  s.addText("ESTADO GLOBAL P1", { x: 8.68, y: 2.28, w: 4, h: 0.3, fontFace: FT, fontSize: 11, bold: true, color: C.copperL, charSpacing: 1.2, margin: 0 });
+  s.addChart(p.ChartType.doughnut, [{ name: "P1", labels: ["Cerrados", "Atrasados", "Abiertos en plazo"],
+    values: [xp1.cerrados, xp1.atrasados, xp1.abiertos - xp1.atrasados] }], {
+    x: 8.5, y: 2.55, w: 2.2, h: 2.2, holeSize: 62,
+    chartColors: [C.good, C.crit, C.copperL],
+    showTitle: false, showLegend: false, showValue: false,
+    dataBorder: { pct: 1, color: C.navy }, chartArea: { fill: { color: C.navy } },
+  });
+  s.addText([{ text: pct(xp1.cerrados, xp1.total), options: { fontSize: 19, bold: true, color: C.white, breakLine: true } },
+             { text: "cerrado", options: { fontSize: 10, color: C.ice } }],
+    { x: 8.5, y: 3.28, w: 2.2, h: 0.75, align: "center", valign: "middle", fontFace: FH, margin: 0 });
+  const dlx = [["Cerrados", xp1.cerrados, C.good], ["Atrasados", xp1.atrasados, C.crit],
+               ["Abiertos en plazo", xp1.abiertos - xp1.atrasados, C.copperL]];
+  let dlyx = 2.7;
+  dlx.forEach(([l, v, c]) => {
+    s.addShape(p.ShapeType.ellipse, { x: 10.95, y: dlyx + 0.04, w: 0.2, h: 0.2, fill: { color: c }, line: { type: "none" } });
+    s.addText(l, { x: 11.2, y: dlyx - 0.05, w: 1.55, h: 0.35, fontFace: FT, fontSize: 10.5, color: C.ice, margin: 0 });
+    s.addText(nf(v), { x: 11.2, y: dlyx + 0.22, w: 1.5, h: 0.3, fontFace: FT, fontSize: 11, bold: true, color: C.white, margin: 0 });
+    dlyx += 0.62;
+  });
+  s.addShape(p.ShapeType.line, { x: 8.68, y: 4.95, w: 3.9, h: 0, line: { color: C.navy2, width: 1 } });
+  const ant = XU.antiguedad;
+  s.addText([{ text: "Antigüedad del atraso\n", options: { bold: true, color: C.copperL, fontSize: 11.5 } },
+             { text: ant.max
+                 ? `Mediana de ${nf(ant.mediana)} días vencidos; el más antiguo lleva ${nf(ant.max)}. ` +
+                   Object.entries(ant.tramos).filter(([, v]) => v).map(([k, v]) => `${nf(v)} entre ${k}`).join(", ") + "."
+                 : "Sin ítems atrasados al corte.",
+               options: { color: C.ice, fontSize: 11.5 } }],
+    { x: 8.68, y: 5.1, w: 3.95, h: 1.3, fontFace: FT, lineSpacing: 15, margin: 0, valign: "top" });
+  footer(s, nSlide++, true, CAPX);
+
+  // ---------------- 12 · Foco de gestión ----------------
+  s = p.addSlide(); bg(s, C.navy);
+  s.addShape(p.ShapeType.ellipse, { x: 10.8, y: -1.8, w: 4.6, h: 4.6, fill: { color: C.navy2 }, line: { type: "none" } });
+  kicker(s, "Desaladora · Foco de gestión", 0.5, 0.5, C.copperL);
+  s.addText("Dónde poner el esfuerzo esta semana", { x: 0.5, y: 0.78, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.white, margin: 0 });
+
+  const zonaFoco = zonas
+    .map((z) => [z, (X.semaforo[z] && X.semaforo[z][2]) || { abiertos: 0, atrasados: 0 }])
+    .sort((a, b) => b[1].atrasados - a[1].atrasados)[0];
+  const focusX = [
+    { n: "01", t: `Recuperar los ${nf(xg.atrasados)} ítems atrasados`, c: C.crit,
+      d: `${pct(xg.atrasados, xg.abiertos)} de los ${nf(xg.abiertos)} abiertos ya venció su fecha requerida. ` +
+         (discAbiertas.length ? `Foco en ${discAbiertas.slice(0, 3).map(([d, v]) => `${d} (${nf(v.atrasados)})`).join(", ")}.` : "") },
+    { n: "02", t: opV ? `Ejecutar las ${nf(opV.pendiente)} caminatas de Operables pendientes` : "Ejecutar las caminatas pendientes", c: C.copper,
+      d: opV ? `La Caminata ${XC.Operable.vigente} va en ${pct(opV.realizada, opV.aplica)} (${nf(opV.realizada)}/${nf(opV.aplica)}). ` +
+         `Sin caminata no se levanta el punch final ni se habilita la entrega de la carpeta.` : "" },
+    { n: "03", t: `Sacar del armado interno las ${nf(XP.enPreparacion + XP.sinEntregar)} carpetas retenidas`, c: C.warn,
+      d: `${nf(XP.enPreparacion)} están en preparación y ${nf(XP.sinEntregar)} sin iniciar. ` +
+         `Solo ${nf(XP.entregadas)} de ${nf(XP.total)} (${pct(XP.entregadas, XP.total)}) llegaron al cliente; ` +
+         `${nf(XP.rechazadas)} volvieron rechazadas y hay que rearmarlas.` },
+    { n: "04", t: zonaFoco ? `Atender la zona ${zonaFoco[0]}` : "Atender la zona crítica", c: C.good,
+      d: zonaFoco ? `Concentra ${nf(zonaFoco[1].abiertos)} P1 abiertos y ${nf(zonaFoco[1].atrasados)} atrasados ` +
+         `sobre ${nf(XS.porZona[zonaFoco[0]])} subsistemas. Es la ruta crítica del proyecto.` : "" },
+  ];
+  focusX.forEach((f, i) => {
+    const px = 0.5 + (i % 2) * (6.0 + 0.33);
+    const py = 1.75 + Math.floor(i / 2) * 2.35;
+    s.addShape(p.ShapeType.roundRect, { x: px, y: py, w: 6.0, h: 2.1, rectRadius: 0.07, fill: { color: C.navy2 }, line: { type: "none" } });
+    s.addText(f.n, { x: px + 0.3, y: py + 0.22, w: 1.1, h: 0.7, fontFace: FH, fontSize: 34, bold: true, color: f.c, margin: 0 });
+    s.addText(f.t, { x: px + 1.35, y: py + 0.2, w: 6.0 - 1.6, h: 0.66, fontFace: FT, fontSize: 14, bold: true, color: C.white, margin: 0, valign: "middle" });
+    s.addText(f.d, { x: px + 1.35, y: py + 0.88, w: 6.0 - 1.65, h: 1.1, fontFace: FT, fontSize: 11, color: C.ice, margin: 0, lineSpacing: 14, valign: "top" });
+  });
+  footer(s, nSlide++, true, CAPX);
+
+  console.log(`Desaladora: 5 láminas agregadas (corte ${X.meta.corteTexto}).`);
+} else {
+  console.log("No se encontró datos_desaladora.json — la PPT sale solo con MASA.");
+}
 
 const salida = path.join(AQUI, "Panel_Control_TOP_P1.pptx");
 p.writeFile({ fileName: salida })

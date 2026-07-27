@@ -1,0 +1,1447 @@
+{
+ "meta": {
+  "id": "DESALADORA",
+  "nombre": "Desaladora",
+  "descripcion": "PV3 Montaje Electromecánico — Ampliación Desaladora",
+  "cliente": "Minera Los Pelambres (AMSA)",
+  "contrato": "VPP-1001-03-CC-088",
+  "corte": "2026-07-27",
+  "corteTexto": "27-07-2026",
+  "hoy": "27-07-2026",
+  "generado": "2026-07-27 16:14"
+ },
+ "subsistemas": {
+  "total": 97,
+  "porTipo": {
+   "Operable": 80,
+   "Componente": 2,
+   "Facility": 15
+  },
+  "porZona": {
+   "Desaladora": 75,
+   "EB-2": 22
+  },
+  "zonaNombres": {
+   "Desaladora": "Planta Desaladora",
+   "EB-2": "Estación de Bombeo 2"
+  }
+ },
+ "caminatas": {
+  "1": {
+   "aplica": 97,
+   "realizada": 13,
+   "pendiente": 84,
+   "noAplica": 0,
+   "pct": 13.4
+  },
+  "2": {
+   "aplica": 82,
+   "realizada": 43,
+   "pendiente": 39,
+   "noAplica": 15,
+   "pct": 52.4
+  },
+  "3": {
+   "aplica": 82,
+   "realizada": 1,
+   "pendiente": 81,
+   "noAplica": 15,
+   "pct": 1.2
+  }
+ },
+ "caminatasPorTipo": {
+  "Operable": {
+   "subs": 80,
+   "1": {
+    "aplica": 80,
+    "realizada": 1,
+    "pendiente": 79,
+    "pct": 1.3
+   },
+   "2": {
+    "aplica": 80,
+    "realizada": 41,
+    "pendiente": 39,
+    "pct": 51.3
+   },
+   "3": {
+    "aplica": 80,
+    "realizada": 1,
+    "pendiente": 79,
+    "pct": 1.3
+   },
+   "vigente": "2"
+  },
+  "Componente": {
+   "subs": 2,
+   "1": {
+    "aplica": 2,
+    "realizada": 2,
+    "pendiente": 0,
+    "pct": 100.0
+   },
+   "2": {
+    "aplica": 2,
+    "realizada": 2,
+    "pendiente": 0,
+    "pct": 100.0
+   },
+   "3": {
+    "aplica": 2,
+    "realizada": 0,
+    "pendiente": 2,
+    "pct": 0.0
+   },
+   "vigente": "2"
+  },
+  "Facility": {
+   "subs": 15,
+   "1": {
+    "aplica": 15,
+    "realizada": 10,
+    "pendiente": 5,
+    "pct": 66.7
+   },
+   "2": {
+    "aplica": 0,
+    "realizada": 0,
+    "pendiente": 0,
+    "pct": null
+   },
+   "3": {
+    "aplica": 0,
+    "realizada": 0,
+    "pendiente": 0,
+    "pct": null
+   },
+   "vigente": "1"
+  }
+ },
+ "caminatasPorZona": {
+  "Desaladora": {
+   "subs": 75,
+   "1": {
+    "aplica": 75,
+    "realizada": 8,
+    "pendiente": 67
+   },
+   "2": {
+    "aplica": 65,
+    "realizada": 34,
+    "pendiente": 31
+   },
+   "3": {
+    "aplica": 65,
+    "realizada": 0,
+    "pendiente": 65
+   }
+  },
+  "EB-2": {
+   "subs": 22,
+   "1": {
+    "aplica": 22,
+    "realizada": 5,
+    "pendiente": 17
+   },
+   "2": {
+    "aplica": 17,
+    "realizada": 9,
+    "pendiente": 8
+   },
+   "3": {
+    "aplica": 17,
+    "realizada": 1,
+    "pendiente": 16
+   }
+  }
+ },
+ "caminatasPendientes": [
+  {
+   "id": "0570-PW-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Distribución de Agua Potable",
+   "caminata": 2
+  },
+  {
+   "id": "0570-PFW-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Agua Contra Incendio",
+   "caminata": 2
+  },
+  {
+   "id": "0570-XP-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sumidero de drenajes",
+   "caminata": 2
+  },
+  {
+   "id": "0570-XH-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Drenajes",
+   "caminata": 2
+  },
+  {
+   "id": "0582-WO-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Captación de Agua de Mar - Sentina",
+   "caminata": 2
+  },
+  {
+   "id": "0582-WO-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Captación de Agua de Mar - Descarga de Salmuera",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 5, 0583-DF-7510",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 6, 0583-DF-7610",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-203",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 7, 0583-DF-7710",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-204",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Celda FAD 8, 0583-DF-7810",
+   "caminata": 2
+  },
+  {
+   "id": "0583-WR-208",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "UF Tren 11, 0583-UF-7011",
+   "caminata": 2
+  },
+  {
+   "id": "0583-PA-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sopladores de FAD",
+   "caminata": 2
+  },
+  {
+   "id": "0584-WYT-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "SWRO Tren 3",
+   "caminata": 2
+  },
+  {
+   "id": "0584-WYT-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "SWRO Tren 4",
+   "caminata": 2
+  },
+  {
+   "id": "0584-WYT-203",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Paquete CIP UF y SWRO",
+   "caminata": 2
+  },
+  {
+   "id": "0584-PA-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Distribución de Aire de Instrumentación",
+   "caminata": 2
+  },
+  {
+   "id": "0585-WS-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Bombas de Agua de Lavado y Servicios",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Antiincrustante",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Cloruro Férrico",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-203",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Hipoclorito de Sodio",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-205",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Soda Cáustica",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-207",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Metabisulfito de Sodio",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-208",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Acido Sulfúrico",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-209",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Polímero",
+   "caminata": 2
+  },
+  {
+   "id": "0586-CY-210",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Dosificación de Inhibidor de Corrosión",
+   "caminata": 2
+  },
+  {
+   "id": "0587-EWS-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Fibra Optica",
+   "caminata": 2
+  },
+  {
+   "id": "0587-EEC-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de CCTV Desalinizadora",
+   "caminata": 2
+  },
+  {
+   "id": "0587-JD-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Control de Proceso",
+   "caminata": 2
+  },
+  {
+   "id": "0587-JD-202",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema SCADA",
+   "caminata": 2
+  },
+  {
+   "id": "0587-EFD-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Sistema de Voz y Data",
+   "caminata": 2
+  },
+  {
+   "id": "4511-WW-201",
+   "tipo": "Operable",
+   "zona": "Desaladora",
+   "desc": "Estación de Impulsión de Agua Desalinizada (EB-1)",
+   "caminata": 2
+  },
+  {
+   "id": "4515-WW-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Estación de Impulsión de Agua Desalinizada (EB-2)",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EVC-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Compensación Reactiva 4515-HF-6001",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EWS-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Fibra Optica",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EEC-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de CCTV / EB2",
+   "caminata": 2
+  },
+  {
+   "id": "4515-JD-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Control de Proceso",
+   "caminata": 2
+  },
+  {
+   "id": "4515-EFD-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Voz y Data",
+   "caminata": 2
+  },
+  {
+   "id": "8280-ESC-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema de Distribución 33kV",
+   "caminata": 2
+  },
+  {
+   "id": "8280-JD-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema SCADA",
+   "caminata": 2
+  },
+  {
+   "id": "0570-NZ-201",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Utilidades Generales",
+   "caminata": 1
+  },
+  {
+   "id": "0580-NZ-203",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Sistema de Alumbrado Planta Desaladora",
+   "caminata": 1
+  },
+  {
+   "id": "0584-NZ-201",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Planta Desalinizadora",
+   "caminata": 1
+  },
+  {
+   "id": "0586-NZ-201",
+   "tipo": "Facility",
+   "zona": "Desaladora",
+   "desc": "Area Reactivos",
+   "caminata": 1
+  },
+  {
+   "id": "4515-NZ-203",
+   "tipo": "Facility",
+   "zona": "EB-2",
+   "desc": "Sistema de Alumbrado - Estación de Bombeo y Sub-Estación Electrica EB-2",
+   "caminata": 1
+  }
+ ],
+ "carpetas": {
+  "total": 97,
+  "estados": {
+   "Aprobada": 22,
+   "En revisión": 8,
+   "Rechazada": 9,
+   "En preparación": 14,
+   "Sin entregar": 44
+  },
+  "entregadas": 39,
+  "aprobadas": 22,
+  "rechazadas": 9,
+  "enRevision": 8,
+  "enPreparacion": 14,
+  "sinEntregar": 44,
+  "tarjetaVerde": 27,
+  "porZona": {
+   "Desaladora": {
+    "Aprobada": 17,
+    "En revisión": 4,
+    "Rechazada": 8,
+    "En preparación": 11,
+    "Sin entregar": 35
+   },
+   "EB-2": {
+    "Aprobada": 5,
+    "En revisión": 4,
+    "Rechazada": 1,
+    "En preparación": 3,
+    "Sin entregar": 9
+   }
+  },
+  "detalle": [
+   {
+    "id": "0580-NZ-202",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0582-PA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-NT-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-NTP-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-WR-206",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-WR-218",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-XP-202",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0584-ECMH-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0584-HA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0585-WYT-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-ESA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-ESL-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-ESL-201 Comp 1",
+    "zona": "Desaladora",
+    "tipo": "Componente",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4510-NZ-201",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4511-ECMH-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4511-ESA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4511-ESC-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4515-ECMH-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4515-ESL-201-Comp 1",
+    "zona": "EB-2",
+    "tipo": "Componente",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "4515-NZ-202",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "8280-NZ-201",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-HA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0583-NTT-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0583-WR-205",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0585-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "En revisión"
+   },
+   {
+    "id": "4510-DRP-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "4515-ESA-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "8280-ESA-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "8280-ESA-202",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0582-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-209",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-210",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-212",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-WR-213",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-XP-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "4511-JD-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "4511-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "4515-ESL-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0583-NZ-201",
+    "zona": "Desaladora",
+    "tipo": "Facility",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-207",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-211",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-214",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-215",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-216",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-217",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-219",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0583-WR-220",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0587-EEA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0587-EVC-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "4515-EEA-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "4515-JQ-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "4515-NZ-201",
+    "zona": "EB-2",
+    "tipo": "Facility",
+    "estado": "En preparación"
+   }
+  ]
+ },
+ "punch": {
+  "global": {
+   "total": 1386,
+   "cerrados": 960,
+   "abiertos": 426,
+   "atrasados": 332,
+   "enPlazo": 65,
+   "sinFecha": 29
+  },
+  "porCategoria": {
+   "P0": {
+    "total": 20,
+    "cerrados": 20,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "P1": {
+    "total": 829,
+    "cerrados": 592,
+    "abiertos": 237,
+    "atrasados": 178,
+    "enPlazo": 50,
+    "sinFecha": 9
+   },
+   "P2": {
+    "total": 492,
+    "cerrados": 329,
+    "abiertos": 163,
+    "atrasados": 134,
+    "enPlazo": 15,
+    "sinFecha": 14
+   },
+   "P3": {
+    "total": 44,
+    "cerrados": 18,
+    "abiertos": 26,
+    "atrasados": 20,
+    "enPlazo": 0,
+    "sinFecha": 6
+   },
+   "Sin categoría": {
+    "total": 1,
+    "cerrados": 1,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "porDisciplina": {
+   "Eléctrica": {
+    "total": 955,
+    "cerrados": 812,
+    "abiertos": 143,
+    "atrasados": 109,
+    "enPlazo": 25,
+    "sinFecha": 9
+   },
+   "Piping": {
+    "total": 222,
+    "cerrados": 86,
+    "abiertos": 136,
+    "atrasados": 106,
+    "enPlazo": 30,
+    "sinFecha": 0
+   },
+   "Obras Civiles": {
+    "total": 138,
+    "cerrados": 40,
+    "abiertos": 98,
+    "atrasados": 76,
+    "enPlazo": 4,
+    "sinFecha": 18
+   },
+   "Mecánica": {
+    "total": 36,
+    "cerrados": 13,
+    "abiertos": 23,
+    "atrasados": 20,
+    "enPlazo": 3,
+    "sinFecha": 0
+   },
+   "Estructura": {
+    "total": 21,
+    "cerrados": 1,
+    "abiertos": 20,
+    "atrasados": 15,
+    "enPlazo": 3,
+    "sinFecha": 2
+   },
+   "Instrumentación y Control": {
+    "total": 14,
+    "cerrados": 8,
+    "abiertos": 6,
+    "atrasados": 6,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "p1PorDisciplina": {
+   "Eléctrica": {
+    "total": 587,
+    "cerrados": 506,
+    "abiertos": 81,
+    "atrasados": 58,
+    "enPlazo": 19,
+    "sinFecha": 4
+   },
+   "Piping": {
+    "total": 153,
+    "cerrados": 56,
+    "abiertos": 97,
+    "atrasados": 72,
+    "enPlazo": 25,
+    "sinFecha": 0
+   },
+   "Obras Civiles": {
+    "total": 51,
+    "cerrados": 17,
+    "abiertos": 34,
+    "atrasados": 29,
+    "enPlazo": 1,
+    "sinFecha": 4
+   },
+   "Mecánica": {
+    "total": 21,
+    "cerrados": 5,
+    "abiertos": 16,
+    "atrasados": 13,
+    "enPlazo": 3,
+    "sinFecha": 0
+   },
+   "Estructura": {
+    "total": 10,
+    "cerrados": 1,
+    "abiertos": 9,
+    "atrasados": 6,
+    "enPlazo": 2,
+    "sinFecha": 1
+   },
+   "Instrumentación y Control": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "p1PorArea": {
+   "0580": {
+    "total": 21,
+    "cerrados": 20,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0582": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0582A": {
+    "total": 17,
+    "cerrados": 0,
+    "abiertos": 17,
+    "atrasados": 17,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0583": {
+    "total": 21,
+    "cerrados": 18,
+    "abiertos": 3,
+    "atrasados": 3,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0583A": {
+    "total": 274,
+    "cerrados": 136,
+    "abiertos": 138,
+    "atrasados": 105,
+    "enPlazo": 33,
+    "sinFecha": 0
+   },
+   "0583B": {
+    "total": 23,
+    "cerrados": 17,
+    "abiertos": 6,
+    "atrasados": 6,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0584": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0584B": {
+    "total": 4,
+    "cerrados": 4,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0585A": {
+    "total": 8,
+    "cerrados": 7,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0587": {
+    "total": 83,
+    "cerrados": 79,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "0587A": {
+    "total": 12,
+    "cerrados": 5,
+    "abiertos": 7,
+    "atrasados": 3,
+    "enPlazo": 4,
+    "sinFecha": 0
+   },
+   "0587B": {
+    "total": 4,
+    "cerrados": 1,
+    "abiertos": 3,
+    "atrasados": 3,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4510A": {
+    "total": 12,
+    "cerrados": 12,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511": {
+    "total": 23,
+    "cerrados": 23,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511A": {
+    "total": 7,
+    "cerrados": 7,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511B": {
+    "total": 46,
+    "cerrados": 46,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4511C": {
+    "total": 17,
+    "cerrados": 16,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4515": {
+    "total": 125,
+    "cerrados": 103,
+    "abiertos": 22,
+    "atrasados": 22,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4515A": {
+    "total": 23,
+    "cerrados": 3,
+    "abiertos": 20,
+    "atrasados": 2,
+    "enPlazo": 9,
+    "sinFecha": 9
+   },
+   "4515B": {
+    "total": 55,
+    "cerrados": 55,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "4515C": {
+    "total": 11,
+    "cerrados": 2,
+    "abiertos": 9,
+    "atrasados": 5,
+    "enPlazo": 4,
+    "sinFecha": 0
+   },
+   "583": {
+    "total": 1,
+    "cerrados": 1,
+    "abiertos": 0,
+    "atrasados": 0,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   "8280": {
+    "total": 28,
+    "cerrados": 23,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "porCaminata": {
+   "1": {
+    "total": 249,
+    "cerrados": 196,
+    "abiertos": 53,
+    "atrasados": 24,
+    "enPlazo": 0,
+    "sinFecha": 29
+   },
+   "2": {
+    "total": 1127,
+    "cerrados": 764,
+    "abiertos": 363,
+    "atrasados": 307,
+    "enPlazo": 56,
+    "sinFecha": 0
+   },
+   "3": {
+    "total": 9,
+    "cerrados": 0,
+    "abiertos": 9,
+    "atrasados": 0,
+    "enPlazo": 9,
+    "sinFecha": 0
+   },
+   "Sin asignar": {
+    "total": 1,
+    "cerrados": 0,
+    "abiertos": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  },
+  "categorias": [
+   "P0",
+   "P1",
+   "P2",
+   "P3",
+   "Sin categoría"
+  ],
+  "heatmap": {
+   "disc": [
+    "Eléctrica",
+    "Piping",
+    "Obras Civiles",
+    "Mecánica",
+    "Estructura",
+    "Instrumentación y Control"
+   ],
+   "cam": [
+    "1",
+    "2",
+    "3"
+   ],
+   "vals": [
+    [
+     5,
+     67,
+     8
+    ],
+    [
+     0,
+     96,
+     1
+    ],
+    [
+     9,
+     25,
+     0
+    ],
+    [
+     0,
+     16,
+     0
+    ],
+    [
+     1,
+     8,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "antiguedad": {
+   "tramos": {
+    "1-30 días": 281,
+    "31-90 días": 51,
+    "91-180 días": 0,
+    ">180 días": 0
+   },
+   "max": 78,
+   "mediana": 22
+  },
+  "topSubsistemas": [
+   {
+    "sub": "0583-WR-207",
+    "total": 46,
+    "cerrados": 6,
+    "abiertos": 40,
+    "atrasados": 40,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "4515-ESL-201",
+    "total": 114,
+    "cerrados": 92,
+    "abiertos": 22,
+    "atrasados": 22,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0582-NZ-201",
+    "total": 17,
+    "cerrados": 0,
+    "abiertos": 17,
+    "atrasados": 17,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-216",
+    "total": 17,
+    "cerrados": 2,
+    "abiertos": 15,
+    "atrasados": 15,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-NZ-201",
+    "total": 16,
+    "cerrados": 5,
+    "abiertos": 11,
+    "atrasados": 11,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-219",
+    "total": 43,
+    "cerrados": 34,
+    "abiertos": 9,
+    "atrasados": 9,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-XP-201",
+    "total": 23,
+    "cerrados": 17,
+    "abiertos": 6,
+    "atrasados": 6,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-217",
+    "total": 12,
+    "cerrados": 7,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "8280-NZ-201",
+    "total": 6,
+    "cerrados": 1,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "4515-JQ-201",
+    "total": 5,
+    "cerrados": 0,
+    "abiertos": 5,
+    "atrasados": 5,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0587-ESL-201",
+    "total": 57,
+    "cerrados": 53,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-211",
+    "total": 9,
+    "cerrados": 5,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinFecha": 0
+   }
+  ]
+ },
+ "semaforo": {
+  "Desaladora": [
+   "crit",
+   "Crítico",
+   {
+    "total": 575,
+    "cerrados": 394,
+    "abiertos": 181,
+    "atrasados": 144,
+    "enPlazo": 37,
+    "sinFecha": 0
+   }
+  ],
+  "EB-2": [
+   "warn",
+   "Atención",
+   {
+    "total": 254,
+    "cerrados": 198,
+    "abiertos": 56,
+    "atrasados": 34,
+    "enPlazo": 13,
+    "sinFecha": 9
+   }
+  ]
+ },
+ "control": {
+  "punchTotal": 1386,
+  "subsEnReporte": 97,
+  "subsConPunch": 50,
+  "subsSinPunch": 47,
+  "punchSinSubsistemaEnReporte": [],
+  "nHuerfanos": 0,
+  "itemsHuerfanos": 0,
+  "contraste": [
+   {
+    "tipo": "Operable",
+    "caminata": "2",
+    "declarado": "41/80",
+    "calculado": "41/80",
+    "ok": true
+   },
+   {
+    "tipo": "Facility",
+    "caminata": "1",
+    "declarado": "10/15",
+    "calculado": "10/15",
+    "ok": true
+   }
+  ],
+  "difPunch": [
+   {
+    "cat": "P0",
+    "reporte": "16C / 25A",
+    "punch": "20C / 0A"
+   },
+   {
+    "cat": "P1",
+    "reporte": "586C / 232A",
+    "punch": "592C / 237A"
+   },
+   {
+    "cat": "P2",
+    "reporte": "325C / 158A",
+    "punch": "329C / 163A"
+   }
+  ]
+ },
+ "disciplinas": [
+  "Eléctrica",
+  "Piping",
+  "Obras Civiles",
+  "Mecánica",
+  "Estructura",
+  "Instrumentación y Control"
+ ],
+ "discCorta": {
+  "Instrumentación y Control": "Instr. y Control",
+  "Obras Civiles": "Obras Civiles"
+ }
+}

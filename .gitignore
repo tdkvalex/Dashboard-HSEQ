@@ -16,3 +16,7 @@ config/portfolio.yaml
 config/portfolio.local.yaml
 config/watchlist.local.yaml
 .DS_Store
+
+# Node (pptxgenjs se instala local para generar la PPT)
+node_modules/
+package-lock.json
