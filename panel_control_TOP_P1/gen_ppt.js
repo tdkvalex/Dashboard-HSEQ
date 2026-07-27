@@ -959,19 +959,38 @@ if (fs.existsSync(rutaTal)) {
 const MARCA_INI = "<!-- === PPT:INICIO ===";
 const MARCA_FIN = "<!-- === PPT:FIN === -->";
 
+// Reemplaza un bloque marcado dentro de index.html. Devuelve el texto nuevo, o
+// el original si las marcas no están (nunca deja el archivo a medias).
+function reemplazar(txt, ini, fin, contenido) {
+  const i = txt.indexOf(ini), f = txt.indexOf(fin);
+  if (i === -1 || f === -1 || f < i) {
+    console.log(`Aviso: no se encontraron las marcas ${ini.slice(9)} en index.html.`);
+    return txt;
+  }
+  return txt.slice(0, i) + contenido + txt.slice(f);
+}
+
+// Los dos logos viajan embebidos en el panel: la versión blanca para el fondo
+// oscuro y la de color para el modo claro.
+function bloqueLogos() {
+  const uri = (f) => {
+    const r = path.join(AQUI, f);
+    return fs.existsSync(r) ? "data:image/png;base64," + fs.readFileSync(r).toString("base64") : null;
+  };
+  const L = { blanco: uri("besalco_logo_blanco.png"), color: uri("besalco_logo.png") };
+  if (!L.blanco && !L.color) console.log("Aviso: no se encontró ningún logo para embeber.");
+  return "<!-- === LOGO:INICIO === (logos embebidos por gen_ppt.js — no editar a mano) -->\n" +
+    "<script>\nconst LOGOS = " + JSON.stringify(L) + ";\n<\/script>\n";
+}
+
 function embeber(archivo) {
   const html = path.join(AQUI, "index.html");
   if (!fs.existsSync(html)) {
     console.log("Aviso: no se encontró index.html; la PPT quedó solo como archivo.");
     return;
   }
-  const txt = fs.readFileSync(html, "utf8");
-  const i = txt.indexOf(MARCA_INI), f = txt.indexOf(MARCA_FIN);
-  if (i === -1 || f === -1 || f < i) {
-    console.log("Aviso: no se encontraron las marcas PPT en index.html; " +
-                "el panel quedó con el informe anterior.");
-    return;
-  }
+  let txt = fs.readFileSync(html, "utf8");
+  txt = reemplazar(txt, "<!-- === LOGO:INICIO ===", "<!-- === LOGO:FIN === -->", bloqueLogos());
   const bin = fs.readFileSync(archivo);
   // El nombre del archivo descargado lleva el corte más reciente de los tres
   // proyectos, en DDMMAA, para no pisar informes de semanas distintas en la
@@ -997,8 +1016,8 @@ function embeber(archivo) {
   };
   const bloque = MARCA_INI + " (la PPT del corte, embebida por gen_ppt.js — no editar a mano) -->\n" +
     "<script>\nconst PPTX = " + JSON.stringify(meta) + ";\n<\/script>\n";
-  fs.writeFileSync(html, txt.slice(0, i) + bloque + txt.slice(f), "utf8");
-  console.log(`Informe embebido en index.html (${meta.nombre} · ${meta.laminas} láminas · ${meta.peso}).`);
+  fs.writeFileSync(html, reemplazar(txt, MARCA_INI, MARCA_FIN, bloque), "utf8");
+  console.log(`Informe y logos embebidos en index.html (${meta.nombre} · ${meta.laminas} láminas · ${meta.peso}).`);
 }
 
 const salida = path.join(AQUI, "Panel_Control_TOP_P1.pptx");

@@ -310,5 +310,22 @@ de una décima respecto de ese bloque intermedio.
 
 ## Logo
 
-El panel muestra el logo de Besalco Montajes si existe un archivo `besalco_logo.png` en esta
-carpeta; si no está, el espacio se oculta automáticamente sin romper el diseño.
+El logo de Besalco Montajes va **arriba a la izquierda**, sin recuadro, igual que en el
+dashboard de Protocolos. La carpeta guarda dos versiones:
+
+| Archivo | Uso |
+|---|---|
+| `besalco_logo.png` | Versión de color — modo claro del panel y láminas de la PPT |
+| `besalco_logo_blanco.png` | Versión blanca — modo oscuro del panel (el predeterminado) |
+
+`gen_ppt.js` los **embebe en `index.html`** como data URI, así el panel se puede enviar por
+correo sin adjuntar la imagen aparte, y el panel elige la versión que corresponde al tema
+activo. Si algún día cambia el logo, basta reemplazar los PNG y volver a correr `gen_ppt.js`.
+La versión blanca se obtiene de la de color conservando su silueta:
+
+```bash
+python3 -c "from PIL import Image; im=Image.open('besalco_logo.png').convert('RGBA'); \
+a=im.split()[3]; Image.merge('RGBA',(a.point(lambda _:255),)*3+(a,)).save('besalco_logo_blanco.png')"
+```
+
+Si no hay ningún logo, el espacio se oculta solo, sin romper el diseño.
