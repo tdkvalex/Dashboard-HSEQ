@@ -51,7 +51,7 @@ import sys
 import unicodedata
 import warnings
 from collections import Counter, defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 from math import floor
 from pathlib import Path
 from statistics import median
@@ -92,6 +92,24 @@ TIPOS = ["No Conformidad", "Producto No Conforme", "Observación",
          "Opción de Mejora", "Reporte HSE Nivel Alto"]
 TRAMOS = [("1-30 días", 0), ("31-90 días", 30), ("91-180 días", 90),
           ("181-365 días", 180), ("Más de un año", 365)]
+
+# Las tres vías por las que entra un hallazgo. Se distinguen porque no son lo
+# mismo de gestionar: la del cliente compromete el contrato, la del subcontrato
+# la absorbe Besalco, y la interna es autodetección.
+EMISIONES = ["Interna BSMT", "Externa Cliente", "Externa Subcontrato"]
+EMISION_CORTA = {"Interna BSMT": "Interna (Besalco)",
+                 "Externa Cliente": "Externa · Cliente",
+                 "Externa Subcontrato": "Externa · Subcontrato",
+                 "Sin clasificar": "Sin clasificar"}
+# La misma vía, redactada para meterla en una frase («4 del cliente»).
+EMISION_FRASE = {"Interna BSMT": "de Besalco",
+                 "Externa Cliente": "del cliente",
+                 "Externa Subcontrato": "de un subcontrato",
+                 "Sin clasificar": "sin clasificar"}
+
+# Ventanas para «lo levantado recientemente». 7 días es la que se mira semana a
+# semana; las otras dan contexto para saber si la semana fue alta o baja.
+VENTANAS = [("semana", 7), ("mes", 30), ("trimestre", 90)]
 
 avisos = []
 
@@ -215,7 +233,72 @@ def construir(items, hoy, fuente):
     tipos = [t for t in TIPOS if any(i["tipo"] == t for i in items)]
     esps = [e for e, _ in Counter(i["especialidad"] for i in items).most_common()]
 
-    def bloque(sub):
+    def novedades(sub, hoy=hoy):
+        """Lo levantado en los últimos 7 días, con su detalle y el ritmo previo.
+
+        Es la lista que se revisa en la reunión semanal: cuántos entraron, en
+        qué disciplina y si los detectó Besalco o los levantó el cliente. La
+        tendencia de las 8 semanas anteriores va al lado porque el número
+        suelto no dice nada: 4 hallazgos son pocos o muchos según el ritmo.
+        """
+        desde = hoy - timedelta(days=7)
+        nuevas = sorted([i for i in sub if i["creada"] and i["creada"] > desde],
+                        key=lambda x: (x["creada"], x["proy"]))
+
+        def cortar(s_):
+            return {
+                "total": len(s_),
+                "internas": sum(1 for i in s_ if i["origen"] == "Interna"),
+                "externas": sum(1 for i in s_ if i["origen"] == "Externa"),
+                "abiertas": sum(1 for i in s_ if i["estado"] == ABIERTA),
+            }
+
+        tendencia = []
+        for k in range(7, -1, -1):
+            ini, fin = hoy - timedelta(days=7 * (k + 1)), hoy - timedelta(days=7 * k)
+            tendencia.append({
+                "etiqueta": ("Esta semana" if k == 0 else
+                             "Semana pasada" if k == 1 else f"Hace {k} semanas"),
+                "desde": (ini + timedelta(days=1)).strftime("%d-%m"),
+                "hasta": fin.strftime("%d-%m"),
+                **cortar([i for i in sub if i["creada"] and ini < i["creada"] <= fin]),
+            })
+
+        return {
+            # `desde` es el primer día que entra en la cuenta, no el corte
+            # anterior: el filtro es «creada > hoy − 7 días», así que el día
+            # del corte pasado ya se informó la semana anterior.
+            "desde": (desde + timedelta(days=1)).strftime("%d-%m-%Y"),
+            "hasta": hoy.strftime("%d-%m-%Y"),
+            **cortar(nuevas),
+            "cerradas": sum(1 for i in nuevas if i["estado"] == CERRADA),
+            "porOrigen": dict(Counter(i["origen"] for i in nuevas)),
+            "porEmision": dict(Counter(i["emision"] for i in nuevas)),
+            # Los tres cortes que se piden en la reunión —disciplina, frente y
+            # tipo— van con el mismo desglose interna/externa, para que el
+            # panel los dibuje todos igual.
+            "porEspecialidad": {e: cortar([i for i in nuevas if i["especialidad"] == e])
+                                for e, _ in Counter(i["especialidad"]
+                                                    for i in nuevas).most_common()},
+            "porProyecto": {n: cortar([i for i in nuevas
+                                       if meta_p[i["proy"]]["nombre"] == n])
+                            for n, _ in Counter(meta_p[i["proy"]]["nombre"]
+                                                for i in nuevas).most_common()},
+            "porTipo": {t: cortar([i for i in nuevas if i["tipo"] == t])
+                        for t, _ in Counter(i["tipo"] for i in nuevas).most_common()},
+            "detalle": [{
+                "fecha": i["creada"].strftime("%d-%m-%Y"),
+                "proy": meta_p[i["proy"]]["nombre"], "n": i["n"], "tipo": i["tipo"],
+                "emision": i["emision"], "origen": i["origen"],
+                "especialidad": i["especialidad"], "responsable": i["responsable"],
+                "estatus": i["estatus"], "estado": i["estado"],
+                "titulo": i["titulo"], "costo": i["costo"],
+                "codigoExterno": i["codigoExterno"],
+            } for i in nuevas],
+            "tendencia": tendencia,
+        }
+
+    def bloque(sub, hoy=hoy):
         ab = [i for i in sub if i["estado"] == ABIERTA]
         return {
             "resumen": resumir(sub),
@@ -224,7 +307,14 @@ def construir(items, hoy, fuente):
             "porOrigen": {o: resumir([i for i in sub if i["origen"] == o])
                           for o in ("Interna", "Externa", "Sin clasificar")
                           if any(i["origen"] == o for i in sub)},
-            "porEmision": dict(Counter(i["emision"] for i in sub)),
+            # Emisión con su cierre, no solo el conteo: «Externa Cliente» y
+            # «Externa Subcontrato» se comportan distinto y hay que verlo.
+            "porEmision": {e: resumir([i for i in sub if i["emision"] == e])
+                           for e in EMISIONES + ["Sin clasificar"]
+                           if any(i["emision"] == e for i in sub)},
+            # Autodetección: qué parte de los hallazgos los levanta Besalco.
+            "autodeteccion": pct1(sum(1 for i in sub if i["origen"] == "Interna"),
+                                  sum(1 for i in sub if i["origen"] in ("Interna", "Externa"))),
             "porEspecialidad": {e: resumir([i for i in sub if i["especialidad"] == e])
                                 for e in esps if any(i["especialidad"] == e for i in sub)},
             "porEstatus": dict(Counter(i["estatus"] for i in ab)),
@@ -232,6 +322,14 @@ def construir(items, hoy, fuente):
                                   and tramo(i["diasAbierta"]) == t)
                            for t, _ in TRAMOS},
             "porAnio": dict(sorted(Counter(i["creada"].year for i in sub if i["creada"]).items())),
+            # Lo levantado en cada ventana reciente, contado sobre el subconjunto.
+            "ventanas": {n: resumir([i for i in sub if i["creada"]
+                                     and (hoy - i["creada"]).days < d])
+                         for n, d in VENTANAS},
+            # Lo levantado en la última semana, con detalle. Va dentro del
+            # bloque para que cada pestaña muestre lo suyo: el corporativo los
+            # cuatro frentes y cada proyecto solo los propios.
+            "semana": novedades(sub),
             "porMes": dict(sorted(Counter(i["creada"].strftime("%Y-%m")
                                           for i in sub if i["creada"]).items())),
         }
@@ -254,6 +352,10 @@ def construir(items, hoy, fuente):
         "obra": bloque([i for i in items if meta_p[i["proy"]]["obra"]]),
         "tipos": tipos,
         "especialidades": esps,
+        # Las etiquetas viven acá y no en el HTML: si mañana aparece una vía de
+        # emisión nueva, se agrega en un solo lado.
+        "etiquetasEmision": EMISION_CORTA,
+        "frasesEmision": EMISION_FRASE,
     }
 
     # ---- detalle de las abiertas: es la lista accionable ----
@@ -372,6 +474,20 @@ def main():
           f"{pc(g['cerradas'], g['total']):>8s} {g['internas']:6d} {g['externas']:6d} "
           f"{g['costo']:8,.0f}".replace(",", ".") +
           f" {(str(g['medianaCierre']) + ' d') if g['medianaCierre'] is not None else '—':>11s}")
+
+    S = datos["global"]["semana"]
+    print(f"\nLEVANTADOS EN LA ÚLTIMA SEMANA  ({S['desde']} → {S['hasta']}): {S['total']}")
+    if S["total"]:
+        print(f"  {S['internas']} internas · {S['externas']} externas · "
+              f"{S['abiertas']} siguen abiertas")
+        for e, r in S["porEspecialidad"].items():
+            print(f"    {e:18s} {r['total']:3d}  ({r['internas']} int · {r['externas']} ext)")
+        for d in S["detalle"]:
+            print(f"    {d['fecha']}  {d['proy']:11s} N°{str(d['n'] or '—'):>5s}  "
+                  f"{EMISION_CORTA.get(d['emision'], d['emision']):22s} "
+                  f"{d['especialidad']:16s} {d['estatus']}")
+    print("  ritmo de las últimas 8 semanas: " +
+          " ".join(str(t["total"]) for t in S["tendencia"]))
 
     print("\nPOR TIPO")
     for t, r in datos["global"]["porTipo"].items():

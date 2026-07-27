@@ -233,6 +233,22 @@
   .chip.good { color: var(--st-good); background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3); }
   .chip.warn { color: var(--st-warn); background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); }
   .chip.crit { color: var(--st-crit); background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.3); }
+  /* Origen del hallazgo: mismo código de color que las barras —azul lo que
+     detecta Besalco, ámbar lo que llega de afuera— para leerlo sin leyenda. */
+  .chip.int { color: var(--ord-3); background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.32); }
+  .chip.ext { color: var(--amber); background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); }
+  :root[data-theme="light"] .chip.int { color: var(--ord-1); }
+
+  /* ── NOVEDADES DE LA SEMANA ───────────────────────────────────── */
+  .nvgrid { display: grid; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 980px) { .nvgrid { grid-template-columns: 1fr; } }
+  .nvh { font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted);
+    margin: 15px 18px 0; }
+  .nvvacio { font-size: 11.5px; color: var(--ink-2); margin: 9px 18px 0; }
+  /* La semana en curso, en dorado: es la fila que se lee primero.
+     Lleva `.row` en el selector para ganarle a `.row .rlab b`, que va después. */
+  .row.nvhoy .rlab b { color: var(--gold); }
 
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 980px) { .grid2 { grid-template-columns: 1fr; } }
@@ -329,6 +345,29 @@
 
   <div class="cards" id="kpis"></div>
 
+  <!-- Novedades: qué entró desde el corte anterior. Es la lista que se revisa
+       en la reunión semanal, con su disciplina y quién levantó cada una. -->
+  <section class="block" id="secNuevas">
+    <h2>Levantados en la última semana</h2>
+    <p class="h2sub" id="subNuevas"></p>
+    <div class="nvgrid">
+      <div>
+        <p class="nvh">Por disciplina</p>
+        <div class="rows" id="chNvEsp"></div>
+        <p class="nvh" id="hNvDim"></p>
+        <div class="rows" id="chNvDim"></div>
+        <div class="legend" id="lgNvEsp"></div>
+      </div>
+      <div>
+        <p class="nvh">Ritmo · últimas 8 semanas</p>
+        <div class="rows" id="chNvTend"></div>
+        <div class="legend" id="lgNvTend"></div>
+      </div>
+    </div>
+    <p class="nvh" id="hNvDet">Detalle de los hallazgos nuevos</p>
+    <div style="overflow-x:auto"><table class="tbl" id="tbNuevas"></table></div>
+  </section>
+
   <section class="block" id="secSem">
     <h2>Semáforo por proyecto</h2>
     <p class="h2sub" id="subSem"></p>
@@ -416,7 +455,7 @@ const NC = {
   "hoy": "27-07-2026",
   "corte": "2026-07-27",
   "corteTexto": "27-07-2026",
-  "generado": "2026-07-27 19:44",
+  "generado": "2026-07-27 20:05",
   "fuente": "5640140e-Data_NCR_1.xlsx"
  },
  "orden": [
@@ -553,11 +592,60 @@ const NC = {
     }
    },
    "porEmision": {
-    "Externa Subcontrato": 8,
-    "Externa Cliente": 30,
-    "Interna BSMT": 56,
-    "Sin clasificar": 1
+    "Interna BSMT": {
+     "total": 56,
+     "cerradas": 55,
+     "abiertas": 1,
+     "atrasadas": 0,
+     "pctCierre": 98.2,
+     "internas": 56,
+     "externas": 0,
+     "costo": 926.1,
+     "conCosto": 47,
+     "medianaCierre": 18,
+     "maxCierre": 250
+    },
+    "Externa Cliente": {
+     "total": 30,
+     "cerradas": 28,
+     "abiertas": 2,
+     "atrasadas": 0,
+     "pctCierre": 93.3,
+     "internas": 0,
+     "externas": 30,
+     "costo": 280.0,
+     "conCosto": 15,
+     "medianaCierre": 21,
+     "maxCierre": 102
+    },
+    "Externa Subcontrato": {
+     "total": 8,
+     "cerradas": 8,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 0,
+     "externas": 8,
+     "costo": 367.1,
+     "conCosto": 7,
+     "medianaCierre": 42,
+     "maxCierre": 111
+    },
+    "Sin clasificar": {
+     "total": 1,
+     "cerradas": 1,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 0,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": 15,
+     "maxCierre": 15
+    }
    },
+   "autodeteccion": 59.6,
    "porEspecialidad": {
     "OO.CC": {
      "total": 12,
@@ -809,6 +897,177 @@ const NC = {
     "2025": 75,
     "2026": 20
    },
+   "ventanas": {
+    "semana": {
+     "total": 1,
+     "cerradas": 0,
+     "abiertas": 1,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 1,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "mes": {
+     "total": 2,
+     "cerradas": 0,
+     "abiertas": 2,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 2,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "trimestre": {
+     "total": 7,
+     "cerradas": 4,
+     "abiertas": 3,
+     "atrasadas": 0,
+     "pctCierre": 57.1,
+     "internas": 1,
+     "externas": 6,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": 13,
+     "maxCierre": 43
+    }
+   },
+   "semana": {
+    "desde": "21-07-2026",
+    "hasta": "27-07-2026",
+    "total": 1,
+    "internas": 0,
+    "externas": 1,
+    "abiertas": 1,
+    "cerradas": 0,
+    "porOrigen": {
+     "Externa": 1
+    },
+    "porEmision": {
+     "Externa Cliente": 1
+    },
+    "porEspecialidad": {
+     "MECÁNICA": {
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
+     }
+    },
+    "porProyecto": {
+     "Desaladora": {
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
+     }
+    },
+    "porTipo": {
+     "No Conformidad": {
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
+     }
+    },
+    "detalle": [
+     {
+      "fecha": "27-07-2026",
+      "proy": "Desaladora",
+      "n": "95",
+      "tipo": "No Conformidad",
+      "emision": "Externa Cliente",
+      "origen": "Externa",
+      "especialidad": "MECÁNICA",
+      "responsable": "Wilson Jara",
+      "estatus": "Iniciado",
+      "estado": "Abierta",
+      "titulo": "Verificación de Preservación",
+      "costo": null,
+      "codigoExterno": "NCR-0535"
+     }
+    ],
+    "tendencia": [
+     {
+      "etiqueta": "Hace 7 semanas",
+      "desde": "02-06",
+      "hasta": "08-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 6 semanas",
+      "desde": "09-06",
+      "hasta": "15-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 5 semanas",
+      "desde": "16-06",
+      "hasta": "22-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 4 semanas",
+      "desde": "23-06",
+      "hasta": "29-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 3 semanas",
+      "desde": "30-06",
+      "hasta": "06-07",
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
+     },
+     {
+      "etiqueta": "Hace 2 semanas",
+      "desde": "07-07",
+      "hasta": "13-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Semana pasada",
+      "desde": "14-07",
+      "hasta": "20-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "21-07",
+      "hasta": "27-07",
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
+     }
+    ]
+   },
    "porMes": {
     "2025-02": 3,
     "2025-03": 9,
@@ -931,9 +1190,34 @@ const NC = {
     }
    },
    "porEmision": {
-    "Externa Cliente": 186,
-    "Interna BSMT": 53
+    "Interna BSMT": {
+     "total": 53,
+     "cerradas": 44,
+     "abiertas": 9,
+     "atrasadas": 0,
+     "pctCierre": 83.0,
+     "internas": 53,
+     "externas": 0,
+     "costo": 25.0,
+     "conCosto": 31,
+     "medianaCierre": 26,
+     "maxCierre": 269
+    },
+    "Externa Cliente": {
+     "total": 186,
+     "cerradas": 169,
+     "abiertas": 17,
+     "atrasadas": 0,
+     "pctCierre": 90.9,
+     "internas": 0,
+     "externas": 186,
+     "costo": 5793.3,
+     "conCosto": 112,
+     "medianaCierre": 22,
+     "maxCierre": 187
+    }
    },
+   "autodeteccion": 22.2,
    "porEspecialidad": {
     "OO.CC": {
      "total": 139,
@@ -1108,6 +1392,213 @@ const NC = {
     "2025": 145,
     "2026": 94
    },
+   "ventanas": {
+    "semana": {
+     "total": 3,
+     "cerradas": 0,
+     "abiertas": 3,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 3,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "mes": {
+     "total": 7,
+     "cerradas": 0,
+     "abiertas": 7,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 7,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "trimestre": {
+     "total": 28,
+     "cerradas": 18,
+     "abiertas": 10,
+     "atrasadas": 0,
+     "pctCierre": 64.3,
+     "internas": 2,
+     "externas": 26,
+     "costo": 0.0,
+     "conCosto": 4,
+     "medianaCierre": 32,
+     "maxCierre": 73
+    }
+   },
+   "semana": {
+    "desde": "21-07-2026",
+    "hasta": "27-07-2026",
+    "total": 3,
+    "internas": 0,
+    "externas": 3,
+    "abiertas": 3,
+    "cerradas": 0,
+    "porOrigen": {
+     "Externa": 3
+    },
+    "porEmision": {
+     "Externa Cliente": 3
+    },
+    "porEspecialidad": {
+     "OO.CC": {
+      "total": 3,
+      "internas": 0,
+      "externas": 3,
+      "abiertas": 3
+     }
+    },
+    "porProyecto": {
+     "Talabre": {
+      "total": 3,
+      "internas": 0,
+      "externas": 3,
+      "abiertas": 3
+     }
+    },
+    "porTipo": {
+     "No Conformidad": {
+      "total": 2,
+      "internas": 0,
+      "externas": 2,
+      "abiertas": 2
+     },
+     "Producto No Conforme": {
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
+     }
+    },
+    "detalle": [
+     {
+      "fecha": "21-07-2026",
+      "proy": "Talabre",
+      "n": "237",
+      "tipo": "No Conformidad",
+      "emision": "Externa Cliente",
+      "origen": "Externa",
+      "especialidad": "OO.CC",
+      "responsable": "Mauricio Rocha A.",
+      "estatus": "Iniciado",
+      "estado": "Abierta",
+      "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
+      "costo": null,
+      "codigoExterno": "RNC N°445"
+     },
+     {
+      "fecha": "21-07-2026",
+      "proy": "Talabre",
+      "n": "238",
+      "tipo": "Producto No Conforme",
+      "emision": "Externa Cliente",
+      "origen": "Externa",
+      "especialidad": "OO.CC",
+      "responsable": "Sebastián Ramos",
+      "estatus": "Iniciado",
+      "estado": "Abierta",
+      "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
+      "costo": null,
+      "codigoExterno": "PNC N°177"
+     },
+     {
+      "fecha": "23-07-2026",
+      "proy": "Talabre",
+      "n": "239",
+      "tipo": "No Conformidad",
+      "emision": "Externa Cliente",
+      "origen": "Externa",
+      "especialidad": "OO.CC",
+      "responsable": "Mauricio Rocha A.",
+      "estatus": "Iniciado",
+      "estado": "Abierta",
+      "titulo": "Presencia de daños visibles en el sistema de impermeabilización piscina QS.",
+      "costo": null,
+      "codigoExterno": "RNC N°447"
+     }
+    ],
+    "tendencia": [
+     {
+      "etiqueta": "Hace 7 semanas",
+      "desde": "02-06",
+      "hasta": "08-06",
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 6 semanas",
+      "desde": "09-06",
+      "hasta": "15-06",
+      "total": 4,
+      "internas": 0,
+      "externas": 4,
+      "abiertas": 2
+     },
+     {
+      "etiqueta": "Hace 5 semanas",
+      "desde": "16-06",
+      "hasta": "22-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 4 semanas",
+      "desde": "23-06",
+      "hasta": "29-06",
+      "total": 2,
+      "internas": 0,
+      "externas": 2,
+      "abiertas": 1
+     },
+     {
+      "etiqueta": "Hace 3 semanas",
+      "desde": "30-06",
+      "hasta": "06-07",
+      "total": 3,
+      "internas": 0,
+      "externas": 3,
+      "abiertas": 3
+     },
+     {
+      "etiqueta": "Hace 2 semanas",
+      "desde": "07-07",
+      "hasta": "13-07",
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
+     },
+     {
+      "etiqueta": "Semana pasada",
+      "desde": "14-07",
+      "hasta": "20-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "21-07",
+      "hasta": "27-07",
+      "total": 3,
+      "internas": 0,
+      "externas": 3,
+      "abiertas": 3
+     }
+    ]
+   },
    "porMes": {
     "2025-05": 5,
     "2025-06": 12,
@@ -1214,10 +1705,47 @@ const NC = {
     }
    },
    "porEmision": {
-    "Interna BSMT": 53,
-    "Externa Subcontrato": 40,
-    "Externa Cliente": 1
+    "Interna BSMT": {
+     "total": 53,
+     "cerradas": 52,
+     "abiertas": 1,
+     "atrasadas": 0,
+     "pctCierre": 98.1,
+     "internas": 53,
+     "externas": 0,
+     "costo": 551.8,
+     "conCosto": 9,
+     "medianaCierre": 33,
+     "maxCierre": 297
+    },
+    "Externa Cliente": {
+     "total": 1,
+     "cerradas": 1,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 0,
+     "externas": 1,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": 146,
+     "maxCierre": 146
+    },
+    "Externa Subcontrato": {
+     "total": 40,
+     "cerradas": 40,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 0,
+     "externas": 40,
+     "costo": 2840.0,
+     "conCosto": 35,
+     "medianaCierre": 211,
+     "maxCierre": 313
+    }
    },
+   "autodeteccion": 56.4,
    "porEspecialidad": {
     "OO.CC": {
      "total": 16,
@@ -1456,6 +1984,136 @@ const NC = {
     "2025": 72,
     "2026": 8
    },
+   "ventanas": {
+    "semana": {
+     "total": 0,
+     "cerradas": 0,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "mes": {
+     "total": 0,
+     "cerradas": 0,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "trimestre": {
+     "total": 1,
+     "cerradas": 0,
+     "abiertas": 1,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 1,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    }
+   },
+   "semana": {
+    "desde": "21-07-2026",
+    "hasta": "27-07-2026",
+    "total": 0,
+    "internas": 0,
+    "externas": 0,
+    "abiertas": 0,
+    "cerradas": 0,
+    "porOrigen": {},
+    "porEmision": {},
+    "porEspecialidad": {},
+    "porProyecto": {},
+    "porTipo": {},
+    "detalle": [],
+    "tendencia": [
+     {
+      "etiqueta": "Hace 7 semanas",
+      "desde": "02-06",
+      "hasta": "08-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 6 semanas",
+      "desde": "09-06",
+      "hasta": "15-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 5 semanas",
+      "desde": "16-06",
+      "hasta": "22-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 4 semanas",
+      "desde": "23-06",
+      "hasta": "29-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 3 semanas",
+      "desde": "30-06",
+      "hasta": "06-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 2 semanas",
+      "desde": "07-07",
+      "hasta": "13-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Semana pasada",
+      "desde": "14-07",
+      "hasta": "20-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "21-07",
+      "hasta": "27-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     }
+    ]
+   },
    "porMes": {
     "2024-05": 1,
     "2024-10": 2,
@@ -1525,8 +2183,21 @@ const NC = {
     }
    },
    "porEmision": {
-    "Sin clasificar": 8
+    "Sin clasificar": {
+     "total": 8,
+     "cerradas": 8,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 0,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": 77,
+     "maxCierre": 146
+    }
    },
+   "autodeteccion": 0.0,
    "porEspecialidad": {
     "Sin especialidad": {
      "total": 8,
@@ -1554,6 +2225,136 @@ const NC = {
     "2023": 3,
     "2024": 4,
     "2025": 1
+   },
+   "ventanas": {
+    "semana": {
+     "total": 0,
+     "cerradas": 0,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "mes": {
+     "total": 0,
+     "cerradas": 0,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    },
+    "trimestre": {
+     "total": 0,
+     "cerradas": 0,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 0.0,
+     "internas": 0,
+     "externas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": null,
+     "maxCierre": null
+    }
+   },
+   "semana": {
+    "desde": "21-07-2026",
+    "hasta": "27-07-2026",
+    "total": 0,
+    "internas": 0,
+    "externas": 0,
+    "abiertas": 0,
+    "cerradas": 0,
+    "porOrigen": {},
+    "porEmision": {},
+    "porEspecialidad": {},
+    "porProyecto": {},
+    "porTipo": {},
+    "detalle": [],
+    "tendencia": [
+     {
+      "etiqueta": "Hace 7 semanas",
+      "desde": "02-06",
+      "hasta": "08-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 6 semanas",
+      "desde": "09-06",
+      "hasta": "15-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 5 semanas",
+      "desde": "16-06",
+      "hasta": "22-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 4 semanas",
+      "desde": "23-06",
+      "hasta": "29-06",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 3 semanas",
+      "desde": "30-06",
+      "hasta": "06-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Hace 2 semanas",
+      "desde": "07-07",
+      "hasta": "13-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Semana pasada",
+      "desde": "14-07",
+      "hasta": "20-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "21-07",
+      "hasta": "27-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     }
+    ]
    },
    "porMes": {
     "2023-02": 3,
@@ -1686,11 +2487,60 @@ const NC = {
    }
   },
   "porEmision": {
-   "Sin clasificar": 9,
-   "Externa Subcontrato": 48,
-   "Externa Cliente": 217,
-   "Interna BSMT": 162
+   "Interna BSMT": {
+    "total": 162,
+    "cerradas": 151,
+    "abiertas": 11,
+    "atrasadas": 0,
+    "pctCierre": 93.2,
+    "internas": 162,
+    "externas": 0,
+    "costo": 1502.9,
+    "conCosto": 87,
+    "medianaCierre": 26,
+    "maxCierre": 297
+   },
+   "Externa Cliente": {
+    "total": 217,
+    "cerradas": 198,
+    "abiertas": 19,
+    "atrasadas": 0,
+    "pctCierre": 91.2,
+    "internas": 0,
+    "externas": 217,
+    "costo": 6073.3,
+    "conCosto": 127,
+    "medianaCierre": 21,
+    "maxCierre": 187
+   },
+   "Externa Subcontrato": {
+    "total": 48,
+    "cerradas": 48,
+    "abiertas": 0,
+    "atrasadas": 0,
+    "pctCierre": 100.0,
+    "internas": 0,
+    "externas": 48,
+    "costo": 3207.1,
+    "conCosto": 42,
+    "medianaCierre": 181,
+    "maxCierre": 313
+   },
+   "Sin clasificar": {
+    "total": 9,
+    "cerradas": 9,
+    "abiertas": 0,
+    "atrasadas": 0,
+    "pctCierre": 100.0,
+    "internas": 0,
+    "externas": 0,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": 74,
+    "maxCierre": 146
+   }
   },
+  "autodeteccion": 37.9,
   "porEspecialidad": {
    "OO.CC": {
     "total": 167,
@@ -2036,6 +2886,240 @@ const NC = {
    "2025": 293,
    "2026": 122
   },
+  "ventanas": {
+   "semana": {
+    "total": 4,
+    "cerradas": 0,
+    "abiertas": 4,
+    "atrasadas": 0,
+    "pctCierre": 0.0,
+    "internas": 0,
+    "externas": 4,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": null,
+    "maxCierre": null
+   },
+   "mes": {
+    "total": 9,
+    "cerradas": 0,
+    "abiertas": 9,
+    "atrasadas": 0,
+    "pctCierre": 0.0,
+    "internas": 0,
+    "externas": 9,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": null,
+    "maxCierre": null
+   },
+   "trimestre": {
+    "total": 36,
+    "cerradas": 22,
+    "abiertas": 14,
+    "atrasadas": 0,
+    "pctCierre": 61.1,
+    "internas": 4,
+    "externas": 32,
+    "costo": 0.0,
+    "conCosto": 4,
+    "medianaCierre": 24,
+    "maxCierre": 73
+   }
+  },
+  "semana": {
+   "desde": "21-07-2026",
+   "hasta": "27-07-2026",
+   "total": 4,
+   "internas": 0,
+   "externas": 4,
+   "abiertas": 4,
+   "cerradas": 0,
+   "porOrigen": {
+    "Externa": 4
+   },
+   "porEmision": {
+    "Externa Cliente": 4
+   },
+   "porEspecialidad": {
+    "OO.CC": {
+     "total": 3,
+     "internas": 0,
+     "externas": 3,
+     "abiertas": 3
+    },
+    "MECÁNICA": {
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    }
+   },
+   "porProyecto": {
+    "Talabre": {
+     "total": 3,
+     "internas": 0,
+     "externas": 3,
+     "abiertas": 3
+    },
+    "Desaladora": {
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    }
+   },
+   "porTipo": {
+    "No Conformidad": {
+     "total": 3,
+     "internas": 0,
+     "externas": 3,
+     "abiertas": 3
+    },
+    "Producto No Conforme": {
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    }
+   },
+   "detalle": [
+    {
+     "fecha": "21-07-2026",
+     "proy": "Talabre",
+     "n": "237",
+     "tipo": "No Conformidad",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "OO.CC",
+     "responsable": "Mauricio Rocha A.",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
+     "costo": null,
+     "codigoExterno": "RNC N°445"
+    },
+    {
+     "fecha": "21-07-2026",
+     "proy": "Talabre",
+     "n": "238",
+     "tipo": "Producto No Conforme",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "OO.CC",
+     "responsable": "Sebastián Ramos",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
+     "costo": null,
+     "codigoExterno": "PNC N°177"
+    },
+    {
+     "fecha": "23-07-2026",
+     "proy": "Talabre",
+     "n": "239",
+     "tipo": "No Conformidad",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "OO.CC",
+     "responsable": "Mauricio Rocha A.",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Presencia de daños visibles en el sistema de impermeabilización piscina QS.",
+     "costo": null,
+     "codigoExterno": "RNC N°447"
+    },
+    {
+     "fecha": "27-07-2026",
+     "proy": "Desaladora",
+     "n": "95",
+     "tipo": "No Conformidad",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "MECÁNICA",
+     "responsable": "Wilson Jara",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Verificación de Preservación",
+     "costo": null,
+     "codigoExterno": "NCR-0535"
+    }
+   ],
+   "tendencia": [
+    {
+     "etiqueta": "Hace 7 semanas",
+     "desde": "02-06",
+     "hasta": "08-06",
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Hace 6 semanas",
+     "desde": "09-06",
+     "hasta": "15-06",
+     "total": 4,
+     "internas": 0,
+     "externas": 4,
+     "abiertas": 2
+    },
+    {
+     "etiqueta": "Hace 5 semanas",
+     "desde": "16-06",
+     "hasta": "22-06",
+     "total": 0,
+     "internas": 0,
+     "externas": 0,
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Hace 4 semanas",
+     "desde": "23-06",
+     "hasta": "29-06",
+     "total": 2,
+     "internas": 0,
+     "externas": 2,
+     "abiertas": 1
+    },
+    {
+     "etiqueta": "Hace 3 semanas",
+     "desde": "30-06",
+     "hasta": "06-07",
+     "total": 4,
+     "internas": 0,
+     "externas": 4,
+     "abiertas": 4
+    },
+    {
+     "etiqueta": "Hace 2 semanas",
+     "desde": "07-07",
+     "hasta": "13-07",
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    },
+    {
+     "etiqueta": "Semana pasada",
+     "desde": "14-07",
+     "hasta": "20-07",
+     "total": 0,
+     "internas": 0,
+     "externas": 0,
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Esta semana",
+     "desde": "21-07",
+     "hasta": "27-07",
+     "total": 4,
+     "internas": 0,
+     "externas": 4,
+     "abiertas": 4
+    }
+   ]
+  },
   "porMes": {
    "2023-02": 3,
    "2024-05": 1,
@@ -2186,11 +3270,60 @@ const NC = {
    }
   },
   "porEmision": {
-   "Externa Subcontrato": 48,
-   "Externa Cliente": 217,
-   "Interna BSMT": 162,
-   "Sin clasificar": 1
+   "Interna BSMT": {
+    "total": 162,
+    "cerradas": 151,
+    "abiertas": 11,
+    "atrasadas": 0,
+    "pctCierre": 93.2,
+    "internas": 162,
+    "externas": 0,
+    "costo": 1502.9,
+    "conCosto": 87,
+    "medianaCierre": 26,
+    "maxCierre": 297
+   },
+   "Externa Cliente": {
+    "total": 217,
+    "cerradas": 198,
+    "abiertas": 19,
+    "atrasadas": 0,
+    "pctCierre": 91.2,
+    "internas": 0,
+    "externas": 217,
+    "costo": 6073.3,
+    "conCosto": 127,
+    "medianaCierre": 21,
+    "maxCierre": 187
+   },
+   "Externa Subcontrato": {
+    "total": 48,
+    "cerradas": 48,
+    "abiertas": 0,
+    "atrasadas": 0,
+    "pctCierre": 100.0,
+    "internas": 0,
+    "externas": 48,
+    "costo": 3207.1,
+    "conCosto": 42,
+    "medianaCierre": 181,
+    "maxCierre": 313
+   },
+   "Sin clasificar": {
+    "total": 1,
+    "cerradas": 1,
+    "abiertas": 0,
+    "atrasadas": 0,
+    "pctCierre": 100.0,
+    "internas": 0,
+    "externas": 0,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": 15,
+    "maxCierre": 15
+   }
   },
+  "autodeteccion": 37.9,
   "porEspecialidad": {
    "OO.CC": {
     "total": 167,
@@ -2522,6 +3655,240 @@ const NC = {
    "2025": 292,
    "2026": 122
   },
+  "ventanas": {
+   "semana": {
+    "total": 4,
+    "cerradas": 0,
+    "abiertas": 4,
+    "atrasadas": 0,
+    "pctCierre": 0.0,
+    "internas": 0,
+    "externas": 4,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": null,
+    "maxCierre": null
+   },
+   "mes": {
+    "total": 9,
+    "cerradas": 0,
+    "abiertas": 9,
+    "atrasadas": 0,
+    "pctCierre": 0.0,
+    "internas": 0,
+    "externas": 9,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": null,
+    "maxCierre": null
+   },
+   "trimestre": {
+    "total": 36,
+    "cerradas": 22,
+    "abiertas": 14,
+    "atrasadas": 0,
+    "pctCierre": 61.1,
+    "internas": 4,
+    "externas": 32,
+    "costo": 0.0,
+    "conCosto": 4,
+    "medianaCierre": 24,
+    "maxCierre": 73
+   }
+  },
+  "semana": {
+   "desde": "21-07-2026",
+   "hasta": "27-07-2026",
+   "total": 4,
+   "internas": 0,
+   "externas": 4,
+   "abiertas": 4,
+   "cerradas": 0,
+   "porOrigen": {
+    "Externa": 4
+   },
+   "porEmision": {
+    "Externa Cliente": 4
+   },
+   "porEspecialidad": {
+    "OO.CC": {
+     "total": 3,
+     "internas": 0,
+     "externas": 3,
+     "abiertas": 3
+    },
+    "MECÁNICA": {
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    }
+   },
+   "porProyecto": {
+    "Talabre": {
+     "total": 3,
+     "internas": 0,
+     "externas": 3,
+     "abiertas": 3
+    },
+    "Desaladora": {
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    }
+   },
+   "porTipo": {
+    "No Conformidad": {
+     "total": 3,
+     "internas": 0,
+     "externas": 3,
+     "abiertas": 3
+    },
+    "Producto No Conforme": {
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    }
+   },
+   "detalle": [
+    {
+     "fecha": "21-07-2026",
+     "proy": "Talabre",
+     "n": "237",
+     "tipo": "No Conformidad",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "OO.CC",
+     "responsable": "Mauricio Rocha A.",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
+     "costo": null,
+     "codigoExterno": "RNC N°445"
+    },
+    {
+     "fecha": "21-07-2026",
+     "proy": "Talabre",
+     "n": "238",
+     "tipo": "Producto No Conforme",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "OO.CC",
+     "responsable": "Sebastián Ramos",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
+     "costo": null,
+     "codigoExterno": "PNC N°177"
+    },
+    {
+     "fecha": "23-07-2026",
+     "proy": "Talabre",
+     "n": "239",
+     "tipo": "No Conformidad",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "OO.CC",
+     "responsable": "Mauricio Rocha A.",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Presencia de daños visibles en el sistema de impermeabilización piscina QS.",
+     "costo": null,
+     "codigoExterno": "RNC N°447"
+    },
+    {
+     "fecha": "27-07-2026",
+     "proy": "Desaladora",
+     "n": "95",
+     "tipo": "No Conformidad",
+     "emision": "Externa Cliente",
+     "origen": "Externa",
+     "especialidad": "MECÁNICA",
+     "responsable": "Wilson Jara",
+     "estatus": "Iniciado",
+     "estado": "Abierta",
+     "titulo": "Verificación de Preservación",
+     "costo": null,
+     "codigoExterno": "NCR-0535"
+    }
+   ],
+   "tendencia": [
+    {
+     "etiqueta": "Hace 7 semanas",
+     "desde": "02-06",
+     "hasta": "08-06",
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Hace 6 semanas",
+     "desde": "09-06",
+     "hasta": "15-06",
+     "total": 4,
+     "internas": 0,
+     "externas": 4,
+     "abiertas": 2
+    },
+    {
+     "etiqueta": "Hace 5 semanas",
+     "desde": "16-06",
+     "hasta": "22-06",
+     "total": 0,
+     "internas": 0,
+     "externas": 0,
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Hace 4 semanas",
+     "desde": "23-06",
+     "hasta": "29-06",
+     "total": 2,
+     "internas": 0,
+     "externas": 2,
+     "abiertas": 1
+    },
+    {
+     "etiqueta": "Hace 3 semanas",
+     "desde": "30-06",
+     "hasta": "06-07",
+     "total": 4,
+     "internas": 0,
+     "externas": 4,
+     "abiertas": 4
+    },
+    {
+     "etiqueta": "Hace 2 semanas",
+     "desde": "07-07",
+     "hasta": "13-07",
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
+    },
+    {
+     "etiqueta": "Semana pasada",
+     "desde": "14-07",
+     "hasta": "20-07",
+     "total": 0,
+     "internas": 0,
+     "externas": 0,
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Esta semana",
+     "desde": "21-07",
+     "hasta": "27-07",
+     "total": 4,
+     "internas": 0,
+     "externas": 4,
+     "abiertas": 4
+    }
+   ]
+  },
   "porMes": {
    "2024-05": 1,
    "2024-10": 2,
@@ -2582,6 +3949,18 @@ const NC = {
   "CONTROL DOCUMENTOS",
   "PINTURA"
  ],
+ "etiquetasEmision": {
+  "Interna BSMT": "Interna (Besalco)",
+  "Externa Cliente": "Externa · Cliente",
+  "Externa Subcontrato": "Externa · Subcontrato",
+  "Sin clasificar": "Sin clasificar"
+ },
+ "frasesEmision": {
+  "Interna BSMT": "de Besalco",
+  "Externa Cliente": "del cliente",
+  "Externa Subcontrato": "de un subcontrato",
+  "Sin clasificar": "sin clasificar"
+ },
  "abiertas": [
   {
    "proy": "TALABRE",
@@ -3176,6 +4555,10 @@ const $ = (id) => document.getElementById(id);
 const pct = (a,b) => b ? Math.round(1000*a/b)/10 : 0;
 const pctTxt = (a,b) => pct(a,b).toLocaleString('es-CL') + '%';
 const fmt = (n) => (n == null ? '—' : n.toLocaleString('es-CL'));
+/* La vía de emisión se rotula con el diccionario que trae el propio JSON:
+   si mañana aparece una nueva, se agrega en no_conformidades.py y nada más. */
+const emis = (k) => (NC.etiquetasEmision || {})[k] || k;
+const emisFrase = (k) => (NC.frasesEmision || {})[k] || k;
 const css = (v) => getComputedStyle(document.querySelector('.viz-root')).getPropertyValue(v).trim();
 
 const tip = $('tip');
@@ -3267,16 +4650,25 @@ function render() {
   const D = activo === 'CORP' ? NC.global : NC.proyectos[activo];
   const R = D.resumen;
   const corp = activo === 'CORP';
-  ['chCierre','chOrigen','chTipo','chEsp','chAnt','chAnio'].forEach(id => $(id).innerHTML = '');
+  ['chCierre','chOrigen','chTipo','chEsp','chAnt','chAnio','chNvEsp','chNvDim','chNvTend']
+    .forEach(id => $(id).innerHTML = '');
   const ord1=css('--ord-1'), ord2=css('--ord-2'), ord3=css('--ord-3');
   const blue=css('--blue'), amber=css('--amber'), red=css('--red'), good=css('--st-good');
+  const orange=css('--orange');
 
   /* KPIs */
   const ab = NC.abiertas.filter(a => corp || a.proy === activo);
   const viejas = ab.filter(a => (a.dias||0) > 180).length;
+  const S = D.semana, tend = S.tendencia, prev = tend[tend.length-2];
+  const mxTend = Math.max(1, ...tend.map(t => t.total));
   $('kpis').innerHTML =
     kpiN('Hallazgos levantados', fmt(R.total), corp ? `en ${NC.orden.length} frentes` : 'en el proyecto',
       `${fmt(R.internas)} internas · ${fmt(R.externas)} externas`, '--teal', 100) +
+    kpiN('Levantados esta semana', fmt(S.total), S.total === 1 ? 'hallazgo' : 'hallazgos',
+      `${fmt(S.internas)} ${S.internas === 1 ? 'interna' : 'internas'} · ` +
+      `${fmt(S.externas)} ${S.externas === 1 ? 'externa' : 'externas'}` +
+      ` · semana anterior: ${fmt(prev.total)}`,
+      S.total ? '--amber' : '--st-good', 100*S.total/mxTend) +
     kpi('Cierre de hallazgos', R.cerradas, R.total,
       `${fmt(R.abiertas)} abiertas` + (viejas ? ` · <span class="alert">${fmt(viejas)} con más de 180 días</span>` : ''), '--blue') +
     kpiN('NC abiertas', fmt(R.abiertas), R.abiertas === 1 ? 'hallazgo' : 'hallazgos',
@@ -3294,8 +4686,9 @@ function render() {
   $('subCierre').textContent = corp
     ? `${fmt(R.cerradas)} de ${fmt(R.total)} hallazgos cerrados (${pctTxt(R.cerradas,R.total)})`
     : `${fmt(R.cerradas)} cerrados y ${fmt(R.abiertas)} abiertos de ${fmt(R.total)} levantados`;
-  $('subOrigen').textContent =
-    `Interna = la levanta Besalco · Externa = la levanta el cliente o un subcontrato`;
+  $('subOrigen').innerHTML =
+    `Interna = la levanta Besalco · Externa = la levanta el cliente o un subcontrato — ` +
+    `autodetección: <b>${(D.autodeteccion ?? 0).toLocaleString('es-CL')}%</b> de los hallazgos clasificados los detecta Besalco`;
   $('subTipo').textContent =
     `No Conformidad y Producto No Conforme son los hallazgos que exigen acción correctiva`;
   $('subEsp').textContent =
@@ -3325,18 +4718,95 @@ function render() {
   }
   legend($('lgCierre'), [[blue,'Cerradas'],[red,'Abiertas']]);
 
-  /* origen */
+  /* origen — la externa se abre en cliente y subcontrato: no se gestionan igual */
   const filasOrigen = corp ? NC.orden.map(p => [NC.proyectos[p].nombre, NC.proyectos[p]])
                            : [[NC.proyectos[activo].nombre, D]];
   for (const [nom, src] of filasOrigen) {
-    const o = src.porOrigen || {}, t = (src.resumen||R).total;
+    const e = src.porEmision || {}, o = src.porOrigen || {}, t = (src.resumen||R).total;
+    const g = (k) => (e[k]||{}).total||0;
     stackRow($('chOrigen'), `<b>${nom}</b>${fmt(t)} levantados`, t, [
-      {v:(o['Interna']||{}).total||0, c:ord1, name:'Interna (Besalco)', inkLabel:'#ffffff'},
-      {v:(o['Externa']||{}).total||0, c:amber, name:'Externa (cliente o subcontrato)', inkLabel:'#0b0b0b'},
-      {v:(o['Sin clasificar']||{}).total||0, name:'Sin clasificar', track:true}
+      {v:g('Interna BSMT'), c:ord1, name:emis('Interna BSMT'), inkLabel:'#ffffff'},
+      {v:g('Externa Cliente'), c:amber, name:emis('Externa Cliente'), inkLabel:'#0b0b0b'},
+      {v:g('Externa Subcontrato'), c:orange, name:emis('Externa Subcontrato'), inkLabel:'#0b0b0b'},
+      {v:g('Sin clasificar'), name:'Sin clasificar', track:true}
     ], `<b>${fmt((o['Externa']||{}).total||0)}</b> externas`, `${nom} — origen`);
   }
-  legend($('lgOrigen'), [[ord1,'Interna (Besalco)'],[amber,'Externa (cliente o subcontrato)'],[null,'Sin clasificar',true]]);
+  legend($('lgOrigen'), [[ord1,emis('Interna BSMT')],[amber,emis('Externa Cliente')],
+                         [orange,emis('Externa Subcontrato')],[null,'Sin clasificar',true]]);
+
+  /* novedades de la semana */
+  (function(){
+    const det = S.detalle || [];
+    const esp = Object.entries(S.porEspecialidad || {});
+    const emisTxt = Object.entries(S.porEmision || {})
+      .map(([k,v]) => `${fmt(v)} ${emisFrase(k)}`).join(' · ');
+    const dondeTxt = corp ? Object.entries(S.porProyecto || {})
+      .map(([k,v]) => `${k} ${fmt(v.total)}`).join(' · ') : '';
+
+    $('subNuevas').innerHTML = S.total
+      ? `Entre el <b>${S.desde}</b> y el <b>${S.hasta}</b> se ${S.total === 1 ? 'levantó' : 'levantaron'} ` +
+        `<b>${fmt(S.total)}</b> ${S.total === 1 ? 'hallazgo' : 'hallazgos'}: ` +
+        `<b>${fmt(S.internas)}</b> ${S.internas === 1 ? 'interna' : 'internas'} y ` +
+        `<b>${fmt(S.externas)}</b> ${S.externas === 1 ? 'externa' : 'externas'} (${emisTxt})` +
+        (dondeTxt ? ` — ${dondeTxt}` : '') + `. ` +
+        `${S.abiertas === S.total ? (S.total === 1 ? 'Sigue abierto' : 'Todos siguen abiertos')
+                                  : `${fmt(S.abiertas)} ${S.abiertas === 1 ? 'sigue abierto' : 'siguen abiertos'}`}. ` +
+        `Contexto: ${fmt(D.ventanas.mes.total)} en los últimos 30 días y ${fmt(D.ventanas.trimestre.total)} en los últimos 90.`
+      : `No se levantaron hallazgos entre el <b>${S.desde}</b> y el <b>${S.hasta}</b>. ` +
+        `Contexto: ${fmt(D.ventanas.mes.total)} en los últimos 30 días y ${fmt(D.ventanas.trimestre.total)} en los últimos 90.`;
+
+    /* Por disciplina y, debajo, por frente (corporativo) o por tipo (proyecto).
+       Los tres cortes se dibujan igual: partidos en interna y externa. */
+    const cortes = (cont, pares) => {
+      const mx = Math.max(1, ...pares.map(([,v]) => v.total));
+      for (const [e,v] of pares) {
+        stackRow($(cont), `<b>${e}</b>${fmt(v.abiertas)} ${v.abiertas === 1 ? 'abierto' : 'abiertos'}`, mx, [
+          {v:v.internas, c:ord1,  name:'Interna (Besalco)', inkLabel:'#ffffff'},
+          {v:v.externas, c:amber, name:'Externa (cliente o subcontrato)', inkLabel:'#0b0b0b'},
+          {v:mx - v.total, name:'', track:true}
+        ], `<b>${fmt(v.total)}</b>`, `${e} — levantados en la semana`);
+      }
+    };
+    const dim = Object.entries((corp ? S.porProyecto : S.porTipo) || {});
+    $('hNvDim').textContent = corp ? 'Por frente' : 'Por tipo de hallazgo';
+    $('hNvDim').hidden = !dim.length;
+    if (esp.length) {
+      cortes('chNvEsp', esp);
+      cortes('chNvDim', dim);
+      legend($('lgNvEsp'), [[ord1,'Interna (Besalco)'],[amber,'Externa (cliente o subcontrato)']]);
+    } else {
+      $('chNvEsp').innerHTML = '<p class="nvvacio">Ninguna disciplina registró hallazgos nuevos.</p>';
+      $('lgNvEsp').innerHTML = '';
+    }
+
+    /* ritmo de las 8 semanas: sin él, un número suelto no dice si fue alta o baja */
+    for (const w of tend) {
+      const row = $('chNvTend');
+      const antes = row.childElementCount;
+      stackRow(row, `<b>${w.etiqueta}</b>${w.desde} al ${w.hasta}`, mxTend, [
+        {v:w.abiertas, c:red, name:'Aún abiertos', inkLabel:'#ffffff'},
+        {v:w.total - w.abiertas, c:blue, name:'Ya cerrados', inkLabel:'#ffffff'},
+        {v:mxTend - w.total, name:'', track:true}
+      ], `<b>${fmt(w.total)}</b>`, `${w.etiqueta} (${w.desde} al ${w.hasta})`);
+      if (w === tend[tend.length-1]) row.children[antes].classList.add('nvhoy');
+    }
+    legend($('lgNvTend'), [[red,'Aún abiertos'],[blue,'Ya cerrados']]);
+
+    /* detalle uno a uno */
+    $('hNvDet').hidden = !det.length;
+    $('tbNuevas').innerHTML = det.length
+      ? `<tr><th>Fecha</th>${corp ? '<th>Frente</th>' : ''}<th class="num">N°</th><th>Tipo</th>
+         <th>Origen</th><th>Disciplina</th><th>Responsable</th><th>Estado</th><th>Título</th></tr>` +
+        det.map(x => `<tr><td>${x.fecha}</td>${corp ? `<td>${x.proy}</td>` : ''}
+          <td class="num">${x.n || '—'}${x.codigoExterno ? `<br><span class="areaname">${x.codigoExterno}</span>` : ''}</td>
+          <td>${x.tipo}</td>
+          <td><span class="chip ${x.origen === 'Interna' ? 'int' : 'ext'}">${emis(x.emision)}</span></td>
+          <td>${x.especialidad}</td><td>${x.responsable}</td>
+          <td>${x.estado === 'Abierta' ? `<span class="chip warn">${x.estatus}</span>`
+                                       : '<span class="chip good">✓ Cerrado</span>'}</td>
+          <td>${(x.titulo || '').slice(0,90)}</td></tr>`).join('')
+      : '';
+  })();
 
   /* tipo */
   for (const [t, r] of Object.entries(D.porTipo)) {

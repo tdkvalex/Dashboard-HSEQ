@@ -30,6 +30,11 @@ Ver [`modulo_nc/README.md`](modulo_nc/README.md).
 cd modulo_nc && python3 no_conformidades.py --data <Data_NCR.xlsx>
 ```
 
+El panel abre con **«Levantados en la última semana»** (cuántos, de qué disciplina, internos o
+externos, y el detalle uno a uno). Esa ventana se cuenta contra `--hoy`, que por defecto es el
+día en que se corre: si se reprocesa un corte pasado hay que pasar `--hoy AAAA-MM-DD`, o la
+semana sale vacía.
+
 **Ojo con el atraso:** la regla es «abierta con la fecha comprometida vencida», pero la columna
 «Fecha De Cierre» del Excel **solo se llena al cerrar**, así que ninguna NC abierta tiene fecha
 y el atraso NO es calculable. El panel lo declara y usa la antigüedad en su lugar. Si algún día

@@ -14,6 +14,20 @@ Dashboard de los hallazgos de calidad de los tres proyectos **y de Oficina Centr
 
 **Semáforo:** Talabre *Crítico* · el resto *Al día*.
 
+### Levantados en la última semana (21-07 → 27-07): 4
+
+Todos **externos del cliente** y todos **siguen abiertos**. Ninguno lo detectó Besalco.
+
+| Fecha | Frente | N° | Tipo | Origen | Disciplina | Responsable |
+|---|---|---|---|---|---|---|
+| 21-07 | Talabre | 237 · RNC N°445 | No Conformidad | Externa · Cliente | OO.CC | Mauricio Rocha A. |
+| 21-07 | Talabre | 238 · PNC N°177 | Producto No Conforme | Externa · Cliente | OO.CC | Sebastián Ramos |
+| 23-07 | Talabre | 239 · RNC N°447 | No Conformidad | Externa · Cliente | OO.CC | Mauricio Rocha A. |
+| 27-07 | Desaladora | 95 · NCR-0535 | No Conformidad | Externa · Cliente | MECÁNICA | Wilson Jara |
+
+Ritmo de las últimas 8 semanas: **1 · 4 · 0 · 2 · 4 · 1 · 0 · 4**. La semana está dentro de lo
+habitual en volumen; lo que no es habitual es que **ninguna** sea de autodetección.
+
 ---
 
 ## Actualización
@@ -54,7 +68,13 @@ que se levantó cada hallazgo abierto. Al corte: mediana 108 días, y **2 llevan
 ### Otras definiciones
 
 - **Interna** = la levanta Besalco (`Interna BSMT`) · **Externa** = la levanta el cliente o un
-  subcontrato (`Externa Cliente`, `Externa Subcontrato`).
+  subcontrato (`Externa Cliente`, `Externa Subcontrato`). Las dos externas se muestran por
+  separado: la del cliente compromete el contrato, la del subcontrato la absorbe Besalco.
+  Al corte: 162 internas · 217 del cliente · 48 de subcontrato · 9 sin clasificar.
+- **Autodetección** = qué parte de los hallazgos clasificados los levanta Besalco. Global
+  **37,9%**; por frente, Desaladora 59,6% · Arqueros 56,4% · **Talabre 22,2%**.
+- **La semana** = lo levantado en los últimos 7 días (`creada > hoy − 7 días`). Cada pestaña
+  muestra la suya: la corporativa los cuatro frentes y cada proyecto solo los propios.
 - **Abierta** = todo estatus distinto de «Cerrado»: *Iniciado*, *Listo para revisión* y
   *No aceptado*. Se conserva el estatus original, porque «No aceptado» no se gestiona igual
   que «Iniciado».
