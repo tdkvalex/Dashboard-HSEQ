@@ -494,9 +494,15 @@ if (fs.existsSync(rutaDes)) {
     bold: true, color: C.white, margin: 0 });
   s.addText(`${X.meta.descripcion} · ${X.meta.cliente}`, { x: 0.85, y: 2.9, w: 10.5, h: 0.5,
     fontFace: FT, fontSize: 16, color: C.ice, margin: 0 });
+  // Los componentes no suman al universo (son entregas parciales de un
+  // subsistema ya contado): se dice en la portada para que la cifra no baile
+  // contra el reporte gerencial, que trae dos filas más.
+  const XCO = X.componentes || { total: 0 };
   s.addText(`Contrato ${X.meta.contrato} · ${nf(XS.total)} subsistemas ` +
-    `(${Object.entries(XS.porTipo).map(([k, v]) => `${nf(v)} ${k}`).join(" · ")}) en ${zonas.join(" y ")}.`,
-    { x: 0.85, y: 3.45, w: 9.6, h: 0.9, fontFace: FT, fontSize: 13.5, color: C.steel, lineSpacing: 20, margin: 0 });
+    `(${Object.entries(XS.porTipo).map(([k, v]) => `${nf(v)} ${k}`).join(" · ")}) en ${zonas.join(" y ")}.` +
+    (XCO.total ? `\nNo suman al universo ${nf(XCO.total)} componentes ya entregados: ` +
+      `son entregas parciales de un subsistema que ya está contado.` : ""),
+    { x: 0.85, y: 3.45, w: 9.6, h: 1.1, fontFace: FT, fontSize: 13.5, color: C.steel, lineSpacing: 20, margin: 0 });
 
   const kpx = [
     [opV ? pct(opV.realizada, opV.aplica) : "—", `Caminata ${XC.Operable ? XC.Operable.vigente : 2} · Operables`],

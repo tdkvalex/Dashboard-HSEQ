@@ -110,15 +110,21 @@ El área **3000** concentra 707 de los 830 P1 abiertos (85,2%).
 
 ## Desaladora — indicadores al corte 27-07-2026
 
-**97 subsistemas** (80 Operables · 15 Facility · 2 Componentes) en dos zonas:
-Planta Desaladora (75) y Estación de Bombeo 2 (22).
+**95 subsistemas** (80 Operables · 15 Facility) en dos zonas:
+Planta Desaladora (74) y Estación de Bombeo 2 (21).
+
+El reporte gerencial trae **97 filas**: las otras dos son **componentes ya entregados**
+(`0587-ESL-201 Comp 1` y `4515-ESL-201-Comp 1`), entregas parciales de un subsistema que ya
+está contado. No suman al universo —sumarlos duplicaría alcance— y se informan aparte en
+«Control de calidad del dato». El universo de 95 es el que declara la propia hoja
+«Resumen general» del archivo: 80 operables y 15 facility.
 
 | Frente | Indicador | Valor |
 |---|---|---|
 | Caminatas | Caminata 2 — Operables | **41/80 · 51,3%** |
 | Caminatas | Caminata 1 — Facility | **10/15 · 66,7%** |
-| Carpetas | Entregadas al cliente | **39/97 · 40,2%** |
-| Carpetas | Aprobadas / Rechazadas / En preparación | **22 / 9 / 14** |
+| Carpetas | Entregadas al cliente | **37/95 · 38,9%** |
+| Carpetas | Aprobadas / Rechazadas / En preparación | **20 / 9 / 14** |
 | Punch P1 | Cerrados | **592/829 · 71,4%** |
 | Punch P1 | Abiertos (de ellos, atrasados) | **237 (178)** |
 | Punch total | Cerrados | **960/1.386 · 69,3%** |
@@ -159,7 +165,10 @@ los dos archivos de origen. Al corte actual:
   945 cerrados / 441 abiertos, y el punch list 960 / 426. También difieren las categorías
   (P0: 41 vs 20). **El panel usa el punch list**, que es la fuente ítem a ítem; la diferencia
   queda documentada en pantalla en vez de resolverse en silencio.
-- 47 de los 97 subsistemas no tienen ningún punch levantado.
+- 45 de los 95 subsistemas no tienen ningún punch levantado.
+- Los 2 componentes que quedan fuera del universo **no tienen ningún punch asociado**:
+  excluirlos no saca de la vista ningún pendiente. El script lo verifica y avisa si algún
+  día lo tuvieran.
 
 ---
 
@@ -266,8 +275,8 @@ Facility por la 1), sumando lo realizado de cada tipo.
 
 | Indicador | Valor |
 |---|---|
-| Subsistemas en control | **451** (MASA 135 · Desaladora 97 · Talabre 219) |
-| Caminata vigente realizada | **313/451 · 69,4%** |
+| Subsistemas en control | **449** (MASA 135 · Desaladora 95 · Talabre 219) |
+| Caminata vigente realizada | **311/449 · 69,3%** |
 | Detalles de terminación levantados | **6.300** |
 | Cierre de detalles (todas las prioridades) | **3.721/6.300 · 59,1%** |
 | Cierre de detalles P1 | **2.053/3.152 · 65,1%** |

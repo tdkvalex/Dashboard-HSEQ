@@ -1,5 +1,5 @@
 {
- "generado": "2026-07-27 21:02",
+ "generado": "2026-07-31 18:00",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -29,10 +29,10 @@
    "qaqc": "DES",
    "cierre": {
     "corte": "27-07-2026",
-    "subs": 97,
+    "subs": 95,
     "cam": {
-     "realizada": 53,
-     "aplica": 97
+     "realizada": 51,
+     "aplica": 95
     },
     "p1": {
      "total": 829,
@@ -50,8 +50,8 @@
     },
     "carpeta": {
      "tipo": "estado",
-     "entregadas": 39,
-     "total": 97
+     "entregadas": 37,
+     "total": 95
     },
     "cierrePct": 71.4,
     "sem": [
@@ -252,7 +252,7 @@
   "cierre": {
    "activo": true,
    "proyectos": 3,
-   "subs": 451,
+   "subs": 449,
    "detalles": 6300,
    "cerrados": 3721,
    "abiertos": 2494,

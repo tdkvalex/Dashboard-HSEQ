@@ -41,6 +41,12 @@ CAMINATA — el archivo trae el número con y sin ceros ('001' y '1'): se unific
     al entero. En las caminatas del reporte gerencial, «Ejecutada» = realizada,
     «N/A» = no aplica a ese tipo de subsistema, vacío o «…...» = pendiente.
 
+UNIVERSO — los subsistemas del proyecto son los Operables y los Facility (95 al
+    corte: 80 + 15, tal como los declara la hoja «Resumen general»). Los
+    «Componente» son entregas parciales de un subsistema que ya está contado, así
+    que NO suman al universo: se informan aparte, con su estado. Ver
+    FUERA_DEL_UNIVERSO.
+
 CARPETA — estatus del Certificado de Entrega de Término de Construcción:
     Aprobada CC / Aprobada -> Aprobada        En Rev. AMSA -> En revisión
     Rechazada -> Rechazada                    Proceso BSMT -> En preparación
@@ -112,6 +118,15 @@ CARPETA_ORDEN = ["Aprobada", "En revisión", "Rechazada",
                  "En preparación", "Sin entregar"]
 
 ZONA_NOMBRES = {"Desaladora": "Planta Desaladora", "EB-2": "Estación de Bombeo 2"}
+
+# Tipos que NO son subsistemas del universo. Un «Componente» es una entrega
+# parcial de un subsistema que ya está en la lista —«0587-ESL-201 Comp 1» cuelga
+# de «0587-ESL-201»—, así que contarlo suma dos veces el mismo alcance físico e
+# infla el universo. Quedan fuera del conteo y se informan aparte, con su estado.
+# Regla validada por el jefe de calidad del proyecto (30-07-2026) y respaldada
+# por la hoja «Resumen general» del propio archivo, que declara 80 operables y
+# 15 facility: el universo es 95, no 97.
+FUERA_DEL_UNIVERSO = {"Componente"}
 
 avisos = []
 
@@ -320,7 +335,39 @@ def resumir(items):
     }
 
 
-def construir(corte, subs, items, hoy, declarado):
+def padre_de(id_comp):
+    """Subsistema del que cuelga un componente: «4515-ESL-201-Comp 1» -> «4515-ESL-201»."""
+    return re.sub(r"[\s\-_]*comp\.?\s*\d*\s*$", "", id_comp, flags=re.I).strip()
+
+
+def construir(corte, todos, items, hoy, declarado):
+    # ---------- universo del proyecto ----------
+    # Los componentes salen del universo (ver FUERA_DEL_UNIVERSO) pero no se
+    # pierden: van a su propio bloque con el estado de cada uno.
+    subs = [s for s in todos if s["tipo"] not in FUERA_DEL_UNIVERSO]
+    fuera = [s for s in todos if s["tipo"] in FUERA_DEL_UNIVERSO]
+
+    ids_univ = {s["id"] for s in subs}
+    componentes = {
+        "total": len(fuera),
+        "entregados": sum(1 for s in fuera if s["carpeta"] in CARPETA_ENTREGADAS),
+        "detalle": [{
+            "id": s["id"], "tipo": s["tipo"], "zona": s["zona"],
+            "padre": padre_de(s["id"]) if padre_de(s["id"]) in ids_univ else None,
+            "carpeta": s["carpeta"], "tarjetaVerde": s["tarjetaVerde"],
+            "caminatas": [n for n in (1, 2, 3) if s["cam"][n] == "Realizada"],
+        } for s in sorted(fuera, key=lambda x: x["id"])],
+    }
+    for c in componentes["detalle"]:
+        if c["padre"] is None:
+            avisos.append(
+                f"Componente «{c['id']}» no tiene un subsistema padre en el reporte: "
+                f"queda fuera del universo igual, pero conviene revisarlo con el proyecto")
+        if c["carpeta"] not in CARPETA_ENTREGADAS:
+            avisos.append(
+                f"Componente «{c['id']}» está fuera del universo pero su carpeta sigue "
+                f"«{c['carpeta']}»: no está entregado — confirmar el tratamiento")
+
     # ---------- subsistemas ----------
     tipos = Counter(s["tipo"] for s in subs)
     zonas = Counter(s["zona"] for s in subs)
@@ -464,8 +511,13 @@ def construir(corte, subs, items, hoy, declarado):
 
     # ---------- control cruzado con el reporte gerencial ----------
     ids_rep = {s["id"] for s in subs}
+    ids_fuera = {s["id"] for s in fuera}
     ids_punch = {i["sub"] for i in items}
-    huerfanos = sorted(ids_punch - ids_rep)
+    # Los componentes están en el reporte aunque no en el universo: no son
+    # huérfanos. Sí se cuenta aparte su punch, porque si algún día tienen ítems
+    # abiertos, dejarlos fuera del universo escondería trabajo pendiente.
+    huerfanos = sorted(ids_punch - ids_rep - ids_fuera)
+    punch_fuera = sum(1 for i in items if i["sub"] in ids_fuera)
     control = {
         "punchTotal": len(items),
         "subsEnReporte": len(ids_rep),
@@ -474,8 +526,15 @@ def construir(corte, subs, items, hoy, declarado):
         "punchSinSubsistemaEnReporte": huerfanos[:20],
         "nHuerfanos": len(huerfanos),
         "itemsHuerfanos": sum(1 for i in items if i["sub"] in set(huerfanos)),
+        "filasReporte": len(todos),
+        "fueraDelUniverso": len(fuera),
+        "punchEnFueraDelUniverso": punch_fuera,
         "contraste": [],
     }
+    if punch_fuera:
+        avisos.append(
+            f"{punch_fuera} ítem(s) de punch están asignados a componentes, que quedan fuera "
+            f"del universo — revisar si deben contarse en el subsistema padre")
     # Contraste del punch: reporte gerencial (tally por subsistema) vs punch list
     # (fuente ítem a ítem). Manda el punch list; la diferencia se informa.
     rep = declarado.get("_punch", {})
@@ -545,7 +604,9 @@ def construir(corte, subs, items, hoy, declarado):
             "porTipo": dict(tipos),
             "porZona": dict(zonas),
             "zonaNombres": {z: ZONA_NOMBRES.get(z, z) for z in zonas},
+            "filasReporte": len(todos),
         },
+        "componentes": componentes,
         "caminatas": caminatas,
         "caminatasPorTipo": camPorTipo,
         "caminatasPorZona": camPorZona,
@@ -622,6 +683,15 @@ def main():
     print(f"\nSUBSISTEMAS: {s['total']}")
     print("  por tipo:", " · ".join(f"{k} {v}" for k, v in s["porTipo"].items()))
     print("  por zona:", " · ".join(f"{k} {v}" for k, v in s["porZona"].items()))
+    comp = datos.get("componentes", {})
+    if comp.get("total"):
+        print(f"  fuera del universo: {comp['total']} componente(s), "
+              f"{comp['entregados']} entregado(s) — el reporte trae {s['filasReporte']} filas")
+        for cx in comp["detalle"]:
+            print(f"    {cx['id']:24s} {cx['zona']:11s} carpeta {cx['carpeta']:14s} "
+                  f"caminatas {','.join(map(str, cx['caminatas'])) or '—':5s} "
+                  f"tarjeta verde {'SI' if cx['tarjetaVerde'] else 'no':3s} "
+                  f"· cuelga de {cx['padre'] or '(sin padre en el reporte)'}")
 
     print("\nCAMINATAS")
     for n in ("1", "2", "3"):

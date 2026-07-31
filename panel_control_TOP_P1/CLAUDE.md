@@ -56,6 +56,13 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 - **Caminata vigente** = la que cada proyecto declara como su indicador:
   MASA → Caminata 2 · Talabre → Caminata 2 · **Desaladora → depende del tipo de subsistema**
   (Operables por la 2, Facility por la 1, según declara su hoja «Resumen general»).
+- **Desaladora: los «Componente» NO son subsistemas del universo.** Son entregas parciales de
+  un subsistema que ya está contado (`0587-ESL-201 Comp 1` cuelga de `0587-ESL-201`), así que
+  sumarlos duplica alcance. El universo son Operables + Facility = **95**, igual que declara
+  la hoja «Resumen general» del propio archivo. Los componentes se informan aparte, con su
+  estado, en el bloque `componentes` del JSON y en «Control de calidad del dato».
+  *Lo pidió Juan Vergara, jefe de calidad del proyecto (30-07-2026), y el usuario lo aprobó.*
+  La constante es `FUERA_DEL_UNIVERSO` en `desaladora.py`.
 - **Detalles de terminación = punch list = DT.** Mismo concepto, se suman.
 - **Prioridades al dígito**: `P1A→P1`, `P2B→P2`, `P3C→P3`. `P0` (Desaladora) y `P4` (Talabre)
   se mantienen aparte.
@@ -102,6 +109,11 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 - **Talabre: el corte es `meta.hoy`**, la fecha de referencia de los atrasos. `meta.ultimaAgenda`
   guarda la caminata agendada más lejana, que es una **fecha futura** y no debe usarse como corte
   (hacía que el informe se descargara con fecha 10-08 en vez de 27-07).
+- **Desaladora: el reporte gerencial trae 97 filas pero el universo es 95.** Las dos de
+  diferencia son componentes (ver regla de homologación). `subsistemas.filasReporte` guarda el
+  conteo bruto para que el cruce contra el archivo siga siendo trazable. El script verifica
+  que esos componentes **no tengan punch asociado** —si algún día lo tienen, avisa—, porque
+  entonces excluirlos escondería trabajo pendiente.
 
 ---
 
