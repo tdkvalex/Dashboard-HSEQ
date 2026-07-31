@@ -185,16 +185,23 @@ Líneas Impulsión 14, PQS 13, Sala GAR 8, Cerro Verde/PS2 3, Impulsión Aducci�
 
 | Frente | Indicador | Valor |
 |---|---|---|
-| Caminatas | Caminata 1 realizada | **199/219 · 90,9%** |
-| Caminatas | Caminata 2 realizada | **170/219 · 77,6%** |
+| Caminatas | Caminata 1 — sobre lo exigible | **199/206 · 96,6%** (90,9% del universo) |
+| Caminatas | Caminata 2 — sobre lo exigible | **170/179 · 95,0%** (77,6% del universo) |
+| Caminatas | Programadas en plazo / sin programar | **40 / 9** (caminata 2) |
 | Carpetas | Avance PEC promedio | **91,1%** |
 | Carpetas | Sobre 95% / bajo 80% | **159 / 10** |
 | DT P1 | Cerrados | **313/335 · 93,4%** |
-| DT total | Cerrados | **1.446/1.951 · 74,1%** |
-| DT total | Abiertos (de ellos, atrasados) | **505 (206)** |
+| DT P1+P2 | Cerrados | **1.366/1.653 · 82,6%** — 298 P3/P4 quedan fuera |
+| DT P1+P2 | Abiertos (de ellos, atrasados) | **287 (205)** |
 
-**Semáforo:** Cerro Verde/PS2 y Piscinas y Sedimentador *Críticos* · Impulsión Aducción y
-Sala GAR *Al día* · el resto en *Atención*.
+**Semáforo:** Piscinas y Sedimentador *Crítico* · Pozos, Impulsión Aducción y Sala GAR
+*Al día* · EBMP, EBMS, Líneas Impulsión y PQS en *Atención* · Cerro Verde/PS2 *Sin base al
+corte* (no tiene ningún detalle levantado ni ninguna caminata vigente realizada).
+
+**El avance de caminata se mide sobre lo exigible**, descontando las agendadas a fecha futura
+—que no son incumplimiento al corte— e informándolas aparte como «programadas en plazo». Con
+el universo completo como denominador, Pozos figuraba en *Atención* con 88/110 aunque sus 22
+restantes ya estaban agendadas.
 
 **Lectura:** el perfil de Talabre es **el inverso al de Desaladora**. Aquí P1 está
 prácticamente cerrado (93,4%) y el volumen pendiente está en las prioridades menores: 265 DT
@@ -283,6 +290,7 @@ Facility por la 1), sumando lo realizado de cada tipo.
 |---|---|
 | Subsistemas en control | **449** (Desaladora 95 · Talabre 219 · Arqueros 135) |
 | Caminata vigente realizada | **311/449 · 69,3%** |
+| Cierre de detalles P1+P2 | **3.600/5.773 · 62,4%** — 527 P3/P4 quedan fuera |
 | Detalles de terminación levantados | **6.300** |
 | Cierre de detalles (todas las prioridades) | **3.721/6.300 · 59,1%** |
 | Cierre de detalles P1 | **2.053/3.152 · 65,1%** |

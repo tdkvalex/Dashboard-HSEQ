@@ -414,6 +414,11 @@ if (fs.existsSync(rutaTal)) {
   const YS = Y.subsistemas, YC = Y.caminatas, YP = Y.carpetas, YT = Y.dt;
   const yp1 = YT.porPrioridad.P1 || { total: 0, cerrados: 0, abiertos: 0, atrasados: 0 };
   const yg = YT.global;
+  // P1+P2 es lo que se gestiona: los P3/P4 no se abordan mientras el cliente no
+  // formalice su ejecución. El detalle por prioridad va completo más abajo.
+  const yg12 = ["P1", "P2"].reduce((o, k) => { const v = YT.porPrioridad[k]; if (v) {
+    o.total += v.total; o.cerrados += v.cerrados; o.abiertos += v.abiertos; o.atrasados += v.atrasados; }
+    return o; }, { total: 0, cerrados: 0, abiertos: 0, atrasados: 0 });
   const CAPY = `Fuente: TalabreSTATUS_PEC + TalabreCuadro_DT · ` +
     `${nf(YS.total)} subsistemas · ${nf(yg.total)} DT · Atrasos al ${Y.meta.hoy}`;
   const c1 = YC["1"], c2 = YC["2"];
@@ -437,10 +442,10 @@ if (fs.existsSync(rutaTal)) {
     { x: 0.85, y: 3.45, w: 9.6, h: 0.9, fontFace: FT, fontSize: 13.5, color: C.steel, lineSpacing: 20, margin: 0 });
 
   const kpy = [
-    [pct(c1.realizada, c1.total), "Caminata 1 realizada"],
-    [pct(c2.realizada, c2.total), "Caminata 2 realizada"],
+    [pct(c1.realizada, c1.exigible), "Caminata 1 · exigible"],
+    [pct(c2.realizada, c2.exigible), "Caminata 2 · exigible"],
     [`${YP.promedio.toLocaleString("es-CL")}%`, "Avance PEC promedio"],
-    [pct(yg.cerrados, yg.total), "Cierre de DT"],
+    [pct(yg12.cerrados, yg12.total), "Cierre de DT P1+P2"],
   ];
   let kxy = 0.85;
   kpy.forEach(([v, l]) => {
@@ -458,10 +463,10 @@ if (fs.existsSync(rutaTal)) {
   s.addText("Estado global de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 
   const cardsY = [
-    { p: pct(c1.realizada, c1.total), v: `${nf(c1.realizada)}/${nf(c1.total)}`, t: "Caminata 1 realizada",
-      d: `${nf(c1.programada)} agendadas · ${nf(c1.pendiente)} sin programar`, c: C.blue },
-    { p: pct(c2.realizada, c2.total), v: `${nf(c2.realizada)}/${nf(c2.total)}`, t: "Caminata 2 realizada",
-      d: `${nf(c2.programada)} agendadas · ${nf(c2.pendiente)} sin programar`, c: C.blue },
+    { p: pct(c1.realizada, c1.exigible), v: `${nf(c1.realizada)}/${nf(c1.exigible)} exigibles`, t: "Caminata 1 realizada",
+      d: `${pct(c1.realizada, c1.total)} del universo · ${nf(c1.programada)} programadas en plazo · ${nf(c1.pendiente)} sin programar`, c: C.blue },
+    { p: pct(c2.realizada, c2.exigible), v: `${nf(c2.realizada)}/${nf(c2.exigible)} exigibles`, t: "Caminata 2 realizada",
+      d: `${pct(c2.realizada, c2.total)} del universo · ${nf(c2.programada)} programadas en plazo · ${nf(c2.pendiente)} sin programar`, c: C.blue },
     { p: `${YP.promedio.toLocaleString("es-CL")}%`, v: `${nf(YP.sobre95)}/${nf(YP.total)} sobre 95%`,
       t: "Avance PEC de carpetas", d: `${nf(YP.bajo80)} subsistemas bajo 80% de avance`, c: C.copper },
     { p: pct(yp1.cerrados, yp1.total), v: `${nf(yp1.cerrados)}/${nf(yp1.total)}`, t: "Cierre de DT P1",
@@ -513,7 +518,8 @@ if (fs.existsSync(rutaTal)) {
   s = p.addSlide(); bg(s, C.paper); logo(s, false);
   kicker(s, "Talabre · Frentes 1 y 2", 0.5, 0.45);
   s.addText("Caminatas y avance de carpetas", { x: 0.5, y: 0.72, w: 12.3, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
-  s.addText(`Caminata 2 realizada en ${nf(c2.realizada)} de ${nf(c2.total)} subsistemas (${pct(c2.realizada, c2.total)}). ` +
+  s.addText(`Caminata 2: ${pct(c2.realizada, c2.exigible)} de lo exigible (${nf(c2.realizada)}/${nf(c2.exigible)}) — ` +
+    `se descuentan ${nf(c2.programada)} agendadas a fecha futura, que no son incumplimiento al corte. ` +
     `Talabre mide la carpeta como % de avance (PEC), no como estado de aprobación.`,
     { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
 

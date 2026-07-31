@@ -10,7 +10,7 @@
   "corteTexto": "27-07-2026",
   "hoy": "27-07-2026",
   "ultimaAgenda": "10-08-2026",
-  "generado": "2026-07-31 18:44"
+  "generado": "2026-07-31 19:52"
  },
  "subsistemas": {
   "total": 219,
@@ -43,14 +43,18 @@
    "realizada": 199,
    "programada": 13,
    "pendiente": 7,
-   "pct": 90.9
+   "pct": 90.9,
+   "exigible": 206,
+   "pctExigible": 96.6
   },
   "2": {
    "total": 219,
    "realizada": 170,
    "programada": 40,
    "pendiente": 9,
-   "pct": 77.6
+   "pct": 77.6,
+   "exigible": 179,
+   "pctExigible": 95.0
   }
  },
  "caminatasPorArea": {
@@ -60,13 +64,15 @@
     "total": 3,
     "realizada": 2,
     "programada": 0,
-    "pendiente": 1
+    "pendiente": 1,
+    "exigible": 3
    },
    "2": {
     "total": 3,
     "realizada": 0,
     "programada": 2,
-    "pendiente": 1
+    "pendiente": 1,
+    "exigible": 1
    }
   },
   "EBMP": {
@@ -75,13 +81,15 @@
     "total": 20,
     "realizada": 19,
     "programada": 0,
-    "pendiente": 1
+    "pendiente": 1,
+    "exigible": 20
    },
    "2": {
     "total": 20,
     "realizada": 18,
     "programada": 0,
-    "pendiente": 2
+    "pendiente": 2,
+    "exigible": 20
    }
   },
   "EBMS": {
@@ -90,13 +98,15 @@
     "total": 26,
     "realizada": 22,
     "programada": 1,
-    "pendiente": 3
+    "pendiente": 3,
+    "exigible": 25
    },
    "2": {
     "total": 26,
     "realizada": 22,
     "programada": 0,
-    "pendiente": 4
+    "pendiente": 4,
+    "exigible": 26
    }
   },
   "IMPULSIÓN ADUCCIÓN": {
@@ -105,13 +115,15 @@
     "total": 3,
     "realizada": 3,
     "programada": 0,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 3
    },
    "2": {
     "total": 3,
     "realizada": 3,
     "programada": 0,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 3
    }
   },
   "LÍNEAS IMPULSIÓN": {
@@ -120,13 +132,15 @@
     "total": 14,
     "realizada": 14,
     "programada": 0,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 14
    },
    "2": {
     "total": 14,
     "realizada": 14,
     "programada": 0,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 14
    }
   },
   "PISCINAS Y SEDIMENTADOR": {
@@ -135,13 +149,15 @@
     "total": 22,
     "realizada": 9,
     "programada": 12,
-    "pendiente": 1
+    "pendiente": 1,
+    "exigible": 10
    },
    "2": {
     "total": 22,
     "realizada": 5,
     "programada": 16,
-    "pendiente": 1
+    "pendiente": 1,
+    "exigible": 6
    }
   },
   "POZOS": {
@@ -150,13 +166,15 @@
     "total": 110,
     "realizada": 110,
     "programada": 0,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 110
    },
    "2": {
     "total": 110,
     "realizada": 88,
     "programada": 22,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 88
    }
   },
   "PQS": {
@@ -165,13 +183,15 @@
     "total": 13,
     "realizada": 12,
     "programada": 0,
-    "pendiente": 1
+    "pendiente": 1,
+    "exigible": 13
    },
    "2": {
     "total": 13,
     "realizada": 12,
     "programada": 0,
-    "pendiente": 1
+    "pendiente": 1,
+    "exigible": 13
    }
   },
   "SALA GAR": {
@@ -180,13 +200,15 @@
     "total": 8,
     "realizada": 8,
     "programada": 0,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 8
    },
    "2": {
     "total": 8,
     "realizada": 8,
     "programada": 0,
-    "pendiente": 0
+    "pendiente": 0,
+    "exigible": 8
    }
   }
  },
@@ -1436,8 +1458,8 @@
  },
  "semaforo": {
   "CERRO VERDE/PS2": [
-   "crit",
-   "Crítico",
+   "nd",
+   "Sin base al corte",
    {
     "total": 0,
     "cerrados": 0,
@@ -1445,6 +1467,11 @@
     "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 1,
+    "agendadas": 2,
+    "avanceExigible": 0.0
    }
   ],
   "EBMP": [
@@ -1457,6 +1484,11 @@
     "atrasados": 11,
     "enPlazo": 0,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 20,
+    "agendadas": 0,
+    "avanceExigible": 90.0
    }
   ],
   "EBMS": [
@@ -1469,6 +1501,11 @@
     "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 26,
+    "agendadas": 0,
+    "avanceExigible": 84.6
    }
   ],
   "IMPULSIÓN ADUCCIÓN": [
@@ -1481,6 +1518,11 @@
     "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 3,
+    "agendadas": 0,
+    "avanceExigible": 100.0
    }
   ],
   "LÍNEAS IMPULSIÓN": [
@@ -1493,6 +1535,11 @@
     "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 14,
+    "agendadas": 0,
+    "avanceExigible": 100.0
    }
   ],
   "PISCINAS Y SEDIMENTADOR": [
@@ -1505,11 +1552,16 @@
     "atrasados": 0,
     "enPlazo": 8,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 6,
+    "agendadas": 16,
+    "avanceExigible": 83.3
    }
   ],
   "POZOS": [
-   "warn",
-   "Atención",
+   "good",
+   "Al día",
    {
     "total": 193,
     "cerrados": 190,
@@ -1517,6 +1569,11 @@
     "atrasados": 2,
     "enPlazo": 1,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 88,
+    "agendadas": 22,
+    "avanceExigible": 100.0
    }
   ],
   "PQS": [
@@ -1529,6 +1586,11 @@
     "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 13,
+    "agendadas": 0,
+    "avanceExigible": 92.3
    }
   ],
   "SALA GAR": [
@@ -1541,6 +1603,11 @@
     "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
+   },
+   {
+    "exigible": 8,
+    "agendadas": 0,
+    "avanceExigible": 100.0
    }
   ]
  },

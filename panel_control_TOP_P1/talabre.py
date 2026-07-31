@@ -308,6 +308,12 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
         }
         c = caminatas[str(n)]
         c["pct"] = pct1(c["realizada"], c["total"])
+        # Avance sobre lo EXIGIBLE: se descuentan las agendadas a fecha futura,
+        # que no son un incumplimiento al corte. Se guardan las dos cifras —la
+        # del universo y la de lo exigible— porque miden cosas distintas y el
+        # panel las muestra juntas: descontar no es esconder.
+        c["exigible"] = c["total"] - c["programada"]
+        c["pctExigible"] = pct1(c["realizada"], c["exigible"]) if c["exigible"] else 100.0
 
     camArea = {}
     for a in areas:
@@ -319,6 +325,7 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
                 "realizada": sum(1 for s in sa if s["cam"][n] == "Realizada"),
                 "programada": sum(1 for s in sa if s["cam"][n] == "Programada"),
                 "pendiente": sum(1 for s in sa if s["cam"][n] == "Pendiente"),
+                "exigible": len(sa) - sum(1 for s in sa if s["cam"][n] == "Programada"),
             }
 
     pendientes = sorted(
@@ -468,20 +475,34 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
     control["dtSinCompromiso"] = dt["global"]["sinCompromiso"]
 
     # ---------- semáforo por área ----------
+    # El avance de caminata se mide sobre lo EXIGIBLE, no sobre el universo: una
+    # caminata con fecha agendada todavía por llegar no es un incumplimiento hoy.
+    # Las agendadas se descuentan del denominador y se informan aparte, para que
+    # descontarlas no equivalga a esconderlas.
+    #   exigible = total − agendadas   (realizadas + las que ya debieron estar)
+    # Regla pedida por Mauricio Rocha (31-07-2026) y aprobada por el usuario.
+    # Un área SIN BASE —sin ningún detalle levantado y sin ninguna caminata
+    # vigente realizada— no se puntúa: no hay nada medido todavía y pintarla del
+    # mismo rojo que un frente con atrasos reales desinforma.
     semaforo = {}
     for a in areas:
         c2 = camArea[a]["2"]
         r = dt["p1PorArea"].get(a) or resumir([])
         cp = carpetas["porArea"][a]
-        avanceCam = pct1(c2["realizada"], c2["total"])
+        agendadas = c2.get("programada", 0)
+        exigible = c2["total"] - agendadas
+        avanceCam = pct1(c2["realizada"], exigible) if exigible else 100.0
         cierre = pct1(r["cerrados"], r["total"]) if r["total"] else 100.0
-        if avanceCam < 60 or cierre < 50 or r["atrasados"] > 20:
+        if r["total"] == 0 and c2["realizada"] == 0:
+            est = ["nd", "Sin base al corte"]
+        elif avanceCam < 60 or cierre < 50 or r["atrasados"] > 20:
             est = ["crit", "Crítico"]
         elif avanceCam < 90 or cierre < 90 or r["atrasados"] > 5 or cp["bajo80"]:
             est = ["warn", "Atención"]
         else:
             est = ["good", "Al día"]
-        semaforo[a] = est + [r]
+        semaforo[a] = est + [r, {"exigible": exigible, "agendadas": agendadas,
+                                 "avanceExigible": avanceCam}]
 
     return {
         "meta": {

@@ -78,6 +78,20 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   *Lo pidió Juan Vergara, jefe de calidad del proyecto (30-07-2026), y el usuario lo aprobó.*
   La constante es `FUERA_DEL_UNIVERSO` en `desaladora.py`.
 - **Detalles de terminación = punch list = DT.** Mismo concepto, se suman.
+- **El % de cierre de detalles se mide sobre P1+P2, no sobre todas las prioridades.**
+  Los P3 y P4 no se abordan mientras el cliente no formalice su ejecución, así que
+  incluirlos mide algo que nadie gestiona. El detalle por prioridad sigue completo en la
+  pestaña de cada proyecto. *Pedido por Mauricio Rocha (31-07-2026), aprobado por el usuario.*
+  La constante es `PRIO_GESTION` en `index.html` y se replica en `gen_ppt.js`.
+- **Caminatas: el semáforo mide sobre lo EXIGIBLE, no sobre el universo.** Una caminata con
+  fecha agendada todavía por llegar **no es un incumplimiento al corte**: se descuenta del
+  denominador (`exigible = total − agendadas`) y se informa aparte como **«programadas en
+  plazo»** — descontarlas no puede significar esconderlas. Se guardan las dos cifras (`pct`
+  sobre el universo y `pctExigible`) porque miden cosas distintas y el panel muestra ambas.
+  *Pedido por Mauricio Rocha (31-07-2026), aprobado por el usuario.*
+- **«Sin base al corte»**: un área sin ningún detalle levantado **y** sin ninguna caminata
+  vigente realizada no se puntúa. No hay nada medido, y pintarla del mismo rojo que un frente
+  con atrasos reales desinforma. Al corte aplica a Cerro Verde/PS2 en Talabre.
 - **Prioridades al dígito**: `P1A→P1`, `P2B→P2`, `P3C→P3`. `P0` (Desaladora) y `P4` (Talabre)
   se mantienen aparte.
 - **«Vencido» (Arqueros) = «Atrasado» (Desaladora, Talabre)**: ítem **abierto** cuya fecha
