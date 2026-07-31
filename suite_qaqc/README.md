@@ -18,7 +18,7 @@ Los tres cubren **los mismos tres proyectos**, con distinto nombre en cada módu
 |---|---|---|---|
 | Desaladora | Antofagasta Minerals | P2416 | Desaladora |
 | Talabre | Codelco | P2407 | Talabre |
-| Arqueros | MASA | P2342 | MASA |
+| Arqueros | MASA | P2342 | Arqueros |
 
 ---
 
@@ -27,9 +27,9 @@ Los tres cubren **los mismos tres proyectos**, con distinto nombre en cada módu
 ```bash
 # 1 · actualizar el módulo Cierre QAQC (ver panel_control_TOP_P1/CLAUDE.md)
 cd ../panel_control_TOP_P1
-python3 actualizar.py <Estatus_Resumen_General_QAQC.xlsx>
 python3 desaladora.py --reporte <REPORTE_GERENCIAL_*> --punch <Listado_Puntos_Punch_*>
 python3 talabre.py    --status  <TalabreSTATUS_PEC>   --dt    <TalabreCuadro_DT>
+python3 actualizar.py <Estatus_Resumen_General_QAQC.xlsx>   # Arqueros
 node gen_ppt.js
 
 # 2 · actualizar el módulo No Conformidades (ver modulo_nc/README.md)

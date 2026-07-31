@@ -45,7 +45,7 @@ agregan una columna de fecha comprometida, el script ya la calcula sin cambios.
 ## 2 · `panel_control_TOP_P1/` — Control de Cierre QAQC
 
 Entregable semanal de Besalco Montajes: panel HTML + PPT ejecutiva del cierre QAQC de tres
-proyectos (MASA, Desaladora, Talabre).
+proyectos (Desaladora, Talabre, Arqueros).
 
 **Es el trabajo activo.** Antes de tocar nada ahí, leer
 [`panel_control_TOP_P1/CLAUDE.md`](panel_control_TOP_P1/CLAUDE.md): tiene qué archivos pedir
@@ -56,9 +56,9 @@ Resumen de un vistazo:
 
 ```bash
 cd panel_control_TOP_P1
-python3 actualizar.py  <Estatus_Resumen_General_QAQC.xlsx>              # MASA
 python3 desaladora.py  --reporte <REPORTE_GERENCIAL_*> --punch <Listado_Puntos_Punch_*>
 python3 talabre.py     --status  <TalabreSTATUS_PEC>   --dt    <TalabreCuadro_DT>
+python3 actualizar.py  <Estatus_Resumen_General_QAQC.xlsx>   # Arqueros (cliente MASA)
 node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el panel
 ```
 

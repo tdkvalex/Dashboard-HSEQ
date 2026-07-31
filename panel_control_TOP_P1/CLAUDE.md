@@ -10,9 +10,13 @@ procesarlos y qué **no** volver a romper.
 
 | Proyecto | Archivos | Hojas que se leen |
 |---|---|---|
-| **MASA** | `Estatus_Resumen_General_QAQC.xlsx` | `BD Caminatas-CTOP`, `BD Detalles Terminación` |
 | **Desaladora** | `REPORTE_GERENCIAL_AAAAMMDD.xlsx` **+** `Listado_Puntos_Punch_Consolidado_AAAA_MM_DD.xlsx` | `REPORTE GERENCIAL`, `Resumen  general` · `LISTADO PUNCH ITEMS` |
 | **Talabre** | `TalabreSTATUS_PEC.xlsx` **+** `TalabreCuadro_DT.xlsx` | `STATUS`, `RESUMEN` · `DT` |
+| **Arqueros** (cliente MASA) | `Estatus_Resumen_General_QAQC.xlsx` | `BD Caminatas-CTOP`, `BD Detalles Terminación` |
+
+**Orden y nombre de los proyectos: Desaladora · Talabre · Arqueros**, los mismos que usa el
+módulo de Protocolos, que es la referencia de toda la suite. *Arqueros* es el proyecto y
+*MASA* el cliente; el archivo de origen y el id interno siguen llamándose MASA.
 
 Desaladora y Talabre **necesitan sus dos archivos**: uno trae subsistemas/caminatas/carpetas
 y el otro el detalle ítem a ítem. Con uno solo el proyecto queda incompleto.
@@ -25,11 +29,11 @@ sus láminas. El resumen corporativo se recalcula con los que haya.
 ## 2 · Comandos
 
 ```bash
-python3 actualizar.py /ruta/Estatus_Resumen_General_QAQC.xlsx
 python3 desaladora.py --reporte /ruta/REPORTE_GERENCIAL_*.xlsx \
                       --punch   /ruta/Listado_Puntos_Punch_Consolidado_*.xlsx
 python3 talabre.py    --status  /ruta/TalabreSTATUS_PEC.xlsx \
                       --dt      /ruta/TalabreCuadro_DT.xlsx
+python3 actualizar.py /ruta/Estatus_Resumen_General_QAQC.xlsx   # Arqueros
 node gen_ppt.js        # SIEMPRE al final
 ```
 
@@ -52,9 +56,9 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 (desplegable «Cómo se homologaron los tres proyectos») y en el README.
 
 - **Caminatas: se identifican por NÚMERO, nunca por el porcentaje que representan.**
-  El «80%» de MASA no es el «80%» de otro proyecto. MASA: «80%» = Caminata 1, «100%» = Caminata 2.
+  El «80%» de Arqueros no es el «80%» de otro proyecto. Arqueros: «80%» = Caminata 1, «100%» = Caminata 2.
 - **Caminata vigente** = la que cada proyecto declara como su indicador:
-  MASA → Caminata 2 · Talabre → Caminata 2 · **Desaladora → depende del tipo de subsistema**
+  Arqueros → Caminata 2 · Talabre → Caminata 2 · **Desaladora → depende del tipo de subsistema**
   (Operables por la 2, Facility por la 1, según declara su hoja «Resumen general»).
 - **Desaladora: los «Componente» NO son subsistemas del universo.** Son entregas parciales de
   un subsistema que ya está contado (`0587-ESL-201 Comp 1` cuelga de `0587-ESL-201`), así que
@@ -66,12 +70,12 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 - **Detalles de terminación = punch list = DT.** Mismo concepto, se suman.
 - **Prioridades al dígito**: `P1A→P1`, `P2B→P2`, `P3C→P3`. `P0` (Desaladora) y `P4` (Talabre)
   se mantienen aparte.
-- **«Vencido» (MASA) = «Atrasado» (Desaladora, Talabre)**: ítem **abierto** cuya fecha
+- **«Vencido» (Arqueros) = «Atrasado» (Desaladora, Talabre)**: ítem **abierto** cuya fecha
   comprometida ya venció. Los abiertos **sin** fecha comprometida **no** se cuentan como
   atrasados; se informan aparte.
 - **Disciplinas**: `CANERIAS→Piping` · `ELECTRICOS→Eléctrica` · `CIVIL` y
   `MOVIMIENTO DE TIERRAS→Obras Civiles` · `INSTRUMENTACION→Instrumentación y Control`.
-- **Las carpetas NO se consolidan en una cifra única.** MASA y Desaladora miden *estado de
+- **Las carpetas NO se consolidan en una cifra única.** Desaladora y Arqueros miden *estado de
   aprobación*; Talabre mide *% de avance (PEC)*. Promediarlas daría un número sin significado.
   El resumen corporativo muestra la métrica nativa de cada uno y suma solo los dos comparables.
 
@@ -119,8 +123,10 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 
 ## 5 · PPT — formato fijo (17 láminas)
 
-1 portada MASA · 2-7 MASA · 8 portada Desaladora · 9-12 Desaladora · 13 portada Talabre ·
-14-17 Talabre.
+**El mazo sigue el mismo orden que las pestañas:** 1 portada Desaladora · 2-5 Desaladora ·
+6 portada Talabre · 7-10 Talabre · 11 portada Arqueros · 12-17 Arqueros.
+Los comentarios de sección **no llevan número de lámina**: se pudren al reordenar y la
+numeración real la pone `nSlide`.
 
 - **Logo** en todas: grande (`x9.14 y0.46 w3.88 h0.84`) en portadas y láminas azules; menor
   (`x9.97 y0.24 w3.03 h0.65`) en contenido.
@@ -133,7 +139,9 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   daban 1,3:1 a 3,4:1 y el número quedaba invisible.
 - **Valores 0**: envolver en `z()` para que no se dibujen. PowerPoint los imprime pegados al
   eje, pisando la etiqueta vecina.
-- El nombre de contrato de MASA está en `PROY_MASA` (arriba de `gen_ppt.js`).
+- El nombre de contrato de Arqueros está en `PROY_MASA` (arriba de `gen_ppt.js`).
+- **`let s` se declara una sola vez**, antes del bloque de Desaladora: los tres proyectos la
+  reasignan y el orden del mazo lo fija el orden de los bloques, no el de las variables.
 
 ---
 
@@ -143,7 +151,7 @@ Los scripts reemplazan solo su bloque; el resto del archivo se edita a mano.
 
 | Marca | La escribe | Contiene |
 |---|---|---|
-| `DATOS:INICIO/FIN` | `actualizar.py` | `const D` — MASA |
+| `DATOS:INICIO/FIN` | `actualizar.py` | `const D` — Arqueros (su Excel se llama MASA) |
 | `DESALADORA:INICIO/FIN` | `desaladora.py` | `const DES` |
 | `TALABRE:INICIO/FIN` | `talabre.py` | `const TAL` |
 | `LOGO:INICIO/FIN` | `gen_ppt.js` | `const LOGOS` — logos en base64 |

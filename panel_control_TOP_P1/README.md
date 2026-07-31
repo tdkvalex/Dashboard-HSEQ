@@ -12,20 +12,17 @@ comparable.
 | Pestaña | Proyecto | Cliente | Corte | Fuente |
 |---|---|---|---|---|
 | **Resumen corporativo** | Los 3 proyectos | Besalco Montajes | — | se calcula desde los otros tres |
-| MASA | Planta Concentradora | MASA | 26-07-2026 | `Estatus_Resumen_General_QAQC.xlsx` |
 | Desaladora | PV3 Ampliación Desaladora | Minera Los Pelambres (AMSA) | 27-07-2026 | `REPORTE_GERENCIAL_*.xlsx` + `Listado_Puntos_Punch_Consolidado_*.xlsx` |
 | Talabre | Captación de agua, pozos y estaciones de bombeo | Codelco | 27-07-2026 | `TalabreSTATUS_PEC.xlsx` + `TalabreCuadro_DT.xlsx` |
+| Arqueros | Contrato Electromecánico Planta Concentradora y de Espesado | MASA | 26-07-2026 | `Estatus_Resumen_General_QAQC.xlsx` |
+
+**El orden y el nombre de los proyectos son los del módulo de Protocolos** —Desaladora,
+Talabre, Arqueros—, que es la referencia de toda la suite. *Arqueros* es el proyecto y *MASA*
+el cliente; el Excel de origen y el id interno siguen llamándose MASA.
 
 ---
 
 ## 🔄 Actualización semanal
-
-**MASA** (2 comandos):
-
-```bash
-python3 actualizar.py /ruta/al/Estatus_Resumen_General_QAQC.xlsx   # datos + panel HTML
-node gen_ppt.js                                                    # PPT ejecutiva
-```
 
 **Desaladora** (2 comandos):
 
@@ -43,6 +40,13 @@ python3 talabre.py \
     --status /ruta/TalabreSTATUS_PEC.xlsx \
     --dt     /ruta/TalabreCuadro_DT.xlsx
 node gen_ppt.js
+```
+
+**Arqueros** (2 comandos):
+
+```bash
+python3 actualizar.py /ruta/al/Estatus_Resumen_General_QAQC.xlsx   # datos + panel HTML
+node gen_ppt.js                                                    # PPT ejecutiva
 ```
 
 `desaladora.py` y `talabre.py` aceptan `--hoy AAAA-MM-DD` para fijar la fecha con la que se
@@ -74,19 +78,19 @@ tilde), así que un cambio de redacción en la planilla no rompe el tablero.
 | Archivo | Qué es |
 |---|---|
 | `index.html` | Panel interactivo con **una pestaña por proyecto**, en **un solo archivo portable** (se puede enviar por correo tal cual). Lleva la PPT del corte embebida y descargable con el botón **Descargar Informe**. Modo claro/oscuro, tooltips y tablas de detalle. |
-| `Panel_Control_TOP_P1.pptx` | Presentación ejecutiva de 17 láminas: 7 de MASA + 5 de Desaladora + 5 de Talabre. |
-| `actualizar.py` | **Punto de entrada de MASA.** Lee el Excel, recalcula todo y actualiza el panel. |
+| `Panel_Control_TOP_P1.pptx` | Presentación ejecutiva de 17 láminas: 5 de Desaladora + 5 de Talabre + 7 de Arqueros. |
+| `actualizar.py` | **Punto de entrada de Arqueros.** Lee el Excel, recalcula todo y actualiza el panel. |
 | `desaladora.py` | **Punto de entrada de Desaladora.** Lee el reporte gerencial y el punch list, valida el cruce entre ambos y actualiza el panel. |
 | `talabre.py` | **Punto de entrada de Talabre.** Lee la hoja STATUS y el registro de DT, verifica la regla de atraso y actualiza el panel. |
 | `gen_ppt.js` | Regenera la PPT completa desde los datos ya calculados de los tres proyectos. |
-| `estatus_datos.json` | Datos consolidados de MASA. |
+| `estatus_datos.json` | Datos consolidados de Arqueros. |
 | `datos_desaladora.json` | Datos consolidados de Desaladora. |
 | `datos_talabre.json` | Datos consolidados de Talabre. |
-| `historial.json` | Un registro por corte de MASA; alimenta la variación semana a semana. |
+| `historial.json` | Un registro por corte de Arqueros; alimenta la variación semana a semana. |
 
 ---
 
-## MASA — indicadores al corte 26-07-2026
+## Arqueros — indicadores al corte 26-07-2026
 
 | Frente | Indicador | Valor | vs. 16-07 |
 |---|---|---|---|
@@ -230,7 +234,7 @@ caminatas, la 1 está casi completa pero la 2 va en 77,6%, concentrando el rezag
 
 ---
 
-## Definiciones y criterios (MASA)
+## Definiciones y criterios (Arqueros)
 
 - **Abierto** = *Trabajo requerido* + *Iniciado* + *Trabajo no aceptado*.
 - **En trámite** = *Listo para revisión* o *Listo para cerrar* — **no** cuenta como cerrado.
@@ -253,7 +257,7 @@ La primera pestaña compara los tres proyectos. La homologación se calcula en e
 desde los datos de cada proyecto, así que **no hay cifras duplicadas**: si cambia un proyecto,
 el consolidado cambia solo.
 
-| Concepto | MASA | Desaladora | Talabre | Cómo se consolida |
+| Concepto | Desaladora | Talabre | Arqueros | Cómo se consolida |
 |---|---|---|---|---|
 | **Caminatas** | «80%» y «100%» | Caminata 1, 2 y 3 | CAMINATA 1 y 2 | Por **número**, nunca por el porcentaje que representan. Se compara la *caminata vigente* que cada proyecto declara como indicador |
 | **Detalles** | Detalles de terminación | Punch list | DT | Son lo mismo: **se suman** |
@@ -262,12 +266,12 @@ el consolidado cambia solo.
 | **Carpetas** | Estatus CTOP | Certificado de entrega | % PEC (avance) | **No se consolidan** (ver abajo) |
 | **Disciplinas** | Piping, Eléctrica… | Piping, Eléctrica… | CANERIAS, ELECTRICOS… | Se unifican los sinónimos |
 
-**Las carpetas no se suman a propósito.** MASA y Desaladora miden *estado de aprobación* ante
+**Las carpetas no se suman a propósito.** Desaladora y Arqueros miden *estado de aprobación* ante
 el cliente; Talabre mide *porcentaje de avance* de la carpeta. Un promedio entre ambas cosas no
 significaría nada, así que la pestaña muestra la métrica nativa de cada proyecto, etiquetada, y
 solo consolida a los dos que sí son comparables (66 de 232 carpetas entregadas, 28,4%).
 
-**Caminata vigente** es la que cada proyecto usa como su indicador: MASA la Caminata 2 (su
+**Caminata vigente** es la que cada proyecto usa como su indicador: Arqueros la Caminata 2 (su
 «100%»), Talabre la Caminata 2, y Desaladora una por tipo de subsistema (Operables por la 2,
 Facility por la 1), sumando lo realizado de cada tipo.
 
@@ -275,14 +279,14 @@ Facility por la 1), sumando lo realizado de cada tipo.
 
 | Indicador | Valor |
 |---|---|
-| Subsistemas en control | **449** (MASA 135 · Desaladora 95 · Talabre 219) |
+| Subsistemas en control | **449** (Desaladora 95 · Talabre 219 · Arqueros 135) |
 | Caminata vigente realizada | **311/449 · 69,3%** |
 | Detalles de terminación levantados | **6.300** |
 | Cierre de detalles (todas las prioridades) | **3.721/6.300 · 59,1%** |
 | Cierre de detalles P1 | **2.053/3.152 · 65,1%** |
 | Detalles abiertos / de ellos atrasados | **2.494 / 1.286 (51,6%)** |
 
-**Semáforo:** MASA *Crítico* · Desaladora *Atención* · Talabre *Al día*.
+**Semáforo:** Desaladora *Atención* · Talabre *Al día* · Arqueros *Crítico*.
 
 ## Descargar el informe desde el panel
 
@@ -303,12 +307,14 @@ La presentación tiene **17 láminas** con esta estructura, que se mantiene cort
 
 | Láminas | Contenido |
 |---|---|
-| 1 | Portada **Proyecto 01 · MASA** |
-| 2–7 | MASA: resumen, semáforo, caminatas, carpetas TOP, detalles P1, foco de gestión |
-| 8 | Portada **Proyecto 02 · Desaladora** |
-| 9–12 | Desaladora: resumen, frentes 1 y 2, frente 3, foco de gestión |
-| 13 | Portada **Proyecto 03 · Talabre** |
-| 14–17 | Talabre: resumen, frentes 1 y 2, frente 3, foco de gestión |
+| 1 | Portada **Proyecto 01 · Desaladora** |
+| 2–5 | Desaladora: resumen, frentes 1 y 2, frente 3, foco de gestión |
+| 6 | Portada **Proyecto 02 · Talabre** |
+| 7–10 | Talabre: resumen, frentes 1 y 2, frente 3, foco de gestión |
+| 11 | Portada **Proyecto 03 · Arqueros** |
+| 12–17 | Arqueros: resumen, semáforo, caminatas, carpetas TOP, detalles P1, foco de gestión |
+
+Es el mismo orden de las pestañas del panel y de los otros dos módulos de la suite.
 
 Reglas de formato que `gen_ppt.js` aplica solo:
 
@@ -316,8 +322,8 @@ Reglas de formato que `gen_ppt.js` aplica solo:
   (3,88 × 0,84 pulg. en `x9.14 y0.46`) en portadas y láminas de fondo azul; menor
   (3,03 × 0,65 en `x9.97 y0.24`) en las de contenido. Si el archivo no está, la PPT
   se genera igual, sin logo.
-- **Etiqueta del proyecto** al pie de cada lámina de contenido (`PROYECTO MASA`,
-  `PROYECTO DESALADORA`, `PROYECTO TALABRE`), alineada a la derecha en 8,5 pt. Las
+- **Etiqueta del proyecto** al pie de cada lámina de contenido (`PROYECTO DESALADORA`,
+  `PROYECTO TALABRE`, `PROYECTO ARQUEROS`), alineada a la derecha en 8,5 pt. Las
   portadas no la llevan porque ya muestran el nombre en grande.
 - **Numeración correlativa** automática: al agregar o quitar láminas no hay que
   renumerar a mano.
@@ -325,7 +331,7 @@ Reglas de formato que `gen_ppt.js` aplica solo:
   cuyo color garantiza contraste ≥ 4,5:1. Los valores 0 **no** se dibujan, para que
   no quede un «0» pegado al eje pisando la etiqueta vecina.
 
-> El nombre de contrato que aparece en la portada de MASA está en `PROY_MASA`, al
+> El nombre de contrato que aparece en la portada de Arqueros está en `PROY_MASA`, al
 > inicio de `gen_ppt.js`; si el JSON llega a traer `meta.proyecto`, se usa ese.
 
 ## Identidad visual
