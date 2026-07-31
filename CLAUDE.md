@@ -45,7 +45,9 @@ agregan una columna de fecha comprometida, el script ya la calcula sin cambios.
 ## 2 · `panel_control_TOP_P1/` — Control de Cierre QAQC
 
 Entregable semanal de Besalco Montajes: panel HTML + PPT ejecutiva del cierre QAQC de tres
-proyectos (Desaladora, Talabre, Arqueros).
+proyectos: **P2416 · Desaladora**, **P2407 · Talabre** y **P2342 · Arqueros** —código, nombre
+y cliente exactamente como los escribe el módulo de Protocolos, que es la referencia de
+identidad de toda la suite.
 
 **Es el trabajo activo.** Antes de tocar nada ahí, leer
 [`panel_control_TOP_P1/CLAUDE.md`](panel_control_TOP_P1/CLAUDE.md): tiene qué archivos pedir

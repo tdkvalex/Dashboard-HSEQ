@@ -18,14 +18,17 @@ const MODULOS = path.join(AQUI, "modulos");
 
 // Los tres módulos cubren los MISMOS tres proyectos con distinto nombre.
 // Esta tabla es la que permite cruzarlos en la portada ejecutiva.
+// Código, nombre y cliente salen del módulo de Protocolos, que es la referencia
+// de identidad: los tres módulos y la portada nombran al mismo proyecto igual.
 const PROYECTOS = [
-  { id: "DESALADORA", nombre: "Desaladora", cliente: "Antofagasta Minerals",
+  { id: "DESALADORA", codigo: "P2416", nombre: "Desaladora", cliente: "ANTOFAGASTA MINERALS",
     protocolos: "P2416", qaqc: "DES" },
-  { id: "TALABRE", nombre: "Talabre", cliente: "Codelco",
+  { id: "TALABRE", codigo: "P2407", nombre: "Talabre", cliente: "CODELCO",
     protocolos: "P2407", qaqc: "TAL" },
-  { id: "ARQUEROS", nombre: "Arqueros", cliente: "MASA",
+  { id: "ARQUEROS", codigo: "P2342", nombre: "Arqueros", cliente: "MASA",
     protocolos: "P2342", qaqc: "MASA" },
 ];
+const etiq = (p) => `${p.codigo} · ${p.nombre}`;
 
 // ---------------------------------------------------------------- utilidades
 const pct1 = (a, b) => (b ? Math.round((1000 * a) / b) / 10 : 0);

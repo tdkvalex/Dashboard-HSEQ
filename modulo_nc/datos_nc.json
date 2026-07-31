@@ -7,7 +7,7 @@
   "hoy": "27-07-2026",
   "corte": "2026-07-27",
   "corteTexto": "27-07-2026",
-  "generado": "2026-07-27 20:05",
+  "generado": "2026-07-31 18:41",
   "fuente": "5640140e-Data_NCR_1.xlsx"
  },
  "orden": [
@@ -19,8 +19,9 @@
  "proyectos": {
   "DESALADORA": {
    "id": "DESALADORA",
+   "codigo": "P2416",
    "nombre": "Desaladora",
-   "cliente": "Minera Los Pelambres",
+   "cliente": "ANTOFAGASTA MINERALS",
    "obra": true,
    "resumen": {
     "total": 95,
@@ -643,8 +644,9 @@
   },
   "TALABRE": {
    "id": "TALABRE",
+   "codigo": "P2407",
    "nombre": "Talabre",
-   "cliente": "Codelco",
+   "cliente": "CODELCO",
    "obra": true,
    "resumen": {
     "total": 239,
@@ -1171,6 +1173,7 @@
   },
   "ARQUEROS": {
    "id": "ARQUEROS",
+   "codigo": "P2342",
    "nombre": "Arqueros",
    "cliente": "MASA",
    "obra": true,
@@ -1688,8 +1691,9 @@
   },
   "OFICINA": {
    "id": "OFICINA",
+   "codigo": "—",
    "nombre": "Oficina Central",
-   "cliente": "Besalco Montajes",
+   "cliente": "BESALCO MONTAJES",
    "obra": false,
    "resumen": {
     "total": 8,

@@ -14,9 +14,19 @@ procesarlos y qué **no** volver a romper.
 | **Talabre** | `TalabreSTATUS_PEC.xlsx` **+** `TalabreCuadro_DT.xlsx` | `STATUS`, `RESUMEN` · `DT` |
 | **Arqueros** (cliente MASA) | `Estatus_Resumen_General_QAQC.xlsx` | `BD Caminatas-CTOP`, `BD Detalles Terminación` |
 
-**Orden y nombre de los proyectos: Desaladora · Talabre · Arqueros**, los mismos que usa el
-módulo de Protocolos, que es la referencia de toda la suite. *Arqueros* es el proyecto y
-*MASA* el cliente; el archivo de origen y el id interno siguen llamándose MASA.
+**La identidad del proyecto sale del módulo de Protocolos**, que es la referencia de toda la
+suite: mismo orden, mismo código, mismo nombre y mismo cliente, escritos igual.
+
+| Código | Nombre | Cliente |
+|---|---|---|
+| `P2416` | Desaladora | ANTOFAGASTA MINERALS |
+| `P2407` | Talabre | CODELCO |
+| `P2342` | Arqueros | MASA |
+
+La pestaña se rotula **`P2416 · Desaladora`** con el cliente debajo, y la versaleta se deja
+solo en la pestaña corporativa, que no es un proyecto. En gráficos y encabezados de tabla va
+el nombre solo, que es lo que cabe: para eso está el helper `etiq()`.
+El id interno y el Excel de Arqueros siguen llamándose MASA; lo que cambia es cómo se muestra.
 
 Desaladora y Talabre **necesitan sus dos archivos**: uno trae subsistemas/caminatas/carpetas
 y el otro el detalle ítem a ítem. Con uno solo el proyecto queda incompleto.

@@ -12,13 +12,15 @@ comparable.
 | Pestaña | Proyecto | Cliente | Corte | Fuente |
 |---|---|---|---|---|
 | **Resumen corporativo** | Los 3 proyectos | Besalco Montajes | — | se calcula desde los otros tres |
-| Desaladora | PV3 Ampliación Desaladora | Minera Los Pelambres (AMSA) | 27-07-2026 | `REPORTE_GERENCIAL_*.xlsx` + `Listado_Puntos_Punch_Consolidado_*.xlsx` |
-| Talabre | Captación de agua, pozos y estaciones de bombeo | Codelco | 27-07-2026 | `TalabreSTATUS_PEC.xlsx` + `TalabreCuadro_DT.xlsx` |
-| Arqueros | Contrato Electromecánico Planta Concentradora y de Espesado | MASA | 26-07-2026 | `Estatus_Resumen_General_QAQC.xlsx` |
+| **P2416 · Desaladora** | PV3 Ampliación Desaladora | ANTOFAGASTA MINERALS | 27-07-2026 | `REPORTE_GERENCIAL_*.xlsx` + `Listado_Puntos_Punch_Consolidado_*.xlsx` |
+| **P2407 · Talabre** | Captación de agua, pozos y estaciones de bombeo | CODELCO | 27-07-2026 | `TalabreSTATUS_PEC.xlsx` + `TalabreCuadro_DT.xlsx` |
+| **P2342 · Arqueros** | Contrato Electromecánico Planta Concentradora y de Espesado | MASA | 26-07-2026 | `Estatus_Resumen_General_QAQC.xlsx` |
 
-**El orden y el nombre de los proyectos son los del módulo de Protocolos** —Desaladora,
-Talabre, Arqueros—, que es la referencia de toda la suite. *Arqueros* es el proyecto y *MASA*
-el cliente; el Excel de origen y el id interno siguen llamándose MASA.
+**La identidad del proyecto —orden, código, nombre y cliente— sale del módulo de Protocolos**,
+que es la referencia de toda la suite. La pestaña se rotula `P2416 · Desaladora` con el cliente
+debajo; en gráficos y encabezados de tabla va el nombre solo, que es lo que cabe.
+*Arqueros* es el proyecto y *MASA* el cliente; el Excel de origen y el id interno siguen
+llamándose MASA.
 
 ---
 
@@ -322,6 +324,7 @@ Reglas de formato que `gen_ppt.js` aplica solo:
   (3,88 × 0,84 pulg. en `x9.14 y0.46`) en portadas y láminas de fondo azul; menor
   (3,03 × 0,65 en `x9.97 y0.24`) en las de contenido. Si el archivo no está, la PPT
   se genera igual, sin logo.
+- **Código del proyecto** en el kicker de cada portada (`PROYECTO 01 · P2416`).
 - **Etiqueta del proyecto** al pie de cada lámina de contenido (`PROYECTO DESALADORA`,
   `PROYECTO TALABRE`, `PROYECTO ARQUEROS`), alineada a la derecha en 8,5 pt. Las
   portadas no la llevan porque ya muestran el nombre en grande.

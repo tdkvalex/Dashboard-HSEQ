@@ -172,7 +172,7 @@ if (fs.existsSync(rutaDes)) {
   s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
   s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
   dot(s, 0.55, 1.35, C.copper, 0.22);
-  s.addText("PROYECTO 01", { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT, fontSize: 13,
+  s.addText("PROYECTO 01 · P2416", { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT, fontSize: 13,
     bold: true, color: C.copperL, charSpacing: 3, margin: 0 });
   s.addText("Desaladora", { x: 0.82, y: 1.72, w: 11.6, h: 1.1, fontFace: FH, fontSize: 46,
     bold: true, color: C.white, margin: 0 });
@@ -426,7 +426,7 @@ if (fs.existsSync(rutaTal)) {
   s.addShape(p.ShapeType.ellipse, { x: 11.0, y: -1.6, w: 4.2, h: 4.2, fill: { color: C.navy2 }, line: { type: "none" } });
   s.addShape(p.ShapeType.ellipse, { x: 12.1, y: 5.0, w: 3.0, h: 3.0, fill: { color: C.navy2 }, line: { type: "none" } });
   dot(s, 0.55, 1.35, C.copper, 0.22);
-  s.addText("PROYECTO 02", { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT, fontSize: 13,
+  s.addText("PROYECTO 02 · P2407", { x: 0.85, y: 1.2, w: 10, h: 0.4, fontFace: FT, fontSize: 13,
     bold: true, color: C.copperL, charSpacing: 3, margin: 0 });
   s.addText("Talabre", { x: 0.82, y: 1.72, w: 11.6, h: 1.1, fontFace: FH, fontSize: 46,
     bold: true, color: C.white, margin: 0 });
@@ -646,7 +646,7 @@ if (fs.existsSync(rutaTal)) {
 // Portada · Proyecto Arqueros
 // =====================================================================
 s = p.addSlide();
-portada(s, "03", "Arqueros", PROY_MASA,
+portada(s, "03 · P2342", "Arqueros", PROY_MASA,
   `${nf(cam.subs)} subsistemas en ${D.areas.length} áreas (${D.areas.join(" · ")}) · ` +
   `${nf(D.dt.global.total)} detalles de terminación levantados.\n` +
   "Estatus de armado y entrega de carpetas TOP · avance de caminatas 80% / 100% · " +

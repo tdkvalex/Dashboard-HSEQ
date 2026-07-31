@@ -78,7 +78,11 @@ PROYECTO = {
     "id": "DESALADORA",
     "nombre": "Desaladora",
     "descripcion": "PV3 Montaje Electromecánico — Ampliación Desaladora",
-    "cliente": "Minera Los Pelambres (AMSA)",
+    # Código y cliente tal como los escribe el módulo de Protocolos, que es la
+    # referencia de identidad de la suite. El mandante directo es Minera Los
+    # Pelambres, del grupo Antofagasta Minerals.
+    "codigo": "P2416",
+    "cliente": "ANTOFAGASTA MINERALS",
     "contrato": "VPP-1001-03-CC-088",
 }
 

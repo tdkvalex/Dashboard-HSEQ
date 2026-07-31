@@ -1,10 +1,11 @@
 {
- "generado": "2026-07-31 18:15",
+ "generado": "2026-07-31 18:44",
  "proyectos": [
   {
    "id": "DESALADORA",
+   "codigo": "P2416",
    "nombre": "Desaladora",
-   "cliente": "Antofagasta Minerals",
+   "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
     "kpi": 0,
     "universo": 18317,
@@ -61,7 +62,7 @@
    },
    "noConformidades": {
     "nombre": "Desaladora",
-    "cliente": "Minera Los Pelambres",
+    "cliente": "ANTOFAGASTA MINERALS",
     "obra": true,
     "total": 95,
     "cerradas": 92,
@@ -82,8 +83,9 @@
   },
   {
    "id": "TALABRE",
+   "codigo": "P2407",
    "nombre": "Talabre",
-   "cliente": "Codelco",
+   "cliente": "CODELCO",
    "protocolos": {
     "kpi": 0.9,
     "universo": 12974,
@@ -140,7 +142,7 @@
    },
    "noConformidades": {
     "nombre": "Talabre",
-    "cliente": "Codelco",
+    "cliente": "CODELCO",
     "obra": true,
     "total": 239,
     "cerradas": 213,
@@ -161,6 +163,7 @@
   },
   {
    "id": "ARQUEROS",
+   "codigo": "P2342",
    "nombre": "Arqueros",
    "cliente": "MASA",
    "protocolos": {

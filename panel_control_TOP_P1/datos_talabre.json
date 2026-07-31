@@ -3,13 +3,14 @@
   "id": "TALABRE",
   "nombre": "Talabre",
   "descripcion": "Captación de agua, pozos y estaciones de bombeo",
-  "cliente": "Codelco",
+  "codigo": "P2407",
+  "cliente": "CODELCO",
   "contrato": "4600029355",
   "corte": "2026-07-27",
   "corteTexto": "27-07-2026",
   "hoy": "27-07-2026",
   "ultimaAgenda": "10-08-2026",
-  "generado": "2026-07-27 18:27"
+  "generado": "2026-07-31 18:44"
  },
  "subsistemas": {
   "total": 219,

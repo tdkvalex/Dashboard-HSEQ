@@ -345,7 +345,7 @@ document.querySelectorAll('.mtab').forEach(b =>
     <th class="mod-h">Cierre QAQC<span>% cierre de P1 · más es mejor</span></th>
     <th class="mod-h">No Conformidades<span>% cerrado · más es mejor</span></th></tr>`;
   for (const p of P) {
-    r += `<tr><td><div class="pj">${p.nombre}</div><div class="cli">${p.cliente}</div></td>
+    r += `<tr><td><div class="pj">${p.codigo ? p.codigo + " · " + p.nombre : p.nombre}</div><div class="cli">${p.cliente}</div></td>
       <td class="c">${p.protocolos ? celda(pc(p.protocolos.kpi),
           `${nf(p.protocolos.enFalta)} en falta de ${nf(p.protocolos.base)}`, p.protocolos.sem) : celda(null,null,null)}</td>
       <td class="c">${p.cierre ? celda(pc(p.cierre.cierrePct),
@@ -403,7 +403,7 @@ document.querySelectorAll('.mtab').forEach(b =>
       <th class="num">NC</th><th class="num">NC abiertas</th><th class="num">NC % cierre</th></tr>`;
     for (const p of P) {
       const a = p.protocolos, b = p.cierre, c = p.noConformidades;
-      r += `<tr><td><div class="pj">${p.nombre}</div><div class="cli">${p.cliente}</div></td>
+      r += `<tr><td><div class="pj">${p.codigo ? p.codigo + " · " + p.nombre : p.nombre}</div><div class="cli">${p.cliente}</div></td>
         <td class="num">${a ? nf(a.protocolos) : '—'}</td>
         <td class="num">${a ? nf(a.pendientes) : '—'}</td>
         <td class="num">${a ? pc(a.kpi) : '—'}</td>

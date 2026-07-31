@@ -12,13 +12,18 @@ ejecutiva: una portada que cruza **proyectos × módulos** y, dentro, cada dashb
 Cierre QAQC y No Conformidades traen además su **PPT ejecutiva embebida**: el botón «Descargar
 Informe» de cada módulo entrega el mazo del corte (17 y 16 láminas) sin salir de la suite.
 
-Los tres cubren **los mismos tres proyectos**, con distinto nombre en cada módulo:
+Los tres cubren **los mismos tres proyectos**, y los tres los nombran igual: el código, el
+nombre y el cliente salen del módulo de **Protocolos**, que es la referencia de identidad.
 
-| Proyecto | Cliente | En Protocolos | En Cierre QAQC |
-|---|---|---|---|
-| Desaladora | Antofagasta Minerals | P2416 | Desaladora |
-| Talabre | Codelco | P2407 | Talabre |
-| Arqueros | MASA | P2342 | Arqueros |
+| Código | Nombre | Cliente |
+|---|---|---|
+| `P2416` | Desaladora | ANTOFAGASTA MINERALS |
+| `P2407` | Talabre | CODELCO |
+| `P2342` | Arqueros | MASA |
+
+Se rotulan **`P2416 · Desaladora`** en la pestaña de cada módulo, en la matriz de la portada y
+en las portadas de las dos PPT. La tabla vive en `armar_suite.js` (`PROYECTOS`), en
+`panel_control_TOP_P1/index.html` (`PROY`) y en `modulo_nc/no_conformidades.py` (`PROYECTOS`).
 
 ---
 

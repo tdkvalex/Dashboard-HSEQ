@@ -3,12 +3,13 @@
   "id": "DESALADORA",
   "nombre": "Desaladora",
   "descripcion": "PV3 Montaje Electromecánico — Ampliación Desaladora",
-  "cliente": "Minera Los Pelambres (AMSA)",
+  "codigo": "P2416",
+  "cliente": "ANTOFAGASTA MINERALS",
   "contrato": "VPP-1001-03-CC-088",
   "corte": "2026-07-27",
   "corteTexto": "27-07-2026",
   "hoy": "27-07-2026",
-  "generado": "2026-07-31 17:59"
+  "generado": "2026-07-31 18:44"
  },
  "subsistemas": {
   "total": 95,

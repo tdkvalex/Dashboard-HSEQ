@@ -594,7 +594,10 @@ OBRAS.forEach((X, idx) => {
 
   // ---------------- portada del proyecto ----------------
   s = p.addSlide();
-  portada(s, `PROYECTO ${num}`, X.nombre, `${X.cliente} · ${D.meta.descripcion}`,
+  // El código del proyecto acompaña al número de portada: es la misma
+  // identidad —código, nombre y cliente— que usan los otros dos módulos.
+  portada(s, `PROYECTO ${num}${X.codigo && X.codigo !== "—" ? " · " + X.codigo : ""}`,
+    X.nombre, `${X.cliente} · ${D.meta.descripcion}`,
     `${nf(v.total)} hallazgos levantados · ${nf(v.internas)} internos y ${nf(v.externas)} externos · ` +
     `${Object.keys(X.porEspecialidad).length} especialidades involucradas.\n` +
     `Estado de cierre, antigüedad de lo que sigue abierto y novedades de la última semana.`,

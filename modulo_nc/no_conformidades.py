@@ -75,15 +75,21 @@ MODULO = {
 # El registro nombra los proyectos con su código; la suite los conoce por su
 # nombre corto. Oficina Central no es un proyecto de obra pero sí genera NC,
 # así que se reporta aparte y no se mezcla con los tres proyectos.
+# Código, nombre y cliente son exactamente los que usa el módulo de Protocolos,
+# que es la referencia de identidad de toda la suite: los tres módulos tienen
+# que nombrar al mismo proyecto igual.
 PROYECTOS = {
-    "P2416 - MLP - DESALADORA": {"id": "DESALADORA", "nombre": "Desaladora",
-                                 "cliente": "Minera Los Pelambres", "obra": True},
-    "P2407 - CODELCO - TALABRE": {"id": "TALABRE", "nombre": "Talabre",
-                                  "cliente": "Codelco", "obra": True},
-    "P2342 - ARQUEROS MASA": {"id": "ARQUEROS", "nombre": "Arqueros",
+    "P2416 - MLP - DESALADORA": {"id": "DESALADORA", "codigo": "P2416",
+                                 "nombre": "Desaladora",
+                                 "cliente": "ANTOFAGASTA MINERALS", "obra": True},
+    "P2407 - CODELCO - TALABRE": {"id": "TALABRE", "codigo": "P2407",
+                                  "nombre": "Talabre",
+                                  "cliente": "CODELCO", "obra": True},
+    "P2342 - ARQUEROS MASA": {"id": "ARQUEROS", "codigo": "P2342",
+                              "nombre": "Arqueros",
                               "cliente": "MASA", "obra": True},
-    "OFICINA CENTRAL": {"id": "OFICINA", "nombre": "Oficina Central",
-                        "cliente": "Besalco Montajes", "obra": False},
+    "OFICINA CENTRAL": {"id": "OFICINA", "codigo": "—", "nombre": "Oficina Central",
+                        "cliente": "BESALCO MONTAJES", "obra": False},
 }
 ORDEN = ["DESALADORA", "TALABRE", "ARQUEROS", "OFICINA"]
 

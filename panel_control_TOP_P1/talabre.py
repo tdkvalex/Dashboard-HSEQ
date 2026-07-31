@@ -79,7 +79,9 @@ PROYECTO = {
     "id": "TALABRE",
     "nombre": "Talabre",
     "descripcion": "Captación de agua, pozos y estaciones de bombeo",
-    "cliente": "Codelco",
+    # Código y cliente tal como los escribe el módulo de Protocolos.
+    "codigo": "P2407",
+    "cliente": "CODELCO",
     "contrato": "4600029355",
 }
 
