@@ -175,7 +175,7 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 |---|---|---|---|
 | Protocolos | 03-08-2026 | % pendiente | **0,4%** — 163 en falta de 44.878 |
 | Cierre QAQC | 03-08-2026 | % detalles cerrados | **59,9%** — 1.238 atrasados |
-| No Conformidades | 03-08-2026 | % hallazgos cerrados | **89,1%** — 53 abiertos de 486 |
+| No Conformidades | 03-08-2026 | % hallazgos cerrados | **89,1%** — 53 abiertos de 485 |
 
 El corte de Cierre QAQC es el más reciente de sus tres proyectos (Talabre, 03-08); Desaladora
 sigue al 27-07 y Arqueros al 26-07 dentro del módulo.
