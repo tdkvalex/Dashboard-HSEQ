@@ -4,11 +4,11 @@
   "nombre": "No Conformidades",
   "descripcion": "Hallazgos de calidad y su corrección",
   "cliente": "Besalco Montajes",
-  "hoy": "27-07-2026",
-  "corte": "2026-07-27",
-  "corteTexto": "27-07-2026",
-  "generado": "2026-07-31 18:41",
-  "fuente": "5640140e-Data_NCR_1.xlsx"
+  "hoy": "03-08-2026",
+  "corte": "2026-08-03",
+  "corteTexto": "03-08-2026",
+  "generado": "2026-08-03 13:30",
+  "fuente": "1e73482e-Data_NCR03082026.xlsx"
  },
  "orden": [
   "DESALADORA",
@@ -452,13 +452,13 @@
    },
    "ventanas": {
     "semana": {
-     "total": 1,
+     "total": 0,
      "cerradas": 0,
-     "abiertas": 1,
+     "abiertas": 0,
      "atrasadas": 0,
      "pctCierre": 0.0,
      "internas": 0,
-     "externas": 1,
+     "externas": 0,
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
@@ -492,72 +492,22 @@
     }
    },
    "semana": {
-    "desde": "21-07-2026",
-    "hasta": "27-07-2026",
-    "total": 1,
+    "desde": "28-07-2026",
+    "hasta": "03-08-2026",
+    "total": 0,
     "internas": 0,
-    "externas": 1,
-    "abiertas": 1,
+    "externas": 0,
+    "abiertas": 0,
     "cerradas": 0,
-    "porOrigen": {
-     "Externa": 1
-    },
-    "porEmision": {
-     "Externa Cliente": 1
-    },
-    "porEspecialidad": {
-     "MECÁNICA": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "abiertas": 1
-     }
-    },
-    "porProyecto": {
-     "Desaladora": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "abiertas": 1
-     }
-    },
-    "porTipo": {
-     "No Conformidad": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "abiertas": 1
-     }
-    },
-    "detalle": [
-     {
-      "fecha": "27-07-2026",
-      "proy": "Desaladora",
-      "n": "95",
-      "tipo": "No Conformidad",
-      "emision": "Externa Cliente",
-      "origen": "Externa",
-      "especialidad": "MECÁNICA",
-      "responsable": "Wilson Jara",
-      "estatus": "Iniciado",
-      "estado": "Abierta",
-      "titulo": "Verificación de Preservación",
-      "costo": null,
-      "codigoExterno": "NCR-0535"
-     }
-    ],
+    "porOrigen": {},
+    "porEmision": {},
+    "porEspecialidad": {},
+    "porProyecto": {},
+    "porTipo": {},
+    "detalle": [],
     "tendencia": [
      {
       "etiqueta": "Hace 7 semanas",
-      "desde": "02-06",
-      "hasta": "08-06",
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 6 semanas",
       "desde": "09-06",
       "hasta": "15-06",
       "total": 0,
@@ -566,7 +516,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 5 semanas",
+      "etiqueta": "Hace 6 semanas",
       "desde": "16-06",
       "hasta": "22-06",
       "total": 0,
@@ -575,7 +525,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 4 semanas",
+      "etiqueta": "Hace 5 semanas",
       "desde": "23-06",
       "hasta": "29-06",
       "total": 0,
@@ -584,7 +534,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 3 semanas",
+      "etiqueta": "Hace 4 semanas",
       "desde": "30-06",
       "hasta": "06-07",
       "total": 1,
@@ -593,7 +543,7 @@
       "abiertas": 1
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "07-07",
       "hasta": "13-07",
       "total": 0,
@@ -602,7 +552,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana pasada",
+      "etiqueta": "Hace 2 semanas",
       "desde": "14-07",
       "hasta": "20-07",
       "total": 0,
@@ -611,13 +561,22 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Esta semana",
+      "etiqueta": "Semana pasada",
       "desde": "21-07",
       "hasta": "27-07",
       "total": 1,
       "internas": 0,
       "externas": 1,
       "abiertas": 1
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "28-07",
+      "hasta": "03-08",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
      }
     ]
    },
@@ -649,44 +608,44 @@
    "cliente": "CODELCO",
    "obra": true,
    "resumen": {
-    "total": 239,
-    "cerradas": 213,
-    "abiertas": 26,
+    "total": 241,
+    "cerradas": 226,
+    "abiertas": 15,
     "atrasadas": 0,
-    "pctCierre": 89.1,
+    "pctCierre": 93.8,
     "internas": 53,
-    "externas": 186,
+    "externas": 188,
     "costo": 5818.3,
     "conCosto": 143,
-    "medianaCierre": 22,
-    "maxCierre": 269
+    "medianaCierre": 23,
+    "maxCierre": 389
    },
    "porTipo": {
     "No Conformidad": {
-     "total": 163,
-     "cerradas": 142,
-     "abiertas": 21,
+     "total": 164,
+     "cerradas": 153,
+     "abiertas": 11,
      "atrasadas": 0,
-     "pctCierre": 87.1,
+     "pctCierre": 93.3,
      "internas": 49,
-     "externas": 114,
+     "externas": 115,
      "costo": 5393.7,
      "conCosto": 90,
-     "medianaCierre": 23,
-     "maxCierre": 269
+     "medianaCierre": 26,
+     "maxCierre": 389
     },
     "Producto No Conforme": {
-     "total": 73,
-     "cerradas": 68,
-     "abiertas": 5,
+     "total": 74,
+     "cerradas": 70,
+     "abiertas": 4,
      "atrasadas": 0,
-     "pctCierre": 93.2,
+     "pctCierre": 94.6,
      "internas": 1,
-     "externas": 72,
+     "externas": 73,
      "costo": 424.6,
      "conCosto": 51,
      "medianaCierre": 20,
-     "maxCierre": 153
+     "maxCierre": 161
     },
     "Observación": {
      "total": 2,
@@ -718,25 +677,25 @@
    "porOrigen": {
     "Interna": {
      "total": 53,
-     "cerradas": 44,
-     "abiertas": 9,
+     "cerradas": 50,
+     "abiertas": 3,
      "atrasadas": 0,
-     "pctCierre": 83.0,
+     "pctCierre": 94.3,
      "internas": 53,
      "externas": 0,
      "costo": 25.0,
      "conCosto": 31,
-     "medianaCierre": 26,
-     "maxCierre": 269
+     "medianaCierre": 29,
+     "maxCierre": 389
     },
     "Externa": {
-     "total": 186,
-     "cerradas": 169,
-     "abiertas": 17,
+     "total": 188,
+     "cerradas": 176,
+     "abiertas": 12,
      "atrasadas": 0,
-     "pctCierre": 90.9,
+     "pctCierre": 93.6,
      "internas": 0,
-     "externas": 186,
+     "externas": 188,
      "costo": 5793.3,
      "conCosto": 112,
      "medianaCierre": 22,
@@ -746,41 +705,41 @@
    "porEmision": {
     "Interna BSMT": {
      "total": 53,
-     "cerradas": 44,
-     "abiertas": 9,
+     "cerradas": 50,
+     "abiertas": 3,
      "atrasadas": 0,
-     "pctCierre": 83.0,
+     "pctCierre": 94.3,
      "internas": 53,
      "externas": 0,
      "costo": 25.0,
      "conCosto": 31,
-     "medianaCierre": 26,
-     "maxCierre": 269
+     "medianaCierre": 29,
+     "maxCierre": 389
     },
     "Externa Cliente": {
-     "total": 186,
-     "cerradas": 169,
-     "abiertas": 17,
+     "total": 188,
+     "cerradas": 176,
+     "abiertas": 12,
      "atrasadas": 0,
-     "pctCierre": 90.9,
+     "pctCierre": 93.6,
      "internas": 0,
-     "externas": 186,
+     "externas": 188,
      "costo": 5793.3,
      "conCosto": 112,
      "medianaCierre": 22,
      "maxCierre": 187
     }
    },
-   "autodeteccion": 22.2,
+   "autodeteccion": 22.0,
    "porEspecialidad": {
     "OO.CC": {
-     "total": 139,
-     "cerradas": 127,
-     "abiertas": 12,
+     "total": 140,
+     "cerradas": 131,
+     "abiertas": 9,
      "atrasadas": 0,
-     "pctCierre": 91.4,
+     "pctCierre": 93.6,
      "internas": 26,
-     "externas": 113,
+     "externas": 114,
      "costo": 1782.8,
      "conCosto": 106,
      "medianaCierre": 21,
@@ -800,13 +759,13 @@
      "maxCierre": 133
     },
     "CALIDAD": {
-     "total": 25,
+     "total": 26,
      "cerradas": 23,
-     "abiertas": 2,
+     "abiertas": 3,
      "atrasadas": 0,
-     "pctCierre": 92.0,
+     "pctCierre": 88.5,
      "internas": 0,
-     "externas": 25,
+     "externas": 26,
      "costo": 4000.0,
      "conCosto": 10,
      "medianaCierre": 23,
@@ -814,41 +773,41 @@
     },
     "ELÉCTRICA": {
      "total": 11,
-     "cerradas": 10,
-     "abiertas": 1,
+     "cerradas": 11,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 90.9,
+     "pctCierre": 100.0,
      "internas": 0,
      "externas": 11,
      "costo": 0.0,
      "conCosto": 1,
-     "medianaCierre": 50,
+     "medianaCierre": 49,
      "maxCierre": 119
     },
     "PIPING": {
      "total": 16,
-     "cerradas": 15,
-     "abiertas": 1,
+     "cerradas": 16,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 93.8,
+     "pctCierre": 100.0,
      "internas": 5,
      "externas": 11,
      "costo": 0.0,
      "conCosto": 7,
-     "medianaCierre": 20,
+     "medianaCierre": 21,
      "maxCierre": 269
     },
     "ESTRUCTURA": {
      "total": 8,
-     "cerradas": 7,
-     "abiertas": 1,
+     "cerradas": 8,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 87.5,
+     "pctCierre": 100.0,
      "internas": 1,
      "externas": 7,
      "costo": 0.0,
      "conCosto": 2,
-     "medianaCierre": 21,
+     "medianaCierre": 24,
      "maxCierre": 56
     },
     "TOPOGRAFÍA": {
@@ -866,16 +825,16 @@
     },
     "ADQUISICIONES": {
      "total": 8,
-     "cerradas": 2,
-     "abiertas": 6,
+     "cerradas": 8,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 25.0,
+     "pctCierre": 100.0,
      "internas": 7,
      "externas": 1,
      "costo": 0.0,
      "conCosto": 5,
-     "medianaCierre": 59,
-     "maxCierre": 59
+     "medianaCierre": 173,
+     "maxCierre": 389
     },
     "GENERAL": {
      "total": 8,
@@ -931,100 +890,94 @@
     }
    },
    "porEstatus": {
-    "No aceptado": 6,
-    "Iniciado": 16,
-    "Listo para revisión": 4
+    "Iniciado": 12,
+    "No aceptado": 1,
+    "Listo para revisión": 2
    },
    "antiguedad": {
-    "1-30 días": 7,
+    "1-30 días": 5,
     "31-90 días": 3,
-    "91-180 días": 9,
-    "181-365 días": 5,
-    "Más de un año": 2
+    "91-180 días": 4,
+    "181-365 días": 2,
+    "Más de un año": 1
    },
    "porAnio": {
     "2025": 145,
-    "2026": 94
+    "2026": 96
    },
    "ventanas": {
     "semana": {
-     "total": 3,
+     "total": 1,
      "cerradas": 0,
-     "abiertas": 3,
+     "abiertas": 1,
      "atrasadas": 0,
      "pctCierre": 0.0,
      "internas": 0,
-     "externas": 3,
+     "externas": 1,
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
      "maxCierre": null
     },
     "mes": {
-     "total": 7,
-     "cerradas": 0,
-     "abiertas": 7,
+     "total": 6,
+     "cerradas": 1,
+     "abiertas": 5,
      "atrasadas": 0,
-     "pctCierre": 0.0,
+     "pctCierre": 16.7,
      "internas": 0,
-     "externas": 7,
+     "externas": 6,
      "costo": 0,
      "conCosto": 0,
-     "medianaCierre": null,
-     "maxCierre": null
+     "medianaCierre": 6,
+     "maxCierre": 6
     },
     "trimestre": {
-     "total": 28,
-     "cerradas": 18,
-     "abiertas": 10,
+     "total": 30,
+     "cerradas": 22,
+     "abiertas": 8,
      "atrasadas": 0,
-     "pctCierre": 64.3,
+     "pctCierre": 73.3,
      "internas": 2,
-     "externas": 26,
+     "externas": 28,
      "costo": 0.0,
      "conCosto": 4,
-     "medianaCierre": 32,
+     "medianaCierre": 28,
      "maxCierre": 73
     }
    },
    "semana": {
-    "desde": "21-07-2026",
-    "hasta": "27-07-2026",
-    "total": 3,
+    "desde": "28-07-2026",
+    "hasta": "03-08-2026",
+    "total": 1,
     "internas": 0,
-    "externas": 3,
-    "abiertas": 3,
+    "externas": 1,
+    "abiertas": 1,
     "cerradas": 0,
     "porOrigen": {
-     "Externa": 3
+     "Externa": 1
     },
     "porEmision": {
-     "Externa Cliente": 3
+     "Externa Cliente": 1
     },
     "porEspecialidad": {
-     "OO.CC": {
-      "total": 3,
+     "CALIDAD": {
+      "total": 1,
       "internas": 0,
-      "externas": 3,
-      "abiertas": 3
+      "externas": 1,
+      "abiertas": 1
      }
     },
     "porProyecto": {
      "Talabre": {
-      "total": 3,
+      "total": 1,
       "internas": 0,
-      "externas": 3,
-      "abiertas": 3
+      "externas": 1,
+      "abiertas": 1
      }
     },
     "porTipo": {
      "No Conformidad": {
-      "total": 2,
-      "internas": 0,
-      "externas": 2,
-      "abiertas": 2
-     },
-     "Producto No Conforme": {
       "total": 1,
       "internas": 0,
       "externas": 1,
@@ -1033,63 +986,24 @@
     },
     "detalle": [
      {
-      "fecha": "21-07-2026",
+      "fecha": "28-07-2026",
       "proy": "Talabre",
-      "n": "237",
+      "n": "241",
       "tipo": "No Conformidad",
       "emision": "Externa Cliente",
       "origen": "Externa",
-      "especialidad": "OO.CC",
-      "responsable": "Mauricio Rocha A.",
+      "especialidad": "CALIDAD",
+      "responsable": "Daniel Ramirez B.",
       "estatus": "Iniciado",
       "estado": "Abierta",
-      "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
+      "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
       "costo": null,
-      "codigoExterno": "RNC N°445"
-     },
-     {
-      "fecha": "21-07-2026",
-      "proy": "Talabre",
-      "n": "238",
-      "tipo": "Producto No Conforme",
-      "emision": "Externa Cliente",
-      "origen": "Externa",
-      "especialidad": "OO.CC",
-      "responsable": "Sebastián Ramos",
-      "estatus": "Iniciado",
-      "estado": "Abierta",
-      "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
-      "costo": null,
-      "codigoExterno": "PNC N°177"
-     },
-     {
-      "fecha": "23-07-2026",
-      "proy": "Talabre",
-      "n": "239",
-      "tipo": "No Conformidad",
-      "emision": "Externa Cliente",
-      "origen": "Externa",
-      "especialidad": "OO.CC",
-      "responsable": "Mauricio Rocha A.",
-      "estatus": "Iniciado",
-      "estado": "Abierta",
-      "titulo": "Presencia de daños visibles en el sistema de impermeabilización piscina QS.",
-      "costo": null,
-      "codigoExterno": "RNC N°447"
+      "codigoExterno": "RNC N°449"
      }
     ],
     "tendencia": [
      {
       "etiqueta": "Hace 7 semanas",
-      "desde": "02-06",
-      "hasta": "08-06",
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 6 semanas",
       "desde": "09-06",
       "hasta": "15-06",
       "total": 4,
@@ -1098,7 +1012,7 @@
       "abiertas": 2
      },
      {
-      "etiqueta": "Hace 5 semanas",
+      "etiqueta": "Hace 6 semanas",
       "desde": "16-06",
       "hasta": "22-06",
       "total": 0,
@@ -1107,25 +1021,25 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 4 semanas",
+      "etiqueta": "Hace 5 semanas",
       "desde": "23-06",
       "hasta": "29-06",
       "total": 2,
       "internas": 0,
       "externas": 2,
-      "abiertas": 1
+      "abiertas": 0
      },
      {
-      "etiqueta": "Hace 3 semanas",
+      "etiqueta": "Hace 4 semanas",
       "desde": "30-06",
       "hasta": "06-07",
       "total": 3,
       "internas": 0,
       "externas": 3,
-      "abiertas": 3
+      "abiertas": 1
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "07-07",
       "hasta": "13-07",
       "total": 1,
@@ -1134,7 +1048,7 @@
       "abiertas": 1
      },
      {
-      "etiqueta": "Semana pasada",
+      "etiqueta": "Hace 2 semanas",
       "desde": "14-07",
       "hasta": "20-07",
       "total": 0,
@@ -1143,13 +1057,22 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Esta semana",
+      "etiqueta": "Semana pasada",
       "desde": "21-07",
       "hasta": "27-07",
-      "total": 3,
+      "total": 4,
       "internas": 0,
-      "externas": 3,
+      "externas": 4,
       "abiertas": 3
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "28-07",
+      "hasta": "03-08",
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "abiertas": 1
      }
     ]
    },
@@ -1168,7 +1091,7 @@
     "2026-04": 11,
     "2026-05": 13,
     "2026-06": 11,
-    "2026-07": 4
+    "2026-07": 6
    }
   },
   "ARQUEROS": {
@@ -1581,8 +1504,8 @@
     }
    },
    "semana": {
-    "desde": "21-07-2026",
-    "hasta": "27-07-2026",
+    "desde": "28-07-2026",
+    "hasta": "03-08-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -1597,15 +1520,6 @@
     "tendencia": [
      {
       "etiqueta": "Hace 7 semanas",
-      "desde": "02-06",
-      "hasta": "08-06",
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 6 semanas",
       "desde": "09-06",
       "hasta": "15-06",
       "total": 0,
@@ -1614,7 +1528,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 5 semanas",
+      "etiqueta": "Hace 6 semanas",
       "desde": "16-06",
       "hasta": "22-06",
       "total": 0,
@@ -1623,7 +1537,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 4 semanas",
+      "etiqueta": "Hace 5 semanas",
       "desde": "23-06",
       "hasta": "29-06",
       "total": 0,
@@ -1632,7 +1546,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 3 semanas",
+      "etiqueta": "Hace 4 semanas",
       "desde": "30-06",
       "hasta": "06-07",
       "total": 0,
@@ -1641,7 +1555,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "07-07",
       "hasta": "13-07",
       "total": 0,
@@ -1650,7 +1564,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana pasada",
+      "etiqueta": "Hace 2 semanas",
       "desde": "14-07",
       "hasta": "20-07",
       "total": 0,
@@ -1659,9 +1573,18 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Esta semana",
+      "etiqueta": "Semana pasada",
       "desde": "21-07",
       "hasta": "27-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "28-07",
+      "hasta": "03-08",
       "total": 0,
       "internas": 0,
       "externas": 0,
@@ -1824,8 +1747,8 @@
     }
    },
    "semana": {
-    "desde": "21-07-2026",
-    "hasta": "27-07-2026",
+    "desde": "28-07-2026",
+    "hasta": "03-08-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -1840,15 +1763,6 @@
     "tendencia": [
      {
       "etiqueta": "Hace 7 semanas",
-      "desde": "02-06",
-      "hasta": "08-06",
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 6 semanas",
       "desde": "09-06",
       "hasta": "15-06",
       "total": 0,
@@ -1857,7 +1771,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 5 semanas",
+      "etiqueta": "Hace 6 semanas",
       "desde": "16-06",
       "hasta": "22-06",
       "total": 0,
@@ -1866,7 +1780,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 4 semanas",
+      "etiqueta": "Hace 5 semanas",
       "desde": "23-06",
       "hasta": "29-06",
       "total": 0,
@@ -1875,7 +1789,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 3 semanas",
+      "etiqueta": "Hace 4 semanas",
       "desde": "30-06",
       "hasta": "06-07",
       "total": 0,
@@ -1884,7 +1798,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "07-07",
       "hasta": "13-07",
       "total": 0,
@@ -1893,7 +1807,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana pasada",
+      "etiqueta": "Hace 2 semanas",
       "desde": "14-07",
       "hasta": "20-07",
       "total": 0,
@@ -1902,9 +1816,18 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Esta semana",
+      "etiqueta": "Semana pasada",
       "desde": "21-07",
       "hasta": "27-07",
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Esta semana",
+      "desde": "28-07",
+      "hasta": "03-08",
       "total": 0,
       "internas": 0,
       "externas": 0,
@@ -1922,40 +1845,40 @@
  },
  "global": {
   "resumen": {
-   "total": 436,
-   "cerradas": 406,
-   "abiertas": 30,
+   "total": 438,
+   "cerradas": 419,
+   "abiertas": 19,
    "atrasadas": 0,
-   "pctCierre": 93.1,
+   "pctCierre": 95.7,
    "internas": 162,
-   "externas": 265,
+   "externas": 267,
    "costo": 10783.4,
    "conCosto": 256,
    "medianaCierre": 28,
-   "maxCierre": 313
+   "maxCierre": 389
   },
   "porTipo": {
    "No Conformidad": {
-    "total": 279,
-    "cerradas": 255,
-    "abiertas": 24,
+    "total": 280,
+    "cerradas": 266,
+    "abiertas": 14,
     "atrasadas": 0,
-    "pctCierre": 91.4,
+    "pctCierre": 95.0,
     "internas": 131,
-    "externas": 140,
+    "externas": 141,
     "costo": 7139.3,
     "conCosto": 137,
     "medianaCierre": 28,
-    "maxCierre": 297
+    "maxCierre": 389
    },
    "Producto No Conforme": {
-    "total": 119,
-    "cerradas": 114,
-    "abiertas": 5,
+    "total": 120,
+    "cerradas": 116,
+    "abiertas": 4,
     "atrasadas": 0,
-    "pctCierre": 95.8,
+    "pctCierre": 96.7,
     "internas": 5,
-    "externas": 114,
+    "externas": 115,
     "costo": 3471.1,
     "conCosto": 93,
     "medianaCierre": 37,
@@ -2004,25 +1927,25 @@
   "porOrigen": {
    "Interna": {
     "total": 162,
-    "cerradas": 151,
-    "abiertas": 11,
+    "cerradas": 157,
+    "abiertas": 5,
     "atrasadas": 0,
-    "pctCierre": 93.2,
+    "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
     "costo": 1502.9,
     "conCosto": 87,
-    "medianaCierre": 26,
-    "maxCierre": 297
+    "medianaCierre": 28,
+    "maxCierre": 389
    },
    "Externa": {
-    "total": 265,
-    "cerradas": 246,
-    "abiertas": 19,
+    "total": 267,
+    "cerradas": 253,
+    "abiertas": 14,
     "atrasadas": 0,
-    "pctCierre": 92.8,
+    "pctCierre": 94.8,
     "internas": 0,
-    "externas": 265,
+    "externas": 267,
     "costo": 9280.4,
     "conCosto": 169,
     "medianaCierre": 28,
@@ -2045,28 +1968,28 @@
   "porEmision": {
    "Interna BSMT": {
     "total": 162,
-    "cerradas": 151,
-    "abiertas": 11,
+    "cerradas": 157,
+    "abiertas": 5,
     "atrasadas": 0,
-    "pctCierre": 93.2,
+    "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
     "costo": 1502.9,
     "conCosto": 87,
-    "medianaCierre": 26,
-    "maxCierre": 297
+    "medianaCierre": 28,
+    "maxCierre": 389
    },
    "Externa Cliente": {
-    "total": 217,
-    "cerradas": 198,
-    "abiertas": 19,
+    "total": 219,
+    "cerradas": 205,
+    "abiertas": 14,
     "atrasadas": 0,
-    "pctCierre": 91.2,
+    "pctCierre": 93.6,
     "internas": 0,
-    "externas": 217,
+    "externas": 219,
     "costo": 6073.3,
     "conCosto": 127,
-    "medianaCierre": 21,
+    "medianaCierre": 22,
     "maxCierre": 187
    },
    "Externa Subcontrato": {
@@ -2096,19 +2019,19 @@
     "maxCierre": 146
    }
   },
-  "autodeteccion": 37.9,
+  "autodeteccion": 37.8,
   "porEspecialidad": {
    "OO.CC": {
-    "total": 167,
-    "cerradas": 154,
-    "abiertas": 13,
+    "total": 168,
+    "cerradas": 158,
+    "abiertas": 10,
     "atrasadas": 0,
-    "pctCierre": 92.2,
+    "pctCierre": 94.0,
     "internas": 48,
-    "externas": 119,
+    "externas": 120,
     "costo": 2650.8,
     "conCosto": 122,
-    "medianaCierre": 21,
+    "medianaCierre": 22,
     "maxCierre": 237
    },
    "EXPEDITORÍA": {
@@ -2125,13 +2048,13 @@
     "maxCierre": 313
    },
    "CALIDAD": {
-    "total": 35,
+    "total": 36,
     "cerradas": 33,
-    "abiertas": 2,
+    "abiertas": 3,
     "atrasadas": 0,
-    "pctCierre": 94.3,
+    "pctCierre": 91.7,
     "internas": 4,
-    "externas": 31,
+    "externas": 32,
     "costo": 4000.0,
     "conCosto": 18,
     "medianaCierre": 22,
@@ -2139,41 +2062,41 @@
    },
    "ELÉCTRICA": {
     "total": 31,
-    "cerradas": 30,
-    "abiertas": 1,
+    "cerradas": 31,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 96.8,
+    "pctCierre": 100.0,
     "internas": 8,
     "externas": 23,
     "costo": 250.0,
     "conCosto": 10,
-    "medianaCierre": 41,
+    "medianaCierre": 39,
     "maxCierre": 250
    },
    "PIPING": {
     "total": 19,
-    "cerradas": 18,
-    "abiertas": 1,
+    "cerradas": 19,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 94.7,
+    "pctCierre": 100.0,
     "internas": 8,
     "externas": 11,
     "costo": 10.0,
     "conCosto": 8,
-    "medianaCierre": 19,
+    "medianaCierre": 20,
     "maxCierre": 269
    },
    "ESTRUCTURA": {
     "total": 15,
-    "cerradas": 13,
-    "abiertas": 2,
+    "cerradas": 14,
+    "abiertas": 1,
     "atrasadas": 0,
-    "pctCierre": 86.7,
+    "pctCierre": 93.3,
     "internas": 6,
     "externas": 9,
     "costo": 38.0,
     "conCosto": 4,
-    "medianaCierre": 43,
+    "medianaCierre": 36,
     "maxCierre": 82
    },
    "TOPOGRAFÍA": {
@@ -2204,16 +2127,16 @@
    },
    "ADQUISICIONES": {
     "total": 12,
-    "cerradas": 6,
-    "abiertas": 6,
+    "cerradas": 12,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 50.0,
+    "pctCierre": 100.0,
     "internas": 11,
     "externas": 1,
     "costo": 11.5,
     "conCosto": 8,
-    "medianaCierre": 59,
-    "maxCierre": 239
+    "medianaCierre": 143,
+    "maxCierre": 389
    },
    "GENERAL": {
     "total": 10,
@@ -2425,86 +2348,80 @@
    }
   },
   "porEstatus": {
-   "No aceptado": 6,
-   "Iniciado": 19,
-   "Listo para revisión": 5
+   "Iniciado": 15,
+   "No aceptado": 1,
+   "Listo para revisión": 3
   },
   "antiguedad": {
-   "1-30 días": 9,
+   "1-30 días": 7,
    "31-90 días": 5,
-   "91-180 días": 9,
-   "181-365 días": 5,
-   "Más de un año": 2
+   "91-180 días": 4,
+   "181-365 días": 2,
+   "Más de un año": 1
   },
   "porAnio": {
    "2023": 3,
    "2024": 18,
    "2025": 293,
-   "2026": 122
+   "2026": 124
   },
   "ventanas": {
    "semana": {
-    "total": 4,
+    "total": 1,
     "cerradas": 0,
-    "abiertas": 4,
+    "abiertas": 1,
     "atrasadas": 0,
     "pctCierre": 0.0,
     "internas": 0,
-    "externas": 4,
+    "externas": 1,
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": null,
     "maxCierre": null
    },
    "mes": {
-    "total": 9,
-    "cerradas": 0,
-    "abiertas": 9,
+    "total": 8,
+    "cerradas": 1,
+    "abiertas": 7,
     "atrasadas": 0,
-    "pctCierre": 0.0,
+    "pctCierre": 12.5,
     "internas": 0,
-    "externas": 9,
+    "externas": 8,
     "costo": 0,
     "conCosto": 0,
-    "medianaCierre": null,
-    "maxCierre": null
+    "medianaCierre": 6,
+    "maxCierre": 6
    },
    "trimestre": {
-    "total": 36,
-    "cerradas": 22,
-    "abiertas": 14,
+    "total": 38,
+    "cerradas": 26,
+    "abiertas": 12,
     "atrasadas": 0,
-    "pctCierre": 61.1,
+    "pctCierre": 68.4,
     "internas": 4,
-    "externas": 32,
+    "externas": 34,
     "costo": 0.0,
     "conCosto": 4,
-    "medianaCierre": 24,
+    "medianaCierre": 28,
     "maxCierre": 73
    }
   },
   "semana": {
-   "desde": "21-07-2026",
-   "hasta": "27-07-2026",
-   "total": 4,
+   "desde": "28-07-2026",
+   "hasta": "03-08-2026",
+   "total": 1,
    "internas": 0,
-   "externas": 4,
-   "abiertas": 4,
+   "externas": 1,
+   "abiertas": 1,
    "cerradas": 0,
    "porOrigen": {
-    "Externa": 4
+    "Externa": 1
    },
    "porEmision": {
-    "Externa Cliente": 4
+    "Externa Cliente": 1
    },
    "porEspecialidad": {
-    "OO.CC": {
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "abiertas": 3
-    },
-    "MECÁNICA": {
+    "CALIDAD": {
      "total": 1,
      "internas": 0,
      "externas": 1,
@@ -2513,12 +2430,6 @@
    },
    "porProyecto": {
     "Talabre": {
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "abiertas": 3
-    },
-    "Desaladora": {
      "total": 1,
      "internas": 0,
      "externas": 1,
@@ -2527,12 +2438,6 @@
    },
    "porTipo": {
     "No Conformidad": {
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "abiertas": 3
-    },
-    "Producto No Conforme": {
      "total": 1,
      "internas": 0,
      "externas": 1,
@@ -2541,78 +2446,24 @@
    },
    "detalle": [
     {
-     "fecha": "21-07-2026",
+     "fecha": "28-07-2026",
      "proy": "Talabre",
-     "n": "237",
+     "n": "241",
      "tipo": "No Conformidad",
      "emision": "Externa Cliente",
      "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Mauricio Rocha A.",
+     "especialidad": "CALIDAD",
+     "responsable": "Daniel Ramirez B.",
      "estatus": "Iniciado",
      "estado": "Abierta",
-     "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
+     "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
      "costo": null,
-     "codigoExterno": "RNC N°445"
-    },
-    {
-     "fecha": "21-07-2026",
-     "proy": "Talabre",
-     "n": "238",
-     "tipo": "Producto No Conforme",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Sebastián Ramos",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
-     "costo": null,
-     "codigoExterno": "PNC N°177"
-    },
-    {
-     "fecha": "23-07-2026",
-     "proy": "Talabre",
-     "n": "239",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Mauricio Rocha A.",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Presencia de daños visibles en el sistema de impermeabilización piscina QS.",
-     "costo": null,
-     "codigoExterno": "RNC N°447"
-    },
-    {
-     "fecha": "27-07-2026",
-     "proy": "Desaladora",
-     "n": "95",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "MECÁNICA",
-     "responsable": "Wilson Jara",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Verificación de Preservación",
-     "costo": null,
-     "codigoExterno": "NCR-0535"
+     "codigoExterno": "RNC N°449"
     }
    ],
    "tendencia": [
     {
      "etiqueta": "Hace 7 semanas",
-     "desde": "02-06",
-     "hasta": "08-06",
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "abiertas": 0
-    },
-    {
-     "etiqueta": "Hace 6 semanas",
      "desde": "09-06",
      "hasta": "15-06",
      "total": 4,
@@ -2621,7 +2472,7 @@
      "abiertas": 2
     },
     {
-     "etiqueta": "Hace 5 semanas",
+     "etiqueta": "Hace 6 semanas",
      "desde": "16-06",
      "hasta": "22-06",
      "total": 0,
@@ -2630,25 +2481,25 @@
      "abiertas": 0
     },
     {
-     "etiqueta": "Hace 4 semanas",
+     "etiqueta": "Hace 5 semanas",
      "desde": "23-06",
      "hasta": "29-06",
      "total": 2,
      "internas": 0,
      "externas": 2,
-     "abiertas": 1
+     "abiertas": 0
     },
     {
-     "etiqueta": "Hace 3 semanas",
+     "etiqueta": "Hace 4 semanas",
      "desde": "30-06",
      "hasta": "06-07",
      "total": 4,
      "internas": 0,
      "externas": 4,
-     "abiertas": 4
+     "abiertas": 2
     },
     {
-     "etiqueta": "Hace 2 semanas",
+     "etiqueta": "Hace 3 semanas",
      "desde": "07-07",
      "hasta": "13-07",
      "total": 1,
@@ -2657,7 +2508,7 @@
      "abiertas": 1
     },
     {
-     "etiqueta": "Semana pasada",
+     "etiqueta": "Hace 2 semanas",
      "desde": "14-07",
      "hasta": "20-07",
      "total": 0,
@@ -2666,13 +2517,22 @@
      "abiertas": 0
     },
     {
-     "etiqueta": "Esta semana",
+     "etiqueta": "Semana pasada",
      "desde": "21-07",
      "hasta": "27-07",
-     "total": 4,
+     "total": 5,
      "internas": 0,
-     "externas": 4,
+     "externas": 5,
      "abiertas": 4
+    },
+    {
+     "etiqueta": "Esta semana",
+     "desde": "28-07",
+     "hasta": "03-08",
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
     }
    ]
   },
@@ -2700,45 +2560,45 @@
    "2026-04": 13,
    "2026-05": 16,
    "2026-06": 14,
-   "2026-07": 6
+   "2026-07": 8
   }
  },
  "obra": {
   "resumen": {
-   "total": 428,
-   "cerradas": 398,
-   "abiertas": 30,
+   "total": 430,
+   "cerradas": 411,
+   "abiertas": 19,
    "atrasadas": 0,
-   "pctCierre": 93.0,
+   "pctCierre": 95.6,
    "internas": 162,
-   "externas": 265,
+   "externas": 267,
    "costo": 10783.4,
    "conCosto": 256,
    "medianaCierre": 28,
-   "maxCierre": 313
+   "maxCierre": 389
   },
   "porTipo": {
    "No Conformidad": {
-    "total": 271,
-    "cerradas": 247,
-    "abiertas": 24,
+    "total": 272,
+    "cerradas": 258,
+    "abiertas": 14,
     "atrasadas": 0,
-    "pctCierre": 91.1,
+    "pctCierre": 94.9,
     "internas": 131,
-    "externas": 140,
+    "externas": 141,
     "costo": 7139.3,
     "conCosto": 137,
-    "medianaCierre": 26,
-    "maxCierre": 297
+    "medianaCierre": 28,
+    "maxCierre": 389
    },
    "Producto No Conforme": {
-    "total": 119,
-    "cerradas": 114,
-    "abiertas": 5,
+    "total": 120,
+    "cerradas": 116,
+    "abiertas": 4,
     "atrasadas": 0,
-    "pctCierre": 95.8,
+    "pctCierre": 96.7,
     "internas": 5,
-    "externas": 114,
+    "externas": 115,
     "costo": 3471.1,
     "conCosto": 93,
     "medianaCierre": 37,
@@ -2787,25 +2647,25 @@
   "porOrigen": {
    "Interna": {
     "total": 162,
-    "cerradas": 151,
-    "abiertas": 11,
+    "cerradas": 157,
+    "abiertas": 5,
     "atrasadas": 0,
-    "pctCierre": 93.2,
+    "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
     "costo": 1502.9,
     "conCosto": 87,
-    "medianaCierre": 26,
-    "maxCierre": 297
+    "medianaCierre": 28,
+    "maxCierre": 389
    },
    "Externa": {
-    "total": 265,
-    "cerradas": 246,
-    "abiertas": 19,
+    "total": 267,
+    "cerradas": 253,
+    "abiertas": 14,
     "atrasadas": 0,
-    "pctCierre": 92.8,
+    "pctCierre": 94.8,
     "internas": 0,
-    "externas": 265,
+    "externas": 267,
     "costo": 9280.4,
     "conCosto": 169,
     "medianaCierre": 28,
@@ -2828,28 +2688,28 @@
   "porEmision": {
    "Interna BSMT": {
     "total": 162,
-    "cerradas": 151,
-    "abiertas": 11,
+    "cerradas": 157,
+    "abiertas": 5,
     "atrasadas": 0,
-    "pctCierre": 93.2,
+    "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
     "costo": 1502.9,
     "conCosto": 87,
-    "medianaCierre": 26,
-    "maxCierre": 297
+    "medianaCierre": 28,
+    "maxCierre": 389
    },
    "Externa Cliente": {
-    "total": 217,
-    "cerradas": 198,
-    "abiertas": 19,
+    "total": 219,
+    "cerradas": 205,
+    "abiertas": 14,
     "atrasadas": 0,
-    "pctCierre": 91.2,
+    "pctCierre": 93.6,
     "internas": 0,
-    "externas": 217,
+    "externas": 219,
     "costo": 6073.3,
     "conCosto": 127,
-    "medianaCierre": 21,
+    "medianaCierre": 22,
     "maxCierre": 187
    },
    "Externa Subcontrato": {
@@ -2879,19 +2739,19 @@
     "maxCierre": 15
    }
   },
-  "autodeteccion": 37.9,
+  "autodeteccion": 37.8,
   "porEspecialidad": {
    "OO.CC": {
-    "total": 167,
-    "cerradas": 154,
-    "abiertas": 13,
+    "total": 168,
+    "cerradas": 158,
+    "abiertas": 10,
     "atrasadas": 0,
-    "pctCierre": 92.2,
+    "pctCierre": 94.0,
     "internas": 48,
-    "externas": 119,
+    "externas": 120,
     "costo": 2650.8,
     "conCosto": 122,
-    "medianaCierre": 21,
+    "medianaCierre": 22,
     "maxCierre": 237
    },
    "EXPEDITORÍA": {
@@ -2908,13 +2768,13 @@
     "maxCierre": 313
    },
    "CALIDAD": {
-    "total": 35,
+    "total": 36,
     "cerradas": 33,
-    "abiertas": 2,
+    "abiertas": 3,
     "atrasadas": 0,
-    "pctCierre": 94.3,
+    "pctCierre": 91.7,
     "internas": 4,
-    "externas": 31,
+    "externas": 32,
     "costo": 4000.0,
     "conCosto": 18,
     "medianaCierre": 22,
@@ -2922,41 +2782,41 @@
    },
    "ELÉCTRICA": {
     "total": 31,
-    "cerradas": 30,
-    "abiertas": 1,
+    "cerradas": 31,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 96.8,
+    "pctCierre": 100.0,
     "internas": 8,
     "externas": 23,
     "costo": 250.0,
     "conCosto": 10,
-    "medianaCierre": 41,
+    "medianaCierre": 39,
     "maxCierre": 250
    },
    "PIPING": {
     "total": 19,
-    "cerradas": 18,
-    "abiertas": 1,
+    "cerradas": 19,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 94.7,
+    "pctCierre": 100.0,
     "internas": 8,
     "externas": 11,
     "costo": 10.0,
     "conCosto": 8,
-    "medianaCierre": 19,
+    "medianaCierre": 20,
     "maxCierre": 269
    },
    "ESTRUCTURA": {
     "total": 15,
-    "cerradas": 13,
-    "abiertas": 2,
+    "cerradas": 14,
+    "abiertas": 1,
     "atrasadas": 0,
-    "pctCierre": 86.7,
+    "pctCierre": 93.3,
     "internas": 6,
     "externas": 9,
     "costo": 38.0,
     "conCosto": 4,
-    "medianaCierre": 43,
+    "medianaCierre": 36,
     "maxCierre": 82
    },
    "TOPOGRAFÍA": {
@@ -2987,16 +2847,16 @@
    },
    "ADQUISICIONES": {
     "total": 12,
-    "cerradas": 6,
-    "abiertas": 6,
+    "cerradas": 12,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 50.0,
+    "pctCierre": 100.0,
     "internas": 11,
     "externas": 1,
     "costo": 11.5,
     "conCosto": 8,
-    "medianaCierre": 59,
-    "maxCierre": 239
+    "medianaCierre": 143,
+    "maxCierre": 389
    },
    "GENERAL": {
     "total": 10,
@@ -3195,85 +3055,79 @@
    }
   },
   "porEstatus": {
-   "No aceptado": 6,
-   "Iniciado": 19,
-   "Listo para revisión": 5
+   "Iniciado": 15,
+   "No aceptado": 1,
+   "Listo para revisión": 3
   },
   "antiguedad": {
-   "1-30 días": 9,
+   "1-30 días": 7,
    "31-90 días": 5,
-   "91-180 días": 9,
-   "181-365 días": 5,
-   "Más de un año": 2
+   "91-180 días": 4,
+   "181-365 días": 2,
+   "Más de un año": 1
   },
   "porAnio": {
    "2024": 14,
    "2025": 292,
-   "2026": 122
+   "2026": 124
   },
   "ventanas": {
    "semana": {
-    "total": 4,
+    "total": 1,
     "cerradas": 0,
-    "abiertas": 4,
+    "abiertas": 1,
     "atrasadas": 0,
     "pctCierre": 0.0,
     "internas": 0,
-    "externas": 4,
+    "externas": 1,
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": null,
     "maxCierre": null
    },
    "mes": {
-    "total": 9,
-    "cerradas": 0,
-    "abiertas": 9,
+    "total": 8,
+    "cerradas": 1,
+    "abiertas": 7,
     "atrasadas": 0,
-    "pctCierre": 0.0,
+    "pctCierre": 12.5,
     "internas": 0,
-    "externas": 9,
+    "externas": 8,
     "costo": 0,
     "conCosto": 0,
-    "medianaCierre": null,
-    "maxCierre": null
+    "medianaCierre": 6,
+    "maxCierre": 6
    },
    "trimestre": {
-    "total": 36,
-    "cerradas": 22,
-    "abiertas": 14,
+    "total": 38,
+    "cerradas": 26,
+    "abiertas": 12,
     "atrasadas": 0,
-    "pctCierre": 61.1,
+    "pctCierre": 68.4,
     "internas": 4,
-    "externas": 32,
+    "externas": 34,
     "costo": 0.0,
     "conCosto": 4,
-    "medianaCierre": 24,
+    "medianaCierre": 28,
     "maxCierre": 73
    }
   },
   "semana": {
-   "desde": "21-07-2026",
-   "hasta": "27-07-2026",
-   "total": 4,
+   "desde": "28-07-2026",
+   "hasta": "03-08-2026",
+   "total": 1,
    "internas": 0,
-   "externas": 4,
-   "abiertas": 4,
+   "externas": 1,
+   "abiertas": 1,
    "cerradas": 0,
    "porOrigen": {
-    "Externa": 4
+    "Externa": 1
    },
    "porEmision": {
-    "Externa Cliente": 4
+    "Externa Cliente": 1
    },
    "porEspecialidad": {
-    "OO.CC": {
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "abiertas": 3
-    },
-    "MECÁNICA": {
+    "CALIDAD": {
      "total": 1,
      "internas": 0,
      "externas": 1,
@@ -3282,12 +3136,6 @@
    },
    "porProyecto": {
     "Talabre": {
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "abiertas": 3
-    },
-    "Desaladora": {
      "total": 1,
      "internas": 0,
      "externas": 1,
@@ -3296,12 +3144,6 @@
    },
    "porTipo": {
     "No Conformidad": {
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "abiertas": 3
-    },
-    "Producto No Conforme": {
      "total": 1,
      "internas": 0,
      "externas": 1,
@@ -3310,78 +3152,24 @@
    },
    "detalle": [
     {
-     "fecha": "21-07-2026",
+     "fecha": "28-07-2026",
      "proy": "Talabre",
-     "n": "237",
+     "n": "241",
      "tipo": "No Conformidad",
      "emision": "Externa Cliente",
      "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Mauricio Rocha A.",
+     "especialidad": "CALIDAD",
+     "responsable": "Daniel Ramirez B.",
      "estatus": "Iniciado",
      "estado": "Abierta",
-     "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
+     "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
      "costo": null,
-     "codigoExterno": "RNC N°445"
-    },
-    {
-     "fecha": "21-07-2026",
-     "proy": "Talabre",
-     "n": "238",
-     "tipo": "Producto No Conforme",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Sebastián Ramos",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
-     "costo": null,
-     "codigoExterno": "PNC N°177"
-    },
-    {
-     "fecha": "23-07-2026",
-     "proy": "Talabre",
-     "n": "239",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Mauricio Rocha A.",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Presencia de daños visibles en el sistema de impermeabilización piscina QS.",
-     "costo": null,
-     "codigoExterno": "RNC N°447"
-    },
-    {
-     "fecha": "27-07-2026",
-     "proy": "Desaladora",
-     "n": "95",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "MECÁNICA",
-     "responsable": "Wilson Jara",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Verificación de Preservación",
-     "costo": null,
-     "codigoExterno": "NCR-0535"
+     "codigoExterno": "RNC N°449"
     }
    ],
    "tendencia": [
     {
      "etiqueta": "Hace 7 semanas",
-     "desde": "02-06",
-     "hasta": "08-06",
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "abiertas": 0
-    },
-    {
-     "etiqueta": "Hace 6 semanas",
      "desde": "09-06",
      "hasta": "15-06",
      "total": 4,
@@ -3390,7 +3178,7 @@
      "abiertas": 2
     },
     {
-     "etiqueta": "Hace 5 semanas",
+     "etiqueta": "Hace 6 semanas",
      "desde": "16-06",
      "hasta": "22-06",
      "total": 0,
@@ -3399,25 +3187,25 @@
      "abiertas": 0
     },
     {
-     "etiqueta": "Hace 4 semanas",
+     "etiqueta": "Hace 5 semanas",
      "desde": "23-06",
      "hasta": "29-06",
      "total": 2,
      "internas": 0,
      "externas": 2,
-     "abiertas": 1
+     "abiertas": 0
     },
     {
-     "etiqueta": "Hace 3 semanas",
+     "etiqueta": "Hace 4 semanas",
      "desde": "30-06",
      "hasta": "06-07",
      "total": 4,
      "internas": 0,
      "externas": 4,
-     "abiertas": 4
+     "abiertas": 2
     },
     {
-     "etiqueta": "Hace 2 semanas",
+     "etiqueta": "Hace 3 semanas",
      "desde": "07-07",
      "hasta": "13-07",
      "total": 1,
@@ -3426,7 +3214,7 @@
      "abiertas": 1
     },
     {
-     "etiqueta": "Semana pasada",
+     "etiqueta": "Hace 2 semanas",
      "desde": "14-07",
      "hasta": "20-07",
      "total": 0,
@@ -3435,13 +3223,22 @@
      "abiertas": 0
     },
     {
-     "etiqueta": "Esta semana",
+     "etiqueta": "Semana pasada",
      "desde": "21-07",
      "hasta": "27-07",
-     "total": 4,
+     "total": 5,
      "internas": 0,
-     "externas": 4,
+     "externas": 5,
      "abiertas": 4
+    },
+    {
+     "etiqueta": "Esta semana",
+     "desde": "28-07",
+     "hasta": "03-08",
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "abiertas": 1
     }
    ]
   },
@@ -3468,7 +3265,7 @@
    "2026-04": 13,
    "2026-05": 16,
    "2026-06": 14,
-   "2026-07": 6
+   "2026-07": 8
   }
  },
  "tipos": [
@@ -3521,22 +3318,6 @@
   {
    "proy": "TALABRE",
    "proyNombre": "Talabre",
-   "n": "20",
-   "tipo": "No Conformidad",
-   "origen": "Interna",
-   "emision": "Interna BSMT",
-   "especialidad": "ADQUISICIONES",
-   "responsable": "Alejandro Rivera G.",
-   "titulo": "Incumplimiento a Plan de Calidad del contrato y PROCEDIMIENTO CORPORATIVO ADQUISICIONES DE PRODUCTOS Y SERVICIOS CRÍTICOS BSMD-CORP-84-ADQU-PRO-03",
-   "estatus": "No aceptado",
-   "creada": "07-07-2025",
-   "dias": 385,
-   "atrasada": false,
-   "costo": 0.0
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
    "n": "21",
    "tipo": "No Conformidad",
    "origen": "Interna",
@@ -3546,25 +3327,9 @@
    "titulo": "Incumplimiento a Plan de Calidad del contrato y METODOLOGÍA ESTÁNDAR EXPEDITORÍA EN OBRA BSMD-CORP-85-TRAN-MTD-03",
    "estatus": "Iniciado",
    "creada": "07-07-2025",
-   "dias": 385,
+   "dias": 392,
    "atrasada": false,
    "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "71",
-   "tipo": "No Conformidad",
-   "origen": "Interna",
-   "emision": "Interna BSMT",
-   "especialidad": "ADQUISICIONES",
-   "responsable": "Alejandro Rivera G.",
-   "titulo": "Incumplimiento pto. 6.1 PIE maestranza EUROPER, se realiza despacho sin dossier de calidad.",
-   "estatus": "No aceptado",
-   "creada": "09-09-2025",
-   "dias": 321,
-   "atrasada": false,
-   "costo": 0.0
   },
   {
    "proy": "TALABRE",
@@ -3578,41 +3343,9 @@
    "titulo": "Incumplimiento a la recepción de materiales (geosinteticos) por expeditoría: protocolización de recepción sin guia despacho, sin certificación de cali",
    "estatus": "Iniciado",
    "creada": "09-09-2025",
-   "dias": 321,
+   "dias": 328,
    "atrasada": false,
    "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "86",
-   "tipo": "No Conformidad",
-   "origen": "Interna",
-   "emision": "Interna BSMT",
-   "especialidad": "ADQUISICIONES",
-   "responsable": "Alejandro Rivera G.",
-   "titulo": "Incumplimiento liberación suministros por área de abastecimiento y logistica",
-   "estatus": "No aceptado",
-   "creada": "02-10-2025",
-   "dias": 298,
-   "atrasada": false,
-   "costo": 0.0
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "140",
-   "tipo": "No Conformidad",
-   "origen": "Interna",
-   "emision": "Interna BSMT",
-   "especialidad": "ADQUISICIONES",
-   "responsable": "Alejandro Rivera G.",
-   "titulo": "Incumplimiento al PIE subcontrato SOLTEX.",
-   "estatus": "No aceptado",
-   "creada": "17-12-2025",
-   "dias": 222,
-   "atrasada": false,
-   "costo": 0.0
   },
   {
    "proy": "TALABRE",
@@ -3626,25 +3359,9 @@
    "titulo": "Daños manguerotes en recepción/descarga en obra (Proveedor CICAL).",
    "estatus": "Iniciado",
    "creada": "22-12-2025",
-   "dias": 217,
+   "dias": 224,
    "atrasada": false,
    "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "182",
-   "tipo": "Producto No Conforme",
-   "origen": "Externa",
-   "emision": "Externa Cliente",
-   "especialidad": "OO.CC",
-   "responsable": "Sebastián Ramos",
-   "titulo": "Postes en esquinas eje B/1 y eje B/2 del cerco perimetral no cuentan con brazo doble para la instalación de la concertina y alambre de púas, sector Sa",
-   "estatus": "Iniciado",
-   "creada": "17-02-2026",
-   "dias": 160,
-   "atrasada": false,
-   "costo": 0.0
   },
   {
    "proy": "TALABRE",
@@ -3658,25 +3375,9 @@
    "titulo": "Fundaciones sin relleno estructural, perdida de parte de relleno de soporte, sin impermeabilización en caras expeustas a terreno (sector Manifold de I",
    "estatus": "Iniciado",
    "creada": "17-03-2026",
-   "dias": 132,
+   "dias": 139,
    "atrasada": false,
    "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "194",
-   "tipo": "No Conformidad",
-   "origen": "Externa",
-   "emision": "Externa Cliente",
-   "especialidad": "OO.CC",
-   "responsable": "Wladimir Carvajal P.",
-   "titulo": "Se deja vano donde va embebido en el hormigón de la elevación del muro 1 inserto metálico con flange y cañería de 18” (sector PQS).",
-   "estatus": "Listo para revisión",
-   "creada": "17-03-2026",
-   "dias": 132,
-   "atrasada": false,
-   "costo": 0.0
   },
   {
    "proy": "TALABRE",
@@ -3690,55 +3391,7 @@
    "titulo": "Corte en geomembrana HDPE instalada en el sector de piscina.",
    "estatus": "Iniciado",
    "creada": "23-03-2026",
-   "dias": 126,
-   "atrasada": false,
-   "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "201",
-   "tipo": "No Conformidad",
-   "origen": "Interna",
-   "emision": "Interna BSMT",
-   "especialidad": "ADQUISICIONES",
-   "responsable": "Alejandro Rivera G.",
-   "titulo": "Incumplimiento numeral 5.4 CONTROL DE ADQUISICIÓN CRITICA de procedimiento corporativo BSMD-CORP-84-ADQU-PRO-03, proveedor SONEPAR, de los gabinetes d",
-   "estatus": "Iniciado",
-   "creada": "01-04-2026",
-   "dias": 117,
-   "atrasada": false,
-   "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "202",
-   "tipo": "No Conformidad",
-   "origen": "Interna",
-   "emision": "Interna BSMT",
-   "especialidad": "ADQUISICIONES",
-   "responsable": "Alejandro Rivera G.",
-   "titulo": "Incumplimiento numeral 5.4 CONTROL DE ADQUISICIÓN CRITICA de procedimiento corporativo BSMD-CORP-84-ADQU-PRO-03, proveedor R&R INGELECTRIC, cable libr",
-   "estatus": "Iniciado",
-   "creada": "01-04-2026",
-   "dias": 117,
-   "atrasada": false,
-   "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "204",
-   "tipo": "Producto No Conforme",
-   "origen": "Externa",
-   "emision": "Externa Cliente",
-   "especialidad": "PIPING",
-   "responsable": "Oscar Nahuel P.",
-   "titulo": "Desalineación en unión bridada, observándose una apertura entre las caras de los flanges. Línea 3716C-RW-36\"-CI-0307-N",
-   "estatus": "No aceptado",
-   "creada": "02-04-2026",
-   "dias": 116,
+   "dias": 133,
    "atrasada": false,
    "costo": null
   },
@@ -3754,7 +3407,7 @@
    "titulo": "Solución proyectada asociada al elemento 3716E-RW-10_-H2.0232-N no ha sido ejecutada conforme a la secuencia constructiva prevista.",
    "estatus": "No aceptado",
    "creada": "06-04-2026",
-   "dias": 112,
+   "dias": 119,
    "atrasada": false,
    "costo": null
   },
@@ -3770,7 +3423,7 @@
    "titulo": "Sector Manifold EBMS, Fundaciones FB-01: falta compactación, confinamiento de la arena y material de relleno. Protocolos relacionados sin gestión de c",
    "estatus": "Iniciado",
    "creada": "14-04-2026",
-   "dias": 104,
+   "dias": 111,
    "atrasada": false,
    "costo": null
   },
@@ -3786,7 +3439,7 @@
    "titulo": "Daño en manilla de válvula 4515-HV-48545.",
    "estatus": "Listo para revisión",
    "creada": "12-05-2026",
-   "dias": 76,
+   "dias": 83,
    "atrasada": false,
    "costo": null
   },
@@ -3802,7 +3455,7 @@
    "titulo": "Incumplimiento en requisito para ejecución de soldadura por extrusión HDPE",
    "estatus": "Iniciado",
    "creada": "25-05-2026",
-   "dias": 63,
+   "dias": 70,
    "atrasada": false,
    "costo": null
   },
@@ -3818,7 +3471,7 @@
    "titulo": "Durante la auditoría se identificaron 107 protocolos pendientes asociados a actividades constructivas ejecutadas, las cuales no cuentan con registros ",
    "estatus": "Listo para revisión",
    "creada": "09-06-2026",
-   "dias": 48,
+   "dias": 55,
    "atrasada": false,
    "costo": 0.0
   },
@@ -3834,55 +3487,7 @@
    "titulo": "No se evidenció un Plan de Cierre de Calidad documentado que consolide las actividades, responsables, plazos, indicadores y estrategia de cierre del c",
    "estatus": "Iniciado",
    "creada": "09-06-2026",
-   "dias": 48,
-   "atrasada": false,
-   "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "231",
-   "tipo": "No Conformidad",
-   "origen": "Externa",
-   "emision": "Externa Cliente",
-   "especialidad": "ELÉCTRICA",
-   "responsable": "Pablo Ortega",
-   "titulo": "Tubos de PVC usados como protección en ambos tirantes (lado sur) de poste existente frente a cámara eléctrica CE-08 se encuentran quebrados en su base",
-   "estatus": "Listo para revisión",
-   "creada": "24-06-2026",
-   "dias": 33,
-   "atrasada": false,
-   "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "233",
-   "tipo": "No Conformidad",
-   "origen": "Externa",
-   "emision": "Externa Cliente",
-   "especialidad": "OO.CC",
-   "responsable": "Luis Ogalde H.",
-   "titulo": "Relleno de la plataforma no se encuentra a la misma cota de los docks de acceso (bajada desde el manifold hacia la plataforma flotante de la Estación ",
-   "estatus": "Iniciado",
-   "creada": "30-06-2026",
-   "dias": 27,
-   "atrasada": false,
-   "costo": null
-  },
-  {
-   "proy": "TALABRE",
-   "proyNombre": "Talabre",
-   "n": "234",
-   "tipo": "No Conformidad",
-   "origen": "Externa",
-   "emision": "Externa Cliente",
-   "especialidad": "ESTRUCTURA",
-   "responsable": "Luis Ogalde H.",
-   "titulo": "Grating de la plataforma PL-01 presenta una intervención mediante soldadura sobre su pletina perimetral ( sector Tie-In).",
-   "estatus": "Iniciado",
-   "creada": "30-06-2026",
-   "dias": 27,
+   "dias": 55,
    "atrasada": false,
    "costo": null
   },
@@ -3894,11 +3499,11 @@
    "origen": "Externa",
    "emision": "Externa Cliente",
    "especialidad": "OO.CC",
-   "responsable": "Luis Ogalde H.",
+   "responsable": "Mauricio Rocha A.",
    "titulo": "Geomembrana presenta sectores en los vértices y cambios de pendiente sin apoyo sobre el sustrato, permaneciendo suspendida (\"en el aire\"), y se verifi",
    "estatus": "Iniciado",
    "creada": "30-06-2026",
-   "dias": 27,
+   "dias": 34,
    "atrasada": false,
    "costo": null
   },
@@ -3914,7 +3519,7 @@
    "titulo": "Construcción Bodega de  Almacenamiento de Químicos",
    "estatus": "Iniciado",
    "creada": "06-07-2026",
-   "dias": 21,
+   "dias": 28,
    "atrasada": false,
    "costo": null
   },
@@ -3930,7 +3535,7 @@
    "titulo": "En Piscina 2, geomembrana superior de HDPE presenta múltiples roturas y desgarros en distintos sectores del paño instalado.",
    "estatus": "Listo para revisión",
    "creada": "09-07-2026",
-   "dias": 18,
+   "dias": 25,
    "atrasada": false,
    "costo": null
   },
@@ -3946,7 +3551,7 @@
    "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
    "estatus": "Iniciado",
    "creada": "21-07-2026",
-   "dias": 6,
+   "dias": 13,
    "atrasada": false,
    "costo": null
   },
@@ -3962,23 +3567,23 @@
    "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
    "estatus": "Iniciado",
    "creada": "21-07-2026",
-   "dias": 6,
+   "dias": 13,
    "atrasada": false,
    "costo": null
   },
   {
    "proy": "TALABRE",
    "proyNombre": "Talabre",
-   "n": "239",
-   "tipo": "No Conformidad",
+   "n": "240",
+   "tipo": "Producto No Conforme",
    "origen": "Externa",
    "emision": "Externa Cliente",
    "especialidad": "OO.CC",
-   "responsable": "Mauricio Rocha A.",
-   "titulo": "Presencia de daños visibles en el sistema de impermeabilización piscina QS.",
+   "responsable": "Sebastián Ramos",
+   "titulo": "Soporte de Línea 405N, perno de anclaje presenta fractura, y desprendimiento localizado del mortero de nivelación (grout) en el sector del perno afect",
    "estatus": "Iniciado",
-   "creada": "23-07-2026",
-   "dias": 4,
+   "creada": "27-07-2026",
+   "dias": 7,
    "atrasada": false,
    "costo": null
   },
@@ -3994,83 +3599,89 @@
    "titulo": "Verificación de Preservación",
    "estatus": "Iniciado",
    "creada": "27-07-2026",
-   "dias": 0,
+   "dias": 7,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "TALABRE",
+   "proyNombre": "Talabre",
+   "n": "241",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "CALIDAD",
+   "responsable": "Daniel Ramirez B.",
+   "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
+   "estatus": "Iniciado",
+   "creada": "28-07-2026",
+   "dias": 6,
    "atrasada": false,
    "costo": null
   }
  ],
  "responsables": [
   {
-   "nombre": "Alejandro Rivera G.",
-   "abiertas": 6,
-   "dias": 385
-  },
-  {
    "nombre": "Sebastián Ramos",
    "abiertas": 5,
-   "dias": 160
+   "dias": 139
   },
   {
    "nombre": "Alvaro Cortés V.",
    "abiertas": 3,
-   "dias": 385
-  },
-  {
-   "nombre": "Luis Ogalde H.",
-   "abiertas": 3,
-   "dias": 27
+   "dias": 392
   },
   {
    "nombre": "Mauricio Rocha A.",
    "abiertas": 3,
-   "dias": 18
-  },
-  {
-   "nombre": "Wladimir Carvajal P.",
-   "abiertas": 2,
-   "dias": 132
+   "dias": 34
   },
   {
    "nombre": "Mauricio Soto B.",
    "abiertas": 2,
-   "dias": 48
+   "dias": 55
   },
   {
-   "nombre": "Oscar Nahuel P.",
+   "nombre": "Wladimir Carvajal P.",
    "abiertas": 1,
-   "dias": 116
+   "dias": 133
   },
   {
    "nombre": "Ariel Flores U.",
    "abiertas": 1,
-   "dias": 76
+   "dias": 83
   },
   {
    "nombre": "Renato Muñoz F.",
    "abiertas": 1,
-   "dias": 63
-  },
-  {
-   "nombre": "Pablo Ortega",
-   "abiertas": 1,
-   "dias": 33
+   "dias": 70
   },
   {
    "nombre": "Cristián Ellmen M.",
    "abiertas": 1,
-   "dias": 21
+   "dias": 28
+  },
+  {
+   "nombre": "Wilson Jara",
+   "abiertas": 1,
+   "dias": 7
+  },
+  {
+   "nombre": "Daniel Ramirez B.",
+   "abiertas": 1,
+   "dias": 6
   }
  ],
  "control": {
-  "registros": 436,
-  "abiertas": 30,
+  "registros": 438,
+  "abiertas": 19,
   "abiertasConFechaComprometida": 0,
   "atrasoCalculable": false,
   "rangoFechas": [
    "10-02-2023",
-   "27-07-2026"
+   "28-07-2026"
   ],
-  "sinCosto": 180,
+  "sinCosto": 182,
   "sinEspecialidad": 8
  },
  "semaforo": {
@@ -4079,8 +3690,8 @@
    "Al día"
   ],
   "TALABRE": [
-   "crit",
-   "Crítico"
+   "warn",
+   "Atención"
   ],
   "ARQUEROS": [
    "good",

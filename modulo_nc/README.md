@@ -2,31 +2,34 @@
 
 Dashboard de los hallazgos de calidad de los tres proyectos **y de Oficina Central**.
 
-**Corte 27-07-2026 · 436 registros** desde 10-02-2023.
+**Corte 03-08-2026 · 438 registros** desde 10-02-2023.
 
 | Frente | Levantados | Cerrados | Abiertos | % cierre | Mediana de cierre |
 |---|---|---|---|---|---|
 | Desaladora | 95 | 92 | 3 | 96,8% | 19 días |
-| Talabre | 239 | 213 | 26 | 89,1% | 22 días |
+| Talabre | 241 | 226 | 15 | 93,8% | 23 días |
 | Arqueros | 94 | 93 | 1 | 98,9% | **139 días** |
 | Oficina Central | 8 | 8 | 0 | 100% | 77 días |
-| **Total** | **436** | **406** | **30** | **93,1%** | **28 días** |
+| **Total** | **438** | **419** | **19** | **95,7%** | **28 días** |
 
-**Semáforo:** Talabre *Crítico* · el resto *Al día*.
+**Semáforo:** Talabre *Atención* · el resto *Al día*.
 
-### Levantados en la última semana (21-07 → 27-07): 4
+**Contra el corte anterior (27-07):** las abiertas bajan de **30 a 19** y el cierre global sube
+de 93,1% a 95,7%. Talabre cerró **13 hallazgos en la semana**, entre ellos **6 de las internas
+de Adquisiciones que superaban los 100 días** —una llevaba 385—. Las abiertas internas caen de
+11 a 5 y las que superan 100 días, de 16 a 7.
 
-Todos **externos del cliente** y todos **siguen abiertos**. Ninguno lo detectó Besalco.
+### Levantados en la última semana (28-07 → 03-08): 1
 
 | Fecha | Frente | N° | Tipo | Origen | Disciplina | Responsable |
 |---|---|---|---|---|---|---|
-| 21-07 | Talabre | 237 · RNC N°445 | No Conformidad | Externa · Cliente | OO.CC | Mauricio Rocha A. |
-| 21-07 | Talabre | 238 · PNC N°177 | Producto No Conforme | Externa · Cliente | OO.CC | Sebastián Ramos |
-| 23-07 | Talabre | 239 · RNC N°447 | No Conformidad | Externa · Cliente | OO.CC | Mauricio Rocha A. |
-| 27-07 | Desaladora | 95 · NCR-0535 | No Conformidad | Externa · Cliente | MECÁNICA | Wilson Jara |
+| 28-07 | Talabre | 241 | No Conformidad | Externa · Cliente | CALIDAD | Daniel Ramirez B. |
 
-Ritmo de las últimas 8 semanas: **1 · 4 · 0 · 2 · 4 · 1 · 0 · 4**. La semana está dentro de lo
-habitual en volumen; lo que no es habitual es que **ninguna** sea de autodetección.
+Ritmo de las últimas 8 semanas: **4 · 0 · 2 · 4 · 1 · 0 · 5 · 1**.
+
+**Lo que queda:** de las 5 internas abiertas, **3 son de Expeditoría en Talabre** —392, 328 y
+224 días, todas «Iniciado» y del mismo responsable—. Adquisiciones cerró todo lo suyo;
+Expeditoría no movió nada.
 
 ---
 
@@ -93,13 +96,13 @@ leer el XML con `python-pptx` / `unzip`, no intentar renderizar.
 ### El atraso NO es calculable con este archivo
 
 La regla del proyecto es: **NC abierta cuya fecha de cierre comprometida ya venció**. Está
-implementada en el script, pero **ninguna de las 30 NC abiertas tiene fecha**: la columna
+implementada en el script, pero **ninguna de las 19 NC abiertas tiene fecha**: la columna
 «Fecha De Cierre» solo se llena **cuando la NC se cierra**, así que es la fecha de cierre real,
 no un compromiso.
 
 El panel **no reporta 0 atrasadas** —eso se leería como un buen resultado—, sino que lo declara
 abiertamente en «Control de calidad del dato» y usa en su lugar la **antigüedad**: días desde
-que se levantó cada hallazgo abierto. Al corte: mediana 108 días, y **2 llevan más de un año**.
+que se levantó cada hallazgo abierto. Al corte: mediana 55 días, y **1 lleva más de un año**.
 
 > Para activar el indicador de atraso basta agregar al Excel una columna de **fecha
 > comprometida de cierre**. El script ya la calcularía sin cambios.
@@ -109,9 +112,9 @@ que se levantó cada hallazgo abierto. Al corte: mediana 108 días, y **2 llevan
 - **Interna** = la levanta Besalco (`Interna BSMT`) · **Externa** = la levanta el cliente o un
   subcontrato (`Externa Cliente`, `Externa Subcontrato`). Las dos externas se muestran por
   separado: la del cliente compromete el contrato, la del subcontrato la absorbe Besalco.
-  Al corte: 162 internas · 217 del cliente · 48 de subcontrato · 9 sin clasificar.
+  Al corte: 162 internas · 219 del cliente · 48 de subcontrato · 9 sin clasificar.
 - **Autodetección** = qué parte de los hallazgos clasificados los levanta Besalco. Global
-  **37,9%**; por frente, Desaladora 59,6% · Arqueros 56,4% · **Talabre 22,2%**.
+  **37,8%**; por frente, Desaladora 59,6% · Arqueros 56,4% · **Talabre 22,0%**.
 - **La semana** = lo levantado en los últimos 7 días (`creada > hoy − 7 días`). Cada pestaña
   muestra la suya: la corporativa los cuatro frentes y cada proyecto solo los propios.
 - **Abierta** = todo estatus distinto de «Cerrado»: *Iniciado*, *Listo para revisión* y
@@ -121,21 +124,26 @@ que se levantó cada hallazgo abierto. Al corte: mediana 108 días, y **2 llevan
   cerradas. Es el indicador de qué tan rápido reacciona cada proyecto.
 - **Oficina Central** genera NC pero no es una obra: aparece en el resumen corporativo y en el
   consolidado «Los 3 proyectos» se excluye, para que sea comparable con los otros módulos.
-- **180 de 436 hallazgos no declaran costo**, así que las 10.783 UF son un piso, no el costo real.
+- **182 de 438 hallazgos no declaran costo**, así que las 10.783 UF son un piso, no el costo real.
 
 ---
 
 ## Lo que muestran los datos
 
-**Talabre concentra el problema:** 26 de las 30 NC abiertas, y es el único con más externas
-(186) que internas (53) — el cliente le levanta más hallazgos de los que detecta solo.
+**Talabre concentra el pendiente:** 15 de las 19 NC abiertas, y es el único con más externas
+(188) que internas (53) — el cliente le levanta más hallazgos de los que detecta solo. Aun así
+es el frente que más se movió en la semana: cerró 13.
 
-**Arqueros cierra 6 veces más lento:** 139 días de mediana contra 22 de Talabre y 19 de
+**La deuda antigua que queda es de Expeditoría:** 3 de las 5 internas abiertas son de esa
+especialidad en Talabre —392, 328 y 224 días, todas «Iniciado» y del mismo responsable—.
+Adquisiciones, que arrastraba 6 sobre 100 días, las cerró todas.
+
+**Arqueros cierra 6 veces más lento:** 139 días de mediana contra 23 de Talabre y 19 de
 Desaladora, pese a tener solo 1 NC abierta. Cierra todo, pero tarde.
 
-**Obras Civiles domina** con 167 hallazgos de 436 (38%) y 13 abiertos.
+**Obras Civiles domina** con 168 hallazgos de 438 (38%) y 10 abiertos.
 
-**El volumen se disparó en 2025** (293 hallazgos contra 18 en 2024), y 2026 ya lleva 122.
+**El volumen se disparó en 2025** (293 hallazgos contra 18 en 2024), y 2026 ya lleva 124.
 
 ---
 

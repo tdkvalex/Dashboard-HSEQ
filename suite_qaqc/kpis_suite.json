@@ -1,5 +1,5 @@
 {
- "generado": "2026-07-31 19:59",
+ "generado": "2026-08-03 13:31",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -144,20 +144,20 @@
     "nombre": "Talabre",
     "cliente": "CODELCO",
     "obra": true,
-    "total": 239,
-    "cerradas": 213,
-    "abiertas": 26,
+    "total": 241,
+    "cerradas": 226,
+    "abiertas": 15,
     "atrasadas": 0,
-    "pctCierre": 89.1,
+    "pctCierre": 93.8,
     "internas": 53,
-    "externas": 186,
+    "externas": 188,
     "costo": 5818.3,
     "conCosto": 143,
-    "medianaCierre": 22,
-    "maxCierre": 269,
+    "medianaCierre": 23,
+    "maxCierre": 389,
     "sem": [
-     "crit",
-     "Crítico"
+     "warn",
+     "Atención"
     ]
    }
   },
@@ -267,15 +267,15 @@
   "noConformidades": {
    "activo": true,
    "proyectos": 3,
-   "total": 428,
-   "cerradas": 398,
-   "abiertas": 30,
-   "pctCierre": 93,
+   "total": 430,
+   "cerradas": 411,
+   "abiertas": 19,
+   "pctCierre": 95.6,
    "costo": 10783.4,
    "medianaCierre": 28,
-   "conOficina": 436,
+   "conOficina": 438,
    "atrasoCalculable": false,
-   "corte": "27-07-2026"
+   "corte": "03-08-2026"
   }
  }
 }
