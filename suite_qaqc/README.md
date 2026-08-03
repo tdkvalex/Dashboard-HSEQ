@@ -113,7 +113,7 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 
 | Archivo | Qué es |
 |---|---|
-| `Suite_QAQC.html` | **El entregable.** Un solo archivo, ~8,1 MB, sin dependencias externas |
+| `Suite_QAQC.html` | **El entregable.** Un solo archivo, ~8,2 MB, sin dependencias externas |
 | `armar_suite.js` | Extrae los KPI y ensambla la suite. **Punto de entrada** |
 | `plantilla_suite.html` | Shell ejecutivo: portada, navegación y montaje de módulos |
 | `modulos/protocolos.html` | Dashboard de Protocolos, tal cual |
@@ -149,12 +149,12 @@ Cada cifra de la portada se contrastó contra lo que muestra el propio módulo:
 
 | Control | Suite | Módulo |
 |---|---|---|
-| Protocolos · universo | 61.264 | 61.264 |
-| Protocolos · KPI corporativo | 0,3% | 0,3% |
-| Protocolos · estado (P) | 11 | 11 |
-| Protocolos · estado (AP) | 109 | 109 |
-| Protocolos · estado (AE) | 5.420 | 5.420 |
-| Protocolos · estado (C) | 38.694 | 38.694 |
+| Protocolos · universo | 62.728 | 62.728 |
+| Protocolos · KPI corporativo | 0,4% | 0,4% |
+| Protocolos · estado (P) | 36 | 36 |
+| Protocolos · estado (AP) | 127 | 127 |
+| Protocolos · estado (AE) | 5.426 | 5.426 |
+| Protocolos · estado (C) | 39.289 | 39.289 |
 | Cierre QAQC · P1 | 65,1% | 65,1% |
 | Cierre QAQC · detalles | 6.300 · 1.286 atrasados | 6.300 · 1.286 |
 
@@ -163,17 +163,17 @@ Cada cifra de la portada se contrastó contra lo que muestra el propio módulo:
 Se replica la lógica del propio dashboard, para que las cifras digan lo mismo en los dos lados:
 
 ```
-Universo      = S + C + P + AP + AE + rv       (61.264)
-En falta      = AP + P                         (120)
-Base del KPI  = AP + P + AE + C                (44.234 = universo − S − rv)
-KPI           = En falta / Base = % pendiente  (0,3% — menos es mejor)
+Universo      = S + C + P + AP + AE + rv       (62.728)
+En falta      = AP + P                         (163)
+Base del KPI  = AP + P + AE + C                (44.878 = universo − S − rv)
+KPI           = En falta / Base = % pendiente  (0,4% — menos es mejor)
 ```
 
 Dos detalles que hay que respetar, o las cifras se van:
 
 - **`AP` ya viene neto de `rv`** (protocolos en revisión del cliente), así que **no** se le
   vuelve a restar. Pero el `rv` **sí suma al universo**: si no se devuelve, el universo queda
-  corto — eran los 148 de diferencia contra el módulo.
+  corto — eran los 200 de diferencia contra el módulo.
 - **`S` (remanente) queda fuera del KPI** pero dentro del universo. Reportar la base del KPI
   como si fuera el universo fue el error original.
 - En un nodo con hijos **no** se suman sus propios estados, solo los de los hijos (así lo hace
