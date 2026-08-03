@@ -379,13 +379,16 @@ bajada(s, SEM.total
     `${SEM.abiertas === SEM.total ? (SEM.total === 1 ? "Sigue abierto" : "Todos siguen abiertos") : `${nf(SEM.abiertas)} siguen abiertos`}.`
   : `Entre el ${SEM.desde} y el ${SEM.hasta} no se levantó ningún hallazgo en ningún frente.`);
 
-// Ritmo de las 8 semanas: 4 hallazgos no dicen nada sin saber el ritmo previo.
+// Ritmo: 4 hallazgos no dicen nada sin saber el ritmo previo. Las semanas
+// recientes van una a una y las anteriores acumuladas; esa barra se rotula con
+// las semanas que suma para que no se lea como una sola.
+const ritLbl = (w) => (w.acumulada ? `${w.semanas} sem.` : w.desde);
 s.addChart(p.ChartType.bar, [
-  { name: "Aún abiertos", labels: SEM.tendencia.map((w) => w.desde), values: SEM.tendencia.map((w) => z(w.abiertas)) },
-  { name: "Ya cerrados", labels: SEM.tendencia.map((w) => w.desde), values: SEM.tendencia.map((w) => z(w.total - w.abiertas)) },
+  { name: "Aún abiertos", labels: SEM.tendencia.map(ritLbl), values: SEM.tendencia.map((w) => z(w.abiertas)) },
+  { name: "Ya cerrados", labels: SEM.tendencia.map(ritLbl), values: SEM.tendencia.map((w) => z(w.total - w.abiertas)) },
 ], {
   ...BARRAS, x: 0.5, y: 1.95, w: 6.4, h: 2.05, chartColors: [C.crit, C.blue],
-  title: "Hallazgos levantados en cada una de las últimas 8 semanas",
+  title: `Ritmo semanal — la barra «${SEM.tendencia[0].semanas} sem.» acumula las semanas más viejas`,
   catAxisLabelFontSize: 10, barGapWidthPct: 40,
 });
 

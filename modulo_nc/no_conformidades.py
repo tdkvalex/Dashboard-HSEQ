@@ -99,6 +99,11 @@ TIPOS = ["No Conformidad", "Producto No Conforme", "Observación",
 TRAMOS = [("1-30 días", 0), ("31-90 días", 30), ("91-180 días", 90),
           ("181-365 días", 180), ("Más de un año", 365)]
 
+# Ritmo semanal: la ventana sigue siendo de 8 semanas, pero solo las 5 más
+# recientes se abren una a una; las 3 anteriores se acumulan en una fila.
+# Ocho filas ocupaban media pantalla sin decir más que el bloque.
+SEM_VENTANA, SEM_DETALLE = 8, 5
+
 # Las tres vías por las que entra un hallazgo. Se distinguen porque no son lo
 # mismo de gestionar: la del cliente compromete el contrato, la del subcontrato
 # la absorbe Besalco, y la interna es autodetección.
@@ -362,14 +367,31 @@ def construir(items, hoy, fuente):
                 "abiertas": sum(1 for i in s_ if i["estado"] == ABIERTA),
             }
 
+        # Las SEM_DETALLE semanas más recientes van una a una; el resto de la
+        # ventana se acumula en una sola fila. Con las 8 semanas abiertas la
+        # sección crecía de más en vertical sin aportar lectura: las semanas
+        # viejas se leen igual como bloque. La fila acumulada se marca para que
+        # el panel avise cuántas semanas suma y nadie la compare con una sola.
         tendencia = []
-        for k in range(7, -1, -1):
+        ini, fin = (hoy - timedelta(days=7 * SEM_VENTANA),
+                    hoy - timedelta(days=7 * SEM_DETALLE))
+        tendencia.append({
+            "etiqueta": f"{SEM_DETALLE} semanas o más",
+            "desde": (ini + timedelta(days=1)).strftime("%d-%m"),
+            "hasta": fin.strftime("%d-%m"),
+            "semanas": SEM_VENTANA - SEM_DETALLE,
+            "acumulada": True,
+            **cortar([i for i in sub if i["creada"] and ini < i["creada"] <= fin]),
+        })
+        for k in range(SEM_DETALLE - 1, -1, -1):
             ini, fin = hoy - timedelta(days=7 * (k + 1)), hoy - timedelta(days=7 * k)
             tendencia.append({
                 "etiqueta": ("Esta semana" if k == 0 else
                              "Semana pasada" if k == 1 else f"Hace {k} semanas"),
                 "desde": (ini + timedelta(days=1)).strftime("%d-%m"),
                 "hasta": fin.strftime("%d-%m"),
+                "semanas": 1,
+                "acumulada": False,
                 **cortar([i for i in sub if i["creada"] and ini < i["creada"] <= fin]),
             })
 

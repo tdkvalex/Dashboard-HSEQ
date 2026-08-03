@@ -106,7 +106,7 @@ Mismo formato y metodología que la del módulo de Cierre QAQC
 | 1 | Portada del consolidado |
 | 2 | Resumen ejecutivo — 4 tarjetas + lectura del período |
 | 3 | Semáforo por frente (los 3 proyectos + Oficina Central + total de obra) |
-| 4 | Levantados en la última semana — ritmo de 8 semanas y detalle uno a uno |
+| 4 | Levantados en la última semana — ritmo de 8 semanas (5 al detalle + 3 acumuladas) y detalle uno a uno |
 | 5 | Origen del hallazgo — interna, cliente y subcontrato · autodetección por frente |
 | 6 | Antigüedad de lo abierto + por qué el atraso no es calculable + velocidad de cierre |
 | 7 | Foco de gestión |
@@ -163,6 +163,12 @@ que se levantó cada hallazgo abierto. Al corte: mediana 55 días, y **1 lleva m
   **37,8%**; por frente, Desaladora 59,6% · Arqueros 56,4% · **Talabre 22,0%**.
 - **La semana** = lo levantado en los últimos 7 días (`creada > hoy − 7 días`). Cada pestaña
   muestra la suya: la corporativa los cuatro frentes y cada proyecto solo los propios.
+- **El ritmo** cubre 8 semanas, pero solo las **5 más recientes van una a una**; las 3
+  anteriores se suman en una fila, «5 semanas o más». Ocho filas ocupaban media pantalla sin
+  aportar lectura. Esa fila **no es una semana**: va en cursiva, con una línea punteada al
+  costado y con el número de semanas que suma en su rótulo, para que su barra no se compare
+  con la de una sola. Las constantes son `SEM_VENTANA` y `SEM_DETALLE` en
+  `no_conformidades.py`; el panel y la PPT se adaptan solas al cambiarlas.
 - **Abierta** = todo estatus distinto de «Cerrado»: *Iniciado*, *Listo para revisión* y
   *No aceptado*. Se conserva el estatus original, porque «No aceptado» no se gestiona igual
   que «Iniciado».
