@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-03 18:28",
+ "generado": "2026-08-03 18:39",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -67,7 +67,7 @@
     "total": 95,
     "cerradas": 92,
     "abiertas": 3,
-    "atrasadas": 0,
+    "atrasadas": 2,
     "pctCierre": 96.8,
     "internas": 56,
     "externas": 38,
@@ -151,7 +151,7 @@
     "total": 241,
     "cerradas": 226,
     "abiertas": 15,
-    "atrasadas": 0,
+    "atrasadas": 13,
     "pctCierre": 93.8,
     "internas": 53,
     "externas": 188,
@@ -233,7 +233,7 @@
     "total": 164,
     "cerradas": 128,
     "abiertas": 36,
-    "atrasadas": 0,
+    "atrasadas": 36,
     "pctCierre": 78,
     "internas": 53,
     "externas": 111,
@@ -286,7 +286,9 @@
    "costo": 10783.4,
    "medianaCierre": 30,
    "conOficina": 508,
-   "atrasoCalculable": false,
+   "atrasoCalculable": true,
+   "atrasadas": 51,
+   "plazoRespuesta": 10,
    "corte": "03-08-2026"
   }
  }

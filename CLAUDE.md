@@ -43,10 +43,12 @@ las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--exter
 «Disposición NC-Externas»). Sin ella Arqueros se ve con 1 abierta y 98,9% de cierre en vez de
 36 y 78%. El script avisa si no se pasa.
 
-**Ojo con el atraso:** la regla es «abierta con la fecha comprometida vencida», pero la columna
-«Fecha De Cierre» del Excel **solo se llena al cerrar**, así que ninguna NC abierta tiene fecha
-y el atraso NO es calculable. El panel lo declara y usa la antigüedad en su lugar. Si algún día
-agregan una columna de fecha comprometida, el script ya la calcula sin cambios.
+**El atraso se mide contra el plazo de respuesta, no contra una fecha comprometida.** Hay
+**10 días para responder una NC desde que se emite**; del día 11 en adelante corre atraso
+(`PLAZO_RESPUESTA` en `no_conformidades.py`). Se cuenta sobre la fecha de emisión porque
+**ninguna de las dos fuentes trae una fecha comprometida de cierre**: las columnas de fecha del
+Excel solo se llenan al cerrar. Al corte, 51 de las 54 abiertas están fuera de plazo.
+*No volver a dar el atraso por «no calculable»: eso fue un error de criterio ya corregido.*
 
 ## 2 · `panel_control_TOP_P1/` — Control de Cierre QAQC
 

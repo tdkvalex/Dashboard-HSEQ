@@ -4,13 +4,13 @@ Dashboard de los hallazgos de calidad de los tres proyectos **y de Oficina Centr
 
 **Corte 03-08-2026 · 508 registros** desde 10-02-2023, de **dos fuentes**.
 
-| Frente | Levantados | Cerrados | Abiertos | % cierre | Mediana de cierre |
-|---|---|---|---|---|---|
-| Desaladora | 95 | 92 | 3 | 96,8% | 19 días |
-| Talabre | 241 | 226 | 15 | 93,8% | 23 días |
-| **Arqueros** | **164** | **128** | **36** | **78,0%** | **131 días** |
-| Oficina Central | 8 | 8 | 0 | 100% | 77 días |
-| **Total** | **508** | **454** | **54** | **89,4%** | **30 días** |
+| Frente | Levantados | Cerrados | Abiertos | Fuera de plazo | % cierre | Mediana de cierre |
+|---|---|---|---|---|---|---|
+| Desaladora | 95 | 92 | 3 | 2 | 96,8% | 19 días |
+| Talabre | 241 | 226 | 15 | 13 | 93,8% | 23 días |
+| **Arqueros** | **164** | **128** | **36** | **36** | **78,0%** | **131 días** |
+| Oficina Central | 8 | 8 | 0 | 0 | 100% | 77 días |
+| **Total** | **508** | **454** | **54** | **51** | **89,4%** | **30 días** |
 
 **Semáforo:** Arqueros y Talabre *Crítico* y *Atención* · el resto *Al día*.
 
@@ -51,18 +51,17 @@ el del subcontrato, punteado.
 ### «Estado de cada vía» — qué pasó con lo que entró por cada una
 
 Bajo el gráfico de origen, una tabla abre cada vía en **levantadas · cerradas · % cierre ·
-abiertas · atrasadas · más de 180 días · antigüedad mediana**. El gráfico dice por dónde entra
+abiertas · atrasadas · +90 días · +180 días · antigüedad mediana · la más antigua**. El gráfico dice por dónde entra
 el hallazgo; la tabla, qué pasó después.
 
-**La columna «Atrasadas» dice `n/c`, no `0`.** Con este archivo el atraso no es calculable
-(ninguna abierta trae fecha comprometida, ver más abajo) y escribir 0 se leería como que no hay
-atraso. En su lugar la severidad de lo abierto la dan las dos columnas siguientes, que sí se
-pueden calcular. Si algún día el Excel trae la fecha comprometida, la columna muestra el número
-real sin tocar nada: depende de `control.atrasoCalculable`.
+**Atrasada** = abierta que pasó el plazo de respuesta (ver más abajo). Las columnas de
+antigüedad no son redundantes: dicen **qué tan grave** es el atraso, porque pasarse una semana
+no es lo mismo que llevar un año.
 
-Al corte, lo que muestra: **las 49 abiertas del cliente cierran al 83%** contra 96,9% las
-internas y 100% las de subcontrato —de las que no queda ninguna abierta—, y las 14 que superan
-los 180 días son todas del cliente. En Arqueros la brecha es la mayor: 50,7% contra 98,1%.
+Al corte: **las 49 abiertas del cliente cierran al 83%** contra 96,9% las internas y 100% las de
+subcontrato —de esas no queda ninguna abierta—. De las 51 fuera de plazo, **46 son del cliente**
+y las 14 que superan los 180 días también. En Arqueros la brecha es la mayor: 50,7% contra
+98,1%, y sus 36 abiertas están todas fuera de plazo.
 
 Las cifras salen de `resumir()` en `no_conformidades.py`, que expone `cliente`, `subcontrato`,
 `abiertasCliente`, `abiertasSubcontrato` y `abiertasInternas` además de los viejos
@@ -124,7 +123,7 @@ Mismo formato y metodología que la del módulo de Cierre QAQC
 | 3 | Semáforo por frente (los 3 proyectos + Oficina Central + total de obra) |
 | 4 | Levantados en la última semana — ritmo de 8 semanas (5 al detalle + 3 acumuladas) y detalle uno a uno |
 | 5 | Origen del hallazgo — interna, cliente y subcontrato · estado de cada vía · autodetección por frente |
-| 6 | Antigüedad de lo abierto + por qué el atraso no es calculable + velocidad de cierre |
+| 6 | Antigüedad de lo abierto + fuera de plazo de respuesta + velocidad de cierre |
 | 7 | Foco de gestión |
 | 8-16 | Portada + 2 láminas por proyecto (estado · pendiente y novedades) |
 
@@ -153,19 +152,29 @@ leer el XML con `python-pptx` / `unzip`, no intentar renderizar.
 
 ## Lo que hay que saber del dato
 
-### El atraso NO es calculable con este archivo
+### El atraso se mide contra el plazo de respuesta
 
-La regla del proyecto es: **NC abierta cuya fecha de cierre comprometida ya venció**. Está
-implementada en el script, pero **ninguna de las 19 NC abiertas tiene fecha**: la columna
-«Fecha De Cierre» solo se llena **cuando la NC se cierra**, así que es la fecha de cierre real,
-no un compromiso.
+**La regla del proyecto: hay 10 días para responder una NC desde que se emite; del día 11 en
+adelante corre atraso.** Los días de atraso son la antigüedad menos el plazo. La constante es
+`PLAZO_RESPUESTA` en `no_conformidades.py`: si el plazo cambia, se cambia ahí y el panel, la PPT
+y la suite se recalculan solos.
 
-El panel **no reporta 0 atrasadas** —eso se leería como un buen resultado—, sino que lo declara
-abiertamente en «Control de calidad del dato» y usa en su lugar la **antigüedad**: días desde
-que se levantó cada hallazgo abierto. Al corte: mediana 55 días, y **1 lleva más de un año**.
+**Se cuenta sobre la fecha de emisión, no sobre una fecha comprometida de cierre.** Ninguna de
+las dos fuentes trae esa fecha: en el registro principal las tres columnas de fecha
+—«Fecha De Cierre» (dos veces) y «Fecha Revisión Y Cierre»— **solo se llenan al cerrar**, y las
+19 abiertas las tienen todas vacías; la planilla del cliente tampoco declara plazo. La fecha de
+emisión, en cambio, está en las dos, así que el atraso **sí es calculable**.
 
-> Para activar el indicador de atraso basta agregar al Excel una columna de **fecha
-> comprometida de cierre**. El script ya la calcularía sin cambios.
+> Una versión anterior del módulo daba el atraso por no calculable y lo reemplazaba por la
+> antigüedad. Era un error de criterio, no de dato: el plazo se cuenta desde la emisión.
+
+Al corte: **51 de las 54 abiertas están fuera de plazo** (94,4%). Solo 3 siguen dentro —dos de
+7 días y una de 6—. Por frente: Arqueros 36 de 36, Talabre 13 de 15, Desaladora 2 de 3. Por vía:
+46 de las 49 del cliente y las 5 internas. El atraso va de 3 a **385 días**.
+
+La antigüedad se sigue reportando y no es redundante: dice **qué tan grave** es cada atraso.
+Pasarse una semana del plazo no es lo mismo que llevar un año abierto, y de las 51 atrasadas,
+17 superan los 180 días y 3 el año.
 
 ### Otras definiciones
 
@@ -192,7 +201,7 @@ que se levantó cada hallazgo abierto. Al corte: mediana 55 días, y **1 lleva m
   cerradas. Es el indicador de qué tan rápido reacciona cada proyecto.
 - **Oficina Central** genera NC pero no es una obra: aparece en el resumen corporativo y en el
   consolidado «Los 3 proyectos» se excluye, para que sea comparable con los otros módulos.
-- **182 de 438 hallazgos no declaran costo**, así que las 10.783 UF son un piso, no el costo real.
+- **252 de 508 hallazgos no declaran costo**, así que las 10.783 UF son un piso, no el costo real.
 
 ---
 

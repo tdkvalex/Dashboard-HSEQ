@@ -287,12 +287,12 @@ const reads = [
        `${SEM.abiertas === SEM.total ? "Todos siguen abiertos" : `${nf(SEM.abiertas)} siguen abiertos`}; la semana anterior entraron ${nf(semPrev.total)}.`
      : `Entre el ${SEM.desde} y el ${SEM.hasta} no se levantó ningún hallazgo en ningún frente.`],
   [K.atrasoCalculable
-    ? `El atraso está medido.`
+    ? `${nf(R.atrasadas)} de los ${nf(R.abiertas)} abiertos están fuera del plazo de respuesta.`
     : `El atraso no es medible con este archivo; se mide la antigüedad.`,
    K.atrasoCalculable
-     ? `${nf(R.atrasadas)} hallazgos abiertos superaron su fecha comprometida.`
-     : `Ninguno de los ${nf(K.abiertas)} abiertos trae fecha comprometida —la columna «Fecha De Cierre» solo se llena al cerrar—, ` +
-       `así que se reporta la antigüedad: ${nf(viejas)} llevan más de 180 días y ${nf(anioMas)} más de un año.`],
+     ? `El plazo es de ${nf(K.plazoRespuesta)} días desde que se emite la NC. De los atrasados, ` +
+       `${nf(viejas)} llevan más de 180 días abiertos y ${nf(anioMas)} más de un año: no es atraso de días, es deuda vieja.`
+     : `Ninguno de los ${nf(K.abiertas)} abiertos trae fecha de emisión, así que no se les puede calcular el atraso.`],
 ];
 
 let ry = 4.86;
@@ -541,20 +541,20 @@ s.addChart(p.ChartType.bar, tramos.map(([t, v]) => ({
 // no se reporta 0 atrasados como si fuera un buen resultado.
 s.addShape(p.ShapeType.roundRect, { x: 7.3, y: 2.05, w: 5.53, h: 2.6, rectRadius: 0.06,
   fill: { color: C.navy }, line: { type: "none" } });
-s.addText(K.atrasoCalculable ? "ATRASO — CALCULABLE" : "ATRASO — NO CALCULABLE",
+s.addText(K.atrasoCalculable ? "FUERA DE PLAZO DE RESPUESTA" : "ATRASO — NO CALCULABLE",
   { x: 7.6, y: 2.22, w: 5, h: 0.3, fontFace: FT, fontSize: 11, bold: true,
-    color: K.atrasoCalculable ? C.good : C.copperL, charSpacing: 1.5, margin: 0 });
-s.addText([{ text: "La regla del proyecto es: hallazgo abierto cuya fecha de cierre comprometida ya venció.\n",
+    color: K.atrasoCalculable ? C.crit : C.copperL, charSpacing: 1.5, margin: 0 });
+s.addText([{ text: `La regla del proyecto es: ${nf(K.plazoRespuesta)} días para responder una NC desde que se emite; ` +
+                   `del día ${nf(K.plazoRespuesta + 1)} en adelante corre atraso.\n`,
              options: { color: C.ice } },
            K.atrasoCalculable
-             ? { text: `Al corte hay ${nf(R.atrasadas)} hallazgos atrasados.`, options: { color: C.white, bold: true } }
-             : { text: `Ninguno de los ${nf(K.abiertas)} abiertos trae esa fecha: la columna «Fecha De Cierre» del Excel ` +
-                       `solo se llena al cerrar. El indicador no se puede calcular y el panel lo declara en vez de ` +
-                       `informar 0 atrasados. En su lugar se usa la antigüedad.`,
-                 options: { color: C.white } }],
+             ? { text: `Al corte hay ${nf(R.atrasadas)} hallazgos fuera de plazo de los ${nf(R.abiertas)} abiertos.`,
+                 options: { color: C.white, bold: true } }
+             : { text: `${nf(K.abiertasSinFechaEmision)} abiertos no traen fecha de emisión, así que no se les puede ` +
+                       `calcular el atraso.`, options: { color: C.white } }],
   { x: 7.6, y: 2.58, w: 4.95, h: 1.5, fontFace: FT, fontSize: 11.5, lineSpacing: 15, margin: 0, valign: "top" });
-s.addText("Para activarlo basta agregar al Excel una columna de fecha comprometida de cierre: el script ya la calcula.",
-  { x: 7.6, y: 4.1, w: 4.95, h: 0.45, fontFace: FT, fontSize: 10, italic: true, color: C.steel, margin: 0, valign: "top" });
+s.addText("Se mide sobre la fecha de emisión: el Excel no declara una fecha comprometida de cierre —esa columna solo se llena al cerrar—.",
+  { x: 7.6, y: 4.05, w: 4.95, h: 0.5, fontFace: FT, fontSize: 10, italic: true, color: C.steel, margin: 0, valign: "top" });
 
 // Velocidad de cierre por frente.
 s.addText("VELOCIDAD DE CIERRE POR FRENTE", { x: 0.55, y: 4.75, w: 8, h: 0.3, fontFace: FT,
@@ -612,10 +612,11 @@ const focus = [
          ? `Los tienen a cargo ${respViejas.map(([n2, c2]) => `${n2} (${nf(c2)})`).join(", ")}. `
          : "") +
        `Es deuda antigua que no se cierra sola.` },
-  { n: "04", t: K.atrasoCalculable ? "Sostener el control del atraso" : "Habilitar la medición del atraso", c: C.good,
+  { n: "04", t: K.atrasoCalculable ? `Responder las ${nf(R.atrasadas)} que pasaron el plazo` : "Habilitar la medición del atraso", c: C.good,
     d: K.atrasoCalculable
-      ? `El indicador está operativo sobre los ${nf(K.abiertas)} abiertos.`
-      : `Agregar al Excel una columna de fecha comprometida de cierre. Sin ella el indicador que pide el ` +
+      ? `El plazo es de ${nf(K.plazoRespuesta)} días desde la emisión y hoy lo incumplen ` +
+        `${pct(R.atrasadas, R.abiertas)} de los abiertos. Solo ${nf(R.abiertas - R.atrasadas)} siguen dentro de plazo.`
+      : `Agregar al Excel la fecha de emisión de las abiertas que no la traen. Sin ella el indicador que pide el ` +
         `procedimiento no se puede calcular y hoy se reemplaza por la antigüedad.` },
 ];
 focus.forEach((f, i) => {

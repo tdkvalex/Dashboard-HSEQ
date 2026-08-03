@@ -236,6 +236,8 @@ const datos = {
       medianaCierre: nc.obra.medianaCierre,
       conOficina: nc.global.total,
       atrasoCalculable: nc.control.atrasoCalculable,
+      atrasadas: nc.obra.atrasadas,
+      plazoRespuesta: nc.control.plazoRespuesta,
       corte: nc.corte,
     } : { activo: false },
   },

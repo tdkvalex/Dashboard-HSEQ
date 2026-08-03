@@ -7,7 +7,7 @@
   "hoy": "03-08-2026",
   "corte": "2026-08-03",
   "corteTexto": "03-08-2026",
-  "generado": "2026-08-03 17:08",
+  "generado": "2026-08-03 18:34",
   "fuente": "1e73482e-Data_NCR03082026.xlsx"
  },
  "orden": [
@@ -27,7 +27,7 @@
     "total": 95,
     "cerradas": 92,
     "abiertas": 3,
-    "atrasadas": 0,
+    "atrasadas": 2,
     "pctCierre": 96.8,
     "internas": 56,
     "externas": 38,
@@ -46,7 +46,7 @@
      "total": 52,
      "cerradas": 50,
      "abiertas": 2,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 96.2,
      "internas": 30,
      "externas": 22,
@@ -100,7 +100,7 @@
      "total": 13,
      "cerradas": 12,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 92.3,
      "internas": 2,
      "externas": 11,
@@ -138,7 +138,7 @@
      "total": 56,
      "cerradas": 55,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 98.2,
      "internas": 56,
      "externas": 0,
@@ -156,7 +156,7 @@
      "total": 38,
      "cerradas": 36,
      "abiertas": 2,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 94.7,
      "internas": 0,
      "externas": 38,
@@ -194,7 +194,7 @@
      "total": 56,
      "cerradas": 55,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 98.2,
      "internas": 56,
      "externas": 0,
@@ -212,7 +212,7 @@
      "total": 30,
      "cerradas": 28,
      "abiertas": 2,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 93.3,
      "internas": 0,
      "externas": 30,
@@ -287,7 +287,7 @@
      "total": 6,
      "cerradas": 5,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 83.3,
      "internas": 4,
      "externas": 2,
@@ -359,7 +359,7 @@
      "total": 3,
      "cerradas": 2,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 66.7,
      "internas": 1,
      "externas": 2,
@@ -628,7 +628,7 @@
      "total": 2,
      "cerradas": 0,
      "abiertas": 2,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 0.0,
      "internas": 0,
      "externas": 2,
@@ -646,7 +646,7 @@
      "total": 7,
      "cerradas": 4,
      "abiertas": 3,
-     "atrasadas": 0,
+     "atrasadas": 2,
      "pctCierre": 57.1,
      "internas": 1,
      "externas": 6,
@@ -789,7 +789,7 @@
     "total": 241,
     "cerradas": 226,
     "abiertas": 15,
-    "atrasadas": 0,
+    "atrasadas": 13,
     "pctCierre": 93.8,
     "internas": 53,
     "externas": 188,
@@ -808,7 +808,7 @@
      "total": 164,
      "cerradas": 153,
      "abiertas": 11,
-     "atrasadas": 0,
+     "atrasadas": 10,
      "pctCierre": 93.3,
      "internas": 49,
      "externas": 115,
@@ -826,7 +826,7 @@
      "total": 74,
      "cerradas": 70,
      "abiertas": 4,
-     "atrasadas": 0,
+     "atrasadas": 3,
      "pctCierre": 94.6,
      "internas": 1,
      "externas": 73,
@@ -882,7 +882,7 @@
      "total": 53,
      "cerradas": 50,
      "abiertas": 3,
-     "atrasadas": 0,
+     "atrasadas": 3,
      "pctCierre": 94.3,
      "internas": 53,
      "externas": 0,
@@ -900,7 +900,7 @@
      "total": 188,
      "cerradas": 176,
      "abiertas": 12,
-     "atrasadas": 0,
+     "atrasadas": 10,
      "pctCierre": 93.6,
      "internas": 0,
      "externas": 188,
@@ -920,7 +920,7 @@
      "total": 53,
      "cerradas": 50,
      "abiertas": 3,
-     "atrasadas": 0,
+     "atrasadas": 3,
      "pctCierre": 94.3,
      "internas": 53,
      "externas": 0,
@@ -938,7 +938,7 @@
      "total": 188,
      "cerradas": 176,
      "abiertas": 12,
-     "atrasadas": 0,
+     "atrasadas": 10,
      "pctCierre": 93.6,
      "internas": 0,
      "externas": 188,
@@ -959,7 +959,7 @@
      "total": 140,
      "cerradas": 131,
      "abiertas": 9,
-     "atrasadas": 0,
+     "atrasadas": 8,
      "pctCierre": 93.6,
      "internas": 26,
      "externas": 114,
@@ -977,7 +977,7 @@
      "total": 5,
      "cerradas": 2,
      "abiertas": 3,
-     "atrasadas": 0,
+     "atrasadas": 3,
      "pctCierre": 40.0,
      "internas": 3,
      "externas": 2,
@@ -995,7 +995,7 @@
      "total": 26,
      "cerradas": 23,
      "abiertas": 3,
-     "atrasadas": 0,
+     "atrasadas": 2,
      "pctCierre": 88.5,
      "internas": 0,
      "externas": 26,
@@ -1211,7 +1211,7 @@
      "total": 6,
      "cerradas": 1,
      "abiertas": 5,
-     "atrasadas": 0,
+     "atrasadas": 3,
      "pctCierre": 16.7,
      "internas": 0,
      "externas": 6,
@@ -1229,7 +1229,7 @@
      "total": 30,
      "cerradas": 22,
      "abiertas": 8,
-     "atrasadas": 0,
+     "atrasadas": 6,
      "pctCierre": 73.3,
      "internas": 2,
      "externas": 28,
@@ -1416,7 +1416,7 @@
     "total": 164,
     "cerradas": 128,
     "abiertas": 36,
-    "atrasadas": 0,
+    "atrasadas": 36,
     "pctCierre": 78.0,
     "internas": 53,
     "externas": 111,
@@ -1435,7 +1435,7 @@
      "total": 89,
      "cerradas": 68,
      "abiertas": 21,
-     "atrasadas": 0,
+     "atrasadas": 21,
      "pctCierre": 76.4,
      "internas": 52,
      "externas": 37,
@@ -1471,7 +1471,7 @@
      "total": 38,
      "cerradas": 23,
      "abiertas": 15,
-     "atrasadas": 0,
+     "atrasadas": 15,
      "pctCierre": 60.5,
      "internas": 1,
      "externas": 37,
@@ -1491,7 +1491,7 @@
      "total": 53,
      "cerradas": 52,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 98.1,
      "internas": 53,
      "externas": 0,
@@ -1509,7 +1509,7 @@
      "total": 111,
      "cerradas": 76,
      "abiertas": 35,
-     "atrasadas": 0,
+     "atrasadas": 35,
      "pctCierre": 68.5,
      "internas": 0,
      "externas": 111,
@@ -1529,7 +1529,7 @@
      "total": 53,
      "cerradas": 52,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 98.1,
      "internas": 53,
      "externas": 0,
@@ -1547,7 +1547,7 @@
      "total": 71,
      "cerradas": 36,
      "abiertas": 35,
-     "atrasadas": 0,
+     "atrasadas": 35,
      "pctCierre": 50.7,
      "internas": 0,
      "externas": 71,
@@ -1586,7 +1586,7 @@
      "total": 16,
      "cerradas": 15,
      "abiertas": 1,
-     "atrasadas": 0,
+     "atrasadas": 1,
      "pctCierre": 93.8,
      "internas": 16,
      "externas": 0,
@@ -1604,7 +1604,7 @@
      "total": 70,
      "cerradas": 35,
      "abiertas": 35,
-     "atrasadas": 0,
+     "atrasadas": 35,
      "pctCierre": 50.0,
      "internas": 0,
      "externas": 70,
@@ -1966,7 +1966,7 @@
      "total": 8,
      "cerradas": 0,
      "abiertas": 8,
-     "atrasadas": 0,
+     "atrasadas": 8,
      "pctCierre": 0.0,
      "internas": 1,
      "externas": 7,
@@ -2387,7 +2387,7 @@
    "total": 508,
    "cerradas": 454,
    "abiertas": 54,
-   "atrasadas": 0,
+   "atrasadas": 51,
    "pctCierre": 89.4,
    "internas": 162,
    "externas": 337,
@@ -2406,7 +2406,7 @@
     "total": 313,
     "cerradas": 279,
     "abiertas": 34,
-    "atrasadas": 0,
+    "atrasadas": 32,
     "pctCierre": 89.1,
     "internas": 131,
     "externas": 174,
@@ -2424,7 +2424,7 @@
     "total": 120,
     "cerradas": 116,
     "abiertas": 4,
-    "atrasadas": 0,
+    "atrasadas": 3,
     "pctCierre": 96.7,
     "internas": 5,
     "externas": 115,
@@ -2442,7 +2442,7 @@
     "total": 60,
     "cerradas": 45,
     "abiertas": 15,
-    "atrasadas": 0,
+    "atrasadas": 15,
     "pctCierre": 75.0,
     "internas": 23,
     "externas": 37,
@@ -2460,7 +2460,7 @@
     "total": 14,
     "cerradas": 13,
     "abiertas": 1,
-    "atrasadas": 0,
+    "atrasadas": 1,
     "pctCierre": 92.9,
     "internas": 3,
     "externas": 11,
@@ -2498,7 +2498,7 @@
     "total": 162,
     "cerradas": 157,
     "abiertas": 5,
-    "atrasadas": 0,
+    "atrasadas": 5,
     "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
@@ -2516,7 +2516,7 @@
     "total": 337,
     "cerradas": 288,
     "abiertas": 49,
-    "atrasadas": 0,
+    "atrasadas": 46,
     "pctCierre": 85.5,
     "internas": 0,
     "externas": 337,
@@ -2554,7 +2554,7 @@
     "total": 162,
     "cerradas": 157,
     "abiertas": 5,
-    "atrasadas": 0,
+    "atrasadas": 5,
     "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
@@ -2572,7 +2572,7 @@
     "total": 289,
     "cerradas": 240,
     "abiertas": 49,
-    "atrasadas": 0,
+    "atrasadas": 46,
     "pctCierre": 83.0,
     "internas": 0,
     "externas": 289,
@@ -2629,7 +2629,7 @@
     "total": 168,
     "cerradas": 158,
     "abiertas": 10,
-    "atrasadas": 0,
+    "atrasadas": 9,
     "pctCierre": 94.0,
     "internas": 48,
     "externas": 120,
@@ -2647,7 +2647,7 @@
     "total": 78,
     "cerradas": 43,
     "abiertas": 35,
-    "atrasadas": 0,
+    "atrasadas": 35,
     "pctCierre": 55.1,
     "internas": 0,
     "externas": 70,
@@ -2665,7 +2665,7 @@
     "total": 48,
     "cerradas": 44,
     "abiertas": 4,
-    "atrasadas": 0,
+    "atrasadas": 4,
     "pctCierre": 91.7,
     "internas": 10,
     "externas": 38,
@@ -2683,7 +2683,7 @@
     "total": 36,
     "cerradas": 33,
     "abiertas": 3,
-    "atrasadas": 0,
+    "atrasadas": 2,
     "pctCierre": 91.7,
     "internas": 4,
     "externas": 32,
@@ -2737,7 +2737,7 @@
     "total": 15,
     "cerradas": 14,
     "abiertas": 1,
-    "atrasadas": 0,
+    "atrasadas": 1,
     "pctCierre": 93.3,
     "internas": 6,
     "externas": 9,
@@ -3119,7 +3119,7 @@
     "total": 8,
     "cerradas": 1,
     "abiertas": 7,
-    "atrasadas": 0,
+    "atrasadas": 4,
     "pctCierre": 12.5,
     "internas": 0,
     "externas": 8,
@@ -3137,7 +3137,7 @@
     "total": 45,
     "cerradas": 26,
     "abiertas": 19,
-    "atrasadas": 0,
+    "atrasadas": 16,
     "pctCierre": 57.8,
     "internas": 4,
     "externas": 41,
@@ -3328,7 +3328,7 @@
    "total": 500,
    "cerradas": 446,
    "abiertas": 54,
-   "atrasadas": 0,
+   "atrasadas": 51,
    "pctCierre": 89.2,
    "internas": 162,
    "externas": 337,
@@ -3347,7 +3347,7 @@
     "total": 305,
     "cerradas": 271,
     "abiertas": 34,
-    "atrasadas": 0,
+    "atrasadas": 32,
     "pctCierre": 88.9,
     "internas": 131,
     "externas": 174,
@@ -3365,7 +3365,7 @@
     "total": 120,
     "cerradas": 116,
     "abiertas": 4,
-    "atrasadas": 0,
+    "atrasadas": 3,
     "pctCierre": 96.7,
     "internas": 5,
     "externas": 115,
@@ -3383,7 +3383,7 @@
     "total": 60,
     "cerradas": 45,
     "abiertas": 15,
-    "atrasadas": 0,
+    "atrasadas": 15,
     "pctCierre": 75.0,
     "internas": 23,
     "externas": 37,
@@ -3401,7 +3401,7 @@
     "total": 14,
     "cerradas": 13,
     "abiertas": 1,
-    "atrasadas": 0,
+    "atrasadas": 1,
     "pctCierre": 92.9,
     "internas": 3,
     "externas": 11,
@@ -3439,7 +3439,7 @@
     "total": 162,
     "cerradas": 157,
     "abiertas": 5,
-    "atrasadas": 0,
+    "atrasadas": 5,
     "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
@@ -3457,7 +3457,7 @@
     "total": 337,
     "cerradas": 288,
     "abiertas": 49,
-    "atrasadas": 0,
+    "atrasadas": 46,
     "pctCierre": 85.5,
     "internas": 0,
     "externas": 337,
@@ -3495,7 +3495,7 @@
     "total": 162,
     "cerradas": 157,
     "abiertas": 5,
-    "atrasadas": 0,
+    "atrasadas": 5,
     "pctCierre": 96.9,
     "internas": 162,
     "externas": 0,
@@ -3513,7 +3513,7 @@
     "total": 289,
     "cerradas": 240,
     "abiertas": 49,
-    "atrasadas": 0,
+    "atrasadas": 46,
     "pctCierre": 83.0,
     "internas": 0,
     "externas": 289,
@@ -3570,7 +3570,7 @@
     "total": 168,
     "cerradas": 158,
     "abiertas": 10,
-    "atrasadas": 0,
+    "atrasadas": 9,
     "pctCierre": 94.0,
     "internas": 48,
     "externas": 120,
@@ -3588,7 +3588,7 @@
     "total": 70,
     "cerradas": 35,
     "abiertas": 35,
-    "atrasadas": 0,
+    "atrasadas": 35,
     "pctCierre": 50.0,
     "internas": 0,
     "externas": 70,
@@ -3606,7 +3606,7 @@
     "total": 48,
     "cerradas": 44,
     "abiertas": 4,
-    "atrasadas": 0,
+    "atrasadas": 4,
     "pctCierre": 91.7,
     "internas": 10,
     "externas": 38,
@@ -3624,7 +3624,7 @@
     "total": 36,
     "cerradas": 33,
     "abiertas": 3,
-    "atrasadas": 0,
+    "atrasadas": 2,
     "pctCierre": 91.7,
     "internas": 4,
     "externas": 32,
@@ -3678,7 +3678,7 @@
     "total": 15,
     "cerradas": 14,
     "abiertas": 1,
-    "atrasadas": 0,
+    "atrasadas": 1,
     "pctCierre": 93.3,
     "internas": 6,
     "externas": 9,
@@ -4059,7 +4059,7 @@
     "total": 8,
     "cerradas": 1,
     "abiertas": 7,
-    "atrasadas": 0,
+    "atrasadas": 4,
     "pctCierre": 12.5,
     "internas": 0,
     "externas": 8,
@@ -4077,7 +4077,7 @@
     "total": 45,
     "cerradas": 26,
     "abiertas": 19,
-    "atrasadas": 0,
+    "atrasadas": 16,
     "pctCierre": 57.8,
     "internas": 4,
     "externas": 41,
@@ -4322,7 +4322,8 @@
    "estatus": "Listo para revisión",
    "creada": "04-07-2025",
    "dias": 395,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 385,
    "costo": null
   },
   {
@@ -4338,7 +4339,8 @@
    "estatus": "Iniciado",
    "creada": "07-07-2025",
    "dias": 392,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 382,
    "costo": null
   },
   {
@@ -4354,7 +4356,8 @@
    "estatus": "Listo para revisión",
    "creada": "07-07-2025",
    "dias": 392,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 382,
    "costo": null
   },
   {
@@ -4370,7 +4373,8 @@
    "estatus": "Listo para revisión",
    "creada": "07-08-2025",
    "dias": 361,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 351,
    "costo": null
   },
   {
@@ -4386,7 +4390,8 @@
    "estatus": "Listo para revisión",
    "creada": "19-08-2025",
    "dias": 349,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 339,
    "costo": null
   },
   {
@@ -4402,7 +4407,8 @@
    "estatus": "Iniciado",
    "creada": "09-09-2025",
    "dias": 328,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 318,
    "costo": null
   },
   {
@@ -4418,7 +4424,8 @@
    "estatus": "Listo para revisión",
    "creada": "16-09-2025",
    "dias": 321,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 311,
    "costo": null
   },
   {
@@ -4434,7 +4441,8 @@
    "estatus": "Observada",
    "creada": "16-10-2025",
    "dias": 291,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 281,
    "costo": null
   },
   {
@@ -4450,7 +4458,8 @@
    "estatus": "Observada",
    "creada": "16-10-2025",
    "dias": 291,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 281,
    "costo": null
   },
   {
@@ -4466,7 +4475,8 @@
    "estatus": "Listo para revisión",
    "creada": "06-11-2025",
    "dias": 270,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 260,
    "costo": null
   },
   {
@@ -4482,7 +4492,8 @@
    "estatus": "Observada",
    "creada": "10-11-2025",
    "dias": 266,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 256,
    "costo": null
   },
   {
@@ -4498,7 +4509,8 @@
    "estatus": "Listo para revisión",
    "creada": "17-12-2025",
    "dias": 229,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 219,
    "costo": null
   },
   {
@@ -4514,7 +4526,8 @@
    "estatus": "Iniciado",
    "creada": "22-12-2025",
    "dias": 224,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 214,
    "costo": null
   },
   {
@@ -4530,7 +4543,8 @@
    "estatus": "Observada",
    "creada": "15-01-2026",
    "dias": 200,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 190,
    "costo": null
   },
   {
@@ -4546,7 +4560,8 @@
    "estatus": "Observada",
    "creada": "15-01-2026",
    "dias": 200,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 190,
    "costo": null
   },
   {
@@ -4562,7 +4577,8 @@
    "estatus": "Listo para revisión",
    "creada": "15-01-2026",
    "dias": 200,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 190,
    "costo": null
   },
   {
@@ -4578,7 +4594,8 @@
    "estatus": "Observada",
    "creada": "15-01-2026",
    "dias": 200,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 190,
    "costo": null
   },
   {
@@ -4594,7 +4611,8 @@
    "estatus": "Listo para revisión",
    "creada": "05-02-2026",
    "dias": 179,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 169,
    "costo": null
   },
   {
@@ -4610,7 +4628,8 @@
    "estatus": "Observada",
    "creada": "05-02-2026",
    "dias": 179,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 169,
    "costo": null
   },
   {
@@ -4626,7 +4645,8 @@
    "estatus": "Observada",
    "creada": "24-02-2026",
    "dias": 160,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 150,
    "costo": null
   },
   {
@@ -4642,7 +4662,8 @@
    "estatus": "Observada",
    "creada": "24-02-2026",
    "dias": 160,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 150,
    "costo": null
   },
   {
@@ -4658,7 +4679,8 @@
    "estatus": "Listo para revisión",
    "creada": "06-03-2026",
    "dias": 150,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 140,
    "costo": null
   },
   {
@@ -4674,7 +4696,8 @@
    "estatus": "Observada",
    "creada": "06-03-2026",
    "dias": 150,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 140,
    "costo": null
   },
   {
@@ -4690,7 +4713,8 @@
    "estatus": "Listo para revisión",
    "creada": "10-03-2026",
    "dias": 146,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 136,
    "costo": null
   },
   {
@@ -4706,7 +4730,8 @@
    "estatus": "Listo para revisión",
    "creada": "10-03-2026",
    "dias": 146,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 136,
    "costo": null
   },
   {
@@ -4722,7 +4747,8 @@
    "estatus": "Observada",
    "creada": "16-03-2026",
    "dias": 140,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 130,
    "costo": null
   },
   {
@@ -4738,7 +4764,8 @@
    "estatus": "Iniciado",
    "creada": "17-03-2026",
    "dias": 139,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 129,
    "costo": null
   },
   {
@@ -4754,7 +4781,8 @@
    "estatus": "Iniciado",
    "creada": "23-03-2026",
    "dias": 133,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 123,
    "costo": null
   },
   {
@@ -4770,7 +4798,8 @@
    "estatus": "No aceptado",
    "creada": "06-04-2026",
    "dias": 119,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 109,
    "costo": null
   },
   {
@@ -4786,7 +4815,8 @@
    "estatus": "Pendiente",
    "creada": "09-04-2026",
    "dias": 116,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 106,
    "costo": null
   },
   {
@@ -4802,7 +4832,8 @@
    "estatus": "Iniciado",
    "creada": "14-04-2026",
    "dias": 111,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 101,
    "costo": null
   },
   {
@@ -4818,7 +4849,8 @@
    "estatus": "Listo para revisión",
    "creada": "21-04-2026",
    "dias": 104,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 94,
    "costo": null
   },
   {
@@ -4834,7 +4866,8 @@
    "estatus": "Pendiente",
    "creada": "21-04-2026",
    "dias": 104,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 94,
    "costo": null
   },
   {
@@ -4850,7 +4883,8 @@
    "estatus": "Listo para revisión",
    "creada": "24-04-2026",
    "dias": 101,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 91,
    "costo": null
   },
   {
@@ -4866,7 +4900,8 @@
    "estatus": "Pendiente",
    "creada": "24-04-2026",
    "dias": 101,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 91,
    "costo": null
   },
   {
@@ -4882,7 +4917,8 @@
    "estatus": "Listo para revisión",
    "creada": "12-05-2026",
    "dias": 83,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 73,
    "costo": null
   },
   {
@@ -4898,7 +4934,8 @@
    "estatus": "Listo para revisión",
    "creada": "20-05-2026",
    "dias": 75,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 65,
    "costo": null
   },
   {
@@ -4914,7 +4951,8 @@
    "estatus": "Listo para revisión",
    "creada": "20-05-2026",
    "dias": 75,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 65,
    "costo": null
   },
   {
@@ -4930,7 +4968,8 @@
    "estatus": "Listo para revisión",
    "creada": "20-05-2026",
    "dias": 75,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 65,
    "costo": null
   },
   {
@@ -4946,7 +4985,8 @@
    "estatus": "Iniciado",
    "creada": "25-05-2026",
    "dias": 70,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 60,
    "costo": null
   },
   {
@@ -4962,7 +5002,8 @@
    "estatus": "Observada",
    "creada": "28-05-2026",
    "dias": 67,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 57,
    "costo": null
   },
   {
@@ -4978,7 +5019,8 @@
    "estatus": "Listo para revisión",
    "creada": "02-06-2026",
    "dias": 62,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 52,
    "costo": null
   },
   {
@@ -4994,7 +5036,8 @@
    "estatus": "Listo para revisión",
    "creada": "02-06-2026",
    "dias": 62,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 52,
    "costo": null
   },
   {
@@ -5010,7 +5053,8 @@
    "estatus": "Listo para revisión",
    "creada": "09-06-2026",
    "dias": 55,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 45,
    "costo": 0.0
   },
   {
@@ -5026,7 +5070,8 @@
    "estatus": "Iniciado",
    "creada": "09-06-2026",
    "dias": 55,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 45,
    "costo": null
   },
   {
@@ -5042,7 +5087,8 @@
    "estatus": "Listo para revisión",
    "creada": "09-06-2026",
    "dias": 55,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 45,
    "costo": null
   },
   {
@@ -5058,7 +5104,8 @@
    "estatus": "Iniciado",
    "creada": "30-06-2026",
    "dias": 34,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 24,
    "costo": null
   },
   {
@@ -5074,7 +5121,8 @@
    "estatus": "Iniciado",
    "creada": "06-07-2026",
    "dias": 28,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 18,
    "costo": null
   },
   {
@@ -5090,7 +5138,8 @@
    "estatus": "Listo para revisión",
    "creada": "09-07-2026",
    "dias": 25,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 15,
    "costo": null
   },
   {
@@ -5106,7 +5155,8 @@
    "estatus": "Iniciado",
    "creada": "21-07-2026",
    "dias": 13,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 3,
    "costo": null
   },
   {
@@ -5122,7 +5172,8 @@
    "estatus": "Iniciado",
    "creada": "21-07-2026",
    "dias": 13,
-   "atrasada": false,
+   "atrasada": true,
+   "diasAtraso": 3,
    "costo": null
   },
   {
@@ -5139,6 +5190,7 @@
    "creada": "27-07-2026",
    "dias": 7,
    "atrasada": false,
+   "diasAtraso": null,
    "costo": null
   },
   {
@@ -5155,6 +5207,7 @@
    "creada": "27-07-2026",
    "dias": 7,
    "atrasada": false,
+   "diasAtraso": null,
    "costo": null
   },
   {
@@ -5171,6 +5224,7 @@
    "creada": "28-07-2026",
    "dias": 6,
    "atrasada": false,
+   "diasAtraso": null,
    "costo": null
   }
  ],
@@ -5234,8 +5288,9 @@
  "control": {
   "registros": 508,
   "abiertas": 54,
-  "abiertasConFechaComprometida": 0,
-  "atrasoCalculable": false,
+  "plazoRespuesta": 10,
+  "atrasoCalculable": true,
+  "abiertasSinFechaEmision": 0,
   "rangoFechas": [
    "10-02-2023",
    "28-07-2026"

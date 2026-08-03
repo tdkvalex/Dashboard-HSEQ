@@ -452,9 +452,14 @@ document.querySelectorAll('.mtab').forEach(b =>
         (peorNC ? ` — ${peorNC.nombre} concentra ${nf(peorNC.noConformidades.abiertas)}` : '') +
         `. La mediana de cierre es de ${nf(M.noConformidades.medianaCierre)} días
         y el costo declarado suma ${nf(Math.round(M.noConformidades.costo))} UF.</p>`;
-      if (!M.noConformidades.atrasoCalculable)
+      if (M.noConformidades.atrasoCalculable && M.noConformidades.atrasadas)
+        h += `<p><b>Las NC no se están respondiendo dentro de plazo:</b>
+          ${nf(M.noConformidades.atrasadas)} de las ${nf(M.noConformidades.abiertas)} abiertas
+          (${pc(Math.round(1000*M.noConformidades.atrasadas/M.noConformidades.abiertas)/10)})
+          pasaron los ${nf(M.noConformidades.plazoRespuesta)} días que hay para responder desde que se emiten.</p>`;
+      else if (!M.noConformidades.atrasoCalculable)
         h += `<p><b>Ojo con el atraso de las NC:</b> no es calculable hoy porque las abiertas no traen
-          fecha de cierre comprometida. El módulo reporta la antigüedad de cada una en su lugar.</p>`;
+          fecha de emisión. El módulo reporta la antigüedad de cada una en su lugar.</p>`;
     } else {
       h += `<p><b>No Conformidades falta</b> para cerrar la vista: hoy se ve qué está documentado y qué está
         ejecutado, pero no qué se hizo mal y sigue sin corregirse.</p>`;

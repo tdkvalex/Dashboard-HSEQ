@@ -32,14 +32,16 @@ ESTADO     «Cerrado» -> Cerrada · el resto (Iniciado, Listo para revisión,
            No aceptado) -> Abierta. Se conserva el estatus original, porque
            «No aceptado» no es lo mismo que «Iniciado» para gestionar.
 
-ATRASO     La regla del proyecto es: NC **abierta** cuya fecha de cierre
-           comprometida ya venció. Está implementada, PERO en el archivo actual
-           la columna «Fecha De Cierre» **solo se llena al cerrar la NC**: las
-           30 abiertas no tienen fecha, así que el atraso no es calculable.
-           El script lo detecta y lo informa, en vez de dar 0 atrasadas como si
-           fuera un buen resultado. Mientras tanto se reporta la ANTIGÜEDAD de
-           cada NC abierta (días desde que se creó), que sí es medible y sirve
-           para priorizar.
+ATRASO     Hay 10 días para responder una NC desde que se emite; del día 11 en
+           adelante corre atraso (PLAZO_RESPUESTA). Se cuenta sobre la FECHA DE
+           EMISIÓN, que las dos fuentes traen, y no sobre una fecha comprometida
+           de cierre, que NINGUNA trae —en el registro principal la columna
+           «Fecha De Cierre» solo se llena al cerrar, y la planilla del cliente
+           tampoco declara plazo—. Por eso el atraso sí es calculable.
+               atrasada       = abierta con más de 10 días desde la emisión
+               días de atraso = antigüedad − 10
+           Se sigue reportando la ANTIGÜEDAD de cada abierta, que es lo que
+           permite priorizar entre las atrasadas.
 
 TIEMPO DE  Solo para las cerradas: días entre la fecha de creación y la de
 CIERRE     cierre. Es el indicador de qué tan rápido reacciona cada proyecto.
@@ -104,6 +106,19 @@ TRAMOS = [("1-30 días", 0), ("31-90 días", 30), ("91-180 días", 90),
 # Ocho filas ocupaban media pantalla sin decir más que el bloque.
 SEM_VENTANA, SEM_DETALLE = 8, 5
 
+# ---------------------------------------------------------------------------
+# PLAZO DE RESPUESTA — la regla de atraso del proyecto
+# ---------------------------------------------------------------------------
+# Hay 10 días para responder una NC desde que se emite; a partir del día 11
+# corre atraso. Se cuenta sobre la FECHA DE EMISIÓN, que las dos fuentes sí
+# traen, y no sobre una fecha comprometida, que ninguna trae. Por eso el atraso
+# SÍ es calculable, al revés de lo que suponía la versión anterior.
+#     atrasada     = abierta con más de PLAZO_RESPUESTA días desde que se emitió
+#     días de atraso = antigüedad − PLAZO_RESPUESTA
+# Confirmado por el usuario (03-08-2026). Si el plazo cambia, se cambia acá y
+# el panel, la PPT y la suite se recalculan solos.
+PLAZO_RESPUESTA = 10
+
 # Las tres vías por las que entra un hallazgo. Se distinguen porque no son lo
 # mismo de gestionar: la del cliente compromete el contrato, la del subcontrato
 # la absorbe Besalco, y la interna es autodetección.
@@ -141,6 +156,23 @@ def pct1(a, b):
 
 def texto(v, alt=""):
     return str(v).strip() if v not in (None, "") else alt
+
+
+def dias_atraso(estado, creada, hoy):
+    """Días de atraso de una NC abierta: los que pasan del plazo de respuesta.
+
+    Se cuenta desde la emisión, no desde una fecha comprometida: esa no la trae
+    ninguna de las dos fuentes, la de emisión sí. En el día 11 el atraso es 1.
+    Devuelve None si no aplica (cerrada, sin fecha, o todavía en plazo).
+    """
+    if estado != ABIERTA or not creada:
+        return None
+    d = (hoy - creada).days - PLAZO_RESPUESTA
+    return d if d > 0 else None
+
+
+def atrasada(estado, creada, hoy):
+    return dias_atraso(estado, creada, hoy) is not None
 
 
 # =============================================================================
@@ -197,8 +229,10 @@ def leer(ruta, hoy):
             "cerradaEl": cerrada,
             "estatus": estatus,
             "estado": estado,
-            # Regla del proyecto: abierta y con la fecha comprometida ya vencida.
-            "atrasada": estado == ABIERTA and bool(cerrada) and cerrada < hoy,
+            # Regla del proyecto: 10 días para responder desde que se emite;
+            # del día 11 en adelante corre atraso. Ver PLAZO_RESPUESTA.
+            "atrasada": atrasada(estado, creada, hoy),
+            "diasAtraso": dias_atraso(estado, creada, hoy),
             "diasAbierta": (hoy - creada).days if estado == ABIERTA and creada else None,
             "diasCierre": (cerrada - creada).days if estado == CERRADA and cerrada and creada else None,
         })
@@ -287,7 +321,10 @@ def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
             "cerradaEl": cerrada,
             "estatus": estatus,
             "estado": estado,
-            "atrasada": False,      # tampoco trae fecha comprometida
+            # Misma regla que el registro principal: la planilla del cliente
+            # también trae la fecha de recepción, que es cuando se emite.
+            "atrasada": atrasada(estado, creada, hoy),
+            "diasAtraso": dias_atraso(estado, creada, hoy),
             "diasAbierta": (hoy - creada).days if estado == ABIERTA and creada else None,
             "diasCierre": (cerrada - creada).days if estado == CERRADA and cerrada and creada else None,
         })
@@ -498,7 +535,8 @@ def construir(items, hoy, fuente):
         "especialidad": i["especialidad"], "responsable": i["responsable"],
         "titulo": i["titulo"], "estatus": i["estatus"],
         "creada": i["creada"].strftime("%d-%m-%Y") if i["creada"] else None,
-        "dias": i["diasAbierta"], "atrasada": i["atrasada"], "costo": i["costo"],
+        "dias": i["diasAbierta"], "atrasada": i["atrasada"],
+        "diasAtraso": i["diasAtraso"], "costo": i["costo"],
     } for i in ab]
 
     # ---- responsables con NC abiertas ----
@@ -509,15 +547,18 @@ def construir(items, hoy, fuente):
                              for n, c in resp.most_common(12)]
 
     # ---- control de calidad del dato ----
-    conFecha = sum(1 for i in items if i["estado"] == ABIERTA and i["cerradaEl"])
     nAb = datos["global"]["resumen"]["abiertas"]
+    ab_todas = [i for i in items if i["estado"] == ABIERTA]
+    sinFecha = sum(1 for i in ab_todas if not i["creada"])
     datos["control"] = {
         "registros": len(items),
         "abiertas": nAb,
-        "abiertasConFechaComprometida": conFecha,
-        # Si ninguna abierta trae fecha, el atraso no se puede calcular: hay que
-        # decirlo, no reportar 0 atrasadas como si fuera un buen resultado.
-        "atrasoCalculable": conFecha > 0,
+        # El atraso se mide contra el PLAZO DE RESPUESTA desde la emisión, no
+        # contra una fecha comprometida —que ninguna fuente trae—. Como la fecha
+        # de emisión sí está en las dos, el atraso es calculable para todas.
+        "plazoRespuesta": PLAZO_RESPUESTA,
+        "atrasoCalculable": nAb == 0 or sinFecha < nAb,
+        "abiertasSinFechaEmision": sinFecha,
         "rangoFechas": [min(i["creada"] for i in items if i["creada"]).strftime("%d-%m-%Y"),
                         max(i["creada"] for i in items if i["creada"]).strftime("%d-%m-%Y")],
         "sinCosto": sum(1 for i in items if i["costo"] is None),
@@ -532,11 +573,10 @@ def construir(items, hoy, fuente):
                                    and i["especialidad"] == "Sin especialidad"),
         },
     }
-    if not datos["control"]["atrasoCalculable"] and nAb:
+    if sinFecha:
         avisos.append(
-            f"Las {nAb} NC abiertas no tienen fecha de cierre comprometida: la columna "
-            f"«Fecha De Cierre» solo se llena al cerrar. El atraso NO es calculable con "
-            f"este archivo; el panel reporta la antigüedad de cada NC abierta en su lugar.")
+            f"{sinFecha} NC abiertas no traen fecha de emisión: no se les puede calcular "
+            f"el atraso y quedan fuera del conteo de atrasadas.")
 
     # ---- semáforo por proyecto ----
     datos["semaforo"] = {}
@@ -657,12 +697,12 @@ def main():
     K = datos["control"]
     print("\nCONTROL DE CALIDAD DEL DATO")
     print(f"  Registros procesados: {K['registros']} · rango {K['rangoFechas'][0]} → {K['rangoFechas'][1]}")
-    print(f"  NC abiertas: {K['abiertas']} · con fecha de cierre comprometida: "
-          f"{K['abiertasConFechaComprometida']}")
+    print(f"  NC abiertas: {K['abiertas']} · plazo de respuesta: {K['plazoRespuesta']} días "
+          f"desde la emisión")
     if K["atrasoCalculable"]:
-        print(f"  OK  El atraso es calculable: {g['atrasadas']} NC atrasadas")
+        print(f"  OK  Atraso calculable: {g['atrasadas']} NC atrasadas de {K['abiertas']} abiertas")
     else:
-        print("  ⚠  El ATRASO NO ES CALCULABLE con este archivo (ver avisos)")
+        print("  ⚠  El ATRASO NO ES CALCULABLE: las abiertas no traen fecha de emisión")
     print(f"  Sin costo declarado: {K['sinCosto']} · sin especialidad: {K['sinEspecialidad']}")
 
     if avisos:
