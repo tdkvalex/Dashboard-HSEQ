@@ -7,7 +7,7 @@
   "hoy": "03-08-2026",
   "corte": "2026-08-03",
   "corteTexto": "03-08-2026",
-  "generado": "2026-08-03 18:34",
+  "generado": "2026-08-03 18:51",
   "fuente": "1e73482e-Data_NCR03082026.xlsx"
  },
  "orden": [
@@ -39,6 +39,7 @@
     "costo": 1573.2,
     "conCosto": 69,
     "medianaCierre": 19,
+    "promedioCierre": 37,
     "maxCierre": 250
    },
    "porTipo": {
@@ -58,6 +59,7 @@
      "costo": 1163.7,
      "conCosto": 37,
      "medianaCierre": 21,
+     "promedioCierre": 39,
      "maxCierre": 166
     },
     "Producto No Conforme": {
@@ -76,6 +78,7 @@
      "costo": 236.5,
      "conCosto": 8,
      "medianaCierre": 43,
+     "promedioCierre": 75,
      "maxCierre": 250
     },
     "Observación": {
@@ -94,6 +97,7 @@
      "costo": 3.0,
      "conCosto": 18,
      "medianaCierre": 18,
+     "promedioCierre": 19,
      "maxCierre": 77
     },
     "Opción de Mejora": {
@@ -112,6 +116,7 @@
      "costo": 170.0,
      "conCosto": 6,
      "medianaCierre": 17,
+     "promedioCierre": 27,
      "maxCierre": 68
     },
     "Reporte HSE Nivel Alto": {
@@ -130,6 +135,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 15,
+     "promedioCierre": 15,
      "maxCierre": 15
     }
    },
@@ -150,6 +156,7 @@
      "costo": 926.1,
      "conCosto": 47,
      "medianaCierre": 18,
+     "promedioCierre": 38,
      "maxCierre": 250
     },
     "Externa": {
@@ -168,6 +175,7 @@
      "costo": 647.1,
      "conCosto": 22,
      "medianaCierre": 23,
+     "promedioCierre": 35,
      "maxCierre": 111
     },
     "Sin clasificar": {
@@ -186,6 +194,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 15,
+     "promedioCierre": 15,
      "maxCierre": 15
     }
    },
@@ -206,6 +215,7 @@
      "costo": 926.1,
      "conCosto": 47,
      "medianaCierre": 18,
+     "promedioCierre": 38,
      "maxCierre": 250
     },
     "Externa Cliente": {
@@ -224,6 +234,7 @@
      "costo": 280.0,
      "conCosto": 15,
      "medianaCierre": 21,
+     "promedioCierre": 31,
      "maxCierre": 102
     },
     "Externa Subcontrato": {
@@ -242,6 +253,7 @@
      "costo": 367.1,
      "conCosto": 7,
      "medianaCierre": 42,
+     "promedioCierre": 51,
      "maxCierre": 111
     },
     "Sin clasificar": {
@@ -260,6 +272,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 15,
+     "promedioCierre": 15,
      "maxCierre": 15
     }
    },
@@ -281,6 +294,7 @@
      "costo": 316.2,
      "conCosto": 10,
      "medianaCierre": 21,
+     "promedioCierre": 36,
      "maxCierre": 111
     },
     "EXPEDITORÍA": {
@@ -299,6 +313,7 @@
      "costo": 450.0,
      "conCosto": 1,
      "medianaCierre": 98,
+     "promedioCierre": 71,
      "maxCierre": 109
     },
     "CALIDAD": {
@@ -317,6 +332,7 @@
      "costo": 0.0,
      "conCosto": 8,
      "medianaCierre": 21,
+     "promedioCierre": 38,
      "maxCierre": 72
     },
     "ELÉCTRICA": {
@@ -335,6 +351,7 @@
      "costo": 250.0,
      "conCosto": 9,
      "medianaCierre": 26,
+     "promedioCierre": 43,
      "maxCierre": 250
     },
     "PIPING": {
@@ -353,6 +370,7 @@
      "costo": 10.0,
      "conCosto": 1,
      "medianaCierre": 64,
+     "promedioCierre": 64,
      "maxCierre": 64
     },
     "ESTRUCTURA": {
@@ -371,6 +389,7 @@
      "costo": 38.0,
      "conCosto": 2,
      "medianaCierre": 45,
+     "promedioCierre": 45,
      "maxCierre": 82
     },
     "ADMINISTRACIÓN": {
@@ -389,6 +408,7 @@
      "costo": 0.0,
      "conCosto": 12,
      "medianaCierre": 18,
+     "promedioCierre": 18,
      "maxCierre": 18
     },
     "ADQUISICIONES": {
@@ -407,6 +427,7 @@
      "costo": 11.5,
      "conCosto": 2,
      "medianaCierre": 43,
+     "promedioCierre": 83,
      "maxCierre": 166
     },
     "MECÁNICA": {
@@ -425,6 +446,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "RRLL": {
@@ -443,6 +465,7 @@
      "costo": 0.0,
      "conCosto": 10,
      "medianaCierre": 7,
+     "promedioCierre": 7,
      "maxCierre": 7
     },
     "SUBCONTRATO": {
@@ -461,6 +484,7 @@
      "costo": 195.1,
      "conCosto": 3,
      "medianaCierre": 20,
+     "promedioCierre": 23,
      "maxCierre": 35
     },
     "BODEGA": {
@@ -479,6 +503,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 14,
+     "promedioCierre": 14,
      "maxCierre": 14
     },
     "LOGÍSTICA": {
@@ -497,6 +522,7 @@
      "costo": 0.0,
      "conCosto": 3,
      "medianaCierre": 39,
+     "promedioCierre": 49,
      "maxCierre": 101
     },
     "PERSONAS": {
@@ -515,6 +541,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 0,
+     "promedioCierre": 0,
      "maxCierre": 0
     },
     "EE.II": {
@@ -533,6 +560,7 @@
      "costo": 150.0,
      "conCosto": 2,
      "medianaCierre": 47,
+     "promedioCierre": 43,
      "maxCierre": 68
     },
     "PROVEEDORES": {
@@ -551,6 +579,7 @@
      "costo": 92.0,
      "conCosto": 2,
      "medianaCierre": 56,
+     "promedioCierre": 72,
      "maxCierre": 110
     },
     "INSTRUMENTACIÓN Y CONTROL": {
@@ -569,6 +598,7 @@
      "costo": 60.4,
      "conCosto": 2,
      "medianaCierre": 32,
+     "promedioCierre": 32,
      "maxCierre": 56
     },
     "CONTROL DOCUMENTOS": {
@@ -587,6 +617,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 8,
+     "promedioCierre": 8,
      "maxCierre": 8
     }
    },
@@ -622,6 +653,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "mes": {
@@ -640,6 +672,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "trimestre": {
@@ -658,6 +691,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 13,
+     "promedioCierre": 20,
      "maxCierre": 43
     }
    },
@@ -801,6 +835,7 @@
     "costo": 5818.3,
     "conCosto": 143,
     "medianaCierre": 23,
+    "promedioCierre": 48,
     "maxCierre": 389
    },
    "porTipo": {
@@ -820,6 +855,7 @@
      "costo": 5393.7,
      "conCosto": 90,
      "medianaCierre": 26,
+     "promedioCierre": 53,
      "maxCierre": 389
     },
     "Producto No Conforme": {
@@ -838,6 +874,7 @@
      "costo": 424.6,
      "conCosto": 51,
      "medianaCierre": 20,
+     "promedioCierre": 34,
      "maxCierre": 161
     },
     "Observación": {
@@ -856,6 +893,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 34,
+     "promedioCierre": 34,
      "maxCierre": 49
     },
     "Opción de Mejora": {
@@ -874,6 +912,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 269,
+     "promedioCierre": 269,
      "maxCierre": 269
     }
    },
@@ -894,6 +933,7 @@
      "costo": 25.0,
      "conCosto": 31,
      "medianaCierre": 29,
+     "promedioCierre": 92,
      "maxCierre": 389
     },
     "Externa": {
@@ -912,6 +952,7 @@
      "costo": 5793.3,
      "conCosto": 112,
      "medianaCierre": 22,
+     "promedioCierre": 36,
      "maxCierre": 187
     }
    },
@@ -932,6 +973,7 @@
      "costo": 25.0,
      "conCosto": 31,
      "medianaCierre": 29,
+     "promedioCierre": 92,
      "maxCierre": 389
     },
     "Externa Cliente": {
@@ -950,6 +992,7 @@
      "costo": 5793.3,
      "conCosto": 112,
      "medianaCierre": 22,
+     "promedioCierre": 36,
      "maxCierre": 187
     }
    },
@@ -971,6 +1014,7 @@
      "costo": 1782.8,
      "conCosto": 106,
      "medianaCierre": 21,
+     "promedioCierre": 42,
      "maxCierre": 237
     },
     "EXPEDITORÍA": {
@@ -989,6 +1033,7 @@
      "costo": 26.0,
      "conCosto": 2,
      "medianaCierre": 74,
+     "promedioCierre": 74,
      "maxCierre": 133
     },
     "CALIDAD": {
@@ -1007,6 +1052,7 @@
      "costo": 4000.0,
      "conCosto": 10,
      "medianaCierre": 23,
+     "promedioCierre": 27,
      "maxCierre": 155
     },
     "ELÉCTRICA": {
@@ -1025,6 +1071,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 49,
+     "promedioCierre": 56,
      "maxCierre": 119
     },
     "PIPING": {
@@ -1043,6 +1090,7 @@
      "costo": 0.0,
      "conCosto": 7,
      "medianaCierre": 21,
+     "promedioCierre": 62,
      "maxCierre": 269
     },
     "ESTRUCTURA": {
@@ -1061,6 +1109,7 @@
      "costo": 0.0,
      "conCosto": 2,
      "medianaCierre": 24,
+     "promedioCierre": 30,
      "maxCierre": 56
     },
     "TOPOGRAFÍA": {
@@ -1079,6 +1128,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 16,
+     "promedioCierre": 19,
      "maxCierre": 31
     },
     "ADQUISICIONES": {
@@ -1097,6 +1147,7 @@
      "costo": 0.0,
      "conCosto": 5,
      "medianaCierre": 173,
+     "promedioCierre": 200,
      "maxCierre": 389
     },
     "GENERAL": {
@@ -1115,6 +1166,7 @@
      "costo": 9.5,
      "conCosto": 6,
      "medianaCierre": 14,
+     "promedioCierre": 30,
      "maxCierre": 134
     },
     "MECÁNICA": {
@@ -1133,6 +1185,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 52,
+     "promedioCierre": 70,
      "maxCierre": 165
     },
     "OFICINA TECNICA": {
@@ -1151,6 +1204,7 @@
      "costo": 0.0,
      "conCosto": 2,
      "medianaCierre": 110,
+     "promedioCierre": 110,
      "maxCierre": 156
     },
     "MEDIOAMBIENTE": {
@@ -1169,6 +1223,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 41,
+     "promedioCierre": 41,
      "maxCierre": 52
     }
    },
@@ -1205,6 +1260,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "mes": {
@@ -1223,6 +1279,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 6,
+     "promedioCierre": 6,
      "maxCierre": 6
     },
     "trimestre": {
@@ -1241,6 +1298,7 @@
      "costo": 0.0,
      "conCosto": 4,
      "medianaCierre": 28,
+     "promedioCierre": 30,
      "maxCierre": 73
     }
    },
@@ -1428,6 +1486,7 @@
     "costo": 3391.8,
     "conCosto": 44,
     "medianaCierre": 131,
+    "promedioCierre": 127,
     "maxCierre": 313
    },
    "porTipo": {
@@ -1447,6 +1506,7 @@
      "costo": 581.8,
      "conCosto": 10,
      "medianaCierre": 52,
+     "promedioCierre": 81,
      "maxCierre": 297
     },
     "Producto No Conforme": {
@@ -1465,6 +1525,7 @@
      "costo": 2810.0,
      "conCosto": 34,
      "medianaCierre": 212,
+     "promedioCierre": 211,
      "maxCierre": 313
     },
     "Observación": {
@@ -1483,6 +1544,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 148,
+     "promedioCierre": 129,
      "maxCierre": 217
     }
    },
@@ -1503,6 +1565,7 @@
      "costo": 551.8,
      "conCosto": 9,
      "medianaCierre": 33,
+     "promedioCierre": 68,
      "maxCierre": 297
     },
     "Externa": {
@@ -1521,6 +1584,7 @@
      "costo": 2840.0,
      "conCosto": 35,
      "medianaCierre": 180,
+     "promedioCierre": 168,
      "maxCierre": 313
     }
    },
@@ -1541,6 +1605,7 @@
      "costo": 551.8,
      "conCosto": 9,
      "medianaCierre": 33,
+     "promedioCierre": 68,
      "maxCierre": 297
     },
     "Externa Cliente": {
@@ -1559,6 +1624,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 125,
+     "promedioCierre": 128,
      "maxCierre": 288
     },
     "Externa Subcontrato": {
@@ -1577,6 +1643,7 @@
      "costo": 2840.0,
      "conCosto": 35,
      "medianaCierre": 211,
+     "promedioCierre": 205,
      "maxCierre": 313
     }
    },
@@ -1598,6 +1665,7 @@
      "costo": 551.8,
      "conCosto": 6,
      "medianaCierre": 42,
+     "promedioCierre": 58,
      "maxCierre": 190
     },
     "Sin especialidad": {
@@ -1616,6 +1684,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 121,
+     "promedioCierre": 127,
      "maxCierre": 288
     },
     "EXPEDITORÍA": {
@@ -1634,6 +1703,7 @@
      "costo": 1700.0,
      "conCosto": 31,
      "medianaCierre": 212,
+     "promedioCierre": 202,
      "maxCierre": 313
     },
     "CALIDAD": {
@@ -1652,6 +1722,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 12,
+     "promedioCierre": 12,
      "maxCierre": 12
     },
     "PIPING": {
@@ -1670,6 +1741,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 12,
+     "promedioCierre": 12,
      "maxCierre": 19
     },
     "ESTRUCTURA": {
@@ -1688,6 +1760,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 47,
+     "promedioCierre": 48,
      "maxCierre": 70
     },
     "TOPOGRAFÍA": {
@@ -1706,6 +1779,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 39,
+     "promedioCierre": 44,
      "maxCierre": 74
     },
     "ADMINISTRACIÓN": {
@@ -1724,6 +1798,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 4,
+     "promedioCierre": 4,
      "maxCierre": 4
     },
     "ADQUISICIONES": {
@@ -1742,6 +1817,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 239,
+     "promedioCierre": 239,
      "maxCierre": 239
     },
     "GENERAL": {
@@ -1760,6 +1836,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 29,
+     "promedioCierre": 29,
      "maxCierre": 29
     },
     "MECÁNICA": {
@@ -1778,6 +1855,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 15,
+     "promedioCierre": 57,
      "maxCierre": 146
     },
     "SUBCONTRATO": {
@@ -1796,6 +1874,7 @@
      "costo": 1140.0,
      "conCosto": 4,
      "medianaCierre": 174,
+     "promedioCierre": 160,
      "maxCierre": 224
     },
     "BODEGA": {
@@ -1814,6 +1893,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 22,
+     "promedioCierre": 40,
      "maxCierre": 133
     },
     "LOGÍSTICA": {
@@ -1832,6 +1912,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 29,
+     "promedioCierre": 19,
      "maxCierre": 29
     },
     "PERSONAS": {
@@ -1850,6 +1931,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 178,
+     "promedioCierre": 178,
      "maxCierre": 178
     },
     "OFICINA TECNICA": {
@@ -1868,6 +1950,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 159,
+     "promedioCierre": 159,
      "maxCierre": 159
     },
     "INGENIERÍA": {
@@ -1886,6 +1969,7 @@
      "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 280,
+     "promedioCierre": 280,
      "maxCierre": 297
     },
     "PINTURA": {
@@ -1904,6 +1988,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 70,
+     "promedioCierre": 70,
      "maxCierre": 70
     }
    },
@@ -1942,6 +2027,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "mes": {
@@ -1960,6 +2046,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "trimestre": {
@@ -1978,6 +2065,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     }
    },
@@ -2125,6 +2213,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 77,
+    "promedioCierre": 70,
     "maxCierre": 146
    },
    "porTipo": {
@@ -2144,6 +2233,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 77,
+     "promedioCierre": 70,
      "maxCierre": 146
     }
    },
@@ -2164,6 +2254,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 77,
+     "promedioCierre": 70,
      "maxCierre": 146
     }
    },
@@ -2184,6 +2275,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 77,
+     "promedioCierre": 70,
      "maxCierre": 146
     }
    },
@@ -2205,6 +2297,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 77,
+     "promedioCierre": 70,
      "maxCierre": 146
     }
    },
@@ -2238,6 +2331,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "mes": {
@@ -2256,6 +2350,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     },
     "trimestre": {
@@ -2274,6 +2369,7 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
+     "promedioCierre": null,
      "maxCierre": null
     }
    },
@@ -2399,6 +2495,7 @@
    "costo": 10783.4,
    "conCosto": 256,
    "medianaCierre": 30,
+   "promedioCierre": 69,
    "maxCierre": 389
   },
   "porTipo": {
@@ -2418,6 +2515,7 @@
     "costo": 7139.3,
     "conCosto": 137,
     "medianaCierre": 29,
+    "promedioCierre": 58,
     "maxCierre": 389
    },
    "Producto No Conforme": {
@@ -2436,6 +2534,7 @@
     "costo": 3471.1,
     "conCosto": 93,
     "medianaCierre": 37,
+    "promedioCierre": 94,
     "maxCierre": 313
    },
    "Observación": {
@@ -2454,6 +2553,7 @@
     "costo": 3.0,
     "conCosto": 19,
     "medianaCierre": 34,
+    "promedioCierre": 76,
     "maxCierre": 217
    },
    "Opción de Mejora": {
@@ -2472,6 +2572,7 @@
     "costo": 170.0,
     "conCosto": 7,
     "medianaCierre": 21,
+    "promedioCierre": 46,
     "maxCierre": 269
    },
    "Reporte HSE Nivel Alto": {
@@ -2490,6 +2591,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 15,
+    "promedioCierre": 15,
     "maxCierre": 15
    }
   },
@@ -2510,6 +2612,7 @@
     "costo": 1502.9,
     "conCosto": 87,
     "medianaCierre": 28,
+    "promedioCierre": 65,
     "maxCierre": 389
    },
    "Externa": {
@@ -2528,6 +2631,7 @@
     "costo": 9280.4,
     "conCosto": 169,
     "medianaCierre": 34,
+    "promedioCierre": 71,
     "maxCierre": 313
    },
    "Sin clasificar": {
@@ -2546,6 +2650,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 74,
+    "promedioCierre": 64,
     "maxCierre": 146
    }
   },
@@ -2566,6 +2671,7 @@
     "costo": 1502.9,
     "conCosto": 87,
     "medianaCierre": 28,
+    "promedioCierre": 65,
     "maxCierre": 389
    },
    "Externa Cliente": {
@@ -2584,6 +2690,7 @@
     "costo": 6073.3,
     "conCosto": 127,
     "medianaCierre": 28,
+    "promedioCierre": 49,
     "maxCierre": 288
    },
    "Externa Subcontrato": {
@@ -2602,6 +2709,7 @@
     "costo": 3207.1,
     "conCosto": 42,
     "medianaCierre": 181,
+    "promedioCierre": 179,
     "maxCierre": 313
    },
    "Sin clasificar": {
@@ -2620,6 +2728,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 74,
+    "promedioCierre": 64,
     "maxCierre": 146
    }
   },
@@ -2641,6 +2750,7 @@
     "costo": 2650.8,
     "conCosto": 122,
     "medianaCierre": 22,
+    "promedioCierre": 43,
     "maxCierre": 237
    },
    "Sin especialidad": {
@@ -2659,6 +2769,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 107,
+    "promedioCierre": 117,
     "maxCierre": 288
    },
    "EXPEDITORÍA": {
@@ -2677,6 +2788,7 @@
     "costo": 2176.0,
     "conCosto": 34,
     "medianaCierre": 180,
+    "promedioCierre": 182,
     "maxCierre": 313
    },
    "CALIDAD": {
@@ -2695,6 +2807,7 @@
     "costo": 4000.0,
     "conCosto": 18,
     "medianaCierre": 22,
+    "promedioCierre": 30,
     "maxCierre": 155
    },
    "ELÉCTRICA": {
@@ -2713,6 +2826,7 @@
     "costo": 250.0,
     "conCosto": 10,
     "medianaCierre": 39,
+    "promedioCierre": 48,
     "maxCierre": 250
    },
    "PIPING": {
@@ -2731,6 +2845,7 @@
     "costo": 10.0,
     "conCosto": 8,
     "medianaCierre": 20,
+    "promedioCierre": 57,
     "maxCierre": 269
    },
    "ESTRUCTURA": {
@@ -2749,6 +2864,7 @@
     "costo": 38.0,
     "conCosto": 4,
     "medianaCierre": 36,
+    "promedioCierre": 38,
     "maxCierre": 82
    },
    "TOPOGRAFÍA": {
@@ -2767,6 +2883,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 26,
+    "promedioCierre": 27,
     "maxCierre": 74
    },
    "ADMINISTRACIÓN": {
@@ -2785,6 +2902,7 @@
     "costo": 0.0,
     "conCosto": 12,
     "medianaCierre": 18,
+    "promedioCierre": 17,
     "maxCierre": 18
    },
    "ADQUISICIONES": {
@@ -2803,6 +2921,7 @@
     "costo": 11.5,
     "conCosto": 8,
     "medianaCierre": 143,
+    "promedioCierre": 174,
     "maxCierre": 389
    },
    "GENERAL": {
@@ -2821,6 +2940,7 @@
     "costo": 9.5,
     "conCosto": 6,
     "medianaCierre": 15,
+    "promedioCierre": 30,
     "maxCierre": 134
    },
    "MECÁNICA": {
@@ -2839,6 +2959,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 49,
+    "promedioCierre": 66,
     "maxCierre": 165
    },
    "RRLL": {
@@ -2857,6 +2978,7 @@
     "costo": 0.0,
     "conCosto": 10,
     "medianaCierre": 7,
+    "promedioCierre": 7,
     "maxCierre": 7
    },
    "SUBCONTRATO": {
@@ -2875,6 +2997,7 @@
     "costo": 1335.1,
     "conCosto": 7,
     "medianaCierre": 141,
+    "promedioCierre": 114,
     "maxCierre": 224
    },
    "BODEGA": {
@@ -2893,6 +3016,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 22,
+    "promedioCierre": 37,
     "maxCierre": 133
    },
    "LOGÍSTICA": {
@@ -2911,6 +3035,7 @@
     "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 29,
+    "promedioCierre": 36,
     "maxCierre": 101
    },
    "PERSONAS": {
@@ -2929,6 +3054,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 178,
+    "promedioCierre": 134,
     "maxCierre": 178
    },
    "OFICINA TECNICA": {
@@ -2947,6 +3073,7 @@
     "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 156,
+    "promedioCierre": 126,
     "maxCierre": 159
    },
    "EE.II": {
@@ -2965,6 +3092,7 @@
     "costo": 150.0,
     "conCosto": 2,
     "medianaCierre": 47,
+    "promedioCierre": 43,
     "maxCierre": 68
    },
    "PROVEEDORES": {
@@ -2983,6 +3111,7 @@
     "costo": 92.0,
     "conCosto": 2,
     "medianaCierre": 56,
+    "promedioCierre": 72,
     "maxCierre": 110
    },
    "MEDIOAMBIENTE": {
@@ -3001,6 +3130,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 41,
+    "promedioCierre": 41,
     "maxCierre": 52
    },
    "INSTRUMENTACIÓN Y CONTROL": {
@@ -3019,6 +3149,7 @@
     "costo": 60.4,
     "conCosto": 2,
     "medianaCierre": 32,
+    "promedioCierre": 32,
     "maxCierre": 56
    },
    "INGENIERÍA": {
@@ -3037,6 +3168,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 280,
+    "promedioCierre": 280,
     "maxCierre": 297
    },
    "CONTROL DOCUMENTOS": {
@@ -3055,6 +3187,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 8,
+    "promedioCierre": 8,
     "maxCierre": 8
    },
    "PINTURA": {
@@ -3073,6 +3206,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 70,
+    "promedioCierre": 70,
     "maxCierre": 70
    }
   },
@@ -3113,6 +3247,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": null,
+    "promedioCierre": null,
     "maxCierre": null
    },
    "mes": {
@@ -3131,6 +3266,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 6,
+    "promedioCierre": 6,
     "maxCierre": 6
    },
    "trimestre": {
@@ -3149,6 +3285,7 @@
     "costo": 0.0,
     "conCosto": 4,
     "medianaCierre": 28,
+    "promedioCierre": 29,
     "maxCierre": 73
    }
   },
@@ -3340,6 +3477,7 @@
    "costo": 10783.4,
    "conCosto": 256,
    "medianaCierre": 30,
+   "promedioCierre": 69,
    "maxCierre": 389
   },
   "porTipo": {
@@ -3359,6 +3497,7 @@
     "costo": 7139.3,
     "conCosto": 137,
     "medianaCierre": 29,
+    "promedioCierre": 58,
     "maxCierre": 389
    },
    "Producto No Conforme": {
@@ -3377,6 +3516,7 @@
     "costo": 3471.1,
     "conCosto": 93,
     "medianaCierre": 37,
+    "promedioCierre": 94,
     "maxCierre": 313
    },
    "Observación": {
@@ -3395,6 +3535,7 @@
     "costo": 3.0,
     "conCosto": 19,
     "medianaCierre": 34,
+    "promedioCierre": 76,
     "maxCierre": 217
    },
    "Opción de Mejora": {
@@ -3413,6 +3554,7 @@
     "costo": 170.0,
     "conCosto": 7,
     "medianaCierre": 21,
+    "promedioCierre": 46,
     "maxCierre": 269
    },
    "Reporte HSE Nivel Alto": {
@@ -3431,6 +3573,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 15,
+    "promedioCierre": 15,
     "maxCierre": 15
    }
   },
@@ -3451,6 +3594,7 @@
     "costo": 1502.9,
     "conCosto": 87,
     "medianaCierre": 28,
+    "promedioCierre": 65,
     "maxCierre": 389
    },
    "Externa": {
@@ -3469,6 +3613,7 @@
     "costo": 9280.4,
     "conCosto": 169,
     "medianaCierre": 34,
+    "promedioCierre": 71,
     "maxCierre": 313
    },
    "Sin clasificar": {
@@ -3487,6 +3632,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 15,
+    "promedioCierre": 15,
     "maxCierre": 15
    }
   },
@@ -3507,6 +3653,7 @@
     "costo": 1502.9,
     "conCosto": 87,
     "medianaCierre": 28,
+    "promedioCierre": 65,
     "maxCierre": 389
    },
    "Externa Cliente": {
@@ -3525,6 +3672,7 @@
     "costo": 6073.3,
     "conCosto": 127,
     "medianaCierre": 28,
+    "promedioCierre": 49,
     "maxCierre": 288
    },
    "Externa Subcontrato": {
@@ -3543,6 +3691,7 @@
     "costo": 3207.1,
     "conCosto": 42,
     "medianaCierre": 181,
+    "promedioCierre": 179,
     "maxCierre": 313
    },
    "Sin clasificar": {
@@ -3561,6 +3710,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 15,
+    "promedioCierre": 15,
     "maxCierre": 15
    }
   },
@@ -3582,6 +3732,7 @@
     "costo": 2650.8,
     "conCosto": 122,
     "medianaCierre": 22,
+    "promedioCierre": 43,
     "maxCierre": 237
    },
    "Sin especialidad": {
@@ -3600,6 +3751,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 121,
+    "promedioCierre": 127,
     "maxCierre": 288
    },
    "EXPEDITORÍA": {
@@ -3618,6 +3770,7 @@
     "costo": 2176.0,
     "conCosto": 34,
     "medianaCierre": 180,
+    "promedioCierre": 182,
     "maxCierre": 313
    },
    "CALIDAD": {
@@ -3636,6 +3789,7 @@
     "costo": 4000.0,
     "conCosto": 18,
     "medianaCierre": 22,
+    "promedioCierre": 30,
     "maxCierre": 155
    },
    "ELÉCTRICA": {
@@ -3654,6 +3808,7 @@
     "costo": 250.0,
     "conCosto": 10,
     "medianaCierre": 39,
+    "promedioCierre": 48,
     "maxCierre": 250
    },
    "PIPING": {
@@ -3672,6 +3827,7 @@
     "costo": 10.0,
     "conCosto": 8,
     "medianaCierre": 20,
+    "promedioCierre": 57,
     "maxCierre": 269
    },
    "ESTRUCTURA": {
@@ -3690,6 +3846,7 @@
     "costo": 38.0,
     "conCosto": 4,
     "medianaCierre": 36,
+    "promedioCierre": 38,
     "maxCierre": 82
    },
    "TOPOGRAFÍA": {
@@ -3708,6 +3865,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 26,
+    "promedioCierre": 27,
     "maxCierre": 74
    },
    "ADMINISTRACIÓN": {
@@ -3726,6 +3884,7 @@
     "costo": 0.0,
     "conCosto": 12,
     "medianaCierre": 18,
+    "promedioCierre": 17,
     "maxCierre": 18
    },
    "ADQUISICIONES": {
@@ -3744,6 +3903,7 @@
     "costo": 11.5,
     "conCosto": 8,
     "medianaCierre": 143,
+    "promedioCierre": 174,
     "maxCierre": 389
    },
    "GENERAL": {
@@ -3762,6 +3922,7 @@
     "costo": 9.5,
     "conCosto": 6,
     "medianaCierre": 15,
+    "promedioCierre": 30,
     "maxCierre": 134
    },
    "MECÁNICA": {
@@ -3780,6 +3941,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 49,
+    "promedioCierre": 66,
     "maxCierre": 165
    },
    "RRLL": {
@@ -3798,6 +3960,7 @@
     "costo": 0.0,
     "conCosto": 10,
     "medianaCierre": 7,
+    "promedioCierre": 7,
     "maxCierre": 7
    },
    "SUBCONTRATO": {
@@ -3816,6 +3979,7 @@
     "costo": 1335.1,
     "conCosto": 7,
     "medianaCierre": 141,
+    "promedioCierre": 114,
     "maxCierre": 224
    },
    "BODEGA": {
@@ -3834,6 +3998,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 22,
+    "promedioCierre": 37,
     "maxCierre": 133
    },
    "LOGÍSTICA": {
@@ -3852,6 +4017,7 @@
     "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 29,
+    "promedioCierre": 36,
     "maxCierre": 101
    },
    "PERSONAS": {
@@ -3870,6 +4036,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 178,
+    "promedioCierre": 134,
     "maxCierre": 178
    },
    "OFICINA TECNICA": {
@@ -3888,6 +4055,7 @@
     "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 156,
+    "promedioCierre": 126,
     "maxCierre": 159
    },
    "EE.II": {
@@ -3906,6 +4074,7 @@
     "costo": 150.0,
     "conCosto": 2,
     "medianaCierre": 47,
+    "promedioCierre": 43,
     "maxCierre": 68
    },
    "PROVEEDORES": {
@@ -3924,6 +4093,7 @@
     "costo": 92.0,
     "conCosto": 2,
     "medianaCierre": 56,
+    "promedioCierre": 72,
     "maxCierre": 110
    },
    "MEDIOAMBIENTE": {
@@ -3942,6 +4112,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 41,
+    "promedioCierre": 41,
     "maxCierre": 52
    },
    "INSTRUMENTACIÓN Y CONTROL": {
@@ -3960,6 +4131,7 @@
     "costo": 60.4,
     "conCosto": 2,
     "medianaCierre": 32,
+    "promedioCierre": 32,
     "maxCierre": 56
    },
    "INGENIERÍA": {
@@ -3978,6 +4150,7 @@
     "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 280,
+    "promedioCierre": 280,
     "maxCierre": 297
    },
    "CONTROL DOCUMENTOS": {
@@ -3996,6 +4169,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 8,
+    "promedioCierre": 8,
     "maxCierre": 8
    },
    "PINTURA": {
@@ -4014,6 +4188,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 70,
+    "promedioCierre": 70,
     "maxCierre": 70
    }
   },
@@ -4053,6 +4228,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": null,
+    "promedioCierre": null,
     "maxCierre": null
    },
    "mes": {
@@ -4071,6 +4247,7 @@
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 6,
+    "promedioCierre": 6,
     "maxCierre": 6
    },
    "trimestre": {
@@ -4089,6 +4266,7 @@
     "costo": 0.0,
     "conCosto": 4,
     "medianaCierre": 28,
+    "promedioCierre": 29,
     "maxCierre": 73
    }
   },

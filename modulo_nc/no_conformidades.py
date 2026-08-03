@@ -361,6 +361,11 @@ def resumir(items):
         "costo": round(sum(costos), 1),
         "conCosto": len(costos),
         "medianaCierre": int(median(dc)) if dc else None,
+        # Promedio, además de la mediana: el promedio es el que pide el cuadro
+        # de «estado de cada vía» y la mediana el que va en los KPI. Se guardan
+        # los dos porque no dicen lo mismo — un solo hallazgo de 400 días mueve
+        # el promedio y no la mediana.
+        "promedioCierre": int(round(sum(dc) / len(dc))) if dc else None,
         "maxCierre": max(dc) if dc else None,
     }
 

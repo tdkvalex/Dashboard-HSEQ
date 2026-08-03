@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-03 18:39",
+ "generado": "2026-08-03 18:54",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -78,6 +78,7 @@
     "costo": 1573.2,
     "conCosto": 69,
     "medianaCierre": 19,
+    "promedioCierre": 37,
     "maxCierre": 250,
     "sem": [
      "good",
@@ -162,6 +163,7 @@
     "costo": 5818.3,
     "conCosto": 143,
     "medianaCierre": 23,
+    "promedioCierre": 48,
     "maxCierre": 389,
     "sem": [
      "warn",
@@ -244,6 +246,7 @@
     "costo": 3391.8,
     "conCosto": 44,
     "medianaCierre": 131,
+    "promedioCierre": 127,
     "maxCierre": 313,
     "sem": [
      "crit",

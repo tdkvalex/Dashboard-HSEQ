@@ -51,17 +51,21 @@ el del subcontrato, punteado.
 ### «Estado de cada vía» — qué pasó con lo que entró por cada una
 
 Bajo el gráfico de origen, una tabla abre cada vía en **levantadas · cerradas · % cierre ·
-abiertas · atrasadas · +90 días · +180 días · antigüedad mediana · la más antigua**. El gráfico dice por dónde entra
-el hallazgo; la tabla, qué pasó después.
+abiertas · atrasadas · tiempo promedio de respuesta**. El gráfico dice por dónde entra el
+hallazgo; la tabla, qué pasó después.
 
-**Atrasada** = abierta que pasó el plazo de respuesta (ver más abajo). Las columnas de
-antigüedad no son redundantes: dicen **qué tan grave** es el atraso, porque pasarse una semana
-no es lo mismo que llevar un año.
+- **Atrasada** = abierta que pasó el plazo de respuesta (ver más abajo).
+- **Tiempo promedio de respuesta** = días entre que se emite y se cierra, **solo sobre las ya
+  cerradas**. Es lo que tardó de verdad cada vía contra los 10 días de plazo. Las que siguen
+  abiertas no entran, así que la cifra es optimista: la antigüedad de lo abierto va en su propio
+  bloque. Es `promedioCierre` en `resumir()`; la mediana se guarda aparte (`medianaCierre`)
+  porque un hallazgo de 400 días mueve el promedio y no la mediana.
 
 Al corte: **las 49 abiertas del cliente cierran al 83%** contra 96,9% las internas y 100% las de
-subcontrato —de esas no queda ninguna abierta—. De las 51 fuera de plazo, **46 son del cliente**
-y las 14 que superan los 180 días también. En Arqueros la brecha es la mayor: 50,7% contra
-98,1%, y sus 36 abiertas están todas fuera de plazo.
+subcontrato —de esas no queda ninguna abierta—. De las 51 fuera de plazo, **46 son del cliente**.
+Y el promedio de respuesta va en **69 días contra los 10 de plazo**: 49 las del cliente, 65 las
+internas y 179 las de subcontrato. En Arqueros la brecha es la mayor: 50,7% de cierre contra
+98,1%, sus 36 abiertas están todas fuera de plazo y responde en 127 días promedio.
 
 Las cifras salen de `resumir()` en `no_conformidades.py`, que expone `cliente`, `subcontrato`,
 `abiertasCliente`, `abiertasSubcontrato` y `abiertasInternas` además de los viejos

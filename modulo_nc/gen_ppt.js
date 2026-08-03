@@ -473,29 +473,32 @@ s.addChart(p.ChartType.bar, serieEmi.map((k) => ({
 // cuántas siguen abiertas y qué tan viejas son. El atraso se declara en la
 // lámina siguiente —no es calculable con este archivo—, así que aquí la
 // severidad de lo abierto la da la antigüedad.
-s.addText("ESTADO DE CADA VÍA", { x: 0.55, y: 4.55, w: 6, h: 0.3, fontFace: FT,
-  fontSize: 11, bold: true, color: C.copper, charSpacing: 1.5, margin: 0 });
-const medDias = (xs) => { const d = xs.map((x) => x.dias || 0).sort((a, b) => a - b);
-  return d.length ? d[Math.floor(d.length / 2)] : 0; };
+s.addText(`ESTADO DE CADA VÍA  ·  atrasada = abierta que pasó los ${nf(K.plazoRespuesta)} días de plazo  ·  ` +
+  `T. respuesta = días de emisión a cierre, solo sobre las cerradas`,
+  { x: 0.55, y: 4.55, w: 7.0, h: 0.3, fontFace: FT,
+    fontSize: 9, bold: true, color: C.copper, charSpacing: 0.6, margin: 0 });
 const viasEmi = EMISIONES.filter((k) => (G.porEmision[k] || {}).total > 0);
 tabla(s, [
-  { t: "VÍA DE EMISIÓN", x: 0.55, w: 1.95, al: "left" },
-  { t: "LEVANTADAS", x: 2.6, w: 1.05 },
-  { t: "CERRADAS", x: 3.75, w: 1.0 },
-  { t: "ABIERTAS", x: 4.85, w: 0.95 },
-  { t: "ANTIG. MEDIANA", x: 5.9, w: 1.15 },
+  { t: "VÍA DE EMISIÓN", x: 0.55, w: 1.6, al: "left" },
+  { t: "LEVANT.", x: 2.2, w: 0.8 },
+  { t: "CERRADAS", x: 3.05, w: 0.8 },
+  { t: "% CIERRE", x: 3.9, w: 0.8 },
+  { t: "ABIERTAS", x: 4.75, w: 0.8 },
+  { t: "ATRASADAS", x: 5.6, w: 0.85 },
+  { t: "T. RESPUESTA", x: 6.5, w: 1.0 },
 ], viasEmi.concat(["TOTAL"]).map((k) => {
   const tot = k === "TOTAL";
   const v = tot ? R : G.porEmision[k];
-  const abv = (D.abiertas || []).filter((a) => tot || a.emision === k);
   return [
     { txt: tot ? "Todas las vías" : emi(k), bold: tot, color: tot ? C.ink : COL_EMI[k] },
     { txt: nf(v.total), bold: tot },
     { txt: nf(v.cerradas), bold: tot },
+    { txt: pct(v.cerradas, v.total), bold: tot },
     { txt: v.abiertas ? nf(v.abiertas) : "—", bold: tot, color: v.abiertas ? C.crit : C.ink2 },
-    { txt: v.abiertas ? `${nf(medDias(abv))} d` : "—", bold: tot, color: v.abiertas ? C.ink : C.ink2 },
+    { txt: v.abiertas ? nf(v.atrasadas) : "—", bold: tot, color: v.atrasadas ? C.crit : C.ink2 },
+    { txt: v.promedioCierre == null ? "—" : `${nf(v.promedioCierre)} d`, bold: tot },
   ];
-}), 4.88, 0.31, { size: 11, ancho: 6.5 });   // 5 filas desde 5.36 cierran en 6.85
+}), 4.88, 0.31, { size: 10.5, ancho: 6.95 });   // 5 filas desde 5.36 cierran en 6.85
 
 const tiposOrd = Object.entries(G.porTipo).sort((a, b) => b[1].total - a[1].total);
 s.addChart(p.ChartType.bar, [
