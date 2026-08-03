@@ -51,15 +51,20 @@ el del subcontrato, punteado.
 ### «Estado de cada vía» — qué pasó con lo que entró por cada una
 
 Bajo el gráfico de origen, una tabla abre cada vía en **levantadas · cerradas · % cierre ·
-abiertas · atrasadas · tiempo promedio de respuesta**. El gráfico dice por dónde entra el
+abiertas · atrasadas · promedio en respuesta**. El gráfico dice por dónde entra el
 hallazgo; la tabla, qué pasó después.
 
 - **Atrasada** = abierta que pasó el plazo de respuesta (ver más abajo).
-- **Tiempo promedio de respuesta** = días entre que se emite y se cierra, **solo sobre las ya
+- **Promedio en respuesta** = días entre que se emite y se cierra, **solo sobre las ya
   cerradas**. Es lo que tardó de verdad cada vía contra los 10 días de plazo. Las que siguen
   abiertas no entran, así que la cifra es optimista: la antigüedad de lo abierto va en su propio
   bloque. Es `promedioCierre` en `resumir()`; la mediana se guarda aparte (`medianaCierre`)
   porque un hallazgo de 400 días mueve el promedio y no la mediana.
+
+La tabla usa `.tbl.compacta` (6 px de aire por celda en vez de 10): comparte fila con «Estado de
+cierre», así que con el padding normal se salía de su media columna. Entra completa desde
+~1.900 px de ancho; por debajo se desplaza dentro de su caja. Si se quiere que entre siempre,
+sacarla del `.grid2` y dejar el bloque a ancho completo.
 
 Al corte: **las 49 abiertas del cliente cierran al 83%** contra 96,9% las internas y 100% las de
 subcontrato —de esas no queda ninguna abierta—. De las 51 fuera de plazo, **46 son del cliente**.

@@ -474,7 +474,7 @@ s.addChart(p.ChartType.bar, serieEmi.map((k) => ({
 // lámina siguiente —no es calculable con este archivo—, así que aquí la
 // severidad de lo abierto la da la antigüedad.
 s.addText(`ESTADO DE CADA VÍA  ·  atrasada = abierta que pasó los ${nf(K.plazoRespuesta)} días de plazo  ·  ` +
-  `T. respuesta = días de emisión a cierre, solo sobre las cerradas`,
+  `promedio en respuesta = días de emisión a cierre, solo sobre las cerradas`,
   { x: 0.55, y: 4.55, w: 7.0, h: 0.3, fontFace: FT,
     fontSize: 9, bold: true, color: C.copper, charSpacing: 0.6, margin: 0 });
 const viasEmi = EMISIONES.filter((k) => (G.porEmision[k] || {}).total > 0);
@@ -485,7 +485,7 @@ tabla(s, [
   { t: "% CIERRE", x: 3.9, w: 0.8 },
   { t: "ABIERTAS", x: 4.75, w: 0.8 },
   { t: "ATRASADAS", x: 5.6, w: 0.85 },
-  { t: "T. RESPUESTA", x: 6.5, w: 1.0 },
+  { t: "PROM. RESPUESTA", x: 6.35, w: 1.15 },
 ], viasEmi.concat(["TOTAL"]).map((k) => {
   const tot = k === "TOTAL";
   const v = tot ? R : G.porEmision[k];
@@ -496,7 +496,7 @@ tabla(s, [
     { txt: pct(v.cerradas, v.total), bold: tot },
     { txt: v.abiertas ? nf(v.abiertas) : "—", bold: tot, color: v.abiertas ? C.crit : C.ink2 },
     { txt: v.abiertas ? nf(v.atrasadas) : "—", bold: tot, color: v.atrasadas ? C.crit : C.ink2 },
-    { txt: v.promedioCierre == null ? "—" : `${nf(v.promedioCierre)} d`, bold: tot },
+    { txt: v.promedioCierre == null ? "—" : `${nf(v.promedioCierre)} días`, bold: tot },
   ];
 }), 4.88, 0.31, { size: 10.5, ancho: 6.95 });   // 5 filas desde 5.36 cierran en 6.85
 
