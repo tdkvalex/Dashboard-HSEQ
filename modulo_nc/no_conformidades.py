@@ -307,6 +307,15 @@ def resumir(items):
         "pctCierre": pct1(len(cer), len(items)),
         "internas": sum(1 for i in items if i["origen"] == "Interna"),
         "externas": sum(1 for i in items if i["origen"] == "Externa"),
+        # Las dos externas NO son lo mismo y no se gestionan igual: la del
+        # cliente compromete el contrato, la del subcontrato la absorbe
+        # Besalco. Se cuentan por separado —también sobre lo abierto— para que
+        # el panel nunca tenga que sumarlas en un solo «externas».
+        "cliente": sum(1 for i in items if i["emision"] == "Externa Cliente"),
+        "subcontrato": sum(1 for i in items if i["emision"] == "Externa Subcontrato"),
+        "abiertasCliente": sum(1 for i in ab if i["emision"] == "Externa Cliente"),
+        "abiertasSubcontrato": sum(1 for i in ab if i["emision"] == "Externa Subcontrato"),
+        "abiertasInternas": sum(1 for i in ab if i["origen"] == "Interna"),
         "costo": round(sum(costos), 1),
         "conCosto": len(costos),
         "medianaCierre": int(median(dc)) if dc else None,
@@ -346,6 +355,10 @@ def construir(items, hoy, fuente):
                 "total": len(s_),
                 "internas": sum(1 for i in s_ if i["origen"] == "Interna"),
                 "externas": sum(1 for i in s_ if i["origen"] == "Externa"),
+                # Mismo desglose de tres vías que `resumir()`: la externa del
+                # cliente se informa aparte de la del subcontrato.
+                "cliente": sum(1 for i in s_ if i["emision"] == "Externa Cliente"),
+                "subcontrato": sum(1 for i in s_ if i["emision"] == "Externa Subcontrato"),
                 "abiertas": sum(1 for i in s_ if i["estado"] == ABIERTA),
             }
 

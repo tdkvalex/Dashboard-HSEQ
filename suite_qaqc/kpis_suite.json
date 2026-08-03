@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-03 16:06",
+ "generado": "2026-08-03 16:24",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -62,7 +62,7 @@
    },
    "noConformidades": {
     "nombre": "Desaladora",
-    "cliente": "ANTOFAGASTA MINERALS",
+    "cliente": 30,
     "obra": true,
     "total": 95,
     "cerradas": 92,
@@ -71,6 +71,10 @@
     "pctCierre": 96.8,
     "internas": 56,
     "externas": 38,
+    "subcontrato": 8,
+    "abiertasCliente": 2,
+    "abiertasSubcontrato": 0,
+    "abiertasInternas": 1,
     "costo": 1573.2,
     "conCosto": 69,
     "medianaCierre": 19,
@@ -142,7 +146,7 @@
    },
    "noConformidades": {
     "nombre": "Talabre",
-    "cliente": "CODELCO",
+    "cliente": 188,
     "obra": true,
     "total": 241,
     "cerradas": 226,
@@ -151,6 +155,10 @@
     "pctCierre": 93.8,
     "internas": 53,
     "externas": 188,
+    "subcontrato": 0,
+    "abiertasCliente": 12,
+    "abiertasSubcontrato": 0,
+    "abiertasInternas": 3,
     "costo": 5818.3,
     "conCosto": 143,
     "medianaCierre": 23,
@@ -220,7 +228,7 @@
    },
    "noConformidades": {
     "nombre": "Arqueros",
-    "cliente": "MASA",
+    "cliente": 71,
     "obra": true,
     "total": 164,
     "cerradas": 128,
@@ -229,6 +237,10 @@
     "pctCierre": 78,
     "internas": 53,
     "externas": 111,
+    "subcontrato": 40,
+    "abiertasCliente": 35,
+    "abiertasSubcontrato": 0,
+    "abiertasInternas": 1,
     "costo": 3391.8,
     "conCosto": 44,
     "medianaCierre": 131,

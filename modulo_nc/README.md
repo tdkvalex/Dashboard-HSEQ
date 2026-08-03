@@ -34,6 +34,24 @@ cerrados y 35 abiertos— recibidos entre 30-04-2025 y 09-06-2026.
 La autodetección de Arqueros cae de 56,4% a **32,3%**: no cambió lo que Besalco detecta,
 apareció lo que le levantan.
 
+### Tres vías de emisión, nunca dos
+
+**La externa del cliente y la del subcontrato no se suman en ningún lugar del panel ni de la
+PPT.** No son lo mismo: la del cliente **compromete el contrato**, la del subcontrato la emite
+Besalco y la absorbe internamente. Juntarlas en un solo «externas» escondía justo la delicada
+—en Arqueros, «35 externas abiertas» eran **35 del cliente y 0 de subcontrato**—.
+
+Van separadas en el KPI de levantados, en el de abiertas, en «lo que sigue abierto por quién lo
+levantó», en el gráfico de origen, en los cortes de la semana, en el semáforo corporativo (tres
+columnas de abiertos y la fila `internas / cliente / subcontrato`), en las dos tablas de detalle
+y en la lámina 3 de la PPT. El color es el mismo en todas partes: **azul** lo interno, **ámbar**
+lo del cliente, **naranja** lo del subcontrato. El chip del cliente lleva borde lleno; el del
+subcontrato, punteado.
+
+Las cifras salen de `resumir()` en `no_conformidades.py`, que expone `cliente`, `subcontrato`,
+`abiertasCliente`, `abiertasSubcontrato` y `abiertasInternas` además de los viejos
+`internas`/`externas`. Si se agrega una vista nueva, usar esas y no `externas`.
+
 **Lo que esa planilla no trae:** disciplina, responsable ni costo. Los 70 registros entran como
 «Sin especialidad» y no suman al costo declarado. El panel lo declara en «Control de calidad
 del dato» en vez de dejar que el hueco se lea como dato perdido.
@@ -135,10 +153,12 @@ que se levantó cada hallazgo abierto. Al corte: mediana 55 días, y **1 lleva m
 
 ### Otras definiciones
 
-- **Interna** = la levanta Besalco (`Interna BSMT`) · **Externa** = la levanta el cliente o un
-  subcontrato (`Externa Cliente`, `Externa Subcontrato`). Las dos externas se muestran por
-  separado: la del cliente compromete el contrato, la del subcontrato la absorbe Besalco.
-  Al corte: 162 internas · 219 del cliente · 48 de subcontrato · 9 sin clasificar.
+- **Interna** = la levanta Besalco (`Interna BSMT`) · **Externa · Cliente** = la levanta el
+  mandante y compromete el contrato · **Externa · Subcontrato** = la emite Besalco contra un
+  subcontratista y la absorbe internamente. **Las dos externas nunca se suman** (ver «Tres vías
+  de emisión» más arriba). Al corte: 162 internas · 289 del cliente · 48 de subcontrato ·
+  9 sin clasificar; de las 54 abiertas, **49 son del cliente**, 5 internas y ninguna de
+  subcontrato.
 - **Autodetección** = qué parte de los hallazgos clasificados los levanta Besalco. Global
   **37,8%**; por frente, Desaladora 59,6% · Arqueros 56,4% · **Talabre 22,0%**.
 - **La semana** = lo levantado en los últimos 7 días (`creada > hoy − 7 días`). Cada pestaña
@@ -156,9 +176,10 @@ que se levantó cada hallazgo abierto. Al corte: mediana 55 días, y **1 lleva m
 
 ## Lo que muestran los datos
 
-**Talabre concentra el pendiente:** 15 de las 19 NC abiertas, y es el único con más externas
-(188) que internas (53) — el cliente le levanta más hallazgos de los que detecta solo. Aun así
-es el frente que más se movió en la semana: cerró 13.
+**Arqueros concentra el pendiente:** 36 de las 54 NC abiertas, y **35 de esas 36 las levantó el
+cliente** — ninguna es de subcontrato. Talabre sigue siendo el frente con más hallazgos del
+mandante que propios (188 contra 53 internas), pero es el que más se movió en la semana:
+cerró 13 y bajó de 26 a 15 abiertas.
 
 **La deuda antigua que queda es de Expeditoría:** 3 de las 5 internas abiertas son de esa
 especialidad en Talabre —392, 328 y 224 días, todas «Iniciado» y del mismo responsable—.

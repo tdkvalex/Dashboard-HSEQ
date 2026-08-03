@@ -69,6 +69,14 @@ const COL_EMI = {
 };
 const EMI = D.etiquetasEmision || {};
 const emi = (k) => EMI[k] || k;
+// Desglose de las TRES vías de emisión, nunca «internas y externas»: la del
+// cliente compromete el contrato y la del subcontrato la absorbe Besalco, así
+// que no pueden compartir una sola cifra. Lo que vale 0 no se escribe.
+const desg = (v) => [
+  `${nf(v.internas)} ${v.internas === 1 ? "interna" : "internas"}`,
+  v.cliente ? `${nf(v.cliente)} del cliente` : null,
+  v.subcontrato ? `${nf(v.subcontrato)} de subcontrato` : null,
+].filter(Boolean).join(" · ");
 const EMISIONES = ["Interna BSMT", "Externa Cliente", "Externa Subcontrato", "Sin clasificar"];
 
 const G = D.global, R = G.resumen, K = D.control;
@@ -201,8 +209,10 @@ const NOMBRES = Object.fromEntries(PROY.map((x) => [x.k, x.nombre]));
 
 // El frente que concentra las NC abiertas: es la lectura de portada.
 const foco = PROY.slice().sort((a, b) => b.resumen.abiertas - a.resumen.abiertas)[0];
-// Frentes donde el cliente levanta más de lo que detecta Besalco.
-const masExternas = PROY.filter((x) => x.resumen.externas > x.resumen.internas);
+// Frentes donde el cliente levanta más de lo que detecta Besalco. Se compara
+// contra las del CLIENTE, no contra el total de externas: sumarle las del
+// subcontrato —que Besalco emite— falsearía la comparación.
+const masExternas = PROY.filter((x) => x.resumen.cliente > x.resumen.internas);
 // Cierre más lento, en días de mediana.
 const conMediana = PROY.filter((x) => x.resumen.medianaCierre != null);
 const lento = conMediana.slice().sort((a, b) => b.resumen.medianaCierre - a.resumen.medianaCierre)[0];
@@ -262,7 +272,7 @@ const reads = [
    `${nf(foco.resumen.abiertas)} de los ${nf(R.abiertas)} hallazgos abiertos (${pct(foco.resumen.abiertas, R.abiertas)})` +
    (masExternas.length
      ? `, y es ${masExternas.length === 1 ? "el único frente" : "uno de los frentes"} donde el cliente levanta más de lo que detecta Besalco ` +
-       `(${nf(foco.resumen.externas)} externas contra ${nf(foco.resumen.internas)} internas).`
+       `(${nf(foco.resumen.cliente)} del cliente contra ${nf(foco.resumen.internas)} internas).`
      : `.`)],
   [SEM.total
     ? `La semana trajo ${nf(SEM.total)} ${SEM.total === 1 ? "hallazgo nuevo" : "hallazgos nuevos"}${SEM.internas === 0 ? ", ninguno de autodetección." : "."}`
@@ -301,16 +311,19 @@ bajada(s, `Crítico si hay más de 15 abiertas o el cierre baja de 85% · Atenci
   `o el cierre queda bajo 95% · Al día en caso contrario.`);
 
 const COLOR_EST = { good: C.good, warn: C.warn, crit: C.crit };
+// «EXTERNAS» se parte en DEL CLIENTE y DE SUBCONTRATO: no son lo mismo y
+// sumarlas escondía justo la que compromete el contrato.
 const colsSem = [
-  { t: "FRENTE", x: 0.55, w: 3.1, al: "left" },
-  { t: "LEVANTADOS", x: 3.75, w: 1.15 },
-  { t: "CERRADOS", x: 5.0, w: 1.05 },
-  { t: "ABIERTOS", x: 6.15, w: 1.0 },
-  { t: "% CIERRE", x: 7.25, w: 1.0 },
-  { t: "INTERNAS", x: 8.35, w: 1.0 },
-  { t: "EXTERNAS", x: 9.45, w: 1.0 },
-  { t: "COSTO UF", x: 10.55, w: 1.2 },
-  { t: "ESTADO", x: 11.85, w: 1.0, al: "center" },
+  { t: "FRENTE", x: 0.55, w: 2.6, al: "left" },
+  { t: "LEVANTADOS", x: 3.25, w: 1.0 },
+  { t: "CERRADOS", x: 4.35, w: 0.95 },
+  { t: "ABIERTOS", x: 5.40, w: 0.9 },
+  { t: "% CIERRE", x: 6.40, w: 0.9 },
+  { t: "INTERNAS", x: 7.40, w: 0.9 },
+  { t: "DEL CLIENTE", x: 8.40, w: 1.1 },
+  { t: "DE SUBCONTR.", x: 9.60, w: 1.1 },
+  { t: "COSTO UF", x: 10.80, w: 1.0 },
+  { t: "ESTADO", x: 11.95, w: 1.0, al: "center" },
 ];
 colsSem.forEach((c) => s.addText(c.t, { x: c.x, y: 2.1, w: c.w, h: 0.3, fontFace: FT,
   fontSize: 9.5, bold: true, color: C.ink2, align: c.al || "right", charSpacing: 0.5, margin: 0 }));
@@ -320,8 +333,8 @@ let rowy = 2.58; const rh = 0.82;
 PROY.forEach((x, i) => {
   const v = x.resumen, est = D.semaforo[x.k] || ["warn", "Atención"];
   if (i % 2 === 1) s.addShape(p.ShapeType.rect, { x: 0.5, y: rowy - 0.05, w: 12.35, h: rh, fill: { color: C.white }, line: { type: "none" } });
-  s.addText(x.nombre, { x: colsSem[0].x, y: rowy, w: 3.0, h: 0.32, fontFace: FT, fontSize: 14, bold: true, color: C.ink, margin: 0 });
-  s.addText(x.cliente + (x.obra ? "" : " · no es obra"), { x: colsSem[0].x, y: rowy + 0.33, w: 3.1, h: 0.28, fontFace: FT, fontSize: 9.5, color: C.ink2, margin: 0 });
+  s.addText(x.nombre, { x: colsSem[0].x, y: rowy, w: 2.55, h: 0.32, fontFace: FT, fontSize: 14, bold: true, color: C.ink, margin: 0 });
+  s.addText(x.cliente + (x.obra ? "" : " · no es obra"), { x: colsSem[0].x, y: rowy + 0.33, w: 2.6, h: 0.28, fontFace: FT, fontSize: 9.5, color: C.ink2, margin: 0 });
   const cy = rowy + 0.08;
   const celda = (idx, txt, color) => s.addText(txt, { x: colsSem[idx].x, y: cy, w: colsSem[idx].w, h: 0.4,
     fontFace: FT, fontSize: 13, color: color || C.ink, align: "right", margin: 0, valign: "middle" });
@@ -330,20 +343,23 @@ PROY.forEach((x, i) => {
   celda(3, nf(v.abiertas), v.abiertas > 15 ? C.crit : C.ink);
   celda(4, pct(v.cerradas, v.total));
   celda(5, nf(v.internas));
-  celda(6, nf(v.externas), v.externas > v.internas ? C.copper : C.ink);
-  celda(7, nf(Math.round(v.costo)));
-  s.addShape(p.ShapeType.roundRect, { x: colsSem[8].x, y: rowy + 0.1, w: 1.0, h: 0.4,
+  // La del cliente en cobre cuando supera lo que Besalco detecta por su cuenta.
+  celda(6, nf(v.cliente), v.cliente > v.internas ? C.copper : C.ink);
+  celda(7, nf(v.subcontrato));
+  celda(8, nf(Math.round(v.costo)));
+  s.addShape(p.ShapeType.roundRect, { x: colsSem[9].x, y: rowy + 0.1, w: 1.0, h: 0.4,
     rectRadius: 0.2, fill: { color: COLOR_EST[est[0]] }, line: { type: "none" } });
-  s.addText(est[1], { x: colsSem[8].x, y: rowy + 0.11, w: 1.0, h: 0.38, fontFace: FT,
+  s.addText(est[1], { x: colsSem[9].x, y: rowy + 0.11, w: 1.0, h: 0.38, fontFace: FT,
     fontSize: 10.5, bold: true, color: C.white, align: "center", margin: 0 });
   s.addShape(p.ShapeType.line, { x: 0.55, y: rowy + rh - 0.05, w: 12.3, h: 0, line: { color: "D9DFE6", width: 0.75 } });
   rowy += rh;
 });
 // Total de obra: es lo comparable con los otros módulos de la suite.
-s.addText("Los 3 proyectos", { x: colsSem[0].x, y: rowy + 0.02, w: 3.0, h: 0.32, fontFace: FT, fontSize: 14, bold: true, color: C.ink, margin: 0 });
-s.addText("sin Oficina Central", { x: colsSem[0].x, y: rowy + 0.35, w: 3.1, h: 0.28, fontFace: FT, fontSize: 9.5, color: C.ink2, margin: 0 });
+s.addText("Los 3 proyectos", { x: colsSem[0].x, y: rowy + 0.02, w: 2.55, h: 0.32, fontFace: FT, fontSize: 14, bold: true, color: C.ink, margin: 0 });
+s.addText("sin Oficina Central", { x: colsSem[0].x, y: rowy + 0.35, w: 2.6, h: 0.28, fontFace: FT, fontSize: 9.5, color: C.ink2, margin: 0 });
 [[1, nf(OBRA.total)], [2, nf(OBRA.cerradas)], [3, nf(OBRA.abiertas)], [4, pct(OBRA.cerradas, OBRA.total)],
- [5, nf(OBRA.internas)], [6, nf(OBRA.externas)], [7, nf(Math.round(OBRA.costo))]].forEach(([i, t]) =>
+ [5, nf(OBRA.internas)], [6, nf(OBRA.cliente)], [7, nf(OBRA.subcontrato)],
+ [8, nf(Math.round(OBRA.costo))]].forEach(([i, t]) =>
   s.addText(t, { x: colsSem[i].x, y: rowy + 0.1, w: colsSem[i].w, h: 0.4, fontFace: FT,
     fontSize: 13, bold: true, color: C.ink, align: "right", margin: 0, valign: "middle" }));
 s.addText(`Mediana de cierre global ${nf(R.medianaCierre)} días · el hallazgo más lento tomó ${nf(R.maxCierre)} días · ` +
@@ -359,8 +375,7 @@ kicker(s, "Novedades del período", 0.5, 0.45);
 titulo(s, "Levantados en la última semana");
 bajada(s, SEM.total
   ? `Entre el ${SEM.desde} y el ${SEM.hasta} se ${SEM.total === 1 ? "levantó" : "levantaron"} ${nf(SEM.total)} ` +
-    `${SEM.total === 1 ? "hallazgo" : "hallazgos"}: ${nf(SEM.internas)} ${SEM.internas === 1 ? "interno" : "internos"} y ` +
-    `${nf(SEM.externas)} ${SEM.externas === 1 ? "externo" : "externos"}. ` +
+    `${SEM.total === 1 ? "hallazgo" : "hallazgos"}: ${desg(SEM)}. ` +
     `${SEM.abiertas === SEM.total ? (SEM.total === 1 ? "Sigue abierto" : "Todos siguen abiertos") : `${nf(SEM.abiertas)} siguen abiertos`}.`
   : `Entre el ${SEM.desde} y el ${SEM.hasta} no se levantó ningún hallazgo en ningún frente.`);
 
@@ -598,7 +613,7 @@ OBRAS.forEach((X, idx) => {
   // identidad —código, nombre y cliente— que usan los otros dos módulos.
   portada(s, `PROYECTO ${num}${X.codigo && X.codigo !== "—" ? " · " + X.codigo : ""}`,
     X.nombre, `${X.cliente} · ${D.meta.descripcion}`,
-    `${nf(v.total)} hallazgos levantados · ${nf(v.internas)} internos y ${nf(v.externas)} externos · ` +
+    `${nf(v.total)} hallazgos levantados · ${desg(v)} · ` +
     `${Object.keys(X.porEspecialidad).length} especialidades involucradas.\n` +
     `Estado de cierre, antigüedad de lo que sigue abierto y novedades de la última semana.`,
     [[pct(v.cerradas, v.total), "Hallazgos cerrados"],
@@ -614,7 +629,7 @@ OBRAS.forEach((X, idx) => {
 
   tarjetas(s, [
     { p: nf(v.total), v: `${nf(v.cerradas)} cerrados`, t: "Hallazgos levantados",
-      d: `${nf(v.internas)} internos · ${nf(v.externas)} externos`, c: C.blue },
+      d: desg(v), c: C.blue },
     { p: pct(v.cerradas, v.total), v: `${nf(v.cerradas)}/${nf(v.total)}`, t: "Cierre de hallazgos",
       d: `Global del módulo: ${pct(R.cerradas, R.total)}`, c: C.goodD },
     { p: nf(v.abiertas), v: v.abiertas === 1 ? "hallazgo abierto" : "hallazgos abiertos",
@@ -700,7 +715,7 @@ OBRAS.forEach((X, idx) => {
     fontSize: 10, bold: true, color: S2.total ? C.copperL : C.ink2, charSpacing: 1, margin: 0, valign: "middle" });
   s.addText(S2.total
     ? `${nf(S2.total)} ${S2.total === 1 ? "hallazgo nuevo" : "hallazgos nuevos"} · ` +
-      `${nf(S2.internas)} ${S2.internas === 1 ? "interno" : "internos"} y ${nf(S2.externas)} ${S2.externas === 1 ? "externo" : "externos"} · ` +
+      `${desg(S2)} · ` +
       Object.entries(S2.porEspecialidad).map(([e, w]) => `${e} ${nf(w.total)}`).join(" · ") +
       ` · ${nf(S2.abiertas)} ${S2.abiertas === 1 ? "sigue abierto" : "siguen abiertos"}`
     : "Sin hallazgos nuevos en el período.",
