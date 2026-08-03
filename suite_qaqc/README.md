@@ -107,6 +107,10 @@ módulo cambia de corte al cambiar de pestaña.
 armar y los deja en un bloque `KPIS`. Así la portada no depende de que los iframes estén
 montados ni de comunicación entre documentos.
 
+**Orden de la portada:** tarjetas de módulo → matriz proyecto × módulo → **Detalle por
+proyecto** → **Lectura ejecutiva**. Primero las cifras, y la lectura al final, que es la
+conclusión que se saca de ellas.
+
 ### «Detalle por proyecto» — cada columna dice de qué módulo es
 
 Es la tabla de cifras crudas y mezcla columnas de los tres módulos. Sin rotularlo, «KPI» o
