@@ -45,6 +45,12 @@ ATRASO     Hay 10 días para responder una NC desde que se emite; del día 11 en
 
 TIEMPO DE  Solo para las cerradas: días entre la fecha de creación y la de
 CIERRE     cierre. Es el indicador de qué tan rápido reacciona cada proyecto.
+
+EXCLUIDOS  Las **opciones de mejora** no entran al módulo: son propuestas, no
+           hallazgos que haya que corregir, y mezclarlas infla el universo y
+           ensucia el % de cierre con algo que nadie está obligado a cerrar.
+           Se cuentan y se declaran en «Control de calidad del dato», para que
+           la exclusión se vea. La constante es TIPOS_EXCLUIDOS.
 """
 
 import argparse
@@ -98,6 +104,14 @@ ORDEN = ["DESALADORA", "TALABRE", "ARQUEROS", "OFICINA"]
 CERRADA, ABIERTA = "Cerrada", "Abierta"
 TIPOS = ["No Conformidad", "Producto No Conforme", "Observación",
          "Opción de Mejora", "Reporte HSE Nivel Alto"]
+
+# Tipos que NO entran al módulo. La opción de mejora es una propuesta, no un
+# hallazgo que haya que corregir: mezclarla con las NC infla el universo y
+# ensucia el % de cierre con algo que nadie está obligado a cerrar. Se cuentan
+# aparte y el panel declara cuántas quedaron fuera, para que la exclusión sea
+# visible y no un dato que se perdió.  Confirmado por el usuario (03-08-2026).
+TIPOS_EXCLUIDOS = ["Opción de Mejora"]
+excluidos = Counter()
 TRAMOS = [("1-30 días", 0), ("31-90 días", 30), ("91-180 días", 90),
           ("181-365 días", 180), ("Más de un año", 365)]
 
@@ -213,6 +227,9 @@ def leer(ruta, hoy):
         tipo = texto(f[5], "Sin tipo")
         if tipo not in TIPOS:
             avisos.append(f"Tipo no reconocido: «{tipo}»")
+        if tipo in TIPOS_EXCLUIDOS:
+            excluidos[tipo] += 1
+            continue
 
         items.append({
             "proy": p["id"],
@@ -300,6 +317,9 @@ def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
         if tipo is None:
             tipo = texto(f[2], "Sin tipo")
             avisos.append(f"Tipo no reconocido en el archivo de externas: «{tipo}»")
+        if tipo in TIPOS_EXCLUIDOS:
+            excluidos[tipo] += 1
+            continue
 
         items.append({
             "proy": proyecto,
@@ -382,7 +402,8 @@ def construir(items, hoy, fuente):
     proys = [p for p in ORDEN if any(i["proy"] == p for i in items)]
     meta_p = {v["id"]: v for v in PROYECTOS.values()}
 
-    tipos = [t for t in TIPOS if any(i["tipo"] == t for i in items)]
+    tipos = [t for t in TIPOS if t not in TIPOS_EXCLUIDOS
+             and any(i["tipo"] == t for i in items)]
     esps = [e for e, _ in Counter(i["especialidad"] for i in items).most_common()]
 
     def novedades(sub, hoy=hoy):
@@ -566,6 +587,9 @@ def construir(items, hoy, fuente):
         "abiertasSinFechaEmision": sinFecha,
         "rangoFechas": [min(i["creada"] for i in items if i["creada"]).strftime("%d-%m-%Y"),
                         max(i["creada"] for i in items if i["creada"]).strftime("%d-%m-%Y")],
+        # Lo que se dejó fuera a propósito: se declara, no se calla.
+        "excluidos": dict(excluidos),
+        "tiposExcluidos": TIPOS_EXCLUIDOS,
         "sinCosto": sum(1 for i in items if i["costo"] is None),
         "sinEspecialidad": sum(1 for i in items if i["especialidad"] == "Sin especialidad"),
         # Las NC del cliente vienen de su propia planilla, que no registra
@@ -578,6 +602,10 @@ def construir(items, hoy, fuente):
                                    and i["especialidad"] == "Sin especialidad"),
         },
     }
+    if excluidos:
+        avisos.append("Fuera del módulo por tipo: "
+                      + " · ".join(f"{n} {t}" for t, n in excluidos.items())
+                      + " (son propuestas, no hallazgos que corregir; el panel lo declara)")
     if sinFecha:
         avisos.append(
             f"{sinFecha} NC abiertas no traen fecha de emisión: no se les puede calcular "

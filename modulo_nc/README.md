@@ -2,15 +2,26 @@
 
 Dashboard de los hallazgos de calidad de los tres proyectos **y de Oficina Central**.
 
-**Corte 03-08-2026 · 508 registros** desde 10-02-2023, de **dos fuentes**.
+**Corte 03-08-2026 · 494 registros** desde 10-02-2023, de **dos fuentes**.
 
 | Frente | Levantados | Cerrados | Abiertos | Fuera de plazo | % cierre | Mediana de cierre |
 |---|---|---|---|---|---|---|
-| Desaladora | 95 | 92 | 3 | 2 | 96,8% | 19 días |
-| Talabre | 241 | 226 | 15 | 13 | 93,8% | 23 días |
+| Desaladora | 82 | 80 | 2 | 1 | 97,6% | 19 días |
+| Talabre | 240 | 225 | 15 | 13 | 93,8% | 23 días |
 | **Arqueros** | **164** | **128** | **36** | **36** | **78,0%** | **131 días** |
 | Oficina Central | 8 | 8 | 0 | 0 | 100% | 77 días |
-| **Total** | **508** | **454** | **54** | **51** | **89,4%** | **30 días** |
+| **Total** | **494** | **441** | **53** | **50** | **89,3%** | **30 días** |
+
+### Las opciones de mejora quedan fuera
+
+**No son hallazgos que haya que corregir, son propuestas.** Sumarlas infla el universo y
+ensucia el % de cierre con algo que nadie está obligado a cerrar. El Excel trae 508 registros
+y el módulo reporta **494**: quedan fuera **14 opciones de mejora** —13 de Desaladora y 1 de
+Talabre—, de las cuales solo 1 seguía abierta.
+
+No se borran en silencio: el panel las declara en «Control de calidad del dato» con el
+contraste 508 → 494, y el script las informa en sus avisos. La constante es `TIPOS_EXCLUIDOS`
+en `no_conformidades.py`; para volver a incluirlas basta vaciarla.
 
 **Semáforo:** Arqueros y Talabre *Crítico* y *Atención* · el resto *Al día*.
 
@@ -66,10 +77,10 @@ cierre», así que con el padding normal se salía de su media columna. Entra co
 ~1.900 px de ancho; por debajo se desplaza dentro de su caja. Si se quiere que entre siempre,
 sacarla del `.grid2` y dejar el bloque a ancho completo.
 
-Al corte: **las 49 abiertas del cliente cierran al 83%** contra 96,9% las internas y 100% las de
-subcontrato —de esas no queda ninguna abierta—. De las 51 fuera de plazo, **46 son del cliente**.
-Y el promedio de respuesta va en **69 días contra los 10 de plazo**: 49 las del cliente, 65 las
-internas y 179 las de subcontrato. En Arqueros la brecha es la mayor: 50,7% de cierre contra
+Al corte: **las 48 abiertas del cliente cierran al 82.7%** contra 96.9% las internas
+y 100% las de subcontrato —de esas no queda ninguna abierta—. De las 50 fuera de plazo,
+**45 son del cliente**. Y el promedio de respuesta va en **69 días contra los 10 de plazo**:
+50 las del cliente, 64 las internas y 179 las de subcontrato. En Arqueros la brecha es la mayor: 50,7% de cierre contra
 98,1%, sus 36 abiertas están todas fuera de plazo y responde en 127 días promedio.
 
 Las cifras salen de `resumir()` en `no_conformidades.py`, que expone `cliente`, `subcontrato`,
@@ -181,7 +192,7 @@ emisión, en cambio, está en las dos, así que el atraso **sí es calculable**.
 > Una versión anterior del módulo daba el atraso por no calculable y lo reemplazaba por la
 > antigüedad. Era un error de criterio, no de dato: el plazo se cuenta desde la emisión.
 
-Al corte: **51 de las 54 abiertas están fuera de plazo** (94,4%). Solo 3 siguen dentro —dos de
+Al corte: **50 de las 53 abiertas están fuera de plazo**. Solo 3 siguen dentro —dos de
 7 días y una de 6—. Por frente: Arqueros 36 de 36, Talabre 13 de 15, Desaladora 2 de 3. Por vía:
 46 de las 49 del cliente y las 5 internas. El atraso va de 3 a **385 días**.
 
@@ -195,7 +206,7 @@ Pasarse una semana del plazo no es lo mismo que llevar un año abierto, y de las
   mandante y compromete el contrato · **Externa · Subcontrato** = la emite Besalco contra un
   subcontratista y la absorbe internamente. **Las dos externas nunca se suman** (ver «Tres vías
   de emisión» más arriba). Al corte: 162 internas · 289 del cliente · 48 de subcontrato ·
-  9 sin clasificar; de las 54 abiertas, **49 son del cliente**, 5 internas y ninguna de
+  de las 53 abiertas, **48 son del cliente**, 5 internas y ninguna de
   subcontrato.
 - **Autodetección** = qué parte de los hallazgos clasificados los levanta Besalco. Global
   **37,8%**; por frente, Desaladora 59,6% · Arqueros 56,4% · **Talabre 22,0%**.
@@ -214,7 +225,7 @@ Pasarse una semana del plazo no es lo mismo que llevar un año abierto, y de las
   cerradas. Es el indicador de qué tan rápido reacciona cada proyecto.
 - **Oficina Central** genera NC pero no es una obra: aparece en el resumen corporativo y en el
   consolidado «Los 3 proyectos» se excluye, para que sea comparable con los otros módulos.
-- **252 de 508 hallazgos no declaran costo**, así que las 10.783 UF son un piso, no el costo real.
+- **245 de 494 hallazgos no declaran costo**, así que las 10.613 UF son un piso, no el costo real.
 
 ---
 

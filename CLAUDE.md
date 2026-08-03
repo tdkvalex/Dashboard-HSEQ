@@ -66,7 +66,9 @@ las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--exter
 **10 días para responder una NC desde que se emite**; del día 11 en adelante corre atraso
 (`PLAZO_RESPUESTA` en `no_conformidades.py`). Se cuenta sobre la fecha de emisión porque
 **ninguna de las dos fuentes trae una fecha comprometida de cierre**: las columnas de fecha del
-Excel solo se llenan al cerrar. Al corte, 51 de las 54 abiertas están fuera de plazo.
+Excel solo se llenan al cerrar. Al corte, 50 de las 53 abiertas están fuera de plazo.
+**Las opciones de mejora no entran al módulo** (`TIPOS_EXCLUIDOS`): son propuestas, no hallazgos
+que corregir. El panel declara cuántas quedaron fuera.
 *No volver a dar el atraso por «no calculable»: eso fue un error de criterio ya corregido.*
 
 ## 2 · `panel_control_TOP_P1/` — Control de Cierre QAQC
