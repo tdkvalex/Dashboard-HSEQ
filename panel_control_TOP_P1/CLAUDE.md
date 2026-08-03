@@ -153,6 +153,12 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 - **Usar `pct1()`, no `round()`.** El `round()` de Python usa redondeo bancario
   (`round(51.25,1)` = 51.2) y el panel calcula en JS con `Math.round` (51.3). `pct1()` iguala
   ambos para que panel, JSON y PPT muestren la misma cifra.
+- **El corte de la cabecera cambia por pestaña** (`CAB[p]().corte`): cada proyecto se actualiza
+  cuando entrega sus archivos, así que no hay un corte único. La pestaña corporativa muestra el
+  más reciente **más el aviso «cortes mixtos»** (`#corteNota`, con el detalle en el `title`),
+  para que ese 03-08 no se lea como la fecha de los tres. Dentro de la suite, la franja de
+  arriba **oculta su propio corte** al abrir un módulo: manda el del módulo, y así la fecha no
+  aparece dos veces ni se contradice al cambiar de pestaña.
 - **Talabre: el corte es `meta.hoy`**, la fecha de referencia de los atrasos. `meta.ultimaAgenda`
   guarda la caminata agendada más lejana, que es una **fecha futura** y no debe usarse como corte
   (hacía que el informe se descargara con fecha 10-08 en vez de 27-07).

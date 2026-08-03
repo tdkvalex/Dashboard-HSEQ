@@ -92,6 +92,11 @@ Al empaquetar, cada módulo recibe un `<style>` que normaliza su cabecera:
 El título lleva `pointer-events:none` para no tapar los botones que quedan debajo. Las
 pestañas de proyecto de cada dashboard quedan intactas.
 
+**El corte de la franja de la suite solo se muestra en el Resumen** (`body[data-vista]` +
+la regla de `.hd-r`): dentro de un módulo lo declara el módulo, que es quien sabe a qué fecha
+está lo que se ve. Es la única forma de que no aparezca dos veces ni se contradiga cuando el
+módulo cambia de corte al cambiar de pestaña.
+
 **La portada no lee los módulos en vivo**: `armar_suite.js` extrae los KPI en el momento de
 armar y los deja en un bloque `KPIS`. Así la portada no depende de que los iframes estén
 montados ni de comunicación entre documentos.
@@ -135,10 +140,19 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 El corte de Cierre QAQC es el más reciente de sus tres proyectos (Talabre, 03-08); Desaladora
 sigue al 27-07 y Arqueros al 26-07 dentro del módulo.
 
-**Cada módulo se actualiza por su lado**, así que no siempre quedan a la misma fecha. La franja
-superior muestra **el corte más reciente** de los tres y, si difieren, agrega el aviso
-**«cortes mixtos»** con el detalle por módulo al pasar el cursor. Antes tomaba solo el de
-Cierre QAQC y la suite se fechaba una semana atrás cuando los otros dos ya iban al día.
+**Cada módulo se actualiza por su lado**, así que no siempre quedan a la misma fecha.
+
+**El corte se muestra una sola vez, y siempre el que corresponde a lo que se está mirando.**
+En el **Resumen**, la franja de la suite muestra el corte más reciente de los tres módulos y,
+si difieren, agrega el aviso **«cortes mixtos»** con el detalle al pasar el cursor. **Al abrir
+un módulo esa franja se oculta** y manda el corte del propio módulo. Antes se veían las dos
+franjas con la fecha repetida y, peor, contradiciéndose: la de arriba decía 03-08 mientras la
+pestaña de Desaladora, abajo, decía 27-07.
+
+Dentro de Cierre QAQC el corte **cambia por pestaña** (Desaladora 27-07 · Talabre 03-08 ·
+Arqueros 26-07), porque cada proyecto entrega sus archivos cuando puede. Su pestaña
+corporativa, que no es un proyecto, muestra el más reciente con el mismo aviso «cortes
+mixtos», para que ese 03-08 no se lea como la fecha de los tres.
 
 **Lo que muestra el cruce:** la documentación va muy por delante del cierre físico. Protocolos
 está prácticamente al día mientras el cierre de detalles P1 arrastra 594 ítems atrasados. El

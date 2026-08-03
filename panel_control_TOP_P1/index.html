@@ -81,6 +81,9 @@
   :root[data-theme="light"] header.top {
     border-image: linear-gradient(90deg, var(--corp-blue), var(--corp-blue2), var(--gold)) 1; }
   :root[data-theme="light"] .theme-btn { color: #ffffff; }
+  /* el ámbar de modo claro da 2,9:1 sobre la cabecera clara, insuficiente para
+     un texto de 9 px: el aviso de cortes usa su versión oscura (4,9:1). */
+  :root[data-theme="light"] .corte i { color: #8a5f0b; }
 
   html, body { margin: 0; padding: 0; }
   .viz-root, .viz-root *, .viz-root *::before, .viz-root *::after { box-sizing: border-box; }
@@ -126,6 +129,12 @@
     background: var(--st-good); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.35); } }
   .corte b { color: var(--gold); }
+  /* Cada proyecto se actualiza por su lado, así que la pestaña corporativa no
+     tiene UN corte: muestra el más reciente y avisa que los tres difieren, en
+     vez de dejar que el más nuevo se lea como la fecha de todo. */
+  .corte i { font-style: normal; font-size: 9px; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--amber);
+    border: 1px dashed currentColor; border-radius: 4px; padding: 1px 6px; cursor: help; }
   .theme-btn, .report-btn { font-family: 'Rajdhani', sans-serif; font-weight: 600;
     font-size: 11px; letter-spacing: .3px; cursor: pointer;
     display: inline-flex; align-items: center; gap: 6px;
@@ -329,7 +338,7 @@
       <div class="sub" id="subtitulo"></div>
     </div>
     <div class="headmeta">
-      <span class="corte">Corte <b id="corteTxt"></b></span>
+      <span class="corte">Corte <b id="corteTxt"></b><i id="corteNota" hidden></i></span>
       <button class="report-btn" id="pptBtn" type="button">📊 Descargar Informe</button>
       <button class="theme-btn" id="themeBtn" type="button">Modo claro</button>
     </div>
@@ -5488,11 +5497,17 @@ function renderCORP() {
 /* ---------- cabecera y selector de proyecto ---------- */
 const CAB = {
   CORP: () => {
-    const c = PROY.map(p => p.d.meta.hoy || p.d.meta.corteTexto || p.d.meta.corte_texto)
-                  .filter(Boolean);
+    // No hay UN corte corporativo: cada proyecto se actualiza por su lado. Se
+    // muestra el más reciente y, si difieren, se avisa con el detalle al pasar
+    // el cursor — así el más nuevo no se lee como la fecha de los tres.
+    const cs = PROY.map(p => ({ n: p.nombre,
+      c: p.d.meta.hoy || p.d.meta.corteTexto || p.d.meta.corte_texto })).filter(x => x.c);
     const iso = (t) => { const [d,m,a] = String(t).split('-'); return `${a}${m}${d}`; };
+    const ord = cs.map(x => iso(x.c)).sort();
     return {
-      corte: c.sort((a,b) => iso(a).localeCompare(iso(b))).pop() || '—',
+      corte: cs.map(x => x.c).sort((a,b) => iso(a).localeCompare(iso(b))).pop() || '—',
+      nota: ord.length && ord[0] !== ord[ord.length - 1]
+        ? { txt: 'cortes mixtos', det: cs.map(x => `${x.n} ${x.c}`).join(' · ') } : null,
       sub: `Besalco Montajes · ${PROY.length} proyectos en control · ` +
            PROY.map(p => `<b>${etiq(p)}</b>`).join(' · ')
     };
@@ -5524,6 +5539,10 @@ function mostrar(p) {
     b.setAttribute('aria-selected', b.dataset.p === p ? 'true' : 'false'));
   const c = CAB[p]();
   $('corteTxt').textContent = c.corte;
+  const n = $('corteNota');
+  n.hidden = !c.nota;
+  n.textContent = c.nota ? c.nota.txt : '';
+  n.title = c.nota ? c.nota.det : '';
   $('subtitulo').innerHTML = c.sub;
   pintar();
 }

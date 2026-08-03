@@ -67,6 +67,13 @@
 
   .hd-r { display:flex; align-items:center; gap:9px; flex-shrink:0;
     padding:0 clamp(12px,2vw,22px) 0 16px; border-left:1px solid var(--bdr); }
+  /* El corte de la suite se muestra SOLO en el Resumen. Dentro de un módulo
+     manda el corte del propio módulo, que es el que corresponde a lo que se
+     está mirando: Cierre QAQC lo cambia por pestaña (Desaladora 27-07,
+     Talabre 03-08…) y repetir arriba el consolidado se leía como que todo
+     estuviera a esa fecha. Una sola fecha visible, y siempre la correcta. */
+  body[data-vista="home"] .hd-r { display:flex; }
+  body:not([data-vista="home"]) .hd-r { display:none; }
   .corte { display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
     font-family:'Rajdhani',sans-serif; font-weight:600; font-size:12px; letter-spacing:.4px; }
   .corte::before { content:''; width:6px; height:6px; border-radius:50%;
@@ -182,7 +189,7 @@
   }
 </style>
 </head>
-<body>
+<body data-vista="home">
 
 <header>
   <span class="marca">
@@ -289,6 +296,9 @@ function ver(v) {
   for (const [k, id] of Object.entries(VISTAS)) $(id).classList.toggle('on', k === v);
   document.querySelectorAll('.mtab').forEach(b =>
     b.setAttribute('aria-selected', b.dataset.v === v ? 'true' : 'false'));
+  // El corte de la franja de la suite solo aplica al Resumen; dentro de un
+  // módulo lo declara el módulo (ver el CSS de .hd-r).
+  document.body.dataset.vista = v;
   if (v === 'protocolos') montar('protocolos', $('vProtocolos'));
   if (v === 'cierre') montar('cierre', $('vCierre'));
   if (v === 'nc') montar('nc', $('vNc'));
