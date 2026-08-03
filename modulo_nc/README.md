@@ -194,3 +194,7 @@ Los scripts reemplazan solo su bloque; el resto del archivo se edita a mano.
 | `NC:INICIO/FIN` | `no_conformidades.py` | `const NC` — todos los datos |
 | `LOGO:INICIO/FIN` | `gen_ppt.js` | `const LOGOS` — logos en base64 |
 | `PPT:INICIO/FIN` | `gen_ppt.js` | `const PPTX` — la PPT en base64 |
+
+**Ancho del contenido:** `.wrap` usa `max-width: clamp(1680px, 88vw, 2160px)`, **el mismo valor
+que `panel_control_TOP_P1/index.html`**. Si se cambia en uno hay que cambiarlo en el otro, o
+los dos módulos saltan de tamaño al cambiar de pestaña dentro de la suite.

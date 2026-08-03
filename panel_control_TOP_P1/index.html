@@ -98,7 +98,13 @@
   .viz-root ::-webkit-scrollbar { width: 6px; height: 6px; }
   .viz-root ::-webkit-scrollbar-track { background: var(--surface-1); }
   .viz-root ::-webkit-scrollbar-thumb { background: var(--baseline); border-radius: 3px; }
-  .wrap { width: 100%; max-width: 1680px; margin: 0 auto; padding: 0 clamp(12px, 2vw, 26px); }
+  /* Ancho del contenido. El tope sube en pantallas grandes —donde 1680 px
+     dejaba casi 470 px muertos por lado— pero no llega a ocupar todo el ancho
+     como Protocolos: por debajo de ~1900 px se comporta igual que antes y el
+     margen nunca baja de ~200 px, que es lo que mantiene legibles las tablas
+     anchas y el heatmap. */
+  .wrap { width: 100%; max-width: clamp(1680px, 88vw, 2160px);
+    margin: 0 auto; padding: 0 clamp(12px, 2vw, 26px); }
 
   /* ── CABECERA ─────────────────────────────────────────────────── */
   header.top {

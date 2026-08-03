@@ -92,6 +92,12 @@ Al empaquetar, cada módulo recibe un `<style>` que normaliza su cabecera:
 El título lleva `pointer-events:none` para no tapar los botones que quedan debajo. Las
 pestañas de proyecto de cada dashboard quedan intactas.
 
+**Ancho del contenido.** Protocolos ocupa todo el ancho disponible; Cierre QAQC y No
+Conformidades usan `max-width: clamp(1680px, 88vw, 2160px)` en su `.wrap` — el mismo valor en
+los dos, para que no salten de tamaño al cambiar de módulo. Hasta ~1900 px se comportan como
+antes; de ahí en adelante se ensanchan hasta 2160 px, dejando siempre unos 200 px de margen.
+El tope fijo anterior (1680 px) desperdiciaba casi 470 px por lado en una pantalla de 2560.
+
 **El corte de la franja de la suite solo se muestra en el Resumen** (`body[data-vista]` +
 la regla de `.hd-r`): dentro de un módulo lo declara el módulo, que es quien sabe a qué fecha
 está lo que se ve. Es la única forma de que no aparezca dos veces ni se contradiga cuando el

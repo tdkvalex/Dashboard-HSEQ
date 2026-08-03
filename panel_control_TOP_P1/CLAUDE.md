@@ -240,6 +240,12 @@ un PPTX que abra.
 `box-sizing: border-box` está acotado a `.viz-root`; sin él el padding del `.wrap` se suma al
 100% y la página desborda ~52 px.
 
+El ancho del contenido es `max-width: clamp(1680px, 88vw, 2160px)` en `.wrap`. **El mismo
+valor va en `modulo_nc/index.html`**: si se cambia en uno hay que cambiarlo en el otro, o los
+dos módulos saltan de tamaño al cambiar de pestaña dentro de la suite. Protocolos no lleva
+tope, por eso se ve más ancho. Al tocarlo, verificar `scrollWidth == viewport` en 1366, 1920,
+2560 y 3440.
+
 ---
 
 ## 8 · Identidad visual
