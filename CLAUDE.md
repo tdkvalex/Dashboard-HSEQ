@@ -23,12 +23,13 @@ README.
 
 ## 1 · `modulo_nc/` — Control de No Conformidades
 
-Módulo de la suite. Un solo Excel de origen (`Data_NCR.xlsx`, hoja «Observaciones»).
+Módulo de la suite. **Dos** Excel de origen: el registro principal (`Data_NCR.xlsx`, hoja
+«Observaciones») y la planilla de NC que el cliente MASA levanta en Arqueros.
 Ver [`modulo_nc/README.md`](modulo_nc/README.md).
 
 ```bash
 cd modulo_nc
-python3 no_conformidades.py --data <Data_NCR.xlsx>
+python3 no_conformidades.py --data <Data_NCR.xlsx> --externas <Data_NCR*externas.xlsx>
 node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el panel
 ```
 
@@ -36,6 +37,11 @@ El panel abre con **«Levantados en la última semana»** (cuántos, de qué dis
 externos, y el detalle uno a uno). Esa ventana se cuenta contra `--hoy`, que por defecto es el
 día en que se corre: si se reprocesa un corte pasado hay que pasar `--hoy AAAA-MM-DD`, o la
 semana sale vacía.
+
+**Son DOS archivos.** El registro principal trae, para Arqueros, solo lo que emite Besalco;
+las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--externas`, hoja
+«Disposición NC-Externas»). Sin ella Arqueros se ve con 1 abierta y 98,9% de cierre en vez de
+36 y 78%. El script avisa si no se pasa.
 
 **Ojo con el atraso:** la regla es «abierta con la fecha comprometida vencida», pero la columna
 «Fecha De Cierre» del Excel **solo se llena al cerrar**, así que ninguna NC abierta tiene fecha

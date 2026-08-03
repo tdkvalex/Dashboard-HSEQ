@@ -7,7 +7,7 @@
   "hoy": "03-08-2026",
   "corte": "2026-08-03",
   "corteTexto": "03-08-2026",
-  "generado": "2026-08-03 13:30",
+  "generado": "2026-08-03 13:40",
   "fuente": "1e73482e-Data_NCR03082026.xlsx"
  },
  "orden": [
@@ -1101,30 +1101,30 @@
    "cliente": "MASA",
    "obra": true,
    "resumen": {
-    "total": 94,
-    "cerradas": 93,
-    "abiertas": 1,
+    "total": 164,
+    "cerradas": 128,
+    "abiertas": 36,
     "atrasadas": 0,
-    "pctCierre": 98.9,
+    "pctCierre": 78.0,
     "internas": 53,
-    "externas": 41,
+    "externas": 111,
     "costo": 3391.8,
     "conCosto": 44,
-    "medianaCierre": 139,
+    "medianaCierre": 131,
     "maxCierre": 313
    },
    "porTipo": {
     "No Conformidad": {
-     "total": 56,
-     "cerradas": 55,
-     "abiertas": 1,
+     "total": 89,
+     "cerradas": 68,
+     "abiertas": 21,
      "atrasadas": 0,
-     "pctCierre": 98.2,
+     "pctCierre": 76.4,
      "internas": 52,
-     "externas": 4,
+     "externas": 37,
      "costo": 581.8,
      "conCosto": 10,
-     "medianaCierre": 42,
+     "medianaCierre": 52,
      "maxCierre": 297
     },
     "Producto No Conforme": {
@@ -1141,17 +1141,17 @@
      "maxCierre": 313
     },
     "Observación": {
-     "total": 1,
-     "cerradas": 1,
-     "abiertas": 0,
+     "total": 38,
+     "cerradas": 23,
+     "abiertas": 15,
      "atrasadas": 0,
-     "pctCierre": 100.0,
+     "pctCierre": 60.5,
      "internas": 1,
-     "externas": 0,
+     "externas": 37,
      "costo": 0,
      "conCosto": 0,
-     "medianaCierre": 178,
-     "maxCierre": 178
+     "medianaCierre": 148,
+     "maxCierre": 217
     }
    },
    "porOrigen": {
@@ -1169,16 +1169,16 @@
      "maxCierre": 297
     },
     "Externa": {
-     "total": 41,
-     "cerradas": 41,
-     "abiertas": 0,
+     "total": 111,
+     "cerradas": 76,
+     "abiertas": 35,
      "atrasadas": 0,
-     "pctCierre": 100.0,
+     "pctCierre": 68.5,
      "internas": 0,
-     "externas": 41,
+     "externas": 111,
      "costo": 2840.0,
      "conCosto": 35,
-     "medianaCierre": 210,
+     "medianaCierre": 180,
      "maxCierre": 313
     }
    },
@@ -1197,17 +1197,17 @@
      "maxCierre": 297
     },
     "Externa Cliente": {
-     "total": 1,
-     "cerradas": 1,
-     "abiertas": 0,
+     "total": 71,
+     "cerradas": 36,
+     "abiertas": 35,
      "atrasadas": 0,
-     "pctCierre": 100.0,
+     "pctCierre": 50.7,
      "internas": 0,
-     "externas": 1,
+     "externas": 71,
      "costo": 0,
      "conCosto": 0,
-     "medianaCierre": 146,
-     "maxCierre": 146
+     "medianaCierre": 125,
+     "maxCierre": 288
     },
     "Externa Subcontrato": {
      "total": 40,
@@ -1223,7 +1223,7 @@
      "maxCierre": 313
     }
    },
-   "autodeteccion": 56.4,
+   "autodeteccion": 32.3,
    "porEspecialidad": {
     "OO.CC": {
      "total": 16,
@@ -1237,6 +1237,19 @@
      "conCosto": 6,
      "medianaCierre": 42,
      "maxCierre": 190
+    },
+    "Sin especialidad": {
+     "total": 70,
+     "cerradas": 35,
+     "abiertas": 35,
+     "atrasadas": 0,
+     "pctCierre": 50.0,
+     "internas": 0,
+     "externas": 70,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": 121,
+     "maxCierre": 288
     },
     "EXPEDITORÍA": {
      "total": 37,
@@ -1448,19 +1461,22 @@
     }
    },
    "porEstatus": {
-    "Iniciado": 1
+    "Iniciado": 1,
+    "Listo para revisión": 20,
+    "Observada": 12,
+    "Pendiente": 3
    },
    "antiguedad": {
     "1-30 días": 0,
-    "31-90 días": 1,
-    "91-180 días": 0,
-    "181-365 días": 0,
-    "Más de un año": 0
+    "31-90 días": 8,
+    "91-180 días": 14,
+    "181-365 días": 12,
+    "Más de un año": 2
    },
    "porAnio": {
     "2024": 14,
-    "2025": 72,
-    "2026": 8
+    "2025": 104,
+    "2026": 46
    },
    "ventanas": {
     "semana": {
@@ -1490,13 +1506,13 @@
      "maxCierre": null
     },
     "trimestre": {
-     "total": 1,
+     "total": 8,
      "cerradas": 0,
-     "abiertas": 1,
+     "abiertas": 8,
      "atrasadas": 0,
      "pctCierre": 0.0,
      "internas": 1,
-     "externas": 0,
+     "externas": 7,
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": null,
@@ -1522,10 +1538,10 @@
       "etiqueta": "Hace 7 semanas",
       "desde": "09-06",
       "hasta": "15-06",
-      "total": 0,
+      "total": 1,
       "internas": 0,
-      "externas": 0,
-      "abiertas": 0
+      "externas": 1,
+      "abiertas": 1
      },
      {
       "etiqueta": "Hace 6 semanas",
@@ -1600,16 +1616,21 @@
     "2025-01": 13,
     "2025-02": 8,
     "2025-03": 5,
-    "2025-04": 9,
+    "2025-04": 10,
     "2025-05": 7,
     "2025-06": 5,
-    "2025-07": 8,
-    "2025-08": 10,
-    "2025-09": 2,
-    "2025-10": 4,
-    "2025-12": 1,
-    "2026-01": 7,
-    "2026-05": 1
+    "2025-07": 11,
+    "2025-08": 14,
+    "2025-09": 10,
+    "2025-10": 9,
+    "2025-11": 6,
+    "2025-12": 6,
+    "2026-01": 15,
+    "2026-02": 6,
+    "2026-03": 11,
+    "2026-04": 6,
+    "2026-05": 5,
+    "2026-06": 3
    }
   },
   "OFICINA": {
@@ -1845,30 +1866,30 @@
  },
  "global": {
   "resumen": {
-   "total": 438,
-   "cerradas": 419,
-   "abiertas": 19,
+   "total": 508,
+   "cerradas": 454,
+   "abiertas": 54,
    "atrasadas": 0,
-   "pctCierre": 95.7,
+   "pctCierre": 89.4,
    "internas": 162,
-   "externas": 267,
+   "externas": 337,
    "costo": 10783.4,
    "conCosto": 256,
-   "medianaCierre": 28,
+   "medianaCierre": 30,
    "maxCierre": 389
   },
   "porTipo": {
    "No Conformidad": {
-    "total": 280,
-    "cerradas": 266,
-    "abiertas": 14,
+    "total": 313,
+    "cerradas": 279,
+    "abiertas": 34,
     "atrasadas": 0,
-    "pctCierre": 95.0,
+    "pctCierre": 89.1,
     "internas": 131,
-    "externas": 141,
+    "externas": 174,
     "costo": 7139.3,
     "conCosto": 137,
-    "medianaCierre": 28,
+    "medianaCierre": 29,
     "maxCierre": 389
    },
    "Producto No Conforme": {
@@ -1885,17 +1906,17 @@
     "maxCierre": 313
    },
    "Observación": {
-    "total": 23,
-    "cerradas": 23,
-    "abiertas": 0,
+    "total": 60,
+    "cerradas": 45,
+    "abiertas": 15,
     "atrasadas": 0,
-    "pctCierre": 100.0,
+    "pctCierre": 75.0,
     "internas": 23,
-    "externas": 0,
+    "externas": 37,
     "costo": 3.0,
     "conCosto": 19,
-    "medianaCierre": 18,
-    "maxCierre": 178
+    "medianaCierre": 34,
+    "maxCierre": 217
    },
    "Opción de Mejora": {
     "total": 14,
@@ -1939,16 +1960,16 @@
     "maxCierre": 389
    },
    "Externa": {
-    "total": 267,
-    "cerradas": 253,
-    "abiertas": 14,
+    "total": 337,
+    "cerradas": 288,
+    "abiertas": 49,
     "atrasadas": 0,
-    "pctCierre": 94.8,
+    "pctCierre": 85.5,
     "internas": 0,
-    "externas": 267,
+    "externas": 337,
     "costo": 9280.4,
     "conCosto": 169,
-    "medianaCierre": 28,
+    "medianaCierre": 34,
     "maxCierre": 313
    },
    "Sin clasificar": {
@@ -1980,17 +2001,17 @@
     "maxCierre": 389
    },
    "Externa Cliente": {
-    "total": 219,
-    "cerradas": 205,
-    "abiertas": 14,
+    "total": 289,
+    "cerradas": 240,
+    "abiertas": 49,
     "atrasadas": 0,
-    "pctCierre": 93.6,
+    "pctCierre": 83.0,
     "internas": 0,
-    "externas": 219,
+    "externas": 289,
     "costo": 6073.3,
     "conCosto": 127,
-    "medianaCierre": 22,
-    "maxCierre": 187
+    "medianaCierre": 28,
+    "maxCierre": 288
    },
    "Externa Subcontrato": {
     "total": 48,
@@ -2019,7 +2040,7 @@
     "maxCierre": 146
    }
   },
-  "autodeteccion": 37.8,
+  "autodeteccion": 32.5,
   "porEspecialidad": {
    "OO.CC": {
     "total": 168,
@@ -2033,6 +2054,19 @@
     "conCosto": 122,
     "medianaCierre": 22,
     "maxCierre": 237
+   },
+   "Sin especialidad": {
+    "total": 78,
+    "cerradas": 43,
+    "abiertas": 35,
+    "atrasadas": 0,
+    "pctCierre": 55.1,
+    "internas": 0,
+    "externas": 70,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": 107,
+    "maxCierre": 288
    },
    "EXPEDITORÍA": {
     "total": 48,
@@ -2190,19 +2224,6 @@
     "medianaCierre": 141,
     "maxCierre": 224
    },
-   "Sin especialidad": {
-    "total": 8,
-    "cerradas": 8,
-    "abiertas": 0,
-    "atrasadas": 0,
-    "pctCierre": 100.0,
-    "internas": 0,
-    "externas": 0,
-    "costo": 0,
-    "conCosto": 0,
-    "medianaCierre": 77,
-    "maxCierre": 146
-   },
    "BODEGA": {
     "total": 8,
     "cerradas": 8,
@@ -2350,20 +2371,22 @@
   "porEstatus": {
    "Iniciado": 15,
    "No aceptado": 1,
-   "Listo para revisión": 3
+   "Listo para revisión": 23,
+   "Observada": 12,
+   "Pendiente": 3
   },
   "antiguedad": {
    "1-30 días": 7,
-   "31-90 días": 5,
-   "91-180 días": 4,
-   "181-365 días": 2,
-   "Más de un año": 1
+   "31-90 días": 12,
+   "91-180 días": 18,
+   "181-365 días": 14,
+   "Más de un año": 3
   },
   "porAnio": {
    "2023": 3,
    "2024": 18,
-   "2025": 293,
-   "2026": 124
+   "2025": 325,
+   "2026": 162
   },
   "ventanas": {
    "semana": {
@@ -2393,13 +2416,13 @@
     "maxCierre": 6
    },
    "trimestre": {
-    "total": 38,
+    "total": 45,
     "cerradas": 26,
-    "abiertas": 12,
+    "abiertas": 19,
     "atrasadas": 0,
-    "pctCierre": 68.4,
+    "pctCierre": 57.8,
     "internas": 4,
-    "externas": 34,
+    "externas": 41,
     "costo": 0.0,
     "conCosto": 4,
     "medianaCierre": 28,
@@ -2466,10 +2489,10 @@
      "etiqueta": "Hace 7 semanas",
      "desde": "09-06",
      "hasta": "15-06",
-     "total": 4,
+     "total": 5,
      "internas": 0,
-     "externas": 4,
-     "abiertas": 2
+     "externas": 5,
+     "abiertas": 3
     },
     {
      "etiqueta": "Hace 6 semanas",
@@ -2545,50 +2568,50 @@
    "2025-01": 13,
    "2025-02": 11,
    "2025-03": 14,
-   "2025-04": 15,
+   "2025-04": 16,
    "2025-05": 37,
    "2025-06": 24,
-   "2025-07": 48,
-   "2025-08": 26,
-   "2025-09": 26,
-   "2025-10": 35,
-   "2025-11": 23,
-   "2025-12": 21,
-   "2026-01": 32,
-   "2026-02": 23,
-   "2026-03": 18,
-   "2026-04": 13,
-   "2026-05": 16,
-   "2026-06": 14,
+   "2025-07": 51,
+   "2025-08": 30,
+   "2025-09": 34,
+   "2025-10": 40,
+   "2025-11": 29,
+   "2025-12": 26,
+   "2026-01": 40,
+   "2026-02": 29,
+   "2026-03": 29,
+   "2026-04": 19,
+   "2026-05": 20,
+   "2026-06": 17,
    "2026-07": 8
   }
  },
  "obra": {
   "resumen": {
-   "total": 430,
-   "cerradas": 411,
-   "abiertas": 19,
+   "total": 500,
+   "cerradas": 446,
+   "abiertas": 54,
    "atrasadas": 0,
-   "pctCierre": 95.6,
+   "pctCierre": 89.2,
    "internas": 162,
-   "externas": 267,
+   "externas": 337,
    "costo": 10783.4,
    "conCosto": 256,
-   "medianaCierre": 28,
+   "medianaCierre": 30,
    "maxCierre": 389
   },
   "porTipo": {
    "No Conformidad": {
-    "total": 272,
-    "cerradas": 258,
-    "abiertas": 14,
+    "total": 305,
+    "cerradas": 271,
+    "abiertas": 34,
     "atrasadas": 0,
-    "pctCierre": 94.9,
+    "pctCierre": 88.9,
     "internas": 131,
-    "externas": 141,
+    "externas": 174,
     "costo": 7139.3,
     "conCosto": 137,
-    "medianaCierre": 28,
+    "medianaCierre": 29,
     "maxCierre": 389
    },
    "Producto No Conforme": {
@@ -2605,17 +2628,17 @@
     "maxCierre": 313
    },
    "Observación": {
-    "total": 23,
-    "cerradas": 23,
-    "abiertas": 0,
+    "total": 60,
+    "cerradas": 45,
+    "abiertas": 15,
     "atrasadas": 0,
-    "pctCierre": 100.0,
+    "pctCierre": 75.0,
     "internas": 23,
-    "externas": 0,
+    "externas": 37,
     "costo": 3.0,
     "conCosto": 19,
-    "medianaCierre": 18,
-    "maxCierre": 178
+    "medianaCierre": 34,
+    "maxCierre": 217
    },
    "Opción de Mejora": {
     "total": 14,
@@ -2659,16 +2682,16 @@
     "maxCierre": 389
    },
    "Externa": {
-    "total": 267,
-    "cerradas": 253,
-    "abiertas": 14,
+    "total": 337,
+    "cerradas": 288,
+    "abiertas": 49,
     "atrasadas": 0,
-    "pctCierre": 94.8,
+    "pctCierre": 85.5,
     "internas": 0,
-    "externas": 267,
+    "externas": 337,
     "costo": 9280.4,
     "conCosto": 169,
-    "medianaCierre": 28,
+    "medianaCierre": 34,
     "maxCierre": 313
    },
    "Sin clasificar": {
@@ -2700,17 +2723,17 @@
     "maxCierre": 389
    },
    "Externa Cliente": {
-    "total": 219,
-    "cerradas": 205,
-    "abiertas": 14,
+    "total": 289,
+    "cerradas": 240,
+    "abiertas": 49,
     "atrasadas": 0,
-    "pctCierre": 93.6,
+    "pctCierre": 83.0,
     "internas": 0,
-    "externas": 219,
+    "externas": 289,
     "costo": 6073.3,
     "conCosto": 127,
-    "medianaCierre": 22,
-    "maxCierre": 187
+    "medianaCierre": 28,
+    "maxCierre": 288
    },
    "Externa Subcontrato": {
     "total": 48,
@@ -2739,7 +2762,7 @@
     "maxCierre": 15
    }
   },
-  "autodeteccion": 37.8,
+  "autodeteccion": 32.5,
   "porEspecialidad": {
    "OO.CC": {
     "total": 168,
@@ -2753,6 +2776,19 @@
     "conCosto": 122,
     "medianaCierre": 22,
     "maxCierre": 237
+   },
+   "Sin especialidad": {
+    "total": 70,
+    "cerradas": 35,
+    "abiertas": 35,
+    "atrasadas": 0,
+    "pctCierre": 50.0,
+    "internas": 0,
+    "externas": 70,
+    "costo": 0,
+    "conCosto": 0,
+    "medianaCierre": 121,
+    "maxCierre": 288
    },
    "EXPEDITORÍA": {
     "total": 48,
@@ -3057,19 +3093,21 @@
   "porEstatus": {
    "Iniciado": 15,
    "No aceptado": 1,
-   "Listo para revisión": 3
+   "Listo para revisión": 23,
+   "Observada": 12,
+   "Pendiente": 3
   },
   "antiguedad": {
    "1-30 días": 7,
-   "31-90 días": 5,
-   "91-180 días": 4,
-   "181-365 días": 2,
-   "Más de un año": 1
+   "31-90 días": 12,
+   "91-180 días": 18,
+   "181-365 días": 14,
+   "Más de un año": 3
   },
   "porAnio": {
    "2024": 14,
-   "2025": 292,
-   "2026": 124
+   "2025": 324,
+   "2026": 162
   },
   "ventanas": {
    "semana": {
@@ -3099,13 +3137,13 @@
     "maxCierre": 6
    },
    "trimestre": {
-    "total": 38,
+    "total": 45,
     "cerradas": 26,
-    "abiertas": 12,
+    "abiertas": 19,
     "atrasadas": 0,
-    "pctCierre": 68.4,
+    "pctCierre": 57.8,
     "internas": 4,
-    "externas": 34,
+    "externas": 41,
     "costo": 0.0,
     "conCosto": 4,
     "medianaCierre": 28,
@@ -3172,10 +3210,10 @@
      "etiqueta": "Hace 7 semanas",
      "desde": "09-06",
      "hasta": "15-06",
-     "total": 4,
+     "total": 5,
      "internas": 0,
-     "externas": 4,
-     "abiertas": 2
+     "externas": 5,
+     "abiertas": 3
     },
     {
      "etiqueta": "Hace 6 semanas",
@@ -3250,21 +3288,21 @@
    "2025-01": 13,
    "2025-02": 11,
    "2025-03": 14,
-   "2025-04": 15,
+   "2025-04": 16,
    "2025-05": 37,
    "2025-06": 24,
-   "2025-07": 48,
-   "2025-08": 26,
-   "2025-09": 26,
-   "2025-10": 35,
-   "2025-11": 23,
-   "2025-12": 20,
-   "2026-01": 32,
-   "2026-02": 23,
-   "2026-03": 18,
-   "2026-04": 13,
-   "2026-05": 16,
-   "2026-06": 14,
+   "2025-07": 51,
+   "2025-08": 30,
+   "2025-09": 34,
+   "2025-10": 40,
+   "2025-11": 29,
+   "2025-12": 25,
+   "2026-01": 40,
+   "2026-02": 29,
+   "2026-03": 29,
+   "2026-04": 19,
+   "2026-05": 20,
+   "2026-06": 17,
    "2026-07": 8
   }
  },
@@ -3277,6 +3315,7 @@
  ],
  "especialidades": [
   "OO.CC",
+  "Sin especialidad",
   "EXPEDITORÍA",
   "CALIDAD",
   "ELÉCTRICA",
@@ -3289,7 +3328,6 @@
   "MECÁNICA",
   "RRLL",
   "SUBCONTRATO",
-  "Sin especialidad",
   "BODEGA",
   "LOGÍSTICA",
   "PERSONAS",
@@ -3316,6 +3354,22 @@
  },
  "abiertas": [
   {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-4",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Sistema de conexión desde chute 2200-CH-002 - chancado secundario a losa colaborante superior",
+   "estatus": "Listo para revisión",
+   "creada": "04-07-2025",
+   "dias": 395,
+   "atrasada": false,
+   "costo": null
+  },
+  {
    "proy": "TALABRE",
    "proyNombre": "Talabre",
    "n": "21",
@@ -3328,6 +3382,54 @@
    "estatus": "Iniciado",
    "creada": "07-07-2025",
    "dias": 392,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-2",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Uniones soldadas y touch-up en tolva de alimentación primaria 2100-BN-001 (Medio Elemento)",
+   "estatus": "Listo para revisión",
+   "creada": "07-07-2025",
+   "dias": 392,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-6",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Condición del grout de nivelación estanque agua de sello 3640-TK-001",
+   "estatus": "Listo para revisión",
+   "creada": "07-08-2025",
+   "dias": 361,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-8",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Montaje de estructura metálica sin arriostramiento vertical de diseño - edificio hidrociclones molienda y edificio sopladores",
+   "estatus": "Listo para revisión",
+   "creada": "19-08-2025",
+   "dias": 349,
    "atrasada": false,
    "costo": null
   },
@@ -3348,6 +3450,102 @@
    "costo": null
   },
   {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-10",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Vigas (puntales) Montadas Fuera de Posición estructura Espesador de\nRelaves",
+   "estatus": "Listo para revisión",
+   "creada": "16-09-2025",
+   "dias": 321,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-21",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Informe Técnico de Inspección – Fisura en Grout de base de pernos de nivelación – “bearing housing” Molino de Bolas",
+   "estatus": "Observada",
+   "creada": "16-10-2025",
+   "dias": 291,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-24",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Inspección grout de los recesos de las celdas columnas",
+   "estatus": "Observada",
+   "creada": "16-10-2025",
+   "dias": 291,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-28",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Cámara 3700-MH-002, salida sala eléctrica 3700, no se dejaron las entradas de escalerillas.",
+   "estatus": "Listo para revisión",
+   "creada": "06-11-2025",
+   "dias": 270,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-30",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Fundaciones faltantes para apoyo de piperacks de flotación-remolienda (P1, P2, P3 y P4) y normalización de pernos de anclaje y conexión de estructura ",
+   "estatus": "Observada",
+   "creada": "10-11-2025",
+   "dias": 266,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-37",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Tolerancia transversal en chutes de descarga harneros",
+   "estatus": "Listo para revisión",
+   "creada": "17-12-2025",
+   "dias": 229,
+   "atrasada": false,
+   "costo": null
+  },
+  {
    "proy": "TALABRE",
    "proyNombre": "Talabre",
    "n": "142",
@@ -3360,6 +3558,214 @@
    "estatus": "Iniciado",
    "creada": "22-12-2025",
    "dias": 224,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-42",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Estructura de correa 2100-CV-001 montada sin pernos de anclaje",
+   "estatus": "Observada",
+   "creada": "15-01-2026",
+   "dias": 200,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-43",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Perforaciones faltantes en estructura soporte chutes descarga 2500-CH-004/005/006",
+   "estatus": "Observada",
+   "creada": "15-01-2026",
+   "dias": 200,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-45",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "(i) Cable de comunicación dañado - (ii) Falta de pintura intumescente parte inferior sala eléctrica. -  (iii) Falta de sello de polvo en HVAC",
+   "estatus": "Listo para revisión",
+   "creada": "15-01-2026",
+   "dias": 200,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-48",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "FISURACIÓN DE RADIER CELDAS COLUMNAS Y VIGA FOSO REMOLIENDA",
+   "estatus": "Observada",
+   "creada": "15-01-2026",
+   "dias": 200,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-55",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Alineamiento bombas 4210-PU-001 /002 y boquillas cajón distribuidor 4210-DB-002",
+   "estatus": "Listo para revisión",
+   "creada": "05-02-2026",
+   "dias": 179,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-56",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Interferencia línea de cañería en Planta Floculante (3612-VP-001)",
+   "estatus": "Observada",
+   "creada": "05-02-2026",
+   "dias": 179,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-57",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "ESTANQUE AGUA FRESCA 2620-TK-001 Y CONEXIONADO PIPING",
+   "estatus": "Observada",
+   "creada": "24-02-2026",
+   "dias": 160,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-58",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "INTERFERENCIA POLEA MOTRIZ CORREA TRANSPORTADORA 2200-CV-001 Y CHUTE 2400-CH-001",
+   "estatus": "Observada",
+   "creada": "24-02-2026",
+   "dias": 160,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-65",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Falta de Protección en Bombas y Líneas de Proceso",
+   "estatus": "Listo para revisión",
+   "creada": "06-03-2026",
+   "dias": 150,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-66",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Interferencia estructura con red de incendio planta POI",
+   "estatus": "Observada",
+   "creada": "06-03-2026",
+   "dias": 150,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-68",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "NIVELACIÓN DE LAS PLACAS BASE DE LOS CHANCADORES SECUNDARIO, TERCIARIO #1 Y TERCIARIO #2 HP500",
+   "estatus": "Listo para revisión",
+   "creada": "10-03-2026",
+   "dias": 146,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-70",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "DESCARGAS DE TUBERÍAS CELDAS DE FLOTACIÓN A CANALETAS DE CONDUCCIÓN",
+   "estatus": "Listo para revisión",
+   "creada": "10-03-2026",
+   "dias": 146,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-71",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "RETRABAJOS CIVILES EN SISTEMA MOTRIZ MOLINO DE BOLAS",
+   "estatus": "Observada",
+   "creada": "16-03-2026",
+   "dias": 140,
    "atrasada": false,
    "costo": null
   },
@@ -3412,6 +3818,22 @@
    "costo": null
   },
   {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-73",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Condicioón fundación de riel grúa portal molienda",
+   "estatus": "Pendiente",
+   "creada": "09-04-2026",
+   "dias": 116,
+   "atrasada": false,
+   "costo": null
+  },
+  {
    "proy": "TALABRE",
    "proyNombre": "Talabre",
    "n": "209",
@@ -3424,6 +3846,70 @@
    "estatus": "Iniciado",
    "creada": "14-04-2026",
    "dias": 111,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-74",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Cuadratura y verticalidad estructura Molino Vertical",
+   "estatus": "Listo para revisión",
+   "creada": "21-04-2026",
+   "dias": 104,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-75",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Condiciones estructurales em correa transportadora 2400-CV-002 y 2400-CV-004",
+   "estatus": "Pendiente",
+   "creada": "21-04-2026",
+   "dias": 104,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-76",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Desviación en canaletas de traspaso de concentrado celdas convencionales (Cleaner).",
+   "estatus": "Listo para revisión",
+   "creada": "24-04-2026",
+   "dias": 101,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-77",
+   "tipo": "Observación",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Condiciones estructurales em correa transportadora 2500-CV-001 y 2100-CV-001",
+   "estatus": "Pendiente",
+   "creada": "24-04-2026",
+   "dias": 101,
    "atrasada": false,
    "costo": null
   },
@@ -3446,6 +3932,54 @@
   {
    "proy": "ARQUEROS",
    "proyNombre": "Arqueros",
+   "n": "MASA-78",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Condición recubrimiento engomado polea motriz correa 2200-CV-001",
+   "estatus": "Listo para revisión",
+   "creada": "20-05-2026",
+   "dias": 75,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-79",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Desviaciones en red de incendio – línea 3670-WFI-4”-AA1-0869-N",
+   "estatus": "Listo para revisión",
+   "creada": "20-05-2026",
+   "dias": 75,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-80",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Interferencia entre la línea de despiche 3680-WRE-4”-AA1B-0511-N y conduit eléctrico",
+   "estatus": "Listo para revisión",
+   "creada": "20-05-2026",
+   "dias": 75,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
    "n": "Calidad - 0094",
    "tipo": "No Conformidad",
    "origen": "Interna",
@@ -3456,6 +3990,54 @@
    "estatus": "Iniciado",
    "creada": "25-05-2026",
    "dias": 70,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-81",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Nivelación de estacuibes de polines mediante lainas en correas transportadoras área de chancado",
+   "estatus": "Observada",
+   "creada": "28-05-2026",
+   "dias": 67,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-82",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Desviaciones constructivas en correa transportadora 2200-CV-001",
+   "estatus": "Listo para revisión",
+   "creada": "02-06-2026",
+   "dias": 62,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-83",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Desviación en apoyos a estructura de buzón descarga de correa 2400-CV-002",
+   "estatus": "Listo para revisión",
+   "creada": "02-06-2026",
+   "dias": 62,
    "atrasada": false,
    "costo": null
   },
@@ -3486,6 +4068,22 @@
    "responsable": "Mauricio Soto B.",
    "titulo": "No se evidenció un Plan de Cierre de Calidad documentado que consolide las actividades, responsables, plazos, indicadores y estrategia de cierre del c",
    "estatus": "Iniciado",
+   "creada": "09-06-2026",
+   "dias": 55,
+   "atrasada": false,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-84",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Sensor o bastón de desalineamiento (“belt sway switch”) de correa transportadora 2200-CV-001",
+   "estatus": "Listo para revisión",
    "creada": "09-06-2026",
    "dias": 55,
    "atrasada": false,
@@ -3622,6 +4220,11 @@
  ],
  "responsables": [
   {
+   "nombre": "Sin asignar",
+   "abiertas": 35,
+   "dias": 395
+  },
+  {
    "nombre": "Sebastián Ramos",
    "abiertas": 5,
    "dias": 139
@@ -3673,16 +4276,20 @@
   }
  ],
  "control": {
-  "registros": 438,
-  "abiertas": 19,
+  "registros": 508,
+  "abiertas": 54,
   "abiertasConFechaComprometida": 0,
   "atrasoCalculable": false,
   "rangoFechas": [
    "10-02-2023",
    "28-07-2026"
   ],
-  "sinCosto": 182,
-  "sinEspecialidad": 8
+  "sinCosto": 252,
+  "sinEspecialidad": 78,
+  "externasCliente": {
+   "registros": 70,
+   "sinEspecialidad": 70
+  }
  },
  "semaforo": {
   "DESALADORA": [
@@ -3694,8 +4301,8 @@
    "Atención"
   ],
   "ARQUEROS": [
-   "good",
-   "Al día"
+   "crit",
+   "Crítico"
   ],
   "OFICINA": [
    "good",

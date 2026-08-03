@@ -204,6 +204,96 @@ def leer(ruta, hoy):
 
 
 # =============================================================================
+# NC EXTERNAS DEL CLIENTE — segunda fuente, solo Arqueros/MASA
+# =============================================================================
+# El registro principal («Observaciones») trae, para Arqueros, únicamente lo que
+# emite Besalco: internas del contrato y contra subcontratos. Las que **el
+# cliente MASA levanta contra Besalco** viven en su propia planilla de control
+# de recepción y respuesta, y sin ellas el frente se ve casi sin pendiente.
+#
+# Hoja «Disposición NC-Externas» · encabezado fila 4 · datos fila 5+
+#   1  N° NC          2  Tipo (NC/OBS/OdM)   3  Interna/Externa   4  Detalle
+#   5  TTAL de Recepción                     6  Fecha de Recepción
+#   7  Status Actual
+#   (14,13) (21,20) (28,27) = (Status, Fecha MASA) de las revisiones 0, 1 y 2
+#
+# TRAMPA: la «Fecha MASA» de las revisiones abiertas trae la fecha de HOY —es una
+# fórmula que cuenta días de espera—, así que solo se lee como fecha de cierre
+# cuando el status de esa misma revisión es «Aprobado».
+HOJA_EXTERNAS = "Disposición NC-Externas"
+TIPO_EXTERNAS = {"no conformidad": "No Conformidad", "observacion": "Observación",
+                 "odm": "Opción de Mejora", "opcion de mejora": "Opción de Mejora"}
+# Estatus del cliente. «Cerrada» es el único que cierra; los demás siguen abiertos
+# y se conservan tal cual porque no se gestionan igual: «Observada» volvió con
+# observaciones del cliente y «Pendiente» aún no tiene respuesta de Besalco.
+CIERRE_EXTERNAS = "cerrada"
+
+
+def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
+    """NC que el cliente levanta contra Besalco, desde su planilla de control."""
+    wb = load_workbook(ruta, data_only=True)
+    if HOJA_EXTERNAS not in wb.sheetnames:
+        avisos.append(f"El archivo de externas no trae la hoja «{HOJA_EXTERNAS}»; se ignoró")
+        return []
+    ws = wb[HOJA_EXTERNAS]
+
+    items = []
+    for f in ws.iter_rows(min_row=5, values_only=True):
+        if not f or (f[1] in (None, "") and f[4] in (None, "")):
+            continue
+        if norm(f[3]) and not norm(f[3]).startswith("externa"):
+            avisos.append(f"Fila «{texto(f[1])}» del archivo de externas marcada "
+                          f"«{texto(f[3])}» y no «Externa» — se omitió")
+            continue
+
+        estatus = texto(f[7], "Sin estatus")
+        estado = CERRADA if norm(estatus) == CIERRE_EXTERNAS else ABIERTA
+
+        creada = f[6] if isinstance(f[6], datetime) else None
+        cerrada = None
+        for st, fe in ((14, 13), (21, 20), (28, 27)):
+            if norm(f[st]) == "aprobado" and isinstance(f[fe], datetime):
+                cerrada = f[fe]
+        if estado == ABIERTA:
+            cerrada = None          # la fecha de las abiertas es =HOY(), no un cierre
+
+        tipo = TIPO_EXTERNAS.get(norm(f[2]))
+        if tipo is None:
+            tipo = texto(f[2], "Sin tipo")
+            avisos.append(f"Tipo no reconocido en el archivo de externas: «{tipo}»")
+
+        items.append({
+            "proy": proyecto,
+            # Se prefija para que no colisione con la numeración interna del
+            # proyecto, que corre por su cuenta.
+            "n": f"MASA-{texto(f[1])}" if texto(f[1]) else "MASA-s/n",
+            "fuente": "externas",
+            "origen": "Externa",
+            "emision": "Externa Cliente",
+            "codigoExterno": texto(f[5]),
+            "tipo": tipo,
+            # La planilla del cliente no registra ni disciplina ni responsable:
+            # se declara faltante en vez de inventarlo.
+            "especialidad": "Sin especialidad",
+            "responsable": "Sin asignar",
+            "creada": creada,
+            "titulo": texto(f[4])[:150],
+            "costo": None,
+            "cerradaEl": cerrada,
+            "estatus": estatus,
+            "estado": estado,
+            "atrasada": False,      # tampoco trae fecha comprometida
+            "diasAbierta": (hoy - creada).days if estado == ABIERTA and creada else None,
+            "diasCierre": (cerrada - creada).days if estado == CERRADA and cerrada and creada else None,
+        })
+
+    if items:
+        ab = sum(1 for i in items if i["estado"] == ABIERTA)
+        print(f"  NC externas del cliente ({proyecto}): {len(items)} registros · {ab} abiertas")
+    return items
+
+
+# =============================================================================
 def resumir(items):
     ab = [i for i in items if i["estado"] == ABIERTA]
     cer = [i for i in items if i["estado"] == CERRADA]
@@ -397,6 +487,15 @@ def construir(items, hoy, fuente):
                         max(i["creada"] for i in items if i["creada"]).strftime("%d-%m-%Y")],
         "sinCosto": sum(1 for i in items if i["costo"] is None),
         "sinEspecialidad": sum(1 for i in items if i["especialidad"] == "Sin especialidad"),
+        # Las NC del cliente vienen de su propia planilla, que no registra
+        # disciplina, responsable ni costo. Se declara para que no parezca
+        # que el dato se perdió.
+        "externasCliente": {
+            "registros": sum(1 for i in items if i.get("fuente") == "externas"),
+            "sinEspecialidad": sum(1 for i in items
+                                   if i.get("fuente") == "externas"
+                                   and i["especialidad"] == "Sin especialidad"),
+        },
     }
     if not datos["control"]["atrasoCalculable"] and nAb:
         avisos.append(
@@ -444,6 +543,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--data", required=True, help="Data_NCR*.xlsx")
+    ap.add_argument("--externas", help="Data_NCR*externas.xlsx — NC que el cliente MASA "
+                                       "levanta en Arqueros; el registro principal no las trae")
     ap.add_argument("--hoy", help="Fecha de referencia AAAA-MM-DD (por defecto, hoy)")
     args = ap.parse_args()
 
@@ -453,6 +554,14 @@ def main():
     items = leer(args.data, hoy)
     if not items:
         sys.exit("No se leyó ningún registro. Revisa el archivo.")
+    n_ext = 0
+    if args.externas:
+        ext = leer_externas(args.externas, hoy)
+        n_ext = len(ext)
+        items += ext
+    else:
+        avisos.append("No se pasó --externas: Arqueros queda sin las NC que le levanta "
+                      "el cliente MASA, que no vienen en el registro principal.")
     datos = construir(items, hoy, Path(args.data).name)
 
     destino = AQUI / "datos_nc.json"

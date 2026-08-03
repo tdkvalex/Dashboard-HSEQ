@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-03 13:31",
+ "generado": "2026-08-03 13:41",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -222,20 +222,20 @@
     "nombre": "Arqueros",
     "cliente": "MASA",
     "obra": true,
-    "total": 94,
-    "cerradas": 93,
-    "abiertas": 1,
+    "total": 164,
+    "cerradas": 128,
+    "abiertas": 36,
     "atrasadas": 0,
-    "pctCierre": 98.9,
+    "pctCierre": 78,
     "internas": 53,
-    "externas": 41,
+    "externas": 111,
     "costo": 3391.8,
     "conCosto": 44,
-    "medianaCierre": 139,
+    "medianaCierre": 131,
     "maxCierre": 313,
     "sem": [
-     "good",
-     "Al día"
+     "crit",
+     "Crítico"
     ]
    }
   }
@@ -267,13 +267,13 @@
   "noConformidades": {
    "activo": true,
    "proyectos": 3,
-   "total": 430,
-   "cerradas": 411,
-   "abiertas": 19,
-   "pctCierre": 95.6,
+   "total": 500,
+   "cerradas": 446,
+   "abiertas": 54,
+   "pctCierre": 89.2,
    "costo": 10783.4,
-   "medianaCierre": 28,
-   "conOficina": 438,
+   "medianaCierre": 30,
+   "conOficina": 508,
    "atrasoCalculable": false,
    "corte": "03-08-2026"
   }

@@ -2,22 +2,45 @@
 
 Dashboard de los hallazgos de calidad de los tres proyectos **y de Oficina Central**.
 
-**Corte 03-08-2026 · 438 registros** desde 10-02-2023.
+**Corte 03-08-2026 · 508 registros** desde 10-02-2023, de **dos fuentes**.
 
 | Frente | Levantados | Cerrados | Abiertos | % cierre | Mediana de cierre |
 |---|---|---|---|---|---|
 | Desaladora | 95 | 92 | 3 | 96,8% | 19 días |
 | Talabre | 241 | 226 | 15 | 93,8% | 23 días |
-| Arqueros | 94 | 93 | 1 | 98,9% | **139 días** |
+| **Arqueros** | **164** | **128** | **36** | **78,0%** | **131 días** |
 | Oficina Central | 8 | 8 | 0 | 100% | 77 días |
-| **Total** | **438** | **419** | **19** | **95,7%** | **28 días** |
+| **Total** | **508** | **454** | **54** | **89,4%** | **30 días** |
 
-**Semáforo:** Talabre *Atención* · el resto *Al día*.
+**Semáforo:** Arqueros y Talabre *Crítico* y *Atención* · el resto *Al día*.
 
-**Contra el corte anterior (27-07):** las abiertas bajan de **30 a 19** y el cierre global sube
-de 93,1% a 95,7%. Talabre cerró **13 hallazgos en la semana**, entre ellos **6 de las internas
-de Adquisiciones que superaban los 100 días** —una llevaba 385—. Las abiertas internas caen de
-11 a 5 y las que superan 100 días, de 16 a 7.
+### Dos fuentes, y por qué
+
+El registro principal (`Data_NCR*.xlsx`, hoja «Observaciones») trae, **para Arqueros, solo lo
+que emite Besalco**: internas del contrato y contra subcontratos. Las que **el cliente MASA
+levanta contra Besalco** viven en su propia planilla de control de recepción y respuesta
+(`Data_NCR*externas.xlsx`, hoja «Disposición NC-Externas») y se cargan con `--externas`.
+
+Sin esa segunda fuente Arqueros se veía con **1 hallazgo abierto y 98,9% de cierre**. Con ella:
+**36 abiertos y 78,0%**, y el frente pasa de *Al día* a **Crítico**. Son 70 registros —35
+cerrados y 35 abiertos— recibidos entre 30-04-2025 y 09-06-2026.
+
+| Arqueros por vía de emisión | Levantados | Abiertos | % cierre |
+|---|---|---|---|
+| Interna (Besalco) | 53 | 1 | 98,1% |
+| **Externa · Cliente** | **71** | **35** | **50,7%** |
+| Externa · Subcontrato | 40 | 0 | 100% |
+
+La autodetección de Arqueros cae de 56,4% a **32,3%**: no cambió lo que Besalco detecta,
+apareció lo que le levantan.
+
+**Lo que esa planilla no trae:** disciplina, responsable ni costo. Los 70 registros entran como
+«Sin especialidad» y no suman al costo declarado. El panel lo declara en «Control de calidad
+del dato» en vez de dejar que el hueco se lea como dato perdido.
+
+**Trampa del archivo:** la «Fecha MASA» de las revisiones abiertas trae la fecha de hoy —es una
+fórmula que cuenta días de espera—, así que solo se lee como fecha de cierre cuando el status
+de esa misma revisión es «Aprobado».
 
 ### Levantados en la última semana (28-07 → 03-08): 1
 
@@ -25,21 +48,24 @@ de Adquisiciones que superaban los 100 días** —una llevaba 385—. Las abiert
 |---|---|---|---|---|---|---|
 | 28-07 | Talabre | 241 | No Conformidad | Externa · Cliente | CALIDAD | Daniel Ramirez B. |
 
-Ritmo de las últimas 8 semanas: **4 · 0 · 2 · 4 · 1 · 0 · 5 · 1**.
-
-**Lo que queda:** de las 5 internas abiertas, **3 son de Expeditoría en Talabre** —392, 328 y
-224 días, todas «Iniciado» y del mismo responsable—. Adquisiciones cerró todo lo suyo;
-Expeditoría no movió nada.
+**Talabre cerró 13 hallazgos en la semana**, entre ellos 6 internas de Adquisiciones que
+superaban los 100 días —una llevaba 385—. Sus abiertas bajan de 26 a 15 y pasa de *Crítico* a
+*Atención*. De las 5 internas que quedan abiertas en todo el módulo, **3 son de Expeditoría en
+Talabre** —392, 328 y 224 días, todas «Iniciado» y del mismo responsable—.
 
 ---
 
 ## Actualización
 
 ```bash
-python3 no_conformidades.py --data /ruta/Data_NCR.xlsx
+python3 no_conformidades.py --data /ruta/Data_NCR.xlsx \
+                            --externas /ruta/Data_NCR*externas.xlsx
 node gen_ppt.js                       # SIEMPRE después del script de Python
 cd ../suite_qaqc && node armar_suite.js
 ```
+
+**`--externas` no es opcional en la práctica**: sin él Arqueros queda sin las NC que le levanta
+el cliente y el script avisa. Ver «Dos fuentes» más arriba.
 
 `no_conformidades.py` acepta `--hoy AAAA-MM-DD` para fijar la fecha de referencia. Escribe
 `datos_nc.json`, inyecta los datos en `index.html` y avisa de todo lo que no pueda clasificar.

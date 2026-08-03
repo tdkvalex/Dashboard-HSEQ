@@ -39,7 +39,7 @@ node gen_ppt.js
 
 # 2 · actualizar el módulo No Conformidades (ver modulo_nc/README.md)
 cd ../modulo_nc
-python3 no_conformidades.py --data <Data_NCR.xlsx>
+python3 no_conformidades.py --data <Data_NCR.xlsx> --externas <Data_NCR*externas.xlsx>
 node gen_ppt.js
 
 # 3 · dejar el dashboard de Protocolos actualizado y rearmar la suite
@@ -130,7 +130,7 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 |---|---|---|
 | Protocolos | % pendiente | **0,3%** — 120 en falta de 44.234 |
 | Cierre QAQC | % detalles cerrados | **59,1%** — 1.286 atrasados |
-| No Conformidades | % hallazgos cerrados | **93%** — 30 abiertos de 428 |
+| No Conformidades | % hallazgos cerrados | **89,2%** — 54 abiertos de 500 |
 
 **Lo que muestra el cruce:** la documentación va muy por delante del cierre físico. Protocolos
 está prácticamente al día mientras el cierre de detalles P1 arrastra 596 ítems atrasados. El
