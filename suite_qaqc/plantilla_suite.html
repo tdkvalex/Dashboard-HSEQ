@@ -73,6 +73,11 @@
     background:var(--green); animation:pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.35)} }
   .corte b { color: var(--gold); }
+  /* Aviso de cortes mixtos: los módulos se actualizan por separado y no
+     siempre quedan en la misma fecha. */
+  .mixto { margin-left:8px; font-size:9px; letter-spacing:.5px; text-transform:uppercase;
+    color:var(--warn,#f59e0b); border:1px dashed currentColor; border-radius:4px;
+    padding:1px 6px; cursor:help; }
   .btn { font-family:'Rajdhani',sans-serif; font-weight:600; font-size:10.5px; letter-spacing:.3px;
     cursor:pointer; display:inline-flex; align-items:center; gap:5px; color:var(--gold);
     background: linear-gradient(135deg, rgba(30,61,123,.85), rgba(20,45,90,.9));
@@ -296,9 +301,39 @@ document.querySelectorAll('.mtab').forEach(b =>
   if (!KPIS) return;
   const P = KPIS.proyectos, M = KPIS.modulos;
 
-  const cortes = P.map(p => p.cierre && p.cierre.corte).filter(Boolean);
-  const iso = (t) => { const [d,m,a] = String(t).split('-'); return `${a}${m}${d}`; };
-  $('corte').textContent = cortes.sort((a,b) => iso(a).localeCompare(iso(b))).pop() || '—';
+  /* El corte de la franja es el MÁS RECIENTE de los tres módulos, no el de uno
+     solo: cada uno se actualiza por su lado y mostrar el de Cierre QAQC dejaba
+     la suite fechada una semana atrás cuando los otros dos ya iban al día.
+     Si no coinciden se dice, con el detalle por módulo: una consola que mezcla
+     cortes sin avisarlo invita a comparar cosas que no son del mismo día. */
+  const MES = {ene:'01',feb:'02',mar:'03',abr:'04',may:'05',jun:'06',
+               jul:'07',ago:'08',sep:'09',oct:'10',nov:'11',dic:'12'};
+  const iso = (t) => {
+    const [d, m, a] = String(t || '').split('-');
+    if (!a) return '';
+    return `${a}${MES[String(m).toLowerCase().slice(0,3)] || m}${String(d).padStart(2,'0')}`;
+  };
+  const dmy = (t) => {
+    const s = iso(t);
+    return s ? `${s.slice(6,8)}-${s.slice(4,6)}-${s.slice(0,4)}` : '—';
+  };
+  const porModulo = [
+    ['Protocolos', M.protocolos.activo ? M.protocolos.actualizado : null],
+    ['Cierre QAQC', M.cierre.activo
+      ? P.map(x => x.cierre && x.cierre.corte).filter(Boolean)
+          .sort((x, y) => iso(x).localeCompare(iso(y))).pop() : null],
+    ['No Conformidades', M.noConformidades.activo ? M.noConformidades.corte : null],
+  ].filter(([, c]) => c);
+  const ordenados = porModulo.map(([, c]) => iso(c)).sort();
+  $('corte').textContent = porModulo.length ? dmy(porModulo.map(([, c]) => c)
+    .sort((x, y) => iso(x).localeCompare(iso(y))).pop()) : '—';
+  if (ordenados.length && ordenados[0] !== ordenados[ordenados.length - 1]) {
+    const av = document.createElement('span');
+    av.className = 'mixto';
+    av.textContent = 'cortes mixtos';
+    av.title = porModulo.map(([n, c]) => `${n}: ${dmy(c)}`).join(' · ');
+    $('corte').parentElement.appendChild(av);
+  }
 
   /* tarjetas de módulo */
   const tarjeta = (clave, nombre, valor, unidad, det, activo) =>

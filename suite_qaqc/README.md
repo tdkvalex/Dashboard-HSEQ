@@ -126,11 +126,16 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 
 ## Consolidado al corte
 
-| Módulo | Indicador | Valor |
-|---|---|---|
-| Protocolos | % pendiente | **0,3%** — 120 en falta de 44.234 |
-| Cierre QAQC | % detalles cerrados | **59,1%** — 1.286 atrasados |
-| No Conformidades | % hallazgos cerrados | **89,2%** — 54 abiertos de 500 |
+| Módulo | Corte | Indicador | Valor |
+|---|---|---|---|
+| Protocolos | 03-08-2026 | % pendiente | **0,4%** — 163 en falta de 44.878 |
+| Cierre QAQC | 27-07-2026 | % detalles cerrados | **59,1%** — 1.286 atrasados |
+| No Conformidades | 03-08-2026 | % hallazgos cerrados | **89,2%** — 54 abiertos de 500 |
+
+**Cada módulo se actualiza por su lado**, así que no siempre quedan a la misma fecha. La franja
+superior muestra **el corte más reciente** de los tres y, si difieren, agrega el aviso
+**«cortes mixtos»** con el detalle por módulo al pasar el cursor. Antes tomaba solo el de
+Cierre QAQC y la suite se fechaba una semana atrás cuando los otros dos ya iban al día.
 
 **Lo que muestra el cruce:** la documentación va muy por delante del cierre físico. Protocolos
 está prácticamente al día mientras el cierre de detalles P1 arrastra 596 ítems atrasados. El
