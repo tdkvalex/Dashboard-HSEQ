@@ -180,14 +180,18 @@ function tarjetas(s, cards) {
 // ---------- tabla ----------
 // cols: [{t, x, w, al}] · filas: [[celda, ...]] · una celda puede ser
 // {txt, color, bold} o un string.
+// `o.ancho` es el largo de las líneas y de la banda cebra: por defecto ocupa la
+// lámina entera, pero una tabla que comparte fila con un gráfico tiene que
+// cortarse antes o le raya encima.
 function tabla(s, cols, filas, y0, rh, opt) {
   const o = opt || {};
+  const W = o.ancho || 12.3;
   cols.forEach((c) => s.addText(c.t, { x: c.x, y: y0, w: c.w, h: 0.3, fontFace: FT,
     fontSize: 9.5, bold: true, color: C.ink2, align: c.al || "right", charSpacing: 0.5, margin: 0 }));
-  s.addShape(p.ShapeType.line, { x: cols[0].x, y: y0 + 0.34, w: 12.3, h: 0, line: { color: C.steel, width: 1 } });
+  s.addShape(p.ShapeType.line, { x: cols[0].x, y: y0 + 0.34, w: W, h: 0, line: { color: C.steel, width: 1 } });
   let y = y0 + 0.48;
   filas.forEach((f, i) => {
-    if (i % 2 === 1) s.addShape(p.ShapeType.rect, { x: cols[0].x - 0.05, y: y - 0.05, w: 12.35, h: rh,
+    if (i % 2 === 1) s.addShape(p.ShapeType.rect, { x: cols[0].x - 0.05, y: y - 0.05, w: W + 0.05, h: rh,
       fill: { color: C.white }, line: { type: "none" } });
     f.forEach((celda, j) => {
       if (celda == null) return;
@@ -196,7 +200,7 @@ function tabla(s, cols, filas, y0, rh, opt) {
         fontFace: FT, fontSize: cc.size || o.size || 11.5, bold: !!cc.bold,
         color: cc.color || C.ink, align: cols[j].al || "right", margin: 0, valign: "middle" });
     });
-    s.addShape(p.ShapeType.line, { x: cols[0].x, y: y + rh - 0.06, w: 12.3, h: 0, line: { color: "D9DFE6", width: 0.75 } });
+    s.addShape(p.ShapeType.line, { x: cols[0].x, y: y + rh - 0.06, w: W, h: 0, line: { color: "D9DFE6", width: 0.75 } });
     y += rh;
   });
   return y;
@@ -461,9 +465,37 @@ s.addChart(p.ChartType.bar, serieEmi.map((k) => ({
   name: emi(k), labels: PROY.map((x) => x.nombre),
   values: PROY.map((x) => z((x.porEmision[k] || {}).total || 0)),
 })), {
-  ...BARRAS, x: 0.5, y: 2.0, w: 6.6, h: 4.4, chartColors: serieEmi.map((k) => COL_EMI[k]),
+  ...BARRAS, x: 0.5, y: 2.0, w: 6.6, h: 2.45, chartColors: serieEmi.map((k) => COL_EMI[k]),
   title: "Hallazgos por frente y vía de emisión", catAxisLabelFontSize: 12, barGapWidthPct: 55,
 });
+
+// Estado de cada vía: no basta con cuántas entran por cada una, hay que ver
+// cuántas siguen abiertas y qué tan viejas son. El atraso se declara en la
+// lámina siguiente —no es calculable con este archivo—, así que aquí la
+// severidad de lo abierto la da la antigüedad.
+s.addText("ESTADO DE CADA VÍA", { x: 0.55, y: 4.55, w: 6, h: 0.3, fontFace: FT,
+  fontSize: 11, bold: true, color: C.copper, charSpacing: 1.5, margin: 0 });
+const medDias = (xs) => { const d = xs.map((x) => x.dias || 0).sort((a, b) => a - b);
+  return d.length ? d[Math.floor(d.length / 2)] : 0; };
+const viasEmi = EMISIONES.filter((k) => (G.porEmision[k] || {}).total > 0);
+tabla(s, [
+  { t: "VÍA DE EMISIÓN", x: 0.55, w: 1.95, al: "left" },
+  { t: "LEVANTADAS", x: 2.6, w: 1.05 },
+  { t: "CERRADAS", x: 3.75, w: 1.0 },
+  { t: "ABIERTAS", x: 4.85, w: 0.95 },
+  { t: "ANTIG. MEDIANA", x: 5.9, w: 1.15 },
+], viasEmi.concat(["TOTAL"]).map((k) => {
+  const tot = k === "TOTAL";
+  const v = tot ? R : G.porEmision[k];
+  const abv = (D.abiertas || []).filter((a) => tot || a.emision === k);
+  return [
+    { txt: tot ? "Todas las vías" : emi(k), bold: tot, color: tot ? C.ink : COL_EMI[k] },
+    { txt: nf(v.total), bold: tot },
+    { txt: nf(v.cerradas), bold: tot },
+    { txt: v.abiertas ? nf(v.abiertas) : "—", bold: tot, color: v.abiertas ? C.crit : C.ink2 },
+    { txt: v.abiertas ? `${nf(medDias(abv))} d` : "—", bold: tot, color: v.abiertas ? C.ink : C.ink2 },
+  ];
+}), 4.88, 0.31, { size: 11, ancho: 6.5 });   // 5 filas desde 5.36 cierran en 6.85
 
 const tiposOrd = Object.entries(G.porTipo).sort((a, b) => b[1].total - a[1].total);
 s.addChart(p.ChartType.bar, [

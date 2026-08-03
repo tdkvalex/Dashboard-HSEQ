@@ -44,9 +44,25 @@ Besalco y la absorbe internamente. Juntarlas en un solo «externas» escondía j
 Van separadas en el KPI de levantados, en el de abiertas, en «lo que sigue abierto por quién lo
 levantó», en el gráfico de origen, en los cortes de la semana, en el semáforo corporativo (tres
 columnas de abiertos y la fila `internas / cliente / subcontrato`), en las dos tablas de detalle
-y en la lámina 3 de la PPT. El color es el mismo en todas partes: **azul** lo interno, **ámbar**
-lo del cliente, **naranja** lo del subcontrato. El chip del cliente lleva borde lleno; el del
-subcontrato, punteado.
+y en las láminas 3 y 5 de la PPT. El color es el mismo en todas partes: **azul** lo interno,
+**ámbar** lo del cliente, **naranja** lo del subcontrato. El chip del cliente lleva borde lleno;
+el del subcontrato, punteado.
+
+### «Estado de cada vía» — qué pasó con lo que entró por cada una
+
+Bajo el gráfico de origen, una tabla abre cada vía en **levantadas · cerradas · % cierre ·
+abiertas · atrasadas · más de 180 días · antigüedad mediana**. El gráfico dice por dónde entra
+el hallazgo; la tabla, qué pasó después.
+
+**La columna «Atrasadas» dice `n/c`, no `0`.** Con este archivo el atraso no es calculable
+(ninguna abierta trae fecha comprometida, ver más abajo) y escribir 0 se leería como que no hay
+atraso. En su lugar la severidad de lo abierto la dan las dos columnas siguientes, que sí se
+pueden calcular. Si algún día el Excel trae la fecha comprometida, la columna muestra el número
+real sin tocar nada: depende de `control.atrasoCalculable`.
+
+Al corte, lo que muestra: **las 49 abiertas del cliente cierran al 83%** contra 96,9% las
+internas y 100% las de subcontrato —de las que no queda ninguna abierta—, y las 14 que superan
+los 180 días son todas del cliente. En Arqueros la brecha es la mayor: 50,7% contra 98,1%.
 
 Las cifras salen de `resumir()` en `no_conformidades.py`, que expone `cliente`, `subcontrato`,
 `abiertasCliente`, `abiertasSubcontrato` y `abiertasInternas` además de los viejos
@@ -107,7 +123,7 @@ Mismo formato y metodología que la del módulo de Cierre QAQC
 | 2 | Resumen ejecutivo — 4 tarjetas + lectura del período |
 | 3 | Semáforo por frente (los 3 proyectos + Oficina Central + total de obra) |
 | 4 | Levantados en la última semana — ritmo de 8 semanas (5 al detalle + 3 acumuladas) y detalle uno a uno |
-| 5 | Origen del hallazgo — interna, cliente y subcontrato · autodetección por frente |
+| 5 | Origen del hallazgo — interna, cliente y subcontrato · estado de cada vía · autodetección por frente |
 | 6 | Antigüedad de lo abierto + por qué el atraso no es calculable + velocidad de cierre |
 | 7 | Foco de gestión |
 | 8-16 | Portada + 2 láminas por proyecto (estado · pendiente y novedades) |
