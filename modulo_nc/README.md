@@ -95,10 +95,18 @@ del dato» en vez de dejar que el hueco se lea como dato perdido.
 fórmula que cuenta días de espera—, así que solo se lee como fecha de cierre cuando el status
 de esa misma revisión es «Aprobado».
 
-### Levantados en la última semana (28-07 → 03-08): 1
+### Levantados en la última semana (27-07 → 02-08): 3
+
+**La semana es la calendario, de lunes a domingo, que ya cerró al corte** — no los últimos 7
+días corridos. El informe se arma el lunes y habla de la semana que terminó: con corte el lunes
+03-08 la ventana es lunes 27-07 → domingo 02-08. Con la ventana móvil anterior (28-07 → 03-08)
+se colaban los hallazgos del lunes del propio informe y se perdían los del lunes anterior: la
+semana quedaba partida en dos y no coincidía con la que se revisa en la reunión.
 
 | Fecha | Frente | N° | Tipo | Origen | Disciplina | Responsable |
 |---|---|---|---|---|---|---|
+| 27-07 | Desaladora | 95 | No Conformidad | Externa · Cliente | MECÁNICA | Wilson Jara |
+| 27-07 | Talabre | 240 | Producto No Conforme | Externa · Cliente | OO.CC | Sebastián Ramos |
 | 28-07 | Talabre | 241 | No Conformidad | Externa · Cliente | CALIDAD | Daniel Ramirez B. |
 
 **Talabre cerró 13 hallazgos en la semana**, entre ellos 6 internas de Adquisiciones que
@@ -210,9 +218,13 @@ Pasarse una semana del plazo no es lo mismo que llevar un año abierto, y de las
   subcontrato.
 - **Autodetección** = qué parte de los hallazgos clasificados los levanta Besalco. Global
   **37,8%**; por frente, Desaladora 59,6% · Arqueros 56,4% · **Talabre 22,0%**.
-- **La semana** = lo levantado en los últimos 7 días (`creada > hoy − 7 días`). Cada pestaña
-  muestra la suya: la corporativa los cuatro frentes y cada proyecto solo los propios.
-- **El ritmo** cubre 8 semanas, pero solo las **5 más recientes van una a una**; las 3
+- **La semana** = la semana calendario **de lunes a domingo que ya cerró** al corte, no los
+  últimos 7 días corridos (`semana_cerrada()`). Cada pestaña muestra la suya: la corporativa
+  los cuatro frentes y cada proyecto solo los propios. Las ventanas de contexto —30 y 90 días—
+  también se cuentan desde ese domingo, no desde el corte, o incluirían días que la semana
+  informada deja fuera.
+- **El ritmo** cubre 8 semanas lunes-domingo contadas hacia atrás desde ese mismo domingo, sin
+  huecos ni solapes, pero solo las **5 más recientes van una a una**; las 3
   anteriores se suman en una fila, «5 semanas o más». Ocho filas ocupaban media pantalla sin
   aportar lectura. Esa fila **no es una semana**: va en cursiva, con una línea punteada al
   costado y con el número de semanas que suma en su rótulo, para que su barra no se compare

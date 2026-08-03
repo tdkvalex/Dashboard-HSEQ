@@ -53,9 +53,10 @@ node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el pan
 ```
 
 El panel abre con **«Levantados en la última semana»** (cuántos, de qué disciplina, internos o
-externos, y el detalle uno a uno). Esa ventana se cuenta contra `--hoy`, que por defecto es el
-día en que se corre: si se reprocesa un corte pasado hay que pasar `--hoy AAAA-MM-DD`, o la
-semana sale vacía.
+externos, y el detalle uno a uno). La ventana es la **semana calendario de lunes a domingo que
+ya cerró** al corte —con `--hoy` el lunes 03-08 informa lunes 27-07 → domingo 02-08—, no los
+últimos 7 días corridos. `--hoy` por defecto es el día en que se corre: si se reprocesa un
+corte pasado hay que pasarlo, o se informa la semana equivocada.
 
 **Son DOS archivos.** El registro principal trae, para Arqueros, solo lo que emite Besalco;
 las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--externas`, hoja

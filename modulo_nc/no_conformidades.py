@@ -172,6 +172,22 @@ def texto(v, alt=""):
     return str(v).strip() if v not in (None, "") else alt
 
 
+def semana_cerrada(hoy):
+    """Última semana calendario COMPLETA (lunes a domingo) al corte.
+
+    El informe se arma el lunes y habla de la semana que acaba de cerrar, no de
+    los últimos 7 días corridos: con un corte el lunes 03-08 la ventana es
+    lunes 27-07 → domingo 02-08. Antes se usaba `creada > hoy − 7 días`, que
+    daba 28-07 → 03-08: metía el lunes del propio informe —un día que recién
+    empieza— y dejaba fuera el lunes anterior, partiendo la semana en dos.
+
+    Si el corte cae un domingo esa semana ya terminó y es la que se informa; si
+    cae a mitad de semana, se informa la anterior completa.
+    """
+    fin = hoy - timedelta(days=(hoy.weekday() + 1) % 7)   # domingo ya cerrado
+    return fin - timedelta(days=6), fin                    # lunes, domingo
+
+
 def dias_atraso(estado, creada, hoy):
     """Días de atraso de una NC abierta: los que pasan del plazo de respuesta.
 
@@ -407,15 +423,21 @@ def construir(items, hoy, fuente):
     esps = [e for e, _ in Counter(i["especialidad"] for i in items).most_common()]
 
     def novedades(sub, hoy=hoy):
-        """Lo levantado en los últimos 7 días, con su detalle y el ritmo previo.
+        """Lo levantado en la última semana cerrada, con su detalle y el ritmo previo.
 
         Es la lista que se revisa en la reunión semanal: cuántos entraron, en
         qué disciplina y si los detectó Besalco o los levantó el cliente. La
         tendencia de las 8 semanas anteriores va al lado porque el número
         suelto no dice nada: 4 hallazgos son pocos o muchos según el ritmo.
+
+        La ventana es la semana calendario lunes-domingo que ya cerró, y todas
+        las semanas del ritmo se cuentan hacia atrás desde ese domingo.
         """
-        desde = hoy - timedelta(days=7)
-        nuevas = sorted([i for i in sub if i["creada"] and i["creada"] > desde],
+        ini_sem, fin_sem = semana_cerrada(hoy)
+        # Las fechas del Excel vienen a medianoche: el domingo entra completo
+        # comparando contra el lunes siguiente.
+        en = lambda i, a, b_: i["creada"] and a <= i["creada"] < b_ + timedelta(days=1)
+        nuevas = sorted([i for i in sub if en(i, ini_sem, fin_sem)],
                         key=lambda x: (x["creada"], x["proy"]))
 
         def cortar(s_):
@@ -435,35 +457,38 @@ def construir(items, hoy, fuente):
         # sección crecía de más en vertical sin aportar lectura: las semanas
         # viejas se leen igual como bloque. La fila acumulada se marca para que
         # el panel avise cuántas semanas suma y nadie la compare con una sola.
+        # Todas las semanas del ritmo son lunes-domingo, contadas hacia atrás
+        # desde el domingo de la semana cerrada.
+        sem = lambda k: (ini_sem - timedelta(days=7 * k), fin_sem - timedelta(days=7 * k))
         tendencia = []
-        ini, fin = (hoy - timedelta(days=7 * SEM_VENTANA),
-                    hoy - timedelta(days=7 * SEM_DETALLE))
+        ini, _ = sem(SEM_VENTANA - 1)
+        _, fin = sem(SEM_DETALLE)
         tendencia.append({
             "etiqueta": f"{SEM_DETALLE} semanas o más",
-            "desde": (ini + timedelta(days=1)).strftime("%d-%m"),
+            "desde": ini.strftime("%d-%m"),
             "hasta": fin.strftime("%d-%m"),
             "semanas": SEM_VENTANA - SEM_DETALLE,
             "acumulada": True,
-            **cortar([i for i in sub if i["creada"] and ini < i["creada"] <= fin]),
+            **cortar([i for i in sub if en(i, ini, fin)]),
         })
         for k in range(SEM_DETALLE - 1, -1, -1):
-            ini, fin = hoy - timedelta(days=7 * (k + 1)), hoy - timedelta(days=7 * k)
+            ini, fin = sem(k)
             tendencia.append({
-                "etiqueta": ("Esta semana" if k == 0 else
-                             "Semana pasada" if k == 1 else f"Hace {k} semanas"),
-                "desde": (ini + timedelta(days=1)).strftime("%d-%m"),
+                # «Última semana» es la que se informa —la que ya cerró—, no la
+                # que corre: el informe se arma el lunes siguiente.
+                "etiqueta": ("Última semana" if k == 0 else
+                             "Semana anterior" if k == 1 else f"Hace {k} semanas"),
+                "desde": ini.strftime("%d-%m"),
                 "hasta": fin.strftime("%d-%m"),
                 "semanas": 1,
                 "acumulada": False,
-                **cortar([i for i in sub if i["creada"] and ini < i["creada"] <= fin]),
+                **cortar([i for i in sub if en(i, ini, fin)]),
             })
 
         return {
-            # `desde` es el primer día que entra en la cuenta, no el corte
-            # anterior: el filtro es «creada > hoy − 7 días», así que el día
-            # del corte pasado ya se informó la semana anterior.
-            "desde": (desde + timedelta(days=1)).strftime("%d-%m-%Y"),
-            "hasta": hoy.strftime("%d-%m-%Y"),
+            # Lunes y domingo de la semana informada, ambos incluidos.
+            "desde": ini_sem.strftime("%d-%m-%Y"),
+            "hasta": fin_sem.strftime("%d-%m-%Y"),
             **cortar(nuevas),
             "cerradas": sum(1 for i in nuevas if i["estado"] == CERRADA),
             "porOrigen": dict(Counter(i["origen"] for i in nuevas)),
@@ -494,6 +519,7 @@ def construir(items, hoy, fuente):
 
     def bloque(sub, hoy=hoy):
         ab = [i for i in sub if i["estado"] == ABIERTA]
+        _, fin_semana = semana_cerrada(hoy)
         return {
             "resumen": resumir(sub),
             "porTipo": {t: resumir([i for i in sub if i["tipo"] == t]) for t in tipos
@@ -517,8 +543,11 @@ def construir(items, hoy, fuente):
                            for t, _ in TRAMOS},
             "porAnio": dict(sorted(Counter(i["creada"].year for i in sub if i["creada"]).items())),
             # Lo levantado en cada ventana reciente, contado sobre el subconjunto.
+            # Se cuentan hacia atrás desde el DOMINGO de la semana informada,
+            # no desde el corte: si no, «los últimos 30 días» incluirían días
+            # que la semana del informe deja fuera.
             "ventanas": {n: resumir([i for i in sub if i["creada"]
-                                     and (hoy - i["creada"]).days < d])
+                                     and 0 <= (fin_semana - i["creada"]).days < d])
                          for n, d in VENTANAS},
             # Lo levantado en la última semana, con detalle. Va dentro del
             # bloque para que cada pestaña muestre lo suyo: el corporativo los
