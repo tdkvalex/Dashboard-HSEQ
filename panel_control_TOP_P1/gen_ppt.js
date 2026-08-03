@@ -419,7 +419,7 @@ if (fs.existsSync(rutaTal)) {
   const yg12 = ["P1", "P2"].reduce((o, k) => { const v = YT.porPrioridad[k]; if (v) {
     o.total += v.total; o.cerrados += v.cerrados; o.abiertos += v.abiertos; o.atrasados += v.atrasados; }
     return o; }, { total: 0, cerrados: 0, abiertos: 0, atrasados: 0 });
-  const CAPY = `Fuente: TalabreSTATUS_PEC + TalabreCuadro_DT · ` +
+  const CAPY = `Fuente: STATUS_SUBSISTEMAS_TALABRE + Detalle_de_Terminaciones · ` +
     `${nf(YS.total)} subsistemas · ${nf(yg.total)} DT · Atrasos al ${Y.meta.hoy}`;
   const c1 = YC["1"], c2 = YC["2"];
   const areasY = Y.areas;
@@ -462,11 +462,13 @@ if (fs.existsSync(rutaTal)) {
   kicker(s, "Talabre · Resumen ejecutivo", 0.5, 0.45);
   s.addText("Estado global de los tres frentes", { x: 0.5, y: 0.72, w: 12, h: 0.6, fontFace: FH, fontSize: 30, bold: true, color: C.ink, margin: 0 });
 
+  const extCam = (c) => `${pct(c.realizada, c.total)} del universo · ${nf(c.programada)} programadas en plazo` +
+    (c.vencida ? ` · ${nf(c.vencida)} con agenda vencida` : "") + ` · ${nf(c.pendiente)} sin programar`;
   const cardsY = [
     { p: pct(c1.realizada, c1.exigible), v: `${nf(c1.realizada)}/${nf(c1.exigible)} exigibles`, t: "Caminata 1 realizada",
-      d: `${pct(c1.realizada, c1.total)} del universo · ${nf(c1.programada)} programadas en plazo · ${nf(c1.pendiente)} sin programar`, c: C.blue },
+      d: extCam(c1), c: C.blue },
     { p: pct(c2.realizada, c2.exigible), v: `${nf(c2.realizada)}/${nf(c2.exigible)} exigibles`, t: "Caminata 2 realizada",
-      d: `${pct(c2.realizada, c2.total)} del universo · ${nf(c2.programada)} programadas en plazo · ${nf(c2.pendiente)} sin programar`, c: C.blue },
+      d: extCam(c2), c: C.blue },
     { p: `${YP.promedio.toLocaleString("es-CL")}%`, v: `${nf(YP.sobre95)}/${nf(YP.total)} sobre 95%`,
       t: "Avance PEC de carpetas", d: `${nf(YP.bajo80)} subsistemas bajo 80% de avance`, c: C.copper },
     { p: pct(yp1.cerrados, yp1.total), v: `${nf(yp1.cerrados)}/${nf(yp1.total)}`, t: "Cierre de DT P1",
@@ -496,9 +498,11 @@ if (fs.existsSync(rutaTal)) {
     [`El atraso es más antiguo que el de los otros proyectos.`,
       `${nf(yg.atrasados)} DT con la fecha de compromiso vencida; mediana de ${nf(YT.antiguedad.mediana)} días ` +
       `y el más antiguo lleva ${nf(YT.antiguedad.max)}. Los ${nf(yg.sinCompromiso)} abiertos sin fecha de compromiso no se cuentan como atrasados.`],
-    [`Las caminatas 1 están casi completas, pero la 2 va ${pct(c2.realizada, c2.total)}.`,
-      `Caminata 1: ${nf(c1.realizada)}/${nf(c1.total)}. Caminata 2: ${nf(c2.realizada)}/${nf(c2.total)}, ` +
-      `con ${nf(c2.programada)} ya agendadas y ${nf(c2.pendiente)} sin programar.`],
+    [`Caminatas: ${pct(c1.realizada, c1.exigible)} y ${pct(c2.realizada, c2.exigible)} de lo exigible (C1 y C2).`,
+      `Caminata 1: ${nf(c1.realizada)}/${nf(c1.exigible)} exigibles` +
+      (c1.vencida ? `, ${nf(c1.vencida)} con agenda vencida` : "") +
+      `. Caminata 2: ${nf(c2.realizada)}/${nf(c2.exigible)}, ` +
+      `con ${nf(c2.programada)} agendadas en plazo y ${nf(c2.pendiente)} sin programar.`],
     [`Las carpetas avanzan bien salvo un grupo acotado.`,
       `Avance promedio ${YP.promedio.toLocaleString("es-CL")}%: ${nf(YP.sobre95)} subsistemas sobre 95% y solo ` +
       `${nf(YP.bajo80)} bajo 80%.` + (YP.enRevisionCliente !== null && YP.enRevisionCliente !== undefined
@@ -523,13 +527,18 @@ if (fs.existsSync(rutaTal)) {
     `Talabre mide la carpeta como % de avance (PEC), no como estado de aprobación.`,
     { x: 0.5, y: 1.35, w: 12.3, h: 0.5, fontFace: FT, fontSize: 13.5, color: C.ink2, margin: 0 });
 
+  // La serie «Agenda vencida» solo se dibuja si existe: una leyenda con una
+  // serie siempre en cero es ruido.
+  const hayVencidasC2 = areasY.some((a) => (Y.caminatasPorArea[a]["2"].vencida || 0) > 0);
   s.addChart(p.ChartType.bar, [
     { name: "Realizada", labels: areasY, values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].realizada)) },
-    { name: "Agendada", labels: areasY, values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].programada)) },
+    { name: "Agendada en plazo", labels: areasY, values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].programada)) },
+    ...(hayVencidasC2 ? [{ name: "Agenda vencida", labels: areasY,
+        values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].vencida || 0)) }] : []),
     { name: "Sin programar", labels: areasY, values: areasY.map((a) => z(Y.caminatasPorArea[a]["2"].pendiente)) },
   ], {
     x: 0.5, y: 2.05, w: 6.4, h: 4.5, barDir: "bar", barGrouping: "stacked",
-    chartColors: [C.goodD, C.blue, C.neutral],
+    chartColors: hayVencidasC2 ? [C.goodD, C.blue, C.warnD, C.neutral] : [C.goodD, C.blue, C.neutral],
     showTitle: true, title: "Caminata 2 por área", titleFontFace: FT, titleFontSize: 13, titleColor: C.ink,
     ...ETIQ,
     showLegend: true, legendPos: "b", legendFontFace: FT, legendFontSize: 10.5, legendColor: C.ink2,
@@ -579,7 +588,9 @@ if (fs.existsSync(rutaTal)) {
 
   s.addShape(p.ShapeType.roundRect, { x: 8.4, y: 2.05, w: 4.43, h: 4.5, rectRadius: 0.06, fill: { color: C.navy }, line: { type: "none" } });
   s.addText("CIERRE POR PRIORIDAD", { x: 8.68, y: 2.28, w: 4, h: 0.3, fontFace: FT, fontSize: 11, bold: true, color: C.copperL, charSpacing: 1.2, margin: 0 });
-  let pyy = 2.72;
+  // Paso de 0.56": con 5 prioridades el bloque termina en y≈5.5 y deja sitio
+  // a la antigüedad DENTRO del panel; con 0.62 el texto se montaba sobre el pie.
+  let pyy = 2.66;
   YT.prioridades.forEach((k) => {
     const v = YT.porPrioridad[k];
     if (!v || !v.total) return;
@@ -589,19 +600,19 @@ if (fs.existsSync(rutaTal)) {
       fontSize: 10.5, color: C.ice, align: "right", margin: 0 });
     s.addText(`${pctv.toLocaleString("es-CL")}%`, { x: 11.25, y: pyy, w: 1.35, h: 0.26, fontFace: FT,
       fontSize: 11, bold: true, color: C.white, align: "right", margin: 0 });
-    s.addShape(p.ShapeType.rect, { x: 8.68, y: pyy + 0.3, w: w, h: 0.13, fill: { color: C.navy2 }, line: { type: "none" } });
-    if (pctv > 0) s.addShape(p.ShapeType.rect, { x: 8.68, y: pyy + 0.3, w: Math.max(0.03, w * pctv / 100), h: 0.13,
+    s.addShape(p.ShapeType.rect, { x: 8.68, y: pyy + 0.28, w: w, h: 0.13, fill: { color: C.navy2 }, line: { type: "none" } });
+    if (pctv > 0) s.addShape(p.ShapeType.rect, { x: 8.68, y: pyy + 0.28, w: Math.max(0.03, w * pctv / 100), h: 0.13,
       fill: { color: pctv >= 90 ? C.good : pctv >= 50 ? C.copperL : C.crit }, line: { type: "none" } });
-    pyy += 0.62;
+    pyy += 0.56;
   });
-  s.addShape(p.ShapeType.line, { x: 8.68, y: pyy + 0.06, w: 3.9, h: 0, line: { color: C.navy2, width: 1 } });
+  s.addShape(p.ShapeType.line, { x: 8.68, y: pyy + 0.04, w: 3.9, h: 0, line: { color: C.navy2, width: 1 } });
   s.addText([{ text: "Antigüedad del atraso\n", options: { bold: true, color: C.copperL, fontSize: 11.5 } },
              { text: YT.antiguedad.max
                  ? `Mediana de ${nf(YT.antiguedad.mediana)} días vencidos; el más antiguo lleva ${nf(YT.antiguedad.max)}. ` +
                    Object.entries(YT.antiguedad.tramos).filter(([, v]) => v).map(([k, v]) => `${nf(v)} entre ${k}`).join(", ") + "."
                  : "Sin DT atrasados al corte.",
                options: { color: C.ice, fontSize: 11 } }],
-    { x: 8.68, y: pyy + 0.2, w: 3.95, h: 1.2, fontFace: FT, lineSpacing: 14, margin: 0, valign: "top" });
+    { x: 8.68, y: pyy + 0.16, w: 3.95, h: 0.9, fontFace: FT, lineSpacing: 14, margin: 0, valign: "top" });
   footer(s, true, CAPY, "Talabre");
 
   // ---------------- Foco de gestión ----------------

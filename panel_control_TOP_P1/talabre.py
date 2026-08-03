@@ -6,39 +6,58 @@ la pestaña Talabre del panel y la PPT.
 Uso (cada semana, con los dos archivos del corte):
 
     python3 talabre.py \
-        --status /ruta/TalabreSTATUS_PEC.xlsx \
-        --dt     /ruta/TalabreCuadro_DT.xlsx
+        --status /ruta/STATUS_SUBSISTEMAS_TALABRE.xlsx \
+        --dt     /ruta/Detalle_de_TerminacionesBesalco.xlsx
 
 Opcional:
-    --hoy 2026-07-27     fecha de referencia para verificar los atrasos
+    --hoy 2026-08-03     fecha de referencia para verificar los atrasos
                          (por defecto, el día en que se corre el script)
 
 ------------------------------------------------------------------------------
 DE DÓNDE SALE CADA DATO
 ------------------------------------------------------------------------------
-STATUS_PEC · hoja «STATUS» (encabezado fila 4, datos fila 5+)
-    col B  ÁREA         col C  SUBSISTEMAS     col E  CAMINATA 1
-    col F  CAMINATA 2   col H  % PEC           col I  DT P1     col J  DT P2
-STATUS_PEC · hoja «RESUMEN» — totales que declara el propio archivo, contra los
-    que se contrasta el cálculo.
+Las columnas se resuelven POR NOMBRE DE ENCABEZADO, no por posición, y la fila
+del encabezado se detecta sola. Los dos archivos ya cambiaron de layout una vez
+—el de subsistemas insertó tres columnas de protocolos y el de DT pasó su
+encabezado a la fila 9—, así que fijar índices los volvería a romper.
 
-CUADRO_DT · hoja «DT» (encabezado fila 1, datos fila 2+)
-    col I  N° SUBSISTEMA   col H  NOMBRE SISTEMA   col U  PRIORIDADES
-    col V  FECHA DE COMPROMISO DE CIERRE           col X  FECHA DE CIERRE
-    col Z  CAMINATA        col AB DISC.            col AI STATUS   col AK ÁREA
+STATUS · hoja «STATUS» — se buscan estos encabezados:
+    ÁREA · SUBSISTEMAS · RESPONSABLE · CAMINATA 1 · CAMINATA 2 · ALCANCE ·
+    % PEC · DT P1 · DT P2 · PENDIENTES CONSTRUCTIVO
+    La columna ÁREA viene con celdas combinadas: el valor se arrastra hacia
+    abajo hasta que aparece otro.
+STATUS · hoja «RESUMEN» — totales que declara el propio archivo, contra los que
+    se contrasta el cálculo. Es OPCIONAL: si no viene, se pierde ese contraste
+    y el script avisa.
+
+DT · hoja «DT» — se buscan estos encabezados:
+    N° SUBSISTEMA · NOMBRE SISTEMA · ÁREA · PRIORIDADES · FECHA DE EMISION ·
+    FECHA DE COMPROMISO DE CIERRE · FECHA DE CIERRE · ID EXTERNO · CAMINATA ·
+    DISC.   (y, si el archivo las trae, STATUS y DIAS ATRASO)
 
 ------------------------------------------------------------------------------
 REGLAS DE CLASIFICACIÓN
 ------------------------------------------------------------------------------
-ESTADO del DT — Talabre ya trae la columna STATUS calculada (Cerrado / Abierto /
-    Atrasado). Se usa tal cual, pero el script VERIFICA que respete la misma
-    regla que el resto de los proyectos:
+ESTADO del DT — se calcula con la MISMA regla que el resto de los proyectos:
+        Cerrado  = tiene fecha de cierre
         Atrasado = sin fecha de cierre y con fecha de compromiso ya vencida
-    y avisa si algún registro no cuadra. Los abiertos sin fecha de compromiso no
-    se dan por atrasados: se informan aparte.
+        Abierto  = el resto
+    Los abiertos sin fecha de compromiso no se dan por atrasados: se informan
+    aparte. Si el archivo trae su propia columna STATUS (el registro anterior la
+    traía), manda esa y el script avisa de los registros donde no coincidan.
+
+ÁREAS — el panel trabaja con las 9 áreas del proyecto. Los dos archivos abren
+    los pozos uno a uno (PBO-15, PBBR-02, TB-01…): se agrupan en POZOS, igual
+    que hacía la hoja STATUS antes de abrirlos. «ADUCCIÓN» se rotula
+    «IMPULSIÓN ADUCCIÓN». LÍNEAS IMPULSIÓN y PQS son áreas propias aunque
+    cuelguen del sistema «Pozos Barrera Hidráulica»: agruparlas en POZOS —como
+    hacía la versión anterior, que leía el sistema y no el área— escondía 296
+    detalles bajo un área que no es la suya.
 
 CAMINATAS — se identifican por NÚMERO. En la hoja STATUS:
-    «SI» = realizada · una fecha = programada para esa fecha · «NO» = pendiente
+    «SI» = realizada · «NO» o vacío = sin programar
+    una fecha AÚN POR LLEGAR = programada en plazo
+    una fecha YA PASADA = vencida (se agendó y no se hizo: sí es incumplimiento)
     OJO: la hoja RESUMEN publica «C1/C2 Prog.», que suma las realizadas MÁS las
     programadas de la semana. Este panel las informa por separado, porque una
     caminata agendada no es una caminata hecha. El contraste queda documentado
@@ -131,8 +150,9 @@ def disciplina(v):
 
 
 def prioridad(v):
+    """Acepta «P1», «P1A»… y también el dígito suelto («1», 1) del registro nuevo."""
     s = norm(v).upper().replace(" ", "")
-    m = re.match(r"^P(\d)", s)
+    m = re.match(r"^P?(\d)", s)
     if m:
         return "P" + m.group(1)
     if s in ("", "SINASIGNAR"):
@@ -160,52 +180,94 @@ def as_fecha(v):
     return None
 
 
+# Las dos fuentes abren los pozos uno a uno (PBO-15, PBBR-02, PBN-01, TB-01…).
+# El panel los agrupa en POZOS, que es el área con la que siempre se reportó.
+POZOS_RE = re.compile(r"^(pbo|pbbr|pbn|tb)[\s-]")
+
+
+def area_canon(v):
+    """Área tal como la reporta el panel: pozos agrupados y rótulos unificados."""
+    if v in (None, ""):
+        return "Sin área"
+    a = str(v).strip()
+    na = norm(a)
+    if na == "aduccion":
+        return "IMPULSIÓN ADUCCIÓN"
+    if POZOS_RE.match(na):
+        return "POZOS"
+    return a
+
+
+def encabezado(ws, requeridas, max_filas=15):
+    """Busca la fila que contiene todas las columnas requeridas y devuelve
+    (n_fila, {nombre_norm: índice}). Los dos archivos ya movieron su encabezado
+    de fila una vez; fijarlo a mano los volvería a romper."""
+    for nf, fila in enumerate(ws.iter_rows(min_row=1, max_row=max_filas,
+                                           values_only=True), 1):
+        cols = {}
+        for i, v in enumerate(fila):
+            if v not in (None, ""):
+                cols[norm(v).rstrip(".")] = i
+        if all(r in cols for r in requeridas):
+            return nf, cols
+    sys.exit(f"No se encontró el encabezado con {requeridas} en la hoja «{ws.title}»")
+
+
 # =============================================================================
-# 1) STATUS_PEC — subsistemas, caminatas y avance de carpeta
+# 1) STATUS — subsistemas, caminatas y avance de carpeta
 # =============================================================================
-def leer_status(ruta):
+def leer_status(ruta, hoy):
     wb = load_workbook(ruta, data_only=True)
     ws = wb["STATUS"]
+    nf, c = encabezado(ws, ["area", "subsistemas", "caminata 1", "caminata 2", "% pec"])
+    col = lambda *nombres: next((c[n] for n in nombres if n in c), None)
+    iSub, iArea = c["subsistemas"], c["area"]
+    iC1, iC2, iPec = c["caminata 1"], c["caminata 2"], c["% pec"]
+    iResp, iAlc = col("responsable"), col("alcance")
+    iP1, iP2 = col("dt p1"), col("dt p2")
+    iObs = col("pendientes constructivo", "observaciones")
 
     def estado_cam(v):
-        """SI = realizada · una fecha = programada · NO o vacío = pendiente."""
-        f = as_fecha(v) if not isinstance(v, str) or not norm(v) in ("si", "no") else None
-        if isinstance(v, datetime):
-            return "Programada", v
+        """SI = realizada · fecha por llegar = programada en plazo ·
+        fecha ya pasada = vencida (se agendó y no se hizo) · NO o vacío = sin programar."""
+        f = v if isinstance(v, datetime) else as_fecha(v)
+        if f:
+            return ("Programada", f) if f >= hoy else ("Vencida", f)
         s = norm(v)
         if s in ("si", "sí"):
             return "Realizada", None
         if s in ("no", ""):
             return "Pendiente", None
-        if f:
-            return "Programada", f
         avisos.append(f"Estado de caminata no reconocido: «{v}» — se cuenta como pendiente")
         return "Pendiente", None
 
-    subs, corte = [], None
-    for f in ws.iter_rows(min_row=5, values_only=True):
-        if f[2] in (None, ""):
+    subs, corte, area = [], None, "Sin área"
+    for f in ws.iter_rows(min_row=nf + 1, values_only=True):
+        if f[iSub] in (None, ""):
             continue
-        e1, d1 = estado_cam(f[4])
-        e2, d2 = estado_cam(f[5])
+        if f[iArea] not in (None, ""):        # la columna viene con celdas combinadas
+            area = area_canon(f[iArea])
+        e1, d1 = estado_cam(f[iC1])
+        e2, d2 = estado_cam(f[iC2])
         for d in (d1, d2):
             if d and (corte is None or d > corte):
                 corte = d
         subs.append({
-            "id": str(f[2]).strip(),
-            "area": str(f[1]).strip() if f[1] else "Sin área",
-            "resp": str(f[3]).strip() if f[3] else "",
-            "alcance": str(f[6]).strip() if f[6] else "",
+            "id": str(f[iSub]).strip(),
+            "area": area,
+            "resp": str(f[iResp]).strip() if iResp is not None and f[iResp] else "",
+            "alcance": str(f[iAlc]).strip() if iAlc is not None and f[iAlc] else "",
             "cam": {1: e1, 2: e2},
             "fechaCam": {1: d1.strftime("%d-%m-%Y") if d1 else None,
                          2: d2.strftime("%d-%m-%Y") if d2 else None},
-            "pec": f[7] if isinstance(f[7], (int, float)) else None,
-            "dtP1": int(f[8]) if isinstance(f[8], (int, float)) else 0,
-            "dtP2": int(f[9]) if isinstance(f[9], (int, float)) else 0,
-            "obs": str(f[10]).strip() if f[10] else "",
+            "pec": f[iPec] if isinstance(f[iPec], (int, float)) else None,
+            "dtP1": int(f[iP1]) if iP1 is not None and isinstance(f[iP1], (int, float)) else 0,
+            "dtP2": int(f[iP2]) if iP2 is not None and isinstance(f[iP2], (int, float)) else 0,
+            "obs": str(f[iObs]).strip() if iObs is not None and f[iObs] else "",
         })
 
-    # Totales que declara el propio archivo, para contrastarlos.
+    # Totales que declara el propio archivo, para contrastarlos. La hoja RESUMEN
+    # dejó de venir en el archivo nuevo: si no está, se pierde ese contraste.
     declarado = {"areas": {}, "total": None}
     if "RESUMEN" in wb.sheetnames:
         for r in wb["RESUMEN"].iter_rows(min_row=3, max_row=12, values_only=True):
@@ -218,56 +280,76 @@ def leer_status(ruta):
                 declarado["areas"][str(r[1]).strip()] = fila
             else:
                 declarado["total"] = fila
+    else:
+        avisos.append("El archivo de STATUS ya no trae la hoja «RESUMEN»: se pierde "
+                      "el contraste contra los totales que declaraba el proyecto")
+
+    # La hoja «DT» del mismo archivo es el extracto de pendientes: sirve para
+    # contrastar cuántos abiertos declara el proyecto.
+    declarado["dtAbiertos"] = None
+    if "DT" in wb.sheetnames:
+        declarado["dtAbiertos"] = sum(
+            1 for r in wb["DT"].iter_rows(min_row=2, values_only=True)
+            if r[0] not in (None, ""))
     return corte, subs, declarado
 
 
 # =============================================================================
-# 2) CUADRO_DT — detalles de terminación
+# 2) Registro de DT — detalles de terminación
 # =============================================================================
 def leer_dt(ruta, hoy):
     wb = load_workbook(ruta, data_only=True, read_only=True)
-    it = wb["DT"].iter_rows(min_row=1, values_only=True)
-    next(it)                                   # encabezado
+    ws = wb["DT"]
+    nf, c = encabezado(ws, ["n° subsistema", "prioridades", "caminata", "disc",
+                            "fecha de compromiso de cierre", "fecha de cierre"])
+    col = lambda *nombres: next((c[n] for n in nombres if n in c), None)
+    iSub, iPrio, iCam, iDisc = c["n° subsistema"], c["prioridades"], c["caminata"], c["disc"]
+    iComp, iCierre = c["fecha de compromiso de cierre"], c["fecha de cierre"]
+    iArea, iId = col("área", "area"), col("id externo")
+    iSt, iDias = col("status"), col("dias atraso")
+    if iSt is None:
+        avisos.append("El registro de DT no trae columna STATUS: el estado se calcula "
+                      "con la regla homologada (cerrado = con fecha de cierre; "
+                      "atrasado = abierto con compromiso vencido)")
 
     items, incoherentes = [], []
-    for f in it:
-        if f[0] is None:
+    for f in ws.iter_rows(min_row=nf + 1, values_only=True):
+        if f[iSub] in (None, "") and (iId is None or f[iId] in (None, "")):
             continue
-        st = str(f[35]).strip() if f[35] else ""
-        if st not in (CERRADO, ABIERTO, ATRASADO):
-            avisos.append(f"STATUS de DT no reconocido: «{f[35]}» — se cuenta como abierto")
-            st = ABIERTO
+        comp, cierre = as_fecha(f[iComp]), as_fecha(f[iCierre])
 
-        comp, cierre = as_fecha(f[21]), as_fecha(f[23])
-        # Verificación: ¿el STATUS del archivo respeta la misma regla que usamos
-        # en los otros proyectos (atrasado = abierto con compromiso vencido)?
-        if st == ATRASADO and not (cierre is None and comp and comp < hoy):
-            incoherentes.append(("marcado Atrasado sin compromiso vencido", str(f[24])))
-        if st == ABIERTO and cierre is None and comp and comp < hoy:
-            incoherentes.append(("abierto con compromiso vencido pero no marcado", str(f[24])))
-        if st == CERRADO and cierre is None:
-            incoherentes.append(("marcado Cerrado sin fecha de cierre", str(f[24])))
+        if iSt is not None:
+            # El archivo trae su STATUS: manda él, pero se verifica que respete
+            # la misma regla que usamos en los otros proyectos.
+            st = str(f[iSt]).strip() if f[iSt] else ""
+            if st not in (CERRADO, ABIERTO, ATRASADO):
+                avisos.append(f"STATUS de DT no reconocido: «{f[iSt]}» — se cuenta como abierto")
+                st = ABIERTO
+            rid = str(f[iId]) if iId is not None else str(f[iSub])
+            if st == ATRASADO and not (cierre is None and comp and comp < hoy):
+                incoherentes.append(("marcado Atrasado sin compromiso vencido", rid))
+            if st == ABIERTO and cierre is None and comp and comp < hoy:
+                incoherentes.append(("abierto con compromiso vencido pero no marcado", rid))
+            if st == CERRADO and cierre is None:
+                incoherentes.append(("marcado Cerrado sin fecha de cierre", rid))
+        else:
+            st = CERRADO if cierre else (ATRASADO if comp and comp < hoy else ABIERTO)
 
-        # El registro de DT usa áreas más finas que la hoja STATUS: todos los
-        # pozos (PBO/PBBR/PBN/TB) pertenecen al sistema «Pozos Barrera
-        # Hidráulica» y se agrupan en POZOS, igual que en STATUS.
-        area = str(f[36]).strip() if f[36] else "Sin área"
-        sistema = str(f[7]).strip() if f[7] else ""
-        if norm(sistema) == "pozos barrera hidraulica":
-            area = "POZOS"
-        elif norm(area) == "aduccion":
-            area = "IMPULSIÓN ADUCCIÓN"
+        if iDias is not None and isinstance(f[iDias], (int, float)) and st == ATRASADO:
+            dias = int(f[iDias])
+        else:
+            dias = (hoy - comp).days if st == ATRASADO and comp else None
 
-        cam = re.sub(r"\D", "", str(f[25] or ""))
+        cam = re.sub(r"\D", "", str(f[iCam] or ""))
         items.append({
-            "id": str(f[24]).strip() if f[24] else str(f[0]),
-            "sub": str(f[8]).strip() if f[8] else "",
-            "area": area,
-            "disc": disciplina(f[27]),
-            "prio": prioridad(f[20]),
+            "id": str(f[iId]).strip() if iId is not None and f[iId] else str(f[iSub]),
+            "sub": str(f[iSub]).strip() if f[iSub] else "",
+            "area": area_canon(f[iArea]) if iArea is not None else "Sin área",
+            "disc": disciplina(f[iDisc]),
+            "prio": prioridad(f[iPrio]),
             "estado": st,
             "cam": int(cam) if cam and int(cam) in (1, 2, 3) else 0,
-            "diasAtraso": int(f[34]) if isinstance(f[34], (int, float)) and st == ATRASADO else None,
+            "diasAtraso": dias,
             "sinCompromiso": st in (ABIERTO, ATRASADO) and comp is None,
         })
 
@@ -275,7 +357,7 @@ def leer_dt(ruta, hoy):
         c = Counter(m for m, _ in incoherentes)
         for m, n in c.items():
             avisos.append(f"{n} DT con estado inconsistente: {m}")
-    return items, incoherentes
+    return items, incoherentes, iSt is not None
 
 
 # =============================================================================
@@ -294,16 +376,20 @@ def resumir(items):
     }
 
 
-def construir(corte, subs, declarado, items, incoherentes, hoy):
+def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio):
     areas = sorted({s["area"] for s in subs})
 
     # ---------- caminatas ----------
+    # «Programada» es solo la agendada a una fecha AÚN POR LLEGAR. La que se
+    # agendó y la fecha ya pasó sin marcarse realizada queda «Vencida»: esa sí
+    # es exigible, porque descontarla escondería un incumplimiento real.
     caminatas = {}
     for n in (1, 2):
         caminatas[str(n)] = {
             "total": len(subs),
             "realizada": sum(1 for s in subs if s["cam"][n] == "Realizada"),
             "programada": sum(1 for s in subs if s["cam"][n] == "Programada"),
+            "vencida": sum(1 for s in subs if s["cam"][n] == "Vencida"),
             "pendiente": sum(1 for s in subs if s["cam"][n] == "Pendiente"),
         }
         c = caminatas[str(n)]
@@ -324,6 +410,7 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
                 "total": len(sa),
                 "realizada": sum(1 for s in sa if s["cam"][n] == "Realizada"),
                 "programada": sum(1 for s in sa if s["cam"][n] == "Programada"),
+                "vencida": sum(1 for s in sa if s["cam"][n] == "Vencida"),
                 "pendiente": sum(1 for s in sa if s["cam"][n] == "Pendiente"),
                 "exigible": len(sa) - sum(1 for s in sa if s["cam"][n] == "Programada"),
             }
@@ -425,7 +512,11 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
     dt["topSubsistemas"] = [{"sub": s, **r} for s, r in top]
 
     # ---------- control de calidad del dato ----------
-    control = {"contraste": [], "incoherentes": len(incoherentes)}
+    # estadoPropio: si el registro trae su columna STATUS, la regla de atraso es
+    # una VERIFICACIÓN; si no la trae, el estado se calcula con la regla y el
+    # panel lo declara en vez de presentar un chequeo que no puede fallar.
+    control = {"contraste": [], "incoherentes": len(incoherentes),
+               "estadoPropio": estado_propio}
     tot = declarado.get("total") or {}
     if tot.get("subs") is not None:
         control["contraste"].append({
@@ -454,7 +545,22 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
             avisos.append(f"Carpetas sobre 80%: el RESUMEN declara {tot['sobre80']} "
                           f"y el detalle da {carpetas['sobre80']} — revisar")
 
-    # DT abiertos: la hoja STATUS lleva su propio conteo por subsistema
+    # La hoja «DT» del archivo de STATUS es el extracto de pendientes del
+    # proyecto: debe cuadrar con los abiertos del registro completo.
+    if declarado.get("dtAbiertos") is not None:
+        control["contraste"].append({
+            "que": "DT abiertos (hoja DT del archivo de STATUS)",
+            "declarado": str(declarado["dtAbiertos"]),
+            "calculado": str(dt["global"]["abiertos"]),
+            "ok": declarado["dtAbiertos"] == dt["global"]["abiertos"]})
+        if declarado["dtAbiertos"] != dt["global"]["abiertos"]:
+            avisos.append(f"El extracto de pendientes trae {declarado['dtAbiertos']} DT y el "
+                          f"registro completo da {dt['global']['abiertos']} abiertos — revisar "
+                          "si los archivos son del mismo corte")
+
+    # DT abiertos: la hoja STATUS lleva su propio conteo por subsistema.
+    # Si cuadra con el registro se muestra como contraste OK; si no, va en
+    # difDT, que el panel pinta como advertencia con su explicación.
     sP1 = sum(s["dtP1"] for s in subs)
     sP2 = sum(s["dtP2"] for s in subs)
     rP1 = dt["porPrioridad"]["P1"]["abiertos"]
@@ -463,6 +569,10 @@ def construir(corte, subs, declarado, items, incoherentes, hoy):
     for nom, sv, rv in (("P1", sP1, rP1), ("P2", sP2, rP2)):
         if sv != rv:
             control["difDT"].append({"prio": nom, "status": sv, "registro": rv})
+        else:
+            control["contraste"].append({
+                "que": f"DT {nom} abiertos: hoja STATUS vs. registro",
+                "declarado": str(sv), "calculado": str(rv), "ok": True})
     if control["difDT"]:
         avisos.append("La hoja STATUS y el registro de DT no cuadran en "
                       + ", ".join(d["prio"] for d in control["difDT"])
@@ -560,17 +670,17 @@ def inyectar_en_html(ruta_html, datos):
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--status", required=True, help="TalabreSTATUS_PEC.xlsx")
-    ap.add_argument("--dt", required=True, help="TalabreCuadro_DT.xlsx")
+    ap.add_argument("--status", required=True, help="STATUS_SUBSISTEMAS_TALABRE.xlsx")
+    ap.add_argument("--dt", required=True, help="Detalle_de_TerminacionesBesalco.xlsx")
     ap.add_argument("--hoy", help="Fecha de referencia AAAA-MM-DD (por defecto, hoy)")
     args = ap.parse_args()
 
     hoy = datetime.strptime(args.hoy, "%Y-%m-%d") if args.hoy else \
         datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
-    corte, subs, declarado = leer_status(args.status)
-    items, incoherentes = leer_dt(args.dt, hoy)
-    datos = construir(corte, subs, declarado, items, incoherentes, hoy)
+    corte, subs, declarado = leer_status(args.status, hoy)
+    items, incoherentes, estado_propio = leer_dt(args.dt, hoy)
+    datos = construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio)
 
     destino = AQUI / "datos_talabre.json"
     destino.write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -594,8 +704,9 @@ def main():
     print("\nCAMINATAS")
     for n in ("1", "2"):
         c = C[n]
-        print(f"  Caminata {n}: {c['realizada']}/{c['total']} realizadas ({pc(c['realizada'], c['total'])})"
-              f" · {c['programada']} programadas · {c['pendiente']} pendientes")
+        print(f"  Caminata {n}: {c['realizada']}/{c['exigible']} exigibles ({pc(c['realizada'], c['exigible'])})"
+              f" · {pc(c['realizada'], c['total'])} del universo · {c['programada']} programadas en plazo"
+              f" · {c['vencida']} con agenda vencida · {c['pendiente']} sin programar")
 
     print(f"\nCARPETAS — avance PEC (Talabre no usa estados de aprobación)")
     print(f"  Promedio: {CP['promedio']}%".replace(".", ","))
@@ -631,7 +742,10 @@ def main():
     for d in K["difDT"]:
         print(f"  ⚠  DT {d['prio']} abiertos: hoja STATUS {d['status']} · "
               f"registro DT {d['registro']} (el panel usa el registro)")
-    if K["incoherentes"]:
+    if not K["estadoPropio"]:
+        print("  i   El registro no trae columna STATUS: el estado se calculó con la regla "
+              "homologada (atrasado = abierto con compromiso vencido)")
+    elif K["incoherentes"]:
         print(f"  ⚠  {K['incoherentes']} registros con estado inconsistente respecto de sus fechas")
     else:
         print("  OK  Todos los DT respetan la regla: atrasado = abierto con compromiso vencido")

@@ -33,7 +33,7 @@ en las portadas de las dos PPT. La tabla vive en `armar_suite.js` (`PROYECTOS`),
 # 1 · actualizar el módulo Cierre QAQC (ver panel_control_TOP_P1/CLAUDE.md)
 cd ../panel_control_TOP_P1
 python3 desaladora.py --reporte <REPORTE_GERENCIAL_*> --punch <Listado_Puntos_Punch_*>
-python3 talabre.py    --status  <TalabreSTATUS_PEC>   --dt    <TalabreCuadro_DT>
+python3 talabre.py    --status  <STATUS_SUBSISTEMAS_TALABRE> --dt <Detalle_de_TerminacionesBesalco>
 python3 actualizar.py <Estatus_Resumen_General_QAQC.xlsx>   # Arqueros
 node gen_ppt.js
 
@@ -129,8 +129,11 @@ centinela no exista en el origen y falla ruidosamente si algún día aparece.
 | Módulo | Corte | Indicador | Valor |
 |---|---|---|---|
 | Protocolos | 03-08-2026 | % pendiente | **0,4%** — 163 en falta de 44.878 |
-| Cierre QAQC | 27-07-2026 | % detalles cerrados | **59,1%** — 1.286 atrasados |
+| Cierre QAQC | 03-08-2026 | % detalles cerrados | **59,9%** — 1.238 atrasados |
 | No Conformidades | 03-08-2026 | % hallazgos cerrados | **89,2%** — 54 abiertos de 500 |
+
+El corte de Cierre QAQC es el más reciente de sus tres proyectos (Talabre, 03-08); Desaladora
+sigue al 27-07 y Arqueros al 26-07 dentro del módulo.
 
 **Cada módulo se actualiza por su lado**, así que no siempre quedan a la misma fecha. La franja
 superior muestra **el corte más reciente** de los tres y, si difieren, agrega el aviso
@@ -138,7 +141,7 @@ superior muestra **el corte más reciente** de los tres y, si difieren, agrega e
 Cierre QAQC y la suite se fechaba una semana atrás cuando los otros dos ya iban al día.
 
 **Lo que muestra el cruce:** la documentación va muy por delante del cierre físico. Protocolos
-está prácticamente al día mientras el cierre de detalles P1 arrastra 596 ítems atrasados. El
+está prácticamente al día mientras el cierre de detalles P1 arrastra 594 ítems atrasados. El
 cuello de botella no está en el papel: está en terreno.
 
 ---
@@ -156,7 +159,7 @@ Cada cifra de la portada se contrastó contra lo que muestra el propio módulo:
 | Protocolos · estado (AE) | 5.426 | 5.426 |
 | Protocolos · estado (C) | 39.289 | 39.289 |
 | Cierre QAQC · P1 | 65,1% | 65,1% |
-| Cierre QAQC · detalles | 6.300 · 1.286 atrasados | 6.300 · 1.286 |
+| Cierre QAQC · detalles | 6.373 · 1.238 atrasados | 6.373 · 1.238 |
 
 ### Cómo se calcula el KPI de Protocolos
 

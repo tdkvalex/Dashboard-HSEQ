@@ -11,8 +11,16 @@ procesarlos y qué **no** volver a romper.
 | Proyecto | Archivos | Hojas que se leen |
 |---|---|---|
 | **Desaladora** | `REPORTE_GERENCIAL_AAAAMMDD.xlsx` **+** `Listado_Puntos_Punch_Consolidado_AAAA_MM_DD.xlsx` | `REPORTE GERENCIAL`, `Resumen  general` · `LISTADO PUNCH ITEMS` |
-| **Talabre** | `TalabreSTATUS_PEC.xlsx` **+** `TalabreCuadro_DT.xlsx` | `STATUS`, `RESUMEN` · `DT` |
+| **Talabre** | `STATUS_SUBSISTEMAS_TALABRE.xlsx` **+** `Detalle_de_TerminacionesBesalco.xlsx` | `STATUS` (y `RESUMEN`/`DT` si vienen, como contraste) · `DT` |
 | **Arqueros** (cliente MASA) | `Estatus_Resumen_General_QAQC.xlsx` | `BD Caminatas-CTOP`, `BD Detalles Terminación` |
+
+Talabre cambió de archivos en el corte 03-08-2026 (antes: `TalabreSTATUS_PEC.xlsx` +
+`TalabreCuadro_DT.xlsx`). El `Detalle_de_TerminacionesBesalco.xlsx` es el **registro completo**
+del proyecto (2.024 DT, no solo los 480 pendientes) y cuadra exacto con la hoja STATUS, cosa
+que el archivo anterior no lograba. `talabre.py` resuelve las columnas **por nombre de
+encabezado** y detecta solo la fila donde empieza, así que soporta los dos formatos.
+**OJO con `Programa_de_Caminatas.xlsm`**: trae una hoja «DT» pero es una foto vieja
+(emisión hasta 19-06); no usarla como fuente.
 
 **La identidad del proyecto sale del módulo de Protocolos**, que es la referencia de toda la
 suite: mismo orden, mismo código, mismo nombre y mismo cliente, escritos igual.
@@ -41,8 +49,8 @@ sus láminas. El resumen corporativo se recalcula con los que haya.
 ```bash
 python3 desaladora.py --reporte /ruta/REPORTE_GERENCIAL_*.xlsx \
                       --punch   /ruta/Listado_Puntos_Punch_Consolidado_*.xlsx
-python3 talabre.py    --status  /ruta/TalabreSTATUS_PEC.xlsx \
-                      --dt      /ruta/TalabreCuadro_DT.xlsx
+python3 talabre.py    --status  /ruta/STATUS_SUBSISTEMAS_TALABRE.xlsx \
+                      --dt      /ruta/Detalle_de_TerminacionesBesalco.xlsx
 python3 actualizar.py /ruta/Estatus_Resumen_General_QAQC.xlsx   # Arqueros
 node gen_ppt.js        # SIEMPRE al final
 ```
@@ -85,10 +93,18 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   La constante es `PRIO_GESTION` en `index.html` y se replica en `gen_ppt.js`.
 - **Caminatas: el semáforo mide sobre lo EXIGIBLE, no sobre el universo.** Una caminata con
   fecha agendada todavía por llegar **no es un incumplimiento al corte**: se descuenta del
-  denominador (`exigible = total − agendadas`) y se informa aparte como **«programadas en
-  plazo»** — descontarlas no puede significar esconderlas. Se guardan las dos cifras (`pct`
-  sobre el universo y `pctExigible`) porque miden cosas distintas y el panel muestra ambas.
-  *Pedido por Mauricio Rocha (31-07-2026), aprobado por el usuario.*
+  denominador (`exigible = total − agendadas en plazo`) y se informa aparte como
+  **«programadas en plazo»** — descontarlas no puede significar esconderlas. Se guardan las
+  dos cifras (`pct` sobre el universo y `pctExigible`) porque miden cosas distintas y el panel
+  muestra ambas. *Pedido por Mauricio Rocha (31-07-2026), aprobado por el usuario.*
+  La agendada cuya **fecha ya pasó** sin marcarse realizada queda **«Vencida»**: sigue siendo
+  exigible (se agendó y no se hizo) y el panel la declara aparte cuando existe.
+- **Talabre: los pozos se agrupan en POZOS, pero LÍNEAS IMPULSIÓN y PQS son áreas propias.**
+  Las fuentes nuevas abren los pozos uno a uno (PBO-15…, PBBR-01…, PBN-01, TB-01/02): se
+  reagrupan bajo POZOS, que es como siempre se reportó. La versión anterior, que derivaba el
+  área desde el *sistema*, metía también LÍNEAS IMPULSIÓN (151 DT) y PQS (145 DT) dentro de
+  POZOS; desde el corte 03-08-2026 cada una reporta lo suyo, igual que en la hoja STATUS.
+  «ADUCCIÓN» se rotula «IMPULSIÓN ADUCCIÓN». La función es `area_canon()` en `talabre.py`.
 - **«Sin base al corte»**: un área sin ningún detalle levantado **y** sin ninguna caminata
   vigente realizada no se puntúa. No hay nada medido, y pintarla del mismo rojo que un frente
   con atrasos reales desinforma. Al corte aplica a Cerro Verde/PS2 en Talabre.
@@ -114,19 +130,22 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   versión: la categoría tomaba los nombres de «Observación por».*
 - **REPORTE GERENCIAL** (encabezado fila 10, datos fila 11+): `2` subsistema · `3` tipo ·
   `4` zona · `6/8/10` caminatas 1/2/3 · `32` estatus del certificado · `34` tarjeta verde.
-- **Cuadro DT de Talabre** (encabezado fila 1): `8` subsistema · `7` sistema · `20` prioridad ·
-  `21` fecha compromiso · `23` fecha cierre · `25` caminata · `27` disciplina · `35` STATUS ·
-  `36` área.
+- **Talabre**: `talabre.py` ya **no usa índices fijos** — resuelve las columnas por nombre de
+  encabezado y detecta la fila donde empieza (el registro de DT lo movió de la fila 1 a la 9,
+  y la hoja STATUS insertó tres columnas de protocolos que corrieron DT P1/P2 de I/J a L/M).
+  Cosas del formato nuevo que el script ya absorbe: prioridades como dígito suelto (`1`…`4`,
+  no `P1`); sin columna STATUS ni DIAS ATRASO (se calculan con la regla homologada); la
+  columna ÁREA de STATUS viene con celdas combinadas (el valor se arrastra hacia abajo);
+  ya no hay hoja RESUMEN (se pierde ese contraste y el script avisa); la hoja «DT» del
+  archivo de STATUS es el extracto de pendientes y se usa como contraste de los abiertos.
 
 ### Discrepancias reales entre archivos (no son bugs, se informan en pantalla)
 - **Desaladora**: el reporte gerencial y el punch list **no cuadran** (945/441 vs 960/426;
   P0 41 vs 20). **Manda el punch list**, que es la fuente ítem a ítem.
-- **Talabre**: la hoja STATUS y el registro de DT no cuadran en P1 (29 vs 22) ni P2 (296 vs
-  265). **Manda el registro de DT**. Además el RESUMEN declara 206 carpetas sobre 80% donde el
-  detalle da 209.
-- **Talabre · caminatas**: la hoja RESUMEN publica «C1/C2 Prog.», que **suma realizadas +
-  agendadas de la semana** (209 y 172). El panel las informa por separado: una caminata
-  agendada no es una caminata hecha (199 y 170 realizadas).
+- **Talabre**: con los archivos viejos la hoja STATUS y el registro de DT **no cuadraban**
+  (P1 29 vs 22 · P2 296 vs 265) y mandaba el registro. Con los nuevos (corte 03-08-2026)
+  **cuadran exacto** (P1 29 · P2 230 · 480 abiertos = extracto de pendientes): si vuelven a
+  divergir, investigar antes de publicar.
 - Ambos scripts **contrastan su cálculo contra los totales que declara el propio archivo** y
   avisan si dejan de cuadrar. Si aparece un aviso nuevo, investigar antes de publicar.
 

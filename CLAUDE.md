@@ -65,7 +65,7 @@ Resumen de un vistazo:
 ```bash
 cd panel_control_TOP_P1
 python3 desaladora.py  --reporte <REPORTE_GERENCIAL_*> --punch <Listado_Puntos_Punch_*>
-python3 talabre.py     --status  <TalabreSTATUS_PEC>   --dt    <TalabreCuadro_DT>
+python3 talabre.py     --status  <STATUS_SUBSISTEMAS_TALABRE>  --dt <Detalle_de_TerminacionesBesalco>
 python3 actualizar.py  <Estatus_Resumen_General_QAQC.xlsx>   # Arqueros (cliente MASA)
 node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el panel
 ```

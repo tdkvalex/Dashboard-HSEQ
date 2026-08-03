@@ -13,7 +13,7 @@ comparable.
 |---|---|---|---|---|
 | **Resumen corporativo** | Los 3 proyectos | Besalco Montajes | — | se calcula desde los otros tres |
 | **P2416 · Desaladora** | PV3 Ampliación Desaladora | ANTOFAGASTA MINERALS | 27-07-2026 | `REPORTE_GERENCIAL_*.xlsx` + `Listado_Puntos_Punch_Consolidado_*.xlsx` |
-| **P2407 · Talabre** | Captación de agua, pozos y estaciones de bombeo | CODELCO | 27-07-2026 | `TalabreSTATUS_PEC.xlsx` + `TalabreCuadro_DT.xlsx` |
+| **P2407 · Talabre** | Captación de agua, pozos y estaciones de bombeo | CODELCO | 03-08-2026 | `STATUS_SUBSISTEMAS_TALABRE.xlsx` + `Detalle_de_TerminacionesBesalco.xlsx` |
 | **P2342 · Arqueros** | Contrato Electromecánico Planta Concentradora y de Espesado | MASA | 26-07-2026 | `Estatus_Resumen_General_QAQC.xlsx` |
 
 **La identidad del proyecto —orden, código, nombre y cliente— sale del módulo de Protocolos**,
@@ -39,10 +39,15 @@ node gen_ppt.js
 
 ```bash
 python3 talabre.py \
-    --status /ruta/TalabreSTATUS_PEC.xlsx \
-    --dt     /ruta/TalabreCuadro_DT.xlsx
+    --status /ruta/STATUS_SUBSISTEMAS_TALABRE.xlsx \
+    --dt     /ruta/Detalle_de_TerminacionesBesalco.xlsx
 node gen_ppt.js
 ```
+
+`talabre.py` resuelve las columnas **por nombre de encabezado** (y detecta la fila donde
+empieza), así que tolera los cambios de layout de estos archivos; soporta también el formato
+anterior (`TalabreSTATUS_PEC` + `TalabreCuadro_DT`). El `Programa_de_Caminatas.xlsm` **no** es
+fuente: su hoja «DT» es una foto vieja del registro.
 
 **Arqueros** (2 comandos):
 
@@ -83,7 +88,7 @@ tilde), así que un cambio de redacción en la planilla no rompe el tablero.
 | `Panel_Control_TOP_P1.pptx` | Presentación ejecutiva de 17 láminas: 5 de Desaladora + 5 de Talabre + 7 de Arqueros. |
 | `actualizar.py` | **Punto de entrada de Arqueros.** Lee el Excel, recalcula todo y actualiza el panel. |
 | `desaladora.py` | **Punto de entrada de Desaladora.** Lee el reporte gerencial y el punch list, valida el cruce entre ambos y actualiza el panel. |
-| `talabre.py` | **Punto de entrada de Talabre.** Lee la hoja STATUS y el registro de DT, verifica la regla de atraso y actualiza el panel. |
+| `talabre.py` | **Punto de entrada de Talabre.** Lee la hoja STATUS y el registro de DT (columnas por nombre), calcula el estado con la regla homologada y actualiza el panel. |
 | `gen_ppt.js` | Regenera la PPT completa desde los datos ya calculados de los tres proyectos. |
 | `estatus_datos.json` | Datos consolidados de Arqueros. |
 | `datos_desaladora.json` | Datos consolidados de Desaladora. |
@@ -178,68 +183,73 @@ los dos archivos de origen. Al corte actual:
 
 ---
 
-## Talabre — indicadores al corte 27-07-2026
+## Talabre — indicadores al corte 03-08-2026
 
-**219 subsistemas** en 9 áreas (Pozos 110, EBMS 26, Piscinas y Sedimentador 22, EBMP 20,
+**218 subsistemas** en 9 áreas (Pozos 110, EBMS 25, Piscinas y Sedimentador 22, EBMP 20,
 Líneas Impulsión 14, PQS 13, Sala GAR 8, Cerro Verde/PS2 3, Impulsión Aducción 3).
+
+Desde este corte el proyecto entrega **el registro completo de DT**
+(`Detalle_de_TerminacionesBesalco.xlsx`: 2.024 registros desde 09-2025) en lugar del extracto
+anterior, y por primera vez **la hoja STATUS y el registro cuadran exacto**.
 
 | Frente | Indicador | Valor |
 |---|---|---|
-| Caminatas | Caminata 1 — sobre lo exigible | **199/206 · 96,6%** (90,9% del universo) |
-| Caminatas | Caminata 2 — sobre lo exigible | **170/179 · 95,0%** (77,6% del universo) |
-| Caminatas | Programadas en plazo / sin programar | **40 / 9** (caminata 2) |
-| Carpetas | Avance PEC promedio | **91,1%** |
-| Carpetas | Sobre 95% / bajo 80% | **159 / 10** |
-| DT P1 | Cerrados | **313/335 · 93,4%** |
-| DT P1+P2 | Cerrados | **1.366/1.653 · 82,6%** — 298 P3/P4 quedan fuera |
-| DT P1+P2 | Abiertos (de ellos, atrasados) | **287 (205)** |
+| Caminatas | Caminata 1 — sobre lo exigible | **205/208 · 98,6%** (94,0% del universo) |
+| Caminatas | C1: programadas en plazo / agenda vencida / sin programar | **10 / 2 / 1** |
+| Caminatas | Caminata 2 — sobre lo exigible | **192/193 · 99,5%** (88,1% del universo) |
+| Caminatas | C2: programadas en plazo / sin programar | **25 / 1** |
+| Carpetas | Avance PEC promedio | **92,7%** |
+| Carpetas | Sobre 95% / bajo 80% | **181 / 9** |
+| DT P1 | Cerrados | **323/352 · 91,8%** |
+| DT P1+P2 | Cerrados | **1.467/1.726 · 85,0%** — 298 P3/P4 quedan fuera |
+| DT P1+P2 | Abiertos (de ellos, atrasados) | **259 (156)** |
 
 **Semáforo:** Piscinas y Sedimentador *Crítico* · Pozos, Impulsión Aducción y Sala GAR
 *Al día* · EBMP, EBMS, Líneas Impulsión y PQS en *Atención* · Cerro Verde/PS2 *Sin base al
 corte* (no tiene ningún detalle levantado ni ninguna caminata vigente realizada).
 
 **El avance de caminata se mide sobre lo exigible**, descontando las agendadas a fecha futura
-—que no son incumplimiento al corte— e informándolas aparte como «programadas en plazo». Con
-el universo completo como denominador, Pozos figuraba en *Atención* con 88/110 aunque sus 22
-restantes ya estaban agendadas.
+—que no son incumplimiento al corte— e informándolas aparte como «programadas en plazo». La
+agendada cuya fecha **ya pasó** sin marcarse realizada queda **«con agenda vencida»**: sigue
+siendo exigible, porque descontarla escondería un incumplimiento real.
 
 **Lectura:** el perfil de Talabre es **el inverso al de Desaladora**. Aquí P1 está
-prácticamente cerrado (93,4%) y el volumen pendiente está en las prioridades menores: 265 DT
-abiertos en P2, 168 en P3 y **50 en P4 sin ni un solo cierre**. El atraso, en cambio, es más
-viejo que en los otros proyectos: mediana de 36 días y 29 ítems sobre los 90 días. En
-caminatas, la 1 está casi completa pero la 2 va en 77,6%, concentrando el rezago en
-**Piscinas y Sedimentador** (5/22) y **Cerro Verde/PS2** (0/3). Las carpetas avanzan bien
-—promedio 91,1%— con solo 10 subsistemas bajo 80%.
+prácticamente cerrado (91,8%) y el volumen pendiente está en las prioridades menores: 230 DT
+abiertos en P2, 171 en P3 y **50 en P4 sin ni un solo cierre**. Las caminatas están al día
+sobre lo exigible (98,6% y 99,5%): lo que falta ya tiene fecha dentro de agosto, con el grueso
+de las agendas en **Piscinas y Sedimentador** (12) y las 3 de Cerro Verde/PS2. El atraso
+pendiente es de mediana 31 días con 21 ítems sobre los 90. Las carpetas avanzan bien
+—promedio 92,7%— con solo 9 subsistemas bajo 80%.
 
 ### Criterios propios de Talabre
 
-- **Estado del DT:** Talabre **ya trae calculada** la columna *STATUS* (Cerrado / Abierto /
-  Atrasado). El panel la usa tal cual, pero `talabre.py` **verifica registro por registro** que
-  respete la misma regla que el resto de los proyectos (atrasado = sin fecha de cierre y con
-  fecha de compromiso vencida) y avisa si alguno no cuadra. **Al corte actual los 1.951
-  registros la respetan.**
-- Los **215 DT abiertos sin fecha de compromiso** no se dan por atrasados; se informan aparte.
-- **Caminatas:** `SI` = realizada · una fecha = agendada para esa fecha · `NO` = sin programar.
-  La hoja RESUMEN publica las caminatas «programadas», que **suman las realizadas más las
-  agendadas de la semana** (209 y 172). Este panel las informa por separado, porque una
-  caminata agendada no es una caminata hecha.
+- **Estado del DT:** el registro nuevo **no trae columna STATUS**, así que `talabre.py`
+  **calcula** el estado con la regla homologada de los tres proyectos: *Cerrado* si hay fecha
+  de cierre; *Atrasado* si está abierto y la fecha de compromiso ya venció; *Abierto* el
+  resto. (Si el archivo volviera a traer su propio STATUS, manda él y el script verifica
+  registro por registro que respete esa misma regla, como hacía antes.)
+- Los **218 DT abiertos sin fecha de compromiso** no se dan por atrasados; se informan aparte.
+- **Caminatas:** `SI` = realizada · fecha aún por llegar = programada en plazo · fecha ya
+  pasada = **agenda vencida** · `NO` o vacío = sin programar.
 - **Carpetas:** Talabre **no maneja estados de aprobación** como los otros dos proyectos: lleva
   un **% de avance por subsistema (PEC)**. Se reporta como avance y por tramos, sin traducirlo
-  a «entregadas», para no inventar un concepto que el proyecto no usa. El archivo declara
-  además 0 carpetas en revisión del cliente.
+  a «entregadas», para no inventar un concepto que el proyecto no usa.
 - **Disciplinas:** `CANERIAS → Piping` · `CIVIL` y `MOVIMIENTO DE TIERRAS → Obras Civiles` ·
   `ELECTRICOS → Eléctrica` · `INSTRUMENTACION → Instrumentación y Control`.
-- **Áreas:** el registro de DT usa códigos más finos que la hoja STATUS (PBO-xx, PBBR-xx,
-  PBN-01, TB-01…). Todos pertenecen al sistema «Pozos Barrera Hidráulica» y se agrupan en
-  **POZOS**, igual que en STATUS.
+- **Áreas:** las dos fuentes abren los pozos uno a uno (PBO-xx, PBBR-xx, PBN-01, TB-01…): se
+  agrupan en **POZOS**, que es como siempre se reportó. **LÍNEAS IMPULSIÓN y PQS reportan lo
+  suyo** (151 y 145 DT): la versión anterior, que derivaba el área desde el sistema, las metía
+  dentro de POZOS. «ADUCCIÓN» se rotula «IMPULSIÓN ADUCCIÓN».
+- **Prioridades:** el registro nuevo las trae como dígito suelto (`1`…`4`); se leen igual que
+  `P1`…`P4`.
 
 ### Control de calidad del dato
 
-- **Cuadran:** total de subsistemas (219) y carpetas sobre 95% (159).
-- **Difiere:** el RESUMEN declara **206** carpetas sobre 80% y el detalle da **209**.
-- **Difiere:** los DT abiertos por subsistema de la hoja STATUS no coinciden con el registro
-  de DT (P1: 29 vs 22 · P2: 296 vs 265). **El panel usa el registro de DT**, que es la fuente
-  ítem a ítem.
+- **Cuadran:** DT abiertos contra el extracto de pendientes del archivo de STATUS
+  (**480 = 480**) y el conteo por subsistema de la hoja STATUS contra el registro
+  (**P1 29 = 29 · P2 230 = 230**) — con los archivos anteriores esto no cuadraba.
+- **Se pierde:** el archivo nuevo ya no trae la hoja «RESUMEN», así que el contraste contra
+  los totales que declaraba el proyecto ya no es posible; el script lo avisa.
 
 ---
 
@@ -288,13 +298,13 @@ Facility por la 1), sumando lo realizado de cada tipo.
 
 | Indicador | Valor |
 |---|---|
-| Subsistemas en control | **449** (Desaladora 95 · Talabre 219 · Arqueros 135) |
-| Caminata vigente realizada | **311/449 · 69,3%** |
-| Cierre de detalles P1+P2 | **3.600/5.773 · 62,4%** — 527 P3/P4 quedan fuera |
-| Detalles de terminación levantados | **6.300** |
-| Cierre de detalles (todas las prioridades) | **3.721/6.300 · 59,1%** |
-| Cierre de detalles P1 | **2.053/3.152 · 65,1%** |
-| Detalles abiertos / de ellos atrasados | **2.494 / 1.286 (51,6%)** |
+| Subsistemas en control | **448** (Desaladora 95 · Talabre 218 · Arqueros 135) |
+| Caminata vigente realizada | **333/448 · 74,3%** |
+| Cierre de detalles P1+P2 | **3.701/5.846 · 63,3%** — 527 P3/P4 quedan fuera |
+| Detalles de terminación levantados | **6.373** |
+| Cierre de detalles (todas las prioridades) | **3.819/6.373 · 59,9%** |
+| Cierre de detalles P1 | **2.063/3.169 · 65,1%** |
+| Detalles abiertos / de ellos atrasados | **2.469 / 1.238 (50,1%)** |
 
 **Semáforo:** Desaladora *Atención* · Talabre *Al día* · Arqueros *Crítico*.
 
