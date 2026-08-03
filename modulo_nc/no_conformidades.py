@@ -111,7 +111,8 @@ TIPOS = ["No Conformidad", "Producto No Conforme", "Observación",
 # aparte y el panel declara cuántas quedaron fuera, para que la exclusión sea
 # visible y no un dato que se perdió.  Confirmado por el usuario (03-08-2026).
 TIPOS_EXCLUIDOS = ["Opción de Mejora"]
-excluidos = Counter()
+excluidos = Counter()            # por tipo
+excluidos_proy = Counter()       # por proyecto, para declarar de dónde salieron
 TRAMOS = [("1-30 días", 0), ("31-90 días", 30), ("91-180 días", 90),
           ("181-365 días", 180), ("Más de un año", 365)]
 
@@ -245,6 +246,7 @@ def leer(ruta, hoy):
             avisos.append(f"Tipo no reconocido: «{tipo}»")
         if tipo in TIPOS_EXCLUIDOS:
             excluidos[tipo] += 1
+            excluidos_proy[p["id"]] += 1
             continue
 
         items.append({
@@ -335,6 +337,7 @@ def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
             avisos.append(f"Tipo no reconocido en el archivo de externas: «{tipo}»")
         if tipo in TIPOS_EXCLUIDOS:
             excluidos[tipo] += 1
+            excluidos_proy[proyecto] += 1
             continue
 
         items.append({
@@ -618,6 +621,10 @@ def construir(items, hoy, fuente):
                         max(i["creada"] for i in items if i["creada"]).strftime("%d-%m-%Y")],
         # Lo que se dejó fuera a propósito: se declara, no se calla.
         "excluidos": dict(excluidos),
+        # De qué frente salió cada uno: la exclusión rige para los cuatro, y
+        # verlo desglosado evita la pregunta de si se aplicó en todos.
+        "excluidosPorProyecto": {meta_p[k]["nombre"]: n
+                                 for k, n in excluidos_proy.most_common()},
         "tiposExcluidos": TIPOS_EXCLUIDOS,
         "sinCosto": sum(1 for i in items if i["costo"] is None),
         "sinEspecialidad": sum(1 for i in items if i["especialidad"] == "Sin especialidad"),
@@ -634,6 +641,9 @@ def construir(items, hoy, fuente):
     if excluidos:
         avisos.append("Fuera del módulo por tipo: "
                       + " · ".join(f"{n} {t}" for t, n in excluidos.items())
+                      + " — de "
+                      + " · ".join(f"{meta_p[k]['nombre']} {n}"
+                                   for k, n in excluidos_proy.most_common())
                       + " (son propuestas, no hallazgos que corregir; el panel lo declara)")
     if sinFecha:
         avisos.append(

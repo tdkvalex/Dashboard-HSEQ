@@ -7,7 +7,7 @@
   "hoy": "03-08-2026",
   "corte": "2026-08-03",
   "corteTexto": "03-08-2026",
-  "generado": "2026-08-03 20:57",
+  "generado": "2026-08-03 22:27",
   "fuente": "b73c9c4f-Data_NCR_2.xlsx"
  },
  "orden": [
@@ -5577,6 +5577,10 @@
   ],
   "excluidos": {
    "Opción de Mejora": 14
+  },
+  "excluidosPorProyecto": {
+   "Desaladora": 13,
+   "Talabre": 1
   },
   "tiposExcluidos": [
    "Opción de Mejora"

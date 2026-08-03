@@ -15,13 +15,19 @@ Dashboard de los hallazgos de calidad de los tres proyectos **y de Oficina Centr
 ### Las opciones de mejora quedan fuera
 
 **No son hallazgos que haya que corregir, son propuestas.** Sumarlas infla el universo y
-ensucia el % de cierre con algo que nadie está obligado a cerrar. El Excel trae 507 registros
-y el módulo reporta **493**: quedan fuera **14 opciones de mejora** —13 de Desaladora y 1 de
-Talabre—, de las cuales solo 1 seguía abierta.
+ensucia el % de cierre con algo que nadie está obligado a cerrar.
+
+**La regla rige para los cuatro frentes y para las dos fuentes**, no solo para el registro
+principal: se filtran al leer, antes de construir nada, así que ninguna vista, ni la PPT, ni la
+portada de la suite las cuenta. En el módulo no queda ningún tipo «Opción de Mejora».
+
+El Excel trae 507 registros y el módulo reporta **493**: quedan fuera **14 opciones
+de mejora** —13 de Desaladora · 1 de Talabre; Arqueros y Oficina Central no tenían—, de las cuales solo 1 seguía abierta.
 
 No se borran en silencio: el panel las declara en «Control de calidad del dato» con el
-contraste 507 → 493, y el script las informa en sus avisos. La constante es `TIPOS_EXCLUIDOS`
-en `no_conformidades.py`; para volver a incluirlas basta vaciarla.
+contraste 507 → 493 y el desglose por frente, y el script las informa en sus avisos.
+La constante es `TIPOS_EXCLUIDOS` en `no_conformidades.py`; para volver a incluirlas basta
+vaciarla, y para excluir otro tipo basta agregarlo.
 
 **Semáforo:** Arqueros y Talabre *Crítico* y *Atención* · el resto *Al día*.
 
