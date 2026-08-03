@@ -99,6 +99,10 @@ Talabre** —392, 328 y 224 días, todas «Iniciado» y del mismo responsable—
 
 ## Actualización
 
+Desde la raíz del repositorio, `python3 actualizar_semana.py --entrada <carpeta>` corre este
+módulo y los otros dos en orden. Ver [`CADA_LUNES.md`](../CADA_LUNES.md). Para reprocesar solo
+No Conformidades:
+
 ```bash
 python3 no_conformidades.py --data /ruta/Data_NCR.xlsx \
                             --externas /ruta/Data_NCR*externas.xlsx

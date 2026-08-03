@@ -307,6 +307,8 @@ def leer_dt(ruta, hoy):
     iComp, iCierre = c["fecha de compromiso de cierre"], c["fecha de cierre"]
     iArea, iId = col("área", "area"), col("id externo")
     iSt, iDias = col("status"), col("dias atraso")
+    iEmi = col("fecha de emision", "fecha de emisión")
+    ultimaEmision = None
     if iSt is None:
         avisos.append("El registro de DT no trae columna STATUS: el estado se calcula "
                       "con la regla homologada (cerrado = con fecha de cierre; "
@@ -340,6 +342,13 @@ def leer_dt(ruta, hoy):
         else:
             dias = (hoy - comp).days if st == ATRASADO and comp else None
 
+        # La emisión más reciente del registro: es lo que permite detectar que
+        # el archivo del corte viene más viejo que el de la semana pasada.
+        if iEmi is not None:
+            e = as_fecha(f[iEmi])
+            if e and (ultimaEmision is None or e > ultimaEmision):
+                ultimaEmision = e
+
         cam = re.sub(r"\D", "", str(f[iCam] or ""))
         items.append({
             "id": str(f[iId]).strip() if iId is not None and f[iId] else str(f[iSub]),
@@ -357,7 +366,7 @@ def leer_dt(ruta, hoy):
         c = Counter(m for m, _ in incoherentes)
         for m, n in c.items():
             avisos.append(f"{n} DT con estado inconsistente: {m}")
-    return items, incoherentes, iSt is not None
+    return items, incoherentes, iSt is not None, ultimaEmision
 
 
 # =============================================================================
@@ -376,7 +385,8 @@ def resumir(items):
     }
 
 
-def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio):
+def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
+              ultima_emision=None):
     areas = sorted({s["area"] for s in subs})
 
     # ---------- caminatas ----------
@@ -516,7 +526,11 @@ def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio):
     # una VERIFICACIÓN; si no la trae, el estado se calcula con la regla y el
     # panel lo declara en vez de presentar un chequeo que no puede fallar.
     control = {"contraste": [], "incoherentes": len(incoherentes),
-               "estadoPropio": estado_propio}
+               "estadoPropio": estado_propio,
+               # Fecha del DT más nuevo del registro. La usa actualizar_semana.py
+               # para avisar si el archivo del corte trae datos más viejos que el
+               # de la semana pasada.
+               "ultimaEmisionDT": ultima_emision.strftime("%d-%m-%Y") if ultima_emision else None}
     tot = declarado.get("total") or {}
     if tot.get("subs") is not None:
         control["contraste"].append({
@@ -679,8 +693,9 @@ def main():
         datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
     corte, subs, declarado = leer_status(args.status, hoy)
-    items, incoherentes, estado_propio = leer_dt(args.dt, hoy)
-    datos = construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio)
+    items, incoherentes, estado_propio, ultima_emision = leer_dt(args.dt, hoy)
+    datos = construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
+                      ultima_emision)
 
     destino = AQUI / "datos_talabre.json"
     destino.write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding="utf-8")

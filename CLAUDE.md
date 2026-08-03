@@ -2,6 +2,25 @@
 
 Contiene **dos cosas independientes**:
 
+## La actualización semanal, en un comando
+
+```bash
+python3 actualizar_semana.py --entrada <carpeta con los archivos del corte>
+python3 verificar_suite.py
+```
+
+`actualizar_semana.py` reconoce cada archivo **por su contenido** —los nombres cambian—,
+corre los tres módulos en el orden correcto (los `gen_ppt.js` después de su script de Python
+y `armar_suite.js` al final) y **se detiene** si algún archivo viene más viejo que el ya
+cargado o si falta la planilla de NC externas. Lo que no llega no se toca: ese módulo conserva
+su corte anterior.
+
+`verificar_suite.py` revisa las dos PPT y la suite en tres anchos antes de enviar.
+
+Todo el procedimiento del lunes está en [`CADA_LUNES.md`](CADA_LUNES.md): qué pedir, a quién,
+las trampas conocidas y qué mirar antes de enviar. Los comandos sueltos de cada módulo, que
+siguen sirviendo para reprocesar uno solo, están más abajo.
+
 ## 0 · `suite_qaqc/` — Suite QAQC (consola ejecutiva)
 
 Reúne los dashboards de calidad en un solo archivo con portada que cruza **proyectos ×

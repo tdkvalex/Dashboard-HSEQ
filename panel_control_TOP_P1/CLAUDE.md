@@ -46,6 +46,11 @@ sus láminas. El resumen corporativo se recalcula con los que haya.
 
 ## 2 · Comandos
 
+**Lo normal es no correr esto a mano.** Desde la raíz del repositorio,
+`python3 actualizar_semana.py --entrada <carpeta>` reconoce los archivos por su contenido,
+corre los tres proyectos y la PPT en orden, y se detiene si algo viene viejo. Ver
+[`CADA_LUNES.md`](../CADA_LUNES.md). Lo de abajo sirve para reprocesar un proyecto solo:
+
 ```bash
 python3 desaladora.py --reporte /ruta/REPORTE_GERENCIAL_*.xlsx \
                       --punch   /ruta/Listado_Puntos_Punch_Consolidado_*.xlsx

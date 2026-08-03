@@ -29,6 +29,11 @@ en las portadas de las dos PPT. La tabla vive en `armar_suite.js` (`PROYECTOS`),
 
 ## Actualización
 
+**Lo normal es no correr nada de esto a mano**: desde la raíz del repositorio,
+`python3 actualizar_semana.py --entrada <carpeta>` hace los siete pasos en orden y avisa de
+los archivos viejos. Ver [`CADA_LUNES.md`](../CADA_LUNES.md). Los comandos sueltos siguen
+sirviendo para reprocesar un módulo solo:
+
 ```bash
 # 1 · actualizar el módulo Cierre QAQC (ver panel_control_TOP_P1/CLAUDE.md)
 cd ../panel_control_TOP_P1
