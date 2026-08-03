@@ -468,15 +468,18 @@ document.querySelectorAll('.mtab').forEach(b =>
      se nombran completos («% pendiente», «detalles atrasados»), para que la
      columna se entienda aunque se lea sola. */
   (function(){
+    // «Subsistemas» va fuera de los tres grupos, junto al nombre del proyecto:
+    // es el alcance del proyecto y es transversal a los tres módulos, no una
+    // cifra de Cierre QAQC (aunque de ahí se lea).
     let r = `<tr>
-      <th class="grp g-none"></th>
+      <th class="grp g-none" colspan="2"></th>
       <th class="grp g-prot sep" colspan="3">Protocolos<span>Registros constructivos · menos es mejor</span></th>
-      <th class="grp g-cier sep" colspan="5">Cierre QAQC<span>Carpetas · caminatas · detalles · más es mejor</span></th>
+      <th class="grp g-cier sep" colspan="4">Cierre QAQC<span>Carpetas · caminatas · detalles · más es mejor</span></th>
       <th class="grp g-nc sep" colspan="3">No Conformidades<span>Hallazgos y su corrección · más es mejor</span></th></tr>`;
-    r += `<tr><th>Proyecto</th>
+    r += `<tr><th>Proyecto</th><th class="num">Subsistemas</th>
       <th class="num sep">Protocolos<br>en universo</th><th class="num">Protocolos<br>en falta</th>
       <th class="num">%<br>pendiente</th>
-      <th class="num sep">Subsistemas</th><th class="num">Detalles<br>levantados</th>
+      <th class="num sep">Detalles<br>levantados</th>
       <th class="num">Detalles<br>cerrados</th><th class="num">Detalles<br>atrasados</th>
       <th class="num">% cierre<br>de P1</th>
       <th class="num sep">Hallazgos<br>levantados</th><th class="num">Hallazgos<br>abiertos</th>
@@ -491,11 +494,11 @@ document.querySelectorAll('.mtab').forEach(b =>
     for (const p of P) {
       const a = p.protocolos, b = p.cierre, c = p.noConformidades;
       r += `<tr><td><div class="pj">${p.codigo ? p.codigo + " · " + p.nombre : p.nombre}</div><div class="cli">${p.cliente}</div></td>
+        <td class="num">${b ? nf(b.subs) : '—'}</td>
         <td class="num sep">${a ? nf(a.universo) : '—'}</td>
         <td class="num">${a ? nf(a.enFalta) : '—'}</td>
         <td class="num${a ? ' pctq' : ''}" title="${qProt(a)}">${a ? pc(a.kpi) : '—'}</td>
-        <td class="num sep">${b ? nf(b.subs) : '—'}</td>
-        <td class="num">${b ? nf(b.det.total) : '—'}</td>
+        <td class="num sep">${b ? nf(b.det.total) : '—'}</td>
         <td class="num">${b ? nf(b.det.cerrados) : '—'}</td>
         <td class="num">${b ? nf(b.det.atrasados) : '—'}</td>
         <td class="num${b ? ' pctq' : ''}" title="${qCie(b)}">${b ? pc(b.cierrePct) : '—'}</td>
@@ -505,11 +508,11 @@ document.querySelectorAll('.mtab').forEach(b =>
     }
     const s = (f) => P.reduce((a,x) => a + (f(x) || 0), 0);
     r += `<tr><td><b>Consolidado</b><div class="cli">los 3 proyectos</div></td>
+      <td class="num"><b>${nf(M.cierre.subs)}</b></td>
       <td class="num sep"><b>${nf(s(x => x.protocolos && x.protocolos.universo))}</b></td>
       <td class="num"><b>${nf(s(x => x.protocolos && x.protocolos.enFalta))}</b></td>
       <td class="num pctq" title="${nf(M.protocolos.enFalta)} en falta de ${nf(M.protocolos.base)} que puntúan — el universo incluye ${nf(M.protocolos.remanente)} de remanente, que queda fuera del KPI"><b>${pc(M.protocolos.kpi)}</b></td>
-      <td class="num sep"><b>${nf(M.cierre.subs)}</b></td>
-      <td class="num"><b>${nf(M.cierre.detalles)}</b></td>
+      <td class="num sep"><b>${nf(M.cierre.detalles)}</b></td>
       <td class="num"><b>${nf(M.cierre.cerrados)}</b></td>
       <td class="num"><b>${nf(M.cierre.atrasados)}</b></td>
       <td class="num pctq" title="${nf(M.cierre.p1Cerrados)} de ${nf(M.cierre.p1Total)} detalles P1 cerrados — las columnas de detalles son de TODAS las prioridades (${nf(M.cierre.detalles)})"><b>${pc(Math.round(1000*M.cierre.p1Cerrados/M.cierre.p1Total)/10)}</b></td>

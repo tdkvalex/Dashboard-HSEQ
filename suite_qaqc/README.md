@@ -116,6 +116,11 @@ pestaña, y su escala— y una línea vertical donde empieza cada grupo. Los tí
 (`Protocolos en falta`, `Detalles atrasados`, `Hallazgos abiertos`) para que la columna se
 entienda aunque se lea sola.
 
+**`Proyecto` y `Subsistemas` quedan fuera de los tres grupos.** Los subsistemas son el alcance
+del proyecto y son transversales a los tres módulos —los mismos que se documentan, se cierran y
+sobre los que se levantan hallazgos—, así que encabezan la tabla junto al nombre y no cuelgan de
+Cierre QAQC, aunque la cifra se lea de ahí.
+
 **Los dos porcentajes no se dividen sobre la columna de al lado**, y eso hay que decirlo o
 alguien va a sacar la calculadora y no le va a dar:
 
