@@ -107,6 +107,26 @@ módulo cambia de corte al cambiar de pestaña.
 armar y los deja en un bloque `KPIS`. Así la portada no depende de que los iframes estén
 montados ni de comunicación entre documentos.
 
+### «Detalle por proyecto» — cada columna dice de qué módulo es
+
+Es la tabla de cifras crudas y mezcla columnas de los tres módulos. Sin rotularlo, «KPI» o
+«atrasados» no significan nada: ¿atrasados de protocolos, de detalles, de no conformidades?
+Por eso lleva **una fila de cabecera que agrupa por módulo** —con su color, el mismo de su
+pestaña, y su escala— y una línea vertical donde empieza cada grupo. Los títulos van completos
+(`Protocolos en falta`, `Detalles atrasados`, `Hallazgos abiertos`) para que la columna se
+entienda aunque se lea sola.
+
+**Los dos porcentajes no se dividen sobre la columna de al lado**, y eso hay que decirlo o
+alguien va a sacar la calculadora y no le va a dar:
+
+- `% pendiente` se calcula sobre la **base del KPI**, no sobre el universo: el remanente (`S`)
+  suma al universo pero no puntúa. Talabre: 133 de **11.550**, no de 13.898.
+- `% cierre de P1` mide **solo P1**, mientras que `Detalles levantados/cerrados/atrasados` son
+  de **todas las prioridades**. Desaladora: 592/829 P1, no 960/1.386.
+
+El denominador real de cada uno va en el `title` de la celda —se ve al pasar el cursor— y las
+dos excepciones están además en la nota al pie de la portada.
+
 ### El detalle que hay que respetar
 
 Los módulos van dentro de `<script type="text/plain">`. Lo único que corta ese bloque es la
