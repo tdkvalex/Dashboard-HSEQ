@@ -254,6 +254,43 @@ def dmy(f):
     return f.strftime("%d-%m-%Y") if isinstance(f, datetime) else "—"
 
 
+def revisar(hallados, publicado):
+    """Lo que hay que mirar ANTES de procesar. Devuelve la lista de avisos.
+
+    Vive aquí, en una sola función, porque la usan dos frentes: la corrida por
+    terminal y el Centro de Carga. Si cada uno llevara su copia, un aviso
+    corregido en un lado seguiría faltando en el otro — y estos avisos son justo
+    los que evitan publicar un corte con cifras equivocadas.
+    """
+    alertas = []
+    for clave, etq, extra in (
+        ("nc_data", "El registro de NC", ""),
+        ("tal_dt", "El registro de DT de Talabre", " (ojo con Programa_de_Caminatas.xlsm)"),
+    ):
+        if clave not in hallados or clave not in publicado:
+            continue
+        f = hallados[clave][1]
+        try:
+            prev = datetime.strptime(publicado[clave], "%d-%m-%Y")
+        except (ValueError, TypeError):
+            continue
+        if f and f < prev:
+            alertas.append(f"{etq} llega hasta {dmy(f)} y lo que ya está cargado cubre "
+                           f"hasta {publicado[clave]}: parece un archivo viejo{extra}.")
+    if "nc_data" in hallados and "nc_externas" not in hallados:
+        alertas.append("Falta la planilla de NC externas del cliente. Sin ella Arqueros "
+                       "pierde las 36 NC que le levanta MASA y sale con 98,9% de cierre "
+                       "en vez de 78%.")
+    for par, proyecto, que in (
+        ({"tal_status", "tal_dt"}, "Talabre", "status + registro de DT"),
+        ({"des_reporte", "des_punch"}, "Desaladora", "reporte + punch"),
+    ):
+        if par & hallados.keys() and not par <= hallados.keys():
+            alertas.append(f"{proyecto} necesita SUS DOS archivos ({que}). "
+                           f"Con uno solo no se procesa.")
+    return alertas
+
+
 # =============================================================================
 # 3) Ejecución
 # =============================================================================
@@ -321,30 +358,7 @@ def main():
         print(f"\n{GRIS}Sin clasificar (se ignoran): "
               f"{', '.join(r.name for r in sin_rol[:6])}{FIN}")
 
-    # --- el archivo nuevo no puede traer datos más viejos que lo publicado ---
-    alertas = []
-    if "nc_data" in hallados and "nc_data" in publicado:
-        f = hallados["nc_data"][1]
-        prev = datetime.strptime(publicado["nc_data"], "%d-%m-%Y")
-        if f and f < prev:
-            alertas.append(f"El registro de NC llega hasta {dmy(f)} y lo publicado ya "
-                           f"cubre hasta {publicado['nc_data']}: parece un archivo viejo.")
-    if "tal_dt" in hallados and "tal_dt" in publicado:
-        f = hallados["tal_dt"][1]
-        prev = datetime.strptime(publicado["tal_dt"], "%d-%m-%Y")
-        if f and f < prev:
-            alertas.append(f"El registro de DT de Talabre llega hasta {dmy(f)} y el que ya "
-                           f"está cargado llega hasta {publicado['tal_dt']}: parece un archivo "
-                           f"viejo (ojo con Programa_de_Caminatas.xlsm).")
-    if "nc_data" in hallados and "nc_externas" not in hallados:
-        alertas.append("Falta la planilla de NC externas del cliente. Sin ella Arqueros "
-                       "pierde las NC que le levanta MASA y sale con 98,9% de cierre.")
-    if {"tal_status", "tal_dt"} & hallados.keys() and not {"tal_status", "tal_dt"} <= hallados.keys():
-        alertas.append("Talabre necesita SUS DOS archivos (status + registro de DT). "
-                       "Con uno solo no se procesa.")
-    if {"des_reporte", "des_punch"} & hallados.keys() and not {"des_reporte", "des_punch"} <= hallados.keys():
-        alertas.append("Desaladora necesita SUS DOS archivos (reporte + punch). "
-                       "Con uno solo no se procesa.")
+    alertas = revisar(hallados, publicado)
 
     # Los avisos DETIENEN la corrida. Un archivo viejo o una planilla que falta
     # no rompen nada visible: el panel sale entero y con cifras equivocadas, que

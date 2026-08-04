@@ -1,6 +1,20 @@
 # Cada lunes — actualización de la Suite QAQC
 
-Tres comandos. El resto es pedir bien los archivos.
+## Sin terminal — el Centro de Carga
+
+Doble clic en **«Abrir Centro de Carga»** (`.command` en Mac/Linux, `.bat` en Windows).
+Se abre una página local: se arrastran ahí los archivos del corte, muestra qué llegó
+y qué falta, corre la actualización completa y deja la Suite lista para descargar.
+
+Es la misma actualización de siempre —la página no calcula nada, le pasa los archivos
+a `actualizar_semana.py` y muestra su salida—, así que los avisos, las trampas y el
+orden de los pasos son idénticos. Y como llama al pipeline en vez de reimplementarlo,
+cualquier cambio en las reglas lo hereda sin tocarse.
+
+La página **no se envía al cliente**: el entregable sigue siendo
+`suite_qaqc/Suite_QAQC.html`, un solo archivo que va por correo tal cual.
+
+## Por terminal — lo mismo, en tres comandos
 
 ```bash
 python3 actualizar_semana.py --entrada ~/Descargas/corte_10-08
@@ -8,7 +22,8 @@ python3 verificar_suite.py
 python3 auditoria_datos.py ~/Descargas/corte_10-08
 ```
 
-Se envía `suite_qaqc/Suite_QAQC.html`. Es un solo archivo: va por correo tal cual.
+El Centro de Carga corre el primero de los tres. Los otros dos siguen siendo a mano:
+verifican el entregable ya armado.
 
 ---
 

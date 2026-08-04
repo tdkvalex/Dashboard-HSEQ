@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centro de Carga · Suite QAQC</title>
+<style>
+  :root {
+    --page:#080d18; --s1:#0f1623; --s2:#141d2e;
+    --bdr:#1d2d44; --bdr2:#243350;
+    --t1:#e8eeff; --t2:#7a93bb; --t3:#5a78a8;
+    --blue:#3b82f6; --green:#10b981; --amber:#f59e0b;
+    --red:#ef4444; --gold:#F8BD19;
+  }
+  *, *::before, *::after { box-sizing:border-box; }
+  html, body { margin:0; padding:0; min-height:100%; }
+  body {
+    background:var(--page); color:var(--t1);
+    font-family:'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size:14px; line-height:1.5;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(59,130,246,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 85% 0%, rgba(248,189,25,.05) 0%, transparent 60%);
+    background-attachment:fixed;
+  }
+  .wrap { max-width:940px; margin:0 auto; padding:26px 22px 60px; }
+
+  header { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+    padding-bottom:14px; border-bottom:1px solid var(--bdr); margin-bottom:22px; }
+  h1 { font-family:'Rajdhani',sans-serif; font-size:22px; font-weight:700;
+    letter-spacing:.6px; margin:0; text-transform:uppercase; }
+  h1 span { color:var(--gold); }
+  header .sub { color:var(--t2); font-size:12.5px; }
+
+  h2 { font-family:'Rajdhani',sans-serif; font-size:13px; font-weight:700;
+    letter-spacing:1.4px; text-transform:uppercase; color:var(--gold);
+    margin:0 0 10px; }
+  section { margin-bottom:24px; }
+
+  /* ── zona de arrastre ─────────────────────────────────────────── */
+  .drop { border:2px dashed var(--bdr2); border-radius:12px; background:var(--s1);
+    padding:34px 20px; text-align:center; cursor:pointer; transition:.15s;
+    display:block; width:100%; color:inherit; font:inherit; }
+  .drop:hover, .drop:focus-visible { border-color:var(--t3); background:var(--s2); }
+  .drop.activa { border-color:var(--gold); background:rgba(248,189,25,.06); }
+  .drop .icono { font-size:30px; line-height:1; margin-bottom:8px; }
+  .drop .t { font-family:'Rajdhani',sans-serif; font-size:17px; font-weight:700;
+    letter-spacing:.4px; }
+  .drop .d { color:var(--t2); font-size:12.5px; margin-top:4px; }
+
+  /* ── lista de módulos ─────────────────────────────────────────── */
+  .mods { display:grid; gap:8px; }
+  .mod { display:grid; grid-template-columns:26px 1fr auto; gap:12px;
+    align-items:start; background:var(--s1); border:1px solid var(--bdr);
+    border-left:3px solid var(--bdr2); border-radius:8px; padding:11px 14px; }
+  .mod.lista { border-left-color:var(--green); }
+  .mod.parcial { border-left-color:var(--amber); }
+  .mod .est { font-size:15px; line-height:1.3; text-align:center; }
+  .mod .nom { font-family:'Rajdhani',sans-serif; font-size:15px; font-weight:700;
+    letter-spacing:.3px; }
+  .mod .det { color:var(--t2); font-size:12px; margin-top:2px; }
+  .mod .arch { color:var(--t3); font-size:11.5px; margin-top:3px;
+    font-variant-numeric:tabular-nums; word-break:break-all; }
+  .mod .cuenta { font-family:'Rajdhani',sans-serif; font-size:15px; font-weight:700;
+    color:var(--t2); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .mod.lista .cuenta { color:var(--green); }
+  .mod.parcial .cuenta { color:var(--amber); }
+
+  /* ── avisos ───────────────────────────────────────────────────── */
+  .aviso { background:rgba(245,158,11,.09); border:1px solid rgba(245,158,11,.42);
+    border-radius:8px; padding:11px 14px; margin-bottom:8px; font-size:13px; }
+  .aviso b { color:var(--amber); }
+  .nota { color:var(--t2); font-size:12.5px; }
+
+  /* ── acciones ─────────────────────────────────────────────────── */
+  .acciones { display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    background:var(--s1); border:1px solid var(--bdr); border-radius:10px;
+    padding:14px 16px; }
+  label.campo { display:flex; flex-direction:column; gap:4px; font-size:11px;
+    color:var(--t2); letter-spacing:.6px; text-transform:uppercase;
+    font-family:'Rajdhani',sans-serif; font-weight:700; }
+  input[type=date] { background:var(--s2); color:var(--t1); border:1px solid var(--bdr2);
+    border-radius:6px; padding:7px 9px; font:inherit; font-size:13px; }
+  .btn { font-family:'Rajdhani',sans-serif; font-weight:700; font-size:14px;
+    letter-spacing:.6px; text-transform:uppercase; cursor:pointer;
+    border-radius:7px; padding:11px 22px; border:1px solid var(--gold);
+    background:var(--gold); color:#0b0b0b; transition:.15s; }
+  .btn:hover:not(:disabled) { filter:brightness(1.1); }
+  .btn:disabled { opacity:.4; cursor:not-allowed; }
+  .btn.sec { background:transparent; color:var(--t2); border-color:var(--bdr2); }
+  .btn.sec:hover:not(:disabled) { color:var(--t1); border-color:var(--t3); }
+  .btn.ok { background:var(--green); border-color:var(--green); color:#04231a; }
+  .chk { display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--t2); }
+  .chk input { width:15px; height:15px; accent-color:var(--amber); }
+
+  /* ── consola ──────────────────────────────────────────────────── */
+  .log { background:#060a12; border:1px solid var(--bdr); border-radius:9px;
+    padding:13px 15px; font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size:11.5px; line-height:1.65; color:#b9cbe6; max-height:340px;
+    overflow:auto; white-space:pre-wrap; word-break:break-word; }
+  .log .ok { color:var(--green); } .log .av { color:var(--amber); }
+  .log .mal { color:var(--red); } .log .cmd { color:var(--t3); }
+  .log .tit { color:var(--gold); font-weight:600; }
+
+  .final { display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    border-radius:10px; padding:16px; margin-top:14px; }
+  .final.bien { background:rgba(16,185,129,.09); border:1px solid rgba(16,185,129,.45); }
+  .final.mal  { background:rgba(239,68,68,.09);  border:1px solid rgba(239,68,68,.45); }
+  .final .t { font-family:'Rajdhani',sans-serif; font-size:16px; font-weight:700;
+    letter-spacing:.3px; }
+  a.btn { text-decoration:none; display:inline-block; }
+  [hidden] { display:none !important; }
+  .oculto-a11y { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Centro de Carga · <span>Suite QAQC</span></h1>
+    <span class="sub">Besalco Montajes — actualización semanal</span>
+  </header>
+
+  <section>
+    <button class="drop" id="drop" type="button">
+      <div class="icono">📥</div>
+      <div class="t">Arrastra aquí los archivos del corte</div>
+      <div class="d">o haz clic para elegirlos · los nombres dan lo mismo, se reconocen por su contenido</div>
+    </button>
+    <input type="file" id="picker" class="oculto-a11y" multiple
+           accept=".xlsx,.xlsm,.html,.htm">
+    <p class="nota" id="subiendo" hidden></p>
+  </section>
+
+  <section id="secMods" hidden>
+    <h2>Qué llegó</h2>
+    <div class="mods" id="mods"></div>
+    <p class="nota" id="notaFaltan" style="margin-top:10px"></p>
+  </section>
+
+  <section id="secAvisos" hidden>
+    <h2>Antes de procesar</h2>
+    <div id="avisos"></div>
+  </section>
+
+  <section id="secAcciones" hidden>
+    <div class="acciones">
+      <label class="campo">Fecha de corte
+        <input type="date" id="corte">
+      </label>
+      <button class="btn" id="correr" type="button">Actualizar la suite</button>
+      <label class="chk" id="wrapIgual" hidden>
+        <input type="checkbox" id="igual">
+        Procesar igual, con los avisos entendidos
+      </label>
+      <button class="btn sec" id="limpiar" type="button">Vaciar</button>
+    </div>
+  </section>
+
+  <section id="secLog" hidden>
+    <h2>Qué está pasando</h2>
+    <div class="log" id="log" role="log" aria-live="polite"></div>
+    <div class="final" id="final" hidden></div>
+  </section>
+
+</div>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+
+/* Los ocho documentos, agrupados como se piden: quien manda los archivos manda
+   un módulo entero, no un rol suelto. */
+const MODULOS = [
+  { nom: "Desaladora",        det: "P2416 · ANTOFAGASTA MINERALS — Juan Vergara",
+    roles: ["des_reporte", "des_punch"], pide: "reporte gerencial + listado punch" },
+  { nom: "Talabre",           det: "P2407 · CODELCO — Mauricio Rocha",
+    roles: ["tal_status", "tal_dt"],     pide: "status de subsistemas + registro de DT" },
+  { nom: "Arqueros",          det: "P2342 · MASA — José Muñoz",
+    roles: ["arqueros"],                 pide: "estatus resumen general" },
+  { nom: "No Conformidades",  det: "los tres proyectos y Oficina Central",
+    roles: ["nc_data", "nc_externas"],   pide: "registro principal + planilla del cliente MASA" },
+  { nom: "Protocolos",        det: "lo entrega el equipo del dashboard",
+    roles: ["protocolos"],               pide: "el .html del dashboard actualizado" },
+];
+
+let ultimo = null;      // último reconocimiento devuelto por el servidor
+let sondeo = null;      // temporizador del log
+
+/* ── subida ────────────────────────────────────────────────────────── */
+const drop = $("drop"), picker = $("picker");
+drop.addEventListener("click", () => picker.click());
+picker.addEventListener("change", () => { subir([...picker.files]); picker.value = ""; });
+
+for (const ev of ["dragenter", "dragover"])
+  drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("activa"); });
+for (const ev of ["dragleave", "drop"])
+  drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("activa"); });
+drop.addEventListener("drop", (e) => subir([...(e.dataTransfer?.files || [])]));
+// Sin esto, soltar un archivo fuera de la zona lo abre y se pierde la página.
+for (const ev of ["dragover", "drop"])
+  window.addEventListener(ev, (e) => { if (e.target !== drop) e.preventDefault(); });
+
+async function subir(archivos) {
+  if (!archivos.length) return;
+  const aviso = $("subiendo");
+  aviso.hidden = false;
+  let n = 0;
+  for (const f of archivos) {
+    aviso.textContent = `Subiendo ${++n} de ${archivos.length}: ${f.nombre || f.name}…`;
+    try {
+      await fetch(`/subir?nombre=${encodeURIComponent(f.name)}`,
+                  { method: "POST", body: f });
+    } catch (e) {
+      aviso.textContent = `No se pudo subir «${f.name}». ¿Se cerró el Centro de Carga?`;
+      return;
+    }
+  }
+  aviso.textContent = "Reconociendo los archivos…";
+  await reconocer();
+  aviso.hidden = true;
+}
+
+/* ── reconocimiento ────────────────────────────────────────────────── */
+async function reconocer() {
+  const r = await fetch("/reconocer", { method: "POST" });
+  ultimo = await r.json();
+  if (ultimo.error) { $("subiendo").textContent = ultimo.error; return; }
+  pintar();
+}
+
+function pintar() {
+  const porRol = Object.fromEntries(ultimo.archivos.map((a) => [a.rol, a]));
+  $("secMods").hidden = false;
+
+  $("mods").innerHTML = MODULOS.map((m) => {
+    const tengo = m.roles.filter((r) => porRol[r]);
+    const clase = tengo.length === m.roles.length ? "lista"
+                : tengo.length ? "parcial" : "";
+    const icono = clase === "lista" ? "✓" : clase === "parcial" ? "▲" : "·";
+    const detalle = tengo.length
+      ? tengo.map((r) => {
+          const a = porRol[r];
+          return `<div class="arch">${esc(a.nombre)} · ${a.mb} MB` +
+                 (a.fecha ? ` · dato hasta ${a.fecha}` : "") + `</div>`;
+        }).join("")
+      : `<div class="arch">falta: ${esc(m.pide)} — conserva su corte anterior</div>`;
+    return `<div class="mod ${clase}">
+      <div class="est">${icono}</div>
+      <div>
+        <div class="nom">${esc(m.nom)}</div>
+        <div class="det">${esc(m.det)}</div>
+        ${detalle}
+      </div>
+      <div class="cuenta">${tengo.length}/${m.roles.length}</div>
+    </div>`;
+  }).join("");
+
+  // Lo que no se usó se dice siempre: un archivo que se mandó y no aparece por
+  // ninguna parte es la forma más fácil de publicar un corte a medias creyendo
+  // que estaba completo.
+  const partes = [];
+  if ((ultimo.sinRol || []).length)
+    partes.push(`No se reconocieron: ${ultimo.sinRol.map(esc).join(" · ")}.`);
+  for (const d of ultimo.descartes || [])
+    partes.push(`Para «${esc(d.etiqueta)}» se descartó ${esc(d.nombre)}: llegó otro más nuevo.`);
+  $("notaFaltan").innerHTML = partes.join(" ");
+
+  const av = ultimo.alertas || [];
+  $("secAvisos").hidden = !av.length;
+  $("avisos").innerHTML = av.map((a) => `<div class="aviso">▲ ${esc(a)}</div>`).join("");
+  $("wrapIgual").hidden = !av.length;
+  if (!av.length) $("igual").checked = false;
+
+  $("secAcciones").hidden = ultimo.archivos.length === 0;
+  if (!$("corte").value) $("corte").value = ultimo.hoy;
+  refrescarBoton();
+}
+
+function refrescarBoton() {
+  const hay = ultimo && ultimo.archivos.length;
+  const av = ultimo && (ultimo.alertas || []).length;
+  $("correr").disabled = !hay || (av && !$("igual").checked);
+  $("correr").title = av && !$("igual").checked
+    ? "Hay avisos sin resolver. Repón el archivo o marca la casilla para seguir igual."
+    : "";
+}
+$("igual").addEventListener("change", refrescarBoton);
+
+/* ── ejecución ─────────────────────────────────────────────────────── */
+$("limpiar").addEventListener("click", async () => {
+  await fetch("/limpiar", { method: "POST" });
+  ultimo = null;
+  for (const s of ["secMods", "secAvisos", "secAcciones", "secLog"]) $(s).hidden = true;
+  $("final").hidden = true;
+  $("log").textContent = "";
+});
+
+$("correr").addEventListener("click", async () => {
+  $("correr").disabled = true;
+  $("secLog").hidden = false;
+  $("final").hidden = true;
+  $("log").textContent = "";
+  $("secLog").scrollIntoView({ behavior: "smooth", block: "start" });
+  const r = await fetch("/correr", {
+    method: "POST",
+    body: JSON.stringify({ corte: $("corte").value, igual: $("igual").checked }),
+  });
+  if (!r.ok) { escribirLog(["No se pudo arrancar la actualización."]); return; }
+  seguirLog(0);
+});
+
+function seguirLog(desde) {
+  clearTimeout(sondeo);
+  sondeo = setTimeout(async () => {
+    let d;
+    try { d = await (await fetch(`/log?desde=${desde}`)).json(); }
+    catch { return seguirLog(desde); }
+    if (d.lineas.length) escribirLog(d.lineas);
+    if (d.viva) return seguirLog(d.total);
+    terminar(d.ok);
+  }, 350);
+}
+
+function escribirLog(lineas) {
+  const caja = $("log");
+  const pegado = caja.scrollTop + caja.clientHeight >= caja.scrollHeight - 30;
+  for (const l of lineas) {
+    const span = document.createElement("span");
+    span.className = claseLinea(l);
+    span.textContent = limpiar(l) + "\n";
+    caja.appendChild(span);
+  }
+  if (pegado) caja.scrollTop = caja.scrollHeight;
+}
+
+// Los scripts colorean con secuencias ANSI, que en el navegador son basura.
+const limpiar = (s) => s.replace(/\x1b\[[0-9;]*m/g, "");
+function claseLinea(l) {
+  const s = limpiar(l);
+  if (/^\s*[✗✕]|falló|Traceback|No se procesó/i.test(s)) return "mal";
+  if (/^\s*[⚠▲]|AVISOS/.test(s)) return "av";
+  if (/^\s*✓/.test(s)) return "ok";
+  if (/^\s*\$/.test(s)) return "cmd";
+  if (/^={4,}|^\s{2}[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ ·]{6,}$/.test(s)) return "tit";
+  return "";
+}
+
+function terminar(ok) {
+  const caja = $("final");
+  caja.hidden = false;
+  caja.className = "final " + (ok ? "bien" : "mal");
+  caja.innerHTML = ok
+    ? `<span class="t">✓ Suite actualizada</span>
+       <a class="btn ok" href="/suite" download>⬇ Descargar Suite_QAQC.html</a>
+       <span class="nota">Revisa los avisos de arriba antes de enviarla.</span>`
+    : `<span class="t">✕ No se completó</span>
+       <span class="nota">Mira la consola: ahí está en qué paso se detuvo y por qué.
+       No se publicó nada, así que la suite anterior sigue intacta.</span>`;
+  refrescarBoton();
+}
+
+const esc = (s) => String(s).replace(/[&<>"]/g,
+  (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+reconocer();   // por si quedaron archivos de una carga anterior
+</script>
+</body>
+</html>

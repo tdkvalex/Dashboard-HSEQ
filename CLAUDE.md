@@ -2,7 +2,16 @@
 
 Contiene **dos cosas independientes**:
 
-## La actualización semanal, en un comando
+## La actualización semanal
+
+Sin terminal: doble clic en **«Abrir Centro de Carga»** (`.command` / `.bat`) levanta
+[`centro_carga.py`](centro_carga.py), una página local donde se arrastran los archivos
+del corte, se ve qué llegó y qué falta, y se descarga la Suite ya armada. La página
+**no calcula nada**: le pasa los archivos a `actualizar_semana.py` y muestra su salida,
+así que no existe una segunda implementación de las reglas que pueda divergir. Nunca se
+empaqueta dentro del entregable.
+
+Por terminal es lo mismo:
 
 ```bash
 python3 actualizar_semana.py --entrada <carpeta con los archivos del corte>
