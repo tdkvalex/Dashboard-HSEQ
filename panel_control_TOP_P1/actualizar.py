@@ -29,35 +29,33 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 
+# La apertura de los Excel vive en `qaqc_excel.py`, en la raíz del repositorio:
+# descarta los estilos con nombre —que en el REPORTE_GERENCIAL son 11 de sus 12
+# MB— y abre en modo read_only, con lo que un corte pasa de ~30 s a ~5 s. Si el
+# módulo se copia suelto a otra parte, se cae a la apertura normal de openpyxl y
+# todo sigue funcionando, solo que más lento.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 try:
-    from openpyxl import load_workbook
+    from qaqc_excel import libro, hoja        # noqa: F401
 except ImportError:
-    sys.exit("Falta openpyxl.  Instálalo con:  pip install openpyxl")
-
-
-def libro(ruta, **kw):
-    """Abre el Excel diciendo QUÉ pasa si no se puede, en vez de un traceback.
-    El lunes hace falta saber qué archivo falta o llegó a medias, no en qué
-    línea de openpyxl se cayó."""
-    p = Path(ruta)
-    if not p.exists():
-        sys.exit(f"No existe el archivo: {p}")
-    if p.stat().st_size == 0:
-        sys.exit(f"«{p.name}» está vacío (0 bytes): la descarga quedó a medias, bájalo de nuevo")
     try:
+        from openpyxl import load_workbook
+    except ImportError:
+        sys.exit("Falta openpyxl.  Instálalo con:  pip install openpyxl")
+
+    def libro(ruta, **kw):
+        kw.setdefault("data_only", True)
+        p = Path(ruta)
+        if not p.exists():
+            sys.exit(f"No existe el archivo: {p}")
         return load_workbook(p, **kw)
-    except Exception as e:
-        sys.exit(f"No se pudo abrir «{p.name}» como Excel ({type(e).__name__}). "
-                 f"Comprueba que sea .xlsx o .xlsm y que la descarga esté completa.")
 
+    def hoja(wb, nombre, ruta):
+        if nombre not in wb.sheetnames:
+            sys.exit(f"«{Path(ruta).name}» no trae la hoja «{nombre}». "
+                     f"Trae: {', '.join(wb.sheetnames[:8])}")
+        return wb[nombre]
 
-def hoja(wb, nombre, ruta):
-    """Igual que wb[nombre], pero si la hoja no está dice cuáles sí están."""
-    if nombre not in wb.sheetnames:
-        sys.exit(f"«{Path(ruta).name}» no trae la hoja «{nombre}». "
-                 f"Trae: {', '.join(wb.sheetnames[:8])}"
-                 + (" …" if len(wb.sheetnames) > 8 else ""))
-    return wb[nombre]
 
 AQUI = Path(__file__).resolve().parent
 
@@ -153,7 +151,7 @@ def as_fecha(v):
 
 
 def leer(ruta, respaldo=None):
-    wb = libro(ruta, data_only=True)
+    wb = libro(ruta)
 
     # --- fecha de corte, desde la hoja Resumen -------------------------------
     corte = None

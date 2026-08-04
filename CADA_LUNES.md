@@ -64,7 +64,58 @@ Si el aviso está entendido y se quiere seguir igual, se agrega `--igual`.
 
 ---
 
-## 3 · Antes de enviar
+## 3 · Cómo circula un archivo, de la carpeta a la suite
+
+Ocho documentos entran; uno sale. Nadie escribe una cifra a mano en ninguna parte.
+
+```
+CARPETA DEL CORTE                 SE LEE ASÍ                 PRODUCE            SE INYECTA EN
+─────────────────────────────────────────────────────────────────────────────────────────────
+REPORTE_GERENCIAL_*.xlsx    ─┐  hojas «REPORTE GERENCIAL»
+Listado_Puntos_Punch_*.xlsx ─┴─▶ y «LISTADO PUNCH ITEMS»  ──▶ datos_desaladora  ─┐
+                                 columnas por POSICIÓN                           │
+STATUS_SUBSISTEMAS_*.xlsx   ─┐  hojas «STATUS» y «DT»                            │
+Detalle_de_Terminaciones*   ─┴─▶ columnas por NOMBRE       ──▶ datos_talabre    ─┼─▶ panel_control_TOP_P1/
+                                                                                 │      index.html
+Estatus_Resumen_General_*   ───▶ «BD Caminatas-CTOP» +                            │   (3 bloques marcados)
+                                 «BD Detalles Terminación»──▶ estatus_datos     ─┘        │
+                                 columnas por POSICIÓN                                    ▼
+                                                                                   node gen_ppt.js
+Data_NCR*.xlsx              ─┐  «Observaciones»                                    embebe la PPT
+NC externas del cliente     ─┴─▶ «Disposición NC-Externas» ──▶ datos_nc.json ──▶ modulo_nc/index.html
+                                                                                          │
+dashboard_protocolos.html   ───▶ se copia tal cual ─────────▶ modulos/protocolos.html      │
+                                                                                          ▼
+                                                            node armar_suite.js ──▶ Suite_QAQC.html
+```
+
+**El reconocimiento es por contenido, no por nombre.** `actualizar_semana.py` mira los
+nombres de hoja de cada archivo de la carpeta y deduce su rol; solo cuando dos archivos
+podrían ser el mismo rol —las dos hojas «DT» de Talabre— baja a mirar encabezados y ancho.
+Por eso da igual cómo se llamen los archivos, y por eso un archivo que no encaja se informa
+en vez de procesarse mal.
+
+**El orden importa en dos puntos, y el script lo respeta solo:**
+
+1. `gen_ppt.js` va **después** de los scripts de Python de su módulo. Regenera la PPT desde
+   los JSON y la embebe en el `index.html`; correrlo antes deja el informe descargable
+   desfasado respecto de las pestañas.
+2. `armar_suite.js` va **al final de todo**. Empaqueta los `index.html` ya terminados.
+
+**Nada se pisa entre módulos.** Cada script reemplaza solo su bloque marcado del
+`index.html`; el resto del archivo no se toca. Los tres proyectos de Cierre QAQC escriben
+bloques distintos del mismo archivo, así que corren **en serie**, no en paralelo.
+
+**Lo que no llega, no se toca.** Cada módulo conserva su corte anterior, y por eso los tres
+proyectos suelen quedar a fechas distintas: el panel lo declara con el aviso «cortes mixtos».
+
+**Cuánto demora.** Un corte completo son unos **6 segundos** —el reconocimiento de la
+carpeta, menos de 1—. Si alguna vez se dispara, casi siempre es un Excel que llegó con
+`styles.xml` inflado: `qaqc_excel.py` los descarta al vuelo y lo explica ahí mismo.
+
+---
+
+## 4 · Antes de enviar
 
 `verificar_suite.py` revisa solo lo que se olvida a mano y **sale con error si
 algo falla**:
@@ -96,7 +147,7 @@ Lo que **sí** hay que mirar a ojo:
 
 ---
 
-## 4 · Si algo se rompe
+## 5 · Si algo se rompe
 
 | Síntoma | Causa probable |
 |---|---|

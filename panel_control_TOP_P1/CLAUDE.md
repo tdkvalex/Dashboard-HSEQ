@@ -68,6 +68,12 @@ reprocesando una semana pasada.
 `index.html` (botón «Descargar Informe») y embebe los logos. Correrlo antes de actualizar un
 proyecto deja el informe descargable desfasado respecto de las pestañas.
 
+Los tres proyectos escriben **bloques distintos del mismo `index.html`**, así que corren en
+serie: paralelizarlos haría que se pisaran. Los Excel se abren desde `qaqc_excel.py` (raíz del
+repositorio), que descarta los estilos con nombre y lee en modo `read_only` — ninguna lectura
+usa `max_row`, `.cell()` ni celdas combinadas, por eso es seguro. Si un módulo se copia suelto
+a otra parte, cae solo a la apertura normal de openpyxl y sigue funcionando, más lento.
+
 Cada script imprime un resumen y una sección **⚠ AVISOS**. Leerlos siempre: ahí aparecen los
 valores nuevos que no reconoce y los cruces que dejaron de cuadrar.
 

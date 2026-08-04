@@ -7,6 +7,7 @@ Contiene **dos cosas independientes**:
 ```bash
 python3 actualizar_semana.py --entrada <carpeta con los archivos del corte>
 python3 verificar_suite.py
+python3 auditoria_datos.py <la misma carpeta>
 ```
 
 `actualizar_semana.py` reconoce cada archivo **por su contenido** —los nombres cambian—,
@@ -16,6 +17,13 @@ cargado o si falta la planilla de NC externas. Lo que no llega no se toca: ese m
 su corte anterior.
 
 `verificar_suite.py` revisa las dos PPT y la suite en tres anchos antes de enviar.
+`auditoria_datos.py` cruza la misma cifra en todas las capas —Excel, JSON, portada y PPT—.
+
+Los ocho documentos que entran, cómo se leen y en qué orden se inyectan están dibujados en
+[`CADA_LUNES.md`](CADA_LUNES.md) §3. Un corte completo demora unos **6 segundos**: los Excel
+se abren desde [`qaqc_excel.py`](qaqc_excel.py), que descarta los estilos con nombre —el
+REPORTE_GERENCIAL arrastra 52.000, 11 de sus 12 MB— y lee los nombres de hoja del ZIP en vez
+de abrir el libro entero solo para reconocerlo.
 
 Todo el procedimiento del lunes está en [`CADA_LUNES.md`](CADA_LUNES.md): qué pedir, a quién,
 las trampas conocidas y qué mirar antes de enviar. Los comandos sueltos de cada módulo, que

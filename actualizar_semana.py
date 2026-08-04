@@ -64,10 +64,11 @@ from pathlib import Path
 
 warnings.filterwarnings("ignore")
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 try:
-    from openpyxl import load_workbook
+    from qaqc_excel import hojas, libro
 except ImportError:
-    sys.exit("Falta openpyxl.  Instálalo con:  pip install openpyxl")
+    sys.exit("Falta qaqc_excel.py junto a este script.")
 
 RAIZ = Path(__file__).resolve().parent
 QAQC = RAIZ / "panel_control_TOP_P1"
@@ -91,29 +92,36 @@ def norm(v):
 # =============================================================================
 # 1) Reconocimiento de archivos
 # =============================================================================
-def hojas(ruta):
-    """Nombres de hoja, sin cargar el contenido."""
-    try:
-        wb = load_workbook(ruta, read_only=True, data_only=True)
-        n = list(wb.sheetnames)
-        wb.close()
-        return n
-    except Exception:
-        return []
+# Reconocer la carpeta es lo primero que pasa cada lunes y era lo más lento de
+# todo: abrir cada libro entero solo para ver sus hojas costaba hasta 8 s por
+# archivo. Los nombres de hoja salen del ZIP en milisegundos, y cuando de verdad
+# hay que leer celdas se abre UNA vez y se reutiliza (`_ABIERTOS`), en vez de
+# tres veces el mismo archivo.
+_ABIERTOS = {}
+
+
+def _abrir(ruta):
+    """El libro de `ruta`, abierto una sola vez por corrida."""
+    if ruta not in _ABIERTOS:
+        try:
+            _ABIERTOS[ruta] = libro(ruta)
+        except SystemExit:
+            _ABIERTOS[ruta] = None
+    return _ABIERTOS[ruta]
 
 
 def encabezados(ruta, hoja, max_filas=12):
     """Todos los textos de las primeras filas de una hoja, normalizados."""
+    wb = _abrir(ruta)
+    if wb is None or hoja not in wb.sheetnames:
+        return set(), 0
     try:
-        wb = load_workbook(ruta, read_only=True, data_only=True)
-        ws = wb[hoja]
         vals, anchos = set(), 0
-        for f in ws.iter_rows(min_row=1, max_row=max_filas, values_only=True):
+        for f in wb[hoja].iter_rows(min_row=1, max_row=max_filas, values_only=True):
             anchos = max(anchos, sum(1 for v in f if v not in (None, "")))
             for v in f:
                 if isinstance(v, str) and v.strip():
                     vals.add(norm(v))
-        wb.close()
         return vals, anchos
     except Exception:
         return set(), 0
@@ -121,14 +129,15 @@ def encabezados(ruta, hoja, max_filas=12):
 
 def fecha_max(ruta, hoja, col, desde=2):
     """Fecha más reciente de una columna. Sirve para detectar archivos viejos."""
+    wb = _abrir(ruta)
+    if wb is None or hoja not in wb.sheetnames:
+        return None
     try:
-        wb = load_workbook(ruta, read_only=True, data_only=True)
         mx = None
         for f in wb[hoja].iter_rows(min_row=desde, values_only=True):
             if col < len(f) and isinstance(f[col], datetime):
                 if mx is None or f[col] > mx:
                     mx = f[col]
-        wb.close()
         return mx
     except Exception:
         return None
