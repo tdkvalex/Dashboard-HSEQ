@@ -20,3 +20,7 @@ config/watchlist.local.yaml
 # Node (pptxgenjs se instala local para generar la PPT)
 node_modules/
 package-lock.json
+
+# Contraseña del Centro de Carga: se guarda solo el hash, y aun así
+# es local — nunca se versiona.
+.centro_carga.json

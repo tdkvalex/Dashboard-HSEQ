@@ -6,6 +6,14 @@ Doble clic en **«Abrir Centro de Carga»** (`.command` en Mac/Linux, `.bat` en 
 Se abre una página local: se arrastran ahí los archivos del corte, muestra qué llegó
 y qué falta, corre la actualización completa y deja la Suite lista para descargar.
 
+**La carga está bloqueada hasta escribir la contraseña de administrador.** La primera
+vez pide definirla, y para eso exige además un código que **solo se imprime en la
+ventana negra** — así la elige quien levantó el servidor, no quien pase por el
+navegador. De la contraseña se guarda solo su huella cifrada, en un archivo local que
+no se versiona: el texto no queda escrito en ninguna parte. Si se olvida, se define
+otra con `python3 centro_carga.py --clave`. La sesión dura 8 horas y hay un botón para
+cerrarla antes.
+
 Es la misma actualización de siempre —la página no calcula nada, le pasa los archivos
 a `actualizar_semana.py` y muestra su salida—, así que los avisos, las trampas y el
 orden de los pasos son idénticos. Y como llama al pipeline en vez de reimplementarlo,

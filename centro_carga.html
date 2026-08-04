@@ -110,6 +110,28 @@
     letter-spacing:.3px; }
   a.btn { text-decoration:none; display:inline-block; }
   [hidden] { display:none !important; }
+
+  /* ── acceso ───────────────────────────────────────────────────── */
+  .puerta { max-width:430px; margin:60px auto; background:var(--s1);
+    border:1px solid var(--bdr); border-radius:12px; padding:30px 28px; }
+  .puerta .candado { font-size:30px; text-align:center; margin-bottom:12px; }
+  .puerta h2 { text-align:center; margin-bottom:6px; }
+  .puerta .d { color:var(--t2); font-size:12.5px; text-align:center;
+    margin:0 0 20px; line-height:1.5; }
+  .puerta label { display:block; font-family:'Rajdhani',sans-serif; font-weight:700;
+    font-size:11px; letter-spacing:.6px; text-transform:uppercase; color:var(--t2);
+    margin-bottom:5px; }
+  .puerta input { width:100%; background:var(--s2); color:var(--t1);
+    border:1px solid var(--bdr2); border-radius:6px; padding:10px 12px;
+    font:inherit; font-size:14px; margin-bottom:14px; }
+  .puerta input:focus { outline:2px solid var(--gold); outline-offset:1px; }
+  .puerta .btn { width:100%; }
+  .puerta .error { background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.45);
+    border-radius:6px; padding:9px 12px; font-size:12.5px; color:#ffb4b4;
+    margin-bottom:14px; }
+  .puerta .pie { color:var(--t3); font-size:11.5px; margin:16px 0 0;
+    text-align:center; line-height:1.55; }
+  .salir { margin-left:auto; }
   .oculto-a11y { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 </style>
 </head>
@@ -119,8 +141,33 @@
   <header>
     <h1>Centro de Carga · <span>Suite QAQC</span></h1>
     <span class="sub">Besalco Montajes — actualización semanal</span>
+    <button class="btn sec salir" id="salir" type="button" hidden>Cerrar sesión</button>
   </header>
 
+  <!-- ── Acceso: hasta entrar aquí, no se puede subir ni procesar nada ── -->
+  <form class="puerta" id="puerta" hidden autocomplete="off">
+    <div class="candado">🔒</div>
+    <h2 id="puertaTit">Carga de datos bloqueada</h2>
+    <p class="d" id="puertaSub">Escribe la contraseña de administrador para activarla.</p>
+    <div class="error" id="puertaErr" hidden></div>
+
+    <div id="campoCodigo" hidden>
+      <label for="codigo">Código de instalación</label>
+      <input id="codigo" type="text" inputmode="latin" autocapitalize="characters"
+             placeholder="aparece en la ventana negra">
+    </div>
+    <label for="clave" id="lblClave">Contraseña</label>
+    <input id="clave" type="password" autocomplete="current-password">
+    <div id="campoClave2" hidden>
+      <label for="clave2">Repite la contraseña</label>
+      <input id="clave2" type="password" autocomplete="new-password">
+    </div>
+
+    <button class="btn" id="entrar" type="submit">Activar carga de datos</button>
+    <p class="pie" id="puertaPie"></p>
+  </form>
+
+  <div id="app" hidden>
   <section>
     <button class="drop" id="drop" type="button">
       <div class="icono">📥</div>
@@ -162,6 +209,7 @@
     <div class="log" id="log" role="log" aria-live="polite"></div>
     <div class="final" id="final" hidden></div>
   </section>
+  </div><!-- /app -->
 
 </div>
 
@@ -363,7 +411,89 @@ function terminar(ok) {
 const esc = (s) => String(s).replace(/[&<>"]/g,
   (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-reconocer();   // por si quedaron archivos de una carga anterior
+/* ── acceso ────────────────────────────────────────────────────────────
+   El bloqueo de verdad está en el servidor: sin sesión, /subir, /correr y
+   /suite responden 401. Esto es la cara visible de esa regla, no la regla. */
+let primeraVez = false;
+
+async function mirarSesion() {
+  let s;
+  try { s = await (await fetch("/sesion")).json(); }
+  catch { return mostrarError("No se pudo hablar con el Centro de Carga. ¿Se cerró la ventana negra?"); }
+  primeraVez = !s.configurado;
+  if (s.autenticado) return abrir();
+
+  $("app").hidden = true;
+  $("salir").hidden = true;
+  $("puerta").hidden = false;
+  $("campoCodigo").hidden = !primeraVez;
+  $("campoClave2").hidden = !primeraVez;
+  $("puertaTit").textContent = primeraVez ? "Definir la contraseña" : "Carga de datos bloqueada";
+  $("puertaSub").textContent = primeraVez
+    ? "Es la primera vez que se abre. Elige la contraseña con la que se activará "
+      + "la carga de datos de aquí en adelante."
+    : "Escribe la contraseña de administrador para activarla.";
+  $("lblClave").textContent = primeraVez ? "Contraseña nueva" : "Contraseña";
+  $("clave").setAttribute("autocomplete", primeraVez ? "new-password" : "current-password");
+  $("entrar").textContent = primeraVez ? "Definir y activar" : "Activar carga de datos";
+  $("puertaPie").innerHTML = primeraVez
+    ? "El código de instalación está impreso en la ventana negra que abriste. "
+      + "De la contraseña se guarda solo su huella cifrada, nunca el texto."
+    : "¿La olvidaste? Cierra esta ventana y corre "
+      + "<code>python3 centro_carga.py --clave</code> para definir otra.";
+  $("clave").focus();
+}
+
+function abrir() {
+  $("puerta").hidden = true;
+  $("app").hidden = false;
+  $("salir").hidden = false;
+  $("clave").value = $("clave2").value = $("codigo").value = "";
+  reconocer();      // por si quedaron archivos de una carga anterior
+}
+
+const mostrarError = (t) => { $("puertaErr").hidden = false; $("puertaErr").textContent = t; };
+
+$("puerta").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  $("puertaErr").hidden = true;
+  const clave = $("clave").value;
+  if (primeraVez && clave !== $("clave2").value)
+    return mostrarError("Las dos contraseñas no coinciden.");
+  if (primeraVez && clave.length < 8)
+    return mostrarError("La contraseña necesita al menos 8 caracteres.");
+
+  $("entrar").disabled = true;
+  try {
+    const r = await fetch(primeraVez ? "/clave" : "/entrar", {
+      method: "POST",
+      body: JSON.stringify(primeraVez ? { clave, codigo: $("codigo").value } : { clave }),
+    });
+    const d = await r.json();
+    if (!r.ok) return mostrarError(d.error || "No se pudo entrar.");
+    abrir();
+  } catch {
+    mostrarError("No se pudo hablar con el Centro de Carga.");
+  } finally {
+    $("entrar").disabled = false;
+  }
+});
+
+$("salir").addEventListener("click", async () => {
+  await fetch("/salir", { method: "POST" });
+  location.reload();
+});
+
+/* Si la sesión caducó mientras la página estaba abierta, no tiene sentido
+   seguir mostrando botones que ya no hacen nada: se vuelve al candado. */
+const _fetch = window.fetch;
+window.fetch = async (...a) => {
+  const r = await _fetch(...a);
+  if (r.status === 401) { clearTimeout(sondeo); mirarSesion(); }
+  return r;
+};
+
+mirarSesion();
 </script>
 </body>
 </html>

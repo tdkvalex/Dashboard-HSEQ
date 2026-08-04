@@ -6,7 +6,9 @@ Contiene **dos cosas independientes**:
 
 Sin terminal: doble clic en **«Abrir Centro de Carga»** (`.command` / `.bat`) levanta
 [`centro_carga.py`](centro_carga.py), una página local donde se arrastran los archivos
-del corte, se ve qué llegó y qué falta, y se descarga la Suite ya armada. La página
+del corte, se ve qué llegó y qué falta, y se descarga la Suite ya armada. **La carga
+está bloqueada tras la contraseña de administrador**: de ella se guarda solo el hash
+en `.centro_carga.json`, que no se versiona. La página
 **no calcula nada**: le pasa los archivos a `actualizar_semana.py` y muestra su salida,
 así que no existe una segunda implementación de las reglas que pueda divergir. Nunca se
 empaqueta dentro del entregable.
