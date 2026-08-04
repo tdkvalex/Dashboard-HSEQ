@@ -72,6 +72,31 @@ try:
 except ImportError:
     sys.exit("Falta openpyxl.  Instálalo con:  pip install openpyxl")
 
+
+def libro(ruta, **kw):
+    """Abre el Excel diciendo QUÉ pasa si no se puede, en vez de un traceback.
+    El lunes hace falta saber qué archivo falta o llegó a medias, no en qué
+    línea de openpyxl se cayó."""
+    p = Path(ruta)
+    if not p.exists():
+        sys.exit(f"No existe el archivo: {p}")
+    if p.stat().st_size == 0:
+        sys.exit(f"«{p.name}» está vacío (0 bytes): la descarga quedó a medias, bájalo de nuevo")
+    try:
+        return load_workbook(p, **kw)
+    except Exception as e:
+        sys.exit(f"No se pudo abrir «{p.name}» como Excel ({type(e).__name__}). "
+                 f"Comprueba que sea .xlsx o .xlsm y que la descarga esté completa.")
+
+
+def hoja(wb, nombre, ruta):
+    """Igual que wb[nombre], pero si la hoja no está dice cuáles sí están."""
+    if nombre not in wb.sheetnames:
+        sys.exit(f"«{Path(ruta).name}» no trae la hoja «{nombre}». "
+                 f"Trae: {', '.join(wb.sheetnames[:8])}"
+                 + (" …" if len(wb.sheetnames) > 8 else ""))
+    return wb[nombre]
+
 AQUI = Path(__file__).resolve().parent
 
 PROYECTO = {
@@ -200,8 +225,8 @@ def as_fecha(v):
 # 1) REPORTE GERENCIAL — subsistemas, caminatas y carpetas
 # =============================================================================
 def leer_reporte(ruta):
-    wb = load_workbook(ruta, data_only=True)
-    ws = wb["REPORTE GERENCIAL"]
+    wb = libro(ruta, data_only=True)
+    ws = hoja(wb, "REPORTE GERENCIAL", ruta)
 
     corte = None
     for f in ws.iter_rows(min_row=1, max_row=9, values_only=True):
@@ -283,8 +308,8 @@ def leer_reporte(ruta):
 # 2) PUNCH LIST — detalles de terminación
 # =============================================================================
 def leer_punch(ruta, hoy):
-    wb = load_workbook(ruta, data_only=True, read_only=True)
-    ws = wb["LISTADO PUNCH ITEMS"]
+    wb = libro(ruta, data_only=True, read_only=True)
+    ws = hoja(wb, "LISTADO PUNCH ITEMS", ruta)
 
     items = []
     for f in ws.iter_rows(min_row=9, values_only=True):

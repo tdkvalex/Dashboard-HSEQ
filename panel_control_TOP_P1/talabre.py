@@ -92,6 +92,31 @@ try:
 except ImportError:
     sys.exit("Falta openpyxl.  Instálalo con:  pip install openpyxl")
 
+
+def libro(ruta, **kw):
+    """Abre el Excel diciendo QUÉ pasa si no se puede, en vez de un traceback.
+    El lunes hace falta saber qué archivo falta o llegó a medias, no en qué
+    línea de openpyxl se cayó."""
+    p = Path(ruta)
+    if not p.exists():
+        sys.exit(f"No existe el archivo: {p}")
+    if p.stat().st_size == 0:
+        sys.exit(f"«{p.name}» está vacío (0 bytes): la descarga quedó a medias, bájalo de nuevo")
+    try:
+        return load_workbook(p, **kw)
+    except Exception as e:
+        sys.exit(f"No se pudo abrir «{p.name}» como Excel ({type(e).__name__}). "
+                 f"Comprueba que sea .xlsx o .xlsm y que la descarga esté completa.")
+
+
+def hoja(wb, nombre, ruta):
+    """Igual que wb[nombre], pero si la hoja no está dice cuáles sí están."""
+    if nombre not in wb.sheetnames:
+        sys.exit(f"«{Path(ruta).name}» no trae la hoja «{nombre}». "
+                 f"Trae: {', '.join(wb.sheetnames[:8])}"
+                 + (" …" if len(wb.sheetnames) > 8 else ""))
+    return wb[nombre]
+
 AQUI = Path(__file__).resolve().parent
 
 PROYECTO = {
@@ -217,8 +242,8 @@ def encabezado(ws, requeridas, max_filas=15):
 # 1) STATUS — subsistemas, caminatas y avance de carpeta
 # =============================================================================
 def leer_status(ruta, hoy):
-    wb = load_workbook(ruta, data_only=True)
-    ws = wb["STATUS"]
+    wb = libro(ruta, data_only=True)
+    ws = hoja(wb, "STATUS", ruta)
     nf, c = encabezado(ws, ["area", "subsistemas", "caminata 1", "caminata 2", "% pec"])
     col = lambda *nombres: next((c[n] for n in nombres if n in c), None)
     iSub, iArea = c["subsistemas"], c["area"]
@@ -298,8 +323,8 @@ def leer_status(ruta, hoy):
 # 2) Registro de DT — detalles de terminación
 # =============================================================================
 def leer_dt(ruta, hoy):
-    wb = load_workbook(ruta, data_only=True, read_only=True)
-    ws = wb["DT"]
+    wb = libro(ruta, data_only=True, read_only=True)
+    ws = hoja(wb, "DT", ruta)
     nf, c = encabezado(ws, ["n° subsistema", "prioridades", "caminata", "disc",
                             "fecha de compromiso de cierre", "fecha de cierre"])
     col = lambda *nombres: next((c[n] for n in nombres if n in c), None)

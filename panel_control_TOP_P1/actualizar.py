@@ -3,7 +3,11 @@
 Actualiza el panel de control y los datos del PPT desde el Excel de estatus QAQC.
 
 Uso (cada lunes):
-    python3 actualizar.py /ruta/al/Estatus_Resumen_General_QAQC.xlsx
+    python3 actualizar.py /ruta/al/Estatus_Resumen_General_QAQC.xlsx [--hoy AAAA-MM-DD]
+
+El corte lo declara el propio Excel («Fecha actualización», hoja Resumen). `--hoy`
+es solo el respaldo para cuando esa celda no viene: sin él se usaría la fecha del
+día y el proyecto quedaría con un corte distinto al de los otros dos.
 
 Qué hace:
   1. Lee las hojas «BD Caminatas-CTOP» y «BD Detalles Terminación».
@@ -29,6 +33,31 @@ try:
     from openpyxl import load_workbook
 except ImportError:
     sys.exit("Falta openpyxl.  Instálalo con:  pip install openpyxl")
+
+
+def libro(ruta, **kw):
+    """Abre el Excel diciendo QUÉ pasa si no se puede, en vez de un traceback.
+    El lunes hace falta saber qué archivo falta o llegó a medias, no en qué
+    línea de openpyxl se cayó."""
+    p = Path(ruta)
+    if not p.exists():
+        sys.exit(f"No existe el archivo: {p}")
+    if p.stat().st_size == 0:
+        sys.exit(f"«{p.name}» está vacío (0 bytes): la descarga quedó a medias, bájalo de nuevo")
+    try:
+        return load_workbook(p, **kw)
+    except Exception as e:
+        sys.exit(f"No se pudo abrir «{p.name}» como Excel ({type(e).__name__}). "
+                 f"Comprueba que sea .xlsx o .xlsm y que la descarga esté completa.")
+
+
+def hoja(wb, nombre, ruta):
+    """Igual que wb[nombre], pero si la hoja no está dice cuáles sí están."""
+    if nombre not in wb.sheetnames:
+        sys.exit(f"«{Path(ruta).name}» no trae la hoja «{nombre}». "
+                 f"Trae: {', '.join(wb.sheetnames[:8])}"
+                 + (" …" if len(wb.sheetnames) > 8 else ""))
+    return wb[nombre]
 
 AQUI = Path(__file__).resolve().parent
 
@@ -123,8 +152,8 @@ def as_fecha(v):
     return None
 
 
-def leer(ruta):
-    wb = load_workbook(ruta, data_only=True)
+def leer(ruta, respaldo=None):
+    wb = libro(ruta, data_only=True)
 
     # --- fecha de corte, desde la hoja Resumen -------------------------------
     corte = None
@@ -139,13 +168,15 @@ def leer(ruta):
             if corte:
                 break
     if corte is None:
-        corte = datetime.now()
+        corte = respaldo or datetime.now()
         avisos.append("No se encontró «Fecha actualización» en la hoja Resumen; "
-                      "se usa la fecha de hoy para calcular vencidos.")
+                      f"se usa {corte:%d-%m-%Y} para calcular vencidos"
+                      + ("" if respaldo else " (la fecha de hoy: pásala con --hoy "
+                         "si estás reprocesando un corte pasado)") + ".")
 
     # --- caminatas y carpetas TOP -------------------------------------------
     caminatas = []
-    for fila in wb["BD Caminatas-CTOP"].iter_rows(min_row=2, values_only=True):
+    for fila in hoja(wb, "BD Caminatas-CTOP", ruta).iter_rows(min_row=2, values_only=True):
         if fila[0] is None:
             continue
         caminatas.append({
@@ -159,7 +190,7 @@ def leer(ruta):
 
     # --- detalles de terminación --------------------------------------------
     detalles = []
-    for fila in wb["BD Detalles Terminación"].iter_rows(min_row=2, values_only=True):
+    for fila in hoja(wb, "BD Detalles Terminación", ruta).iter_rows(min_row=2, values_only=True):
         if all(v is None for v in fila):
             continue
         estado, grupo = mapear(fila[8], DT_MAP, "Estatus detalle")\
@@ -389,9 +420,24 @@ def inyectar_en_html(ruta_html, datos):
 
 
 def main():
-    if len(sys.argv) < 2:
+    # El corte de Arqueros lo declara el propio Excel («Fecha actualización» de
+    # la hoja Resumen), que es la fuente correcta. --hoy solo existe para el
+    # respaldo: si esa celda no viene, antes se usaba la fecha del día en
+    # silencio y el proyecto quedaba con un corte distinto al de los otros dos.
+    argv = sys.argv[1:]
+    respaldo = None
+    if "--hoy" in argv:
+        i = argv.index("--hoy")
+        if i + 1 >= len(argv):
+            sys.exit("--hoy necesita una fecha AAAA-MM-DD")
+        try:
+            respaldo = datetime.strptime(argv[i + 1], "%Y-%m-%d")
+        except ValueError:
+            sys.exit("--hoy debe ser AAAA-MM-DD")
+        argv = argv[:i] + argv[i + 2:]
+    if not argv:
         sys.exit(__doc__)
-    ruta = Path(sys.argv[1]).expanduser()
+    ruta = Path(argv[0]).expanduser()
     if not ruta.exists():
         sys.exit(f"No existe el archivo: {ruta}")
 
@@ -403,7 +449,7 @@ def main():
         except Exception:
             anterior = None
 
-    corte, caminatas, detalles = leer(ruta)
+    corte, caminatas, detalles = leer(ruta, respaldo)
     datos = construir(corte, caminatas, detalles)
     datos["semaforo"] = semaforo(datos)
 

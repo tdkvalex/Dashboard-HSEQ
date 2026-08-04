@@ -236,6 +236,22 @@ def revisar_datos():
     else:
         bien(f"Detalles cuadran ({suma:,})".replace(",", "."))
 
+    # Una copia en modulos/ le gana al archivo en vivo: el módulo se congela en
+    # ese corte y nada avisa. Solo protocolos.html debe vivir ahí —llega de otro
+    # equipo y no se genera aquí—; los otros dos se leen de donde se generan.
+    sombras = [f for f in ("cierre_qaqc.html", "no_conformidades.html")
+               if (RAIZ / "suite_qaqc" / "modulos" / f).exists()]
+    if sombras:
+        falla(f"Hay copia(s) en suite_qaqc/modulos/: {', '.join(sombras)} — "
+              f"le ganan al módulo en vivo y lo dejan congelado. Bórralas y rearma")
+    else:
+        bien("Sin copias que congelen un módulo en modulos/")
+
+    # El HTML que llega de otro equipo es el único insumo que no se puede
+    # regenerar desde el repositorio: si falta, no hay corte que valga.
+    if not (RAIZ / "suite_qaqc" / "modulos" / "protocolos.html").exists():
+        falla("Falta suite_qaqc/modulos/protocolos.html — pídelo al equipo de Protocolos")
+
     cortes = sorted({p["cierre"]["corte"] for p in k["proyectos"] if p.get("cierre")})
     if len(cortes) > 1:
         print(f"  {AV} Cortes mixtos en Cierre QAQC: {', '.join(cortes)} "

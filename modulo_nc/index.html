@@ -244,6 +244,9 @@
   .tbl .int { color: var(--ord-3); font-weight: 700; }
   .tbl .cli { color: var(--amber); font-weight: 700; }
   .tbl .sub { color: var(--orange); font-weight: 700; }
+  /* Lo que el origen no clasifica: neutro y en cursiva, nunca en color de
+     estado, pero visible — si se omite, el desglose no suma el total. */
+  .tbl .na { color: var(--ink-muted); font-style: italic; font-weight: 400; cursor: help; }
   .tbl .ext { color: var(--amber); font-weight: 700; }
   :root[data-theme="light"] .tbl .int { color: var(--ord-1); }
 
@@ -502,7 +505,7 @@ const NC = {
   "hoy": "03-08-2026",
   "corte": "2026-08-03",
   "corteTexto": "03-08-2026",
-  "generado": "2026-08-03 22:27",
+  "generado": "2026-08-03 23:59",
   "fuente": "b73c9c4f-Data_NCR_2.xlsx"
  },
  "orden": [
@@ -6601,6 +6604,14 @@ function render() {
     // columna propia —nunca sumados con los del subcontrato—, porque son los
     // que comprometen el contrato. Los totales quedan al lado.
     const cel = (v, cls) => v ? `<span class="${cls}">${fmt(v)}</span>` : '—';
+    // El desglose por vía tiene que sumar el total. Lo que el Excel no clasifica
+    // se declara aparte: si no, Oficina Central sale «0 / 0 / 0» con 8 levantadas
+    // y se lee como si no hubiera registro, no como si faltara el dato.
+    const desg = (v) => {
+      const sc = v.total - v.internas - (v.cliente || 0) - (v.subcontrato || 0);
+      return `${fmt(v.internas)} / <span class="cli">${fmt(v.cliente)}</span> / ${fmt(v.subcontrato)}` +
+             (sc > 0 ? ` <span class="na" title="El Excel no declara la vía de emisión">+${fmt(sc)} s/c</span>` : '');
+    };
     let r = `<tr><th>Frente</th><th class="num">Levantados</th><th class="num">Cerrados</th>
       <th class="num">Abiertos</th><th class="num">Abiertos internos</th>
       <th class="num">Abiertos <b>del cliente</b></th><th class="num">Abiertos de subcontrato</th>
@@ -6616,7 +6627,7 @@ function render() {
         <td class="num">${cel(v.abiertasSubcontrato, 'sub')}</td>
         <td class="num">${v.atrasadas ? `<span class="alert">${fmt(v.atrasadas)}</span>` : '—'}</td>
         <td class="num">${pctTxt(v.cerradas,v.total)}</td>
-        <td class="num">${fmt(v.internas)} / <span class="cli">${fmt(v.cliente)}</span> / ${fmt(v.subcontrato)}</td>
+        <td class="num">${desg(v)}</td>
         <td class="num">${fmt(Math.round(v.costo))}</td>
         <td><span class="chip ${s[0]}">${icono[s[0]]} ${s[1]}</span></td></tr>`;
     }
@@ -6629,7 +6640,7 @@ function render() {
       <td class="num"><b>${cel(o.abiertasSubcontrato, 'sub')}</b></td>
       <td class="num"><b>${o.atrasadas ? `<span class="alert">${fmt(o.atrasadas)}</span>` : '—'}</b></td>
       <td class="num"><b>${pctTxt(o.cerradas,o.total)}</b></td>
-      <td class="num"><b>${fmt(o.internas)} / <span class="cli">${fmt(o.cliente)}</span> / ${fmt(o.subcontrato)}</b></td>
+      <td class="num"><b>${desg(o)}</b></td>
       <td class="num"><b>${fmt(Math.round(o.costo))}</b></td><td></td></tr>`;
     $('semaforo').innerHTML = r;
 

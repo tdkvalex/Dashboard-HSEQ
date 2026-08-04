@@ -71,6 +71,31 @@ try:
 except ImportError:
     sys.exit("Falta openpyxl.  Instálalo con:  pip install openpyxl")
 
+
+def libro(ruta, **kw):
+    """Abre el Excel diciendo QUÉ pasa si no se puede, en vez de un traceback.
+    El lunes hace falta saber qué archivo falta o llegó a medias, no en qué
+    línea de openpyxl se cayó."""
+    p = Path(ruta)
+    if not p.exists():
+        sys.exit(f"No existe el archivo: {p}")
+    if p.stat().st_size == 0:
+        sys.exit(f"«{p.name}» está vacío (0 bytes): la descarga quedó a medias, bájalo de nuevo")
+    try:
+        return load_workbook(p, **kw)
+    except Exception as e:
+        sys.exit(f"No se pudo abrir «{p.name}» como Excel ({type(e).__name__}). "
+                 f"Comprueba que sea .xlsx o .xlsm y que la descarga esté completa.")
+
+
+def hoja(wb, nombre, ruta):
+    """Igual que wb[nombre], pero si la hoja no está dice cuáles sí están."""
+    if nombre not in wb.sheetnames:
+        sys.exit(f"«{Path(ruta).name}» no trae la hoja «{nombre}». "
+                 f"Trae: {', '.join(wb.sheetnames[:8])}"
+                 + (" …" if len(wb.sheetnames) > 8 else ""))
+    return wb[nombre]
+
 AQUI = Path(__file__).resolve().parent
 
 MODULO = {
@@ -208,7 +233,7 @@ def atrasada(estado, creada, hoy):
 
 # =============================================================================
 def leer(ruta, hoy):
-    wb = load_workbook(ruta, data_only=True)
+    wb = libro(ruta, data_only=True)
     hoja = "Observaciones" if "Observaciones" in wb.sheetnames else wb.sheetnames[0]
     it = wb[hoja].iter_rows(values_only=True)
     next(it)                                     # encabezado
@@ -305,7 +330,7 @@ CIERRE_EXTERNAS = "cerrada"
 
 def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
     """NC que el cliente levanta contra Besalco, desde su planilla de control."""
-    wb = load_workbook(ruta, data_only=True)
+    wb = libro(ruta, data_only=True)
     if HOJA_EXTERNAS not in wb.sheetnames:
         avisos.append(f"El archivo de externas no trae la hoja «{HOJA_EXTERNAS}»; se ignoró")
         return []

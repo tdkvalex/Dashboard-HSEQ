@@ -31,9 +31,14 @@ Ver [`suite_qaqc/README.md`](suite_qaqc/README.md). Punto de entrada:
 
 ```bash
 cd suite_qaqc
-cp ../panel_control_TOP_P1/index.html modulos/cierre_qaqc.html   # tras actualizar el módulo
+cp <dashboard_protocolos_del_corte>.html modulos/protocolos.html   # el único que se copia
 node armar_suite.js
 ```
+
+**Cierre QAQC y No Conformidades NO se copian a `modulos/`.** El generador los toma en vivo
+de `panel_control_TOP_P1/index.html` y `modulo_nc/index.html`. Si alguien deja una copia en
+`modulos/`, esa copia **gana** y el módulo queda congelado en ese corte para siempre, sin que
+nada avise. Protocolos sí se copia: llega de otro equipo y no se genera aquí.
 
 Cada módulo va aislado en su propio iframe, así que se integran **sin reescribir ninguno**.
 Detalle crítico: los módulos se empaquetan con un centinela en lugar de `</script`; escaparlos

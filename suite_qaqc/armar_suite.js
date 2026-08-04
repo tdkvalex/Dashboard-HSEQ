@@ -340,15 +340,29 @@ if (!fs.existsSync(plantilla)) {
     { clave: "nc", rutas: [path.join(MODULOS, "no_conformidades.html"),
                            path.join(AQUI, "..", "modulo_nc", "index.html")] },
   ];
-  let bloques = "<!-- === MODULOS:INICIO === -->\n", pesos = [];
+  let bloques = "<!-- === MODULOS:INICIO === -->\n", pesos = [], faltan = [];
   for (const { clave, rutas } of mods) {
     const r = rutas.find((x) => fs.existsSync(x));
     const hay = Boolean(r);
     const archivo = path.basename(r || rutas[0]);
     const cuerpo = hay ? empaquetar(fs.readFileSync(r, "utf8"), archivo) : "";
     if (hay) pesos.push(`${clave} ${(fs.statSync(r).size / 1024 / 1024).toFixed(1)} MB`);
-    else console.log(`Aviso: falta ${archivo} — la suite sale sin el módulo ${clave}.`);
+    else faltan.push({ clave, archivo });
     bloques += `<script type="text/plain" id="mod-${clave}">${cuerpo}<\/script>\n`;
+  }
+  // Un módulo que falta NO puede salir en silencio. Antes se imprimía un aviso
+  // entre veinte líneas de resumen y se escribía igual una suite donde ese
+  // módulo aparece en 0 % — que es exactamente como se ve un proyecto sin
+  // avance. Es preferible no tener entregable a tener uno que miente.
+  if (faltan.length && !process.argv.includes("--sin-modulo")) {
+    console.error("\n" + "=".repeat(72));
+    for (const { clave, archivo } of faltan)
+      console.error(`  ✕ Falta ${archivo} — el módulo «${clave}» saldría en 0, que se lee\n` +
+                    `    como «sin avance» y no como «sin dato».`);
+    console.error(`\n  La suite NO se escribió. Repón el archivo y vuelve a correr.\n` +
+                  `  Si de verdad quieres armarla incompleta: node armar_suite.js --sin-modulo`);
+    console.error("=".repeat(72));
+    process.exit(1);
   }
   html = bloque(html, "<!-- === MODULOS:INICIO === -->", "<!-- === MODULOS:FIN === -->", bloques);
 

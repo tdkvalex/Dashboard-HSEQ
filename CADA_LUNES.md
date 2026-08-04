@@ -1,10 +1,11 @@
 # Cada lunes — actualización de la Suite QAQC
 
-Dos comandos. El resto es pedir bien los archivos.
+Tres comandos. El resto es pedir bien los archivos.
 
 ```bash
 python3 actualizar_semana.py --entrada ~/Descargas/corte_10-08
 python3 verificar_suite.py
+python3 auditoria_datos.py ~/Descargas/corte_10-08
 ```
 
 Se envía `suite_qaqc/Suite_QAQC.html`. Es un solo archivo: va por correo tal cual.
@@ -43,6 +44,13 @@ si el archivo viene más viejo. Si aparece ese aviso, pedir el archivo correcto.
 que le levanta MASA y aparece con 98,9% de cierre en vez de 78%. También detiene
 la corrida.
 
+**El dashboard de Protocolos es el único que no se puede regenerar aquí.** Llega
+armado de otro equipo y vive solo en `suite_qaqc/modulos/protocolos.html`, que no
+se versiona (pesa 3 MB y no es nuestro). **Guarda una copia fuera del repositorio
+cada vez que llegue uno nuevo.** Si se pierde, la suite no se puede armar hasta
+que ese equipo lo reenvíe — y desde este corte el generador se detiene en vez de
+publicar Protocolos en 0 %, que se lee como «sin avance» y no como «sin dato».
+
 **Si se reprocesa un corte pasado, va `--corte`.** La ventana de «levantados en la
 última semana» y los días de atraso se cuentan contra esa fecha; sin el parámetro
 se usa el día en que se corre.
@@ -70,6 +78,13 @@ algo falla**:
 
 Con `--rapido` corre solo a 1920 px, para una pasada corta.
 
+`auditoria_datos.py` revisa lo otro: que **la misma cifra diga lo mismo en todas
+las capas** —Excel, JSON de cada módulo, portada de la suite y texto de las PPT—,
+que las partes sumen el total, que la semana informada vaya de lunes a domingo y
+que el ritmo no tenga huecos. Pasándole la carpeta del corte agrega el cruce
+contra el Excel de origen, que es el único capaz de pillar un error de lectura.
+También sale con error si algo falla.
+
 Lo que **sí** hay que mirar a ojo:
 
 1. **Los AVISOS de cada script.** Ahí aparecen los valores que no supo clasificar
@@ -87,7 +102,8 @@ Lo que **sí** hay que mirar a ojo:
 |---|---|
 | «no vino — se conserva el corte anterior» en un archivo que sí mandaste | el archivo no tiene las hojas esperadas: ábrelo y compara con la tabla de arriba |
 | Un script avisa de columnas o valores no reconocidos | el proyecto cambió el formato del Excel. `talabre.py` resuelve columnas por nombre y aguanta; los demás usan posiciones fijas documentadas en `panel_control_TOP_P1/CLAUDE.md` §4 |
-| La suite sale sin un módulo | falta su JSON o su HTML; el generador avisa y arma la suite con los que haya |
+| «Falta … — la suite NO se escribió» | falta el HTML de ese módulo (casi siempre `modulos/protocolos.html`). Repónlo; la suite anterior sigue intacta. Armarla incompleta a propósito: `node armar_suite.js --sin-modulo` |
+| Un módulo se quedó pegado en un corte viejo | hay una copia en `suite_qaqc/modulos/` que le gana al archivo en vivo. Solo `protocolos.html` debe estar ahí: borra `cierre_qaqc.html` o `no_conformidades.html` si aparecieron |
 | La PPT no descarga desde el panel | se corrió `gen_ppt.js` antes que el script de Python. Repetir en orden — `actualizar_semana.py` lo hace solo |
 
 El detalle de cada módulo está en su propio README:
