@@ -141,6 +141,87 @@ def revisar_ppt(ruta):
 # =============================================================================
 # 2) La suite en el navegador
 # =============================================================================
+
+# El error que motivó esto: una tarjeta decía «1.148/1.988» y debajo «830
+# abiertos». 1.988 − 1.148 = 840, no 830 — faltaban 10 «en trámite» que la
+# tarjeta no nombraba. No era un cálculo malo sino un desglose incompleto, y no
+# hay forma de que un chequeo de datos lo vea: hay que leer lo que se publica.
+#
+# Un desglose se escribe de dos maneras, y las dos se revisan:
+#   · sobre el RESTO       «27/135 entregadas · 108 pendientes»   → suma 135−27
+#   · sobre el NUMERADOR   «27/135 entregadas · 12 rechazadas…»   → suma 27
+RESTO = ("abiertos", "abiertas", "pendientes", "pendiente", "sin entregar", "en falta",
+         "por programar", "próximas", "no cerrados", "por caminar", "en trámite")
+NUMERADOR = ("aprobadas", "rechazadas", "en revisión", "observadas", "realizadas")
+# Ojo con la diferencia: «en trámite» es una PARTE —cerrados + abiertos + trámite
+# = total— y por eso suma. «Vencidos» y «atrasados» son un SUBCONJUNTO de los
+# abiertos, ya contados: sumarlos los contaría dos veces.
+SUBCONJUNTO = ("vencidos", "vencidas", "atrasados", "atrasadas",
+               "quedan fuera", "sin fecha requerida", "en preparación")
+
+_FRAC = re.compile(r"^(\d[\d.]*)\s*/\s*(\d[\d.]*)$")
+# Hasta tres palabras de solo letras. El límite importa: la etiqueta suele venir
+# pegada al indicador de variación («1 observadas▲ +1 vs. 16-07»), y exigir un
+# separador hacía que se perdiera justo la parte que faltaba declarar.
+_ETIQ = re.compile(r"(\d[\d.]*)\s+([a-záéíóúñ]+(?:\s+[a-záéíóúñ]+){0,2})", re.I)
+
+
+def _n(t):
+    return int(t.replace(".", ""))
+
+
+def _desgloses(texto_frac, vecinos):
+    """(resto_declarado, numerador_declarado, etiquetas) de un grupo de textos."""
+    r = n = None
+    etiquetas = []
+    for t in vecinos:
+        for val, etq in _ETIQ.findall(t):
+            e = " ".join(etq.lower().split())
+            if any(e.startswith(k) for k in SUBCONJUNTO):
+                continue
+            if any(e.startswith(k) for k in RESTO):
+                r = (r or 0) + _n(val); etiquetas.append(f"{val} {e}")
+            elif any(e.startswith(k) for k in NUMERADOR):
+                n = (n or 0) + _n(val); etiquetas.append(f"{val} {e}")
+    return r, n, etiquetas
+
+
+def revisar_desgloses(ruta):
+    """Cada tarjeta con una fracción: lo que dice debajo tiene que cuadrar."""
+    from pptx import Presentation
+    EMU = 914400
+    malos = []
+    for i, lam in enumerate(Presentation(ruta).slides, 1):
+        cajas = [(sh.left / EMU, sh.top / EMU, (sh.left + sh.width) / EMU,
+                  sh.width / EMU, " ".join(sh.text_frame.text.split()))
+                 for sh in lam.shapes
+                 if sh.has_text_frame and sh.text_frame.text.strip()
+                 and sh.left is not None and sh.width is not None]
+        for x0, y0, x1, w0, txt in cajas:
+            m = _FRAC.match(txt)
+            if not m:
+                continue
+            c, tot = _n(m.group(1)), _n(m.group(2))
+            if tot <= 0:
+                continue
+            # La misma tarjeta: se solapa en horizontal, va debajo y no es la
+            # caja ancha del texto narrativo, que cruza las cuatro columnas.
+            vecinos = [v[4] for v in cajas
+                       if v[0] < x1 and v[2] > x0 and 0 <= v[1] - y0 <= 2.2 and v[3] < w0 * 1.6]
+            resto, numer, etq = _desgloses(txt, vecinos)
+            if resto is not None and resto != tot - c:
+                malos.append(f"lámina {i}: «{txt}» → el resto es {tot - c} pero el "
+                             f"desglose suma {resto} ({' · '.join(etq)})")
+            if numer is not None and numer != c:
+                malos.append(f"lámina {i}: «{txt}» → el desglose suma {numer}, "
+                             f"pero arriba dice {c} ({' · '.join(etq)})")
+    if malos:
+        for x in malos:
+            falla(x)
+    else:
+        bien("Los desgloses cuadran con su fracción")
+
+
 def revisar_suite(anchos):
     print(f"\n{SUITE.name}")
     if not SUITE.exists():
@@ -275,6 +356,7 @@ def main():
     revisar_datos()
     for r in PPTS:
         revisar_ppt(r)
+        revisar_desgloses(r)
     revisar_suite(anchos)
 
     print("\n" + "=" * 74)

@@ -121,6 +121,14 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   con atrasos reales desinforma. Al corte aplica a Cerro Verde/PS2 en Talabre.
 - **Prioridades al dígito**: `P1A→P1`, `P2B→P2`, `P3C→P3`. `P0` (Desaladora) y `P4` (Talabre)
   se mantienen aparte.
+- **Arqueros tiene un TERCER estado: «en trámite».** «Listo para revisión» y «Listo para
+  cerrar» son trabajo ya hecho esperando al cliente: no es cerrado ni es abierto. Los otros
+  dos proyectos no lo tienen. Por eso, en Arqueros y en el consolidado,
+  **total = cerrados + abiertos + trámite**, y toda tarjeta que muestre las tres primeras
+  cifras tiene que nombrar la cuarta — si no, el lector resta y le sobran ítems.
+  Al corte son 10 en P1 y 85 en P1+P2. Lo mismo con las carpetas de Arqueros, que además de
+  aprobadas/rechazadas/en revisión tienen **observadas** (1 al corte).
+  `verificar_suite.py` revisa esto solo, en `revisar_desgloses()`.
 - **«Vencido» (Arqueros) = «Atrasado» (Desaladora, Talabre)**: ítem **abierto** cuya fecha
   comprometida ya venció. Los abiertos **sin** fecha comprometida **no** se cuentan como
   atrasados; se informan aparte.

@@ -217,7 +217,10 @@ if (fs.existsSync(rutaDes)) {
       t: `Caminata ${XC.Facility ? XC.Facility.vigente : 1} · Facility`,
       d: faV ? `${nf(faV.pendiente)} facilities por caminar` : "", c: C.blue },
     { p: pct(XP.entregadas, XP.total), v: `${nf(XP.entregadas)}/${nf(XP.total)}`, t: "Carpetas entregadas",
-      d: `${nf(XP.aprobadas)} aprobadas · ${nf(XP.rechazadas)} rechazadas · ${nf(XP.enPreparacion)} en preparación`, c: C.copper },
+      // Las tres partes desglosan las ENTREGADAS. «En preparación» no lo está
+      // —es interna, aún no llega al cliente—, así que sumarla aquí daba 43
+      // bajo un número que dice 37. Va en el texto de la lámina de carpetas.
+      d: `${nf(XP.aprobadas)} aprobadas · ${nf(XP.enRevision)} en revisión · ${nf(XP.rechazadas)} rechazadas`, c: C.copper },
     { p: pct(xp1.cerrados, xp1.total), v: `${nf(xp1.cerrados)}/${nf(xp1.total)}`, t: "Cierre de punch P1",
       d: `${nf(xp1.abiertos)} abiertos · ${nf(xp1.atrasados)} atrasados`, c: C.crit },
   ];
@@ -689,9 +692,14 @@ const cards = [
   { p: pct(cam.c100, cam.subs), v: `${nf(cam.c100)}/${nf(cam.subs)}`, t: "Caminatas 100% realizadas",
     d: `${nf(cam.prox)} próximas · ${nf(cam.prog)} por programar`, c: C.blue, dd: dCam100 },
   { p: pct(top.entregadas, top.total), v: `${nf(top.entregadas)}/${nf(top.total)}`, t: "Carpetas TOP entregadas",
-    d: `${nf(top.aprob)} aprobadas · ${nf(top.rech)} rechazadas · ${nf(top.rev)} en revisión`, c: C.copper, dd: dTop },
+    d: `${nf(top.aprob)} aprobadas · ${nf(top.rech)} rechazadas · ${nf(top.rev)} en revisión`
+       + (top.obs ? ` · ${nf(top.obs)} observadas` : ""), c: C.copper, dd: dTop },
+  // El «en trámite» va en la tarjeta, no solo en el dónut de la lámina de
+  // detalle: sin él, total − cerrados no da los abiertos y quien lee la tarjeta
+  // encuentra 10 ítems que no están en ninguna parte.
   { p: pct(P1.cerrados, P1.total), v: `${nf(P1.cerrados)}/${nf(P1.total)}`, t: "Cierre de detalles P1",
-    d: `${nf(P1.abiertos)} abiertos · ${nf(P1.vencidos)} vencidos`, c: C.crit, dd: dP1c },
+    d: `${nf(P1.abiertos)} abiertos · ${nf(P1.vencidos)} vencidos`
+       + (P1.tramite ? ` · ${nf(P1.tramite)} en trámite` : ""), c: C.crit, dd: dP1c },
 ];
 let cx = 0.5; const cw = 3.0, gp = 0.13;
 cards.forEach((cd) => {
