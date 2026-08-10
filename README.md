@@ -52,6 +52,18 @@ falla:
   de origen, en el JSON de cada módulo, en la portada de la suite y en el texto de
   las PPT. 71 comprobaciones.
 
+## Versión online
+
+La suite se publica sola en **GitHub Pages** cada vez que se sube un módulo
+actualizado: `.github/workflows/publicar.yml` corre el mismo `armar_suite.js` en
+el servidor y despliega el resultado. Lo que se ve online es, por construcción,
+lo mismo que produce el corte local — no hay una segunda versión que pueda quedar
+atrás, y la suite no se versiona, así que el repositorio no engorda.
+
+La página lleva `noindex`: **cualquiera con el link la ve, pero no aparece en
+buscadores**. Para que sí se indexe, borrar el bloque del `<meta robots>` y el
+`robots.txt` del workflow.
+
 ## Aviso
 
 Repositorio **público**. El contenido incluye nombres de cliente, códigos de

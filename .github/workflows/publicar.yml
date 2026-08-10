@@ -1,0 +1,72 @@
+# Publica la Suite QAQC en GitHub Pages cada vez que cambia un módulo.
+#
+# La suite NO se versiona: son ~8,7 MB por corte y guardarlos cada semana
+# engordaría el repositorio sin aportar nada. Se arma aquí, en el servidor, a
+# partir de los tres módulos que sí están versionados —el mismo
+# `node armar_suite.js` de siempre, que solo usa módulos nativos de Node— y se
+# publica el resultado. Así lo que se ve online es, por construcción, lo mismo
+# que produce el corte local: no hay una segunda versión que pueda quedar atrás.
+name: Publicar la Suite QAQC
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "suite_qaqc/**"
+      - "panel_control_TOP_P1/index.html"
+      - "modulo_nc/index.html"
+      - ".github/workflows/publicar.yml"
+  workflow_dispatch:        # y a mano, desde la pestaña Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Si llegan dos cortes seguidos, gana el último: no tiene sentido publicar uno
+# viejo encima del nuevo.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.desplegar.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Armar la suite
+        working-directory: suite_qaqc
+        run: node armar_suite.js
+
+      - name: Preparar el sitio
+        run: |
+          mkdir -p _sitio
+          cp suite_qaqc/Suite_QAQC.html _sitio/index.html
+          cp suite_qaqc/Suite_QAQC.html _sitio/Suite_QAQC.html
+          # Visible para cualquiera que tenga el link, pero fuera de los
+          # buscadores: el contenido trae nombres de cliente, códigos de
+          # contrato y costos en UF, y no hay razón para que Google lo indexe.
+          # Para que sí aparezca en búsquedas, borrar este bloque y robots.txt.
+          # En binario a propósito: leer y escribir como texto normaliza los
+          # saltos de línea y reescribiría 7.000 líneas que no tocamos.
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("_sitio/index.html")
+          d = p.read_bytes()
+          meta = b'<meta name="robots" content="noindex, nofollow">'
+          if meta not in d:
+              p.write_bytes(d.replace(b"<head>", b"<head>\n" + meta, 1))
+          PY
+          printf 'User-agent: *\nDisallow: /\n' > _sitio/robots.txt
+          ls -la _sitio
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _sitio
+
+      - id: desplegar
+        uses: actions/deploy-pages@v4
