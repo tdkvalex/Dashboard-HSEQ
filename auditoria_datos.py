@@ -33,23 +33,24 @@ R = Path(__file__).resolve().parent
 ENTRADA = Path(sys.argv[1]).expanduser() if len(sys.argv) > 1 else None
 
 
-def buscar(*claves, salvo=()):
-    """El .xlsx/.xlsm MÁS NUEVO cuyo nombre contenga todas las claves y ninguna
-    de `salvo`. El más nuevo, porque una carpeta de corte puede arrastrar la
-    versión anterior del mismo archivo y auditar contra la vieja no sirve."""
-    if not ENTRADA or not ENTRADA.is_dir():
-        return None
-    cand = [f for f in ENTRADA.iterdir()
-            if f.suffix.lower() in (".xlsx", ".xlsm")
-            and all(k in f.name.lower() for k in claves)
-            and not any(k in f.name.lower() for k in salvo)]
-    return max(cand, key=lambda f: f.stat().st_mtime) if cand else None
+# Los archivos se reconocen con el MISMO `explorar()` que usa la actualización:
+# por contenido, no por nombre. Buscarlos por nombre aquí ya falló una vez —el
+# log del cliente pasó a llamarse `Log_Control_NC_MASA` y dejó de encontrarse—,
+# y un auditor que no encuentra la fuente calla en vez de fallar, que es peor.
+sys.path.insert(0, str(R))
+try:
+    from actualizar_semana import explorar
+except ImportError:
+    explorar = None
 
+_HALLADOS = {}
+if ENTRADA and ENTRADA.is_dir() and explorar:
+    _HALLADOS = {rol: ruta for rol, (ruta, _) in explorar(ENTRADA)[0].items()}
 
-NCX = buscar("data_ncr", salvo=("externas",))
-EXT = buscar("externas")
-TAL_S = buscar("status_subsistemas")
-TAL_D = buscar("terminaciones")
+NCX = _HALLADOS.get("nc_data")
+EXT = _HALLADOS.get("nc_externas")
+TAL_S = _HALLADOS.get("tal_status")
+TAL_D = _HALLADOS.get("tal_dt")
 
 ok, mal, avi = [], [], []
 def chk(cond, titulo, detalle=""):
@@ -69,18 +70,34 @@ if NCX and EXT:
     wb = load_workbook(NCX, data_only=True, read_only=True)
     it = wb["Observaciones"].iter_rows(values_only=True); next(it)
     filas = [f for f in it if f[0] not in (None, "")]
-    odm = sum(1 for f in filas if str(f[5]).strip() == "Opción de Mejora")
+    odm = lambda f: str(f[5]).strip() == "Opción de Mejora"
+    # Las dos reglas del módulo, aplicadas aquí de nuevo desde el Excel y no
+    # leídas del JSON: si se copiara la respuesta del JSON, este cruce no podría
+    # pillar nunca un error de lectura, que es justo para lo que existe.
+    #   · las opciones de mejora no entran
+    #   · en Arqueros, la NC del cliente se cuenta solo desde el log de MASA
+    cli_arq = lambda f: (str(f[0]).strip().upper().startswith("P2342")
+                         and "cliente" in str(f[3]).strip().lower())
+    n_odm = sum(1 for f in filas if odm(f))
+    n_cli = sum(1 for f in filas if cli_arq(f) and not odm(f))
+    utiles = [f for f in filas if not odm(f) and not cli_arq(f)]
     wb2 = load_workbook(EXT, data_only=True, read_only=True)
     ext = [f for f in wb2["Disposición NC-Externas"].iter_rows(min_row=5, values_only=True)
            if f[1] not in (None, "")]
-    esperado = len(filas) - odm + len(ext)
+    esperado = len(utiles) + len(ext)
     chk(nc["control"]["registros"] == esperado, "NC · registros",
-        f"Excel {len(filas)} − {odm} ODM + {len(ext)} externas = {esperado} · JSON {nc['control']['registros']}")
-    cerr_x = sum(1 for f in filas
-                 if str(f[24]).strip() == "Cerrado" and str(f[5]).strip() != "Opción de Mejora")
+        f"Excel {len(filas)} − {n_odm} ODM − {n_cli} del cliente ya en el log + {len(ext)} "
+        f"del log = {esperado} · JSON {nc['control']['registros']}")
+    chk(nc["control"].get("clienteSoloDelLog", {}).get("descartadas") == n_cli,
+        "NC · las descartadas por venir del log cuadran con el Excel",
+        f"Excel {n_cli} · JSON {nc['control'].get('clienteSoloDelLog', {}).get('descartadas')}")
+    cerr_x = sum(1 for f in utiles if str(f[24]).strip() == "Cerrado")
     cerr_e = sum(1 for f in ext if str(f[7]).strip().lower() == "cerrada")
     chk(nc["global"]["resumen"]["cerradas"] == cerr_x + cerr_e, "NC · cerradas",
         f"Excel {cerr_x}+{cerr_e} · JSON {nc['global']['resumen']['cerradas']}")
+    chk(nc["proyectos"]["ARQUEROS"]["resumen"]["cliente"] == len(ext),
+        "NC · las del cliente en Arqueros son exactamente las del log",
+        f"log {len(ext)} · JSON {nc['proyectos']['ARQUEROS']['resumen']['cliente']}")
 elif ENTRADA:
     nota("NC · no se encontró el Data_NCR o la planilla de externas: no se cruzó contra el Excel")
 

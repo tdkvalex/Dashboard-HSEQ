@@ -24,6 +24,8 @@ RAIZ = Path(__file__).resolve().parent
 SUITE = RAIZ / "suite_qaqc" / "Suite_QAQC.html"
 PPTS = [RAIZ / "panel_control_TOP_P1" / "Panel_Control_TOP_P1.pptx",
         RAIZ / "modulo_nc" / "Panel_No_Conformidades.pptx"]
+# Qué PPT debe entregar el botón de cada módulo de la suite.
+PPT_DE_MODULO = {"cierre": PPTS[0], "nc": PPTS[1]}
 CHROMIUM = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 
 VERDE, ROJO, AMBAR, GRIS, FIN = "\033[32m", "\033[31m", "\033[33m", "\033[90m", "\033[0m"
@@ -240,7 +242,7 @@ def revisar_suite(anchos):
         nav = pw.chromium.launch(executable_path=CHROMIUM) if Path(CHROMIUM).exists() \
             else pw.chromium.launch()
         for W in anchos:
-            pg = nav.new_page(viewport={"width": W, "height": 1000})
+            pg = nav.new_page(viewport={"width": W, "height": 1000}, accept_downloads=True)
             errs = []
             pg.on("pageerror", lambda e: errs.append(str(e)))
             pg.goto(url)
@@ -269,13 +271,24 @@ def revisar_suite(anchos):
                     if fr.evaluate("document.documentElement.scrollWidth") > W:
                         problemas.append(f"{etq} desborda en una pestaña")
                         break
-                # La PPT tiene que descargar de verdad, no solo existir el botón.
+                # La PPT tiene que descargar de verdad Y ser la vigente. Que sea
+                # un .pptx no basta: si se corre `gen_ppt.js` antes que el script
+                # de Python, el botón entrega una PPT anterior mientras las
+                # pestañas ya muestran el corte nuevo, y nada lo delata.
                 if W == anchos[0] and fr.locator("#pptBtn").count():
                     try:
-                        with pg.expect_download(timeout=8000) as dl:
+                        with pg.expect_download(timeout=15000) as dl:
                             fr.click("#pptBtn")
-                        if not dl.value.suggested_filename.endswith(".pptx"):
+                        d = dl.value
+                        if not d.suggested_filename.endswith(".pptx"):
                             problemas.append(f"{etq}: la descarga no es un .pptx")
+                        else:
+                            bajado = Path(d.path()).read_bytes()
+                            enDisco = PPT_DE_MODULO.get(mod)
+                            if enDisco and enDisco.exists() and bajado != enDisco.read_bytes():
+                                problemas.append(
+                                    f"{etq}: la PPT embebida NO es la de {enDisco.name} — "
+                                    f"se corrió gen_ppt.js antes que el script de datos")
                     except Exception:
                         problemas.append(f"{etq}: el botón de informe no descargó")
                 pg.click('button[data-v="home"]')
