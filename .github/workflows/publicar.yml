@@ -38,6 +38,15 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # Antes de publicar, el mismo control de fondo que se corre a mano: que la
+      # misma cifra diga lo mismo en el JSON de cada módulo, en la portada y en
+      # el texto de las PPT. Si no cuadra, el job muere aquí y Pages conserva la
+      # versión anterior. Publicar rápido no vale nada si se publica mal.
+      - name: Auditar la coherencia de los datos
+        run: |
+          python3 -m pip install --quiet openpyxl
+          python3 auditoria_datos.py
+
       - name: Armar la suite
         working-directory: suite_qaqc
         run: node armar_suite.js
@@ -62,6 +71,16 @@ jobs:
               p.write_bytes(d.replace(b"<head>", b"<head>\n" + meta, 1))
           PY
           printf 'User-agent: *\nDisallow: /\n' > _sitio/robots.txt
+
+          # Red de seguridad tonta y eficaz: la suite ronda los 8,7 MB. Si sale
+          # muy por debajo es que se armó a medias, y más vale no publicarla que
+          # publicar un panel truncado que parece completo.
+          peso=$(stat -c%s _sitio/index.html)
+          echo "index.html: $peso bytes"
+          if [ "$peso" -lt 5000000 ]; then
+            echo "::error::La suite pesa $peso bytes, muy por debajo de lo normal (~8,7 MB). No se publica."
+            exit 1
+          fi
           ls -la _sitio
 
       - uses: actions/upload-pages-artifact@v3

@@ -60,6 +60,16 @@ el servidor y despliega el resultado. Lo que se ve online es, por construcción,
 lo mismo que produce el corte local — no hay una segunda versión que pueda quedar
 atrás, y la suite no se versiona, así que el repositorio no engorda.
 
+**Nada se publica sin pasar dos controles**, y cualquiera de los dos detiene el
+despliegue dejando online la versión anterior:
+
+1. `auditoria_datos.py` — que la misma cifra diga lo mismo en el JSON de cada
+   módulo, en la portada y en el texto de las PPT.
+2. Un control de peso — la suite ronda los 8,7 MB; si sale muy por debajo es que
+   se armó a medias, y un panel truncado parece completo.
+
+La página pesa 8,7 MB y se sirve comprimida: **el visitante descarga unos 4 MB**.
+
 La página lleva `noindex`: **cualquiera con el link la ve, pero no aparece en
 buscadores**. Para que sí se indexe, borrar el bloque del `<meta robots>` y el
 `robots.txt` del workflow.
