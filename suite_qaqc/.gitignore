@@ -1,11 +1,8 @@
 # Salida del generador: se rearma con `node armar_suite.js`.
-# Son ~8 MB por corte; versionarlos infla el repositorio sin aportar nada.
+# Son ~8 MB por corte; versionarla infla el repositorio sin aportar nada.
 Suite_QAQC.html
 
 # Copia del panel, que ya se versiona en panel_control_TOP_P1/index.html.
+# Si aparece aquí, el generador la prefiere y el módulo queda congelado.
 modulos/cierre_qaqc.html
-
-# Entregado por el equipo de Protocolos; se deja aquí para armar la suite.
-modulos/protocolos.html
-
-# Carpetas temporales del Centro de Carga (se borran solas al cerrarlo).
+modulos/no_conformidades.html

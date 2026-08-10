@@ -1,23 +1,11 @@
 __pycache__/
 *.py[cod]
-*.egg-info/
 .venv/
 venv/
 .env
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.cache/
-data/cache/
-reports/*.md
-reports/*.html
-!reports/.gitkeep
-config/portfolio.yaml
-config/portfolio.local.yaml
-config/watchlist.local.yaml
 .DS_Store
 
-# Node (pptxgenjs se instala local para generar la PPT)
+# Node (pptxgenjs se instala local para generar las PPT)
 node_modules/
 package-lock.json
 

@@ -1,6 +1,17 @@
-# Repositorio Inversiones
+# Dashboard HSEQ — Besalco Montajes
 
-Contiene **dos cosas independientes**:
+Repositorio de **uso exclusivo para dashboards y paneles de control HSEQ**
+(Seguridad y Salud Ocupacional, Medio Ambiente, Calidad/QAQC). Nada que no sea
+un tablero HSEQ o lo que lo alimenta entra aquí.
+
+Hoy contiene la **Suite QAQC**, el entregable semanal de calidad. Vino del
+repositorio `Inversiones`, donde convivía con un monitor de cartera de acciones
+sin ninguna relación; se trajo **con todo su historial**, así que los commits que
+explican por qué existe cada regla siguen disponibles con `git log`.
+
+> **Este repositorio es público.** El material trae nombres de cliente, códigos de
+> contrato, detalle de no conformidades y costos en UF. Es una decisión tomada a
+> conciencia (10-08-2026), no un descuido.
 
 ## La actualización semanal
 
@@ -58,6 +69,10 @@ node armar_suite.js
 de `panel_control_TOP_P1/index.html` y `modulo_nc/index.html`. Si alguien deja una copia en
 `modulos/`, esa copia **gana** y el módulo queda congelado en ese corte para siempre, sin que
 nada avise. Protocolos sí se copia: llega de otro equipo y no se genera aquí.
+
+**El dashboard de Protocolos SÍ se versiona** (`suite_qaqc/modulos/protocolos.html`).
+Es el único insumo que no se puede regenerar desde aquí —llega armado del equipo de
+Protocolos— y por eso es el único que se guarda: si se pierde, no hay corte.
 
 Cada módulo va aislado en su propio iframe, así que se integran **sin reescribir ninguno**.
 Detalle crítico: los módulos se empaquetan con un centinela en lugar de `</script`; escaparlos
@@ -130,16 +145,10 @@ python3 actualizar.py  <Estatus_Resumen_General_QAQC.xlsx>   # Arqueros (cliente
 node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el panel
 ```
 
-## 3 · `src/`, `config/`, `reports/` — Monitor de cartera BTG
-
-Motor de reglas en Python para monitorear cartera de acciones (CL/US) y detectar
-oportunidades. Ver [`README.md`](README.md). No tiene relación con el panel QAQC.
-
 ---
 
 ## Entorno
 
-- **Rama de trabajo:** `claude/top-p1-control-panel-gl1gva`.
 - **Chromium para Playwright:** `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`
   (el `executable_path` por defecto apunta a una versión que no está instalada).
 - **LibreOffice no abre PPTX** en este contenedor: falta el filtro de Impress. Verificar las
