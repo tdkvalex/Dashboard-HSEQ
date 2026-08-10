@@ -44,7 +44,10 @@ jobs:
       # versión anterior. Publicar rápido no vale nada si se publica mal.
       - name: Auditar la coherencia de los datos
         run: |
-          python3 -m pip install --quiet openpyxl
+          # openpyxl y python-pptx: el auditor importa pptx dentro de una
+          # función —para cruzar los JSON contra el texto de las láminas— y por
+          # eso no aparece en los imports de arriba del archivo.
+          python3 -m pip install --quiet openpyxl python-pptx
           python3 auditoria_datos.py
 
       - name: Armar la suite
