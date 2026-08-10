@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-07-26",
-  "corte_texto": "26-07-2026",
-  "generado": "2026-08-04 03:26"
+  "corte": "2026-08-10",
+  "corte_texto": "10-08-2026",
+  "generado": "2026-08-10 15:09"
  },
  "areas": [
   "2000",
@@ -463,62 +463,62 @@
  "dt": {
   "global": {
    "total": 2963,
-   "cerrados": 1315,
-   "tramite": 85,
-   "abiertos": 1563,
-   "vencidos": 748
+   "cerrados": 1327,
+   "tramite": 83,
+   "abiertos": 1553,
+   "vencidos": 1074
   },
   "tipos": {
    "P1": {
     "total": 1988,
-    "cerrados": 1148,
-    "tramite": 10,
-    "abiertos": 830,
-    "vencidos": 405
+    "cerrados": 1154,
+    "tramite": 6,
+    "abiertos": 828,
+    "vencidos": 667
    },
    "P2": {
     "total": 811,
-    "cerrados": 165,
-    "tramite": 75,
-    "abiertos": 571,
-    "vencidos": 323
+    "cerrados": 171,
+    "tramite": 77,
+    "abiertos": 563,
+    "vencidos": 383
    },
    "P3": {
     "total": 164,
     "cerrados": 2,
     "tramite": 0,
     "abiertos": 162,
-    "vencidos": 20
+    "vencidos": 24
    }
   },
   "p1Esp": {
    "Piping": {
     "total": 430,
     "cerrados": 179,
-    "tramite": 0,
-    "abiertos": 251,
-    "vencidos": 74
+    "tramite": 2,
+    "abiertos": 249,
+    "vencidos": 217
    },
    "Eléctrica": {
     "total": 422,
-    "cerrados": 203,
-    "tramite": 3,
+    "cerrados": 204,
+    "tramite": 2,
     "abiertos": 216,
-    "vencidos": 98
+    "vencidos": 173
    },
    "Instrumentación y Control": {
     "total": 426,
-    "cerrados": 242,
-    "tramite": 3,
+    "cerrados": 243,
+    "tramite": 2,
     "abiertos": 181,
-    "vencidos": 128
+    "vencidos": 153
    },
    "Mecánica": {
     "total": 503,
-    "cerrados": 373,
-    "tramite": 4,
+    "cerrados": 377,
+    "tramite": 0,
     "abiertos": 126,
-    "vencidos": 88
+    "vencidos": 107
    },
    "Estructura": {
     "total": 137,
@@ -538,24 +538,24 @@
   "p1Area": {
    "2000": {
     "total": 570,
-    "cerrados": 524,
-    "tramite": 8,
+    "cerrados": 529,
+    "tramite": 3,
     "abiertos": 38,
-    "vencidos": 19
+    "vencidos": 27
    },
    "3000": {
     "total": 1049,
     "cerrados": 342,
-    "tramite": 0,
-    "abiertos": 707,
-    "vencidos": 366
+    "tramite": 2,
+    "abiertos": 705,
+    "vencidos": 598
    },
    "4000": {
     "total": 357,
-    "cerrados": 271,
-    "tramite": 2,
+    "cerrados": 272,
+    "tramite": 1,
     "abiertos": 84,
-    "vencidos": 19
+    "vencidos": 41
    },
    "8000": {
     "total": 12,
@@ -577,7 +577,7 @@
    "vals": [
     [
      0,
-     236,
+     234,
      15,
      0
     ],
@@ -614,8 +614,8 @@
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 678,
-   "Caminata 2 (100%)": 152
+   "Caminata 1 (80%)": 675,
+   "Caminata 2 (100%)": 153
   }
  },
  "semaforo": {
@@ -637,21 +637,21 @@
   ]
  },
  "previo": {
-  "corte": "2026-07-16",
-  "corte_texto": "16-07-2026",
+  "corte": "2026-07-26",
+  "corte_texto": "26-07-2026",
   "cam80": 135,
   "cam100": 90,
   "subs": 135,
-  "camProx": 9,
-  "camProg": 36,
-  "topEntregadas": 26,
-  "topRev": 17,
+  "camProx": 44,
+  "camProg": 1,
+  "topEntregadas": 27,
+  "topRev": 14,
   "topObs": 1,
-  "topRech": 8,
+  "topRech": 12,
   "topAprob": 0,
   "p1Total": 1988,
-  "p1Cerrados": 1147,
+  "p1Cerrados": 1148,
   "p1Abiertos": 830,
-  "p1Vencidos": 401
+  "p1Vencidos": 405
  }
 }
