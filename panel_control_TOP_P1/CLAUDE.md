@@ -162,9 +162,12 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 - **Desaladora**: el reporte gerencial y el punch list **no cuadran** (945/441 vs 960/426;
   P0 41 vs 20). **Manda el punch list**, que es la fuente ítem a ítem.
 - **Talabre**: con los archivos viejos la hoja STATUS y el registro de DT **no cuadraban**
-  (P1 29 vs 22 · P2 296 vs 265) y mandaba el registro. Con los nuevos (corte 03-08-2026)
-  **cuadran exacto** (P1 29 · P2 230 · 480 abiertos = extracto de pendientes): si vuelven a
-  divergir, investigar antes de publicar.
+  (P1 29 vs 22 · P2 296 vs 265) y mandaba el registro. Desde el corte 03-08-2026 cuadran, y
+  cuando aparece una diferencia **pequeña conviene mirarla ítem a ítem antes de alarmarse**:
+  al corte 10-08 el extracto declaraba 500 pendientes y el registro daba 498, y los dos de
+  diferencia eran `1-3716C-008-DT-009` y `-013`, cerrados **ese mismo 10-08** después de que
+  se generara el extracto. Ningún abierto del registro faltaba en el extracto. Si la
+  diferencia es de decenas, entonces sí son archivos de cortes distintos.
 - Ambos scripts **contrastan su cálculo contra los totales que declara el propio archivo** y
   avisan si dejan de cuadrar. Si aparece un aviso nuevo, investigar antes de publicar.
 
