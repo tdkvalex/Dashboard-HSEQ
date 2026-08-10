@@ -91,6 +91,14 @@ las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--exter
 registros perdidos**. La hoja «Data Externas» del mismo libro lista los mismos 71 con
 numeración correlativa, así que los huecos son de la numeración del cliente.*
 
+**En Arqueros, las NC del cliente se cuentan SOLO desde el log de MASA.** El registro
+principal también trae alguna marcada «Externa Cliente», pero es una copia que se llena
+aparte y llega a contradecir al log: al corte 10-08, `Calidad - 0063` figuraba **Cerrada**
+en el registro y **«Listo para revisión»** en el log, siendo la misma NC. Manda el log, que
+es el documento que se revisa con el cliente. La constante es
+`PROYECTO_CLIENTE_SOLO_DEL_LOG` en `no_conformidades.py`; el script declara cuántas descartó
+y el JSON las guarda en `control.clienteSoloDelLog`. *Pedido por el usuario (10-08-2026).*
+
 **El atraso se mide contra el plazo de respuesta, no contra una fecha comprometida.** Hay
 **10 días para responder una NC desde que se emite**; del día 11 en adelante corre atraso
 (`PLAZO_RESPUESTA` en `no_conformidades.py`). Se cuenta sobre la fecha de emisión porque

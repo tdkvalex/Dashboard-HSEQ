@@ -136,6 +136,7 @@ TIPOS = ["No Conformidad", "Producto No Conforme", "Observación",
 TIPOS_EXCLUIDOS = ["Opción de Mejora"]
 excluidos = Counter()            # por tipo
 excluidos_proy = Counter()       # por proyecto, para declarar de dónde salieron
+del_log = {}                     # NC del cliente descartadas del registro principal
 TRAMOS = [("1-30 días", 0), ("31-90 días", 30), ("91-180 días", 90),
           ("181-365 días", 180), ("Más de un año", 365)]
 
@@ -160,6 +161,13 @@ PLAZO_RESPUESTA = 10
 # Las tres vías por las que entra un hallazgo. Se distinguen porque no son lo
 # mismo de gestionar: la del cliente compromete el contrato, la del subcontrato
 # la absorbe Besalco, y la interna es autodetección.
+# En Arqueros, las NC que levanta el cliente MASA se cuentan SOLO desde su log
+# (`--externas`). El registro principal también trae alguna marcada «Externa
+# Cliente», pero es una copia que se llena aparte y llega a contradecir al log:
+# al corte 10-08, «Calidad - 0063» figuraba Cerrada aquí y «Listo para revisión»
+# allá. Manda el log, que es el documento que se revisa con el cliente.
+PROYECTO_CLIENTE_SOLO_DEL_LOG = "ARQUEROS"
+
 EMISIONES = ["Interna BSMT", "Externa Cliente", "Externa Subcontrato"]
 EMISION_CORTA = {"Interna BSMT": "Interna (Besalco)",
                  "Externa Cliente": "Externa · Cliente",
@@ -258,6 +266,12 @@ def leer(ruta, hoy):
             if f[3] not in (None, ""):
                 avisos.append(f"Tipo de emisión no reconocido: «{emision}»")
 
+        # La NC del cliente en Arqueros viene del log, no de aquí (ver la
+        # constante arriba). Se descarta y se declara cuántas se dejaron fuera.
+        if p["id"] == PROYECTO_CLIENTE_SOLO_DEL_LOG and norm(emision).startswith("externa cliente"):
+            del_log[texto(f[1], "sin código")] = texto(f[12], "")[:60]
+            continue
+
         estatus = texto(f[24], "Sin estatus")
         estado = CERRADA if norm(estatus) == "cerrado" else ABIERTA
 
@@ -297,6 +311,14 @@ def leer(ruta, hoy):
 
     for k, n in sin_proyecto.items():
         avisos.append(f"{n} registros con proyecto no reconocido «{k}» — quedaron fuera")
+    if del_log:
+        n = len(del_log)
+        avisos.append(
+            f"{n} NC del cliente {'venía' if n == 1 else 'venían'} también en el registro "
+            f"principal y se {'descartó' if n == 1 else 'descartaron'}: en Arqueros esa vía "
+            f"se cuenta solo desde el log de MASA "
+            f"({' · '.join(f'{k} «{v}»' for k, v in list(del_log.items())[:3])}"
+            + (" …" if len(del_log) > 3 else "") + ")")
     return items
 
 
@@ -644,6 +666,11 @@ def construir(items, hoy, fuente):
                         max(i["creada"] for i in items if i["creada"]).strftime("%d-%m-%Y")],
         # Lo que se dejó fuera a propósito: se declara, no se calla.
         "excluidos": dict(excluidos),
+        # Cuántas NC del cliente se descartaron del registro principal porque en
+        # Arqueros esa vía se cuenta solo desde el log de MASA.
+        "clienteSoloDelLog": {"proyecto": PROYECTO_CLIENTE_SOLO_DEL_LOG,
+                              "descartadas": len(del_log),
+                              "codigos": list(del_log)},
         # De qué frente salió cada uno: la exclusión rige para los cuatro, y
         # verlo desglosado evita la pregunta de si se aplicó en todos.
         "excluidosPorProyecto": {meta_p[k]["nombre"]: n
