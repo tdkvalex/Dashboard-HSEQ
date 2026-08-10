@@ -85,7 +85,11 @@ corte pasado hay que pasarlo, o se informa la semana equivocada.
 **Son DOS archivos.** El registro principal trae, para Arqueros, solo lo que emite Besalco;
 las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--externas`, hoja
 «Disposición NC-Externas»). Sin ella Arqueros se ve con 1 abierta y 98,9% de cierre en vez de
-36 y 78%. El script avisa si no se pasa.
+36 y 78%. El script avisa si no se pasa. Desde el corte 10-08-2026 esa planilla llega como
+`Log_Control_NC_MASA_*.xlsm`, un libro con varias hojas; se sigue leyendo la misma.
+*La numeración de MASA tiene huecos (al 10-08 faltan 13 números entre el 1 y el 84): **no son
+registros perdidos**. La hoja «Data Externas» del mismo libro lista los mismos 71 con
+numeración correlativa, así que los huecos son de la numeración del cliente.*
 
 **El atraso se mide contra el plazo de respuesta, no contra una fecha comprometida.** Hay
 **10 días para responder una NC desde que se emite**; del día 11 en adelante corre atraso

@@ -4,11 +4,11 @@
   "nombre": "No Conformidades",
   "descripcion": "Hallazgos de calidad y su corrección",
   "cliente": "Besalco Montajes",
-  "hoy": "03-08-2026",
-  "corte": "2026-08-03",
-  "corteTexto": "03-08-2026",
-  "generado": "2026-08-04 03:26",
-  "fuente": "b73c9c4f-Data_NCR_2.xlsx"
+  "hoy": "10-08-2026",
+  "corte": "2026-08-10",
+  "corteTexto": "10-08-2026",
+  "generado": "2026-08-10 15:14",
+  "fuente": "5f2decc2-Data_NCR10082026.xlsx"
  },
  "orden": [
   "DESALADORA",
@@ -25,39 +25,39 @@
    "obra": true,
    "resumen": {
     "total": 82,
-    "cerradas": 80,
-    "abiertas": 2,
+    "cerradas": 81,
+    "abiertas": 1,
     "atrasadas": 1,
-    "pctCierre": 97.6,
+    "pctCierre": 98.8,
     "internas": 54,
     "externas": 27,
     "cliente": 19,
     "subcontrato": 8,
-    "abiertasCliente": 1,
+    "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 1,
     "costo": 1403.2,
-    "conCosto": 63,
-    "medianaCierre": 19,
+    "conCosto": 64,
+    "medianaCierre": 18,
     "promedioCierre": 38,
     "maxCierre": 250
    },
    "porTipo": {
     "No Conformidad": {
      "total": 52,
-     "cerradas": 50,
-     "abiertas": 2,
+     "cerradas": 51,
+     "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 96.2,
+     "pctCierre": 98.1,
      "internas": 30,
      "externas": 22,
      "cliente": 19,
      "subcontrato": 3,
-     "abiertasCliente": 1,
+     "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 1,
      "costo": 1163.7,
-     "conCosto": 37,
+     "conCosto": 38,
      "medianaCierre": 21,
      "promedioCierre": 39,
      "maxCierre": 166
@@ -94,7 +94,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 3,
+     "costo": 3.0,
      "conCosto": 18,
      "medianaCierre": 18,
      "promedioCierre": 19,
@@ -142,21 +142,21 @@
     },
     "Externa": {
      "total": 27,
-     "cerradas": 26,
-     "abiertas": 1,
+     "cerradas": 27,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 96.3,
+     "pctCierre": 100.0,
      "internas": 0,
      "externas": 27,
      "cliente": 19,
      "subcontrato": 8,
-     "abiertasCliente": 1,
+     "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 627.1,
-     "conCosto": 18,
+     "conCosto": 19,
      "medianaCierre": 25,
-     "promedioCierre": 39,
+     "promedioCierre": 38,
      "maxCierre": 111
     },
     "Sin clasificar": {
@@ -201,21 +201,21 @@
     },
     "Externa Cliente": {
      "total": 19,
-     "cerradas": 18,
-     "abiertas": 1,
+     "cerradas": 19,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 94.7,
+     "pctCierre": 100.0,
      "internas": 0,
      "externas": 19,
      "cliente": 19,
      "subcontrato": 0,
-     "abiertasCliente": 1,
+     "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 260,
-     "conCosto": 11,
-     "medianaCierre": 23,
-     "promedioCierre": 34,
+     "costo": 260.0,
+     "conCosto": 12,
+     "medianaCierre": 21,
+     "promedioCierre": 33,
      "maxCierre": 102
     },
     "Externa Subcontrato": {
@@ -291,7 +291,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 1,
-     "costo": 450,
+     "costo": 450.0,
      "conCosto": 1,
      "medianaCierre": 100,
      "promedioCierre": 80,
@@ -310,7 +310,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 6,
      "medianaCierre": 43,
      "promedioCierre": 44,
@@ -329,7 +329,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 250,
+     "costo": 250.0,
      "conCosto": 9,
      "medianaCierre": 28,
      "promedioCierre": 47,
@@ -348,7 +348,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 10,
+     "costo": 10.0,
      "conCosto": 1,
      "medianaCierre": 64,
      "promedioCierre": 64,
@@ -367,7 +367,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 38,
+     "costo": 38.0,
      "conCosto": 1,
      "medianaCierre": 82,
      "promedioCierre": 82,
@@ -386,7 +386,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 12,
      "medianaCierre": 18,
      "promedioCierre": 18,
@@ -411,6 +411,25 @@
      "promedioCierre": 83,
      "maxCierre": 166
     },
+    "MECÁNICA": {
+     "total": 1,
+     "cerradas": 1,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 0,
+     "externas": 1,
+     "cliente": 1,
+     "subcontrato": 0,
+     "abiertasCliente": 0,
+     "abiertasSubcontrato": 0,
+     "abiertasInternas": 0,
+     "costo": 0.0,
+     "conCosto": 1,
+     "medianaCierre": 12,
+     "promedioCierre": 12,
+     "maxCierre": 12
+    },
     "RRLL": {
      "total": 10,
      "cerradas": 10,
@@ -424,7 +443,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 10,
      "medianaCierre": 7,
      "promedioCierre": 7,
@@ -449,25 +468,6 @@
      "promedioCierre": 23,
      "maxCierre": 35
     },
-    "MECÁNICA": {
-     "total": 1,
-     "cerradas": 0,
-     "abiertas": 1,
-     "atrasadas": 0,
-     "pctCierre": 0.0,
-     "internas": 0,
-     "externas": 1,
-     "cliente": 1,
-     "subcontrato": 0,
-     "abiertasCliente": 1,
-     "abiertasSubcontrato": 0,
-     "abiertasInternas": 0,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": null,
-     "promedioCierre": null,
-     "maxCierre": null
-    },
     "BODEGA": {
      "total": 1,
      "cerradas": 1,
@@ -481,7 +481,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 14,
      "promedioCierre": 14,
@@ -500,7 +500,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 3,
      "medianaCierre": 39,
      "promedioCierre": 49,
@@ -519,7 +519,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 0,
      "promedioCierre": 0,
@@ -538,7 +538,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 92,
+     "costo": 92.0,
      "conCosto": 2,
      "medianaCierre": 56,
      "promedioCierre": 72,
@@ -557,7 +557,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 30,
      "promedioCierre": 30,
@@ -603,11 +603,10 @@
     }
    },
    "porEstatus": {
-    "Listo para revisión": 1,
-    "Iniciado": 1
+    "Listo para revisión": 1
    },
    "antiguedad": {
-    "1-30 días": 1,
+    "1-30 días": 0,
     "31-90 días": 1,
     "91-180 días": 0,
     "181-365 días": 0,
@@ -619,16 +618,16 @@
    },
    "ventanas": {
     "semana": {
-     "total": 1,
+     "total": 0,
      "cerradas": 0,
-     "abiertas": 1,
+     "abiertas": 0,
      "atrasadas": 0,
      "pctCierre": 0.0,
      "internas": 0,
-     "externas": 1,
-     "cliente": 1,
+     "externas": 0,
+     "cliente": 0,
      "subcontrato": 0,
-     "abiertasCliente": 1,
+     "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 0,
@@ -639,111 +638,64 @@
     },
     "mes": {
      "total": 1,
-     "cerradas": 0,
-     "abiertas": 1,
+     "cerradas": 1,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 0.0,
+     "pctCierre": 100.0,
      "internas": 0,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertasCliente": 1,
+     "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": null,
-     "promedioCierre": null,
-     "maxCierre": null
+     "costo": 0.0,
+     "conCosto": 1,
+     "medianaCierre": 12,
+     "promedioCierre": 12,
+     "maxCierre": 12
     },
     "trimestre": {
      "total": 2,
-     "cerradas": 0,
-     "abiertas": 2,
+     "cerradas": 1,
+     "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 0.0,
+     "pctCierre": 50.0,
      "internas": 1,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertasCliente": 1,
+     "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 1,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": null,
-     "promedioCierre": null,
-     "maxCierre": null
+     "costo": 0.0,
+     "conCosto": 1,
+     "medianaCierre": 12,
+     "promedioCierre": 12,
+     "maxCierre": 12
     }
    },
    "semana": {
-    "desde": "27-07-2026",
-    "hasta": "02-08-2026",
-    "total": 1,
+    "desde": "03-08-2026",
+    "hasta": "09-08-2026",
+    "total": 0,
     "internas": 0,
-    "externas": 1,
-    "cliente": 1,
+    "externas": 0,
+    "cliente": 0,
     "subcontrato": 0,
-    "abiertas": 1,
+    "abiertas": 0,
     "cerradas": 0,
-    "porOrigen": {
-     "Externa": 1
-    },
-    "porEmision": {
-     "Externa Cliente": 1
-    },
-    "porEspecialidad": {
-     "MECÁNICA": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "cliente": 1,
-      "subcontrato": 0,
-      "abiertas": 1
-     }
-    },
-    "porProyecto": {
-     "Desaladora": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "cliente": 1,
-      "subcontrato": 0,
-      "abiertas": 1
-     }
-    },
-    "porTipo": {
-     "No Conformidad": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "cliente": 1,
-      "subcontrato": 0,
-      "abiertas": 1
-     }
-    },
-    "detalle": [
-     {
-      "fecha": "27-07-2026",
-      "proy": "Desaladora",
-      "n": "95",
-      "tipo": "No Conformidad",
-      "emision": "Externa Cliente",
-      "origen": "Externa",
-      "especialidad": "MECÁNICA",
-      "responsable": "Wilson Jara",
-      "estatus": "Iniciado",
-      "estado": "Abierta",
-      "titulo": "Verificación de Preservación",
-      "costo": null,
-      "codigoExterno": "NCR-0535"
-     }
-    ],
+    "porOrigen": {},
+    "porEmision": {},
+    "porEspecialidad": {},
+    "porProyecto": {},
+    "porTipo": {},
+    "detalle": [],
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "08-06",
-      "hasta": "28-06",
+      "desde": "15-06",
+      "hasta": "05-07",
       "semanas": 3,
       "acumulada": true,
       "total": 0,
@@ -755,19 +707,6 @@
      },
      {
       "etiqueta": "Hace 4 semanas",
-      "desde": "29-06",
-      "hasta": "05-07",
-      "semanas": 1,
-      "acumulada": false,
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "cliente": 0,
-      "subcontrato": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 3 semanas",
       "desde": "06-07",
       "hasta": "12-07",
       "semanas": 1,
@@ -780,7 +719,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "13-07",
       "hasta": "19-07",
       "semanas": 1,
@@ -793,7 +732,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "20-07",
       "hasta": "26-07",
       "semanas": 1,
@@ -806,7 +745,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Última semana",
+      "etiqueta": "Semana anterior",
       "desde": "27-07",
       "hasta": "02-08",
       "semanas": 1,
@@ -816,7 +755,20 @@
       "externas": 1,
       "cliente": 1,
       "subcontrato": 0,
-      "abiertas": 1
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Última semana",
+      "desde": "03-08",
+      "hasta": "09-08",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "cliente": 0,
+      "subcontrato": 0,
+      "abiertas": 0
      }
     ]
    },
@@ -847,20 +799,20 @@
    "cliente": "CODELCO",
    "obra": true,
    "resumen": {
-    "total": 240,
-    "cerradas": 225,
+    "total": 241,
+    "cerradas": 226,
     "abiertas": 15,
-    "atrasadas": 13,
+    "atrasadas": 15,
     "pctCierre": 93.8,
     "internas": 52,
-    "externas": 188,
-    "cliente": 188,
+    "externas": 189,
+    "cliente": 189,
     "subcontrato": 0,
     "abiertasCliente": 12,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 3,
     "costo": 5818.3,
-    "conCosto": 142,
+    "conCosto": 143,
     "medianaCierre": 23,
     "promedioCierre": 47,
     "maxCierre": 389
@@ -870,7 +822,7 @@
      "total": 164,
      "cerradas": 153,
      "abiertas": 11,
-     "atrasadas": 10,
+     "atrasadas": 11,
      "pctCierre": 93.3,
      "internas": 49,
      "externas": 115,
@@ -886,20 +838,20 @@
      "maxCierre": 389
     },
     "Producto No Conforme": {
-     "total": 74,
-     "cerradas": 70,
+     "total": 75,
+     "cerradas": 71,
      "abiertas": 4,
-     "atrasadas": 3,
-     "pctCierre": 94.6,
+     "atrasadas": 4,
+     "pctCierre": 94.7,
      "internas": 1,
-     "externas": 73,
-     "cliente": 73,
+     "externas": 74,
+     "cliente": 74,
      "subcontrato": 0,
      "abiertasCliente": 4,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 424.6,
-     "conCosto": 51,
+     "conCosto": 52,
      "medianaCierre": 20,
      "promedioCierre": 34,
      "maxCierre": 161
@@ -917,7 +869,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 34,
      "promedioCierre": 34,
@@ -938,27 +890,27 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 3,
-     "costo": 25,
+     "costo": 25.0,
      "conCosto": 30,
      "medianaCierre": 29,
      "promedioCierre": 89,
      "maxCierre": 389
     },
     "Externa": {
-     "total": 188,
-     "cerradas": 176,
+     "total": 189,
+     "cerradas": 177,
      "abiertas": 12,
-     "atrasadas": 10,
-     "pctCierre": 93.6,
+     "atrasadas": 12,
+     "pctCierre": 93.7,
      "internas": 0,
-     "externas": 188,
-     "cliente": 188,
+     "externas": 189,
+     "cliente": 189,
      "subcontrato": 0,
      "abiertasCliente": 12,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 5793.3,
-     "conCosto": 112,
+     "conCosto": 113,
      "medianaCierre": 22,
      "promedioCierre": 36,
      "maxCierre": 187
@@ -978,39 +930,39 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 3,
-     "costo": 25,
+     "costo": 25.0,
      "conCosto": 30,
      "medianaCierre": 29,
      "promedioCierre": 89,
      "maxCierre": 389
     },
     "Externa Cliente": {
-     "total": 188,
-     "cerradas": 176,
+     "total": 189,
+     "cerradas": 177,
      "abiertas": 12,
-     "atrasadas": 10,
-     "pctCierre": 93.6,
+     "atrasadas": 12,
+     "pctCierre": 93.7,
      "internas": 0,
-     "externas": 188,
-     "cliente": 188,
+     "externas": 189,
+     "cliente": 189,
      "subcontrato": 0,
      "abiertasCliente": 12,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 5793.3,
-     "conCosto": 112,
+     "conCosto": 113,
      "medianaCierre": 22,
      "promedioCierre": 36,
      "maxCierre": 187
     }
    },
-   "autodeteccion": 21.7,
+   "autodeteccion": 21.6,
    "porEspecialidad": {
     "OO.CC": {
      "total": 140,
      "cerradas": 131,
      "abiertas": 9,
-     "atrasadas": 8,
+     "atrasadas": 9,
      "pctCierre": 93.6,
      "internas": 26,
      "externas": 114,
@@ -1038,7 +990,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 3,
-     "costo": 26,
+     "costo": 26.0,
      "conCosto": 2,
      "medianaCierre": 74,
      "promedioCierre": 74,
@@ -1048,7 +1000,7 @@
      "total": 26,
      "cerradas": 23,
      "abiertas": 3,
-     "atrasadas": 2,
+     "atrasadas": 3,
      "pctCierre": 88.5,
      "internas": 0,
      "externas": 26,
@@ -1057,7 +1009,7 @@
      "abiertasCliente": 3,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 4000,
+     "costo": 4000.0,
      "conCosto": 10,
      "medianaCierre": 23,
      "promedioCierre": 27,
@@ -1076,29 +1028,29 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 49,
      "promedioCierre": 56,
      "maxCierre": 119
     },
     "PIPING": {
-     "total": 15,
-     "cerradas": 15,
+     "total": 16,
+     "cerradas": 16,
      "abiertas": 0,
      "atrasadas": 0,
      "pctCierre": 100.0,
      "internas": 4,
-     "externas": 11,
-     "cliente": 11,
+     "externas": 12,
+     "cliente": 12,
      "subcontrato": 0,
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
-     "conCosto": 6,
-     "medianaCierre": 20,
-     "promedioCierre": 49,
+     "costo": 0.0,
+     "conCosto": 7,
+     "medianaCierre": 18,
+     "promedioCierre": 46,
      "maxCierre": 269
     },
     "TOPOGRAFÍA": {
@@ -1133,7 +1085,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 2,
      "medianaCierre": 24,
      "promedioCierre": 30,
@@ -1152,7 +1104,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 5,
      "medianaCierre": 173,
      "promedioCierre": 200,
@@ -1190,7 +1142,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 52,
      "promedioCierre": 70,
@@ -1209,7 +1161,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 2,
      "medianaCierre": 110,
      "promedioCierre": 110,
@@ -1228,7 +1180,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 41,
      "promedioCierre": 41,
@@ -1241,117 +1193,109 @@
     "Listo para revisión": 2
    },
    "antiguedad": {
-    "1-30 días": 5,
-    "31-90 días": 3,
+    "1-30 días": 4,
+    "31-90 días": 4,
     "91-180 días": 4,
     "181-365 días": 2,
     "Más de un año": 1
    },
    "porAnio": {
     "2025": 144,
-    "2026": 96
+    "2026": 97
    },
    "ventanas": {
     "semana": {
-     "total": 2,
-     "cerradas": 0,
-     "abiertas": 2,
+     "total": 1,
+     "cerradas": 1,
+     "abiertas": 0,
      "atrasadas": 0,
-     "pctCierre": 0.0,
+     "pctCierre": 100.0,
      "internas": 0,
-     "externas": 2,
-     "cliente": 2,
+     "externas": 1,
+     "cliente": 1,
      "subcontrato": 0,
-     "abiertasCliente": 2,
+     "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": null,
-     "promedioCierre": null,
-     "maxCierre": null
+     "costo": 0.0,
+     "conCosto": 1,
+     "medianaCierre": 1,
+     "promedioCierre": 1,
+     "maxCierre": 1
     },
     "mes": {
      "total": 6,
-     "cerradas": 1,
-     "abiertas": 5,
-     "atrasadas": 3,
-     "pctCierre": 16.7,
+     "cerradas": 2,
+     "abiertas": 4,
+     "atrasadas": 4,
+     "pctCierre": 33.3,
      "internas": 0,
      "externas": 6,
      "cliente": 6,
      "subcontrato": 0,
-     "abiertasCliente": 5,
+     "abiertasCliente": 4,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": 6,
-     "promedioCierre": 6,
+     "costo": 0.0,
+     "conCosto": 1,
+     "medianaCierre": 3,
+     "promedioCierre": 4,
      "maxCierre": 6
     },
     "trimestre": {
-     "total": 30,
-     "cerradas": 22,
+     "total": 29,
+     "cerradas": 21,
      "abiertas": 8,
-     "atrasadas": 6,
-     "pctCierre": 73.3,
+     "atrasadas": 8,
+     "pctCierre": 72.4,
      "internas": 2,
-     "externas": 28,
-     "cliente": 28,
+     "externas": 27,
+     "cliente": 27,
      "subcontrato": 0,
      "abiertasCliente": 8,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
-     "conCosto": 4,
+     "costo": 0.0,
+     "conCosto": 5,
      "medianaCierre": 28,
-     "promedioCierre": 30,
+     "promedioCierre": 26,
      "maxCierre": 73
     }
    },
    "semana": {
-    "desde": "27-07-2026",
-    "hasta": "02-08-2026",
-    "total": 2,
+    "desde": "03-08-2026",
+    "hasta": "09-08-2026",
+    "total": 1,
     "internas": 0,
-    "externas": 2,
-    "cliente": 2,
+    "externas": 1,
+    "cliente": 1,
     "subcontrato": 0,
-    "abiertas": 2,
-    "cerradas": 0,
+    "abiertas": 0,
+    "cerradas": 1,
     "porOrigen": {
-     "Externa": 2
+     "Externa": 1
     },
     "porEmision": {
-     "Externa Cliente": 2
+     "Externa Cliente": 1
     },
     "porEspecialidad": {
-     "OO.CC": {
+     "PIPING": {
       "total": 1,
       "internas": 0,
       "externas": 1,
       "cliente": 1,
       "subcontrato": 0,
-      "abiertas": 1
-     },
-     "CALIDAD": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "cliente": 1,
-      "subcontrato": 0,
-      "abiertas": 1
+      "abiertas": 0
      }
     },
     "porProyecto": {
      "Talabre": {
-      "total": 2,
+      "total": 1,
       "internas": 0,
-      "externas": 2,
-      "cliente": 2,
+      "externas": 1,
+      "cliente": 1,
       "subcontrato": 0,
-      "abiertas": 2
+      "abiertas": 0
      }
     },
     "porTipo": {
@@ -1361,78 +1305,42 @@
       "externas": 1,
       "cliente": 1,
       "subcontrato": 0,
-      "abiertas": 1
-     },
-     "No Conformidad": {
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "cliente": 1,
-      "subcontrato": 0,
-      "abiertas": 1
+      "abiertas": 0
      }
     },
     "detalle": [
      {
-      "fecha": "27-07-2026",
+      "fecha": "05-08-2026",
       "proy": "Talabre",
-      "n": "240",
+      "n": "242",
       "tipo": "Producto No Conforme",
       "emision": "Externa Cliente",
       "origen": "Externa",
-      "especialidad": "OO.CC",
-      "responsable": "Sebastián Ramos",
-      "estatus": "Iniciado",
-      "estado": "Abierta",
-      "titulo": "Soporte de Línea 405N, perno de anclaje presenta fractura, y desprendimiento localizado del mortero de nivelación (grout) en el sector del perno afect",
-      "costo": null,
-      "codigoExterno": "PNC N°182"
-     },
-     {
-      "fecha": "28-07-2026",
-      "proy": "Talabre",
-      "n": "241",
-      "tipo": "No Conformidad",
-      "emision": "Externa Cliente",
-      "origen": "Externa",
-      "especialidad": "CALIDAD",
-      "responsable": "Daniel Ramirez B.",
-      "estatus": "Iniciado",
-      "estado": "Abierta",
-      "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
-      "costo": null,
-      "codigoExterno": "RNC N°449"
+      "especialidad": "PIPING",
+      "responsable": "Oscar Nahuel P.",
+      "estatus": "Cerrado",
+      "estado": "Cerrada",
+      "titulo": "Línea 3716D-RW-36\"-CI-0408-N, no contienen registros que acrediten la verificación del parámetro de nivelación de la cañería.",
+      "costo": 0.0,
+      "codigoExterno": "PNC N°183"
      }
     ],
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "08-06",
-      "hasta": "28-06",
+      "desde": "15-06",
+      "hasta": "05-07",
       "semanas": 3,
       "acumulada": true,
-      "total": 6,
+      "total": 5,
       "internas": 0,
-      "externas": 6,
-      "cliente": 6,
-      "subcontrato": 0,
-      "abiertas": 2
-     },
-     {
-      "etiqueta": "Hace 4 semanas",
-      "desde": "29-06",
-      "hasta": "05-07",
-      "semanas": 1,
-      "acumulada": false,
-      "total": 3,
-      "internas": 0,
-      "externas": 3,
-      "cliente": 3,
+      "externas": 5,
+      "cliente": 5,
       "subcontrato": 0,
       "abiertas": 1
      },
      {
-      "etiqueta": "Hace 3 semanas",
+      "etiqueta": "Hace 4 semanas",
       "desde": "06-07",
       "hasta": "12-07",
       "semanas": 1,
@@ -1445,7 +1353,7 @@
       "abiertas": 1
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "13-07",
       "hasta": "19-07",
       "semanas": 1,
@@ -1458,7 +1366,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "20-07",
       "hasta": "26-07",
       "semanas": 1,
@@ -1471,7 +1379,7 @@
       "abiertas": 2
      },
      {
-      "etiqueta": "Última semana",
+      "etiqueta": "Semana anterior",
       "desde": "27-07",
       "hasta": "02-08",
       "semanas": 1,
@@ -1482,6 +1390,19 @@
       "cliente": 2,
       "subcontrato": 0,
       "abiertas": 2
+     },
+     {
+      "etiqueta": "Última semana",
+      "desde": "03-08",
+      "hasta": "09-08",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "cliente": 1,
+      "subcontrato": 0,
+      "abiertas": 0
      }
     ]
    },
@@ -1500,7 +1421,8 @@
     "2026-04": 11,
     "2026-05": 13,
     "2026-06": 11,
-    "2026-07": 6
+    "2026-07": 6,
+    "2026-08": 1
    }
   },
   "ARQUEROS": {
@@ -1510,42 +1432,42 @@
    "cliente": "MASA",
    "obra": true,
    "resumen": {
-    "total": 163,
-    "cerradas": 127,
-    "abiertas": 36,
+    "total": 165,
+    "cerradas": 128,
+    "abiertas": 37,
     "atrasadas": 36,
-    "pctCierre": 77.9,
+    "pctCierre": 77.6,
     "internas": 53,
-    "externas": 110,
-    "cliente": 70,
+    "externas": 112,
+    "cliente": 72,
     "subcontrato": 40,
-    "abiertasCliente": 35,
+    "abiertasCliente": 36,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 1,
     "costo": 3391.8,
     "conCosto": 44,
-    "medianaCierre": 129,
-    "promedioCierre": 127,
+    "medianaCierre": 131,
+    "promedioCierre": 128,
     "maxCierre": 313
    },
    "porTipo": {
     "No Conformidad": {
-     "total": 88,
-     "cerradas": 67,
-     "abiertas": 21,
+     "total": 90,
+     "cerradas": 68,
+     "abiertas": 22,
      "atrasadas": 21,
-     "pctCierre": 76.1,
+     "pctCierre": 75.6,
      "internas": 52,
-     "externas": 36,
-     "cliente": 33,
+     "externas": 38,
+     "cliente": 35,
      "subcontrato": 3,
-     "abiertasCliente": 20,
+     "abiertasCliente": 21,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 1,
      "costo": 581.8,
      "conCosto": 10,
      "medianaCierre": 52,
-     "promedioCierre": 80,
+     "promedioCierre": 82,
      "maxCierre": 297
     },
     "Producto No Conforme": {
@@ -1561,7 +1483,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 2810,
+     "costo": 2810.0,
      "conCosto": 34,
      "medianaCierre": 212,
      "promedioCierre": 211,
@@ -1583,8 +1505,8 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 148,
-     "promedioCierre": 129,
-     "maxCierre": 217
+     "promedioCierre": 130,
+     "maxCierre": 224
     }
    },
    "porOrigen": {
@@ -1608,22 +1530,22 @@
      "maxCierre": 297
     },
     "Externa": {
-     "total": 110,
-     "cerradas": 75,
-     "abiertas": 35,
+     "total": 112,
+     "cerradas": 76,
+     "abiertas": 36,
      "atrasadas": 35,
-     "pctCierre": 68.2,
+     "pctCierre": 67.9,
      "internas": 0,
-     "externas": 110,
-     "cliente": 70,
+     "externas": 112,
+     "cliente": 72,
      "subcontrato": 40,
-     "abiertasCliente": 35,
+     "abiertasCliente": 36,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 2840,
+     "costo": 2840.0,
      "conCosto": 35,
      "medianaCierre": 180,
-     "promedioCierre": 168,
+     "promedioCierre": 169,
      "maxCierre": 313
     }
    },
@@ -1648,22 +1570,22 @@
      "maxCierre": 297
     },
     "Externa Cliente": {
-     "total": 70,
-     "cerradas": 35,
-     "abiertas": 35,
+     "total": 72,
+     "cerradas": 36,
+     "abiertas": 36,
      "atrasadas": 35,
      "pctCierre": 50.0,
      "internas": 0,
-     "externas": 70,
-     "cliente": 70,
+     "externas": 72,
+     "cliente": 72,
      "subcontrato": 0,
-     "abiertasCliente": 35,
+     "abiertasCliente": 36,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 0,
      "conCosto": 0,
-     "medianaCierre": 121,
-     "promedioCierre": 127,
+     "medianaCierre": 125,
+     "promedioCierre": 129,
      "maxCierre": 288
     },
     "Externa Subcontrato": {
@@ -1679,14 +1601,14 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 2840,
+     "costo": 2840.0,
      "conCosto": 35,
      "medianaCierre": 211,
      "promedioCierre": 205,
      "maxCierre": 313
     }
    },
-   "autodeteccion": 32.5,
+   "autodeteccion": 32.1,
    "porEspecialidad": {
     "OO.CC": {
      "total": 16,
@@ -1708,22 +1630,22 @@
      "maxCierre": 190
     },
     "Sin especialidad": {
-     "total": 70,
+     "total": 71,
      "cerradas": 35,
-     "abiertas": 35,
+     "abiertas": 36,
      "atrasadas": 35,
-     "pctCierre": 50.0,
+     "pctCierre": 49.3,
      "internas": 0,
-     "externas": 70,
-     "cliente": 70,
+     "externas": 71,
+     "cliente": 71,
      "subcontrato": 0,
-     "abiertasCliente": 35,
+     "abiertasCliente": 36,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 121,
-     "promedioCierre": 127,
+     "promedioCierre": 128,
      "maxCierre": 288
     },
     "EXPEDITORÍA": {
@@ -1739,7 +1661,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 1700,
+     "costo": 1700.0,
      "conCosto": 31,
      "medianaCierre": 212,
      "promedioCierre": 202,
@@ -1853,7 +1775,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 239,
      "promedioCierre": 239,
@@ -1878,6 +1800,25 @@
      "promedioCierre": 29,
      "maxCierre": 29
     },
+    "MECÁNICA": {
+     "total": 3,
+     "cerradas": 3,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 2,
+     "externas": 1,
+     "cliente": 1,
+     "subcontrato": 0,
+     "abiertasCliente": 0,
+     "abiertasSubcontrato": 0,
+     "abiertasInternas": 0,
+     "costo": 0,
+     "conCosto": 0,
+     "medianaCierre": 15,
+     "promedioCierre": 57,
+     "maxCierre": 146
+    },
     "SUBCONTRATO": {
      "total": 6,
      "cerradas": 6,
@@ -1891,30 +1832,11 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 1140,
+     "costo": 1140.0,
      "conCosto": 4,
      "medianaCierre": 174,
      "promedioCierre": 160,
      "maxCierre": 224
-    },
-    "MECÁNICA": {
-     "total": 2,
-     "cerradas": 2,
-     "abiertas": 0,
-     "atrasadas": 0,
-     "pctCierre": 100.0,
-     "internas": 2,
-     "externas": 0,
-     "cliente": 0,
-     "subcontrato": 0,
-     "abiertasCliente": 0,
-     "abiertasSubcontrato": 0,
-     "abiertasInternas": 0,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": 13,
-     "promedioCierre": 13,
-     "maxCierre": 15
     },
     "BODEGA": {
      "total": 7,
@@ -1986,7 +1908,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 159,
      "promedioCierre": 159,
@@ -2005,7 +1927,7 @@
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
-     "costo": 0,
+     "costo": 0.0,
      "conCosto": 1,
      "medianaCierre": 280,
      "promedioCierre": 280,
@@ -2033,21 +1955,21 @@
    },
    "porEstatus": {
     "Iniciado": 1,
-    "Listo para revisión": 20,
-    "Observada": 12,
-    "Pendiente": 3
+    "Listo para revisión": 25,
+    "Stand By": 10,
+    "Observada": 1
    },
    "antiguedad": {
-    "1-30 días": 0,
+    "1-30 días": 1,
     "31-90 días": 8,
-    "91-180 días": 14,
-    "181-365 días": 12,
-    "Más de un año": 2
+    "91-180 días": 12,
+    "181-365 días": 13,
+    "Más de un año": 3
    },
    "porAnio": {
     "2024": 14,
-    "2025": 103,
-    "2026": 46
+    "2025": 104,
+    "2026": 47
    },
    "ventanas": {
     "semana": {
@@ -2070,16 +1992,16 @@
      "maxCierre": null
     },
     "mes": {
-     "total": 0,
+     "total": 1,
      "cerradas": 0,
-     "abiertas": 0,
+     "abiertas": 1,
      "atrasadas": 0,
      "pctCierre": 0.0,
      "internas": 0,
-     "externas": 0,
-     "cliente": 0,
+     "externas": 1,
+     "cliente": 1,
      "subcontrato": 0,
-     "abiertasCliente": 0,
+     "abiertasCliente": 1,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 0,
@@ -2089,16 +2011,16 @@
      "maxCierre": null
     },
     "trimestre": {
-     "total": 8,
+     "total": 9,
      "cerradas": 0,
-     "abiertas": 8,
+     "abiertas": 9,
      "atrasadas": 8,
      "pctCierre": 0.0,
      "internas": 1,
-     "externas": 7,
-     "cliente": 7,
+     "externas": 8,
+     "cliente": 8,
      "subcontrato": 0,
-     "abiertasCliente": 7,
+     "abiertasCliente": 8,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 1,
      "costo": 0,
@@ -2109,8 +2031,8 @@
     }
    },
    "semana": {
-    "desde": "27-07-2026",
-    "hasta": "02-08-2026",
+    "desde": "03-08-2026",
+    "hasta": "09-08-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -2127,23 +2049,10 @@
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "08-06",
-      "hasta": "28-06",
+      "desde": "15-06",
+      "hasta": "05-07",
       "semanas": 3,
       "acumulada": true,
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "cliente": 1,
-      "subcontrato": 0,
-      "abiertas": 1
-     },
-     {
-      "etiqueta": "Hace 4 semanas",
-      "desde": "29-06",
-      "hasta": "05-07",
-      "semanas": 1,
-      "acumulada": false,
       "total": 0,
       "internas": 0,
       "externas": 0,
@@ -2152,7 +2061,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 3 semanas",
+      "etiqueta": "Hace 4 semanas",
       "desde": "06-07",
       "hasta": "12-07",
       "semanas": 1,
@@ -2165,7 +2074,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "13-07",
       "hasta": "19-07",
       "semanas": 1,
@@ -2178,7 +2087,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "20-07",
       "hasta": "26-07",
       "semanas": 1,
@@ -2191,9 +2100,22 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Última semana",
+      "etiqueta": "Semana anterior",
       "desde": "27-07",
       "hasta": "02-08",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 1,
+      "internas": 0,
+      "externas": 1,
+      "cliente": 1,
+      "subcontrato": 0,
+      "abiertas": 1
+     },
+     {
+      "etiqueta": "Última semana",
+      "desde": "03-08",
+      "hasta": "09-08",
       "semanas": 1,
       "acumulada": false,
       "total": 0,
@@ -2216,7 +2138,7 @@
     "2025-04": 10,
     "2025-05": 7,
     "2025-06": 5,
-    "2025-07": 10,
+    "2025-07": 11,
     "2025-08": 14,
     "2025-09": 10,
     "2025-10": 9,
@@ -2227,7 +2149,8 @@
     "2026-03": 11,
     "2026-04": 6,
     "2026-05": 5,
-    "2026-06": 3
+    "2026-06": 3,
+    "2026-07": 1
    }
   },
   "OFICINA": {
@@ -2413,8 +2336,8 @@
     }
    },
    "semana": {
-    "desde": "27-07-2026",
-    "hasta": "02-08-2026",
+    "desde": "03-08-2026",
+    "hasta": "09-08-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -2431,8 +2354,8 @@
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "08-06",
-      "hasta": "28-06",
+      "desde": "15-06",
+      "hasta": "05-07",
       "semanas": 3,
       "acumulada": true,
       "total": 0,
@@ -2444,19 +2367,6 @@
      },
      {
       "etiqueta": "Hace 4 semanas",
-      "desde": "29-06",
-      "hasta": "05-07",
-      "semanas": 1,
-      "acumulada": false,
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "cliente": 0,
-      "subcontrato": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 3 semanas",
       "desde": "06-07",
       "hasta": "12-07",
       "semanas": 1,
@@ -2469,7 +2379,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "13-07",
       "hasta": "19-07",
       "semanas": 1,
@@ -2482,7 +2392,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "20-07",
       "hasta": "26-07",
       "semanas": 1,
@@ -2495,9 +2405,22 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Última semana",
+      "etiqueta": "Semana anterior",
       "desde": "27-07",
       "hasta": "02-08",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "cliente": 0,
+      "subcontrato": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Última semana",
+      "desde": "03-08",
+      "hasta": "09-08",
       "semanas": 1,
       "acumulada": false,
       "total": 0,
@@ -2519,61 +2442,61 @@
  },
  "global": {
   "resumen": {
-   "total": 493,
-   "cerradas": 440,
+   "total": 496,
+   "cerradas": 443,
    "abiertas": 53,
-   "atrasadas": 50,
-   "pctCierre": 89.2,
+   "atrasadas": 52,
+   "pctCierre": 89.3,
    "internas": 159,
-   "externas": 325,
-   "cliente": 277,
+   "externas": 328,
+   "cliente": 280,
    "subcontrato": 48,
    "abiertasCliente": 48,
    "abiertasSubcontrato": 0,
    "abiertasInternas": 5,
    "costo": 10613.4,
-   "conCosto": 249,
+   "conCosto": 251,
    "medianaCierre": 30,
    "promedioCierre": 69,
    "maxCierre": 389
   },
   "porTipo": {
    "No Conformidad": {
-    "total": 312,
-    "cerradas": 278,
+    "total": 314,
+    "cerradas": 280,
     "abiertas": 34,
-    "atrasadas": 32,
-    "pctCierre": 89.1,
+    "atrasadas": 33,
+    "pctCierre": 89.2,
     "internas": 131,
-    "externas": 173,
-    "cliente": 167,
+    "externas": 175,
+    "cliente": 169,
     "subcontrato": 6,
     "abiertasCliente": 29,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 5,
     "costo": 7139.3,
-    "conCosto": 137,
+    "conCosto": 138,
     "medianaCierre": 29,
     "promedioCierre": 58,
     "maxCierre": 389
    },
    "Producto No Conforme": {
-    "total": 120,
-    "cerradas": 116,
+    "total": 121,
+    "cerradas": 117,
     "abiertas": 4,
-    "atrasadas": 3,
+    "atrasadas": 4,
     "pctCierre": 96.7,
     "internas": 5,
-    "externas": 115,
-    "cliente": 73,
+    "externas": 116,
+    "cliente": 74,
     "subcontrato": 42,
     "abiertasCliente": 4,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 3471.1,
-    "conCosto": 93,
+    "conCosto": 94,
     "medianaCierre": 37,
-    "promedioCierre": 94,
+    "promedioCierre": 93,
     "maxCierre": 313
    },
    "Observación": {
@@ -2589,11 +2512,11 @@
     "abiertasCliente": 15,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 3,
+    "costo": 3.0,
     "conCosto": 19,
     "medianaCierre": 34,
     "promedioCierre": 76,
-    "maxCierre": 217
+    "maxCierre": 224
    },
    "Reporte HSE Nivel Alto": {
     "total": 1,
@@ -2636,20 +2559,20 @@
     "maxCierre": 389
    },
    "Externa": {
-    "total": 325,
-    "cerradas": 277,
+    "total": 328,
+    "cerradas": 280,
     "abiertas": 48,
-    "atrasadas": 45,
-    "pctCierre": 85.2,
+    "atrasadas": 47,
+    "pctCierre": 85.4,
     "internas": 0,
-    "externas": 325,
-    "cliente": 277,
+    "externas": 328,
+    "cliente": 280,
     "subcontrato": 48,
     "abiertasCliente": 48,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 9260.4,
-    "conCosto": 165,
+    "conCosto": 167,
     "medianaCierre": 34,
     "promedioCierre": 72,
     "maxCierre": 313
@@ -2695,20 +2618,20 @@
     "maxCierre": 389
    },
    "Externa Cliente": {
-    "total": 277,
-    "cerradas": 229,
+    "total": 280,
+    "cerradas": 232,
     "abiertas": 48,
-    "atrasadas": 45,
-    "pctCierre": 82.7,
+    "atrasadas": 47,
+    "pctCierre": 82.9,
     "internas": 0,
-    "externas": 277,
-    "cliente": 277,
+    "externas": 280,
+    "cliente": 280,
     "subcontrato": 0,
     "abiertasCliente": 48,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 6053.3,
-    "conCosto": 123,
+    "conCosto": 125,
     "medianaCierre": 28,
     "promedioCierre": 50,
     "maxCierre": 288
@@ -2752,13 +2675,13 @@
     "maxCierre": 146
    }
   },
-  "autodeteccion": 32.9,
+  "autodeteccion": 32.6,
   "porEspecialidad": {
    "OO.CC": {
     "total": 166,
     "cerradas": 156,
     "abiertas": 10,
-    "atrasadas": 9,
+    "atrasadas": 10,
     "pctCierre": 94.0,
     "internas": 47,
     "externas": 119,
@@ -2774,16 +2697,16 @@
     "maxCierre": 237
    },
    "Sin especialidad": {
-    "total": 78,
+    "total": 79,
     "cerradas": 43,
-    "abiertas": 35,
+    "abiertas": 36,
     "atrasadas": 35,
-    "pctCierre": 55.1,
+    "pctCierre": 54.4,
     "internas": 0,
-    "externas": 70,
-    "cliente": 70,
+    "externas": 71,
+    "cliente": 71,
     "subcontrato": 0,
-    "abiertasCliente": 35,
+    "abiertasCliente": 36,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 0,
@@ -2805,7 +2728,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 4,
-    "costo": 2176,
+    "costo": 2176.0,
     "conCosto": 34,
     "medianaCierre": 180,
     "promedioCierre": 185,
@@ -2815,7 +2738,7 @@
     "total": 34,
     "cerradas": 31,
     "abiertas": 3,
-    "atrasadas": 2,
+    "atrasadas": 3,
     "pctCierre": 91.2,
     "internas": 4,
     "externas": 30,
@@ -2824,7 +2747,7 @@
     "abiertasCliente": 3,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 4000,
+    "costo": 4000.0,
     "conCosto": 16,
     "medianaCierre": 23,
     "promedioCierre": 31,
@@ -2843,29 +2766,29 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 250,
+    "costo": 250.0,
     "conCosto": 10,
     "medianaCierre": 41,
     "promedioCierre": 51,
     "maxCierre": 250
    },
    "PIPING": {
-    "total": 18,
-    "cerradas": 18,
+    "total": 19,
+    "cerradas": 19,
     "abiertas": 0,
     "atrasadas": 0,
     "pctCierre": 100.0,
     "internas": 7,
-    "externas": 11,
-    "cliente": 11,
+    "externas": 12,
+    "cliente": 12,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 10,
-    "conCosto": 7,
+    "costo": 10.0,
+    "conCosto": 8,
     "medianaCierre": 19,
-    "promedioCierre": 46,
+    "promedioCierre": 43,
     "maxCierre": 269
    },
    "TOPOGRAFÍA": {
@@ -2900,7 +2823,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 38,
+    "costo": 38.0,
     "conCosto": 3,
     "medianaCierre": 43,
     "promedioCierre": 40,
@@ -2919,7 +2842,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 12,
     "medianaCierre": 18,
     "promedioCierre": 17,
@@ -2963,6 +2886,25 @@
     "promedioCierre": 30,
     "maxCierre": 134
    },
+   "MECÁNICA": {
+    "total": 10,
+    "cerradas": 10,
+    "abiertas": 0,
+    "atrasadas": 0,
+    "pctCierre": 100.0,
+    "internas": 3,
+    "externas": 7,
+    "cliente": 7,
+    "subcontrato": 0,
+    "abiertasCliente": 0,
+    "abiertasSubcontrato": 0,
+    "abiertasInternas": 0,
+    "costo": 0.0,
+    "conCosto": 2,
+    "medianaCierre": 39,
+    "promedioCierre": 60,
+    "maxCierre": 165
+   },
    "RRLL": {
     "total": 10,
     "cerradas": 10,
@@ -2976,7 +2918,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 10,
     "medianaCierre": 7,
     "promedioCierre": 7,
@@ -3001,25 +2943,6 @@
     "promedioCierre": 114,
     "maxCierre": 224
    },
-   "MECÁNICA": {
-    "total": 9,
-    "cerradas": 8,
-    "abiertas": 1,
-    "atrasadas": 0,
-    "pctCierre": 88.9,
-    "internas": 3,
-    "externas": 6,
-    "cliente": 6,
-    "subcontrato": 0,
-    "abiertasCliente": 1,
-    "abiertasSubcontrato": 0,
-    "abiertasInternas": 0,
-    "costo": 0,
-    "conCosto": 1,
-    "medianaCierre": 39,
-    "promedioCierre": 56,
-    "maxCierre": 165
-   },
    "BODEGA": {
     "total": 8,
     "cerradas": 8,
@@ -3033,7 +2956,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 22,
     "promedioCierre": 37,
@@ -3052,7 +2975,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 29,
     "promedioCierre": 36,
@@ -3071,7 +2994,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 178,
     "promedioCierre": 134,
@@ -3090,7 +3013,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 156,
     "promedioCierre": 126,
@@ -3109,7 +3032,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 92,
+    "costo": 92.0,
     "conCosto": 2,
     "medianaCierre": 56,
     "promedioCierre": 72,
@@ -3128,7 +3051,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 41,
     "promedioCierre": 41,
@@ -3147,7 +3070,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 30,
     "promedioCierre": 30,
@@ -3185,7 +3108,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 280,
     "promedioCierre": 280,
@@ -3231,69 +3154,69 @@
    }
   },
   "porEstatus": {
-   "Iniciado": 14,
+   "Iniciado": 13,
    "No aceptado": 1,
-   "Listo para revisión": 23,
-   "Observada": 12,
-   "Pendiente": 3
+   "Listo para revisión": 28,
+   "Stand By": 10,
+   "Observada": 1
   },
   "antiguedad": {
-   "1-30 días": 6,
-   "31-90 días": 12,
-   "91-180 días": 18,
-   "181-365 días": 14,
-   "Más de un año": 3
+   "1-30 días": 5,
+   "31-90 días": 13,
+   "91-180 días": 16,
+   "181-365 días": 15,
+   "Más de un año": 4
   },
   "porAnio": {
    "2023": 3,
    "2024": 18,
-   "2025": 315,
-   "2026": 157
+   "2025": 316,
+   "2026": 159
   },
   "ventanas": {
    "semana": {
-    "total": 3,
-    "cerradas": 0,
-    "abiertas": 3,
+    "total": 1,
+    "cerradas": 1,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 0.0,
+    "pctCierre": 100.0,
     "internas": 0,
-    "externas": 3,
-    "cliente": 3,
+    "externas": 1,
+    "cliente": 1,
     "subcontrato": 0,
-    "abiertasCliente": 3,
+    "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
-    "conCosto": 0,
-    "medianaCierre": null,
-    "promedioCierre": null,
-    "maxCierre": null
+    "costo": 0.0,
+    "conCosto": 1,
+    "medianaCierre": 1,
+    "promedioCierre": 1,
+    "maxCierre": 1
    },
    "mes": {
-    "total": 7,
-    "cerradas": 1,
-    "abiertas": 6,
-    "atrasadas": 3,
-    "pctCierre": 14.3,
+    "total": 8,
+    "cerradas": 3,
+    "abiertas": 5,
+    "atrasadas": 4,
+    "pctCierre": 37.5,
     "internas": 0,
-    "externas": 7,
-    "cliente": 7,
+    "externas": 8,
+    "cliente": 8,
     "subcontrato": 0,
-    "abiertasCliente": 6,
+    "abiertasCliente": 5,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
-    "conCosto": 0,
+    "costo": 0.0,
+    "conCosto": 2,
     "medianaCierre": 6,
     "promedioCierre": 6,
-    "maxCierre": 6
+    "maxCierre": 12
    },
    "trimestre": {
     "total": 40,
     "cerradas": 22,
     "abiertas": 18,
-    "atrasadas": 15,
+    "atrasadas": 17,
     "pctCierre": 55.0,
     "internas": 4,
     "externas": 36,
@@ -3302,167 +3225,92 @@
     "abiertasCliente": 16,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 2,
-    "costo": 0,
-    "conCosto": 4,
-    "medianaCierre": 28,
-    "promedioCierre": 30,
+    "costo": 0.0,
+    "conCosto": 6,
+    "medianaCierre": 24,
+    "promedioCierre": 26,
     "maxCierre": 73
    }
   },
   "semana": {
-   "desde": "27-07-2026",
-   "hasta": "02-08-2026",
-   "total": 3,
+   "desde": "03-08-2026",
+   "hasta": "09-08-2026",
+   "total": 1,
    "internas": 0,
-   "externas": 3,
-   "cliente": 3,
+   "externas": 1,
+   "cliente": 1,
    "subcontrato": 0,
-   "abiertas": 3,
-   "cerradas": 0,
+   "abiertas": 0,
+   "cerradas": 1,
    "porOrigen": {
-    "Externa": 3
+    "Externa": 1
    },
    "porEmision": {
-    "Externa Cliente": 3
+    "Externa Cliente": 1
    },
    "porEspecialidad": {
-    "MECÁNICA": {
+    "PIPING": {
      "total": 1,
      "internas": 0,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertas": 1
-    },
-    "OO.CC": {
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "cliente": 1,
-     "subcontrato": 0,
-     "abiertas": 1
-    },
-    "CALIDAD": {
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "cliente": 1,
-     "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
     }
    },
    "porProyecto": {
     "Talabre": {
-     "total": 2,
-     "internas": 0,
-     "externas": 2,
-     "cliente": 2,
-     "subcontrato": 0,
-     "abiertas": 2
-    },
-    "Desaladora": {
      "total": 1,
      "internas": 0,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
     }
    },
    "porTipo": {
-    "No Conformidad": {
-     "total": 2,
-     "internas": 0,
-     "externas": 2,
-     "cliente": 2,
-     "subcontrato": 0,
-     "abiertas": 2
-    },
     "Producto No Conforme": {
      "total": 1,
      "internas": 0,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
     }
    },
    "detalle": [
     {
-     "fecha": "27-07-2026",
-     "proy": "Desaladora",
-     "n": "95",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "MECÁNICA",
-     "responsable": "Wilson Jara",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Verificación de Preservación",
-     "costo": null,
-     "codigoExterno": "NCR-0535"
-    },
-    {
-     "fecha": "27-07-2026",
+     "fecha": "05-08-2026",
      "proy": "Talabre",
-     "n": "240",
+     "n": "242",
      "tipo": "Producto No Conforme",
      "emision": "Externa Cliente",
      "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Sebastián Ramos",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Soporte de Línea 405N, perno de anclaje presenta fractura, y desprendimiento localizado del mortero de nivelación (grout) en el sector del perno afect",
-     "costo": null,
-     "codigoExterno": "PNC N°182"
-    },
-    {
-     "fecha": "28-07-2026",
-     "proy": "Talabre",
-     "n": "241",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "CALIDAD",
-     "responsable": "Daniel Ramirez B.",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
-     "costo": null,
-     "codigoExterno": "RNC N°449"
+     "especialidad": "PIPING",
+     "responsable": "Oscar Nahuel P.",
+     "estatus": "Cerrado",
+     "estado": "Cerrada",
+     "titulo": "Línea 3716D-RW-36\"-CI-0408-N, no contienen registros que acrediten la verificación del parámetro de nivelación de la cañería.",
+     "costo": 0.0,
+     "codigoExterno": "PNC N°183"
     }
    ],
    "tendencia": [
     {
      "etiqueta": "5 semanas o más",
-     "desde": "08-06",
-     "hasta": "28-06",
+     "desde": "15-06",
+     "hasta": "05-07",
      "semanas": 3,
      "acumulada": true,
-     "total": 7,
+     "total": 5,
      "internas": 0,
-     "externas": 7,
-     "cliente": 7,
-     "subcontrato": 0,
-     "abiertas": 3
-    },
-    {
-     "etiqueta": "Hace 4 semanas",
-     "desde": "29-06",
-     "hasta": "05-07",
-     "semanas": 1,
-     "acumulada": false,
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "cliente": 3,
+     "externas": 5,
+     "cliente": 5,
      "subcontrato": 0,
      "abiertas": 1
     },
     {
-     "etiqueta": "Hace 3 semanas",
+     "etiqueta": "Hace 4 semanas",
      "desde": "06-07",
      "hasta": "12-07",
      "semanas": 1,
@@ -3475,7 +3323,7 @@
      "abiertas": 1
     },
     {
-     "etiqueta": "Hace 2 semanas",
+     "etiqueta": "Hace 3 semanas",
      "desde": "13-07",
      "hasta": "19-07",
      "semanas": 1,
@@ -3488,7 +3336,7 @@
      "abiertas": 0
     },
     {
-     "etiqueta": "Semana anterior",
+     "etiqueta": "Hace 2 semanas",
      "desde": "20-07",
      "hasta": "26-07",
      "semanas": 1,
@@ -3501,17 +3349,30 @@
      "abiertas": 2
     },
     {
-     "etiqueta": "Última semana",
+     "etiqueta": "Semana anterior",
      "desde": "27-07",
      "hasta": "02-08",
      "semanas": 1,
      "acumulada": false,
-     "total": 3,
+     "total": 4,
      "internas": 0,
-     "externas": 3,
-     "cliente": 3,
+     "externas": 4,
+     "cliente": 4,
      "subcontrato": 0,
      "abiertas": 3
+    },
+    {
+     "etiqueta": "Última semana",
+     "desde": "03-08",
+     "hasta": "09-08",
+     "semanas": 1,
+     "acumulada": false,
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "cliente": 1,
+     "subcontrato": 0,
+     "abiertas": 0
     }
    ]
   },
@@ -3527,7 +3388,7 @@
    "2025-04": 16,
    "2025-05": 36,
    "2025-06": 22,
-   "2025-07": 49,
+   "2025-07": 50,
    "2025-08": 29,
    "2025-09": 33,
    "2025-10": 40,
@@ -3539,66 +3400,67 @@
    "2026-04": 19,
    "2026-05": 19,
    "2026-06": 14,
-   "2026-07": 7
+   "2026-07": 8,
+   "2026-08": 1
   }
  },
  "obra": {
   "resumen": {
-   "total": 485,
-   "cerradas": 432,
+   "total": 488,
+   "cerradas": 435,
    "abiertas": 53,
-   "atrasadas": 50,
+   "atrasadas": 52,
    "pctCierre": 89.1,
    "internas": 159,
-   "externas": 325,
-   "cliente": 277,
+   "externas": 328,
+   "cliente": 280,
    "subcontrato": 48,
    "abiertasCliente": 48,
    "abiertasSubcontrato": 0,
    "abiertasInternas": 5,
    "costo": 10613.4,
-   "conCosto": 249,
+   "conCosto": 251,
    "medianaCierre": 30,
    "promedioCierre": 69,
    "maxCierre": 389
   },
   "porTipo": {
    "No Conformidad": {
-    "total": 304,
-    "cerradas": 270,
+    "total": 306,
+    "cerradas": 272,
     "abiertas": 34,
-    "atrasadas": 32,
-    "pctCierre": 88.8,
+    "atrasadas": 33,
+    "pctCierre": 88.9,
     "internas": 131,
-    "externas": 173,
-    "cliente": 167,
+    "externas": 175,
+    "cliente": 169,
     "subcontrato": 6,
     "abiertasCliente": 29,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 5,
     "costo": 7139.3,
-    "conCosto": 137,
+    "conCosto": 138,
     "medianaCierre": 29,
-    "promedioCierre": 57,
+    "promedioCierre": 58,
     "maxCierre": 389
    },
    "Producto No Conforme": {
-    "total": 120,
-    "cerradas": 116,
+    "total": 121,
+    "cerradas": 117,
     "abiertas": 4,
-    "atrasadas": 3,
+    "atrasadas": 4,
     "pctCierre": 96.7,
     "internas": 5,
-    "externas": 115,
-    "cliente": 73,
+    "externas": 116,
+    "cliente": 74,
     "subcontrato": 42,
     "abiertasCliente": 4,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 3471.1,
-    "conCosto": 93,
+    "conCosto": 94,
     "medianaCierre": 37,
-    "promedioCierre": 94,
+    "promedioCierre": 93,
     "maxCierre": 313
    },
    "Observación": {
@@ -3614,11 +3476,11 @@
     "abiertasCliente": 15,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 3,
+    "costo": 3.0,
     "conCosto": 19,
     "medianaCierre": 34,
     "promedioCierre": 76,
-    "maxCierre": 217
+    "maxCierre": 224
    },
    "Reporte HSE Nivel Alto": {
     "total": 1,
@@ -3661,20 +3523,20 @@
     "maxCierre": 389
    },
    "Externa": {
-    "total": 325,
-    "cerradas": 277,
+    "total": 328,
+    "cerradas": 280,
     "abiertas": 48,
-    "atrasadas": 45,
-    "pctCierre": 85.2,
+    "atrasadas": 47,
+    "pctCierre": 85.4,
     "internas": 0,
-    "externas": 325,
-    "cliente": 277,
+    "externas": 328,
+    "cliente": 280,
     "subcontrato": 48,
     "abiertasCliente": 48,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 9260.4,
-    "conCosto": 165,
+    "conCosto": 167,
     "medianaCierre": 34,
     "promedioCierre": 72,
     "maxCierre": 313
@@ -3720,20 +3582,20 @@
     "maxCierre": 389
    },
    "Externa Cliente": {
-    "total": 277,
-    "cerradas": 229,
+    "total": 280,
+    "cerradas": 232,
     "abiertas": 48,
-    "atrasadas": 45,
-    "pctCierre": 82.7,
+    "atrasadas": 47,
+    "pctCierre": 82.9,
     "internas": 0,
-    "externas": 277,
-    "cliente": 277,
+    "externas": 280,
+    "cliente": 280,
     "subcontrato": 0,
     "abiertasCliente": 48,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 6053.3,
-    "conCosto": 123,
+    "conCosto": 125,
     "medianaCierre": 28,
     "promedioCierre": 50,
     "maxCierre": 288
@@ -3777,13 +3639,13 @@
     "maxCierre": 15
    }
   },
-  "autodeteccion": 32.9,
+  "autodeteccion": 32.6,
   "porEspecialidad": {
    "OO.CC": {
     "total": 166,
     "cerradas": 156,
     "abiertas": 10,
-    "atrasadas": 9,
+    "atrasadas": 10,
     "pctCierre": 94.0,
     "internas": 47,
     "externas": 119,
@@ -3799,22 +3661,22 @@
     "maxCierre": 237
    },
    "Sin especialidad": {
-    "total": 70,
+    "total": 71,
     "cerradas": 35,
-    "abiertas": 35,
+    "abiertas": 36,
     "atrasadas": 35,
-    "pctCierre": 50.0,
+    "pctCierre": 49.3,
     "internas": 0,
-    "externas": 70,
-    "cliente": 70,
+    "externas": 71,
+    "cliente": 71,
     "subcontrato": 0,
-    "abiertasCliente": 35,
+    "abiertasCliente": 36,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 0,
     "conCosto": 0,
     "medianaCierre": 121,
-    "promedioCierre": 127,
+    "promedioCierre": 128,
     "maxCierre": 288
    },
    "EXPEDITORÍA": {
@@ -3830,7 +3692,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 4,
-    "costo": 2176,
+    "costo": 2176.0,
     "conCosto": 34,
     "medianaCierre": 180,
     "promedioCierre": 185,
@@ -3840,7 +3702,7 @@
     "total": 34,
     "cerradas": 31,
     "abiertas": 3,
-    "atrasadas": 2,
+    "atrasadas": 3,
     "pctCierre": 91.2,
     "internas": 4,
     "externas": 30,
@@ -3849,7 +3711,7 @@
     "abiertasCliente": 3,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 4000,
+    "costo": 4000.0,
     "conCosto": 16,
     "medianaCierre": 23,
     "promedioCierre": 31,
@@ -3868,29 +3730,29 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 250,
+    "costo": 250.0,
     "conCosto": 10,
     "medianaCierre": 41,
     "promedioCierre": 51,
     "maxCierre": 250
    },
    "PIPING": {
-    "total": 18,
-    "cerradas": 18,
+    "total": 19,
+    "cerradas": 19,
     "abiertas": 0,
     "atrasadas": 0,
     "pctCierre": 100.0,
     "internas": 7,
-    "externas": 11,
-    "cliente": 11,
+    "externas": 12,
+    "cliente": 12,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 10,
-    "conCosto": 7,
+    "costo": 10.0,
+    "conCosto": 8,
     "medianaCierre": 19,
-    "promedioCierre": 46,
+    "promedioCierre": 43,
     "maxCierre": 269
    },
    "TOPOGRAFÍA": {
@@ -3925,7 +3787,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 38,
+    "costo": 38.0,
     "conCosto": 3,
     "medianaCierre": 43,
     "promedioCierre": 40,
@@ -3944,7 +3806,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 12,
     "medianaCierre": 18,
     "promedioCierre": 17,
@@ -3988,6 +3850,25 @@
     "promedioCierre": 30,
     "maxCierre": 134
    },
+   "MECÁNICA": {
+    "total": 10,
+    "cerradas": 10,
+    "abiertas": 0,
+    "atrasadas": 0,
+    "pctCierre": 100.0,
+    "internas": 3,
+    "externas": 7,
+    "cliente": 7,
+    "subcontrato": 0,
+    "abiertasCliente": 0,
+    "abiertasSubcontrato": 0,
+    "abiertasInternas": 0,
+    "costo": 0.0,
+    "conCosto": 2,
+    "medianaCierre": 39,
+    "promedioCierre": 60,
+    "maxCierre": 165
+   },
    "RRLL": {
     "total": 10,
     "cerradas": 10,
@@ -4001,7 +3882,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 10,
     "medianaCierre": 7,
     "promedioCierre": 7,
@@ -4026,25 +3907,6 @@
     "promedioCierre": 114,
     "maxCierre": 224
    },
-   "MECÁNICA": {
-    "total": 9,
-    "cerradas": 8,
-    "abiertas": 1,
-    "atrasadas": 0,
-    "pctCierre": 88.9,
-    "internas": 3,
-    "externas": 6,
-    "cliente": 6,
-    "subcontrato": 0,
-    "abiertasCliente": 1,
-    "abiertasSubcontrato": 0,
-    "abiertasInternas": 0,
-    "costo": 0,
-    "conCosto": 1,
-    "medianaCierre": 39,
-    "promedioCierre": 56,
-    "maxCierre": 165
-   },
    "BODEGA": {
     "total": 8,
     "cerradas": 8,
@@ -4058,7 +3920,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 22,
     "promedioCierre": 37,
@@ -4077,7 +3939,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 29,
     "promedioCierre": 36,
@@ -4096,7 +3958,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 178,
     "promedioCierre": 134,
@@ -4115,7 +3977,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 3,
     "medianaCierre": 156,
     "promedioCierre": 126,
@@ -4134,7 +3996,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 92,
+    "costo": 92.0,
     "conCosto": 2,
     "medianaCierre": 56,
     "promedioCierre": 72,
@@ -4153,7 +4015,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 41,
     "promedioCierre": 41,
@@ -4172,7 +4034,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 30,
     "promedioCierre": 30,
@@ -4210,7 +4072,7 @@
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
+    "costo": 0.0,
     "conCosto": 1,
     "medianaCierre": 280,
     "promedioCierre": 280,
@@ -4256,68 +4118,68 @@
    }
   },
   "porEstatus": {
-   "Iniciado": 14,
+   "Iniciado": 13,
    "No aceptado": 1,
-   "Listo para revisión": 23,
-   "Observada": 12,
-   "Pendiente": 3
+   "Listo para revisión": 28,
+   "Stand By": 10,
+   "Observada": 1
   },
   "antiguedad": {
-   "1-30 días": 6,
-   "31-90 días": 12,
-   "91-180 días": 18,
-   "181-365 días": 14,
-   "Más de un año": 3
+   "1-30 días": 5,
+   "31-90 días": 13,
+   "91-180 días": 16,
+   "181-365 días": 15,
+   "Más de un año": 4
   },
   "porAnio": {
    "2024": 14,
-   "2025": 314,
-   "2026": 157
+   "2025": 315,
+   "2026": 159
   },
   "ventanas": {
    "semana": {
-    "total": 3,
-    "cerradas": 0,
-    "abiertas": 3,
+    "total": 1,
+    "cerradas": 1,
+    "abiertas": 0,
     "atrasadas": 0,
-    "pctCierre": 0.0,
+    "pctCierre": 100.0,
     "internas": 0,
-    "externas": 3,
-    "cliente": 3,
+    "externas": 1,
+    "cliente": 1,
     "subcontrato": 0,
-    "abiertasCliente": 3,
+    "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
-    "conCosto": 0,
-    "medianaCierre": null,
-    "promedioCierre": null,
-    "maxCierre": null
+    "costo": 0.0,
+    "conCosto": 1,
+    "medianaCierre": 1,
+    "promedioCierre": 1,
+    "maxCierre": 1
    },
    "mes": {
-    "total": 7,
-    "cerradas": 1,
-    "abiertas": 6,
-    "atrasadas": 3,
-    "pctCierre": 14.3,
+    "total": 8,
+    "cerradas": 3,
+    "abiertas": 5,
+    "atrasadas": 4,
+    "pctCierre": 37.5,
     "internas": 0,
-    "externas": 7,
-    "cliente": 7,
+    "externas": 8,
+    "cliente": 8,
     "subcontrato": 0,
-    "abiertasCliente": 6,
+    "abiertasCliente": 5,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
-    "costo": 0,
-    "conCosto": 0,
+    "costo": 0.0,
+    "conCosto": 2,
     "medianaCierre": 6,
     "promedioCierre": 6,
-    "maxCierre": 6
+    "maxCierre": 12
    },
    "trimestre": {
     "total": 40,
     "cerradas": 22,
     "abiertas": 18,
-    "atrasadas": 15,
+    "atrasadas": 17,
     "pctCierre": 55.0,
     "internas": 4,
     "externas": 36,
@@ -4326,167 +4188,92 @@
     "abiertasCliente": 16,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 2,
-    "costo": 0,
-    "conCosto": 4,
-    "medianaCierre": 28,
-    "promedioCierre": 30,
+    "costo": 0.0,
+    "conCosto": 6,
+    "medianaCierre": 24,
+    "promedioCierre": 26,
     "maxCierre": 73
    }
   },
   "semana": {
-   "desde": "27-07-2026",
-   "hasta": "02-08-2026",
-   "total": 3,
+   "desde": "03-08-2026",
+   "hasta": "09-08-2026",
+   "total": 1,
    "internas": 0,
-   "externas": 3,
-   "cliente": 3,
+   "externas": 1,
+   "cliente": 1,
    "subcontrato": 0,
-   "abiertas": 3,
-   "cerradas": 0,
+   "abiertas": 0,
+   "cerradas": 1,
    "porOrigen": {
-    "Externa": 3
+    "Externa": 1
    },
    "porEmision": {
-    "Externa Cliente": 3
+    "Externa Cliente": 1
    },
    "porEspecialidad": {
-    "MECÁNICA": {
+    "PIPING": {
      "total": 1,
      "internas": 0,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertas": 1
-    },
-    "OO.CC": {
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "cliente": 1,
-     "subcontrato": 0,
-     "abiertas": 1
-    },
-    "CALIDAD": {
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "cliente": 1,
-     "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
     }
    },
    "porProyecto": {
     "Talabre": {
-     "total": 2,
-     "internas": 0,
-     "externas": 2,
-     "cliente": 2,
-     "subcontrato": 0,
-     "abiertas": 2
-    },
-    "Desaladora": {
      "total": 1,
      "internas": 0,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
     }
    },
    "porTipo": {
-    "No Conformidad": {
-     "total": 2,
-     "internas": 0,
-     "externas": 2,
-     "cliente": 2,
-     "subcontrato": 0,
-     "abiertas": 2
-    },
     "Producto No Conforme": {
      "total": 1,
      "internas": 0,
      "externas": 1,
      "cliente": 1,
      "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
     }
    },
    "detalle": [
     {
-     "fecha": "27-07-2026",
-     "proy": "Desaladora",
-     "n": "95",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "MECÁNICA",
-     "responsable": "Wilson Jara",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Verificación de Preservación",
-     "costo": null,
-     "codigoExterno": "NCR-0535"
-    },
-    {
-     "fecha": "27-07-2026",
+     "fecha": "05-08-2026",
      "proy": "Talabre",
-     "n": "240",
+     "n": "242",
      "tipo": "Producto No Conforme",
      "emision": "Externa Cliente",
      "origen": "Externa",
-     "especialidad": "OO.CC",
-     "responsable": "Sebastián Ramos",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Soporte de Línea 405N, perno de anclaje presenta fractura, y desprendimiento localizado del mortero de nivelación (grout) en el sector del perno afect",
-     "costo": null,
-     "codigoExterno": "PNC N°182"
-    },
-    {
-     "fecha": "28-07-2026",
-     "proy": "Talabre",
-     "n": "241",
-     "tipo": "No Conformidad",
-     "emision": "Externa Cliente",
-     "origen": "Externa",
-     "especialidad": "CALIDAD",
-     "responsable": "Daniel Ramirez B.",
-     "estatus": "Iniciado",
-     "estado": "Abierta",
-     "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
-     "costo": null,
-     "codigoExterno": "RNC N°449"
+     "especialidad": "PIPING",
+     "responsable": "Oscar Nahuel P.",
+     "estatus": "Cerrado",
+     "estado": "Cerrada",
+     "titulo": "Línea 3716D-RW-36\"-CI-0408-N, no contienen registros que acrediten la verificación del parámetro de nivelación de la cañería.",
+     "costo": 0.0,
+     "codigoExterno": "PNC N°183"
     }
    ],
    "tendencia": [
     {
      "etiqueta": "5 semanas o más",
-     "desde": "08-06",
-     "hasta": "28-06",
+     "desde": "15-06",
+     "hasta": "05-07",
      "semanas": 3,
      "acumulada": true,
-     "total": 7,
+     "total": 5,
      "internas": 0,
-     "externas": 7,
-     "cliente": 7,
-     "subcontrato": 0,
-     "abiertas": 3
-    },
-    {
-     "etiqueta": "Hace 4 semanas",
-     "desde": "29-06",
-     "hasta": "05-07",
-     "semanas": 1,
-     "acumulada": false,
-     "total": 3,
-     "internas": 0,
-     "externas": 3,
-     "cliente": 3,
+     "externas": 5,
+     "cliente": 5,
      "subcontrato": 0,
      "abiertas": 1
     },
     {
-     "etiqueta": "Hace 3 semanas",
+     "etiqueta": "Hace 4 semanas",
      "desde": "06-07",
      "hasta": "12-07",
      "semanas": 1,
@@ -4499,7 +4286,7 @@
      "abiertas": 1
     },
     {
-     "etiqueta": "Hace 2 semanas",
+     "etiqueta": "Hace 3 semanas",
      "desde": "13-07",
      "hasta": "19-07",
      "semanas": 1,
@@ -4512,7 +4299,7 @@
      "abiertas": 0
     },
     {
-     "etiqueta": "Semana anterior",
+     "etiqueta": "Hace 2 semanas",
      "desde": "20-07",
      "hasta": "26-07",
      "semanas": 1,
@@ -4525,17 +4312,30 @@
      "abiertas": 2
     },
     {
-     "etiqueta": "Última semana",
+     "etiqueta": "Semana anterior",
      "desde": "27-07",
      "hasta": "02-08",
      "semanas": 1,
      "acumulada": false,
-     "total": 3,
+     "total": 4,
      "internas": 0,
-     "externas": 3,
-     "cliente": 3,
+     "externas": 4,
+     "cliente": 4,
      "subcontrato": 0,
      "abiertas": 3
+    },
+    {
+     "etiqueta": "Última semana",
+     "desde": "03-08",
+     "hasta": "09-08",
+     "semanas": 1,
+     "acumulada": false,
+     "total": 1,
+     "internas": 0,
+     "externas": 1,
+     "cliente": 1,
+     "subcontrato": 0,
+     "abiertas": 0
     }
    ]
   },
@@ -4550,7 +4350,7 @@
    "2025-04": 16,
    "2025-05": 36,
    "2025-06": 22,
-   "2025-07": 49,
+   "2025-07": 50,
    "2025-08": 29,
    "2025-09": 33,
    "2025-10": 40,
@@ -4562,7 +4362,8 @@
    "2026-04": 19,
    "2026-05": 19,
    "2026-06": 14,
-   "2026-07": 7
+   "2026-07": 8,
+   "2026-08": 1
   }
  },
  "tipos": [
@@ -4583,9 +4384,9 @@
   "ADMINISTRACIÓN",
   "ADQUISICIONES",
   "GENERAL",
+  "MECÁNICA",
   "RRLL",
   "SUBCONTRATO",
-  "MECÁNICA",
   "BODEGA",
   "LOGÍSTICA",
   "PERSONAS",
@@ -4623,9 +4424,9 @@
    "titulo": "Sistema de conexión desde chute 2200-CH-002 - chancado secundario a losa colaborante superior",
    "estatus": "Listo para revisión",
    "creada": "04-07-2025",
-   "dias": 395,
+   "dias": 402,
    "atrasada": true,
-   "diasAtraso": 385,
+   "diasAtraso": 392,
    "costo": null
   },
   {
@@ -4640,9 +4441,9 @@
    "titulo": "Incumplimiento a Plan de Calidad del contrato y METODOLOGÍA ESTÁNDAR EXPEDITORÍA EN OBRA BSMD-CORP-85-TRAN-MTD-03",
    "estatus": "Iniciado",
    "creada": "07-07-2025",
-   "dias": 392,
+   "dias": 399,
    "atrasada": true,
-   "diasAtraso": 382,
+   "diasAtraso": 389,
    "costo": null
   },
   {
@@ -4657,9 +4458,9 @@
    "titulo": "Uniones soldadas y touch-up en tolva de alimentación primaria 2100-BN-001 (Medio Elemento)",
    "estatus": "Listo para revisión",
    "creada": "07-07-2025",
-   "dias": 392,
+   "dias": 399,
    "atrasada": true,
-   "diasAtraso": 382,
+   "diasAtraso": 389,
    "costo": null
   },
   {
@@ -4674,9 +4475,9 @@
    "titulo": "Condición del grout de nivelación estanque agua de sello 3640-TK-001",
    "estatus": "Listo para revisión",
    "creada": "07-08-2025",
-   "dias": 361,
+   "dias": 368,
    "atrasada": true,
-   "diasAtraso": 351,
+   "diasAtraso": 358,
    "costo": null
   },
   {
@@ -4691,9 +4492,9 @@
    "titulo": "Montaje de estructura metálica sin arriostramiento vertical de diseño - edificio hidrociclones molienda y edificio sopladores",
    "estatus": "Listo para revisión",
    "creada": "19-08-2025",
-   "dias": 349,
+   "dias": 356,
    "atrasada": true,
-   "diasAtraso": 339,
+   "diasAtraso": 346,
    "costo": null
   },
   {
@@ -4708,9 +4509,9 @@
    "titulo": "Incumplimiento a la recepción de materiales (geosinteticos) por expeditoría: protocolización de recepción sin guia despacho, sin certificación de cali",
    "estatus": "Iniciado",
    "creada": "09-09-2025",
-   "dias": 328,
+   "dias": 335,
    "atrasada": true,
-   "diasAtraso": 318,
+   "diasAtraso": 325,
    "costo": null
   },
   {
@@ -4725,9 +4526,9 @@
    "titulo": "Vigas (puntales) Montadas Fuera de Posición estructura Espesador de\nRelaves",
    "estatus": "Listo para revisión",
    "creada": "16-09-2025",
-   "dias": 321,
+   "dias": 328,
    "atrasada": true,
-   "diasAtraso": 311,
+   "diasAtraso": 318,
    "costo": null
   },
   {
@@ -4740,11 +4541,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Informe Técnico de Inspección – Fisura en Grout de base de pernos de nivelación – “bearing housing” Molino de Bolas",
-   "estatus": "Observada",
+   "estatus": "Listo para revisión",
    "creada": "16-10-2025",
-   "dias": 291,
+   "dias": 298,
    "atrasada": true,
-   "diasAtraso": 281,
+   "diasAtraso": 288,
    "costo": null
   },
   {
@@ -4757,11 +4558,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Inspección grout de los recesos de las celdas columnas",
-   "estatus": "Observada",
+   "estatus": "Stand By",
    "creada": "16-10-2025",
-   "dias": 291,
+   "dias": 298,
    "atrasada": true,
-   "diasAtraso": 281,
+   "diasAtraso": 288,
    "costo": null
   },
   {
@@ -4776,9 +4577,9 @@
    "titulo": "Cámara 3700-MH-002, salida sala eléctrica 3700, no se dejaron las entradas de escalerillas.",
    "estatus": "Listo para revisión",
    "creada": "06-11-2025",
-   "dias": 270,
+   "dias": 277,
    "atrasada": true,
-   "diasAtraso": 260,
+   "diasAtraso": 267,
    "costo": null
   },
   {
@@ -4791,11 +4592,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Fundaciones faltantes para apoyo de piperacks de flotación-remolienda (P1, P2, P3 y P4) y normalización de pernos de anclaje y conexión de estructura ",
-   "estatus": "Observada",
+   "estatus": "Listo para revisión",
    "creada": "10-11-2025",
-   "dias": 266,
+   "dias": 273,
    "atrasada": true,
-   "diasAtraso": 256,
+   "diasAtraso": 263,
    "costo": null
   },
   {
@@ -4810,9 +4611,9 @@
    "titulo": "Tolerancia transversal en chutes de descarga harneros",
    "estatus": "Listo para revisión",
    "creada": "17-12-2025",
-   "dias": 229,
+   "dias": 236,
    "atrasada": true,
-   "diasAtraso": 219,
+   "diasAtraso": 226,
    "costo": null
   },
   {
@@ -4827,9 +4628,9 @@
    "titulo": "Daños manguerotes en recepción/descarga en obra (Proveedor CICAL).",
    "estatus": "Iniciado",
    "creada": "22-12-2025",
-   "dias": 224,
+   "dias": 231,
    "atrasada": true,
-   "diasAtraso": 214,
+   "diasAtraso": 221,
    "costo": null
   },
   {
@@ -4842,11 +4643,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Estructura de correa 2100-CV-001 montada sin pernos de anclaje",
-   "estatus": "Observada",
+   "estatus": "Stand By",
    "creada": "15-01-2026",
-   "dias": 200,
+   "dias": 207,
    "atrasada": true,
-   "diasAtraso": 190,
+   "diasAtraso": 197,
    "costo": null
   },
   {
@@ -4861,9 +4662,9 @@
    "titulo": "Perforaciones faltantes en estructura soporte chutes descarga 2500-CH-004/005/006",
    "estatus": "Observada",
    "creada": "15-01-2026",
-   "dias": 200,
+   "dias": 207,
    "atrasada": true,
-   "diasAtraso": 190,
+   "diasAtraso": 197,
    "costo": null
   },
   {
@@ -4878,9 +4679,9 @@
    "titulo": "(i) Cable de comunicación dañado - (ii) Falta de pintura intumescente parte inferior sala eléctrica. -  (iii) Falta de sello de polvo en HVAC",
    "estatus": "Listo para revisión",
    "creada": "15-01-2026",
-   "dias": 200,
+   "dias": 207,
    "atrasada": true,
-   "diasAtraso": 190,
+   "diasAtraso": 197,
    "costo": null
   },
   {
@@ -4893,11 +4694,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "FISURACIÓN DE RADIER CELDAS COLUMNAS Y VIGA FOSO REMOLIENDA",
-   "estatus": "Observada",
+   "estatus": "Stand By",
    "creada": "15-01-2026",
-   "dias": 200,
+   "dias": 207,
    "atrasada": true,
-   "diasAtraso": 190,
+   "diasAtraso": 197,
    "costo": null
   },
   {
@@ -4912,9 +4713,9 @@
    "titulo": "Alineamiento bombas 4210-PU-001 /002 y boquillas cajón distribuidor 4210-DB-002",
    "estatus": "Listo para revisión",
    "creada": "05-02-2026",
-   "dias": 179,
+   "dias": 186,
    "atrasada": true,
-   "diasAtraso": 169,
+   "diasAtraso": 176,
    "costo": null
   },
   {
@@ -4927,11 +4728,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Interferencia línea de cañería en Planta Floculante (3612-VP-001)",
-   "estatus": "Observada",
+   "estatus": "Stand By",
    "creada": "05-02-2026",
-   "dias": 179,
+   "dias": 186,
    "atrasada": true,
-   "diasAtraso": 169,
+   "diasAtraso": 176,
    "costo": null
   },
   {
@@ -4944,11 +4745,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "ESTANQUE AGUA FRESCA 2620-TK-001 Y CONEXIONADO PIPING",
-   "estatus": "Observada",
+   "estatus": "Stand By",
    "creada": "24-02-2026",
-   "dias": 160,
+   "dias": 167,
    "atrasada": true,
-   "diasAtraso": 150,
+   "diasAtraso": 157,
    "costo": null
   },
   {
@@ -4961,11 +4762,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "INTERFERENCIA POLEA MOTRIZ CORREA TRANSPORTADORA 2200-CV-001 Y CHUTE 2400-CH-001",
-   "estatus": "Observada",
+   "estatus": "Listo para revisión",
    "creada": "24-02-2026",
-   "dias": 160,
+   "dias": 167,
    "atrasada": true,
-   "diasAtraso": 150,
+   "diasAtraso": 157,
    "costo": null
   },
   {
@@ -4980,9 +4781,9 @@
    "titulo": "Falta de Protección en Bombas y Líneas de Proceso",
    "estatus": "Listo para revisión",
    "creada": "06-03-2026",
-   "dias": 150,
+   "dias": 157,
    "atrasada": true,
-   "diasAtraso": 140,
+   "diasAtraso": 147,
    "costo": null
   },
   {
@@ -4995,11 +4796,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Interferencia estructura con red de incendio planta POI",
-   "estatus": "Observada",
+   "estatus": "Stand By",
    "creada": "06-03-2026",
-   "dias": 150,
+   "dias": 157,
    "atrasada": true,
-   "diasAtraso": 140,
+   "diasAtraso": 147,
    "costo": null
   },
   {
@@ -5014,9 +4815,9 @@
    "titulo": "NIVELACIÓN DE LAS PLACAS BASE DE LOS CHANCADORES SECUNDARIO, TERCIARIO #1 Y TERCIARIO #2 HP500",
    "estatus": "Listo para revisión",
    "creada": "10-03-2026",
-   "dias": 146,
+   "dias": 153,
    "atrasada": true,
-   "diasAtraso": 136,
+   "diasAtraso": 143,
    "costo": null
   },
   {
@@ -5031,9 +4832,9 @@
    "titulo": "DESCARGAS DE TUBERÍAS CELDAS DE FLOTACIÓN A CANALETAS DE CONDUCCIÓN",
    "estatus": "Listo para revisión",
    "creada": "10-03-2026",
-   "dias": 146,
+   "dias": 153,
    "atrasada": true,
-   "diasAtraso": 136,
+   "diasAtraso": 143,
    "costo": null
   },
   {
@@ -5046,11 +4847,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "RETRABAJOS CIVILES EN SISTEMA MOTRIZ MOLINO DE BOLAS",
-   "estatus": "Observada",
+   "estatus": "Listo para revisión",
    "creada": "16-03-2026",
-   "dias": 140,
+   "dias": 147,
    "atrasada": true,
-   "diasAtraso": 130,
+   "diasAtraso": 137,
    "costo": null
   },
   {
@@ -5065,9 +4866,9 @@
    "titulo": "Fundaciones sin relleno estructural, perdida de parte de relleno de soporte, sin impermeabilización en caras expeustas a terreno (sector Manifold de I",
    "estatus": "Iniciado",
    "creada": "17-03-2026",
-   "dias": 139,
+   "dias": 146,
    "atrasada": true,
-   "diasAtraso": 129,
+   "diasAtraso": 136,
    "costo": null
   },
   {
@@ -5082,9 +4883,9 @@
    "titulo": "Corte en geomembrana HDPE instalada en el sector de piscina.",
    "estatus": "Iniciado",
    "creada": "23-03-2026",
-   "dias": 133,
+   "dias": 140,
    "atrasada": true,
-   "diasAtraso": 123,
+   "diasAtraso": 130,
    "costo": null
   },
   {
@@ -5099,9 +4900,9 @@
    "titulo": "Solución proyectada asociada al elemento 3716E-RW-10_-H2.0232-N no ha sido ejecutada conforme a la secuencia constructiva prevista.",
    "estatus": "No aceptado",
    "creada": "06-04-2026",
-   "dias": 119,
+   "dias": 126,
    "atrasada": true,
-   "diasAtraso": 109,
+   "diasAtraso": 116,
    "costo": null
   },
   {
@@ -5114,11 +4915,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Condicioón fundación de riel grúa portal molienda",
-   "estatus": "Pendiente",
+   "estatus": "Stand By",
    "creada": "09-04-2026",
-   "dias": 116,
+   "dias": 123,
    "atrasada": true,
-   "diasAtraso": 106,
+   "diasAtraso": 113,
    "costo": null
   },
   {
@@ -5133,9 +4934,9 @@
    "titulo": "Sector Manifold EBMS, Fundaciones FB-01: falta compactación, confinamiento de la arena y material de relleno. Protocolos relacionados sin gestión de c",
    "estatus": "Iniciado",
    "creada": "14-04-2026",
-   "dias": 111,
+   "dias": 118,
    "atrasada": true,
-   "diasAtraso": 101,
+   "diasAtraso": 108,
    "costo": null
   },
   {
@@ -5150,9 +4951,9 @@
    "titulo": "Cuadratura y verticalidad estructura Molino Vertical",
    "estatus": "Listo para revisión",
    "creada": "21-04-2026",
-   "dias": 104,
+   "dias": 111,
    "atrasada": true,
-   "diasAtraso": 94,
+   "diasAtraso": 101,
    "costo": null
   },
   {
@@ -5165,11 +4966,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Condiciones estructurales em correa transportadora 2400-CV-002 y 2400-CV-004",
-   "estatus": "Pendiente",
+   "estatus": "Listo para revisión",
    "creada": "21-04-2026",
-   "dias": 104,
+   "dias": 111,
    "atrasada": true,
-   "diasAtraso": 94,
+   "diasAtraso": 101,
    "costo": null
   },
   {
@@ -5184,9 +4985,9 @@
    "titulo": "Desviación en canaletas de traspaso de concentrado celdas convencionales (Cleaner).",
    "estatus": "Listo para revisión",
    "creada": "24-04-2026",
-   "dias": 101,
+   "dias": 108,
    "atrasada": true,
-   "diasAtraso": 91,
+   "diasAtraso": 98,
    "costo": null
   },
   {
@@ -5199,11 +5000,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Condiciones estructurales em correa transportadora 2500-CV-001 y 2100-CV-001",
-   "estatus": "Pendiente",
+   "estatus": "Stand By",
    "creada": "24-04-2026",
-   "dias": 101,
+   "dias": 108,
    "atrasada": true,
-   "diasAtraso": 91,
+   "diasAtraso": 98,
    "costo": null
   },
   {
@@ -5218,9 +5019,9 @@
    "titulo": "Daño en manilla de válvula 4515-HV-48545.",
    "estatus": "Listo para revisión",
    "creada": "12-05-2026",
-   "dias": 83,
+   "dias": 90,
    "atrasada": true,
-   "diasAtraso": 73,
+   "diasAtraso": 80,
    "costo": null
   },
   {
@@ -5235,9 +5036,9 @@
    "titulo": "Condición recubrimiento engomado polea motriz correa 2200-CV-001",
    "estatus": "Listo para revisión",
    "creada": "20-05-2026",
-   "dias": 75,
+   "dias": 82,
    "atrasada": true,
-   "diasAtraso": 65,
+   "diasAtraso": 72,
    "costo": null
   },
   {
@@ -5252,9 +5053,9 @@
    "titulo": "Desviaciones en red de incendio – línea 3670-WFI-4”-AA1-0869-N",
    "estatus": "Listo para revisión",
    "creada": "20-05-2026",
-   "dias": 75,
+   "dias": 82,
    "atrasada": true,
-   "diasAtraso": 65,
+   "diasAtraso": 72,
    "costo": null
   },
   {
@@ -5267,11 +5068,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Interferencia entre la línea de despiche 3680-WRE-4”-AA1B-0511-N y conduit eléctrico",
-   "estatus": "Listo para revisión",
+   "estatus": "Stand By",
    "creada": "20-05-2026",
-   "dias": 75,
+   "dias": 82,
    "atrasada": true,
-   "diasAtraso": 65,
+   "diasAtraso": 72,
    "costo": null
   },
   {
@@ -5286,9 +5087,9 @@
    "titulo": "Incumplimiento en requisito para ejecución de soldadura por extrusión HDPE",
    "estatus": "Iniciado",
    "creada": "25-05-2026",
-   "dias": 70,
+   "dias": 77,
    "atrasada": true,
-   "diasAtraso": 60,
+   "diasAtraso": 67,
    "costo": null
   },
   {
@@ -5301,11 +5102,11 @@
    "especialidad": "Sin especialidad",
    "responsable": "Sin asignar",
    "titulo": "Nivelación de estacuibes de polines mediante lainas en correas transportadoras área de chancado",
-   "estatus": "Observada",
+   "estatus": "Stand By",
    "creada": "28-05-2026",
-   "dias": 67,
+   "dias": 74,
    "atrasada": true,
-   "diasAtraso": 57,
+   "diasAtraso": 64,
    "costo": null
   },
   {
@@ -5320,9 +5121,9 @@
    "titulo": "Desviaciones constructivas en correa transportadora 2200-CV-001",
    "estatus": "Listo para revisión",
    "creada": "02-06-2026",
-   "dias": 62,
+   "dias": 69,
    "atrasada": true,
-   "diasAtraso": 52,
+   "diasAtraso": 59,
    "costo": null
   },
   {
@@ -5337,9 +5138,9 @@
    "titulo": "Desviación en apoyos a estructura de buzón descarga de correa 2400-CV-002",
    "estatus": "Listo para revisión",
    "creada": "02-06-2026",
-   "dias": 62,
+   "dias": 69,
    "atrasada": true,
-   "diasAtraso": 52,
+   "diasAtraso": 59,
    "costo": null
   },
   {
@@ -5354,10 +5155,10 @@
    "titulo": "Durante la auditoría se identificaron 107 protocolos pendientes asociados a actividades constructivas ejecutadas, las cuales no cuentan con registros ",
    "estatus": "Listo para revisión",
    "creada": "09-06-2026",
-   "dias": 55,
+   "dias": 62,
    "atrasada": true,
-   "diasAtraso": 45,
-   "costo": 0
+   "diasAtraso": 52,
+   "costo": 0.0
   },
   {
    "proy": "TALABRE",
@@ -5371,9 +5172,9 @@
    "titulo": "No se evidenció un Plan de Cierre de Calidad documentado que consolide las actividades, responsables, plazos, indicadores y estrategia de cierre del c",
    "estatus": "Iniciado",
    "creada": "09-06-2026",
-   "dias": 55,
+   "dias": 62,
    "atrasada": true,
-   "diasAtraso": 45,
+   "diasAtraso": 52,
    "costo": null
   },
   {
@@ -5388,9 +5189,9 @@
    "titulo": "Sensor o bastón de desalineamiento (“belt sway switch”) de correa transportadora 2200-CV-001",
    "estatus": "Listo para revisión",
    "creada": "09-06-2026",
-   "dias": 55,
+   "dias": 62,
    "atrasada": true,
-   "diasAtraso": 45,
+   "diasAtraso": 52,
    "costo": null
   },
   {
@@ -5405,9 +5206,9 @@
    "titulo": "Geomembrana presenta sectores en los vértices y cambios de pendiente sin apoyo sobre el sustrato, permaneciendo suspendida (\"en el aire\"), y se verifi",
    "estatus": "Iniciado",
    "creada": "30-06-2026",
-   "dias": 34,
+   "dias": 41,
    "atrasada": true,
-   "diasAtraso": 24,
+   "diasAtraso": 31,
    "costo": null
   },
   {
@@ -5422,9 +5223,9 @@
    "titulo": "En Piscina 2, geomembrana superior de HDPE presenta múltiples roturas y desgarros en distintos sectores del paño instalado.",
    "estatus": "Listo para revisión",
    "creada": "09-07-2026",
-   "dias": 25,
+   "dias": 32,
    "atrasada": true,
-   "diasAtraso": 15,
+   "diasAtraso": 22,
    "costo": null
   },
   {
@@ -5439,9 +5240,9 @@
    "titulo": "Arrugas y trampolines en lámina geomembrana 2,0mm en piscinas 1 y 2.",
    "estatus": "Iniciado",
    "creada": "21-07-2026",
-   "dias": 13,
+   "dias": 20,
    "atrasada": true,
-   "diasAtraso": 3,
+   "diasAtraso": 10,
    "costo": null
   },
   {
@@ -5456,9 +5257,9 @@
    "titulo": "Relleno en fundaciones FS-01 y F-02 debajo de plancha de la estructura de piping.",
    "estatus": "Iniciado",
    "creada": "21-07-2026",
-   "dias": 13,
+   "dias": 20,
    "atrasada": true,
-   "diasAtraso": 3,
+   "diasAtraso": 10,
    "costo": null
   },
   {
@@ -5473,26 +5274,9 @@
    "titulo": "Soporte de Línea 405N, perno de anclaje presenta fractura, y desprendimiento localizado del mortero de nivelación (grout) en el sector del perno afect",
    "estatus": "Iniciado",
    "creada": "27-07-2026",
-   "dias": 7,
-   "atrasada": false,
-   "diasAtraso": null,
-   "costo": null
-  },
-  {
-   "proy": "DESALADORA",
-   "proyNombre": "Desaladora",
-   "n": "95",
-   "tipo": "No Conformidad",
-   "origen": "Externa",
-   "emision": "Externa Cliente",
-   "especialidad": "MECÁNICA",
-   "responsable": "Wilson Jara",
-   "titulo": "Verificación de Preservación",
-   "estatus": "Iniciado",
-   "creada": "27-07-2026",
-   "dias": 7,
-   "atrasada": false,
-   "diasAtraso": null,
+   "dias": 14,
+   "atrasada": true,
+   "diasAtraso": 4,
    "costo": null
   },
   {
@@ -5507,7 +5291,24 @@
    "titulo": "Registros de construcción no contienen información completa, ni se encuentran disponibles para su revisión, evidenciando que no han sido confeccionado",
    "estatus": "Iniciado",
    "creada": "28-07-2026",
-   "dias": 6,
+   "dias": 13,
+   "atrasada": true,
+   "diasAtraso": 3,
+   "costo": null
+  },
+  {
+   "proy": "ARQUEROS",
+   "proyNombre": "Arqueros",
+   "n": "MASA-59",
+   "tipo": "No Conformidad",
+   "origen": "Externa",
+   "emision": "Externa Cliente",
+   "especialidad": "Sin especialidad",
+   "responsable": "Sin asignar",
+   "titulo": "Desviación respecto a la ingeniería en uniones vitaulic del área molienda.",
+   "estatus": "Listo para revisión",
+   "creada": "31-07-2026",
+   "dias": 10,
    "atrasada": false,
    "diasAtraso": null,
    "costo": null
@@ -5516,64 +5317,59 @@
  "responsables": [
   {
    "nombre": "Sin asignar",
-   "abiertas": 35,
-   "dias": 395
+   "abiertas": 36,
+   "dias": 402
   },
   {
    "nombre": "Sebastián Ramos",
    "abiertas": 5,
-   "dias": 139
+   "dias": 146
   },
   {
    "nombre": "Alvaro Cortés V.",
    "abiertas": 3,
-   "dias": 392
+   "dias": 399
   },
   {
    "nombre": "Mauricio Rocha A.",
    "abiertas": 3,
-   "dias": 34
+   "dias": 41
   },
   {
    "nombre": "Mauricio Soto B.",
    "abiertas": 2,
-   "dias": 55
+   "dias": 62
   },
   {
    "nombre": "Wladimir Carvajal P.",
    "abiertas": 1,
-   "dias": 133
+   "dias": 140
   },
   {
    "nombre": "Ariel Flores U.",
    "abiertas": 1,
-   "dias": 83
+   "dias": 90
   },
   {
    "nombre": "Renato Muñoz F.",
    "abiertas": 1,
-   "dias": 70
-  },
-  {
-   "nombre": "Wilson Jara",
-   "abiertas": 1,
-   "dias": 7
+   "dias": 77
   },
   {
    "nombre": "Daniel Ramirez B.",
    "abiertas": 1,
-   "dias": 6
+   "dias": 13
   }
  ],
  "control": {
-  "registros": 493,
+  "registros": 496,
   "abiertas": 53,
   "plazoRespuesta": 10,
   "atrasoCalculable": true,
   "abiertasSinFechaEmision": 0,
   "rangoFechas": [
    "10-02-2023",
-   "28-07-2026"
+   "05-08-2026"
   ],
   "excluidos": {
    "Opción de Mejora": 14
@@ -5585,11 +5381,11 @@
   "tiposExcluidos": [
    "Opción de Mejora"
   ],
-  "sinCosto": 244,
-  "sinEspecialidad": 78,
+  "sinCosto": 245,
+  "sinEspecialidad": 79,
   "externasCliente": {
-   "registros": 70,
-   "sinEspecialidad": 70
+   "registros": 71,
+   "sinEspecialidad": 71
   }
  },
  "semaforo": {
