@@ -106,6 +106,11 @@ las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--exter
 registros perdidos**. La hoja «Data Externas» del mismo libro lista los mismos 71 con
 numeración correlativa, así que los huecos son de la numeración del cliente.*
 
+**Qué archivo alimenta a cada proyecto:** Talabre y Desaladora salen **solo** del
+`Data_NCR` —ahí vienen sus internas, las del cliente y las de subcontrato—. Arqueros usa
+`Data_NCR` **más** el log de MASA: del primero salen sus internas y las de subcontrato, y del
+segundo **las del cliente, que el `Data_NCR` no trae**.
+
 **En Arqueros, las NC del cliente se cuentan SOLO desde el log de MASA.** El registro
 principal también trae alguna marcada «Externa Cliente», pero es una copia que se llena
 aparte y llega a contradecir al log: al corte 10-08, `Calidad - 0063` figuraba **Cerrada**
@@ -144,6 +149,28 @@ python3 talabre.py     --status  <STATUS_SUBSISTEMAS_TALABRE>  --dt <Detalle_de_
 python3 actualizar.py  <Estatus_Resumen_General_QAQC.xlsx>   # Arqueros (cliente MASA)
 node gen_ppt.js        # SIEMPRE al final: regenera la PPT y la embebe en el panel
 ```
+
+## 3 · Protocolos — dashboard corporativo
+
+El tercer módulo de la suite. **No es un HTML que llega hecho**: se genera desde las matrices
+de cada proyecto, con la pestaña de KPI, y en Talabre además con los CSV de Goformz. El
+procedimiento completo está en el skill `hseq-dashboard-besalco`.
+
+| Proyecto | Matriz · pestaña | Goformz |
+|---|---|---|
+| P2416 · Desaladora | `KPI` | no |
+| P2407 · Talabre | `KPI` | **sí** — 7 grupos de CSV |
+| P2342 · Arqueros | **`KPI-BSMT` y solo esa** | no |
+
+**Arqueros: la pestaña es `KPI-BSMT`, nunca `KPI-MASA`.** El skill dice «probar ambas»; eso
+**no aplica aquí**. `KPI-BSMT` es el conteo de Besalco y `KPI-MASA` el del cliente: miden cosas
+distintas, y caer a la segunda cuando falta la primera publicaría la cifra equivocada sin que
+nada avise. Si `KPI-BSMT` no está, hay que **detenerse y pedir la matriz correcta**, no buscar
+un reemplazo. *Pedido por el usuario (10-08-2026).*
+
+**Talabre: los `rv` se restan una sola vez.** `AP_neto = AP_bruto − rv`, con `rv` contado desde
+los CSV de Goformz (campo «Comentarios VP» = Sí). El KPI usa el `AP` ya neto y el universo
+suma `rv` aparte. Restarlo dos veces fue un error real y está documentado en el skill.
 
 ---
 
