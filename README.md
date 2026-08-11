@@ -52,27 +52,15 @@ falla:
   de origen, en el JSON de cada módulo, en la portada de la suite y en el texto de
   las PPT. 71 comprobaciones.
 
-## Versión online
+## Versión online (disponible, sin activar)
 
-La suite se publica sola en **GitHub Pages** cada vez que se sube un módulo
-actualizado: `.github/workflows/publicar.yml` corre el mismo `armar_suite.js` en
-el servidor y despliega el resultado. Lo que se ve online es, por construcción,
-lo mismo que produce el corte local — no hay una segunda versión que pueda quedar
-atrás, y la suite no se versiona, así que el repositorio no engorda.
+Existe un workflow que publica la suite en **GitHub Pages** con cada corte:
+arma el archivo en el servidor con el mismo `armar_suite.js`, tras pasar la
+auditoría de datos y un control de peso. Está probado de punta a punta, pero
+**hoy no se usa**: el entregable es el archivo que se manda por correo.
 
-**Nada se publica sin pasar dos controles**, y cualquiera de los dos detiene el
-despliegue dejando online la versión anterior:
-
-1. `auditoria_datos.py` — que la misma cifra diga lo mismo en el JSON de cada
-   módulo, en la portada y en el texto de las PPT.
-2. Un control de peso — la suite ronda los 8,7 MB; si sale muy por debajo es que
-   se armó a medias, y un panel truncado parece completo.
-
-La página pesa 8,7 MB y se sirve comprimida: **el visitante descarga unos 4 MB**.
-
-La página lleva `noindex`: **cualquiera con el link la ve, pero no aparece en
-buscadores**. Para que sí se indexe, borrar el bloque del `<meta robots>` y el
-`robots.txt` del workflow.
+Para activarlo: Settings → Pages → Source «GitHub Actions», y descomentar el
+bloque `push` de `.github/workflows/publicar.yml`.
 
 ## Aviso
 

@@ -8,15 +8,26 @@
 # que produce el corte local: no hay una segunda versión que pueda quedar atrás.
 name: Publicar la Suite QAQC
 
+# DORMIDO POR DECISIÓN (10-08-2026). El entregable sigue siendo el archivo
+# `Suite_QAQC.html` que se manda por correo; la versión online queda para más
+# adelante. Por eso solo dispara a mano: dejarlo en `push` hacía que cada corte
+# terminara en una corrida fallida mientras Pages esté sin activar.
+#
+# Para reactivarlo cuando se quiera, dos pasos:
+#   1. En GitHub: Settings → Pages → Source: «GitHub Actions».
+#   2. Aquí: descomentar el bloque `push` de abajo.
+# Lo demás está probado y funciona: la construcción, la auditoría previa y el
+# control de peso corrieron en verde en el runner; lo único que faltaba era el
+# paso 1.
 on:
-  push:
-    branches: [main]
-    paths:
-      - "suite_qaqc/**"
-      - "panel_control_TOP_P1/index.html"
-      - "modulo_nc/index.html"
-      - ".github/workflows/publicar.yml"
-  workflow_dispatch:        # y a mano, desde la pestaña Actions
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - "suite_qaqc/**"
+  #     - "panel_control_TOP_P1/index.html"
+  #     - "modulo_nc/index.html"
+  #     - ".github/workflows/publicar.yml"
 
 permissions:
   contents: read
