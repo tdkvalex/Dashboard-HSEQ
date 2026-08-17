@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-17 14:34",
+ "generado": "2026-08-17 15:23",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -8,20 +8,20 @@
    "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
     "kpi": 0,
-    "universo": 18205,
+    "universo": 18147,
     "enFalta": 3,
-    "avance": 10911,
-    "remanente": 7291,
-    "base": 10914,
+    "avance": 11010,
+    "remanente": 7134,
+    "base": 11013,
     "estados": {
-     "S": 7291,
-     "C": 9579,
+     "S": 7134,
+     "C": 9779,
      "P": 0,
      "AP": 3,
-     "AE": 1332,
+     "AE": 1231,
      "rv": 0
     },
-    "actualizado": "10-ago-2026",
+    "actualizado": "17-ago-2026",
     "sem": [
      "good",
      "Cumple"
@@ -92,21 +92,21 @@
    "nombre": "Talabre",
    "cliente": "CODELCO",
    "protocolos": {
-    "kpi": 2.7,
-    "universo": 14073,
-    "enFalta": 316,
-    "avance": 11601,
-    "remanente": 2022,
-    "base": 11917,
+    "kpi": 2,
+    "universo": 14449,
+    "enFalta": 243,
+    "avance": 11807,
+    "remanente": 1664,
+    "base": 12050,
     "estados": {
-     "S": 2022,
-     "C": 10956,
-     "P": 7,
-     "AP": 309,
-     "AE": 645,
-     "rv": 134
+     "S": 1664,
+     "C": 11251,
+     "P": 34,
+     "AP": 209,
+     "AE": 556,
+     "rv": 735
     },
-    "actualizado": "10-ago-2026",
+    "actualizado": "17-ago-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -178,17 +178,17 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.1,
-    "universo": 29945,
+    "universo": 24798,
     "enFalta": 13,
-    "avance": 23319,
-    "remanente": 6613,
-    "base": 23332,
+    "avance": 18378,
+    "remanente": 6407,
+    "base": 18391,
     "estados": {
-     "S": 6613,
-     "C": 19891,
+     "S": 6407,
+     "C": 15098,
      "P": 10,
      "AP": 3,
-     "AE": 3428,
+     "AE": 3280,
      "rv": 0
     },
     "actualizado": "17-ago-2026",
@@ -259,13 +259,13 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 62223,
-   "enFalta": 332,
-   "avance": 45831,
-   "remanente": 15926,
-   "base": 46163,
-   "actualizado": "10-ago-2026",
-   "kpi": 0.7
+   "universo": 57394,
+   "enFalta": 259,
+   "avance": 41195,
+   "remanente": 15205,
+   "base": 41454,
+   "actualizado": "17-ago-2026",
+   "kpi": 0.6
   },
   "cierre": {
    "activo": true,

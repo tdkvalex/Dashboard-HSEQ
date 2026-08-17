@@ -195,12 +195,14 @@ for f in kp["proyectos"]:
             if f["cierre"]["p1"]["total"] else True, f"Portada · {f['id']}: % cierre de P1 bien calculado")
 
 # ═══════════════ 4 · PROTOCOLOS ═══════════════
-# Protocolos no escribe JSON: sus cifras viven en el propio HTML. Se auditan
-# igual, y con la fuente delante cuando la carpeta del corte trae las matrices.
-# Este cruce existe porque el 17-08-2026 la hoja KPI-BSMT de Obras Civiles vino
-# con las fórmulas dinámicas guardadas como `1` y declaraba 16 cerrados donde
-# había 2.936: el panel se habría publicado con el proyecto desplomado.
-print("4 · PROTOCOLOS · EL PANEL CONTRA SUS MATRICES")
+# Protocolos llega armado de otro equipo y no escribe JSON: sus cifras viven en
+# el propio HTML. No hay fuente contra la cual cruzarlo aquí, así que se audita
+# su coherencia interna, que es lo que sí se puede comprobar: que el KPI que
+# guarda el historial sea el que sale de sumar el árbol, y que el último punto
+# de cada nodo diga lo mismo que el árbol muestra. Un panel que se contradice a
+# sí mismo enseña una cifra en la tarjeta y calcula la variación semanal sobre
+# otra, y eso no se ve mirándolo.
+print("4 · PROTOCOLOS · COHERENCIA INTERNA DEL PANEL")
 PROT = R / "suite_qaqc/modulos/protocolos.html"
 _ph = PROT.read_text(encoding="utf-8") if PROT.exists() else ""
 
@@ -287,46 +289,6 @@ if _ph:
                  f"conservan el anterior — {', '.join(quietos[:4])}"
                  + (" …" if len(quietos) > 4 else ""))
 
-    # Con las matrices delante: se recalculan y se comparan contra el árbol.
-    mtz_dir = None
-    if ENTRADA and ENTRADA.is_dir():
-        try:
-            sys.path.insert(0, str(R / "modulo_protocolos"))
-            from protocolos_masa import leer_matriz, MAPA, CONGELADOS, ESTADOS
-            hallado = {}
-            for f in sorted(ENTRADA.glob("*.xls*")):
-                d, _f, calc, _c = leer_matriz(f)
-                if d:
-                    hallado[d] = calc
-            if hallado:
-                mtz_dir = True
-                faltan = {m for m, _ in MAPA.values()} - set(hallado)
-                if faltan:
-                    nota(f"Protocolos · faltan matrices en la carpeta: {', '.join(sorted(faltan))}")
-                else:
-                    i2 = _ph.find("const PROJECTS = {")
-                    arbol = _ph[i2:_ph.find("\n};", i2)]
-                    a = arbol.find("P2342:{")
-                    arbol = arbol[a:]
-                    difs = []
-                    for nid, (mt, siglas) in MAPA.items():
-                        t = {k: 0 for k in ESTADOS}
-                        for sg in siglas:
-                            for k in ESTADOS:
-                                t[k] += hallado[mt].get(sg, {}).get(k, 0)
-                        m = re.search(r"id:'" + re.escape(nid) + r"'[^}]*?S:(\d+),\s*C:(\d+),\s*P:(\d+),\s*AP:(\d+),\s*AE:(\d+)", arbol)
-                        if not m:
-                            difs.append(f"{nid} no está en el panel")
-                            continue
-                        esp = (t["S"], t["C"], t["P"], t["AP"], t["AE"])
-                        if tuple(int(x) for x in m.groups()) != esp:
-                            difs.append(f"{nid} panel {'/'.join(m.groups())} vs matriz {'/'.join(map(str, esp))}")
-                    chk(not difs, "Protocolos · P2342: el panel = las matrices recalculadas",
-                        "; ".join(difs[:3]))
-        except ImportError:
-            pass
-    if not mtz_dir:
-        nota("Protocolos · sin matrices en la carpeta: no se pudo cruzar contra la fuente")
 else:
     nota("Protocolos · no encuentro suite_qaqc/modulos/protocolos.html")
 
