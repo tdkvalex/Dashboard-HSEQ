@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-17 14:02",
+ "generado": "2026-08-17 14:34",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -178,20 +178,20 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.1,
-    "universo": 29790,
-    "enFalta": 16,
-    "avance": 22840,
-    "remanente": 6934,
-    "base": 22856,
+    "universo": 29945,
+    "enFalta": 13,
+    "avance": 23319,
+    "remanente": 6613,
+    "base": 23332,
     "estados": {
-     "S": 6934,
-     "C": 19442,
-     "P": 14,
-     "AP": 2,
-     "AE": 3398,
+     "S": 6613,
+     "C": 19891,
+     "P": 10,
+     "AP": 3,
+     "AE": 3428,
      "rv": 0
     },
-    "actualizado": "10-ago-2026",
+    "actualizado": "17-ago-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -259,11 +259,11 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 62068,
-   "enFalta": 335,
-   "avance": 45352,
-   "remanente": 16247,
-   "base": 45687,
+   "universo": 62223,
+   "enFalta": 332,
+   "avance": 45831,
+   "remanente": 15926,
+   "base": 46163,
    "actualizado": "10-ago-2026",
    "kpi": 0.7
   },

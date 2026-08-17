@@ -194,8 +194,145 @@ for f in kp["proyectos"]:
         chk(f["cierre"]["cierrePct"] == round(1000 * f["cierre"]["p1"]["cerrados"] / f["cierre"]["p1"]["total"]) / 10
             if f["cierre"]["p1"]["total"] else True, f"Portada · {f['id']}: % cierre de P1 bien calculado")
 
-# ═══════════════ 4 · JSON → PPT ═══════════════
-print("4 · LOS JSON CONTRA LAS PPT")
+# ═══════════════ 4 · PROTOCOLOS ═══════════════
+# Protocolos no escribe JSON: sus cifras viven en el propio HTML. Se auditan
+# igual, y con la fuente delante cuando la carpeta del corte trae las matrices.
+# Este cruce existe porque el 17-08-2026 la hoja KPI-BSMT de Obras Civiles vino
+# con las fórmulas dinámicas guardadas como `1` y declaraba 16 cerrados donde
+# había 2.936: el panel se habría publicado con el proyecto desplomado.
+print("4 · PROTOCOLOS · EL PANEL CONTRA SUS MATRICES")
+PROT = R / "suite_qaqc/modulos/protocolos.html"
+_ph = PROT.read_text(encoding="utf-8") if PROT.exists() else ""
+
+def _hojas_proyecto(pid):
+    """Suma las hojas del árbol de un proyecto tal como las declara PROJECTS."""
+    i = _ph.find("const PROJECTS = {")
+    blk = _ph[i:_ph.find("\n};", i)]
+    pos = sorted(x for x in (blk.find(q + ":{") for q in ("P2416", "P2407", "P2342")) if x >= 0)
+    a = blk.find(pid + ":{")
+    if a < 0:
+        return None
+    b = next((x for x in pos if x > a), len(blk))
+    seg = blk[a:b]
+    t = {k: 0 for k in ("S", "C", "P", "AP", "AE")}
+    for h in re.finditer(r"S:(\d+),\s*C:(\d+),\s*P:(\d+),\s*AP:(\d+),\s*AE:(\d+)", seg):
+        for k, v in zip(("S", "C", "P", "AP", "AE"), h.groups()):
+            t[k] += int(v)
+    t["activo"] = not re.search(r"status:'(?!active)", seg)
+    return t
+
+def _kpi(t):
+    den = t["P"] + t["AP"] + t["AE"] + t["C"]
+    import math
+    return math.floor((t["P"] + t["AP"]) / den * 100 * 100 + 0.5) / 100 if den else 0.0
+
+if _ph:
+    # El último punto del historial tiene que decir lo mismo que el árbol. Si
+    # se desincronizan, el panel muestra una cifra y la variación semanal otra.
+    i = _ph.find("let KPI_HISTORY")
+    ult = _ph[:_ph.find("\n];", i)]
+    ult = ult[ult.rfind("{date:"):]
+    guardado = dict(re.findall(r"(P2\d\d\d|CORP):([\d.]+)", ult[:ult.find("disc:") if "disc:" in ult else len(ult)]))
+    corp = {k: 0 for k in ("S", "C", "P", "AP", "AE")}
+    for pid in ("P2416", "P2407", "P2342"):
+        t = _hojas_proyecto(pid)
+        if not t or not t["activo"]:
+            continue
+        for k in corp:
+            corp[k] += t[k]
+        if pid in guardado:
+            chk(abs(_kpi(t) - float(guardado[pid])) < 0.005,
+                f"Protocolos · {pid}: el KPI del historial = el del árbol",
+                f"{guardado[pid]} vs {_kpi(t):.2f}")
+    if "CORP" in guardado:
+        chk(abs(_kpi(corp) - float(guardado["CORP"])) < 0.005,
+            "Protocolos · CORP: el KPI del historial = la suma de los activos",
+            f"{guardado['CORP']} vs {_kpi(corp):.2f}")
+
+    # Cada nodo tiene que cerrar con el punto de historial DEL CORTE QUE DECLARA
+    # el proyecto. Un nodo sin punto en esa fecha no es un error: es un nodo que
+    # esta semana no se actualizó —su matriz no llegó— y conserva el valor
+    # anterior. Eso se informa, no se falla; lo que sí falla es que el punto
+    # exista y diga otra cosa que el árbol, porque entonces el panel muestra una
+    # cifra y la variación semanal se calcula sobre otra.
+    j = _ph.find("let NODE_HISTORY")
+    i2 = _ph.find("const PROJECTS = {")
+    todo = _ph[i2:_ph.find("\n};", i2)]
+    for pid in ("P2416", "P2407", "P2342"):
+        k = _ph.find(pid + ": {", j)
+        a = todo.find(pid + ":{")
+        if k < 0 or a < 0:
+            continue
+        seg = _ph[k:_ph.find("\n  },", k)]
+        b = min([x for x in (todo.find(q + ":{") for q in ("P2416", "P2407", "P2342")) if x > a] or [len(todo)])
+        arbol = todo[a:b]
+        mc = re.search(r"lastUpload:\{all:'(\d{4}-\d\d-\d\d)", arbol)
+        corte_p = mc.group(1) if mc else None
+        desfase, quietos = [], []
+        for nid, cuerpo in re.findall(r"'([A-Z0-9\-]+)':\[(.*?)\],?\n", seg, re.S):
+            m = re.search(r"id:'" + re.escape(nid) + r"'[^}]*?S:(\d+),\s*C:(\d+),\s*P:(\d+),\s*AP:(\d+),\s*AE:(\d+)", arbol)
+            if not m:
+                continue
+            pts = dict((d, g) for d, *g in re.findall(
+                r"date:'(\d{4}-\d\d-\d\d)'.*?data:\{S:(\d+),C:(\d+),P:(\d+),AP:(\d+),AE:(\d+)\}", cuerpo))
+            if corte_p and corte_p in pts:
+                if tuple(pts[corte_p]) != tuple(m.groups()):
+                    desfase.append(f"{nid} (árbol {'/'.join(m.groups())} vs historial {'/'.join(pts[corte_p])})")
+            elif pts:
+                quietos.append(f"{nid} (último {max(pts)})")
+        chk(not desfase, f"Protocolos · {pid}: el árbol = su historial al {corte_p}",
+            "; ".join(desfase[:3]))
+        if quietos:
+            nota(f"Protocolos · {pid}: {len(quietos)} nodo(s) sin dato en el corte {corte_p}, "
+                 f"conservan el anterior — {', '.join(quietos[:4])}"
+                 + (" …" if len(quietos) > 4 else ""))
+
+    # Con las matrices delante: se recalculan y se comparan contra el árbol.
+    mtz_dir = None
+    if ENTRADA and ENTRADA.is_dir():
+        try:
+            sys.path.insert(0, str(R / "modulo_protocolos"))
+            from protocolos_masa import leer_matriz, MAPA, CONGELADOS, ESTADOS
+            hallado = {}
+            for f in sorted(ENTRADA.glob("*.xls*")):
+                d, _f, calc, _c = leer_matriz(f)
+                if d:
+                    hallado[d] = calc
+            if hallado:
+                mtz_dir = True
+                faltan = {m for m, _ in MAPA.values()} - set(hallado)
+                if faltan:
+                    nota(f"Protocolos · faltan matrices en la carpeta: {', '.join(sorted(faltan))}")
+                else:
+                    i2 = _ph.find("const PROJECTS = {")
+                    arbol = _ph[i2:_ph.find("\n};", i2)]
+                    a = arbol.find("P2342:{")
+                    arbol = arbol[a:]
+                    difs = []
+                    for nid, (mt, siglas) in MAPA.items():
+                        t = {k: 0 for k in ESTADOS}
+                        for sg in siglas:
+                            for k in ESTADOS:
+                                t[k] += hallado[mt].get(sg, {}).get(k, 0)
+                        m = re.search(r"id:'" + re.escape(nid) + r"'[^}]*?S:(\d+),\s*C:(\d+),\s*P:(\d+),\s*AP:(\d+),\s*AE:(\d+)", arbol)
+                        if not m:
+                            difs.append(f"{nid} no está en el panel")
+                            continue
+                        esp = (t["S"], t["C"], t["P"], t["AP"], t["AE"])
+                        if tuple(int(x) for x in m.groups()) != esp:
+                            difs.append(f"{nid} panel {'/'.join(m.groups())} vs matriz {'/'.join(map(str, esp))}")
+                    chk(not difs, "Protocolos · P2342: el panel = las matrices recalculadas",
+                        "; ".join(difs[:3]))
+        except ImportError:
+            pass
+    if not mtz_dir:
+        nota("Protocolos · sin matrices en la carpeta: no se pudo cruzar contra la fuente")
+else:
+    nota("Protocolos · no encuentro suite_qaqc/modulos/protocolos.html")
+
+
+# ═══════════════ 5 · JSON → PPT ═══════════════
+print("5 · LOS JSON CONTRA LAS PPT")
 def textos(ruta):
     from pptx import Presentation
     return "\n".join(sh.text_frame.text for s_ in Presentation(str(ruta)).slides
@@ -212,8 +349,8 @@ tx_ci = textos(R / "panel_control_TOP_P1/Panel_Control_TOP_P1.pptx")
 chk(nf(tal["dt"]["global"]["total"]) in tx_ci, f"PPT Cierre · aparece el total de DT de Talabre ({nf(tal['dt']['global']['total'])})")
 chk(nf(des["punch"]["global"]["total"]) in tx_ci, "PPT Cierre · aparece el total de punch de Desaladora")
 
-# ═══════════════ 5 · IDENTIDAD ENTRE MÓDULOS ═══════════════
-print("5 · IDENTIDAD DE LOS PROYECTOS")
+# ═══════════════ 6 · IDENTIDAD ENTRE MÓDULOS ═══════════════
+print("6 · IDENTIDAD DE LOS PROYECTOS")
 ident = {}
 for p in nc["orden"]:
     if nc["proyectos"][p]["obra"]:

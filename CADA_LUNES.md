@@ -46,7 +46,8 @@ reconoce cada uno por su contenido, no por cómo se llame.
 | **P2407 · Talabre** | Mauricio Rocha | `STATUS_SUBSISTEMAS_TALABRE.xlsx` **y** `Detalle_de_TerminacionesBesalco.xlsx` | hoja «STATUS» · hoja «DT» con más de 20 columnas |
 | **P2342 · Arqueros** | José Muñoz | `Estatus_Resumen_General_QAQC.xlsx` | hojas «BD Caminatas-CTOP» + «BD Detalles Terminación» |
 | **No Conformidades** | — | `Data_NCR*.xlsx` **y** la planilla de NC externas del cliente MASA | hoja «Observaciones» · hoja «Disposición NC-Externas» |
-| **Protocolos** | el equipo del dashboard | el `.html` del dashboard actualizado | contiene `PROJECTS` y `NODE_HISTORY` |
+| **Protocolos · P2342** | José Muñoz | las **7 matrices** de disciplina de Arqueros | título con el código `BSMT-P23/42-85-<SIGLA>-MTZ-01` |
+| **Protocolos · P2416 y P2407** | el equipo del dashboard | el `.html` del dashboard actualizado | contiene `PROJECTS` y `NODE_HISTORY` |
 
 **Desaladora, Talabre y No Conformidades necesitan SUS DOS archivos.** Con uno
 solo el script no procesa ese módulo y lo dice.
@@ -67,12 +68,19 @@ si el archivo viene más viejo. Si aparece ese aviso, pedir el archivo correcto.
 que le levanta MASA y aparece con 98,9% de cierre en vez de 78%. También detiene
 la corrida.
 
-**El dashboard de Protocolos es el único que no se puede regenerar aquí.** Llega
-armado de otro equipo y vive solo en `suite_qaqc/modulos/protocolos.html`, que no
-se versiona (pesa 3 MB y no es nuestro). **Guarda una copia fuera del repositorio
-cada vez que llegue uno nuevo.** Si se pierde, la suite no se puede armar hasta
-que ese equipo lo reenvíe — y desde este corte el generador se detiene en vez de
+**De Protocolos sólo Arqueros se regenera aquí.** Desde el corte 17-08-2026,
+`modulo_protocolos/protocolos_masa.py` arma el bloque `P2342` a partir de las 7
+matrices de disciplina. Desaladora y Talabre siguen llegando dentro del `.html`
+que manda el otro equipo, así que el archivo `suite_qaqc/modulos/protocolos.html`
+**sí se versiona**: es el único lugar donde viven esos dos proyectos. Si se pierde,
+la suite no se puede armar hasta recuperarlo — y el generador se detiene en vez de
 publicar Protocolos en 0 %, que se lee como «sin avance» y no como «sin dato».
+
+**Las matrices de MASA traen la hoja `KPI-BSMT` desactualizada.** No se lee: se
+recalcula con sus propias fórmulas. Al corte 17-08 venían mal 11 de 17 columnas, y
+en Obras Civiles la hoja declaraba 16 cerrados donde había 4.748. Está explicado en
+[`modulo_protocolos/README.md`](modulo_protocolos/README.md) §2. **Nunca usar la hoja
+`KPI-MASA`**, que es el alcance del cliente.
 
 **Si se reprocesa un corte pasado, va `--corte`.** La ventana de «levantados en la
 última semana» y los días de atraso se cuentan contra esa fecha; sin el parámetro
@@ -107,7 +115,8 @@ Estatus_Resumen_General_*   ───▶ «BD Caminatas-CTOP» +                
 Data_NCR*.xlsx              ─┐  «Observaciones»                                    embebe la PPT
 NC externas del cliente     ─┴─▶ «Disposición NC-Externas» ──▶ datos_nc.json ──▶ modulo_nc/index.html
                                                                                           │
-dashboard_protocolos.html   ───▶ se copia tal cual ─────────▶ modulos/protocolos.html      │
+7 matrices de disciplina    ───▶ KPI-BSMT RECALCULADO ────┐                                │
+dashboard_protocolos.html   ───▶ se copia tal cual ───────┴─▶ modulos/protocolos.html      │
                                                                                           ▼
                                                             node armar_suite.js ──▶ Suite_QAQC.html
 ```

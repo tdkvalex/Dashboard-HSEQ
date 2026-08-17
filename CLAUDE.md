@@ -156,6 +156,16 @@ El tercer módulo de la suite. **No es un HTML que llega hecho**: se genera desd
 de cada proyecto, con la pestaña de KPI, y en Talabre además con los CSV de Goformz. El
 procedimiento completo está en el skill `hseq-dashboard-besalco`.
 
+**Arqueros ya se carga con un script propio** desde el corte 17-08-2026:
+[`modulo_protocolos/protocolos_masa.py`](modulo_protocolos/README.md) lee las 7 matrices y
+escribe el bloque `P2342`, su historial por nodo y el punto semanal del KPI. Desaladora y
+Talabre siguen haciéndose a mano dentro del mismo `.html`, así que el archivo se versiona.
+
+```bash
+cd modulo_protocolos
+python3 protocolos_masa.py --matrices <carpeta con las 7 matrices>
+```
+
 | Proyecto | Matriz · pestaña | Goformz |
 |---|---|---|
 | P2416 · Desaladora | `KPI` | no |
@@ -167,6 +177,20 @@ procedimiento completo está en el skill `hseq-dashboard-besalco`.
 distintas, y caer a la segunda cuando falta la primera publicaría la cifra equivocada sin que
 nada avise. Si `KPI-BSMT` no está, hay que **detenerse y pedir la matriz correcta**, no buscar
 un reemplazo. *Pedido por el usuario (10-08-2026).*
+
+**Y esa pestaña no se lee: se recalcula.** Sus cifras vienen guardadas de la última vez que
+alguien recalculó el libro. Al corte 17-08-2026 venían desfasadas **11 de 17 columnas**, y en
+Obras Civiles las fórmulas dinámicas (`UNIQUE`/`FILTER`) quedaron colapsadas a `1`: la hoja
+declaraba **16 cerrados donde había 4.748**, y publicarla habría mostrado el proyecto
+desplomándose sin que pasara nada. Donde la caché está sana el recálculo da su mismo número
+exacto —eso es lo que lo valida—, y `--verificar-cache` lo muestra columna por columna.
+Ojo con la unidad, que el propio libro mezcla: `C`/`AP`/`AE` cuentan **protocolos distintos**
+y `S`/`P`/`N` cuentan **celdas**. Se replica tal cual: es lo que el cliente revisa.
+
+**La matriz de la línea BT/MT no llega desde el 29-06-2026.** `TOPO-ELECBT-2342` (98) y
+`ELEC-BT-2342` (72) conservan su último valor y **no suman punto nuevo al historial**, para no
+inventarle continuidad a un dato que nadie actualizó. Llevan 13 cortes idénticos desde el
+23-03-2026: conviene confirmar con el proyecto si ese alcance sigue vigente.
 
 **Talabre: los `rv` se restan una sola vez.** `AP_neto = AP_bruto − rv`, con `rv` contado desde
 los CSV de Goformz (campo «Comentarios VP» = Sí). El KPI usa el `AP` ya neto y el universo
