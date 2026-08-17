@@ -598,87 +598,152 @@ titulo(s, "Costo mensual por disciplina");
 
 const CM = Object.entries(D.obra.costoMes || {}).sort((a, b) => a[0].localeCompare(b[0]));
 const MESNOM = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
-const rotMes = (m) => `${MESNOM[+m.slice(5, 7) - 1]}-${m.slice(2, 4)}`;
-const VENTANA = 12;                       // el control se lleva sobre el año móvil
-const ultM = CM.slice(-VENTANA);
+const rotMes = (m) => `${MESNOM[+m.slice(5, 7) - 1]}\n${m.slice(2, 4)}`;
+const rotPlano = (m) => `${MESNOM[+m.slice(5, 7) - 1]}-${m.slice(2, 4)}`;
+// Se muestran TODOS los meses desde el primero con costo, igual que el panel.
+// Con una ventana de 12 meses quedaban filas enteras en blanco —CALIDAD cargó
+// sus 4.000 UF en jul-25 y SUBCONTRATO las suyas en jun-25—, y una fila vacía
+// con un total grande al lado se lee como un error de la lámina.
+const desdeM = CM.findIndex(([, v]) => v.costo > 0);
+const ultM = desdeM < 0 ? [] : CM.slice(desdeM);
 
-// Acumulado histórico por disciplina: ordena las series y llena el recuadro,
-// para que la lámina no dependa solo de la ventana que se dibuja.
+// Acumulado histórico por disciplina: ordena las filas y va en su propia
+// columna, para que una disciplina que gastó fuerte antes de la ventana no
+// aparezca en blanco —CALIDAD cargó 4.000 UF en jul-25 y quedaría invisible—.
 const acumDisc = {};
 CM.forEach(([, v]) => Object.entries(v.porEspecialidad)
   .forEach(([e, c]) => { acumDisc[e] = (acumDisc[e] || 0) + c; }));
-const topDisc = Object.entries(acumDisc).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([e]) => e);
-// Colores con ≥4,5:1 sobre texto blanco — misma regla que el resto del mazo.
-const COL_DISC = [C.crit, C.copperD, C.warnD, C.blue, C.goodD];
-const COL_OTRAS = C.neutral;
-const hayOtrasD = Object.keys(acumDisc).length > topDisc.length;
+const TOP_N = 7;
+const ordenD = Object.entries(acumDisc).sort((a, b) => b[1] - a[1]);
+const topDisc = ordenD.slice(0, TOP_N).map(([e]) => e);
+const hayOtrasD = ordenD.length > topDisc.length;
 const otrasDe = (v) => Object.entries(v.porEspecialidad)
   .filter(([e]) => !topDisc.includes(e)).reduce((a, b) => a + b[1], 0);
+const acumOtras = ordenD.slice(TOP_N).reduce((a, b) => a + b[1], 0);
 
 const totVentana = ultM.reduce((a, [, v]) => a + v.costo, 0);
 const totHist = CM.reduce((a, [, v]) => a + v.costo, 0);
 const ncVentana = ultM.reduce((a, [, v]) => a + v.total, 0);
 const monVentana = ultM.reduce((a, [, v]) => a + v.conMonto, 0);
-const mesesMudos = ultM.filter(([, v]) => !v.conMonto).length;
+// Racha de meses mudos al final: es el hueco que hay que cerrar, no un dato más.
+let seco = 0;
+for (let i = CM.length - 1; i >= 0 && !CM[i][1].conMonto; i--) seco++;
+const mesPico = CM.slice().sort((a, b) => b[1].costo - a[1].costo)[0];
 
-bajada(s, `${nf(Math.round(totVentana))} UF declaradas en los últimos ${ultM.length} meses ` +
-  `—${nf(Math.round(totHist))} UF en todo el registro—, imputadas al mes en que se levantó cada hallazgo. ` +
+bajada(s, `${nf(Math.round(totHist))} UF declaradas entre ${rotPlano(ultM[0][0])} y ` +
+  `${rotPlano(ultM[ultM.length - 1][0])}, imputadas al mes en que se levantó cada hallazgo. ` +
   `Las declaran ${nf(monVentana)} de ${nf(ncVentana)} hallazgos del período.`);
 
-const serieD = topDisc.map((e) => ({
-  name: e,
-  labels: ultM.map(([m]) => rotMes(m)),
-  values: ultM.map(([, v]) => z(v.porEspecialidad[e] || 0)),
-}));
-if (hayOtrasD) serieD.push({
-  name: "Otras disciplinas",
-  labels: ultM.map(([m]) => rotMes(m)),
-  values: ultM.map(([, v]) => z(otrasDe(v))),
-});
-s.addChart(p.ChartType.bar, serieD, {
-  ...BARRAS, x: 0.5, y: 1.95, w: 8.55, h: 4.05,
-  chartColors: COL_DISC.slice(0, topDisc.length).concat(hayOtrasD ? [COL_OTRAS] : []),
-  title: `Costo declarado por mes · UF · últimos ${ultM.length} meses`,
-  catAxisLabelFontSize: 10.5, barGapWidthPct: 45,
-});
-
-// Recuadro: los tres estados del dato y el acumulado por disciplina. Sin esto,
-// un mes en blanco se lee «no costó» cuando lo que dice es «nadie lo declaró».
-s.addShape(p.ShapeType.roundRect, { x: 9.3, y: 1.95, w: 3.53, h: 4.05, rectRadius: 0.06,
-  fill: { color: C.navy }, line: { type: "none" } });
-s.addText("QUÉ TAN COMPLETO ESTÁ EL DATO", { x: 9.55, y: 2.12, w: 3.1, h: 0.3, fontFace: FT,
-  fontSize: 9.5, bold: true, color: C.copperL, charSpacing: 1.2, margin: 0 });
-s.addText([
-  { text: `${nf(K.costoConMonto)} `, options: { color: C.white, bold: true, fontSize: 14 } },
-  { text: `declaran un monto\n`, options: { color: C.ice } },
-  { text: `${nf(K.costoEnCero)} `, options: { color: C.white, bold: true, fontSize: 14 } },
-  { text: `declaran 0 — afirman que no costó\n`, options: { color: C.ice } },
-  { text: `${nf(K.sinCosto)} `, options: { color: C.copperL, bold: true, fontSize: 14 } },
-  { text: `dejan la casilla vacía: no se sabe`, options: { color: C.ice } },
-], { x: 9.55, y: 2.5, w: 3.05, h: 1.45, fontFace: FT, fontSize: 10.5, lineSpacing: 15,
-     margin: 0, valign: "top" });
-
-s.addText("ACUMULADO POR DISCIPLINA · UF", { x: 9.55, y: 3.98, w: 3.1, h: 0.3, fontFace: FT,
-  fontSize: 9.5, bold: true, color: C.copperL, charSpacing: 1.2, margin: 0 });
-let cyD = 4.30;
-const filaDisc = (nombre, color, monto) => {
-  s.addShape(p.ShapeType.rect, { x: 9.55, y: cyD + 0.06, w: 0.12, h: 0.12,
-    fill: { color }, line: { type: "none" } });
-  s.addText(nombre, { x: 9.76, y: cyD - 0.02, w: 2.0, h: 0.26, fontFace: FT, fontSize: 10.5,
-    color: C.ice, margin: 0 });
-  s.addText(nf(Math.round(monto)), { x: 11.76, y: cyD - 0.02, w: 0.86, h: 0.26, fontFace: FT,
-    fontSize: 10.5, bold: true, color: C.white, align: "right", margin: 0 });
-  cyD += 0.28;   // 6 filas desde 4.30 cierran en 5.96, dentro del recuadro
+/* Matriz disciplina × mes. Va como matriz y no como barra apilada porque un
+   solo mes de ${jul-25} dejaba a los demás en un píxel, y lo que se pide leer
+   es cuánto puso cada disciplina en cada mes. El color solo ordena la
+   magnitud —tramos fijos, no cuantiles— y el número está escrito. */
+const CORTES = [50, 200, 500, 1500];
+const nivel = (v) => (v <= 0 ? -1 : CORTES.filter((c) => v >= c).length);
+// Rampa clara→oscura sobre papel, con la tinta que da ≥4,5:1 en cada tramo.
+// Arranca en un azul ya visible: con el tono más claro, el tramo más bajo se
+// confundía con una celda vacía y no se distinguía «cobró poco» de «no cobró».
+const RAMPA = [
+  { f: "BFDBFE", t: C.ink }, { f: "93C5FD", t: C.ink }, { f: "60A5FA", t: C.ink },
+  { f: "3B82F6", t: "0B0B0B" }, { f: "1E40AF", t: C.white },
+];
+const VACIA = { f: "EFF2F6", t: C.steel };
+const celda = (v, bold) => {
+  const k = nivel(v);
+  const c = k < 0 ? VACIA : RAMPA[k];
+  return { text: k < 0 ? "" : nf(Math.round(v)),
+           options: { fill: { color: c.f }, color: c.t, bold: !!bold } };
 };
-topDisc.forEach((e, i) => filaDisc(e, COL_DISC[i], acumDisc[e]));
-if (hayOtrasD) filaDisc("Otras disciplinas", COL_OTRAS,
-  Object.entries(acumDisc).filter(([e]) => !topDisc.includes(e)).reduce((a, b) => a + b[1], 0));
+
+const encab = (t, al) => ({ text: t, options: { fill: { color: C.paper }, color: C.ink2,
+  bold: true, fontSize: 7.5, align: al || "right", valign: "bottom" } });
+const rotulo = (t, bold) => ({ text: t, options: { fill: { color: C.paper }, color: C.ink,
+  bold: !!bold, align: "left" } });
+
+const filas = [[encab("DISCIPLINA", "left")]
+  .concat(ultM.map(([m]) => encab(rotMes(m))))
+  .concat([encab("TOTAL UF")])];
+
+topDisc.forEach((e) => {
+  filas.push([rotulo(e)]
+    .concat(ultM.map(([, v]) => celda(v.porEspecialidad[e] || 0)))
+    .concat([{ text: nf(Math.round(acumDisc[e])),
+      options: { fill: { color: C.white }, color: C.ink, bold: true } }]));
+});
+if (hayOtrasD) {
+  filas.push([rotulo(`Otras (${ordenD.length - TOP_N} disciplinas)`)]
+    .concat(ultM.map(([, v]) => celda(otrasDe(v))))
+    .concat([{ text: nf(Math.round(acumOtras)),
+      options: { fill: { color: C.white }, color: C.ink, bold: true } }]));
+}
+filas.push([rotulo("TOTAL DEL MES", true)]
+  .concat(ultM.map(([, v]) => celda(v.costo, true)))
+  .concat([{ text: nf(Math.round(totHist)),
+    options: { fill: { color: C.navy }, color: C.white, bold: true } }]));
+// Cobertura: sin esta fila, un mes en blanco se lee «no costó» cuando lo que
+// dice es «nadie lo declaró».
+filas.push([{ text: "NC CON MONTO DECLARADO", options: { fill: { color: C.paper },
+    color: C.ink2, align: "left", fontSize: 7.5 } }]
+  .concat(ultM.map(([, v]) => ({ text: `${v.conMonto}/${v.total}`,
+    options: { fill: { color: C.paper }, fontSize: 7.5,
+               color: v.conMonto ? C.ink2 : C.crit, bold: !v.conMonto } })))
+  .concat([{ text: `${nf(monVentana)}/${nf(ncVentana)}`,
+    options: { fill: { color: C.paper }, color: C.ink2, fontSize: 7.5, bold: true } }]));
+
+// Ancho por mes ajustado al número de columnas: con 22 meses la matriz tiene
+// que caber igual, y «4.000» a 7,5 pt ocupa 0,33".
+const anchoMes = ultM.length > 18 ? 0.44 : ultM.length > 12 ? 0.52 : 0.63;
+const anchoDisc = 2.1, anchoTot = 0.9;
+s.addTable(filas, {
+  x: 0.45, y: 1.98, w: anchoDisc + anchoMes * ultM.length + anchoTot,
+  colW: [anchoDisc].concat(ultM.map(() => anchoMes)).concat([anchoTot]),
+  rowH: 0.245, fontFace: FT, fontSize: ultM.length > 18 ? 7.5 : 9,
+  align: "right", valign: "middle",
+  border: { type: "solid", pt: 1, color: C.paper }, margin: 2,
+});
+
+// Leyenda de la rampa, pegada bajo la matriz.
+let lx = 0.45;
+s.addText("UF POR CELDA", { x: lx, y: 5.28, w: 1.15, h: 0.22, fontFace: FT, fontSize: 8,
+  bold: true, color: C.ink2, charSpacing: 0.8, margin: 0, valign: "middle" });
+lx += 1.2;
+RAMPA.forEach((c, i) => {
+  const t = i === 0 ? `< ${nf(CORTES[0])}`
+    : i === RAMPA.length - 1 ? `${nf(CORTES[i - 1])} o más`
+    : `${nf(CORTES[i - 1])}–${nf(CORTES[i] - 1)}`;
+  s.addShape(p.ShapeType.rect, { x: lx, y: 5.33, w: 0.14, h: 0.14,
+    fill: { color: c.f }, line: { color: C.track, width: 0.5 } });
+  s.addText(t, { x: lx + 0.2, y: 5.26, w: 1.05, h: 0.26, fontFace: FT, fontSize: 8.5,
+    color: C.ink2, margin: 0, valign: "middle" });
+  lx += 1.32;
+});
+
+// Los tres estados del dato. Van juntos y con la misma jerarquía porque la
+// diferencia entre «declara 0» y «casilla vacía» es la que decide si la cifra
+// de arriba se puede leer como el costo del período o solo como su piso.
+const EST = [
+  { n: K.costoConMonto, t: "declaran un monto", c: C.blue },
+  { n: K.costoEnCero, t: "declaran 0 — afirman que no costó", c: C.steel },
+  { n: K.sinCosto, t: "dejan la casilla vacía: no se sabe", c: C.crit },
+];
+let ex = 0.45;
+EST.forEach((e) => {
+  s.addShape(p.ShapeType.rect, { x: ex, y: 5.78, w: 0.045, h: 0.62,
+    fill: { color: e.c }, line: { type: "none" } });
+  s.addText(nf(e.n), { x: ex + 0.16, y: 5.76, w: 1.1, h: 0.38, fontFace: FH, fontSize: 21,
+    bold: true, color: C.ink, margin: 0, valign: "middle" });
+  s.addText(e.t, { x: ex + 0.16, y: 6.12, w: 3.6, h: 0.28, fontFace: FT, fontSize: 9.5,
+    color: C.ink2, margin: 0, valign: "top" });
+  ex += 4.15;
+});
 
 s.addText(`El costo se imputa al mes de emisión: la columna «Costo De La No Conformidad» no trae fecha propia. ` +
-  (mesesMudos ? `${nf(mesesMudos)} de los últimos ${ultM.length} meses no tienen ningún monto declarado, ` +
-                `y un mes en blanco es «sin declarar», no «sin costo». ` : "") +
-  `La serie es un piso del costo real, no el costo real.`,
-  { x: 0.5, y: 6.18, w: 12.3, h: 0.55, fontFace: FT, fontSize: 9.5, italic: true,
+  (mesPico ? `El mes más caro es ${MESNOM[+mesPico[0].slice(5, 7) - 1]}-${mesPico[0].slice(2, 4)} ` +
+             `con ${nf(Math.round(mesPico[1].costo))} UF. ` : "") +
+  (seco ? `Los últimos ${nf(seco)} meses no traen ningún monto declarado —un mes en blanco es ` +
+          `«sin declarar», no «sin costo»—. ` : "") +
+  `La cifra es un piso del costo real.`,
+  { x: 0.5, y: 6.55, w: 12.3, h: 0.42, fontFace: FT, fontSize: 9.5, italic: true,
     color: C.ink2, margin: 0, valign: "top" });
 footer(s, false, CAP, "consolidado");
 

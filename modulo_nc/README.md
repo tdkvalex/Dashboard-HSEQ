@@ -162,7 +162,7 @@ Mismo formato y metodología que la del módulo de Cierre QAQC
 | 4 | Levantados en la última semana — ritmo de 8 semanas (5 al detalle + 3 acumuladas) y detalle uno a uno |
 | 5 | Origen del hallazgo — interna, cliente y subcontrato · estado de cada vía · autodetección por frente |
 | 6 | Antigüedad de lo abierto + fuera de plazo de respuesta + velocidad de cierre |
-| 7 | **Costo mensual por disciplina** — últimos 12 meses + acumulado y cobertura del dato |
+| 7 | **Costo mensual por disciplina** — matriz disciplina × mes, cobertura del dato y los tres estados |
 | 8 | Foco de gestión |
 | 9-17 | Portada + 2 láminas por proyecto (estado · pendiente y novedades) |
 
@@ -273,8 +273,23 @@ que el total, con la tabla del panel contradiciendo a la tarjeta del KPI. `audit
 comprueba las dos cuadraturas —los meses contra el frente, y las disciplinas contra su mes— y
 recuenta los tres estados desde el Excel.
 
-Un mes sin barra se rotula **«sin declarar»**, nunca «sin costo». Al corte hay 4 meses seguidos
-así (may-26 a ago-26): 45 hallazgos levantados y ninguno con monto.
+Se presenta como **matriz disciplina × mes**, no como barras apiladas. La razón es concreta: un
+solo mes de 4.382 UF —casi todo una NC de CALIDAD— dejaba a los otros veintiún meses en una raya
+de un píxel, y la lectura que se pide, «cuánto puso cada disciplina en cada mes», había que
+adivinarla por color. En la matriz el número está escrito y el color solo ordena la magnitud, en
+**tramos fijos** (<50 · 50–199 · 200–499 · 500–1.499 · ≥1.500 UF) y no en cuantiles, para que un
+mes no cambie de tono porque cambió otro. Además ocupa una fila por disciplina —doce— en vez de
+una por mes —veintidós—.
+
+La rampa arranca en el segundo escalón de `--seq-*`: con el primero, el tramo más bajo quedaba
+del mismo tono que una celda vacía y no se distinguía «cobró poco» de «no cobró». La tinta de
+cada celda se elige calculando el contraste contra las dos disponibles y quedándose con la mejor
+—no con un umbral de luminancia fijo, que dejaba el tramo más brillante en 2,2:1—; así el panel
+da ≥4,9:1 en modo oscuro y en modo claro, donde la rampa va al revés.
+
+La última fila, **«NC con monto declarado»**, no es decorativa: un mes sin celdas es «sin
+declarar», nunca «sin costo». Al corte hay 4 meses seguidos así (may-26 a ago-26): 45 hallazgos
+levantados y ninguno con monto.
 
 ---
 
