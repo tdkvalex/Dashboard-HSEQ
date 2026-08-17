@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-10 15:31",
+ "generado": "2026-08-17 13:17",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -147,17 +147,17 @@
    },
    "noConformidades": {
     "nombre": "Talabre",
-    "cliente": 189,
+    "cliente": 192,
     "obra": true,
-    "total": 241,
-    "cerradas": 226,
-    "abiertas": 15,
-    "atrasadas": 15,
-    "pctCierre": 93.8,
+    "total": 244,
+    "cerradas": 230,
+    "abiertas": 14,
+    "atrasadas": 12,
+    "pctCierre": 94.3,
     "internas": 52,
-    "externas": 189,
+    "externas": 192,
     "subcontrato": 0,
-    "abiertasCliente": 12,
+    "abiertasCliente": 11,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 3,
     "costo": 5818.3,
@@ -235,7 +235,7 @@
     "total": 164,
     "cerradas": 127,
     "abiertas": 37,
-    "atrasadas": 36,
+    "atrasadas": 37,
     "pctCierre": 77.4,
     "internas": 53,
     "externas": 111,
@@ -246,7 +246,7 @@
     "costo": 3391.8,
     "conCosto": 44,
     "medianaCierre": 129,
-    "promedioCierre": 127,
+    "promedioCierre": 128,
     "maxCierre": 313,
     "sem": [
      "crit",
@@ -282,17 +282,17 @@
   "noConformidades": {
    "activo": true,
    "proyectos": 3,
-   "total": 487,
-   "cerradas": 434,
-   "abiertas": 53,
-   "pctCierre": 89.1,
+   "total": 490,
+   "cerradas": 438,
+   "abiertas": 52,
+   "pctCierre": 89.4,
    "costo": 10613.4,
    "medianaCierre": 30,
-   "conOficina": 495,
+   "conOficina": 498,
    "atrasoCalculable": true,
-   "atrasadas": 52,
+   "atrasadas": 50,
    "plazoRespuesta": 10,
-   "corte": "10-08-2026"
+   "corte": "17-08-2026"
   }
  }
 }
