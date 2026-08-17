@@ -88,6 +88,27 @@ if NCX and EXT:
     chk(nc["control"]["registros"] == esperado, "NC · registros",
         f"Excel {len(filas)} − {n_odm} ODM − {n_cli} del cliente ya en el log + {len(ext)} "
         f"del log = {esperado} · JSON {nc['control']['registros']}")
+
+    # Costo: los tres estados se recuentan desde el Excel. Una casilla vacía y
+    # un 0 declarado NO son lo mismo —«no se sabe» contra «no costó»— y el
+    # módulo los publica por separado; si esa distinción se pierde en la
+    # lectura, el costo mensual pasa a leerse como completo sin serlo.
+    _c = [f[19] for f in utiles]
+    con = sum(1 for x in _c if isinstance(x, (int, float)) and x > 0)
+    cero = sum(1 for x in _c if isinstance(x, (int, float)) and not x)
+    vacio = sum(1 for x in _c if not isinstance(x, (int, float)))
+    # El log del cliente no trae columna de costo: sus filas cuentan como vacías.
+    vacio += len(ext)
+    K_ = nc["control"]
+    chk(K_["costoConMonto"] == con, "NC · costo: hallazgos con monto declarado",
+        f'Excel {con} · JSON {K_["costoConMonto"]}')
+    chk(K_["costoEnCero"] == cero, "NC · costo: hallazgos que declaran 0",
+        f'Excel {cero} · JSON {K_["costoEnCero"]}')
+    chk(K_["sinCosto"] == vacio, "NC · costo: hallazgos sin declarar",
+        f'Excel {vacio} · JSON {K_["sinCosto"]}')
+    uf = round(sum(x for x in _c if isinstance(x, (int, float))), 1)
+    chk(abs(uf - nc["global"]["resumen"]["costo"]) < 0.05, "NC · costo total en UF",
+        f'Excel {uf} · JSON {nc["global"]["resumen"]["costo"]}')
     chk(nc["control"].get("clienteSoloDelLog", {}).get("descartadas") == n_cli,
         "NC · las descartadas por venir del log cuadran con el Excel",
         f"Excel {n_cli} · JSON {nc['control'].get('clienteSoloDelLog', {}).get('descartadas')}")
@@ -136,6 +157,21 @@ for p in nc["orden"]:
     t = nc["proyectos"][p]["porTipo"]
     chk(sum(v["total"] for v in t.values()) == r["total"], f"NC · {p}: porTipo suma el total")
     chk("Opción de Mejora" not in t, f"NC · {p}: sin opciones de mejora")
+    # Costo mensual: la serie por mes y disciplina tiene que cerrar con el
+    # costo del frente y con su conteo de hallazgos. Es una tabla cruzada
+    # —mes × disciplina— y son justo las que se desalinean sin que se note.
+    cm = nc["proyectos"][p].get("costoMes", {})
+    chk(round(sum(v["costo"] for v in cm.values()), 1) == r["costo"],
+        f"NC · {p}: el costo mensual suma el costo del frente",
+        f'{round(sum(v["costo"] for v in cm.values()), 1)} vs {r["costo"]}')
+    chk(all(round(sum(v["porEspecialidad"].values()), 2) == round(v["costo"], 2)
+            for v in cm.values()),
+        f"NC · {p}: en cada mes, las disciplinas suman el costo del mes")
+    chk(all(v["conMonto"] + v["enCero"] + v["sinDeclarar"] == v["total"] for v in cm.values()),
+        f"NC · {p}: con monto + en cero + sin declarar = hallazgos del mes")
+    chk(sum(v["total"] for v in cm.values())
+        == sum(nc["proyectos"][p]["porMes"].values()),
+        f"NC · {p}: el costo mensual cubre los mismos meses que porMes")
 ab = nc["abiertas"]
 chk(len(ab) == g["abiertas"], "NC · la lista de abiertas tiene tantas filas como abiertas",
     f"{len(ab)} vs {g['abiertas']}")

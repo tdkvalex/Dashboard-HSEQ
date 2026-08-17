@@ -586,7 +586,104 @@ tabla(s, [
 footer(s, false, CAP, "consolidado");
 
 // =====================================================================
-// 7 — Foco de gestión
+// 7 — Costo mensual por disciplina
+// =====================================================================
+// El monto se imputa al mes en que se LEVANTÓ la NC: la fuente no registra una
+// fecha propia del costo. La cobertura va EN la lámina y no en una nota al pie,
+// porque la mayor parte del registro no trae el dato: sin ese contexto, el
+// total de un mes se lee como el costo del mes cuando en realidad es su piso.
+s = p.addSlide(); bg(s, C.paper); logo(s, false);
+kicker(s, "Costo de la no conformidad", 0.5, 0.45);
+titulo(s, "Costo mensual por disciplina");
+
+const CM = Object.entries(D.obra.costoMes || {}).sort((a, b) => a[0].localeCompare(b[0]));
+const MESNOM = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const rotMes = (m) => `${MESNOM[+m.slice(5, 7) - 1]}-${m.slice(2, 4)}`;
+const VENTANA = 12;                       // el control se lleva sobre el año móvil
+const ultM = CM.slice(-VENTANA);
+
+// Acumulado histórico por disciplina: ordena las series y llena el recuadro,
+// para que la lámina no dependa solo de la ventana que se dibuja.
+const acumDisc = {};
+CM.forEach(([, v]) => Object.entries(v.porEspecialidad)
+  .forEach(([e, c]) => { acumDisc[e] = (acumDisc[e] || 0) + c; }));
+const topDisc = Object.entries(acumDisc).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([e]) => e);
+// Colores con ≥4,5:1 sobre texto blanco — misma regla que el resto del mazo.
+const COL_DISC = [C.crit, C.copperD, C.warnD, C.blue, C.goodD];
+const COL_OTRAS = C.neutral;
+const hayOtrasD = Object.keys(acumDisc).length > topDisc.length;
+const otrasDe = (v) => Object.entries(v.porEspecialidad)
+  .filter(([e]) => !topDisc.includes(e)).reduce((a, b) => a + b[1], 0);
+
+const totVentana = ultM.reduce((a, [, v]) => a + v.costo, 0);
+const totHist = CM.reduce((a, [, v]) => a + v.costo, 0);
+const ncVentana = ultM.reduce((a, [, v]) => a + v.total, 0);
+const monVentana = ultM.reduce((a, [, v]) => a + v.conMonto, 0);
+const mesesMudos = ultM.filter(([, v]) => !v.conMonto).length;
+
+bajada(s, `${nf(Math.round(totVentana))} UF declaradas en los últimos ${ultM.length} meses ` +
+  `—${nf(Math.round(totHist))} UF en todo el registro—, imputadas al mes en que se levantó cada hallazgo. ` +
+  `Las declaran ${nf(monVentana)} de ${nf(ncVentana)} hallazgos del período.`);
+
+const serieD = topDisc.map((e) => ({
+  name: e,
+  labels: ultM.map(([m]) => rotMes(m)),
+  values: ultM.map(([, v]) => z(v.porEspecialidad[e] || 0)),
+}));
+if (hayOtrasD) serieD.push({
+  name: "Otras disciplinas",
+  labels: ultM.map(([m]) => rotMes(m)),
+  values: ultM.map(([, v]) => z(otrasDe(v))),
+});
+s.addChart(p.ChartType.bar, serieD, {
+  ...BARRAS, x: 0.5, y: 1.95, w: 8.55, h: 4.05,
+  chartColors: COL_DISC.slice(0, topDisc.length).concat(hayOtrasD ? [COL_OTRAS] : []),
+  title: `Costo declarado por mes · UF · últimos ${ultM.length} meses`,
+  catAxisLabelFontSize: 10.5, barGapWidthPct: 45,
+});
+
+// Recuadro: los tres estados del dato y el acumulado por disciplina. Sin esto,
+// un mes en blanco se lee «no costó» cuando lo que dice es «nadie lo declaró».
+s.addShape(p.ShapeType.roundRect, { x: 9.3, y: 1.95, w: 3.53, h: 4.05, rectRadius: 0.06,
+  fill: { color: C.navy }, line: { type: "none" } });
+s.addText("QUÉ TAN COMPLETO ESTÁ EL DATO", { x: 9.55, y: 2.12, w: 3.1, h: 0.3, fontFace: FT,
+  fontSize: 9.5, bold: true, color: C.copperL, charSpacing: 1.2, margin: 0 });
+s.addText([
+  { text: `${nf(K.costoConMonto)} `, options: { color: C.white, bold: true, fontSize: 14 } },
+  { text: `declaran un monto\n`, options: { color: C.ice } },
+  { text: `${nf(K.costoEnCero)} `, options: { color: C.white, bold: true, fontSize: 14 } },
+  { text: `declaran 0 — afirman que no costó\n`, options: { color: C.ice } },
+  { text: `${nf(K.sinCosto)} `, options: { color: C.copperL, bold: true, fontSize: 14 } },
+  { text: `dejan la casilla vacía: no se sabe`, options: { color: C.ice } },
+], { x: 9.55, y: 2.5, w: 3.05, h: 1.45, fontFace: FT, fontSize: 10.5, lineSpacing: 15,
+     margin: 0, valign: "top" });
+
+s.addText("ACUMULADO POR DISCIPLINA · UF", { x: 9.55, y: 3.98, w: 3.1, h: 0.3, fontFace: FT,
+  fontSize: 9.5, bold: true, color: C.copperL, charSpacing: 1.2, margin: 0 });
+let cyD = 4.30;
+const filaDisc = (nombre, color, monto) => {
+  s.addShape(p.ShapeType.rect, { x: 9.55, y: cyD + 0.06, w: 0.12, h: 0.12,
+    fill: { color }, line: { type: "none" } });
+  s.addText(nombre, { x: 9.76, y: cyD - 0.02, w: 2.0, h: 0.26, fontFace: FT, fontSize: 10.5,
+    color: C.ice, margin: 0 });
+  s.addText(nf(Math.round(monto)), { x: 11.76, y: cyD - 0.02, w: 0.86, h: 0.26, fontFace: FT,
+    fontSize: 10.5, bold: true, color: C.white, align: "right", margin: 0 });
+  cyD += 0.28;   // 6 filas desde 4.30 cierran en 5.96, dentro del recuadro
+};
+topDisc.forEach((e, i) => filaDisc(e, COL_DISC[i], acumDisc[e]));
+if (hayOtrasD) filaDisc("Otras disciplinas", COL_OTRAS,
+  Object.entries(acumDisc).filter(([e]) => !topDisc.includes(e)).reduce((a, b) => a + b[1], 0));
+
+s.addText(`El costo se imputa al mes de emisión: la columna «Costo De La No Conformidad» no trae fecha propia. ` +
+  (mesesMudos ? `${nf(mesesMudos)} de los últimos ${ultM.length} meses no tienen ningún monto declarado, ` +
+                `y un mes en blanco es «sin declarar», no «sin costo». ` : "") +
+  `La serie es un piso del costo real, no el costo real.`,
+  { x: 0.5, y: 6.18, w: 12.3, h: 0.55, fontFace: FT, fontSize: 9.5, italic: true,
+    color: C.ink2, margin: 0, valign: "top" });
+footer(s, false, CAP, "consolidado");
+
+// =====================================================================
+// 8 — Foco de gestión
 // =====================================================================
 s = p.addSlide(); bg(s, C.navy); logo(s, true);
 s.addShape(p.ShapeType.ellipse, { x: 10.8, y: -1.8, w: 4.6, h: 4.6, fill: { color: C.navy2 }, line: { type: "none" } });
@@ -763,7 +860,7 @@ OBRAS.forEach((X, idx) => {
   footer(s, false, CAP, X.nombre);
 });
 
-console.log(`Láminas: ${nSlide - 1} (7 corporativas + ${OBRAS.length} proyectos × 3).`);
+console.log(`Láminas: ${nSlide - 1} (8 corporativas + ${OBRAS.length} proyectos × 3).`);
 
 // =====================================================================
 // Se escribe la PPT y se embebe en index.html para que el panel la ofrezca

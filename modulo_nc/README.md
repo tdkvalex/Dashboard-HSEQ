@@ -149,7 +149,7 @@ Para la suite no hay que copiar nada: el generador lee `modulo_nc/index.html` di
 
 ---
 
-## La PPT ejecutiva — 16 láminas
+## La PPT ejecutiva — 17 láminas
 
 Mismo formato y metodología que la del módulo de Cierre QAQC
 (`panel_control_TOP_P1/gen_ppt.js`), para que el mazo se lea igual venga del módulo que venga.
@@ -162,8 +162,9 @@ Mismo formato y metodología que la del módulo de Cierre QAQC
 | 4 | Levantados en la última semana — ritmo de 8 semanas (5 al detalle + 3 acumuladas) y detalle uno a uno |
 | 5 | Origen del hallazgo — interna, cliente y subcontrato · estado de cada vía · autodetección por frente |
 | 6 | Antigüedad de lo abierto + fuera de plazo de respuesta + velocidad de cierre |
-| 7 | Foco de gestión |
-| 8-16 | Portada + 2 láminas por proyecto (estado · pendiente y novedades) |
+| 7 | **Costo mensual por disciplina** — últimos 12 meses + acumulado y cobertura del dato |
+| 8 | Foco de gestión |
+| 9-17 | Portada + 2 láminas por proyecto (estado · pendiente y novedades) |
 
 Reglas del formato, iguales a las del otro módulo:
 
@@ -243,7 +244,37 @@ Pasarse una semana del plazo no es lo mismo que llevar un año abierto, y de las
   cerradas. Es el indicador de qué tan rápido reacciona cada proyecto.
 - **Oficina Central** genera NC pero no es una obra: aparece en el resumen corporativo y en el
   consolidado «Los 3 proyectos» se excluye, para que sea comparable con los otros módulos.
-- **244 de 493 hallazgos no declaran costo**. así que las 10.613 UF son un piso. no el costo real.
+### El costo: tres estados, no dos
+
+La columna «Costo De La No Conformidad» admite tres situaciones que **no significan lo mismo**
+y que el módulo publica por separado (`control.costoConMonto`, `costoEnCero`, `sinCosto`):
+
+| Estado | Qué dice | Al corte 17-08-2026 |
+|---|---|---|
+| Declara un monto | costó tanto | **108** |
+| Declara **0** | afirma que no costó | **143** |
+| Casilla vacía | **no se sabe** | **247** |
+
+Juntar los dos últimos en un solo «sin costo» haría leer como gratis lo que solo está sin
+medir. Por eso **las 10.613 UF son un piso del costo real, nunca el costo real**, y el panel
+y la PPT lo dicen en la misma lámina donde va la cifra, no en una nota al pie.
+
+### Costo mensual por disciplina
+
+**El monto se imputa al mes en que se LEVANTÓ la NC**, no al mes en que se cerró: la fuente no
+registra una fecha propia del costo, así que esa es la única imputación defendible — y además
+hace que la serie se lea contra «hallazgos por mes», que usa el mismo criterio. Va en
+`costoMes` de cada frente, con el desglose por disciplina de cada mes.
+
+Se agrega redondeando a **dos decimales**, no a uno: la columna de origen no trae más de dos,
+así que a dos no se pierde nada y **la suma de los meses da exactamente el costo del frente**.
+A un decimal cada mes se redondeaba por su cuenta y la columna terminaba sumando un décimo más
+que el total, con la tabla del panel contradiciendo a la tarjeta del KPI. `auditoria_datos.py`
+comprueba las dos cuadraturas —los meses contra el frente, y las disciplinas contra su mes— y
+recuenta los tres estados desde el Excel.
+
+Un mes sin barra se rotula **«sin declarar»**, nunca «sin costo». Al corte hay 4 meses seguidos
+así (may-26 a ago-26): 45 hallazgos levantados y ninguno con monto.
 
 ---
 

@@ -7,8 +7,8 @@
   "hoy": "17-08-2026",
   "corte": "2026-08-17",
   "corteTexto": "17-08-2026",
-  "generado": "2026-08-17 13:16",
-  "fuente": "2da31d24-Data_NCR17082026.xlsx"
+  "generado": "2026-08-17 21:44",
+  "fuente": "Data_NCR17082026.xlsx"
  },
  "orden": [
   "DESALADORA",
@@ -790,6 +790,179 @@
     "2026-04": 2,
     "2026-05": 1,
     "2026-07": 1
+   },
+   "costoMes": {
+    "2025-02": {
+     "total": 3,
+     "costo": 118.31,
+     "conMonto": 2,
+     "enCero": 1,
+     "sinDeclarar": 0,
+     "porEspecialidad": {
+      "SUBCONTRATO": 112.11,
+      "OO.CC": 6.2
+     }
+    },
+    "2025-03": {
+     "total": 7,
+     "costo": 61.47,
+     "conMonto": 2,
+     "enCero": 4,
+     "sinDeclarar": 1,
+     "porEspecialidad": {
+      "OO.CC": 50.0,
+      "ADQUISICIONES": 11.47
+     }
+    },
+    "2025-04": {
+     "total": 6,
+     "costo": 53.0,
+     "conMonto": 1,
+     "enCero": 3,
+     "sinDeclarar": 2,
+     "porEspecialidad": {
+      "SUBCONTRATO": 53.0
+     }
+    },
+    "2025-05": {
+     "total": 24,
+     "costo": 30.0,
+     "conMonto": 1,
+     "enCero": 23,
+     "sinDeclarar": 0,
+     "porEspecialidad": {
+      "SUBCONTRATO": 30.0
+     }
+    },
+    "2025-06": {
+     "total": 5,
+     "costo": 112.0,
+     "conMonto": 4,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {
+      "ELÉCTRICA": 50.0,
+      "PROVEEDORES": 42.0,
+      "OO.CC": 20.0
+     }
+    },
+    "2025-07": {
+     "total": 4,
+     "costo": 22.0,
+     "conMonto": 1,
+     "enCero": 2,
+     "sinDeclarar": 1,
+     "porEspecialidad": {
+      "ELÉCTRICA": 22.0
+     }
+    },
+    "2025-08": {
+     "total": 2,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 1,
+     "sinDeclarar": 1,
+     "porEspecialidad": {}
+    },
+    "2025-09": {
+     "total": 4,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 2,
+     "sinDeclarar": 2,
+     "porEspecialidad": {}
+    },
+    "2025-10": {
+     "total": 2,
+     "costo": 20.0,
+     "conMonto": 1,
+     "enCero": 1,
+     "sinDeclarar": 0,
+     "porEspecialidad": {
+      "OO.CC": 20.0
+     }
+    },
+    "2025-11": {
+     "total": 4,
+     "costo": 130.0,
+     "conMonto": 2,
+     "enCero": 1,
+     "sinDeclarar": 1,
+     "porEspecialidad": {
+      "OO.CC": 80.0,
+      "PROVEEDORES": 50.0
+     }
+    },
+    "2025-12": {
+     "total": 6,
+     "costo": 93.0,
+     "conMonto": 4,
+     "enCero": 0,
+     "sinDeclarar": 2,
+     "porEspecialidad": {
+      "ELÉCTRICA": 73.0,
+      "INSTRUMENTACIÓN Y CONTROL": 20.0
+     }
+    },
+    "2026-01": {
+     "total": 5,
+     "costo": 168.0,
+     "conMonto": 3,
+     "enCero": 0,
+     "sinDeclarar": 2,
+     "porEspecialidad": {
+      "OO.CC": 120.0,
+      "ESTRUCTURA": 38.0,
+      "PIPING": 10.0
+     }
+    },
+    "2026-02": {
+     "total": 4,
+     "costo": 45.43,
+     "conMonto": 2,
+     "enCero": 0,
+     "sinDeclarar": 2,
+     "porEspecialidad": {
+      "INSTRUMENTACIÓN Y CONTROL": 40.43,
+      "ELÉCTRICA": 5.0
+     }
+    },
+    "2026-03": {
+     "total": 2,
+     "costo": 450.0,
+     "conMonto": 1,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 450.0
+     }
+    },
+    "2026-04": {
+     "total": 2,
+     "costo": 100.0,
+     "conMonto": 1,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {
+      "ELÉCTRICA": 100.0
+     }
+    },
+    "2026-05": {
+     "total": 1,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {}
+    },
+    "2026-07": {
+     "total": 1,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 1,
+     "sinDeclarar": 0,
+     "porEspecialidad": {}
+    }
    }
   },
   "TALABRE": {
@@ -1452,6 +1625,161 @@
     "2026-06": 11,
     "2026-07": 6,
     "2026-08": 4
+   },
+   "costoMes": {
+    "2025-05": {
+     "total": 5,
+     "costo": 99.5,
+     "conMonto": 3,
+     "enCero": 2,
+     "sinDeclarar": 0,
+     "porEspecialidad": {
+      "OO.CC": 90.0,
+      "GENERAL": 9.5
+     }
+    },
+    "2025-06": {
+     "total": 12,
+     "costo": 5.26,
+     "conMonto": 3,
+     "enCero": 7,
+     "sinDeclarar": 2,
+     "porEspecialidad": {
+      "OO.CC": 5.26
+     }
+    },
+    "2025-07": {
+     "total": 35,
+     "costo": 4010.0,
+     "conMonto": 3,
+     "enCero": 25,
+     "sinDeclarar": 7,
+     "porEspecialidad": {
+      "CALIDAD": 4000.0,
+      "OO.CC": 10.0
+     }
+    },
+    "2025-08": {
+     "total": 13,
+     "costo": 1.0,
+     "conMonto": 1,
+     "enCero": 10,
+     "sinDeclarar": 2,
+     "porEspecialidad": {
+      "OO.CC": 1.0
+     }
+    },
+    "2025-09": {
+     "total": 19,
+     "costo": 546.57,
+     "conMonto": 6,
+     "enCero": 11,
+     "sinDeclarar": 2,
+     "porEspecialidad": {
+      "OO.CC": 546.57
+     }
+    },
+    "2025-10": {
+     "total": 29,
+     "costo": 196.0,
+     "conMonto": 7,
+     "enCero": 11,
+     "sinDeclarar": 11,
+     "porEspecialidad": {
+      "OO.CC": 196.0
+     }
+    },
+    "2025-11": {
+     "total": 19,
+     "costo": 45.0,
+     "conMonto": 4,
+     "enCero": 5,
+     "sinDeclarar": 10,
+     "porEspecialidad": {
+      "OO.CC": 45.0
+     }
+    },
+    "2025-12": {
+     "total": 12,
+     "costo": 575.0,
+     "conMonto": 3,
+     "enCero": 4,
+     "sinDeclarar": 5,
+     "porEspecialidad": {
+      "OO.CC": 575.0
+     }
+    },
+    "2026-01": {
+     "total": 20,
+     "costo": 35.0,
+     "conMonto": 4,
+     "enCero": 2,
+     "sinDeclarar": 14,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 26.0,
+      "OO.CC": 9.0
+     }
+    },
+    "2026-02": {
+     "total": 19,
+     "costo": 175.0,
+     "conMonto": 5,
+     "enCero": 10,
+     "sinDeclarar": 4,
+     "porEspecialidad": {
+      "OO.CC": 175.0
+     }
+    },
+    "2026-03": {
+     "total": 16,
+     "costo": 130.0,
+     "conMonto": 4,
+     "enCero": 6,
+     "sinDeclarar": 6,
+     "porEspecialidad": {
+      "OO.CC": 130.0
+     }
+    },
+    "2026-04": {
+     "total": 11,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 2,
+     "sinDeclarar": 9,
+     "porEspecialidad": {}
+    },
+    "2026-05": {
+     "total": 13,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 1,
+     "sinDeclarar": 12,
+     "porEspecialidad": {}
+    },
+    "2026-06": {
+     "total": 11,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 3,
+     "sinDeclarar": 8,
+     "porEspecialidad": {}
+    },
+    "2026-07": {
+     "total": 6,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 6,
+     "porEspecialidad": {}
+    },
+    "2026-08": {
+     "total": 4,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 1,
+     "sinDeclarar": 3,
+     "porEspecialidad": {}
+    }
    }
   },
   "ARQUEROS": {
@@ -2180,6 +2508,219 @@
     "2026-05": 5,
     "2026-06": 3,
     "2026-07": 1
+   },
+   "costoMes": {
+    "2024-05": {
+     "total": 1,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 1,
+     "sinDeclarar": 0,
+     "porEspecialidad": {}
+    },
+    "2024-10": {
+     "total": 2,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 2,
+     "sinDeclarar": 0,
+     "porEspecialidad": {}
+    },
+    "2024-11": {
+     "total": 9,
+     "costo": 52.0,
+     "conMonto": 1,
+     "enCero": 0,
+     "sinDeclarar": 8,
+     "porEspecialidad": {
+      "OO.CC": 52.0
+     }
+    },
+    "2024-12": {
+     "total": 2,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 1,
+     "sinDeclarar": 1,
+     "porEspecialidad": {}
+    },
+    "2025-01": {
+     "total": 13,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 13,
+     "porEspecialidad": {}
+    },
+    "2025-02": {
+     "total": 8,
+     "costo": 252.6,
+     "conMonto": 5,
+     "enCero": 0,
+     "sinDeclarar": 3,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 200.0,
+      "OO.CC": 52.6
+     }
+    },
+    "2025-03": {
+     "total": 5,
+     "costo": 200.0,
+     "conMonto": 4,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 200.0
+     }
+    },
+    "2025-04": {
+     "total": 10,
+     "costo": 300.0,
+     "conMonto": 6,
+     "enCero": 0,
+     "sinDeclarar": 4,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 300.0
+     }
+    },
+    "2025-05": {
+     "total": 7,
+     "costo": 450.0,
+     "conMonto": 7,
+     "enCero": 0,
+     "sinDeclarar": 0,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 300.0,
+      "SUBCONTRATO": 150.0
+     }
+    },
+    "2025-06": {
+     "total": 5,
+     "costo": 940.0,
+     "conMonto": 5,
+     "enCero": 0,
+     "sinDeclarar": 0,
+     "porEspecialidad": {
+      "SUBCONTRATO": 790.0,
+      "EXPEDITORÍA": 150.0
+     }
+    },
+    "2025-07": {
+     "total": 10,
+     "costo": 350.0,
+     "conMonto": 4,
+     "enCero": 0,
+     "sinDeclarar": 6,
+     "porEspecialidad": {
+      "SUBCONTRATO": 200.0,
+      "EXPEDITORÍA": 150.0
+     }
+    },
+    "2025-08": {
+     "total": 14,
+     "costo": 210.0,
+     "conMonto": 5,
+     "enCero": 0,
+     "sinDeclarar": 9,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 200.0,
+      "OO.CC": 10.0
+     }
+    },
+    "2025-09": {
+     "total": 10,
+     "costo": 200.0,
+     "conMonto": 1,
+     "enCero": 0,
+     "sinDeclarar": 9,
+     "porEspecialidad": {
+      "EXPEDITORÍA": 200.0
+     }
+    },
+    "2025-10": {
+     "total": 9,
+     "costo": 190.64,
+     "conMonto": 1,
+     "enCero": 0,
+     "sinDeclarar": 8,
+     "porEspecialidad": {
+      "OO.CC": 190.64
+     }
+    },
+    "2025-11": {
+     "total": 6,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 6,
+     "porEspecialidad": {}
+    },
+    "2025-12": {
+     "total": 6,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 6,
+     "porEspecialidad": {}
+    },
+    "2026-01": {
+     "total": 15,
+     "costo": 246.58,
+     "conMonto": 1,
+     "enCero": 0,
+     "sinDeclarar": 14,
+     "porEspecialidad": {
+      "OO.CC": 246.58
+     }
+    },
+    "2026-02": {
+     "total": 6,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 6,
+     "porEspecialidad": {}
+    },
+    "2026-03": {
+     "total": 11,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 11,
+     "porEspecialidad": {}
+    },
+    "2026-04": {
+     "total": 6,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 6,
+     "porEspecialidad": {}
+    },
+    "2026-05": {
+     "total": 5,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 5,
+     "porEspecialidad": {}
+    },
+    "2026-06": {
+     "total": 3,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 3,
+     "porEspecialidad": {}
+    },
+    "2026-07": {
+     "total": 1,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {}
+    }
    }
   },
   "OFICINA": {
@@ -2466,6 +3007,40 @@
     "2024-10": 1,
     "2024-11": 3,
     "2025-12": 1
+   },
+   "costoMes": {
+    "2023-02": {
+     "total": 3,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 3,
+     "porEspecialidad": {}
+    },
+    "2024-10": {
+     "total": 1,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {}
+    },
+    "2024-11": {
+     "total": 3,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 3,
+     "porEspecialidad": {}
+    },
+    "2025-12": {
+     "total": 1,
+     "costo": 0.0,
+     "conMonto": 0,
+     "enCero": 0,
+     "sinDeclarar": 1,
+     "porEspecialidad": {}
+    }
    }
   }
  },
@@ -3461,6 +4036,267 @@
    "2026-06": 14,
    "2026-07": 8,
    "2026-08": 4
+  },
+  "costoMes": {
+   "2023-02": {
+    "total": 3,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 0,
+    "sinDeclarar": 3,
+    "porEspecialidad": {}
+   },
+   "2024-05": {
+    "total": 1,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 0,
+    "porEspecialidad": {}
+   },
+   "2024-10": {
+    "total": 3,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 2,
+    "sinDeclarar": 1,
+    "porEspecialidad": {}
+   },
+   "2024-11": {
+    "total": 12,
+    "costo": 52.0,
+    "conMonto": 1,
+    "enCero": 0,
+    "sinDeclarar": 11,
+    "porEspecialidad": {
+     "OO.CC": 52.0
+    }
+   },
+   "2024-12": {
+    "total": 2,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 1,
+    "porEspecialidad": {}
+   },
+   "2025-01": {
+    "total": 13,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 0,
+    "sinDeclarar": 13,
+    "porEspecialidad": {}
+   },
+   "2025-02": {
+    "total": 11,
+    "costo": 370.91,
+    "conMonto": 7,
+    "enCero": 1,
+    "sinDeclarar": 3,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 200.0,
+     "SUBCONTRATO": 112.11,
+     "OO.CC": 58.8
+    }
+   },
+   "2025-03": {
+    "total": 12,
+    "costo": 261.47,
+    "conMonto": 6,
+    "enCero": 4,
+    "sinDeclarar": 2,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 200.0,
+     "OO.CC": 50.0,
+     "ADQUISICIONES": 11.47
+    }
+   },
+   "2025-04": {
+    "total": 16,
+    "costo": 353.0,
+    "conMonto": 7,
+    "enCero": 3,
+    "sinDeclarar": 6,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 300.0,
+     "SUBCONTRATO": 53.0
+    }
+   },
+   "2025-05": {
+    "total": 36,
+    "costo": 579.5,
+    "conMonto": 11,
+    "enCero": 25,
+    "sinDeclarar": 0,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 300.0,
+     "SUBCONTRATO": 180.0,
+     "OO.CC": 90.0,
+     "GENERAL": 9.5
+    }
+   },
+   "2025-06": {
+    "total": 22,
+    "costo": 1057.26,
+    "conMonto": 12,
+    "enCero": 7,
+    "sinDeclarar": 3,
+    "porEspecialidad": {
+     "SUBCONTRATO": 790.0,
+     "EXPEDITORÍA": 150.0,
+     "ELÉCTRICA": 50.0,
+     "PROVEEDORES": 42.0,
+     "OO.CC": 25.26
+    }
+   },
+   "2025-07": {
+    "total": 49,
+    "costo": 4382.0,
+    "conMonto": 8,
+    "enCero": 27,
+    "sinDeclarar": 14,
+    "porEspecialidad": {
+     "CALIDAD": 4000.0,
+     "SUBCONTRATO": 200.0,
+     "EXPEDITORÍA": 150.0,
+     "ELÉCTRICA": 22.0,
+     "OO.CC": 10.0
+    }
+   },
+   "2025-08": {
+    "total": 29,
+    "costo": 211.0,
+    "conMonto": 6,
+    "enCero": 11,
+    "sinDeclarar": 12,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 200.0,
+     "OO.CC": 11.0
+    }
+   },
+   "2025-09": {
+    "total": 33,
+    "costo": 746.57,
+    "conMonto": 7,
+    "enCero": 13,
+    "sinDeclarar": 13,
+    "porEspecialidad": {
+     "OO.CC": 546.57,
+     "EXPEDITORÍA": 200.0
+    }
+   },
+   "2025-10": {
+    "total": 40,
+    "costo": 406.64,
+    "conMonto": 9,
+    "enCero": 12,
+    "sinDeclarar": 19,
+    "porEspecialidad": {
+     "OO.CC": 406.64
+    }
+   },
+   "2025-11": {
+    "total": 29,
+    "costo": 175.0,
+    "conMonto": 6,
+    "enCero": 6,
+    "sinDeclarar": 17,
+    "porEspecialidad": {
+     "OO.CC": 125.0,
+     "PROVEEDORES": 50.0
+    }
+   },
+   "2025-12": {
+    "total": 25,
+    "costo": 668.0,
+    "conMonto": 7,
+    "enCero": 4,
+    "sinDeclarar": 14,
+    "porEspecialidad": {
+     "OO.CC": 575.0,
+     "ELÉCTRICA": 73.0,
+     "INSTRUMENTACIÓN Y CONTROL": 20.0
+    }
+   },
+   "2026-01": {
+    "total": 40,
+    "costo": 449.58,
+    "conMonto": 8,
+    "enCero": 2,
+    "sinDeclarar": 30,
+    "porEspecialidad": {
+     "OO.CC": 375.58,
+     "ESTRUCTURA": 38.0,
+     "EXPEDITORÍA": 26.0,
+     "PIPING": 10.0
+    }
+   },
+   "2026-02": {
+    "total": 29,
+    "costo": 220.43,
+    "conMonto": 7,
+    "enCero": 10,
+    "sinDeclarar": 12,
+    "porEspecialidad": {
+     "OO.CC": 175.0,
+     "INSTRUMENTACIÓN Y CONTROL": 40.43,
+     "ELÉCTRICA": 5.0
+    }
+   },
+   "2026-03": {
+    "total": 29,
+    "costo": 580.0,
+    "conMonto": 5,
+    "enCero": 6,
+    "sinDeclarar": 18,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 450.0,
+     "OO.CC": 130.0
+    }
+   },
+   "2026-04": {
+    "total": 19,
+    "costo": 100.0,
+    "conMonto": 1,
+    "enCero": 2,
+    "sinDeclarar": 16,
+    "porEspecialidad": {
+     "ELÉCTRICA": 100.0
+    }
+   },
+   "2026-05": {
+    "total": 19,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 18,
+    "porEspecialidad": {}
+   },
+   "2026-06": {
+    "total": 14,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 3,
+    "sinDeclarar": 11,
+    "porEspecialidad": {}
+   },
+   "2026-07": {
+    "total": 8,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 7,
+    "porEspecialidad": {}
+   },
+   "2026-08": {
+    "total": 4,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 3,
+    "porEspecialidad": {}
+   }
   }
  },
  "obra": {
@@ -4453,6 +5289,259 @@
    "2026-06": 14,
    "2026-07": 8,
    "2026-08": 4
+  },
+  "costoMes": {
+   "2024-05": {
+    "total": 1,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 0,
+    "porEspecialidad": {}
+   },
+   "2024-10": {
+    "total": 2,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 2,
+    "sinDeclarar": 0,
+    "porEspecialidad": {}
+   },
+   "2024-11": {
+    "total": 9,
+    "costo": 52.0,
+    "conMonto": 1,
+    "enCero": 0,
+    "sinDeclarar": 8,
+    "porEspecialidad": {
+     "OO.CC": 52.0
+    }
+   },
+   "2024-12": {
+    "total": 2,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 1,
+    "porEspecialidad": {}
+   },
+   "2025-01": {
+    "total": 13,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 0,
+    "sinDeclarar": 13,
+    "porEspecialidad": {}
+   },
+   "2025-02": {
+    "total": 11,
+    "costo": 370.91,
+    "conMonto": 7,
+    "enCero": 1,
+    "sinDeclarar": 3,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 200.0,
+     "SUBCONTRATO": 112.11,
+     "OO.CC": 58.8
+    }
+   },
+   "2025-03": {
+    "total": 12,
+    "costo": 261.47,
+    "conMonto": 6,
+    "enCero": 4,
+    "sinDeclarar": 2,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 200.0,
+     "OO.CC": 50.0,
+     "ADQUISICIONES": 11.47
+    }
+   },
+   "2025-04": {
+    "total": 16,
+    "costo": 353.0,
+    "conMonto": 7,
+    "enCero": 3,
+    "sinDeclarar": 6,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 300.0,
+     "SUBCONTRATO": 53.0
+    }
+   },
+   "2025-05": {
+    "total": 36,
+    "costo": 579.5,
+    "conMonto": 11,
+    "enCero": 25,
+    "sinDeclarar": 0,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 300.0,
+     "SUBCONTRATO": 180.0,
+     "OO.CC": 90.0,
+     "GENERAL": 9.5
+    }
+   },
+   "2025-06": {
+    "total": 22,
+    "costo": 1057.26,
+    "conMonto": 12,
+    "enCero": 7,
+    "sinDeclarar": 3,
+    "porEspecialidad": {
+     "SUBCONTRATO": 790.0,
+     "EXPEDITORÍA": 150.0,
+     "ELÉCTRICA": 50.0,
+     "PROVEEDORES": 42.0,
+     "OO.CC": 25.26
+    }
+   },
+   "2025-07": {
+    "total": 49,
+    "costo": 4382.0,
+    "conMonto": 8,
+    "enCero": 27,
+    "sinDeclarar": 14,
+    "porEspecialidad": {
+     "CALIDAD": 4000.0,
+     "SUBCONTRATO": 200.0,
+     "EXPEDITORÍA": 150.0,
+     "ELÉCTRICA": 22.0,
+     "OO.CC": 10.0
+    }
+   },
+   "2025-08": {
+    "total": 29,
+    "costo": 211.0,
+    "conMonto": 6,
+    "enCero": 11,
+    "sinDeclarar": 12,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 200.0,
+     "OO.CC": 11.0
+    }
+   },
+   "2025-09": {
+    "total": 33,
+    "costo": 746.57,
+    "conMonto": 7,
+    "enCero": 13,
+    "sinDeclarar": 13,
+    "porEspecialidad": {
+     "OO.CC": 546.57,
+     "EXPEDITORÍA": 200.0
+    }
+   },
+   "2025-10": {
+    "total": 40,
+    "costo": 406.64,
+    "conMonto": 9,
+    "enCero": 12,
+    "sinDeclarar": 19,
+    "porEspecialidad": {
+     "OO.CC": 406.64
+    }
+   },
+   "2025-11": {
+    "total": 29,
+    "costo": 175.0,
+    "conMonto": 6,
+    "enCero": 6,
+    "sinDeclarar": 17,
+    "porEspecialidad": {
+     "OO.CC": 125.0,
+     "PROVEEDORES": 50.0
+    }
+   },
+   "2025-12": {
+    "total": 24,
+    "costo": 668.0,
+    "conMonto": 7,
+    "enCero": 4,
+    "sinDeclarar": 13,
+    "porEspecialidad": {
+     "OO.CC": 575.0,
+     "ELÉCTRICA": 73.0,
+     "INSTRUMENTACIÓN Y CONTROL": 20.0
+    }
+   },
+   "2026-01": {
+    "total": 40,
+    "costo": 449.58,
+    "conMonto": 8,
+    "enCero": 2,
+    "sinDeclarar": 30,
+    "porEspecialidad": {
+     "OO.CC": 375.58,
+     "ESTRUCTURA": 38.0,
+     "EXPEDITORÍA": 26.0,
+     "PIPING": 10.0
+    }
+   },
+   "2026-02": {
+    "total": 29,
+    "costo": 220.43,
+    "conMonto": 7,
+    "enCero": 10,
+    "sinDeclarar": 12,
+    "porEspecialidad": {
+     "OO.CC": 175.0,
+     "INSTRUMENTACIÓN Y CONTROL": 40.43,
+     "ELÉCTRICA": 5.0
+    }
+   },
+   "2026-03": {
+    "total": 29,
+    "costo": 580.0,
+    "conMonto": 5,
+    "enCero": 6,
+    "sinDeclarar": 18,
+    "porEspecialidad": {
+     "EXPEDITORÍA": 450.0,
+     "OO.CC": 130.0
+    }
+   },
+   "2026-04": {
+    "total": 19,
+    "costo": 100.0,
+    "conMonto": 1,
+    "enCero": 2,
+    "sinDeclarar": 16,
+    "porEspecialidad": {
+     "ELÉCTRICA": 100.0
+    }
+   },
+   "2026-05": {
+    "total": 19,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 18,
+    "porEspecialidad": {}
+   },
+   "2026-06": {
+    "total": 14,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 3,
+    "sinDeclarar": 11,
+    "porEspecialidad": {}
+   },
+   "2026-07": {
+    "total": 8,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 7,
+    "porEspecialidad": {}
+   },
+   "2026-08": {
+    "total": 4,
+    "costo": 0.0,
+    "conMonto": 0,
+    "enCero": 1,
+    "sinDeclarar": 3,
+    "porEspecialidad": {}
+   }
   }
  },
  "tipos": [
@@ -5461,6 +6550,8 @@
    "Opción de Mejora"
   ],
   "sinCosto": 247,
+  "costoConMonto": 108,
+  "costoEnCero": 143,
   "sinEspecialidad": 79,
   "externasCliente": {
    "registros": 71,

@@ -420,6 +420,58 @@ def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
 
 
 # =============================================================================
+def costo_mensual(items):
+    """Costo declarado, mes a mes y por disciplina.
+
+    **El costo se imputa al mes en que se levantó la NC**, no al mes en que se
+    cerró. Es la única fecha que la fuente asocia al monto —la columna «Costo De
+    La No Conformidad» no trae fecha propia— y así esta serie se lee contra
+    `porMes`, que cuenta los hallazgos del mismo mes con el mismo criterio.
+
+    Tres cosas distintas que no se pueden mezclar, y por eso van en campos
+    separados:
+
+    * **`conMonto`** — la NC declara un costo mayor que cero.
+    * **`enCero`** — la NC declara costo **0**. Es una afirmación: no costó.
+    * **`sinDeclarar`** — la casilla viene vacía. No se sabe.
+
+    Sumar los dos últimos en un solo «sin costo» haría leer como gratis lo que
+    solo está sin medir. Al corte 17-08-2026 son 110, 141 y 247 de 498: la mayor
+    parte del registro **no tiene el dato**, así que la serie es un piso del
+    costo real, nunca el costo real. El panel lo declara mes a mes.
+    """
+    meses = {}
+    for i in items:
+        if not i["creada"]:
+            continue
+        m = meses.setdefault(i["creada"].strftime("%Y-%m"), {
+            "total": 0, "costo": 0.0, "conMonto": 0, "enCero": 0,
+            "sinDeclarar": 0, "porEspecialidad": {},
+        })
+        m["total"] += 1
+        c = i["costo"]
+        if not isinstance(c, (int, float)):
+            m["sinDeclarar"] += 1
+        elif c > 0:
+            m["costo"] += c
+            m["conMonto"] += 1
+            e = i["especialidad"]
+            m["porEspecialidad"][e] = m["porEspecialidad"].get(e, 0.0) + c
+        else:
+            m["enCero"] += 1
+    # Se redondea a DOS decimales, no a uno. La columna de origen no trae más
+    # de dos, así que a dos el redondeo no pierde nada y la suma de los meses
+    # da exactamente el costo del frente. A un decimal no: cada mes se redondea
+    # por su cuenta y la columna terminaba sumando un décimo más que el total
+    # —la tabla del panel contradecía a la tarjeta del KPI—.
+    for m in meses.values():
+        m["costo"] = round(m["costo"], 2)
+        m["porEspecialidad"] = dict(sorted(
+            ((e, round(v, 2)) for e, v in m["porEspecialidad"].items()),
+            key=lambda x: -x[1]))
+    return dict(sorted(meses.items()))
+
+# =============================================================================
 def resumir(items):
     ab = [i for i in items if i["estado"] == ABIERTA]
     cer = [i for i in items if i["estado"] == CERRADA]
@@ -603,6 +655,8 @@ def construir(items, hoy, fuente):
             "semana": novedades(sub),
             "porMes": dict(sorted(Counter(i["creada"].strftime("%Y-%m")
                                           for i in sub if i["creada"]).items())),
+            # Costo mes a mes y por disciplina, imputado al mes de emisión.
+            "costoMes": costo_mensual(sub),
         }
 
     datos = {
@@ -676,7 +730,14 @@ def construir(items, hoy, fuente):
         "excluidosPorProyecto": {meta_p[k]["nombre"]: n
                                  for k, n in excluidos_proy.most_common()},
         "tiposExcluidos": TIPOS_EXCLUIDOS,
+        # Costo: tres estados, no dos. Una NC que declara 0 afirma que no
+        # costó; una con la casilla vacía no dice nada. Juntarlas haría leer
+        # como gratis lo que solo está sin medir.
         "sinCosto": sum(1 for i in items if i["costo"] is None),
+        "costoConMonto": sum(1 for i in items
+                             if isinstance(i["costo"], (int, float)) and i["costo"] > 0),
+        "costoEnCero": sum(1 for i in items
+                           if isinstance(i["costo"], (int, float)) and not i["costo"]),
         "sinEspecialidad": sum(1 for i in items if i["especialidad"] == "Sin especialidad"),
         # Las NC del cliente vienen de su propia planilla, que no registra
         # disciplina, responsable ni costo. Se declara para que no parezca
