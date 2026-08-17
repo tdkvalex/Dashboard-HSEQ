@@ -96,6 +96,15 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   estado, en el bloque `componentes` del JSON y en «Control de calidad del dato».
   *Lo pidió Juan Vergara, jefe de calidad del proyecto (30-07-2026), y el usuario lo aprobó.*
   La constante es `FUERA_DEL_UNIVERSO` en `desaladora.py`.
+- **Desaladora: el corte lo manda el REPORTE, los atrasos los manda el punch list.**
+  Los dos archivos no vienen a la misma fecha: el REPORTE declara el corte oficial del
+  proyecto (`meta.corte`) y el punch list suele ser posterior, porque se exporta el día que se
+  arma el informe. El estado de cada ítem —cerrado o abierto— sale del punch, que es el más
+  reciente, así que **el atraso se mide contra la fecha del punch** (`meta.hoy`, se pasa con
+  `--hoy`), no contra la del reporte. La PPT lo dice en el pie: «Corte 11-08-2026 · Atrasos al
+  17-08-2026». *Pedido por el usuario (17-08-2026).*
+  Al corte 17-08 el ajuste no movió ninguna cifra —ningún abierto vencía en esos 6 días—,
+  pero en una semana con vencimientos sí cambia los atrasados.
 - **Detalles de terminación = punch list = DT.** Mismo concepto, se suman.
 - **El % de cierre de detalles se mide sobre P1+P2, no sobre todas las prioridades.**
   Los P3 y P4 no se abordan mientras el cliente no formalice su ejecución, así que

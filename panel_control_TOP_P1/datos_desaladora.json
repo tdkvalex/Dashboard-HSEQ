@@ -8,8 +8,8 @@
   "contrato": "VPP-1001-03-CC-088",
   "corte": "2026-08-11",
   "corteTexto": "11-08-2026",
-  "hoy": "11-08-2026",
-  "generado": "2026-08-17 13:48"
+  "hoy": "17-08-2026",
+  "generado": "2026-08-17 13:53"
  },
  "subsistemas": {
   "total": 95,
@@ -1204,12 +1204,12 @@
   "antiguedad": {
    "tramos": {
     "1-30 días": 0,
-    "31-90 días": 157,
-    "91-180 días": 3,
+    "31-90 días": 145,
+    "91-180 días": 15,
     ">180 días": 0
    },
-   "max": 93,
-   "mediana": 37
+   "max": 99,
+   "mediana": 43
   },
   "topSubsistemas": [
    {
