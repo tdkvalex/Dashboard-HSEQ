@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-24 13:47",
+ "generado": "2026-08-24 14:35",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -7,24 +7,24 @@
    "nombre": "Desaladora",
    "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
-    "kpi": 0,
-    "universo": 18147,
-    "enFalta": 3,
-    "avance": 11010,
-    "remanente": 7134,
-    "base": 11013,
+    "kpi": 0.1,
+    "universo": 18352,
+    "enFalta": 8,
+    "avance": 11387,
+    "remanente": 6957,
+    "base": 11395,
     "estados": {
-     "S": 7134,
-     "C": 9779,
-     "P": 0,
-     "AP": 3,
-     "AE": 1231,
+     "S": 6957,
+     "C": 10098,
+     "P": 8,
+     "AP": 0,
+     "AE": 1289,
      "rv": 0
     },
-    "actualizado": "17-ago-2026",
+    "actualizado": "24-ago-2026",
     "sem": [
      "good",
-     "Cumple"
+     "Aceptable"
     ]
    },
    "qaqc": "DES",
@@ -92,21 +92,21 @@
    "nombre": "Talabre",
    "cliente": "CODELCO",
    "protocolos": {
-    "kpi": 2,
-    "universo": 14449,
-    "enFalta": 243,
-    "avance": 11807,
-    "remanente": 1664,
-    "base": 12050,
+    "kpi": 1.1,
+    "universo": 14153,
+    "enFalta": 140,
+    "avance": 12344,
+    "remanente": 1155,
+    "base": 12484,
     "estados": {
-     "S": 1664,
-     "C": 11251,
-     "P": 34,
-     "AP": 209,
-     "AE": 556,
-     "rv": 735
+     "S": 1155,
+     "C": 11803,
+     "P": 31,
+     "AP": 109,
+     "AE": 541,
+     "rv": 514
     },
-    "actualizado": "17-ago-2026",
+    "actualizado": "24-ago-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -178,20 +178,20 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.1,
-    "universo": 24798,
-    "enFalta": 13,
-    "avance": 18378,
-    "remanente": 6407,
-    "base": 18391,
+    "universo": 24754,
+    "enFalta": 14,
+    "avance": 18855,
+    "remanente": 5885,
+    "base": 18869,
     "estados": {
-     "S": 6407,
-     "C": 15098,
-     "P": 10,
+     "S": 5885,
+     "C": 15204,
+     "P": 11,
      "AP": 3,
-     "AE": 3280,
+     "AE": 3651,
      "rv": 0
     },
-    "actualizado": "17-ago-2026",
+    "actualizado": "24-ago-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -259,13 +259,13 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 57394,
-   "enFalta": 259,
-   "avance": 41195,
-   "remanente": 15205,
-   "base": 41454,
-   "actualizado": "17-ago-2026",
-   "kpi": 0.6
+   "universo": 57259,
+   "enFalta": 162,
+   "avance": 42586,
+   "remanente": 13997,
+   "base": 42748,
+   "actualizado": "24-ago-2026",
+   "kpi": 0.4
   },
   "cierre": {
    "activo": true,
