@@ -122,7 +122,12 @@ function leerCierre() {
       const d = v[v.vigente]; if (d) { r += d.realizada; a += d.aplica; }
     }
     const p1 = X.punch.porCategoria.P1;
-    out.DES = { corte: X.meta.hoy, subs: X.subsistemas.total,
+    // El corte de Desaladora es el que declara el REPORTE GERENCIAL
+    // (`corteTexto`), NO `meta.hoy`, que es la fecha contra la que se calculan
+    // los atrasos. Al corte 24-08-2026 la portada anunciaba Desaladora al 24-08
+    // cuando su reporte declara el 18-08. Es el mismo error que ya se había
+    // corregido dentro del panel; aquí había quedado vivo.
+    out.DES = { corte: X.meta.corteTexto, subs: X.subsistemas.total,
       cam: { realizada: r, aplica: a },
       p1: { total: p1.total, cerrados: p1.cerrados, abiertos: p1.abiertos, atrasados: p1.atrasados },
       det: X.punch.global,
@@ -130,7 +135,10 @@ function leerCierre() {
   }
   if (Y) {
     const p1 = Y.dt.porPrioridad.P1;
-    out.TAL = { corte: Y.meta.hoy, subs: Y.subsistemas.total,
+    // Talabre sí declara su corte en `hoy` —su archivo de STATUS no trae una
+    // fecha propia—, pero `talabre.py` lo copia a `corteTexto`, así que los
+    // cuatro módulos se leen del mismo campo.
+    out.TAL = { corte: Y.meta.corteTexto, subs: Y.subsistemas.total,
       cam: { realizada: Y.caminatas["2"].realizada, aplica: Y.caminatas["2"].total },
       p1: { total: p1.total, cerrados: p1.cerrados, abiertos: p1.abiertos, atrasados: p1.atrasados },
       det: Y.dt.global,
@@ -151,7 +159,7 @@ function leerNC() {
   // Oficina Central genera NC pero no es obra: se guarda aparte para no
   // mezclarla con los tres proyectos en la matriz de la portada.
   return { proyectos: out, global: J.global.resumen, obra: J.obra.resumen,
-           corte: J.meta.hoy, control: J.control };
+           corte: J.meta.corteTexto, control: J.control };
 }
 
 // ---------------------------------------------------------------- semáforos

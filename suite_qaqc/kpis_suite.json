@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-24 14:35",
+ "generado": "2026-08-24 14:48",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -29,7 +29,7 @@
    },
    "qaqc": "DES",
    "cierre": {
-    "corte": "24-08-2026",
+    "corte": "18-08-2026",
     "subs": 95,
     "cam": {
      "realizada": 57,

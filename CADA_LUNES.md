@@ -74,6 +74,12 @@ cada vez que llegue uno nuevo.** Si se pierde, la suite no se puede armar hasta
 que ese equipo lo reenvíe — y desde este corte el generador se detiene en vez de
 publicar Protocolos en 0 %, que se lee como «sin avance» y no como «sin dato».
 
+**El corte de la portada sale de `corteTexto`, no de `hoy`.** Son cosas distintas: `hoy` es
+la fecha contra la que se calculan los atrasos y `corteTexto` la que declara el archivo de
+origen. En Desaladora se separan —el REPORTE puede venir de días antes— y `armar_suite.js`
+estaba anunciando el 24-08 cuando el reporte declaraba el 18-08. Los cuatro módulos se leen
+ahora del mismo campo.
+
 **Si se reprocesa un corte pasado, va `--corte`.** La ventana de «levantados en la
 última semana» y los días de atraso se cuentan contra esa fecha; sin el parámetro
 se usa el día en que se corre.
