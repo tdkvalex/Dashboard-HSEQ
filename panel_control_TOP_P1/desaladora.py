@@ -21,7 +21,8 @@ REPORTE GERENCIAL · hoja «REPORTE GERENCIAL» (encabezado fila 10, datos fila 
     col E  Zona (Desaladora / EB-2)   col G  Caminata 1   col I  Caminata 2
     col K  Caminata 3                 col AG Estatus del certificado (carpeta)
 
-PUNCH LIST · hoja «LISTADO PUNCH ITEMS» (encabezado fila 8, datos fila 9+)
+PUNCH LIST · la hoja y las columnas se resuelven por NOMBRE de encabezado:
+             el archivo ya cambió de formato una vez (ver COLS_PUNCH)
     col B  Nº Caminata      col G  Subsistema      col H  Disciplina
     col J  Categoría        col P  Fecha Requerida Cierre     col W  STATUS
 
@@ -117,6 +118,12 @@ DISC_CORTA = {"Instrumentación y Control": "Instr. y Control",
 
 DISC_MAP = {
     "electrica": "Eléctrica",
+    # El export nuevo del punch escribe la disciplina en masculino plural y
+    # mete «ESTRUCTURAL» junto a «ESTRUCTURA». Sin estas dos, 221 ítems caían
+    # en «Otras» y Eléctrica aparecía con 915 en vez de 1.135.
+    "electricos": "Eléctrica",
+    "electrico": "Eléctrica",
+    "estructural": "Estructura",
     "piping": "Piping",
     "canerias": "Piping",
     "oo.cc": "Obras Civiles",
@@ -154,6 +161,14 @@ ZONA_NOMBRES = {"Desaladora": "Planta Desaladora", "EB-2": "Estación de Bombeo 
 # por la hoja «Resumen general» del propio archivo, que declara 80 operables y
 # 15 facility: el universo es 95, no 97.
 FUERA_DEL_UNIVERSO = {"Componente"}
+
+# Un componente se reconoce TAMBIÉN por su código, no solo por su tipo. En el
+# reporte del 18-08-2026 los tres componentes seguían ahí —«0587-ESL-201 Comp 1»
+# y compañía— pero el proyecto les cambió el tipo de «Componente» a «Operable»:
+# la regla, que miraba solo el tipo, dejó de verlos y el universo pasó de 95 a
+# 98 sin que nada avisara. El código es lo que no cambia, así que manda él y el
+# reetiquetado se informa.
+RE_COMPONENTE = re.compile(r"[\s\-_]+comp\.?\s*\d*\s*$", re.I)
 
 avisos = []
 
@@ -305,24 +320,90 @@ def leer_reporte(ruta):
 # =============================================================================
 # 2) PUNCH LIST — detalles de terminación
 # =============================================================================
+# Nombres con que cada columna del punch ha llegado hasta ahora. El primero que
+# aparezca gana. Se buscan por nombre y no por posición porque el archivo YA
+# cambió de formato: el export del 17-08-2026 22:13 llega con la hoja
+# «Worksheet» en vez de «LISTADO PUNCH ITEMS», sin la columna «Foto» ni las de
+# número de proyecto, y con sistema, subsistema, disciplina, categoría y fecha
+# requerida corridas una o dos columnas. Con índices fijos, ese archivo se leía
+# entero pero con los datos cambiados de sitio, sin que nada avisara.
+COLS_PUNCH = {
+    "item":  ("punch item", "punch items", "punch itms"),
+    "cam":   ("caminata", "nº caminata", "n° caminata", "no caminata", "n caminata"),
+    "area":  ("sistema / facility", "sistema/facility", "sistema"),
+    "sub":   ("subsistema",),
+    "disc":  ("disciplina",),
+    "cat":   ("categoria",),
+    "freq":  ("fecha requerida cierre", "fecha requerida de cierre"),
+    "resp":  ("contratista responsable", "responsable"),
+    "estado": ("status", "estado"),
+}
+# Sin estas no se puede leer la hoja; el resto se puede echar de menos y seguir.
+PUNCH_MINIMO = ("item", "sub", "disc", "cat", "estado")
+
+
+def hoja_punch(wb, ruta, max_filas=15):
+    """Encuentra la hoja del punch y su encabezado por CONTENIDO.
+
+    Devuelve (hoja, nº de fila del encabezado, {clave: índice}). Recorre las
+    hojas y se queda con la primera cuya cabecera trae las columnas mínimas.
+    """
+    for ws in wb.worksheets:
+        for nf, fila in enumerate(ws.iter_rows(min_row=1, max_row=max_filas,
+                                               values_only=True), 1):
+            enc = {norm(v).rstrip(".:"): i for i, v in enumerate(fila) if v not in (None, "")}
+            if not enc:
+                continue
+            c = {}
+            for clave, nombres in COLS_PUNCH.items():
+                for n in nombres:
+                    if n in enc:
+                        c[clave] = enc[n]
+                        break
+            if all(k in c for k in PUNCH_MINIMO):
+                faltan = [k for k in COLS_PUNCH if k not in c]
+                if faltan:
+                    avisos.append(f"El punch list no trae columna para {', '.join(faltan)}: "
+                                  f"esos campos quedan vacíos")
+                return ws, nf, c
+    sys.exit(f"«{Path(ruta).name}» no parece un listado de punch: ninguna hoja trae "
+             f"las columnas {', '.join(PUNCH_MINIMO)}. "
+             f"Hojas: {', '.join(wb.sheetnames[:8])}")
+
+
+def codigo(v, vacio):
+    """Código de subsistema o área, sin la descripción que lo sigue.
+
+    El export nuevo escribe «0583-WR-206 PRE-FILTROS UF 3» donde el anterior
+    ponía solo «0583-WR-206», y el REPORTE GERENCIAL usa el código pelado: sin
+    recortar, NINGÚN subsistema del punch cruzaba con el reporte y los 98
+    aparecían como huérfanos. El código es el primer token; en el formato
+    viejo el valor entero ya era el código, así que recortar no le hace nada.
+    """
+    t = str(v).strip() if v not in (None, "") else ""
+    return t.split()[0] if t else vacio
+
+
 def leer_punch(ruta, hoy):
     wb = libro(ruta)
-    ws = hoja(wb, "LISTADO PUNCH ITEMS", ruta)
+    ws, nf, c = hoja_punch(wb, ruta)
+    val = lambda f, k: (f[c[k]] if k in c and c[k] < len(f) else None)
 
     items = []
-    for f in ws.iter_rows(min_row=9, values_only=True):
-        if f[2] in (None, ""):
+    for f in ws.iter_rows(min_row=nf + 1, values_only=True):
+        if val(f, "item") in (None, ""):
             continue
-        st = norm(f[22])
+        crudo = val(f, "estado")
+        st = norm(crudo)
         if st == "cerrado":
             estado, atrasado = "Cerrado", False
         elif st == "abierto":
             estado, atrasado = "Abierto", False
         else:
             estado, atrasado = "Abierto", False
-            avisos.append(f"STATUS de punch no reconocido: «{f[22]}» — se cuenta como abierto")
+            avisos.append(f"STATUS de punch no reconocido: «{crudo}» — se cuenta como abierto")
 
-        freq = as_fecha(f[15])
+        freq = as_fecha(val(f, "freq"))
         dias = None
         if estado == "Abierto" and freq:
             # Regla del proyecto: abierto con fecha requerida ya vencida = atrasado.
@@ -330,18 +411,19 @@ def leer_punch(ruta, hoy):
                 atrasado = True
                 dias = (hoy - freq).days
 
+        texto = lambda k, vacio="": (str(val(f, k)).strip() if val(f, k) else vacio)
         items.append({
-            "id": str(f[2]).strip(),
-            "cam": num_caminata(f[1]),
-            "area": str(f[5]).strip() if f[5] else "Sin área",
-            "sub": str(f[6]).strip() if f[6] else "Sin subsistema",
-            "disc": disciplina(f[7]),
-            "cat": categoria(f[9]),
+            "id": texto("item"),
+            "cam": num_caminata(val(f, "cam")),
+            "area": codigo(val(f, "area"), "Sin área"),
+            "sub": codigo(val(f, "sub"), "Sin subsistema"),
+            "disc": disciplina(val(f, "disc")),
+            "cat": categoria(val(f, "cat")),
             "estado": estado,
             "atrasado": atrasado,
             "sinFecha": estado == "Abierto" and freq is None,
             "diasAtraso": dias,
-            "resp": str(f[14]).strip() if f[14] else "",
+            "resp": texto("resp"),
         })
     return items
 
@@ -371,8 +453,23 @@ def construir(corte, todos, items, hoy, declarado):
     # ---------- universo del proyecto ----------
     # Los componentes salen del universo (ver FUERA_DEL_UNIVERSO) pero no se
     # pierden: van a su propio bloque con el estado de cada uno.
-    subs = [s for s in todos if s["tipo"] not in FUERA_DEL_UNIVERSO]
-    fuera = [s for s in todos if s["tipo"] in FUERA_DEL_UNIVERSO]
+    def es_componente(s):
+        por_tipo = s["tipo"] in FUERA_DEL_UNIVERSO
+        por_codigo = bool(RE_COMPONENTE.search(s["id"]))
+        if por_codigo and not por_tipo:
+            avisos.append(
+                f"«{s['id']}» tiene código de componente pero el reporte lo declara "
+                f"«{s['tipo']}»: se mantiene FUERA del universo por su código "
+                f"—si el proyecto lo reclasificó a propósito, hay que confirmarlo—")
+        elif por_tipo and not por_codigo:
+            avisos.append(
+                f"«{s['id']}» está declarado «{s['tipo']}» pero su código no lo parece: "
+                f"queda fuera del universo igual, conviene revisarlo")
+        return por_tipo or por_codigo
+
+    fuera = [s for s in todos if es_componente(s)]
+    ids_fuera_comp = {s["id"] for s in fuera}
+    subs = [s for s in todos if s["id"] not in ids_fuera_comp]
 
     ids_univ = {s["id"] for s in subs}
     componentes = {

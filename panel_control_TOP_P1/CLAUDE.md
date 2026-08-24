@@ -152,10 +152,19 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 ## 4 · Trampas ya descubiertas
 
 ### Columnas de origen (índices 0-based, ya resueltos en los scripts)
-- **Punch de Desaladora** (`LISTADO PUNCH ITEMS`, encabezado fila 8, datos fila 9+):
-  `1` Nº caminata · `5` Sistema/Facility · `6` Subsistema · `7` Disciplina · `9` Categoría ·
-  `15` Fecha Requerida Cierre · `22` STATUS. *Hubo un desfase de una columna en la primera
-  versión: la categoría tomaba los nombres de «Observación por».*
+- **Punch de Desaladora**: `desaladora.py` ya **no usa índices fijos** — busca la hoja y las
+  columnas **por nombre de encabezado** (`COLS_PUNCH` / `hoja_punch()`), igual que Talabre.
+  El archivo cambió de formato en el corte 24-08-2026: el export nuevo llega con la hoja
+  **`Worksheet`** en vez de `LISTADO PUNCH ITEMS`, sin las columnas «Foto» ni las de número de
+  proyecto, y con sistema, subsistema, disciplina, categoría y fecha requerida corridas una o
+  dos columnas. Con índices fijos el archivo se leía entero pero **con los datos cambiados de
+  sitio**, sin que nada avisara. *Antes ya había pasado: la categoría tomaba los nombres de
+  «Observación por».*
+  Dos cosas más del formato nuevo que el script absorbe:
+  **el subsistema y el área traen la descripción pegada** («0583-WR-206 PRE-FILTROS UF 3»)
+  cuando el REPORTE usa el código pelado — se recorta al primer token (`codigo()`), o ningún
+  subsistema cruza y los 98 salen huérfanos; y **la disciplina viene como `ELECTRICOS`**, que
+  se suma a `DISC_MAP` junto a `ESTRUCTURAL` (sin eso, 221 ítems caían en «Otras»).
 - **REPORTE GERENCIAL** (encabezado fila 10, datos fila 11+): `2` subsistema · `3` tipo ·
   `4` zona · `6/8/10` caminatas 1/2/3 · `32` estatus del certificado · `34` tarjeta verde.
 - **Talabre**: `talabre.py` ya **no usa índices fijos** — resuelve las columnas por nombre de
@@ -193,6 +202,14 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 - **Talabre: el corte es `meta.hoy`**, la fecha de referencia de los atrasos. `meta.ultimaAgenda`
   guarda la caminata agendada más lejana, que es una **fecha futura** y no debe usarse como corte
   (hacía que el informe se descargara con fecha 10-08 en vez de 27-07).
+- **Los componentes se reconocen por su CÓDIGO, no por su tipo.** En el reporte del
+  18-08-2026 los tres seguían ahí —`0587-ESL-201 Comp 1`, `0587-EWS-201 Comp 1`,
+  `4515-ESL-201-Comp 1`— pero el proyecto les cambió el tipo de «Componente» a «Operable»:
+  la regla miraba solo el tipo, dejó de verlos y **el universo pasó de 95 a 98 en silencio**.
+  Ahora manda el código (`RE_COMPONENTE`) y el reetiquetado se informa en AVISOS. Que la
+  regla es la correcta lo confirma el propio archivo: con los componentes fuera, la caminata 2
+  de Operable cuadra exacto contra lo que declara la hoja «Resumen general» (46/80); con ellos
+  dentro daba 49/83.
 - **Desaladora: el reporte gerencial trae 97 filas pero el universo es 95.** Las dos de
   diferencia son componentes (ver regla de homologación). `subsistemas.filasReporte` guarda el
   conteo bruto para que el cruce contra el archivo siga siendo trazable. El script verifica
