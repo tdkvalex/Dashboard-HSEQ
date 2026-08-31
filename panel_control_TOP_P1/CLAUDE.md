@@ -160,6 +160,11 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   dos columnas. Con índices fijos el archivo se leía entero pero **con los datos cambiados de
   sitio**, sin que nada avisara. *Antes ya había pasado: la categoría tomaba los nombres de
   «Observación por».*
+  Desde el corte 31-08-2026 el archivo trae un **tercer estado, `ATRASADO`**, además de
+  `ABIERTO` y `CERRADO`: son abiertos que el propio proyecto marca fuera de plazo. Se
+  respetan como atrasados sin mirar la fecha —los 10 del corte ya la tenían vencida, así que
+  la cifra no cambió, pero un `ATRASADO` con fecha futura habría contado como en plazo,
+  contradiciendo al archivo.
   Dos cosas más del formato nuevo que el script absorbe:
   **el subsistema y el área traen la descripción pegada** («0583-WR-206 PRE-FILTROS UF 3»)
   cuando el REPORTE usa el código pelado — se recorta al primer token (`codigo()`), o ningún

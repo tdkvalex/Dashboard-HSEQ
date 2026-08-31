@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-31 13:57",
+ "generado": "2026-08-31 14:39",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -29,32 +29,32 @@
    },
    "qaqc": "DES",
    "cierre": {
-    "corte": "18-08-2026",
+    "corte": "25-08-2026",
     "subs": 95,
     "cam": {
-     "realizada": 57,
+     "realizada": 61,
      "aplica": 95
     },
     "p1": {
-     "total": 956,
-     "cerrados": 676,
-     "abiertos": 280,
+     "total": 1038,
+     "cerrados": 714,
+     "abiertos": 324,
      "atrasados": 8
     },
     "det": {
-     "total": 1596,
-     "cerrados": 1092,
-     "abiertos": 504,
-     "atrasados": 15,
-     "enPlazo": 489,
+     "total": 1722,
+     "cerrados": 1169,
+     "abiertos": 553,
+     "atrasados": 14,
+     "enPlazo": 539,
      "sinFecha": 0
     },
     "carpeta": {
      "tipo": "estado",
-     "entregadas": 42,
+     "entregadas": 43,
      "total": 95
     },
-    "cierrePct": 70.7,
+    "cierrePct": 68.8,
     "sem": [
      "warn",
      "Atención"
@@ -114,32 +114,32 @@
    },
    "qaqc": "TAL",
    "cierre": {
-    "corte": "24-08-2026",
+    "corte": "31-08-2026",
     "subs": 218,
     "cam": {
-     "realizada": 194,
+     "realizada": 198,
      "aplica": 218
     },
     "p1": {
-     "total": 376,
-     "cerrados": 342,
-     "abiertos": 34,
-     "atrasados": 14
+     "total": 380,
+     "cerrados": 354,
+     "abiertos": 26,
+     "atrasados": 22
     },
     "det": {
-     "total": 2062,
-     "cerrados": 1682,
-     "abiertos": 380,
-     "atrasados": 148,
-     "enPlazo": 232,
+     "total": 2078,
+     "cerrados": 1726,
+     "abiertos": 352,
+     "atrasados": 125,
+     "enPlazo": 227,
      "sinCompromiso": 211
     },
     "carpeta": {
      "tipo": "avance",
-     "promedio": 93.8,
+     "promedio": 94,
      "total": 218
     },
-    "cierrePct": 91,
+    "cierrePct": 93.2,
     "sem": [
      "good",
      "Al día"
@@ -199,7 +199,7 @@
    },
    "qaqc": "MASA",
    "cierre": {
-    "corte": "17-08-2026",
+    "corte": "24-08-2026",
     "subs": 135,
     "cam": {
      "realizada": 90,
@@ -207,22 +207,22 @@
     },
     "p1": {
      "total": 1988,
-     "cerrados": 1154,
-     "abiertos": 826,
-     "atrasados": 673
+     "cerrados": 1156,
+     "abiertos": 825,
+     "atrasados": 672
     },
     "det": {
      "total": 2963,
-     "cerrados": 1328,
-     "abiertos": 1548,
-     "atrasados": 1078
+     "cerrados": 1330,
+     "abiertos": 1546,
+     "atrasados": 1077
     },
     "carpeta": {
      "tipo": "estado",
      "entregadas": 28,
      "total": 135
     },
-    "cierrePct": 58,
+    "cierrePct": 58.1,
     "sem": [
      "crit",
      "Crítico"
@@ -271,13 +271,13 @@
    "activo": true,
    "proyectos": 3,
    "subs": 448,
-   "detalles": 6621,
-   "cerrados": 4102,
-   "abiertos": 2432,
-   "atrasados": 1241,
-   "p1Total": 3320,
-   "p1Cerrados": 2172,
-   "p1Atrasados": 695
+   "detalles": 6763,
+   "cerrados": 4225,
+   "abiertos": 2451,
+   "atrasados": 1216,
+   "p1Total": 3406,
+   "p1Cerrados": 2224,
+   "p1Atrasados": 702
   },
   "noConformidades": {
    "activo": true,

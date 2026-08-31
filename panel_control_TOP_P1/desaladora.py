@@ -399,6 +399,14 @@ def leer_punch(ruta, hoy):
             estado, atrasado = "Cerrado", False
         elif st == "abierto":
             estado, atrasado = "Abierto", False
+        elif st == "atrasado":
+            # Desde el corte 31-08-2026 el archivo trae un tercer estado y
+            # declara él mismo el atraso. Se respeta: son ítems abiertos que el
+            # proyecto ya marcó fuera de plazo. Al corte los 10 tenían además la
+            # fecha vencida, así que la cifra no cambia —pero si mañana llega uno
+            # marcado ATRASADO con fecha futura, la regla de la fecha lo daría
+            # en plazo y contradiría al propio archivo.
+            estado, atrasado = "Abierto", True
         else:
             estado, atrasado = "Abierto", False
             avisos.append(f"STATUS de punch no reconocido: «{crudo}» — se cuenta como abierto")

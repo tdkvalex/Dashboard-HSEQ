@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-08-17",
-  "corte_texto": "17-08-2026",
-  "generado": "2026-08-24 13:32"
+  "corte": "2026-08-24",
+  "corte_texto": "24-08-2026",
+  "generado": "2026-08-31 14:39"
  },
  "areas": [
   "2000",
@@ -468,24 +468,24 @@
  "dt": {
   "global": {
    "total": 2963,
-   "cerrados": 1328,
+   "cerrados": 1330,
    "tramite": 87,
-   "abiertos": 1548,
-   "vencidos": 1078
+   "abiertos": 1546,
+   "vencidos": 1077
   },
   "tipos": {
    "P1": {
     "total": 1988,
-    "cerrados": 1154,
-    "tramite": 8,
-    "abiertos": 826,
-    "vencidos": 673
+    "cerrados": 1156,
+    "tramite": 7,
+    "abiertos": 825,
+    "vencidos": 672
    },
    "P2": {
     "total": 811,
     "cerrados": 172,
-    "tramite": 79,
-    "abiertos": 560,
+    "tramite": 80,
+    "abiertos": 559,
     "vencidos": 381
    },
    "P3": {
@@ -506,8 +506,8 @@
    },
    "Eléctrica": {
     "total": 421,
-    "cerrados": 204,
-    "tramite": 2,
+    "cerrados": 206,
+    "tramite": 0,
     "abiertos": 215,
     "vencidos": 173
    },
@@ -521,9 +521,9 @@
    "Mecánica": {
     "total": 502,
     "cerrados": 377,
-    "tramite": 0,
-    "abiertos": 125,
-    "vencidos": 111
+    "tramite": 1,
+    "abiertos": 124,
+    "vencidos": 110
    },
    "Estructura": {
     "total": 137,
@@ -543,17 +543,17 @@
   "p1Area": {
    "2000": {
     "total": 570,
-    "cerrados": 529,
-    "tramite": 3,
+    "cerrados": 531,
+    "tramite": 1,
     "abiertos": 38,
     "vencidos": 27
    },
    "3000": {
     "total": 1049,
     "cerrados": 342,
-    "tramite": 4,
-    "abiertos": 703,
-    "vencidos": 604
+    "tramite": 5,
+    "abiertos": 702,
+    "vencidos": 603
    },
    "4000": {
     "total": 357,
@@ -600,7 +600,7 @@
     ],
     [
      18,
-     102,
+     101,
      5,
      0
     ],
@@ -620,7 +620,7 @@
   },
   "p1AbiertosPorOrigen": {
    "Caminata 1 (80%)": 676,
-   "Caminata 2 (100%)": 150
+   "Caminata 2 (100%)": 149
   }
  },
  "semaforo": {
@@ -642,21 +642,21 @@
   ]
  },
  "previo": {
-  "corte": "2026-08-10",
-  "corte_texto": "10-08-2026",
+  "corte": "2026-08-17",
+  "corte_texto": "17-08-2026",
   "cam80": 135,
   "cam100": 90,
   "subs": 135,
   "camProx": 44,
   "camProg": 1,
-  "topEntregadas": 27,
-  "topRev": 14,
+  "topEntregadas": 28,
+  "topRev": 15,
   "topObs": 1,
   "topRech": 12,
   "topAprob": 0,
   "p1Total": 1988,
   "p1Cerrados": 1154,
-  "p1Abiertos": 828,
-  "p1Vencidos": 667
+  "p1Abiertos": 826,
+  "p1Vencidos": 673
  }
 }
