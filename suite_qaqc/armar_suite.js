@@ -111,9 +111,15 @@ function leerCierre() {
     const p1 = D.dt.tipos.P1, c = D.cam.global, t = D.ctop.global;
     out.MASA = { corte: D.meta.corte_texto, subs: c.subs,
       cam: { realizada: c.c100, aplica: c.subs },
-      p1: { total: p1.total, cerrados: p1.cerrados, abiertos: p1.abiertos, atrasados: p1.vencidos },
+      // Arqueros tiene un TERCER estado —«en trámite»: trabajo hecho esperando al
+      // cliente— que no es cerrado ni abierto. Se publica junto a los otros dos:
+      // sin él, `cerrados + abiertos` no da el total y quien lea este JSON resta
+      // y le sobran ítems. Es el mismo error que apareció en la lámina 12.
+      p1: { total: p1.total, cerrados: p1.cerrados, abiertos: p1.abiertos,
+            tramite: p1.tramite || 0, atrasados: p1.vencidos },
       det: { total: D.dt.global.total, cerrados: D.dt.global.cerrados,
-             abiertos: D.dt.global.abiertos, atrasados: D.dt.global.vencidos },
+             abiertos: D.dt.global.abiertos, tramite: D.dt.global.tramite || 0,
+             atrasados: D.dt.global.vencidos },
       carpeta: { tipo: "estado", entregadas: t.entregadas, total: t.total } };
   }
   if (X) {
@@ -226,9 +232,13 @@ const datos = {
       detalles: sum((x) => x.cierre && x.cierre.det.total),
       cerrados: sum((x) => x.cierre && x.cierre.det.cerrados),
       abiertos: sum((x) => x.cierre && x.cierre.det.abiertos),
+      // Solo Arqueros lo tiene, pero se suma igual: así `cerrados + abiertos +
+      // tramite` cierra contra `detalles` en el consolidado.
+      tramite: sum((x) => x.cierre && (x.cierre.det.tramite || 0)),
       atrasados: sum((x) => x.cierre && x.cierre.det.atrasados),
       p1Total: sum((x) => x.cierre && x.cierre.p1.total),
       p1Cerrados: sum((x) => x.cierre && x.cierre.p1.cerrados),
+      p1Tramite: sum((x) => x.cierre && (x.cierre.p1.tramite || 0)),
       p1Atrasados: sum((x) => x.cierre && x.cierre.p1.atrasados),
     } : { activo: false },
     noConformidades: nc ? {

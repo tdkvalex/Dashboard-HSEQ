@@ -223,6 +223,22 @@ chk(m["noConformidades"]["atrasadas"] == nc["obra"]["resumen"]["atrasadas"], "Po
 det = m["cierre"]["detalles"]
 suma_det = des["punch"]["global"]["total"] + tal["dt"]["global"]["total"] + arq["dt"]["global"]["total"]
 chk(det == suma_det, "Portada · detalles = suma de los 3 proyectos", f"{det} vs {suma_det}")
+# Los estados tienen que cerrar contra el total, en cada proyecto y en el
+# consolidado. Arqueros tiene un TERCER estado —«en trámite»— y si la portada
+# no lo arrastra, `cerrados + abiertos` queda 60 ítems corto y quien lea el JSON
+# resta y le sobran. Es exactamente el error que apareció en la lámina 12.
+for f in kp["proyectos"]:
+    if not f.get("cierre"):
+        continue
+    d = f["cierre"]["det"]
+    suma = d["cerrados"] + d["abiertos"] + d.get("tramite", 0)
+    chk(suma == d["total"], f"Portada · {f['nombre']}: cerrados+abiertos+trámite = detalles",
+        f"{d['cerrados']}+{d['abiertos']}+{d.get('tramite', 0)} = {suma} vs {d['total']}")
+_c = m["cierre"]
+_s = _c["cerrados"] + _c["abiertos"] + _c.get("tramite", 0)
+chk(_s == _c["detalles"], "Portada · consolidado: cerrados+abiertos+trámite = detalles",
+    f"{_s} vs {_c['detalles']}")
+
 subs_suma = des["subsistemas"]["total"] + tal["subsistemas"]["total"] + arq["cam"]["global"]["subs"]
 chk(m["cierre"]["subs"] == subs_suma, "Portada · subsistemas = suma de los 3", f"{m['cierre']['subs']} vs {subs_suma}")
 for f in kp["proyectos"]:
