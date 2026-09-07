@@ -182,6 +182,15 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   archivo de STATUS es el extracto de pendientes y se usa como contraste de los abiertos.
 
 ### Discrepancias reales entre archivos (no son bugs, se informan en pantalla)
+- **Desaladora: los dos exports del punch NO traen las mismas fechas requeridas.** El
+  `PunchList_*_final` de los cortes 24-08 y 31-08 y el `Listado_Puntos_Punch_Consolidado_*`
+  del 07-09 discrepan en **273 ítems**, y el patrón dominante es `31-08 → 05-07` (102 ítems)
+  y `31-08 → 06-07` (25): el export «final» mostraba fechas más tardías que las que trae el
+  consolidado para los mismos ítems. El efecto sobre el atraso es enorme —14 atrasados con el
+  «final» del 25-08 contra 318 con el consolidado del 07-09— y **no es avance ni retroceso de
+  obra: es el archivo**. La serie coherente es la del consolidado (160 al 17-08 → 318 al
+  07-09). **Pedir siempre el `Listado_Puntos_Punch_Consolidado_*`**; si llega un
+  `PunchList_*_final`, avisar que el atraso de esa semana no es comparable con el resto.
 - **Desaladora**: el reporte gerencial y el punch list **no cuadran** (945/441 vs 960/426;
   P0 41 vs 20). **Manda el punch list**, que es la fuente ítem a ítem.
 - **Talabre**: con los archivos viejos la hoja STATUS y el registro de DT **no cuadraban**
