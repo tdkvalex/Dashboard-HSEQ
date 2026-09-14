@@ -114,6 +114,7 @@ Data_NCR*.xlsx              ─┐  «Observaciones»                           
 NC externas del cliente     ─┴─▶ «Disposición NC-Externas» ──▶ datos_nc.json ──▶ modulo_nc/index.html
                                                                                           │
 dashboard_protocolos.html   ───▶ se copia tal cual ─────────▶ modulos/protocolos.html      │
+                                 node gen_ppt_protocolos.js ──▶ informe embebido           │
                                                                                           ▼
                                                             node armar_suite.js ──▶ Suite_QAQC.html
 ```

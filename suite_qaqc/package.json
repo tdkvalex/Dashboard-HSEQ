@@ -1,0 +1,6 @@
+{
+  "name": "suite-qaqc",
+  "private": true,
+  "description": "Armado de la Suite QAQC y generación del informe de Protocolos",
+  "dependencies": { "pptxgenjs": "^3.12.0" }
+}

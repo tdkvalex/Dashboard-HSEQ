@@ -65,6 +65,14 @@ cp <dashboard_protocolos_del_corte>.html modulos/protocolos.html   # el único q
 node armar_suite.js
 ```
 
+**El informe de Protocolos se genera aquí, igual que los otros dos.** El dashboard llega de
+otro equipo, pero su PPT la arma `suite_qaqc/gen_ppt_protocolos.js` sobre la copia del corte y
+la deja embebida en el módulo. Antes el módulo traía su propio modal y generaba la PPT **en el
+navegador** al apretar el botón: salía con otro formato y —lo importante— **lo que descargaba
+el usuario no era lo que `verificar_suite.py` revisa**, porque no existía hasta ese clic. Ahora
+los tres botones entregan de un clic un archivo ya verificado. Corre después de copiar el
+dashboard y antes de `armar_suite.js`; `actualizar_semana.py` ya lo encadena.
+
 **Cierre QAQC y No Conformidades NO se copian a `modulos/`.** El generador los toma en vivo
 de `panel_control_TOP_P1/index.html` y `modulo_nc/index.html`. Si alguien deja una copia en
 `modulos/`, esa copia **gana** y el módulo queda congelado en ese corte para siempre, sin que

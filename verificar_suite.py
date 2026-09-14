@@ -23,9 +23,14 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent
 SUITE = RAIZ / "suite_qaqc" / "Suite_QAQC.html"
 PPTS = [RAIZ / "panel_control_TOP_P1" / "Panel_Control_TOP_P1.pptx",
-        RAIZ / "modulo_nc" / "Panel_No_Conformidades.pptx"]
-# Qué PPT debe entregar el botón de cada módulo de la suite.
-PPT_DE_MODULO = {"cierre": PPTS[0], "nc": PPTS[1]}
+        RAIZ / "modulo_nc" / "Panel_No_Conformidades.pptx",
+        RAIZ / "suite_qaqc" / "Informe_Protocolos.pptx"]
+# Qué PPT debe entregar el botón de cada módulo de la suite. Los tres se
+# generan aquí y se embeben ya revisados: lo que descarga el usuario tiene que
+# ser byte a byte el archivo que pasó por este verificador.
+PPT_DE_MODULO = {"cierre": PPTS[0], "nc": PPTS[1], "protocolos": PPTS[2]}
+# Protocolos llega de otro equipo y su botón se llama distinto.
+BOTON_INFORME = "#pptBtn, #reportBtn"
 CHROMIUM = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 
 VERDE, ROJO, AMBAR, GRIS, FIN = "\033[32m", "\033[31m", "\033[33m", "\033[90m", "\033[0m"
@@ -275,10 +280,10 @@ def revisar_suite(anchos):
                 # un .pptx no basta: si se corre `gen_ppt.js` antes que el script
                 # de Python, el botón entrega una PPT anterior mientras las
                 # pestañas ya muestran el corte nuevo, y nada lo delata.
-                if W == anchos[0] and fr.locator("#pptBtn").count():
+                if W == anchos[0] and fr.locator(BOTON_INFORME).count():
                     try:
                         with pg.expect_download(timeout=15000) as dl:
-                            fr.click("#pptBtn")
+                            fr.locator(BOTON_INFORME).first.click()
                         d = dl.value
                         if not d.suggested_filename.endswith(".pptx"):
                             problemas.append(f"{etq}: la descarga no es un .pptx")

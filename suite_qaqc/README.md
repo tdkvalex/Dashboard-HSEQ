@@ -241,3 +241,54 @@ Dos detalles que hay que respetar, o las cifras se van:
 
 **Rendimiento:** portada 0,37 s · Protocolos 0,70 s · Cierre QAQC 0,60 s · volver a un módulo
 ya montado 0,19 s · 18 MB de memoria JS.
+
+
+---
+
+## El informe de Protocolos
+
+`gen_ppt_protocolos.js` arma la PPT ejecutiva de Protocolos y la deja embebida en
+`modulos/protocolos.html`, de modo que su botón «Descargar Informe» se comporte igual que el
+de Cierre QAQC y el de No Conformidades: **un clic, un archivo ya generado y verificado**.
+
+```bash
+cp <dashboard_del_corte>.html modulos/protocolos.html
+node gen_ppt_protocolos.js      # DESPUÉS de copiar, ANTES de armar_suite.js
+node armar_suite.js
+```
+
+### Por qué no se deja como venía
+
+El dashboard llega de otro equipo y traía su propio camino: un modal donde se elegía alcance y
+formato, y la PPT **se generaba en el navegador** al apretar el botón. Dos problemas:
+
+1. El mazo salía con otro formato —otra portada, otra tipografía, sin numeración correlativa ni
+   etiqueta de proyecto al pie— y los tres viajan juntos en la misma suite.
+2. **Lo que descargaba el usuario no era lo que revisa `verificar_suite.py`**, porque no existía
+   hasta ese clic. Los otros dos se generan, se verifican y recién entonces se embeben.
+
+Ahora los tres siguen la misma regla. `verificar_suite.py` comprueba el informe de Protocolos
+con los mismos criterios que los otros dos (láminas, numeración, logo, desbordes, contraste de
+etiquetas) y además **descarga desde el botón y lo compara byte a byte** con el archivo en
+disco: si alguien regenera el mazo sin rearmar la suite, lo dice.
+
+### Estructura del mazo — 11 láminas
+
+| Láminas | Contenido |
+|---|---|
+| 1 | Portada del consolidado |
+| 2 | Resumen ejecutivo — 4 tarjetas + lectura del corte |
+| 3 | Semáforo por proyecto, con universo, avance, remanente y base del KPI |
+| 4 | Pendiente por disciplina — gráfico + tabla, agregando los tres frentes |
+| 5 | Tendencia del pendiente por corte (de `KPI_HISTORY`) |
+| 6-11 | Portada + estado por disciplina de cada proyecto |
+
+Las definiciones son las mismas que usa la portada de la suite, para que las cifras no se
+contradigan: **Universo** = S+C+P+AP+AE+rv · **En falta** = AP+P · **Base del KPI** = universo
+menos el remanente · **KPI** = en falta / base, donde menos es mejor.
+
+**El corte del mazo es el más reciente de los tres proyectos**, no el del primero de la lista;
+si no coinciden, la portada y el pie lo declaran como cortes mixtos.
+
+El bloque que se inyecta en el módulo va entre `PPT-PROTOCOLOS:INICIO` y `:FIN`, y se
+reemplaza en cada corrida: correrlo dos veces no acumula copias.

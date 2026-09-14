@@ -6,3 +6,11 @@ Suite_QAQC.html
 # Si aparece aquí, el generador la prefiere y el módulo queda congelado.
 modulos/cierre_qaqc.html
 modulos/no_conformidades.html
+
+# Dependencias del generador del informe de Protocolos (pptxgenjs).
+node_modules/
+package-lock.json
+
+# El informe de Protocolos se regenera con `node gen_ppt_protocolos.js`
+# en cada corte, igual que las otras dos PPT.
+Informe_Protocolos.pptx

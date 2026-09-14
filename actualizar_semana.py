@@ -402,7 +402,11 @@ def main():
         if not ok:
             sys.exit(f"\n{MAL} Se detuvo en «{titulo}». Nada más se ejecutó.")
 
-    # Protocolos lo genera otro equipo: solo se copia a modulos/.
+    # El dashboard de Protocolos lo arma otro equipo: se copia a modulos/ y
+    # sobre esa copia se genera aquí su informe, igual que en los otros dos
+    # módulos. El generador va DESPUÉS de la copia —lee el dashboard del corte—
+    # y ANTES de `armar_suite.js`, que empaqueta el módulo ya con el informe
+    # embebido.
     if "protocolos" in modulos and g("protocolos"):
         destino = SUITE / "modulos" / "protocolos.html"
         print(f"\n{GRIS}$ cp {g('protocolos')} {destino}{FIN}")
@@ -410,6 +414,10 @@ def main():
             destino.parent.mkdir(exist_ok=True)
             shutil.copyfile(g("protocolos"), destino)
         print(f"{OK} Protocolos copiado a modulos/")
+        ok, _ = correr(["node", "gen_ppt_protocolos.js"], SUITE,
+                       "Informe de Protocolos", args.dry_run)
+        if not ok:
+            sys.exit(1)
 
     if "suite" in modulos:
         ok, _ = correr(["node", "armar_suite.js"], SUITE, "Suite QAQC", args.dry_run)
