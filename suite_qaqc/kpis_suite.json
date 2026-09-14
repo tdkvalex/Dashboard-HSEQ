@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-14 01:51",
+ "generado": "2026-09-14 02:09",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -92,21 +92,21 @@
    "nombre": "Talabre",
    "cliente": "CODELCO",
    "protocolos": {
-    "kpi": 2.4,
-    "universo": 14153,
-    "enFalta": 310,
-    "avance": 12601,
-    "remanente": 560,
-    "base": 12911,
+    "kpi": 2.1,
+    "universo": 14316,
+    "enFalta": 271,
+    "avance": 12607,
+    "remanente": 612,
+    "base": 12878,
     "estados": {
-     "S": 560,
-     "C": 12263,
-     "P": 165,
-     "AP": 145,
-     "AE": 338,
-     "rv": 682
+     "S": 612,
+     "C": 12288,
+     "P": 124,
+     "AP": 147,
+     "AE": 319,
+     "rv": 826
     },
-    "actualizado": "07-sep-2026",
+    "actualizado": "13-sep-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -178,20 +178,20 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.1,
-    "universo": 29562,
+    "universo": 29310,
     "enFalta": 17,
-    "avance": 24125,
-    "remanente": 5420,
-    "base": 24142,
+    "avance": 24429,
+    "remanente": 4864,
+    "base": 24446,
     "estados": {
-     "S": 5420,
-     "C": 20097,
+     "S": 4864,
+     "C": 20396,
      "P": 14,
      "AP": 3,
-     "AE": 4028,
+     "AE": 4033,
      "rv": 0
     },
-    "actualizado": "07-sep-2026",
+    "actualizado": "13-sep-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -261,13 +261,13 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 62555,
-   "enFalta": 389,
-   "avance": 48826,
-   "remanente": 12658,
-   "base": 49215,
+   "universo": 62466,
+   "enFalta": 350,
+   "avance": 49136,
+   "remanente": 12154,
+   "base": 49486,
    "actualizado": "07-sep-2026",
-   "kpi": 0.8
+   "kpi": 0.7
   },
   "cierre": {
    "activo": true,
