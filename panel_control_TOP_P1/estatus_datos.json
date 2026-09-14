@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-09-07",
-  "corte_texto": "07-09-2026",
-  "generado": "2026-09-07 13:22"
+  "corte": "2026-09-10",
+  "corte_texto": "10-09-2026",
+  "generado": "2026-09-14 01:51"
  },
  "areas": [
   "2000",
@@ -20,8 +20,8 @@
   "global": {
    "subs": 136,
    "c80": 136,
-   "c100": 92,
-   "prox": 44,
+   "c100": 93,
+   "prox": 43,
    "prog": 0
   },
   "byArea": {
@@ -49,8 +49,8 @@
    "8000": {
     "subs": 2,
     "c80": 2,
-    "c100": 1,
-    "prox": 1,
+    "c100": 2,
+    "prox": 0,
     "prog": 0
    }
   },
@@ -269,30 +269,25 @@
     "3000",
     "3000-3700-S03 Sistema de Alumbrado y Alimentación Eléctrica",
     "Próxima a realizar"
-   ],
-   [
-    "8000",
-    "8000-8200-S01 Sala de Telecomunicaciones",
-    "Próxima a realizar"
    ]
   ]
  },
  "ctop": {
   "global": {
    "total": 136,
-   "entregadas": 28,
-   "rev": 10,
+   "entregadas": 31,
+   "rev": 11,
    "obs": 1,
-   "rech": 17,
+   "rech": 19,
    "aprob": 0,
-   "pend": 108
+   "pend": 105
   },
   "byArea": {
    "2000": {
     "total": 35,
-    "rev": 9,
+    "rev": 10,
     "obs": 0,
-    "rech": 9,
+    "rech": 11,
     "aprob": 0
    },
    "3000": {
@@ -396,12 +391,17 @@
    [
     "2000",
     "2000-2100-S01 Recepción y Chancado Primario",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
     "2000-2100-S03 Sistema de Izamiento Chancado Primario",
     "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2400-S01 Harneros Terciarios",
+    "En revisión"
    ],
    [
     "2000",
@@ -415,8 +415,13 @@
    ],
    [
     "2000",
-    "2000-2600-S04 Suministro de Agua Fresca",
+    "2000-2600-S03 Sistema colector de polvo",
     "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2600-S04 Suministro de Agua Fresca",
+    "Rechazada"
    ],
    [
     "3000",
@@ -457,31 +462,36 @@
     "2000",
     "2000-2700-S02 NIOs y JB Area Seca",
     "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2700-S03 NIOs y JB Piscinas 3661, 3662 y Planta de Tratamiento de Agua Potable",
+    "En revisión"
    ]
   ]
  },
  "dt": {
   "global": {
-   "total": 2963,
-   "cerrados": 1403,
-   "tramite": 60,
-   "abiertos": 1500,
-   "vencidos": 1050
+   "total": 2967,
+   "cerrados": 1468,
+   "tramite": 23,
+   "abiertos": 1476,
+   "vencidos": 1034
   },
   "tipos": {
    "P1": {
-    "total": 1988,
-    "cerrados": 1189,
-    "tramite": 20,
-    "abiertos": 779,
-    "vencidos": 645
+    "total": 1990,
+    "cerrados": 1222,
+    "tramite": 13,
+    "abiertos": 755,
+    "vencidos": 630
    },
    "P2": {
-    "total": 811,
-    "cerrados": 212,
-    "tramite": 40,
+    "total": 813,
+    "cerrados": 244,
+    "tramite": 10,
     "abiertos": 559,
-    "vencidos": 381
+    "vencidos": 380
    },
    "P3": {
     "total": 164,
@@ -494,38 +504,38 @@
   "p1Esp": {
    "Piping": {
     "total": 432,
-    "cerrados": 191,
-    "tramite": 9,
-    "abiertos": 232,
-    "vencidos": 206
+    "cerrados": 202,
+    "tramite": 3,
+    "abiertos": 227,
+    "vencidos": 203
    },
    "Eléctrica": {
-    "total": 421,
-    "cerrados": 214,
-    "tramite": 2,
-    "abiertos": 205,
-    "vencidos": 171
+    "total": 423,
+    "cerrados": 218,
+    "tramite": 1,
+    "abiertos": 204,
+    "vencidos": 170
    },
    "Instrumentación y Control": {
     "total": 426,
-    "cerrados": 251,
-    "tramite": 1,
-    "abiertos": 174,
-    "vencidos": 149
+    "cerrados": 254,
+    "tramite": 2,
+    "abiertos": 170,
+    "vencidos": 147
    },
    "Mecánica": {
     "total": 502,
-    "cerrados": 382,
-    "tramite": 4,
-    "abiertos": 116,
-    "vencidos": 104
+    "cerrados": 393,
+    "tramite": 0,
+    "abiertos": 109,
+    "vencidos": 97
    },
    "Estructura": {
     "total": 137,
-    "cerrados": 101,
-    "tramite": 4,
-    "abiertos": 32,
-    "vencidos": 15
+    "cerrados": 105,
+    "tramite": 7,
+    "abiertos": 25,
+    "vencidos": 13
    },
    "Obras Civiles": {
     "total": 70,
@@ -538,31 +548,31 @@
   "p1Area": {
    "2000": {
     "total": 570,
-    "cerrados": 539,
-    "tramite": 6,
-    "abiertos": 25,
-    "vencidos": 21
+    "cerrados": 550,
+    "tramite": 2,
+    "abiertos": 18,
+    "vencidos": 14
    },
    "3000": {
     "total": 1049,
-    "cerrados": 349,
-    "tramite": 13,
-    "abiertos": 687,
-    "vencidos": 590
+    "cerrados": 362,
+    "tramite": 9,
+    "abiertos": 678,
+    "vencidos": 586
    },
    "4000": {
     "total": 357,
-    "cerrados": 290,
-    "tramite": 1,
-    "abiertos": 66,
-    "vencidos": 33
+    "cerrados": 298,
+    "tramite": 2,
+    "abiertos": 57,
+    "vencidos": 30
    },
    "8000": {
     "total": 12,
-    "cerrados": 11,
+    "cerrados": 12,
     "tramite": 0,
-    "abiertos": 1,
-    "vencidos": 1
+    "abiertos": 0,
+    "vencidos": 0
    }
   },
   "hm": {
@@ -577,31 +587,31 @@
    "vals": [
     [
      0,
-     223,
-     9,
+     221,
+     6,
      0
     ],
     [
      12,
      164,
-     28,
-     1
-    ],
-    [
-     2,
-     147,
-     25,
+     26,
      0
     ],
     [
-     11,
+     1,
+     147,
+     22,
+     0
+    ],
+    [
+     5,
      101,
-     4,
+     3,
      0
     ],
     [
      0,
-     32,
+     25,
      0,
      0
     ],
@@ -614,8 +624,8 @@
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 648,
-   "Caminata 2 (100%)": 131
+   "Caminata 1 (80%)": 638,
+   "Caminata 2 (100%)": 117
   }
  },
  "semaforo": {
@@ -632,26 +642,26 @@
    "Atención"
   ],
   "8000": [
-   "crit",
-   "Crítico"
+   "good",
+   "Al día"
   ]
  },
  "previo": {
-  "corte": "2026-08-24",
-  "corte_texto": "24-08-2026",
-  "cam80": 135,
-  "cam100": 90,
-  "subs": 135,
+  "corte": "2026-09-07",
+  "corte_texto": "07-09-2026",
+  "cam80": 136,
+  "cam100": 92,
+  "subs": 136,
   "camProx": 44,
-  "camProg": 1,
+  "camProg": 0,
   "topEntregadas": 28,
-  "topRev": 15,
+  "topRev": 10,
   "topObs": 1,
-  "topRech": 12,
+  "topRech": 17,
   "topAprob": 0,
   "p1Total": 1988,
-  "p1Cerrados": 1156,
-  "p1Abiertos": 825,
-  "p1Vencidos": 672
+  "p1Cerrados": 1189,
+  "p1Abiertos": 779,
+  "p1Vencidos": 645
  }
 }

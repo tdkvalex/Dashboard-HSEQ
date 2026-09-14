@@ -106,5 +106,23 @@
   "p1Cerrados": 1189,
   "p1Abiertos": 779,
   "p1Vencidos": 645
+ },
+ {
+  "corte": "2026-09-10",
+  "corte_texto": "10-09-2026",
+  "cam80": 136,
+  "cam100": 93,
+  "subs": 136,
+  "camProx": 43,
+  "camProg": 0,
+  "topEntregadas": 31,
+  "topRev": 11,
+  "topObs": 1,
+  "topRech": 19,
+  "topAprob": 0,
+  "p1Total": 1990,
+  "p1Cerrados": 1222,
+  "p1Abiertos": 755,
+  "p1Vencidos": 630
  }
 ]
