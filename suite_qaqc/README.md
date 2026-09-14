@@ -281,7 +281,7 @@ disco: si alguien regenera el mazo sin rearmar la suite, lo dice.
 | 3 | Semáforo por proyecto, con universo, avance, remanente y base del KPI |
 | 4 | Pendiente por disciplina — gráfico + tabla, agregando los tres frentes |
 | 5 | Tendencia del pendiente por corte (de `KPI_HISTORY`) |
-| 6-11 | Portada + estado por disciplina de cada proyecto |
+| 6-11 | Portada + **panel** de cada proyecto |
 
 Las definiciones son las mismas que usa la portada de la suite, para que las cifras no se
 contradigan: **Universo** = S+C+P+AP+AE+rv · **En falta** = AP+P · **Base del KPI** = universo
@@ -292,3 +292,40 @@ si no coinciden, la portada y el pie lo declaran como cortes mixtos.
 
 El bloque que se inyecta en el módulo va entre `PPT-PROTOCOLOS:INICIO` y `:FIN`, y se
 reemplaza en cada corrida: correrlo dos veces no acumula copias.
+
+
+### Los términos son los del módulo, no otros
+
+El mazo usa **los mismos códigos de estado que el dashboard** —`(S)`, `(AE)`, `(AP)`, `(P)`,
+`(RV)`, `(C)`— y las mismas columnas y en el mismo orden que su tabla, para que quien mire los
+dos no tenga que traducir nada. Cada lámina lleva impresa la **escala del KPI** con sus cinco
+bandas y el **glosario** con la definición de cada estado: el mazo viaja solo por correo y quien
+lo recibe no siempre tiene el panel al lado.
+
+| Banda | Rango | | Banda | Rango |
+|---|---|---|---|---|
+| Cumple | 0% | | Deficiente | 16%–50% |
+| Aceptable | 1%–3% | | No Cumple | 51%–100% |
+| Medianamente | 4%–15% | | | |
+
+Los colores de las bandas **no** son los del panel: el verde y el naranja de pantalla dan menos
+de 4,5:1 con texto blanco encima de un chip y el rótulo queda ilegible impreso. Las bandas y los
+nombres sí son idénticos.
+
+### El panel de proyecto
+
+Las láminas de cada frente replican la banda del tablero de Power BI que se usaba antes de este
+dashboard, que es el corte que la gente ya sabe leer:
+
+- **Matriz ESTATUS × DISCIPLINA** a la izquierda —una fila por estado, una columna por
+  disciplina en su código corto (TOPO, OOCC, ESTR, MECA, PIPN, ELEC, INST, ARQT, PCOM)— con
+  su fila de totales. La fila `(RV)` solo aparece cuando el proyecto la tiene.
+- **Dona de avance** al centro, con el universo escrito dentro y el reparto en las tres partes
+  del tablero anterior: Avance `(C+AE)`, En Falta `(AP+P)` y Remanente `(S)`.
+- **Chip del KPI** del proyecto con su banda.
+- **Una pastilla con su dona por disciplina** abajo, con el KPI de cada una.
+
+La geometría se adapta sola: el ancho de columna y la altura de fila se calculan según cuántas
+disciplinas y cuántos estados tenga el proyecto. Sin eso, Desaladora —que tiene nueve
+disciplinas— desbordaba la matriz sobre la dona, y Talabre —que además trae `(RV)`— empujaba la
+tabla encima de las pastillas.
