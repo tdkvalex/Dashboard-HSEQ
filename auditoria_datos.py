@@ -363,6 +363,38 @@ tx_ci = textos(R / "panel_control_TOP_P1/Panel_Control_TOP_P1.pptx")
 chk(nf(tal["dt"]["global"]["total"]) in tx_ci, f"PPT Cierre · aparece el total de DT de Talabre ({nf(tal['dt']['global']['total'])})")
 chk(nf(des["punch"]["global"]["total"]) in tx_ci, "PPT Cierre · aparece el total de punch de Desaladora")
 
+# El informe de Protocolos se genera desde el propio dashboard, así que sus
+# cifras tienen que ser las mismas que publica la portada. Las tablas van en
+# objetos `table`, no en cajas de texto, y ahí `textos()` no llega: hay que
+# recorrerlas aparte o el cruce pasa sin mirar nada.
+_prot = R / "suite_qaqc/Informe_Protocolos.pptx"
+if _prot.exists() and kp["modulos"].get("protocolos", {}).get("activo"):
+    from pptx import Presentation
+    _t = []
+    for _s in Presentation(str(_prot)).slides:
+        for _sh in _s.shapes:
+            if _sh.has_text_frame:
+                _t.append(_sh.text_frame.text)
+            elif getattr(_sh, "has_table", False):
+                for _r in _sh.table.rows:
+                    _t.append(" | ".join(c.text for c in _r.cells))
+    tx_pr = "\n".join(_t)
+    P = kp["modulos"]["protocolos"]
+    for etq, val in (("universo", P["universo"]), ("en falta", P["enFalta"]),
+                     ("base del KPI", P["base"]), ("remanente", P["remanente"])):
+        chk(nf(val) in tx_pr, f"PPT Protocolos · aparece el {etq} ({nf(val)})")
+    # El mazo escribe los porcentajes en formato chileno: 0,6% y no 0.6%.
+    chk(str(P["kpi"]).replace(".", ",") + "%" in tx_pr,
+        f'PPT Protocolos · aparece el KPI corporativo ({str(P["kpi"]).replace(".", ",")}%)')
+    for f in kp["proyectos"]:
+        q = f.get("protocolos")
+        if not q:
+            continue
+        chk(str(q["kpi"]).replace(".", ",") + "%" in tx_pr,
+            f'PPT Protocolos · aparece el KPI de {f["nombre"]}')
+else:
+    nota("Protocolos · no hay informe generado: correr suite_qaqc/gen_ppt_protocolos.js")
+
 # ═══════════════ 6 · IDENTIDAD ENTRE MÓDULOS ═══════════════
 print("6 · IDENTIDAD DE LOS PROYECTOS")
 ident = {}
