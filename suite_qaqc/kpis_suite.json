@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-14 02:33",
+ "generado": "2026-09-14 02:40",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -7,21 +7,21 @@
    "nombre": "Desaladora",
    "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
-    "kpi": 0.5,
-    "universo": 18840,
-    "enFalta": 62,
-    "avance": 12100,
-    "remanente": 6678,
-    "base": 12162,
+    "kpi": 0.2,
+    "universo": 18647,
+    "enFalta": 20,
+    "avance": 12538,
+    "remanente": 6089,
+    "base": 12558,
     "estados": {
-     "S": 6678,
-     "C": 10781,
-     "P": 30,
-     "AP": 32,
-     "AE": 1319,
+     "S": 6089,
+     "C": 11353,
+     "P": 14,
+     "AP": 6,
+     "AE": 1185,
      "rv": 0
     },
-    "actualizado": "07-sep-2026",
+    "actualizado": "13-sep-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -261,13 +261,13 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 62466,
-   "enFalta": 350,
-   "avance": 49136,
-   "remanente": 12154,
-   "base": 49486,
-   "actualizado": "07-sep-2026",
-   "kpi": 0.7
+   "universo": 62273,
+   "enFalta": 308,
+   "avance": 49574,
+   "remanente": 11565,
+   "base": 49882,
+   "actualizado": "13-sep-2026",
+   "kpi": 0.6
   },
   "cierre": {
    "activo": true,
