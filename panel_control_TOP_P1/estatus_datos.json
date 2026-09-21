@@ -2,7 +2,7 @@
  "meta": {
   "corte": "2026-09-21",
   "corte_texto": "21-09-2026",
-  "generado": "2026-09-21 14:23"
+  "generado": "2026-09-21 14:39"
  },
  "areas": [
   "2000",
@@ -470,29 +470,33 @@
   "global": {
    "total": 3050,
    "cerrados": 1626,
-   "tramite": 54,
-   "abiertos": 1370,
-   "vencidos": 900
+   "tramite": 0,
+   "esperandoCliente": 54,
+   "abiertos": 1424,
+   "vencidos": 936
   },
   "tipos": {
    "P1": {
     "total": 2025,
     "cerrados": 1362,
-    "tramite": 30,
-    "abiertos": 633,
-    "vencidos": 508
+    "tramite": 0,
+    "esperandoCliente": 30,
+    "abiertos": 663,
+    "vencidos": 533
    },
    "P2": {
     "total": 852,
     "cerrados": 262,
-    "tramite": 24,
-    "abiertos": 566,
-    "vencidos": 368
+    "tramite": 0,
+    "esperandoCliente": 24,
+    "abiertos": 590,
+    "vencidos": 379
    },
    "P3": {
     "total": 173,
     "cerrados": 2,
     "tramite": 0,
+    "esperandoCliente": 0,
     "abiertos": 171,
     "vencidos": 24
    }
@@ -501,42 +505,48 @@
    "Piping": {
     "total": 445,
     "cerrados": 256,
-    "tramite": 24,
-    "abiertos": 165,
-    "vencidos": 135
+    "tramite": 0,
+    "esperandoCliente": 24,
+    "abiertos": 189,
+    "vencidos": 156
    },
    "Eléctrica": {
     "total": 429,
     "cerrados": 240,
-    "tramite": 2,
-    "abiertos": 187,
-    "vencidos": 153
+    "tramite": 0,
+    "esperandoCliente": 2,
+    "abiertos": 189,
+    "vencidos": 155
    },
    "Instrumentación y Control": {
     "total": 427,
     "cerrados": 264,
-    "tramite": 1,
-    "abiertos": 162,
-    "vencidos": 138
+    "tramite": 0,
+    "esperandoCliente": 1,
+    "abiertos": 163,
+    "vencidos": 139
    },
    "Mecánica": {
     "total": 514,
     "cerrados": 421,
     "tramite": 0,
+    "esperandoCliente": 0,
     "abiertos": 93,
     "vencidos": 78
    },
    "Estructura": {
     "total": 140,
     "cerrados": 128,
-    "tramite": 3,
-    "abiertos": 9,
-    "vencidos": 4
+    "tramite": 0,
+    "esperandoCliente": 3,
+    "abiertos": 12,
+    "vencidos": 5
    },
    "Obras Civiles": {
     "total": 70,
     "cerrados": 53,
     "tramite": 0,
+    "esperandoCliente": 0,
     "abiertos": 17,
     "vencidos": 0
    }
@@ -545,21 +555,24 @@
    "2000": {
     "total": 570,
     "cerrados": 565,
-    "tramite": 2,
-    "abiertos": 3,
-    "vencidos": 1
+    "tramite": 0,
+    "esperandoCliente": 2,
+    "abiertos": 5,
+    "vencidos": 3
    },
    "3000": {
     "total": 1049,
     "cerrados": 463,
-    "tramite": 24,
-    "abiertos": 562,
-    "vencidos": 481
+    "tramite": 0,
+    "esperandoCliente": 24,
+    "abiertos": 586,
+    "vencidos": 503
    },
    "4000": {
     "total": 357,
     "cerrados": 308,
     "tramite": 0,
+    "esperandoCliente": 0,
     "abiertos": 49,
     "vencidos": 26
    },
@@ -567,6 +580,7 @@
     "total": 12,
     "cerrados": 12,
     "tramite": 0,
+    "esperandoCliente": 0,
     "abiertos": 0,
     "vencidos": 0
    }
@@ -583,19 +597,19 @@
    "vals": [
     [
      0,
-     154,
+     175,
      3,
      0
     ],
     [
-     3,
+     5,
      156,
      23,
      0
     ],
     [
      0,
-     141,
+     142,
      20,
      0
     ],
@@ -607,7 +621,7 @@
     ],
     [
      0,
-     9,
+     11,
      0,
      0
     ],
@@ -620,8 +634,8 @@
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 525,
-   "Caminata 2 (100%)": 108
+   "Caminata 1 (80%)": 549,
+   "Caminata 2 (100%)": 114
   }
  },
  "semaforo": {

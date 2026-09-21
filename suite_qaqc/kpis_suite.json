@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-21 14:24",
+ "generado": "2026-09-21 14:39",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -208,16 +208,16 @@
     "p1": {
      "total": 2025,
      "cerrados": 1362,
-     "abiertos": 633,
-     "tramite": 30,
-     "atrasados": 508
+     "abiertos": 663,
+     "tramite": 0,
+     "atrasados": 533
     },
     "det": {
      "total": 3050,
      "cerrados": 1626,
-     "abiertos": 1370,
-     "tramite": 54,
-     "atrasados": 900
+     "abiertos": 1424,
+     "tramite": 0,
+     "atrasados": 936
     },
     "carpeta": {
      "tipo": "estado",
@@ -275,13 +275,13 @@
    "subs": 449,
    "detalles": 7362,
    "cerrados": 4989,
-   "abiertos": 2319,
-   "tramite": 54,
-   "atrasados": 1265,
+   "abiertos": 2373,
+   "tramite": 0,
+   "atrasados": 1301,
    "p1Total": 3818,
    "p1Cerrados": 2708,
-   "p1Tramite": 30,
-   "p1Atrasados": 699
+   "p1Tramite": 0,
+   "p1Atrasados": 724
   },
   "noConformidades": {
    "activo": true,

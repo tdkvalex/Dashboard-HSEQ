@@ -139,9 +139,17 @@ DT_MAP = {
     "trabajo requerido": ("Trabajo requerido", "abierto"),
     "iniciado": ("Iniciado", "abierto"),
     "trabajo no aceptado": ("Trabajo no aceptado", "abierto"),
-    "listo para revision": ("Listo para revisión", "tramite"),
-    "listo para cerrar": ("Listo para cerrar", "tramite"),
+    # Mientras el estatus no diga «Cerrado», el detalle está ABIERTO. Antes
+    # estos dos formaban un tercer grupo «en trámite» y el panel mostraba menos
+    # abiertos que el propio Excel del cliente: en el área 2000, 3 contra los 5
+    # que declara su hoja Resumen. *Regla del usuario (21-09-2026).*
+    "listo para revision": ("Listo para revisión", "abierto"),
+    "listo para cerrar": ("Listo para cerrar", "abierto"),
 }
+# Ya no cuentan aparte, pero saber cuántos esperan respuesta del cliente sigue
+# sirviendo: son abiertos cuya pelota no es nuestra. Se informan como subconjunto
+# de los abiertos, sin sumar al total.
+DT_ESPERANDO_CLIENTE = ("Listo para revisión", "Listo para cerrar")
 
 ESPECIALIDAD_MAP = {
     "electrica": "Eléctrica",
@@ -267,7 +275,10 @@ def resumir(filas):
     return {
         "total": len(filas),
         "cerrados": sum(1 for d in filas if d["grupo"] == "cerrado"),
+        # Se conserva en 0 para que la portada y la auditoría sigan cerrando
+        # `cerrados + abiertos + tramite = total` sin tocar nada más.
         "tramite": sum(1 for d in filas if d["grupo"] == "tramite"),
+        "esperandoCliente": sum(1 for d in filas if d["estado"] in DT_ESPERANDO_CLIENTE),
         "abiertos": sum(1 for d in filas if d["grupo"] == "abierto"),
         "vencidos": sum(1 for d in filas if d["vencido"]),
     }
@@ -546,7 +557,9 @@ def main():
           f"{pc(p1['cerrados'], p1['total'])}   "
           f"(abiertos {p1['abiertos']} · vencidos {p1['vencidos']})")
     print(f"  Detalles totales    {g['total']}  "
-          f"(cerrados {g['cerrados']} · trámite {g['tramite']} · abiertos {g['abiertos']})")
+          f"(cerrados {g['cerrados']} · abiertos {g['abiertos']}"
+          + (f", de ellos {g['esperandoCliente']} esperando revisión del cliente"
+             if g.get("esperandoCliente") else "") + ")")
 
     cambios = comparar(datos, anterior)
     if cambios:

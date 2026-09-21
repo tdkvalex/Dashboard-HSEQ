@@ -92,6 +92,14 @@ valores nuevos que no reconoce y los cruces que dejaron de cuadrar.
 Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el panel
 (desplegable «Cómo se homologaron los tres proyectos») y en el README.
 
+- **Arqueros: mientras el estatus no diga `Cerrado`, el detalle está ABIERTO.** `Trabajo
+  requerido`, `Iniciado`, `Trabajo no aceptado`, `Listo para revisión` y `Listo para cerrar`
+  son todos abiertos. Antes los dos últimos formaban un tercer grupo «en trámite» y el panel
+  mostraba **menos abiertos que el propio Excel del cliente** —área 2000: 3 contra los 5 que
+  declara su hoja Resumen—. Con la regla corregida los P1 abiertos cuadran área por área con
+  MASA: 5 · 586 · 49 · 0 = **663**. Los que esperan revisión del cliente se siguen informando
+  como **subconjunto** de los abiertos (`esperandoCliente`), porque esa pelota no es nuestra,
+  pero no salen del conteo. *Regla del usuario (21-09-2026).*
 - **Arqueros: una carpeta TOP está ENTREGADA desde que está en manos del cliente**, es decir
   con estatus `En Revisión`, `Observada`, `Rechazada` o `Aprobada`. Dentro de las entregadas se
   distingue la subcondición **«con respuesta del cliente»** —`Observada`, `Rechazada`,
