@@ -14,6 +14,14 @@ procesarlos y qué **no** volver a romper.
 | **Talabre** | `STATUS_SUBSISTEMAS_TALABRE.xlsx` **+** `Detalle_de_TerminacionesBesalco.xlsx` | `STATUS` (y `RESUMEN`/`DT` si vienen, como contraste) · `DT` |
 | **Arqueros** (cliente MASA) | `Estatus_Resumen_General_QAQC.xlsx` | `BD Caminatas-CTOP`, `BD Detalles Terminación` |
 
+**Desaladora emite sus dos archivos en días distintos, y eso es normal: el REPORTE GERENCIAL
+sale los MARTES y el estatus de punch list los LUNES.** El corte bueno es el reporte de ese
+martes actualizado con el punch del lunes siguiente, así que el punch siempre va unos días por
+delante y los conteos de punch de los dos archivos no coinciden. **No es una incongruencia que
+haya que resolver**: el panel usa el punch list —la fuente ítem a ítem y la más reciente—,
+declara **las dos fechas** (`meta.corteTexto` y `meta.cortePunchTexto`) y lo explica en la nota
+de fuentes. *Aclarado por el usuario (21-09-2026).*
+
 Talabre cambió de archivos en el corte 03-08-2026 (antes: `TalabreSTATUS_PEC.xlsx` +
 `TalabreCuadro_DT.xlsx`). El `Detalle_de_TerminacionesBesalco.xlsx` es el **registro completo**
 del proyecto (2.024 DT, no solo los 480 pendientes) y cuadra exacto con la hoja STATUS, cosa
@@ -84,6 +92,12 @@ valores nuevos que no reconoce y los cruces que dejaron de cuadrar.
 Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el panel
 (desplegable «Cómo se homologaron los tres proyectos») y en el README.
 
+- **Arqueros: una carpeta TOP está ENTREGADA desde que está en manos del cliente**, es decir
+  con estatus `En Revisión`, `Observada`, `Rechazada` o `Aprobada`. Dentro de las entregadas se
+  distingue la subcondición **«con respuesta del cliente»** —`Observada`, `Rechazada`,
+  `Aprobada`— de las que siguen en revisión sin pronunciamiento. Al corte 21-09: 37 entregadas,
+  de ellas 20 con respuesta y 17 sin pronunciamiento. `En proceso` **no** es entregada: es la
+  carpeta cuyo armado empezó y que todavía no se envía. *Criterio del usuario (21-09-2026).*
 - **Caminatas: se identifican por NÚMERO, nunca por el porcentaje que representan.**
   El «80%» de Arqueros no es el «80%» de otro proyecto. Arqueros: «80%» = Caminata 1, «100%» = Caminata 2.
 - **Caminata vigente** = la que cada proyecto declara como su indicador:

@@ -100,7 +100,9 @@ dejaron de entrar como «Sin especialidad» —que era el 91% de ese hueco— y 
 reparte por disciplina. El cliente la escribe con su propia grafía, así que se homologa a la
 del registro principal (`DISC_EXTERNAS`: `MECANICA`→`MECÁNICA`, `OBRAS CIVILES`→`OO.CC`); una
 disciplina que solo aparece en el log se respeta tal cual y se avisa, porque puede ser nueva o
-puede ser otro dato colado —al 21-09 viene `TECNOFUSION`, que es un subcontratista—.
+puede ser otro dato colado. Al 21-09 viene `TECNOFUSION`, que **es un subcontrato, no una
+disciplina** —confirmado por el usuario—: se deja tal cual porque corregirlo sería inventar un
+dato que el cliente no declaró, y el aviso queda para poder pedírselo.
 
 **Las columnas se resuelven por su encabezado (fila 4), nunca por posición.** El cliente las
 mueve: en el corte 21-09-2026 insertó «Disciplina» y «Área» y corrió dos lugares todo lo que

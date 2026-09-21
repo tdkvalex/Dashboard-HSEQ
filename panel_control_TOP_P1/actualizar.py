@@ -107,6 +107,10 @@ def cols_por_encabezado(ws, esperadas, etiqueta):
 
 CTOP_MAP = {
     "": "Sin entregar",
+    # «En proceso» es la carpeta cuyo armado empezó pero que todavía NO se
+    # entregó al cliente. Cuenta como sin entregar. *Confirmado por el usuario
+    # (21-09-2026), cuando apareció el primer registro con ese estatus.*
+    "en proceso": "Sin entregar",
     "en revision": "En revisión",
     "revision": "En revisión",
     "observada": "Observada",
@@ -116,8 +120,13 @@ CTOP_MAP = {
     "aprobada": "Aprobada",
     "aprobado": "Aprobada",
 }
-# Una carpeta cuenta como ENTREGADA si ya entró al circuito de revisión.
+# Una carpeta cuenta como ENTREGADA si ya entró al circuito de revisión: desde
+# que está en manos del cliente, se entregó. Dentro de las entregadas hay una
+# subcondición: las que YA TIENEN RESPUESTA del cliente —observada, rechazada o
+# aprobada— frente a las que siguen en revisión sin pronunciamiento.
+# *Criterio del usuario (21-09-2026).*
 CTOP_ENTREGADAS = {"En revisión", "Observada", "Rechazada", "Aprobada"}
+CTOP_CON_RESPUESTA = {"Observada", "Rechazada", "Aprobada"}
 
 # Estados de los detalles de terminación, agrupados en 3 categorías de gestión.
 DT_MAP = {
@@ -287,6 +296,7 @@ def construir(corte, caminatas, detalles):
 
     ctop_global = Counter(c["ctop"] for c in caminatas)
     entregadas = sum(v for k, v in ctop_global.items() if k in CTOP_ENTREGADAS)
+    con_respuesta = sum(v for k, v in ctop_global.items() if k in CTOP_CON_RESPUESTA)
 
     heat = []
     for e in ESPECIALIDADES:
@@ -318,6 +328,7 @@ def construir(corte, caminatas, detalles):
             "global": {
                 "total": len(caminatas),
                 "entregadas": entregadas,
+                "conRespuesta": con_respuesta,
                 "rev": ctop_global.get("En revisión", 0),
                 "obs": ctop_global.get("Observada", 0),
                 "rech": ctop_global.get("Rechazada", 0),
@@ -417,6 +428,7 @@ def actualizar_historial(datos):
         "camProx": c["prox"], "camProg": c["prog"],
         "topEntregadas": t["entregadas"], "topRev": t["rev"],
         "topObs": t["obs"], "topRech": t["rech"], "topAprob": t["aprob"],
+        "topConRespuesta": t["conRespuesta"],
         "p1Total": p1["total"], "p1Cerrados": p1["cerrados"],
         "p1Abiertos": p1["abiertos"], "p1Vencidos": p1["vencidos"],
     }
@@ -508,6 +520,8 @@ def main():
     print(f"  Carpetas TOP entr.  {t['entregadas']}/{t['total']}  "
           f"{pc(t['entregadas'], t['total'])}   "
           f"(aprobadas {t['aprob']} · rechazadas {t['rech']} · en revisión {t['rev']})")
+    print(f"    con respuesta del cliente  {t['conRespuesta']}/{t['entregadas']} "
+          f"entregadas   ·   {t['rev']} sin pronunciamiento")
     print(f"  Cierre P1           {p1['cerrados']}/{p1['total']}  "
           f"{pc(p1['cerrados'], p1['total'])}   "
           f"(abiertos {p1['abiertos']} · vencidos {p1['vencidos']})")

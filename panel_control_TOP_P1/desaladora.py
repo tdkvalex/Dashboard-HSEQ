@@ -471,6 +471,29 @@ def codigo(v, vacio):
     return t.split()[0] if t else vacio
 
 
+# Los dos archivos de Desaladora NO son del mismo día y no tienen por qué serlo:
+# el proyecto emite el REPORTE GERENCIAL los martes y el estatus de punch list
+# los lunes. El corte bueno es el reporte del martes actualizado con el punch
+# del lunes siguiente, así que el panel declara las DOS fechas en vez de dar a
+# entender que hay una sola. El punch no trae su fecha dentro: viene en el
+# nombre, que el proyecto escribe de tres formas.
+_FECHAS_PUNCH = ((r"(\d{4})[-_](\d{2})[-_](\d{2})", (0, 1, 2)),      # 2026_09_20
+                 (r"(\d{2})-(\d{2})-(\d{4})", (2, 1, 0)),            # 31-08-2026
+                 (r"(\d{2})(\d{2})(\d{4})", (2, 1, 0)))              # 25082026
+
+
+def fecha_de_nombre(ruta):
+    """Fecha del punch list, tomada de su nombre; None si no la trae."""
+    nombre = Path(ruta).stem
+    for patron, (a, m, d) in _FECHAS_PUNCH:
+        for g in re.findall(patron, nombre):
+            try:
+                return datetime(int(g[a]), int(g[m]), int(g[d]))
+            except ValueError:
+                continue
+    return None
+
+
 def leer_punch(ruta, hoy):
     wb = libro(ruta)
     ws, nf, c = hoja_punch(wb, ruta)
@@ -544,7 +567,7 @@ def padre_de(id_comp):
     return re.sub(r"[\s\-_]*comp\.?\s*\d*\s*$", "", id_comp, flags=re.I).strip()
 
 
-def construir(corte, todos, items, hoy, declarado):
+def construir(corte, todos, items, hoy, declarado, cortePunch=None):
     # ---------- universo del proyecto ----------
     # Los componentes salen del universo (ver FUERA_DEL_UNIVERSO) pero no se
     # pierden: van a su propio bloque con el estado de cada uno.
@@ -770,10 +793,15 @@ def construir(corte, todos, items, hoy, declarado):
                 })
         control["difPunch"] = difs
         if difs:
+            # No es una sospecha: los dos archivos se emiten en días distintos
+            # —el reporte los martes, el punch los lunes—, así que el punch
+            # siempre va algunos días por delante. Se informa para saber cuánto
+            # se movió entre uno y otro, no para dudar de los archivos.
             avisos.append(
-                "El reporte gerencial y el punch list no cuadran en "
+                "El conteo de punch del reporte gerencial va por detrás del punch list en "
                 + ", ".join(d["cat"] for d in difs)
-                + " — el panel usa el punch list, que es la fuente ítem a ítem")
+                + " — es lo esperable: el reporte se emite los martes y el punch los lunes. "
+                  "El panel usa el punch list, que es la fuente ítem a ítem y la más reciente")
 
     # Contraste de caminatas contra los totales que declara el propio archivo.
     for tipo, d in declarado.items():
@@ -815,6 +843,8 @@ def construir(corte, todos, items, hoy, declarado):
             **PROYECTO,
             "corte": corte.strftime("%Y-%m-%d") if corte else None,
             "corteTexto": corte.strftime("%d-%m-%Y") if corte else "sin fecha",
+            "cortePunch": cortePunch.strftime("%Y-%m-%d") if cortePunch else None,
+            "cortePunchTexto": cortePunch.strftime("%d-%m-%Y") if cortePunch else None,
             "hoy": hoy.strftime("%d-%m-%Y"),
             "generado": datetime.now().strftime("%Y-%m-%d %H:%M"),
         },
@@ -882,7 +912,8 @@ def main():
 
     corte, subs, declarado = leer_reporte(args.reporte)
     items = leer_punch(args.punch, hoy)
-    datos = construir(corte, subs, items, hoy, declarado)
+    datos = construir(corte, subs, items, hoy, declarado,
+                      fecha_de_nombre(args.punch))
 
     destino = AQUI / "datos_desaladora.json"
     destino.write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -896,7 +927,9 @@ def main():
     print("=" * 68)
     print(f"  {m['nombre'].upper()} — {m['descripcion']}")
     print(f"  {m['cliente']}   ·   contrato {m['contrato']}")
-    print(f"  Corte del reporte: {m['corteTexto']}   ·   atrasos calculados al {m['hoy']}")
+    print(f"  Reporte gerencial: {m['corteTexto']}"
+          + (f"   ·   punch list: {m['cortePunchTexto']}" if m.get("cortePunchTexto") else "")
+          + f"   ·   atrasos calculados al {m['hoy']}")
     print("=" * 68)
 
     print(f"\nSUBSISTEMAS: {s['total']}")
@@ -969,8 +1002,8 @@ def main():
               f"gerencial ({ctl['itemsHuerfanos']} ítems): "
               f"{', '.join(ctl['punchSinSubsistemaEnReporte'][:10])}")
     if ctl.get("difPunch"):
-        print("  ⚠ El conteo de punch difiere entre los dos archivos "
-              "(el panel usa el punch list):")
+        print("  i  El punch list va por delante del reporte gerencial —se emiten en "
+              "días distintos— y el panel usa el punch list:")
         for d in ctl["difPunch"]:
             print(f"      {d['cat']}: reporte gerencial {d['reporte']} · "
                   f"punch list {d['punch']}")

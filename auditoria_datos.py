@@ -429,16 +429,32 @@ if _ph:
         arbol = todo[a:b]
         mc = re.search(r"lastUpload:\{all:'(\d{4}-\d\d-\d\d)", arbol)
         corte_p = mc.group(1) if mc else None
+        # Los campos se leen POR NOMBRE y tolerando espacios. La versión anterior
+        # exigía `date:'…'` pegado y los cinco estados en orden fijo; el panel
+        # escribe 8 de sus 1.064 puntos como `date: '…'`, y esos se perdían. El
+        # resultado era una falsa alarma semanal —«7 nodos de Talabre sin dato»—
+        # sobre nodos que sí traían su punto del corte. Un auditor que se
+        # equivoca enseña a no hacerle caso, que es peor que no tenerlo.
+        CAMPOS = ("S", "C", "P", "AP", "AE")
+
+        def _estados(txt):
+            d = dict((k, int(v)) for k, v in re.findall(r"\b([A-Za-z]+)\s*:\s*(\d+)", txt))
+            return tuple(str(d.get(k, 0)) for k in CAMPOS)
+
         desfase, quietos = [], []
-        for nid, cuerpo in re.findall(r"'([A-Z0-9\-]+)':\[(.*?)\],?\n", seg, re.S):
-            m = re.search(r"id:'" + re.escape(nid) + r"'[^}]*?S:(\d+),\s*C:(\d+),\s*P:(\d+),\s*AP:(\d+),\s*AE:(\d+)", arbol)
-            if not m:
+        for nid, cuerpo in re.findall(r"'([A-Z0-9\-]+)'\s*:\s*\[(.*?)\],?\n", seg, re.S):
+            ma = re.search(r"id\s*:\s*'" + re.escape(nid) + r"'([^}]*)", arbol)
+            if not ma:
                 continue
-            pts = dict((d, g) for d, *g in re.findall(
-                r"date:'(\d{4}-\d\d-\d\d)'.*?data:\{S:(\d+),C:(\d+),P:(\d+),AP:(\d+),AE:(\d+)\}", cuerpo))
+            enArbol = _estados(ma.group(1))
+            pts = {}
+            for d, datos in re.findall(
+                    r"date\s*:\s*'(\d{4}-\d\d-\d\d)'.*?data\s*:\s*\{([^}]*)\}", cuerpo, re.S):
+                pts[d] = _estados(datos)
             if corte_p and corte_p in pts:
-                if tuple(pts[corte_p]) != tuple(m.groups()):
-                    desfase.append(f"{nid} (árbol {'/'.join(m.groups())} vs historial {'/'.join(pts[corte_p])})")
+                if pts[corte_p] != enArbol:
+                    desfase.append(f"{nid} (árbol {'/'.join(enArbol)} vs "
+                                   f"historial {'/'.join(pts[corte_p])})")
             elif pts:
                 quietos.append(f"{nid} (último {max(pts)})")
         chk(not desfase, f"Protocolos · {pid}: el árbol = su historial al {corte_p}",

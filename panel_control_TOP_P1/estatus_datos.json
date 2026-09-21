@@ -2,7 +2,7 @@
  "meta": {
   "corte": "2026-09-19",
   "corte_texto": "19-09-2026",
-  "generado": "2026-09-21 13:29"
+  "generado": "2026-09-21 13:52"
  },
  "areas": [
   "2000",
@@ -266,11 +266,12 @@
   "global": {
    "total": 136,
    "entregadas": 37,
+   "conRespuesta": 20,
    "rev": 17,
    "obs": 1,
    "rech": 19,
    "aprob": 0,
-   "pend": 98
+   "pend": 99
   },
   "byArea": {
    "2000": {
