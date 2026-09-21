@@ -38,8 +38,14 @@ y `armar_suite.js` al final) y **se detiene** si algún archivo viene más viejo
 cargado o si falta la planilla de NC externas. Lo que no llega no se toca: ese módulo conserva
 su corte anterior.
 
-`verificar_suite.py` revisa las dos PPT y la suite en tres anchos antes de enviar.
-`auditoria_datos.py` cruza la misma cifra en todas las capas —Excel, JSON, portada y PPT—.
+`verificar_suite.py` revisa las tres PPT y la suite en tres anchos antes de enviar.
+`auditoria_datos.py` cruza la misma cifra en todas las capas —Excel, JSON, portada y PPT— y
+además **contra el corte anterior**: hay cifras que solo pueden subir, y si una cae a cero no
+es el proyecto retrocediendo sino una columna que se dejó de leer. Eso pasó sin que nadie lo
+viera: la tarjeta verde de Desaladora venía en 25, 28, 29 y se publicó en **0** los cortes del
+18-08, 25-08 y 01-09 porque al REPORTE le insertaron una columna. **Los cuatro lectores
+resuelven sus columnas por el nombre del encabezado**, no por posición, y se detienen si falta
+una esencial.
 
 Los ocho documentos que entran, cómo se leen y en qué orden se inyectan están dibujados en
 [`CADA_LUNES.md`](CADA_LUNES.md) §3. Un corte completo demora unos **6 segundos**: los Excel

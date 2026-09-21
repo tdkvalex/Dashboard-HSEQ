@@ -78,6 +78,33 @@ CAMINATA_MAP = {
     "por programar": "Por programar",
 }
 
+COLS_CAMINATAS = {
+    "item": ("item",),                  "clasificacion": ("clasificacion",),
+    "area": ("area",),                  "subsistema": ("subsistema",),
+    "c80":  ("estatus caminata 80%",),  "c100": ("estatus caminata 100%",),
+    "ctop": ("estatus ctop",),
+}
+COLS_DETALLES = {
+    "area": ("area",),                  "tipo": ("tipo",),
+    "especialidad": ("especialidad",),  "estatus": ("estatus",),
+    "vence": ("fecha de vencimiento",), "caminata": ("n° caminata", "nº caminata",
+                                                     "n caminata", "no caminata"),
+}
+
+
+def cols_por_encabezado(ws, esperadas, etiqueta):
+    """Índice de cada columna por su encabezado de la fila 1."""
+    f1 = next(ws.iter_rows(min_row=1, max_row=1, values_only=True), ())
+    nombres = {norm(v): i for i, v in enumerate(f1) if v not in (None, "")}
+    cols = {k: next((nombres[a] for a in alias if a in nombres), None)
+            for k, alias in esperadas.items()}
+    faltan = [k for k, v in cols.items() if v is None]
+    if faltan:
+        sys.exit(f"La hoja «{etiqueta}» no trae las columnas {', '.join(faltan)} "
+                 f"en la fila 1: el archivo cambió de formato y no se leyó.")
+    return cols
+
+
 CTOP_MAP = {
     "": "Sin entregar",
     "en revision": "En revisión",
@@ -173,38 +200,49 @@ def leer(ruta, respaldo=None):
                          "si estás reprocesando un corte pasado)") + ".")
 
     # --- caminatas y carpetas TOP -------------------------------------------
+    # Las columnas se resuelven por su encabezado (fila 1). Leer por posición ya
+    # falló dos veces en una misma semana en los otros dos frentes —el log de
+    # MASA y el REPORTE GERENCIAL insertaron columnas—, y este archivo viene del
+    # mismo cliente. Si falta una columna esencial, el archivo no se lee.
+    hc = hoja(wb, "BD Caminatas-CTOP", ruta)
+    cc = cols_por_encabezado(hc, COLS_CAMINATAS, "BD Caminatas-CTOP")
     caminatas = []
-    for fila in hoja(wb, "BD Caminatas-CTOP", ruta).iter_rows(min_row=2, values_only=True):
-        if fila[0] is None:
+    for fila in hc.iter_rows(min_row=2, values_only=True):
+        if fila[cc["item"]] is None:
             continue
+        g = lambda k: fila[cc[k]] if cc[k] < len(fila) else None
         caminatas.append({
-            "clasificacion": (fila[1] or "").strip(),
-            "area": str(fila[2]).strip(),
-            "subsistema": str(fila[3]).strip(),
-            "c80": mapear(fila[4], CAMINATA_MAP, "Caminata 80%"),
-            "c100": mapear(fila[5], CAMINATA_MAP, "Caminata 100%"),
-            "ctop": mapear(fila[6], CTOP_MAP, "Estatus CTOP"),
+            "clasificacion": (g("clasificacion") or "").strip(),
+            "area": str(g("area")).strip(),
+            "subsistema": str(g("subsistema")).strip(),
+            "c80": mapear(g("c80"), CAMINATA_MAP, "Caminata 80%"),
+            "c100": mapear(g("c100"), CAMINATA_MAP, "Caminata 100%"),
+            "ctop": mapear(g("ctop"), CTOP_MAP, "Estatus CTOP"),
         })
 
     # --- detalles de terminación --------------------------------------------
+    hd = hoja(wb, "BD Detalles Terminación", ruta)
+    cd = cols_por_encabezado(hd, COLS_DETALLES, "BD Detalles Terminación")
     detalles = []
-    for fila in hoja(wb, "BD Detalles Terminación", ruta).iter_rows(min_row=2, values_only=True):
+    for fila in hd.iter_rows(min_row=2, values_only=True):
         if all(v is None for v in fila):
             continue
-        estado, grupo = mapear(fila[8], DT_MAP, "Estatus detalle")\
-            if norm(fila[8]) in DT_MAP else (str(fila[8]).strip(), "abierto")
-        if norm(fila[8]) not in DT_MAP:
-            avisos.append(f"Estatus detalle no reconocido «{fila[8]}» — "
+        g = lambda k: fila[cd[k]] if cd[k] < len(fila) else None
+        est = g("estatus")
+        estado, grupo = mapear(est, DT_MAP, "Estatus detalle")\
+            if norm(est) in DT_MAP else (str(est).strip(), "abierto")
+        if norm(est) not in DT_MAP:
+            avisos.append(f"Estatus detalle no reconocido «{est}» — "
                           f"contabilizado como ABIERTO por precaución")
-        vence = as_fecha(fila[9])
+        vence = as_fecha(g("vence"))
         detalles.append({
-            "area": str(fila[1]).strip(),
-            "tipo": (fila[4] or "").strip(),
-            "especialidad": mapear(fila[5], ESPECIALIDAD_MAP, "Especialidad"),
+            "area": str(g("area")).strip(),
+            "tipo": (g("tipo") or "").strip(),
+            "especialidad": mapear(g("especialidad"), ESPECIALIDAD_MAP, "Especialidad"),
             "estado": estado,
             "grupo": grupo,
             "vencido": bool(grupo == "abierto" and vence and vence < corte),
-            "caminata": (fila[13] or "").strip(),
+            "caminata": (g("caminata") or "").strip(),
         })
 
     return corte, caminatas, detalles

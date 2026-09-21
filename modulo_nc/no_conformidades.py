@@ -238,23 +238,72 @@ def atrasada(estado, creada, hoy):
 
 
 # =============================================================================
+# El registro principal también se resuelve por encabezado (fila 1). Es la
+# fuente más grande del módulo —513 hallazgos y 10.613 UF— y hasta ahora se leía
+# por posición, el mismo riesgo que ya se materializó dos veces: el log de MASA
+# y el REPORTE GERENCIAL insertaron columnas la misma semana. «Fecha De Cierre»
+# aparece dos veces en el archivo, así que la columna se pide por nombre y por
+# cuál de sus apariciones.
+COLS_DATA = {
+    "proyecto": ("nombre del proyecto", 0),   "n":      ("#", 0),
+    "emision":  ("tipo de emision", 0),       "tipo":   ("tipo", 0),
+    "especialidad": ("especialidad", 0),      "resp":   ("personas asignadas", 0),
+    "creada":   ("fecha de creacion", 0),     "titulo": ("titulo", 0),
+    "cerrada":  ("fecha de cierre", 0),       "estatus": ("estatus", 0),
+}
+# Encabezados largos que el proyecto redacta entero: se reconocen por su inicio.
+COLS_DATA_PREFIJO = {
+    "codigoExterno": "codigo/numero nc externa",
+    "costo": "costo de la no conformidad",
+}
+
+
+def cols_data(ws):
+    """Columnas del registro principal por encabezado; None si falta alguna."""
+    f1 = next(ws.iter_rows(min_row=1, max_row=1, values_only=True), ())
+    exactos, cols, faltan = {}, {}, []
+    for i, v in enumerate(f1):
+        if texto(v):
+            exactos.setdefault(norm(v), []).append(i)
+    for k, (nombre, n) in COLS_DATA.items():
+        idx = exactos.get(nombre, [])
+        if len(idx) > n:
+            cols[k] = idx[n]
+        else:
+            faltan.append(f"{k} («{nombre}»)")
+    for k, pre in COLS_DATA_PREFIJO.items():
+        i = next((i for i, v in enumerate(f1) if texto(v) and norm(v).startswith(pre)), None)
+        if i is None:
+            faltan.append(f"{k} («{pre}…»)")
+        else:
+            cols[k] = i
+    if faltan:
+        avisos.append("El registro principal no trae las columnas " + ", ".join(faltan) +
+                      " en la fila 1; no se leyó")
+        return None
+    return cols
+
+
 def leer(ruta, hoy):
     wb = libro(ruta)
     hoja = "Observaciones" if "Observaciones" in wb.sheetnames else wb.sheetnames[0]
-    it = wb[hoja].iter_rows(values_only=True)
-    next(it)                                     # encabezado
+    C = cols_data(wb[hoja])
+    if C is None:
+        return []
+    col = lambda f, k: f[C[k]] if C[k] < len(f) else None
+    it = wb[hoja].iter_rows(min_row=2, values_only=True)
 
     items, sin_proyecto = [], Counter()
     for f in it:
         if all(x is None for x in f):
             continue
-        clave = texto(f[0]).upper()
+        clave = texto(col(f, "proyecto")).upper()
         p = PROYECTOS.get(clave)
         if p is None:
             sin_proyecto[clave or "(vacío)"] += 1
             continue
 
-        emision = texto(f[3], "Sin clasificar")
+        emision = texto(col(f, "emision"), "Sin clasificar")
         if norm(emision).startswith("interna"):
             origen = "Interna"
         elif norm(emision).startswith("externa"):
@@ -263,22 +312,22 @@ def leer(ruta, hoy):
             origen = "Sin clasificar"
             # Vacío es un dato faltante, no un valor raro: se cuenta aparte y
             # solo se avisa si aparece un texto que no se sabe clasificar.
-            if f[3] not in (None, ""):
+            if col(f, "emision") not in (None, ""):
                 avisos.append(f"Tipo de emisión no reconocido: «{emision}»")
 
         # La NC del cliente en Arqueros viene del log, no de aquí (ver la
         # constante arriba). Se descarta y se declara cuántas se dejaron fuera.
         if p["id"] == PROYECTO_CLIENTE_SOLO_DEL_LOG and norm(emision).startswith("externa cliente"):
-            del_log[texto(f[1], "sin código")] = texto(f[12], "")[:60]
+            del_log[texto(col(f, "n"), "sin código")] = texto(col(f, "titulo"), "")[:60]
             continue
 
-        estatus = texto(f[24], "Sin estatus")
+        estatus = texto(col(f, "estatus"), "Sin estatus")
         estado = CERRADA if norm(estatus) == "cerrado" else ABIERTA
 
-        creada = f[11] if isinstance(f[11], datetime) else None
-        cerrada = f[21] if isinstance(f[21], datetime) else None
+        creada = col(f, "creada") if isinstance(col(f, "creada"), datetime) else None
+        cerrada = col(f, "cerrada") if isinstance(col(f, "cerrada"), datetime) else None
 
-        tipo = texto(f[5], "Sin tipo")
+        tipo = texto(col(f, "tipo"), "Sin tipo")
         if tipo not in TIPOS:
             avisos.append(f"Tipo no reconocido: «{tipo}»")
         if tipo in TIPOS_EXCLUIDOS:
@@ -288,16 +337,16 @@ def leer(ruta, hoy):
 
         items.append({
             "proy": p["id"],
-            "n": texto(f[1]),
+            "n": texto(col(f, "n")),
             "origen": origen,
             "emision": emision,
-            "codigoExterno": texto(f[4]),
+            "codigoExterno": texto(col(f, "codigoExterno")),
             "tipo": tipo,
-            "especialidad": texto(f[8], "Sin especialidad"),
-            "responsable": texto(f[9], "Sin asignar"),
+            "especialidad": texto(col(f, "especialidad"), "Sin especialidad"),
+            "responsable": texto(col(f, "resp"), "Sin asignar"),
             "creada": creada,
-            "titulo": texto(f[12])[:150],
-            "costo": f[19] if isinstance(f[19], (int, float)) else None,
+            "titulo": texto(col(f, "titulo"))[:150],
+            "costo": col(f, "costo") if isinstance(col(f, "costo"), (int, float)) else None,
             "cerradaEl": cerrada,
             "estatus": estatus,
             "estado": estado,

@@ -17,7 +17,7 @@ la portada de la suite y las PPT digan el mismo número. Cinco cruces:
 
 Sale con error si algo falla, así que sirve en cualquier automatismo.
 """
-import json, re, sys, warnings, zipfile
+import json, re, subprocess, sys, warnings, zipfile
 from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -52,6 +52,7 @@ EXT = _HALLADOS.get("nc_externas")
 TAL_S = _HALLADOS.get("tal_status")
 TAL_D = _HALLADOS.get("tal_dt")
 DES_R = _HALLADOS.get("des_reporte")
+ARQ_F = _HALLADOS.get("arqueros")
 
 ok, mal, avi = [], [], []
 def chk(cond, titulo, detalle=""):
@@ -190,6 +191,51 @@ if DES_R:
         chk(des["carpetas"]["sinEntregar"] == _vacias,
             "Desaladora · carpetas sin entregar cuadran con el REPORTE",
             f"Excel {_vacias} sin estatus de {len(_est)} · JSON {des['carpetas']['sinEntregar']}")
+
+if ARQ_F:
+    # Arqueros no tenía ningún cruce contra su Excel: era el único de los tres
+    # frentes cuyo lector nadie contrastaba, y es el que peor está. Se reconta
+    # aquí resolviendo los encabezados por cuenta propia.
+    wba = load_workbook(ARQ_F, data_only=True, read_only=True)
+    def _cols(ws, fila=1):
+        f = next(ws.iter_rows(min_row=fila, max_row=fila, values_only=True), ())
+        return {" ".join(str(v).split()).lower(): i
+                for i, v in enumerate(f) if v not in (None, "")}
+    wsd = wba["BD Detalles Terminación"]
+    cd = _cols(wsd)
+    iT, iE, iS = cd.get("tipo"), cd.get("estatus"), cd.get("subsistema")
+    if None in (iT, iE, iS):
+        nota("Arqueros · no se ubicaron «Tipo»/«Estatus» en BD Detalles Terminación: "
+             "no se recontaron los detalles")
+    else:
+        det = [f for f in wsd.iter_rows(min_row=2, values_only=True)
+               if not all(v is None for v in f)]
+        chk(arq["dt"]["global"]["total"] == len(det), "Arqueros · detalles de terminación",
+            f"Excel {len(det)} · JSON {arq['dt']['global']['total']}")
+        _p1 = [f for f in det if str(f[iT] or "").strip() == "P1"]
+        chk(arq["dt"]["tipos"]["P1"]["total"] == len(_p1), "Arqueros · detalles P1",
+            f"Excel {len(_p1)} · JSON {arq['dt']['tipos']['P1']['total']}")
+        _cerr = sum(1 for f in _p1 if " ".join(str(f[iE] or "").split()).lower() == "cerrado")
+        chk(arq["dt"]["tipos"]["P1"]["cerrados"] == _cerr, "Arqueros · P1 cerrados",
+            f"Excel {_cerr} · JSON {arq['dt']['tipos']['P1']['cerrados']}")
+    wsc = wba["BD Caminatas-CTOP"]
+    cc = _cols(wsc)
+    iSub, iCtop = cc.get("subsistema"), cc.get("estatus ctop")
+    if None in (iSub, iCtop):
+        nota("Arqueros · no se ubicó «Estatus CTOP» en BD Caminatas-CTOP: "
+             "no se recontaron las carpetas")
+    else:
+        cam = [f for f in wsc.iter_rows(min_row=2, values_only=True) if f[0] is not None]
+        chk(arq["cam"]["global"]["subs"] == len(cam), "Arqueros · subsistemas",
+            f"Excel {len(cam)} · JSON {arq['cam']['global']['subs']}")
+        # Entregada = la carpeta ya entró al circuito de revisión del cliente.
+        _ENTR = ("en revision", "en revisión", "observada", "observado",
+                 "rechazada", "rechazado", "aprobada", "aprobado")
+        _ent = sum(1 for f in cam
+                   if " ".join(str(f[iCtop] or "").split()).lower() in _ENTR)
+        chk(arq["ctop"]["global"]["entregadas"] == _ent,
+            "Arqueros · carpetas TOP entregadas",
+            f"Excel {_ent} · JSON {arq['ctop']['global']['entregadas']}")
 
 if TAL_S:
     wbs = load_workbook(TAL_S, data_only=True)
@@ -468,6 +514,83 @@ for f in kp["proyectos"]:
     ident.setdefault(f["id"], set()).add((f["codigo"], f["nombre"], f["cliente"]))
 for k, v in ident.items():
     chk(len(v) == 1, f"Identidad · {k} se nombra igual en todos lados", str(v) if len(v) > 1 else "")
+
+# ═══════════════ 7 · CONTINUIDAD CONTRA EL CORTE ANTERIOR ═══════════════
+print("7 · CONTINUIDAD CONTRA EL CORTE ANTERIOR")
+# Hay cifras que solo pueden subir: una carpeta entregada no se desentrega, un
+# protocolo cerrado no se abre. Si una de ellas cae a cero, no es el proyecto
+# retrocediendo: es que se dejó de leer su columna. Pasó sin que nadie lo viera.
+# La tarjeta verde de Desaladora venía en 25, 28, 29 y se publicó en **0** los
+# cortes del 18-08, 25-08 y 01-09 —al REPORTE le habían insertado una columna—;
+# volvió a 43 recién cuando las columnas pasaron a resolverse por encabezado.
+# Tres entregables salieron con esa cifra en cero y ninguna comprobación chistó.
+ACUMULATIVAS = {
+    "panel_control_TOP_P1/datos_desaladora.json": {
+        "carpetas · tarjeta verde":  ("carpetas", "tarjetaVerde"),
+        "carpetas · aprobadas":      ("carpetas", "aprobadas"),
+        "carpetas · entregadas":     ("carpetas", "entregadas"),
+        "punch · cerrados":          ("punch", "global", "cerrados"),
+    },
+    "panel_control_TOP_P1/datos_talabre.json": {
+        "DT · cerrados":             ("dt", "global", "cerrados"),
+        "carpetas · avance PEC":     ("carpetas", "promedio"),
+    },
+    "panel_control_TOP_P1/estatus_datos.json": {
+        "carpetas TOP · entregadas": ("ctop", "global", "entregadas"),
+        "P1 · cerrados":             ("dt", "tipos", "P1", "cerrados"),
+    },
+    "modulo_nc/datos_nc.json": {
+        "NC · cerradas":             ("global", "resumen", "cerradas"),
+        "NC · registros":            ("control", "registros"),
+    },
+}
+
+
+def _cava(d, ruta):
+    for k in ruta:
+        d = d[k]
+    return d
+
+
+def _version_anterior(arch):
+    """El último commit cuyo contenido difiere del actual; None si no hay git."""
+    try:
+        actual = (R / arch).read_bytes()
+        sha = subprocess.run(["git", "log", "--format=%H", "--", arch], cwd=R,
+                             capture_output=True, text=True, timeout=30).stdout.split()
+        for s in sha[:12]:
+            raw = subprocess.run(["git", "show", f"{s}:{arch}"], cwd=R,
+                                 capture_output=True, timeout=30).stdout
+            if raw and raw != actual:
+                return json.loads(raw.decode("utf-8"))
+    except Exception:
+        return None
+    return None
+
+
+_hubo = False
+for arch, campos in ACUMULATIVAS.items():
+    ant = _version_anterior(arch)
+    if ant is None:
+        continue
+    _hubo = True
+    corte_ant = (ant.get("meta") or {}).get("corteTexto") or "el corte anterior"
+    act = json.loads((R / arch).read_text())
+    for etq, ruta in campos.items():
+        try:
+            a, b = _cava(ant, ruta), _cava(act, ruta)
+        except (KeyError, TypeError):
+            continue
+        if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+            continue
+        chk(not (a > 0 and b == 0), f"Continuidad · {etq} no se desplomó a cero",
+            f"{corte_ant} traía {a} y ahora da 0 — se dejó de leer esa columna")
+        if a > 0 and 0 < b < a * 0.75:
+            nota(f"Continuidad · {etq} cae de {a} a {b} desde {corte_ant} "
+                 f"— confirmar que el retroceso es real")
+if not _hubo:
+    nota("Continuidad · no se pudo recuperar ningún corte anterior desde git: "
+         "no se comparó contra la semana pasada")
 
 # ═══════════════ salida ═══════════════
 print()
