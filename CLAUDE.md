@@ -110,6 +110,10 @@ las NC que **el cliente MASA le levanta** vienen en su propia planilla (`--exter
 «Disposición NC-Externas»). Sin ella Arqueros se ve con 1 abierta y 98,9% de cierre en vez de
 36 y 78%. El script avisa si no se pasa. Desde el corte 10-08-2026 esa planilla llega como
 `Log_Control_NC_MASA_*.xlsm`, un libro con varias hojas; se sigue leyendo la misma.
+**Sus columnas se resuelven por el encabezado de la fila 4, nunca por posición:** el cliente
+las mueve —al 21-09-2026 insertó «Disciplina» y «Área» y corrió dos lugares todo lo demás, con
+lo que las 43 cerradas se leyeron como abiertas—. Desde ese corte el log **sí trae disciplina**
+y las 79 del cliente dejaron de ser «Sin especialidad».
 *La numeración de MASA tiene huecos (al 10-08 faltan 13 números entre el 1 y el 84): **no son
 registros perdidos**. La hoja «Data Externas» del mismo libro lista los mismos 71 con
 numeración correlativa, así que los huecos son de la numeración del cliente.*

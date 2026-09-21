@@ -93,9 +93,23 @@ Las cifras salen de `resumir()` en `no_conformidades.py`, que expone `cliente`, 
 `abiertasCliente`, `abiertasSubcontrato` y `abiertasInternas` además de los viejos
 `internas`/`externas`. Si se agrega una vista nueva, usar esas y no `externas`.
 
-**Lo que esa planilla no trae:** disciplina, responsable ni costo. Los 70 registros entran como
-«Sin especialidad» y no suman al costo declarado. El panel lo declara en «Control de calidad
-del dato» en vez de dejar que el hueco se lea como dato perdido.
+**Lo que esa planilla no trae:** responsable ni costo. Esos registros no suman al costo
+declarado, y el panel lo declara en «Control de calidad del dato» en vez de dejar que el hueco
+se lea como dato perdido. **Disciplina sí trae desde el corte 21-09-2026**: las 79 del cliente
+dejaron de entrar como «Sin especialidad» —que era el 91% de ese hueco— y el panel ya las
+reparte por disciplina. El cliente la escribe con su propia grafía, así que se homologa a la
+del registro principal (`DISC_EXTERNAS`: `MECANICA`→`MECÁNICA`, `OBRAS CIVILES`→`OO.CC`); una
+disciplina que solo aparece en el log se respeta tal cual y se avisa, porque puede ser nueva o
+puede ser otro dato colado —al 21-09 viene `TECNOFUSION`, que es un subcontratista—.
+
+**Las columnas se resuelven por su encabezado (fila 4), nunca por posición.** El cliente las
+mueve: en el corte 21-09-2026 insertó «Disciplina» y «Área» y corrió dos lugares todo lo que
+venía a la derecha. El lector posicional pasó a leer el código de recepción donde esperaba el
+estatus, ninguno coincidió con «Cerrada» y **las 43 cerradas del cliente aparecieron abiertas**:
+Arqueros saltó de 37 a 80 abiertos y de 78,5% a 53,5% de cierre sin que nada avisara. Si falta
+una columna esencial el archivo **no se lee**, y se dice cuál falta. `auditoria_datos.py`
+recuenta los cierres del log por su cuenta —resolviendo el encabezado por separado, no copiando
+la resolución del módulo— y compara: ese cruce es el que delata este error.
 
 **Trampa del archivo:** la «Fecha MASA» de las revisiones abiertas trae la fecha de hoy —es una
 fórmula que cuenta días de espera—, así que solo se lee como fecha de cierre cuando el status

@@ -330,22 +330,70 @@ def leer(ruta, hoy):
 # cliente MASA levanta contra Besalco** viven en su propia planilla de control
 # de recepción y respuesta, y sin ellas el frente se ve casi sin pendiente.
 #
-# Hoja «Disposición NC-Externas» · encabezado fila 4 · datos fila 5+
-#   1  N° NC          2  Tipo (NC/OBS/OdM)   3  Interna/Externa   4  Detalle
-#   5  TTAL de Recepción                     6  Fecha de Recepción
-#   7  Status Actual
-#   (14,13) (21,20) (28,27) = (Status, Fecha MASA) de las revisiones 0, 1 y 2
+# Hoja «Disposición NC-Externas» · encabezado fila 4 · datos fila 5+.
+#
+# Las columnas se resuelven POR NOMBRE, no por posición: el cliente las mueve.
+# En el corte 21-09-2026 insertó «Disciplina» y «Área» entre «Interna/Externa» y
+# «Detalle», y todo lo de la derecha corrió dos lugares. El lector posicional
+# pasó a leer el código de recepción («EB-NE-1017») donde esperaba el estatus,
+# ninguno coincidió con «Cerrada» y las 43 NC cerradas del cliente aparecieron
+# abiertas: Arqueros saltó de 37 a 80 abiertas sin que nada avisara.
 #
 # TRAMPA: la «Fecha MASA» de las revisiones abiertas trae la fecha de HOY —es una
 # fórmula que cuenta días de espera—, así que solo se lee como fecha de cierre
 # cuando el status de esa misma revisión es «Aprobado».
 HOJA_EXTERNAS = "Disposición NC-Externas"
+FILA_ENCABEZADO_EXT = 4
+COLS_EXTERNAS = {
+    "n":       ("n° nc", "nº nc", "n nc", "no nc"),
+    "tipo":    ("nc/obs/odm masa", "nc°/obs/odm masa", "ncº/obs/odm masa"),
+    "origen":  ("interna externa",),
+    "disc":    ("disciplina",),
+    "detalle": ("detalle",),
+    "codigo":  ("ttal de recepcion",),
+    "creada":  ("fecha de recepcion",),
+    "estatus": ("status actual",),
+}
+# Sin estas el archivo no es el que creemos y se prefiere no leerlo a leerlo mal.
+EXT_MINIMO = ("n", "tipo", "origen", "detalle", "creada", "estatus")
+# Disciplina: el cliente escribe la misma especialidad con otra grafía que el
+# registro principal. Homologar es solo eso —la misma disciplina, un solo
+# nombre—: sin esto el panel listaría «MECANICA» y «MECÁNICA» como dos.
+DISC_EXTERNAS = {"mecanica": "MECÁNICA", "obras civiles": "OO.CC",
+                 "ee ii": "EE.II", "ee.ii": "EE.II"}
+
+
+def cols_externas(ws):
+    """Índice de cada columna por su encabezado; None si falta alguna esencial."""
+    fila = next(ws.iter_rows(min_row=FILA_ENCABEZADO_EXT,
+                             max_row=FILA_ENCABEZADO_EXT, values_only=True), ())
+    nombres = {norm(v): i for i, v in enumerate(fila) if texto(v)}
+    cols = {k: next((nombres[a] for a in alias if a in nombres), None)
+            for k, alias in COLS_EXTERNAS.items()}
+    faltan = [k for k in EXT_MINIMO if cols[k] is None]
+    if faltan:
+        avisos.append(f"El archivo de externas no trae las columnas "
+                      f"{', '.join(faltan)} en la fila {FILA_ENCABEZADO_EXT}; se ignoró")
+        return None
+    # (Status, Fecha MASA) de cada revisión, las que traiga el archivo.
+    cols["revs"] = [(nombres[f"status rev.{n}"], nombres[f"fecha masa rev.{n}"])
+                    for n in range(6)
+                    if f"status rev.{n}" in nombres and f"fecha masa rev.{n}" in nombres]
+    return cols
 TIPO_EXTERNAS = {"no conformidad": "No Conformidad", "observacion": "Observación",
                  "odm": "Opción de Mejora", "opcion de mejora": "Opción de Mejora"}
 # Estatus del cliente. «Cerrada» es el único que cierra; los demás siguen abiertos
 # y se conservan tal cual porque no se gestionan igual: «Observada» volvió con
 # observaciones del cliente y «Pendiente» aún no tiene respuesta de Besalco.
 CIERRE_EXTERNAS = "cerrada"
+
+
+def disciplina_externa(v):
+    """Disciplina del log del cliente, con la grafía del registro principal."""
+    s = norm(v)
+    if not s:
+        return "Sin especialidad"
+    return DISC_EXTERNAS.get(s, texto(v).upper())
 
 
 def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
@@ -355,30 +403,34 @@ def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
         avisos.append(f"El archivo de externas no trae la hoja «{HOJA_EXTERNAS}»; se ignoró")
         return []
     ws = wb[HOJA_EXTERNAS]
+    c = cols_externas(ws)
+    if c is None:
+        return []
+    col = lambda f, k: f[c[k]] if c[k] is not None and c[k] < len(f) else None
 
     items = []
-    for f in ws.iter_rows(min_row=5, values_only=True):
-        if not f or (f[1] in (None, "") and f[4] in (None, "")):
+    for f in ws.iter_rows(min_row=FILA_ENCABEZADO_EXT + 1, values_only=True):
+        if not f or (col(f, "n") in (None, "") and col(f, "detalle") in (None, "")):
             continue
-        if norm(f[3]) and not norm(f[3]).startswith("externa"):
-            avisos.append(f"Fila «{texto(f[1])}» del archivo de externas marcada "
-                          f"«{texto(f[3])}» y no «Externa» — se omitió")
+        if norm(col(f, "origen")) and not norm(col(f, "origen")).startswith("externa"):
+            avisos.append(f"Fila «{texto(col(f, 'n'))}» del archivo de externas marcada "
+                          f"«{texto(col(f, 'origen'))}» y no «Externa» — se omitió")
             continue
 
-        estatus = texto(f[7], "Sin estatus")
+        estatus = texto(col(f, "estatus"), "Sin estatus")
         estado = CERRADA if norm(estatus) == CIERRE_EXTERNAS else ABIERTA
 
-        creada = f[6] if isinstance(f[6], datetime) else None
+        creada = col(f, "creada") if isinstance(col(f, "creada"), datetime) else None
         cerrada = None
-        for st, fe in ((14, 13), (21, 20), (28, 27)):
+        for st, fe in c["revs"]:
             if norm(f[st]) == "aprobado" and isinstance(f[fe], datetime):
                 cerrada = f[fe]
         if estado == ABIERTA:
             cerrada = None          # la fecha de las abiertas es =HOY(), no un cierre
 
-        tipo = TIPO_EXTERNAS.get(norm(f[2]))
+        tipo = TIPO_EXTERNAS.get(norm(col(f, "tipo")))
         if tipo is None:
-            tipo = texto(f[2], "Sin tipo")
+            tipo = texto(col(f, "tipo"), "Sin tipo")
             avisos.append(f"Tipo no reconocido en el archivo de externas: «{tipo}»")
         if tipo in TIPOS_EXCLUIDOS:
             excluidos[tipo] += 1
@@ -389,18 +441,19 @@ def leer_externas(ruta, hoy, proyecto="ARQUEROS"):
             "proy": proyecto,
             # Se prefija para que no colisione con la numeración interna del
             # proyecto, que corre por su cuenta.
-            "n": f"MASA-{texto(f[1])}" if texto(f[1]) else "MASA-s/n",
+            "n": f"MASA-{texto(col(f, 'n'))}" if texto(col(f, "n")) else "MASA-s/n",
             "fuente": "externas",
             "origen": "Externa",
             "emision": "Externa Cliente",
-            "codigoExterno": texto(f[5]),
+            "codigoExterno": texto(col(f, "codigo")),
             "tipo": tipo,
-            # La planilla del cliente no registra ni disciplina ni responsable:
-            # se declara faltante en vez de inventarlo.
-            "especialidad": "Sin especialidad",
+            # Desde el corte 21-09-2026 la planilla del cliente sí trae la
+            # disciplina; el responsable sigue sin registrarse y se declara
+            # faltante en vez de inventarlo.
+            "especialidad": disciplina_externa(col(f, "disc")),
             "responsable": "Sin asignar",
             "creada": creada,
-            "titulo": texto(f[4])[:150],
+            "titulo": texto(col(f, "detalle"))[:150],
             "costo": None,
             "cerradaEl": cerrada,
             "estatus": estatus,
@@ -816,6 +869,17 @@ def main():
     if args.externas:
         ext = leer_externas(args.externas, hoy)
         n_ext = len(ext)
+        # La disciplina del log es texto libre del cliente: si una no existe en
+        # el registro principal, o es una disciplina nueva o se coló otra cosa
+        # —un subcontratista, por ejemplo—. Se declara en vez de corregirla.
+        propias = {i["especialidad"] for i in items}
+        raras = sorted({i["especialidad"] for i in ext
+                        if i["especialidad"] not in propias
+                        and i["especialidad"] != "Sin especialidad"})
+        if raras:
+            avisos.append(f"Disciplina solo vista en el log de MASA: "
+                          f"{', '.join('«' + r + '»' for r in raras)} — se respetó tal "
+                          f"cual; revisar si es una disciplina o se coló otro dato.")
         items += ext
     else:
         avisos.append("No se pasó --externas: Arqueros queda sin las NC que le levanta "

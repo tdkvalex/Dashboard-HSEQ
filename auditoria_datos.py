@@ -82,8 +82,21 @@ if NCX and EXT:
     n_cli = sum(1 for f in filas if cli_arq(f) and not odm(f))
     utiles = [f for f in filas if not odm(f) and not cli_arq(f)]
     wb2 = load_workbook(EXT, data_only=True, read_only=True)
-    ext = [f for f in wb2["Disposición NC-Externas"].iter_rows(min_row=5, values_only=True)
-           if f[1] not in (None, "")]
+    _hoja = wb2["Disposición NC-Externas"]
+    # Las columnas del log se resuelven por su encabezado —fila 4—, y por cuenta
+    # propia: el cliente las mueve, y en el corte 21-09-2026 dos columnas nuevas
+    # corrieron el estatus dos lugares. Esta lectura es a propósito
+    # independiente de la del módulo; si copiara su resolución, el cruce dejaría
+    # de poder pillar justo el error que existe para pillar.
+    _enc = {" ".join(str(v).split()).lower(): i
+            for i, v in enumerate(next(_hoja.iter_rows(min_row=4, max_row=4,
+                                                       values_only=True), ()))
+            if v not in (None, "")}
+    _iN, _iSt = _enc.get("n° nc", 1), _enc.get("status actual")
+    if _iSt is None:
+        nota("NC · el log de MASA no trae «Status Actual» en la fila 4: no se recontaron sus cierres")
+    ext = [f for f in _hoja.iter_rows(min_row=5, values_only=True)
+           if f[_iN] not in (None, "")]
     esperado = len(utiles) + len(ext)
     chk(nc["control"]["registros"] == esperado, "NC · registros",
         f"Excel {len(filas)} − {n_odm} ODM − {n_cli} del cliente ya en el log + {len(ext)} "
@@ -113,12 +126,21 @@ if NCX and EXT:
         "NC · las descartadas por venir del log cuadran con el Excel",
         f"Excel {n_cli} · JSON {nc['control'].get('clienteSoloDelLog', {}).get('descartadas')}")
     cerr_x = sum(1 for f in utiles if str(f[24]).strip() == "Cerrado")
-    cerr_e = sum(1 for f in ext if str(f[7]).strip().lower() == "cerrada")
+    cerr_e = sum(1 for f in ext if _iSt is not None
+                 and str(f[_iSt]).strip().lower() == "cerrada")
     chk(nc["global"]["resumen"]["cerradas"] == cerr_x + cerr_e, "NC · cerradas",
         f"Excel {cerr_x}+{cerr_e} · JSON {nc['global']['resumen']['cerradas']}")
     chk(nc["proyectos"]["ARQUEROS"]["resumen"]["cliente"] == len(ext),
         "NC · las del cliente en Arqueros son exactamente las del log",
         f"log {len(ext)} · JSON {nc['proyectos']['ARQUEROS']['resumen']['cliente']}")
+    # El cierre del cliente, recontado aparte: si el módulo dejara de reconocer
+    # la columna de estatus del log —le corrieron las columnas en el corte
+    # 21-09-2026— todas sus NC se verían abiertas y solo este corte lo delata.
+    if _iSt is not None:
+        _ecl = nc["proyectos"]["ARQUEROS"]["porEmision"].get("Externa Cliente", {})
+        chk(_ecl.get("cerradas") == cerr_e,
+            "NC · el cierre del cliente en Arqueros cuadra con el log",
+            f'log {cerr_e} cerradas de {len(ext)} · JSON {_ecl.get("cerradas")}')
 elif ENTRADA:
     nota("NC · no se encontró el Data_NCR o la planilla de externas: no se cruzó contra el Excel")
 

@@ -374,7 +374,8 @@ def main():
     revisar_datos()
     for r in PPTS:
         revisar_ppt(r)
-        revisar_desgloses(r)
+        if r.exists():          # si falta, revisar_ppt ya lo dijo en una línea
+            revisar_desgloses(r)
     revisar_suite(anchos)
 
     print("\n" + "=" * 74)
