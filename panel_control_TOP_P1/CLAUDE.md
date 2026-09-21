@@ -98,6 +98,11 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   `Aprobada`— de las que siguen en revisión sin pronunciamiento. Al corte 21-09: 37 entregadas,
   de ellas 20 con respuesta y 17 sin pronunciamiento. `En proceso` **no** es entregada: es la
   carpeta cuyo armado empezó y que todavía no se envía. *Criterio del usuario (21-09-2026).*
+- **Arqueros, caminata `Reprogramar` = «Por programar».** La caminata tenía fecha y hay que
+  volver a agendarla, así que está pendiente de programación. Apareció en el corte 21-09-2026
+  en 3 subsistemas y, sin homologar, quedaba fuera de los tres tramos: la tarjeta decía 133 de
+  136 y esos tres no figuraban en ninguna parte. `actualizar.py` avisa ahora si los tramos no
+  suman el universo, con el estatus culpable por su nombre, y `auditoria_datos.py` lo comprueba.
 - **Caminatas: se identifican por NÚMERO, nunca por el porcentaje que representan.**
   El «80%» de Arqueros no es el «80%» de otro proyecto. Arqueros: «80%» = Caminata 1, «100%» = Caminata 2.
 - **Caminata vigente** = la que cada proyecto declara como su indicador:

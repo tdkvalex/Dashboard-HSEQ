@@ -76,6 +76,11 @@ CAMINATA_MAP = {
     "proximo a realizar": "Próxima a realizar",
     "programar": "Por programar",
     "por programar": "Por programar",
+    # «Reprogramar»: la caminata tenía fecha y hay que volver a agendarla, así
+    # que está pendiente de programación. Apareció en el corte 21-09-2026 en 3
+    # subsistemas y, sin mapear, quedaba fuera de los tres tramos: el desglose
+    # decía 133 de 136 y tres subsistemas no aparecían en ninguna parte.
+    "reprogramar": "Por programar",
 }
 
 COLS_CAMINATAS = {
@@ -297,6 +302,21 @@ def construir(corte, caminatas, detalles):
     ctop_global = Counter(c["ctop"] for c in caminatas)
     entregadas = sum(v for k, v in ctop_global.items() if k in CTOP_ENTREGADAS)
     con_respuesta = sum(v for k, v in ctop_global.items() if k in CTOP_CON_RESPUESTA)
+
+    # Los tres tramos tienen que sumar el universo. Si el cliente estrena un
+    # estatus que no está en CAMINATA_MAP, el aviso de `mapear` es fácil de
+    # pasar por alto, pero el subsistema desaparece del desglose sin dejar
+    # rastro. Esto lo dice con nombre y apellido.
+    _tramos = (sum(1 for c in caminatas if c["c100"] == "Realizada")
+               + sum(1 for c in caminatas if c["c100"] == "Próxima a realizar")
+               + sum(1 for c in caminatas if c["c100"] == "Por programar"))
+    if _tramos != len(caminatas):
+        _fuera = sorted({c["c100"] for c in caminatas
+                         if c["c100"] not in ("Realizada", "Próxima a realizar",
+                                              "Por programar")})
+        avisos.append(f"El desglose de caminatas suma {_tramos} de {len(caminatas)}: "
+                      f"{len(caminatas) - _tramos} subsistema(s) quedan fuera de los tres "
+                      f"tramos por estatus sin homologar — {', '.join(repr(x) for x in _fuera)}")
 
     heat = []
     for e in ESPECIALIDADES:

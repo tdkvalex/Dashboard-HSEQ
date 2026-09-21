@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-09-19",
-  "corte_texto": "19-09-2026",
-  "generado": "2026-09-21 13:52"
+  "corte": "2026-09-21",
+  "corte_texto": "21-09-2026",
+  "generado": "2026-09-21 14:23"
  },
  "areas": [
   "2000",
@@ -20,9 +20,9 @@
   "global": {
    "subs": 136,
    "c80": 136,
-   "c100": 95,
-   "prox": 41,
-   "prog": 0
+   "c100": 100,
+   "prox": 33,
+   "prog": 3
   },
   "byArea": {
    "2000": {
@@ -35,9 +35,9 @@
    "3000": {
     "subs": 77,
     "c80": 77,
-    "c100": 39,
-    "prox": 38,
-    "prog": 0
+    "c100": 45,
+    "prox": 29,
+    "prog": 3
    },
    "4000": {
     "subs": 22,
@@ -49,30 +49,15 @@
    "8000": {
     "subs": 2,
     "c80": 2,
-    "c100": 2,
-    "prox": 0,
+    "c100": 1,
+    "prox": 1,
     "prog": 0
    }
   },
   "pend": [
    [
     "3000",
-    "3000-3200-F03 Estructuras Metálicas",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3663/3664-F03 Estructuras Metálicas",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
     "3000-3100-S01 Molino de Bolas",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3100-S04 Sistema de Izamiento Molienda",
     "Próxima a realizar"
    ],
    [
@@ -107,17 +92,7 @@
    ],
    [
     "3000",
-    "3000-3200-S16 Transferencia Relave Final a Relaveducto",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
     "3000-3200-S18 Flotación de Limpieza",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3200-S19 Sistema para Derrames",
     "Próxima a realizar"
    ],
    [
@@ -132,23 +107,13 @@
    ],
    [
     "3000",
-    "3000-3200-S22 Sistema de Izamiento Flotación",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
     "3000-3300-S02 Espesador de Concentrado",
     "Próxima a realizar"
    ],
    [
     "3000",
-    "3000-3300-S03 Transferencia Concentrado Espesado a Filtro Prensa",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
     "3000-3300-S04 Filtro Prensa de Concentrado",
-    "Próxima a realizar"
+    "Por programar"
    ],
    [
     "3000",
@@ -158,7 +123,7 @@
    [
     "3000",
     "3000-3300-S06 Sistema de Compresores Filtro Prensa",
-    "Próxima a realizar"
+    "Por programar"
    ],
    [
     "3000",
@@ -193,7 +158,7 @@
    [
     "3000",
     "3000-3600-S06 Duchas de Emergencia",
-    "Próxima a realizar"
+    "Por programar"
    ],
    [
     "3000",
@@ -258,6 +223,16 @@
    [
     "3000",
     "3000-3700-S03 Sistema de Alumbrado y Alimentación Eléctrica",
+    "Próxima a realizar"
+   ],
+   [
+    "8000",
+    "8000-8200-S01 Sala de Telecomunicaciones",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3700-S05 Luminarias y enchufes piscinas y planta de agua potable",
     "Próxima a realizar"
    ]
   ]
@@ -493,70 +468,70 @@
  },
  "dt": {
   "global": {
-   "total": 3007,
-   "cerrados": 1567,
-   "tramite": 8,
-   "abiertos": 1432,
-   "vencidos": 974
+   "total": 3050,
+   "cerrados": 1626,
+   "tramite": 54,
+   "abiertos": 1370,
+   "vencidos": 900
   },
   "tipos": {
    "P1": {
-    "total": 2008,
-    "cerrados": 1316,
-    "tramite": 2,
-    "abiertos": 690,
-    "vencidos": 569
+    "total": 2025,
+    "cerrados": 1362,
+    "tramite": 30,
+    "abiertos": 633,
+    "vencidos": 508
    },
    "P2": {
-    "total": 830,
-    "cerrados": 249,
-    "tramite": 6,
-    "abiertos": 575,
-    "vencidos": 381
+    "total": 852,
+    "cerrados": 262,
+    "tramite": 24,
+    "abiertos": 566,
+    "vencidos": 368
    },
    "P3": {
-    "total": 169,
+    "total": 173,
     "cerrados": 2,
     "tramite": 0,
-    "abiertos": 167,
+    "abiertos": 171,
     "vencidos": 24
    }
   },
   "p1Esp": {
    "Piping": {
-    "total": 436,
-    "cerrados": 230,
-    "tramite": 0,
-    "abiertos": 206,
-    "vencidos": 180
+    "total": 445,
+    "cerrados": 256,
+    "tramite": 24,
+    "abiertos": 165,
+    "vencidos": 135
    },
    "Eléctrica": {
-    "total": 425,
-    "cerrados": 227,
-    "tramite": 0,
-    "abiertos": 198,
-    "vencidos": 163
+    "total": 429,
+    "cerrados": 240,
+    "tramite": 2,
+    "abiertos": 187,
+    "vencidos": 153
    },
    "Instrumentación y Control": {
     "total": 427,
-    "cerrados": 262,
-    "tramite": 0,
-    "abiertos": 165,
-    "vencidos": 141
+    "cerrados": 264,
+    "tramite": 1,
+    "abiertos": 162,
+    "vencidos": 138
    },
    "Mecánica": {
-    "total": 510,
-    "cerrados": 419,
-    "tramite": 1,
-    "abiertos": 90,
+    "total": 514,
+    "cerrados": 421,
+    "tramite": 0,
+    "abiertos": 93,
     "vencidos": 78
    },
    "Estructura": {
     "total": 140,
-    "cerrados": 125,
-    "tramite": 1,
-    "abiertos": 14,
-    "vencidos": 7
+    "cerrados": 128,
+    "tramite": 3,
+    "abiertos": 9,
+    "vencidos": 4
    },
    "Obras Civiles": {
     "total": 70,
@@ -569,24 +544,24 @@
   "p1Area": {
    "2000": {
     "total": 570,
-    "cerrados": 558,
-    "tramite": 0,
-    "abiertos": 12,
-    "vencidos": 10
+    "cerrados": 565,
+    "tramite": 2,
+    "abiertos": 3,
+    "vencidos": 1
    },
    "3000": {
     "total": 1049,
-    "cerrados": 436,
-    "tramite": 1,
-    "abiertos": 612,
-    "vencidos": 529
+    "cerrados": 463,
+    "tramite": 24,
+    "abiertos": 562,
+    "vencidos": 481
    },
    "4000": {
     "total": 357,
-    "cerrados": 305,
+    "cerrados": 308,
     "tramite": 0,
-    "abiertos": 52,
-    "vencidos": 27
+    "abiertos": 49,
+    "vencidos": 26
    },
    "8000": {
     "total": 12,
@@ -608,31 +583,31 @@
    "vals": [
     [
      0,
-     199,
+     154,
      3,
      0
     ],
     [
-     11,
-     157,
-     26,
+     3,
+     156,
+     23,
      0
     ],
     [
      0,
-     144,
+     141,
      20,
      0
     ],
     [
-     1,
-     84,
+     0,
+     85,
      3,
      0
     ],
     [
      0,
-     11,
+     9,
      0,
      0
     ],
@@ -645,8 +620,8 @@
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 581,
-   "Caminata 2 (100%)": 109
+   "Caminata 1 (80%)": 525,
+   "Caminata 2 (100%)": 108
   }
  },
  "semaforo": {
@@ -663,26 +638,27 @@
    "Atención"
   ],
   "8000": [
-   "good",
-   "Al día"
+   "crit",
+   "Crítico"
   ]
  },
  "previo": {
-  "corte": "2026-09-10",
-  "corte_texto": "10-09-2026",
+  "corte": "2026-09-19",
+  "corte_texto": "19-09-2026",
   "cam80": 136,
-  "cam100": 93,
+  "cam100": 95,
   "subs": 136,
-  "camProx": 43,
+  "camProx": 41,
   "camProg": 0,
-  "topEntregadas": 31,
-  "topRev": 11,
+  "topEntregadas": 37,
+  "topRev": 17,
   "topObs": 1,
   "topRech": 19,
   "topAprob": 0,
-  "p1Total": 1990,
-  "p1Cerrados": 1222,
-  "p1Abiertos": 755,
-  "p1Vencidos": 630
+  "topConRespuesta": 20,
+  "p1Total": 2008,
+  "p1Cerrados": 1316,
+  "p1Abiertos": 690,
+  "p1Vencidos": 569
  }
 }

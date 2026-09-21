@@ -303,6 +303,24 @@ chk(not huecos, "NC · el ritmo no tiene huecos ni solapes", " · ".join(huecos)
 chk(sum(x["total"] for x in t if x.get("acumulada")) >= 0, "NC · ritmo consistente")
 chk(t[-1]["total"] == s["total"], "NC · la última fila del ritmo = la semana informada")
 
+# Arqueros: los tramos de la caminata vigente tienen que sumar el universo. Si
+# el cliente estrena un estatus sin homologar, el subsistema no cae en ninguno y
+# desaparece del desglose. Pasó en el corte 21-09-2026 con «Reprogramar»: la
+# tarjeta decía 133 de 136 y tres subsistemas no figuraban en ninguna parte.
+ac = arq["cam"]["global"]
+chk(ac["c100"] + ac["prox"] + ac["prog"] == ac["subs"],
+    "Arqueros · los tramos de caminata suman el universo",
+    f'{ac["c100"]}+{ac["prox"]}+{ac["prog"]} vs {ac["subs"]}')
+at = arq["ctop"]["global"]
+chk(at["rev"] + at["obs"] + at["rech"] + at["aprob"] == at["entregadas"],
+    "Arqueros · el desglose de carpetas TOP suma las entregadas")
+chk(at["conRespuesta"] + at["rev"] == at["entregadas"],
+    "Arqueros · con respuesta + en revisión = entregadas",
+    f'{at["conRespuesta"]}+{at["rev"]} vs {at["entregadas"]}')
+chk(at["entregadas"] + at["pend"] == at["total"],
+    "Arqueros · entregadas + sin entregar = universo",
+    f'{at["entregadas"]}+{at["pend"]} vs {at["total"]}')
+
 tg = tal["dt"]["global"]
 chk(tg["cerrados"] + tg["abiertos"] == tg["total"], "Talabre · cerrados+abiertos=total")
 chk(tg["atrasados"] + tg["enPlazo"] == tg["abiertos"], "Talabre · atrasados+enPlazo=abiertos")
