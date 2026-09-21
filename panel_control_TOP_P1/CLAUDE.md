@@ -170,8 +170,25 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   cuando el REPORTE usa el código pelado — se recorta al primer token (`codigo()`), o ningún
   subsistema cruza y los 98 salen huérfanos; y **la disciplina viene como `ELECTRICOS`**, que
   se suma a `DISC_MAP` junto a `ESTRUCTURAL` (sin eso, 221 ítems caían en «Otras»).
-- **REPORTE GERENCIAL** (encabezado fila 10, datos fila 11+): `2` subsistema · `3` tipo ·
-  `4` zona · `6/8/10` caminatas 1/2/3 · `32` estatus del certificado · `34` tarjeta verde.
+- **REPORTE GERENCIAL**: `desaladora.py` tampoco usa ya índices fijos. Su encabezado tiene
+  **tres pisos** —bloque (fila 8), grupo (fila 9) y campo (fila 10)— y las columnas se
+  resuelven con la clave `grupo|campo` (`COLS_REPORTE` / `cols_reporte()`); el bloque solo
+  sirve para agrupar el punch. Datos desde la fila 11.
+  El proyecto le agrega columnas: en el corte **15-09-2026** sumó un «RESUMEN TOTALES» al
+  punch de la Caminata 1-2 y dos columnas al certificado (`Tipo`, `Días Caminata a Entrega`),
+  con lo que el **estatus del certificado pasó de la 32 a la 35** y la **tarjeta verde de la
+  34 a la 39**. Leído por posición, la 32 pasó a ser un total numérico: las **95 carpetas
+  aparecieron «Sin entregar»** —39 de ellas aprobadas— y el panel habría publicado **0% de
+  entrega** con el único rastro de un aviso «estatus no reconocido» por fila. El conteo de
+  punch declarado por el reporte también se disparó (P1 2.290C/1.262A en vez de 890C/495A)
+  porque el bloque de la Caminata 3 se había corrido.
+  Dos redes, no una: si falta una columna esencial el archivo **no se lee**, y si el estatus
+  de carpeta deja de reconocerse en **más del 10%** de los subsistemas el script **se
+  detiene** —un estatus raro suelto es un dato del proyecto; que no se reconozca ninguno es
+  estar leyendo la columna equivocada—. `auditoria_datos.py` reconta las carpetas resolviendo
+  el encabezado por su cuenta y compara.
+  Estatus que trae la columna: `Aprobada`, `Aprobada CC`, `En Rev. AMSA`, `Proceso BSMT`,
+  `Rechazada` y vacío.
 - **Talabre**: `talabre.py` ya **no usa índices fijos** — resuelve las columnas por nombre de
   encabezado y detecta la fila donde empieza (el registro de DT lo movió de la fila 1 a la 9,
   y la hoja STATUS insertó tres columnas de protocolos que corrieron DT P1/P2 de I/J a L/M).

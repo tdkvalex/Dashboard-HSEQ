@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-09-10",
-  "corte_texto": "10-09-2026",
-  "generado": "2026-09-14 01:51"
+  "corte": "2026-09-19",
+  "corte_texto": "19-09-2026",
+  "generado": "2026-09-21 12:54"
  },
  "areas": [
   "2000",
@@ -20,8 +20,8 @@
   "global": {
    "subs": 136,
    "c80": 136,
-   "c100": 93,
-   "prox": 43,
+   "c100": 95,
+   "prox": 41,
    "prog": 0
   },
   "byArea": {
@@ -35,8 +35,8 @@
    "3000": {
     "subs": 77,
     "c80": 77,
-    "c100": 37,
-    "prox": 40,
+    "c100": 39,
+    "prox": 38,
     "prog": 0
    },
    "4000": {
@@ -67,11 +67,6 @@
    ],
    [
     "3000",
-    "3000-3700-F03 Estructuras Metálicas",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
     "3000-3100-S01 Molino de Bolas",
     "Próxima a realizar"
    ],
@@ -93,11 +88,6 @@
    [
     "3000",
     "3000-3200-S03 Flotación Rougher – Scavenger",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3200-S06 Alimentación Hidrociclones de Remolienda",
     "Próxima a realizar"
    ],
    [
@@ -275,17 +265,17 @@
  "ctop": {
   "global": {
    "total": 136,
-   "entregadas": 31,
-   "rev": 11,
+   "entregadas": 37,
+   "rev": 17,
    "obs": 1,
    "rech": 19,
    "aprob": 0,
-   "pend": 105
+   "pend": 98
   },
   "byArea": {
    "2000": {
     "total": 35,
-    "rev": 10,
+    "rev": 16,
     "obs": 0,
     "rech": 11,
     "aprob": 0
@@ -395,8 +385,23 @@
    ],
    [
     "2000",
+    "2000-2100-S02 Correa de Transporte 2100-CV-001",
+    "En revisión"
+   ],
+   [
+    "2000",
     "2000-2100-S03 Sistema de Izamiento Chancado Primario",
     "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2400-S05 Correa de Transporte 2400-CV-004",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2400-S06 Correa de Transporte 2400-CV-005",
+    "En revisión"
    ],
    [
     "2000",
@@ -410,8 +415,23 @@
    ],
    [
     "2000",
+    "2000-2400-S04 Correa de Transporte 2400-CV-003",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2200-S02 Correa de Transporte 2200-CV-001",
+    "En revisión"
+   ],
+   [
+    "2000",
     "2000-2600-S01 Sistema de Aire Comprimido",
     "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2600-S02 Sistema de Supresión de Polvo",
+    "En revisión"
    ],
    [
     "2000",
@@ -472,100 +492,100 @@
  },
  "dt": {
   "global": {
-   "total": 2967,
-   "cerrados": 1468,
-   "tramite": 23,
-   "abiertos": 1476,
-   "vencidos": 1034
+   "total": 3007,
+   "cerrados": 1567,
+   "tramite": 8,
+   "abiertos": 1432,
+   "vencidos": 974
   },
   "tipos": {
    "P1": {
-    "total": 1990,
-    "cerrados": 1222,
-    "tramite": 13,
-    "abiertos": 755,
-    "vencidos": 630
+    "total": 2008,
+    "cerrados": 1316,
+    "tramite": 2,
+    "abiertos": 690,
+    "vencidos": 569
    },
    "P2": {
-    "total": 813,
-    "cerrados": 244,
-    "tramite": 10,
-    "abiertos": 559,
-    "vencidos": 380
+    "total": 830,
+    "cerrados": 249,
+    "tramite": 6,
+    "abiertos": 575,
+    "vencidos": 381
    },
    "P3": {
-    "total": 164,
+    "total": 169,
     "cerrados": 2,
     "tramite": 0,
-    "abiertos": 162,
+    "abiertos": 167,
     "vencidos": 24
    }
   },
   "p1Esp": {
    "Piping": {
-    "total": 432,
-    "cerrados": 202,
-    "tramite": 3,
-    "abiertos": 227,
-    "vencidos": 203
+    "total": 436,
+    "cerrados": 230,
+    "tramite": 0,
+    "abiertos": 206,
+    "vencidos": 180
    },
    "Eléctrica": {
-    "total": 423,
-    "cerrados": 218,
-    "tramite": 1,
-    "abiertos": 204,
-    "vencidos": 170
+    "total": 425,
+    "cerrados": 227,
+    "tramite": 0,
+    "abiertos": 198,
+    "vencidos": 163
    },
    "Instrumentación y Control": {
-    "total": 426,
-    "cerrados": 254,
-    "tramite": 2,
-    "abiertos": 170,
-    "vencidos": 147
+    "total": 427,
+    "cerrados": 262,
+    "tramite": 0,
+    "abiertos": 165,
+    "vencidos": 141
    },
    "Mecánica": {
-    "total": 502,
-    "cerrados": 393,
-    "tramite": 0,
-    "abiertos": 109,
-    "vencidos": 97
+    "total": 510,
+    "cerrados": 419,
+    "tramite": 1,
+    "abiertos": 90,
+    "vencidos": 78
    },
    "Estructura": {
-    "total": 137,
-    "cerrados": 105,
-    "tramite": 7,
-    "abiertos": 25,
-    "vencidos": 13
+    "total": 140,
+    "cerrados": 125,
+    "tramite": 1,
+    "abiertos": 14,
+    "vencidos": 7
    },
    "Obras Civiles": {
     "total": 70,
-    "cerrados": 50,
+    "cerrados": 53,
     "tramite": 0,
-    "abiertos": 20,
+    "abiertos": 17,
     "vencidos": 0
    }
   },
   "p1Area": {
    "2000": {
     "total": 570,
-    "cerrados": 550,
-    "tramite": 2,
-    "abiertos": 18,
-    "vencidos": 14
+    "cerrados": 558,
+    "tramite": 0,
+    "abiertos": 12,
+    "vencidos": 10
    },
    "3000": {
     "total": 1049,
-    "cerrados": 362,
-    "tramite": 9,
-    "abiertos": 678,
-    "vencidos": 586
+    "cerrados": 436,
+    "tramite": 1,
+    "abiertos": 612,
+    "vencidos": 529
    },
    "4000": {
     "total": 357,
-    "cerrados": 298,
-    "tramite": 2,
-    "abiertos": 57,
-    "vencidos": 30
+    "cerrados": 305,
+    "tramite": 0,
+    "abiertos": 52,
+    "vencidos": 27
    },
    "8000": {
     "total": 12,
@@ -587,45 +607,45 @@
    "vals": [
     [
      0,
-     221,
-     6,
+     199,
+     3,
      0
     ],
     [
-     12,
-     164,
+     11,
+     157,
      26,
      0
     ],
     [
-     1,
-     147,
-     22,
+     0,
+     144,
+     20,
      0
     ],
     [
-     5,
-     101,
+     1,
+     84,
      3,
      0
     ],
     [
      0,
-     25,
+     11,
      0,
      0
     ],
     [
      0,
-     20,
+     17,
      0,
      0
     ]
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 638,
-   "Caminata 2 (100%)": 117
+   "Caminata 1 (80%)": 581,
+   "Caminata 2 (100%)": 109
   }
  },
  "semaforo": {
@@ -647,21 +667,21 @@
   ]
  },
  "previo": {
-  "corte": "2026-09-07",
-  "corte_texto": "07-09-2026",
+  "corte": "2026-09-10",
+  "corte_texto": "10-09-2026",
   "cam80": 136,
-  "cam100": 92,
+  "cam100": 93,
   "subs": 136,
-  "camProx": 44,
+  "camProx": 43,
   "camProg": 0,
-  "topEntregadas": 28,
-  "topRev": 10,
+  "topEntregadas": 31,
+  "topRev": 11,
   "topObs": 1,
-  "topRech": 17,
+  "topRech": 19,
   "topAprob": 0,
-  "p1Total": 1988,
-  "p1Cerrados": 1189,
-  "p1Abiertos": 779,
-  "p1Vencidos": 645
+  "p1Total": 1990,
+  "p1Cerrados": 1222,
+  "p1Abiertos": 755,
+  "p1Vencidos": 630
  }
 }

@@ -51,6 +51,7 @@ NCX = _HALLADOS.get("nc_data")
 EXT = _HALLADOS.get("nc_externas")
 TAL_S = _HALLADOS.get("tal_status")
 TAL_D = _HALLADOS.get("tal_dt")
+DES_R = _HALLADOS.get("des_reporte")
 
 ok, mal, avi = [], [], []
 def chk(cond, titulo, detalle=""):
@@ -152,6 +153,44 @@ if TAL_D:
     cerrados = sum(1 for f in dt if isinstance(f[23], datetime))
     chk(tal["dt"]["global"]["cerrados"] == cerrados, "Talabre · DT cerrados",
         f"Excel {cerrados} · JSON {tal['dt']['global']['cerrados']}")
+if DES_R:
+    # Las carpetas de Desaladora, recontadas desde el REPORTE resolviendo su
+    # encabezado de tres pisos por cuenta propia. El proyecto le agrega columnas
+    # —al 15-09-2026 corrió el estatus de la 32 a la 35— y leído por posición el
+    # panel publicaba las 95 carpetas «Sin entregar», 36 de ellas aprobadas.
+    wbd = load_workbook(DES_R, data_only=True, read_only=True)
+    wsd = wbd["REPORTE GERENCIAL"]
+    _f = {r: next(wsd.iter_rows(min_row=r, max_row=r, values_only=True), ())
+          for r in (9, 10)}
+    def _lim(fila):
+        out, ult = [], ""
+        for v in fila:
+            if v not in (None, ""):
+                ult = " ".join(str(v).split()).lower()
+            out.append(ult)
+        return out
+    _g = _lim(_f[9])
+    _iEst = next((i for i, v in enumerate(_f[10])
+                  if v not in (None, "") and " ".join(str(v).split()).lower() == "estatus"
+                  and i < len(_g) and _g[i] == "construcción"), None)
+    _iSub = next((i for i, v in enumerate(_f[10])
+                  if v not in (None, "")
+                  and " ".join(str(v).split()).lower() == "subsistema-facility"), None)
+    if _iEst is None or _iSub is None:
+        nota("Desaladora · no se ubicó «Estatus» de CONSTRUCCIÓN en el REPORTE: "
+             "no se recontaron las carpetas")
+    else:
+        _fuera = {c["id"] for c in des["componentes"]["detalle"]}
+        _est = [str(f[_iEst]).strip() if f[_iEst] not in (None, "") else ""
+                for f in wsd.iter_rows(min_row=11, max_row=181, values_only=True)
+                if f[_iSub] not in (None, "") and str(f[_iSub]).strip() not in _fuera]
+        _vacias = sum(1 for e in _est if not e)
+        chk(des["carpetas"]["total"] == len(_est), "Desaladora · subsistemas del REPORTE",
+            f"Excel {len(_est)} · JSON {des['carpetas']['total']}")
+        chk(des["carpetas"]["sinEntregar"] == _vacias,
+            "Desaladora · carpetas sin entregar cuadran con el REPORTE",
+            f"Excel {_vacias} sin estatus de {len(_est)} · JSON {des['carpetas']['sinEntregar']}")
+
 if TAL_S:
     wbs = load_workbook(TAL_S, data_only=True)
     subs = [f for f in wbs["STATUS"].iter_rows(min_row=5, values_only=True) if f[2] not in (None, "")]

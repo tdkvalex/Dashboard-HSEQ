@@ -237,6 +237,73 @@ def as_fecha(v):
 # =============================================================================
 # 1) REPORTE GERENCIAL — subsistemas, caminatas y carpetas
 # =============================================================================
+# El REPORTE GERENCIAL tiene el encabezado en tres pisos —bloque (fila 8),
+# grupo (fila 9) y campo (fila 10)— y el proyecto le agrega columnas: en el
+# corte 15-09-2026 sumó un «RESUMEN TOTALES» al punch de la Caminata 1-2 y dos
+# columnas al certificado, con lo que el estatus de carpeta se corrió de la 32 a
+# la 35. Leído por posición, la 32 pasó a ser un total numérico: las 95 carpetas
+# —36 de ellas aprobadas— aparecieron como «Sin entregar» y el panel habría
+# publicado 0% de entrega. Por eso las columnas se resuelven por su encabezado.
+FILAS_ENCABEZADO = (8, 9, 10)
+# (clave «bloque|grupo|campo», cuál de sus apariciones). «AREA» —el código de
+# área— y «Area» —la zona— tienen el mismo encabezado: se distinguen por orden.
+COLS_REPORTE = {
+    "area": ("||area", 0),          "sub":  ("||subsistema-facility", 0),
+    "tipo": ("||tipo", 0),          "zona": ("||area", 1),
+    "desc": ("||descripcion", 0),
+    "cam1": ("||caminata 1", 0),
+    "cam2": ("||caminata 2", 0),
+    "cam3": ("||caminata 3", 0),
+    "carpeta": ("|construccion|estatus", 0),
+    "tarjeta": ("|construccion|tarjeta verde", 0),
+}
+
+
+def _ffill(fila):
+    """Encabezado combinado: el valor solo está en la primera columna del grupo."""
+    out, ult = [], ""
+    for v in fila:
+        if v not in (None, ""):
+            ult = norm(v)
+        out.append(ult)
+    return out
+
+
+def cols_reporte(ws):
+    """Columnas del REPORTE por encabezado. Devuelve None si falta alguna."""
+    f8, f9, f10 = (next(ws.iter_rows(min_row=r, max_row=r, values_only=True), ())
+                   for r in FILAS_ENCABEZADO)
+    b8, b9 = _ffill(f8), _ffill(f9)
+    # El bloque solo se usa para el punch; para lo demás basta grupo|campo, que
+    # ya distingue CONSTRUCCIÓN de PRECOM sin depender de cómo titulen el bloque.
+    llaves = {}
+    for i, v in enumerate(f10):
+        if v in (None, ""):
+            continue
+        llaves.setdefault(f"|{b9[i] if i < len(b9) else ''}|{norm(v)}", []).append(i)
+    cols, faltan = {}, []
+    for k, (llave, n) in COLS_REPORTE.items():
+        idx = llaves.get(llave, [])
+        if len(idx) > n:
+            cols[k] = idx[n]
+        else:
+            faltan.append(f"{k} ({llave})")
+    if faltan:
+        avisos.append("El REPORTE GERENCIAL no trae las columnas " + ", ".join(faltan) +
+                      f" en el encabezado de las filas {FILAS_ENCABEZADO}; no se leyó")
+        return None
+    # Punch declarado por el reporte: cada bloque «PUNCH LIST …» con sus cuatro
+    # categorías. Los «RESUMEN TOTALES» quedan fuera porque su grupo es «totales».
+    CAT = {"p1a": "P1", "p2b": "P2", "p3c": "P3", "p0": "P0"}
+    cols["punch"] = {c: {"a": [], "c": []} for c in CAT.values()}
+    for i, v in enumerate(f10):
+        g = b9[i] if i < len(b9) else ""
+        b = b8[i] if i < len(b8) else ""
+        if norm(v) in ("a", "c") and g in CAT and b.startswith("punch list"):
+            cols["punch"][CAT[g]][norm(v)].append(i)
+    return cols
+
+
 def leer_reporte(ruta):
     wb = libro(ruta)
     ws = hoja(wb, "REPORTE GERENCIAL", ruta)
@@ -263,25 +330,46 @@ def leer_reporte(ruta):
         avisos.append(f"Estado de caminata no reconocido: «{v}» — se cuenta como pendiente")
         return "Pendiente"
 
-    subs = []
-    for f in ws.iter_rows(min_row=11, max_row=181, values_only=True):
-        if f[2] in (None, ""):
+    C = cols_reporte(ws)
+    if C is None:
+        sys.exit("El REPORTE GERENCIAL cambió de formato: revisar el encabezado.")
+    col = lambda f, k: f[C[k]] if C[k] < len(f) else None
+
+    subs, no_reconocidas = [], []
+    for f in ws.iter_rows(min_row=max(FILAS_ENCABEZADO) + 1, max_row=181, values_only=True):
+        if col(f, "sub") in (None, ""):
             continue
-        est = norm(f[32])
+        est = norm(col(f, "carpeta"))
         carp = CARPETA_MAP.get(est)
         if carp is None:
             carp = "Sin entregar"
-            avisos.append(f"Estatus de carpeta no reconocido: «{f[32]}» — se cuenta como sin entregar")
+            no_reconocidas.append(str(col(f, "carpeta")).strip())
+            bruto = col(f, "carpeta")
+            avisos.append(f"Estatus de carpeta no reconocido: "
+                          f"«{str(bruto).strip() if bruto not in (None, '') else ''}» "
+                          f"— se cuenta como sin entregar")
         subs.append({
-            "id": str(f[2]).strip(),
-            "area": str(f[1]).strip(),
-            "tipo": (str(f[3]).strip() if f[3] else "Sin tipo"),
-            "zona": (str(f[4]).strip() if f[4] else "Sin zona"),
-            "desc": (str(f[5]).strip() if f[5] else ""),
-            "cam": {1: estado_cam(f[6]), 2: estado_cam(f[8]), 3: estado_cam(f[10])},
+            "id": str(col(f, "sub")).strip(),
+            "area": str(col(f, "area")).strip(),
+            "tipo": (str(col(f, "tipo")).strip() if col(f, "tipo") else "Sin tipo"),
+            "zona": (str(col(f, "zona")).strip() if col(f, "zona") else "Sin zona"),
+            "desc": (str(col(f, "desc")).strip() if col(f, "desc") else ""),
+            "cam": {1: estado_cam(col(f, "cam1")), 2: estado_cam(col(f, "cam2")),
+                    3: estado_cam(col(f, "cam3"))},
             "carpeta": carp,
-            "tarjetaVerde": norm(f[34]) == "si",
+            "tarjetaVerde": norm(col(f, "tarjeta")) == "si",
         })
+
+    # Un estatus raro suelto es un dato del proyecto; que no se reconozca ninguno
+    # significa que se está leyendo la columna equivocada. Antes de este corte el
+    # panel habría publicado las 95 carpetas «Sin entregar» —36 de ellas
+    # aprobadas— sin más señal que un aviso por fila.
+    if len(no_reconocidas) > max(3, len(subs) // 10):
+        sys.exit(f"El estatus de carpeta no se reconoce en {len(no_reconocidas)} de "
+                 f"{len(subs)} subsistemas (ej.: "
+                 f"{', '.join(repr(x) for x in no_reconocidas[:4])}). "
+                 f"Se está leyendo la columna equivocada: revisar el encabezado del "
+                 f"REPORTE GERENCIAL antes de publicar.")
 
     # El propio archivo declara sus totales en «Resumen  general»: se leen para
     # contrastarlos con lo que calculamos y avisar si algo dejó de cuadrar.
@@ -300,19 +388,18 @@ def leer_reporte(ruta):
                 declarado[etiqueta] = {"total": nums[0], "ejecutadas": nums[1]}
                 etiqueta = None
 
-    # El reporte gerencial también lleva su propio conteo de punch por subsistema
-    # (columnas N a AC). Se totaliza para contrastarlo con el punch list, que es
-    # la fuente ítem a ítem.
-    filas = [f for f in ws.iter_rows(min_row=11, max_row=181, values_only=True)
-             if f[2] not in (None, "")]
+    # El reporte gerencial también lleva su propio conteo de punch por subsistema,
+    # en un bloque por caminata. Se totaliza para contrastarlo con el punch list,
+    # que es la fuente ítem a ítem. Los «RESUMEN TOTALES» del propio archivo no
+    # entran: sumarían dos veces lo mismo.
+    filas = [f for f in ws.iter_rows(min_row=max(FILAS_ENCABEZADO) + 1, max_row=181,
+                                     values_only=True)
+             if col(f, "sub") not in (None, "")]
+    suma = lambda f, ix: sum(f[i] for i in ix if i < len(f) and isinstance(f[i], (int, float)))
     punch_rep = {}
-    for base in (13, 21):                      # Caminata 1-2 y Caminata 3
-        for k, cat in enumerate(["P1", "P2", "P3", "P0"]):
-            a = sum(f[base + 2 * k] for f in filas if isinstance(f[base + 2 * k], (int, float)))
-            c = sum(f[base + 2 * k + 1] for f in filas if isinstance(f[base + 2 * k + 1], (int, float)))
-            e = punch_rep.setdefault(cat, {"abiertos": 0, "cerrados": 0})
-            e["abiertos"] += int(a)
-            e["cerrados"] += int(c)
+    for cat, ix in C["punch"].items():
+        punch_rep[cat] = {"abiertos": int(sum(suma(f, ix["a"]) for f in filas)),
+                          "cerrados": int(sum(suma(f, ix["c"]) for f in filas))}
     declarado["_punch"] = punch_rep
     return corte, subs, declarado
 

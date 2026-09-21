@@ -6,11 +6,11 @@
   "codigo": "P2407",
   "cliente": "CODELCO",
   "contrato": "4600029355",
-  "corte": "2026-09-13",
-  "corteTexto": "13-09-2026",
-  "hoy": "13-09-2026",
-  "ultimaAgenda": "20-09-2026",
-  "generado": "2026-09-14 01:49"
+  "corte": "2026-09-21",
+  "corteTexto": "21-09-2026",
+  "hoy": "21-09-2026",
+  "ultimaAgenda": "28-09-2026",
+  "generado": "2026-09-21 12:52"
  },
  "subsistemas": {
   "total": 218,
@@ -40,23 +40,23 @@
  "caminatas": {
   "1": {
    "total": 218,
-   "realizada": 215,
+   "realizada": 216,
    "programada": 2,
-   "vencida": 1,
+   "vencida": 0,
    "pendiente": 0,
-   "pct": 98.6,
+   "pct": 99.1,
    "exigible": 216,
-   "pctExigible": 99.5
+   "pctExigible": 100.0
   },
   "2": {
    "total": 218,
-   "realizada": 205,
-   "programada": 8,
-   "vencida": 5,
+   "realizada": 207,
+   "programada": 11,
+   "vencida": 0,
    "pendiente": 0,
-   "pct": 94.0,
-   "exigible": 210,
-   "pctExigible": 97.6
+   "pct": 95.0,
+   "exigible": 207,
+   "pctExigible": 100.0
   }
  },
  "caminatasPorArea": {
@@ -110,9 +110,9 @@
    },
    "2": {
     "total": 25,
-    "realizada": 23,
+    "realizada": 25,
     "programada": 0,
-    "vencida": 2,
+    "vencida": 0,
     "pendiente": 0,
     "exigible": 25
    }
@@ -159,19 +159,19 @@
    "subs": 22,
    "1": {
     "total": 22,
-    "realizada": 21,
+    "realizada": 22,
     "programada": 0,
-    "vencida": 1,
+    "vencida": 0,
     "pendiente": 0,
     "exigible": 22
    },
    "2": {
     "total": 22,
     "realizada": 15,
-    "programada": 4,
-    "vencida": 3,
+    "programada": 7,
+    "vencida": 0,
     "pendiente": 0,
-    "exigible": 18
+    "exigible": 15
    }
   },
   "POZOS": {
@@ -239,7 +239,7 @@
    "alcance": "TELECOMUNICACIONES PS2",
    "cam": 1,
    "estado": "Programada",
-   "fecha": "18-09-2026",
+   "fecha": "22-09-2026",
    "pec": 0.37
   },
   {
@@ -248,17 +248,8 @@
    "alcance": "OO.CC. de piscina QS",
    "cam": 1,
    "estado": "Programada",
-   "fecha": "15-09-2026",
+   "fecha": "25-09-2026",
    "pec": 0
-  },
-  {
-   "id": "3716D-004",
-   "area": "PISCINAS Y SEDIMENTADOR",
-   "alcance": "Agua de Lavado Pipeline hacia Sedimentador y Piscinas de Sedimentación",
-   "cam": 1,
-   "estado": "Vencida",
-   "fecha": "12-09-2026",
-   "pec": 0.77
   },
   {
    "id": "5900B-001",
@@ -266,7 +257,7 @@
    "alcance": "JUMPER DE F.O EN GABINETE PS4 PARA CONEXIÓN DE SWITCHES CORE",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "18-09-2026",
+   "fecha": "22-09-2026",
    "pec": 0.95
   },
   {
@@ -275,7 +266,7 @@
    "alcance": "TELECOMUNICACIONES PS2",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "20-09-2026",
+   "fecha": "24-09-2026",
    "pec": 0.37
   },
   {
@@ -284,7 +275,7 @@
    "alcance": "CABLE DESDE MASTIL A PS4/F.O DESDE POSTE A PS4",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "18-09-2026",
+   "fecha": "22-09-2026",
    "pec": 0.95
   },
   {
@@ -293,8 +284,8 @@
    "alcance": "Agua de Lavado Pipeline hacia Sedimentador y Piscinas de Sedimentación",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "15-09-2026",
-   "pec": 0.77
+   "fecha": "23-09-2026",
+   "pec": 0.8
   },
   {
    "id": "3716D-010",
@@ -302,7 +293,7 @@
    "alcance": "Puesta a Tierra (SPT) y Protección Atmosférica (pararrayos).",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "15-09-2026",
+   "fecha": "23-09-2026",
    "pec": 0.86
   },
   {
@@ -311,8 +302,35 @@
    "alcance": "Alimentación Eléctrica - Iluminación",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "15-09-2026",
+   "fecha": "23-09-2026",
    "pec": 0.85
+  },
+  {
+   "id": "3716D-014",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC. líneas de distribución de Agua de lavado",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "24-09-2026",
+   "pec": 0.9
+  },
+  {
+   "id": "3716D-016",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC.  piping de sedimentador",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "24-09-2026",
+   "pec": 0.93
+  },
+  {
+   "id": "3716D-020",
+   "area": "PISCINAS Y SEDIMENTADOR",
+   "alcance": "OO.CC. de sistema de eléctrico y de telecomunicaciones desde BD-03",
+   "cam": 2,
+   "estado": "Programada",
+   "fecha": "24-09-2026",
+   "pec": 0.92
   },
   {
    "id": "3716D-024",
@@ -320,7 +338,7 @@
    "alcance": "Telecomunicación",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "15-09-2026",
+   "fecha": "23-09-2026",
    "pec": 0.85
   },
   {
@@ -329,53 +347,8 @@
    "alcance": "OO.CC. de piscina QS",
    "cam": 2,
    "estado": "Programada",
-   "fecha": "20-09-2026",
+   "fecha": "28-09-2026",
    "pec": 0
-  },
-  {
-   "id": "3716B-012",
-   "area": "EBMS",
-   "alcance": "Impulsión de agua Pipeline EBMS, Parte 2",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "11-09-2026",
-   "pec": 0.8
-  },
-  {
-   "id": "3716B-029",
-   "area": "EBMS",
-   "alcance": "Descarga Auxiliar de Agua a EBMS desde EBMN. Linea 215",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "11-09-2026",
-   "pec": 0.9
-  },
-  {
-   "id": "3716D-014",
-   "area": "PISCINAS Y SEDIMENTADOR",
-   "alcance": "OO.CC. líneas de distribución de Agua de lavado",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "12-09-2026",
-   "pec": 0.87
-  },
-  {
-   "id": "3716D-016",
-   "area": "PISCINAS Y SEDIMENTADOR",
-   "alcance": "OO.CC.  piping de sedimentador",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "12-09-2026",
-   "pec": 0.91
-  },
-  {
-   "id": "3716D-020",
-   "area": "PISCINAS Y SEDIMENTADOR",
-   "alcance": "OO.CC. de sistema de eléctrico y de telecomunicaciones desde BD-03",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "12-09-2026",
-   "pec": 0.9
   }
  ],
  "carpetas": {
@@ -384,12 +357,12 @@
   "conDato": 218,
   "promedio": 95.0,
   "sobre95": 193,
-  "sobre80": 214,
-  "bajo80": 4,
+  "sobre80": 215,
+  "bajo80": 3,
   "tramos": {
    "95% o más": 193,
-   "80% a 95%": 21,
-   "Bajo 80%": 4
+   "80% a 95%": 22,
+   "Bajo 80%": 3
   },
   "enRevisionCliente": null,
   "porArea": {
@@ -430,14 +403,14 @@
    },
    "PISCINAS Y SEDIMENTADOR": {
     "subs": 22,
-    "promedio": 92.1,
+    "promedio": 92.5,
     "sobre95": 15,
-    "sobre80": 21,
-    "bajo80": 1
+    "sobre80": 22,
+    "bajo80": 0
    },
    "POZOS": {
     "subs": 110,
-    "promedio": 96.9,
+    "promedio": 97.0,
     "sobre95": 110,
     "sobre80": 110,
     "bajo80": 0
@@ -475,39 +448,33 @@
     "area": "LÍNEAS IMPULSIÓN",
     "pec": 71.0,
     "obs": ""
-   },
-   {
-    "id": "3716D-004",
-    "area": "PISCINAS Y SEDIMENTADOR",
-    "pec": 77.0,
-    "obs": ""
    }
   ]
  },
  "dt": {
   "global": {
-   "total": 2111,
-   "cerrados": 1768,
-   "abiertos": 343,
-   "atrasados": 111,
-   "enPlazo": 232,
+   "total": 2115,
+   "cerrados": 1830,
+   "abiertos": 285,
+   "atrasados": 73,
+   "enPlazo": 212,
    "sinCompromiso": 211
   },
   "porPrioridad": {
    "P1": {
-    "total": 407,
-    "cerrados": 365,
-    "abiertos": 42,
-    "atrasados": 25,
-    "enPlazo": 17,
+    "total": 409,
+    "cerrados": 385,
+    "abiertos": 24,
+    "atrasados": 23,
+    "enPlazo": 1,
     "sinCompromiso": 0
    },
    "P2": {
-    "total": 1406,
-    "cerrados": 1319,
-    "abiertos": 87,
-    "atrasados": 83,
-    "enPlazo": 4,
+    "total": 1408,
+    "cerrados": 1361,
+    "abiertos": 47,
+    "atrasados": 47,
+    "enPlazo": 0,
     "sinCompromiso": 0
    },
    "P3": {
@@ -538,41 +505,41 @@
   "porDisciplina": {
    "Obras Civiles": {
     "total": 679,
-    "cerrados": 547,
-    "abiertos": 132,
-    "atrasados": 61,
-    "enPlazo": 71,
+    "cerrados": 590,
+    "abiertos": 89,
+    "atrasados": 33,
+    "enPlazo": 56,
     "sinCompromiso": 56
    },
    "Piping": {
-    "total": 671,
-    "cerrados": 532,
-    "abiertos": 139,
-    "atrasados": 6,
-    "enPlazo": 133,
+    "total": 674,
+    "cerrados": 539,
+    "abiertos": 135,
+    "atrasados": 3,
+    "enPlazo": 132,
     "sinCompromiso": 132
    },
    "Eléctrica": {
     "total": 521,
-    "cerrados": 480,
-    "abiertos": 41,
-    "atrasados": 32,
-    "enPlazo": 9,
+    "cerrados": 488,
+    "abiertos": 33,
+    "atrasados": 25,
+    "enPlazo": 8,
     "sinCompromiso": 7
    },
    "Instrumentación y Control": {
-    "total": 164,
-    "cerrados": 158,
-    "abiertos": 6,
-    "atrasados": 0,
-    "enPlazo": 6,
+    "total": 165,
+    "cerrados": 160,
+    "abiertos": 5,
+    "atrasados": 2,
+    "enPlazo": 3,
     "sinCompromiso": 3
    },
    "Estructura": {
     "total": 76,
-    "cerrados": 51,
-    "abiertos": 25,
-    "atrasados": 12,
+    "cerrados": 53,
+    "abiertos": 23,
+    "atrasados": 10,
     "enPlazo": 13,
     "sinCompromiso": 13
    }
@@ -580,34 +547,34 @@
   "p1PorDisciplina": {
    "Obras Civiles": {
     "total": 46,
-    "cerrados": 32,
-    "abiertos": 14,
-    "atrasados": 1,
-    "enPlazo": 13,
+    "cerrados": 43,
+    "abiertos": 3,
+    "atrasados": 3,
+    "enPlazo": 0,
     "sinCompromiso": 0
    },
    "Piping": {
-    "total": 187,
-    "cerrados": 186,
-    "abiertos": 1,
+    "total": 188,
+    "cerrados": 188,
+    "abiertos": 0,
     "atrasados": 0,
-    "enPlazo": 1,
+    "enPlazo": 0,
     "sinCompromiso": 0
    },
    "Eléctrica": {
     "total": 127,
-    "cerrados": 102,
-    "abiertos": 25,
-    "atrasados": 23,
-    "enPlazo": 2,
+    "cerrados": 108,
+    "abiertos": 19,
+    "atrasados": 18,
+    "enPlazo": 1,
     "sinCompromiso": 0
    },
    "Instrumentación y Control": {
-    "total": 37,
-    "cerrados": 36,
+    "total": 38,
+    "cerrados": 37,
     "abiertos": 1,
-    "atrasados": 0,
-    "enPlazo": 1,
+    "atrasados": 1,
+    "enPlazo": 0,
     "sinCompromiso": 0
    },
    "Estructura": {
@@ -630,18 +597,18 @@
    },
    "EBMP": {
     "total": 61,
-    "cerrados": 60,
-    "abiertos": 1,
-    "atrasados": 1,
+    "cerrados": 61,
+    "abiertos": 0,
+    "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
    },
    "EBMS": {
     "total": 62,
-    "cerrados": 61,
-    "abiertos": 1,
+    "cerrados": 62,
+    "abiertos": 0,
     "atrasados": 0,
-    "enPlazo": 1,
+    "enPlazo": 0,
     "sinCompromiso": 0
    },
    "IMPULSIÓN ADUCCIÓN": {
@@ -661,11 +628,11 @@
     "sinCompromiso": 0
    },
    "PISCINAS Y SEDIMENTADOR": {
-    "total": 78,
-    "cerrados": 39,
-    "abiertos": 39,
-    "atrasados": 23,
-    "enPlazo": 16,
+    "total": 80,
+    "cerrados": 57,
+    "abiertos": 23,
+    "atrasados": 22,
+    "enPlazo": 1,
     "sinCompromiso": 0
    },
    "POZOS": {
@@ -704,18 +671,18 @@
    },
    "EBMP": {
     "total": 198,
-    "cerrados": 175,
-    "abiertos": 23,
-    "atrasados": 12,
-    "enPlazo": 11,
+    "cerrados": 180,
+    "abiertos": 18,
+    "atrasados": 8,
+    "enPlazo": 10,
     "sinCompromiso": 10
    },
    "EBMS": {
-    "total": 280,
-    "cerrados": 236,
-    "abiertos": 44,
-    "atrasados": 6,
-    "enPlazo": 38,
+    "total": 282,
+    "cerrados": 242,
+    "abiertos": 40,
+    "atrasados": 4,
+    "enPlazo": 36,
     "sinCompromiso": 36
    },
    "IMPULSIÓN ADUCCIÓN": {
@@ -735,26 +702,26 @@
     "sinCompromiso": 51
    },
    "PISCINAS Y SEDIMENTADOR": {
-    "total": 215,
-    "cerrados": 122,
-    "abiertos": 93,
-    "atrasados": 75,
-    "enPlazo": 18,
+    "total": 217,
+    "cerrados": 170,
+    "abiertos": 47,
+    "atrasados": 46,
+    "enPlazo": 1,
     "sinCompromiso": 0
    },
    "POZOS": {
     "total": 1022,
-    "cerrados": 912,
-    "abiertos": 110,
-    "atrasados": 4,
+    "cerrados": 913,
+    "abiertos": 109,
+    "atrasados": 3,
     "enPlazo": 106,
     "sinCompromiso": 106
    },
    "PQS": {
     "total": 145,
-    "cerrados": 138,
-    "abiertos": 7,
-    "atrasados": 4,
+    "cerrados": 140,
+    "abiertos": 5,
+    "atrasados": 2,
     "enPlazo": 3,
     "sinCompromiso": 3
    },
@@ -769,19 +736,19 @@
   },
   "porCaminata": {
    "1": {
-    "total": 1316,
-    "cerrados": 1230,
-    "abiertos": 86,
-    "atrasados": 35,
+    "total": 1318,
+    "cerrados": 1241,
+    "abiertos": 77,
+    "atrasados": 26,
     "enPlazo": 51,
     "sinCompromiso": 51
    },
    "2": {
-    "total": 795,
-    "cerrados": 538,
-    "abiertos": 257,
-    "atrasados": 76,
-    "enPlazo": 181,
+    "total": 797,
+    "cerrados": 589,
+    "abiertos": 208,
+    "atrasados": 47,
+    "enPlazo": 161,
     "sinCompromiso": 160
    }
   },
@@ -807,19 +774,19 @@
    "vals": [
     [
      0,
-     14
+     3
     ],
     [
      0,
-     1
+     0
     ],
     [
-     14,
-     11
+     12,
+     7
     ],
     [
-     0,
-     1
+     1,
+     0
     ],
     [
      0,
@@ -830,33 +797,33 @@
   "matriz": {
    "Obras Civiles": {
     "CERRO VERDE/PS2": 0,
-    "EBMP": 12,
-    "EBMS": 3,
+    "EBMP": 8,
+    "EBMS": 2,
     "IMPULSIÓN ADUCCIÓN": 1,
     "LÍNEAS IMPULSIÓN": 3,
-    "PISCINAS Y SEDIMENTADOR": 54,
+    "PISCINAS Y SEDIMENTADOR": 17,
     "POZOS": 51,
-    "PQS": 1,
+    "PQS": 0,
     "SALA GAR": 7
    },
    "Piping": {
     "CERRO VERDE/PS2": 0,
     "EBMP": 7,
-    "EBMS": 34,
+    "EBMS": 33,
     "IMPULSIÓN ADUCCIÓN": 1,
     "LÍNEAS IMPULSIÓN": 49,
-    "PISCINAS Y SEDIMENTADOR": 4,
-    "POZOS": 42,
+    "PISCINAS Y SEDIMENTADOR": 2,
+    "POZOS": 41,
     "PQS": 2,
     "SALA GAR": 0
    },
    "Eléctrica": {
     "CERRO VERDE/PS2": 0,
-    "EBMP": 3,
+    "EBMP": 2,
     "EBMS": 1,
     "IMPULSIÓN ADUCCIÓN": 0,
     "LÍNEAS IMPULSIÓN": 0,
-    "PISCINAS Y SEDIMENTADOR": 27,
+    "PISCINAS Y SEDIMENTADOR": 20,
     "POZOS": 5,
     "PQS": 2,
     "SALA GAR": 3
@@ -864,10 +831,10 @@
    "Instrumentación y Control": {
     "CERRO VERDE/PS2": 0,
     "EBMP": 1,
-    "EBMS": 2,
+    "EBMS": 0,
     "IMPULSIÓN ADUCCIÓN": 0,
     "LÍNEAS IMPULSIÓN": 0,
-    "PISCINAS Y SEDIMENTADOR": 0,
+    "PISCINAS Y SEDIMENTADOR": 1,
     "POZOS": 0,
     "PQS": 1,
     "SALA GAR": 2
@@ -878,21 +845,21 @@
     "EBMS": 4,
     "IMPULSIÓN ADUCCIÓN": 0,
     "LÍNEAS IMPULSIÓN": 0,
-    "PISCINAS Y SEDIMENTADOR": 8,
+    "PISCINAS Y SEDIMENTADOR": 7,
     "POZOS": 12,
-    "PQS": 1,
+    "PQS": 0,
     "SALA GAR": 0
    }
   },
   "antiguedad": {
    "tramos": {
-    "1-30 días": 28,
-    "31-90 días": 71,
-    "91-180 días": 12,
-    ">180 días": 0
+    "1-30 días": 25,
+    "31-90 días": 40,
+    "91-180 días": 7,
+    ">180 días": 1
    },
-   "max": 178,
-   "mediana": 38
+   "max": 186,
+   "mediana": 45
   },
   "topSubsistemas": [
    {
@@ -901,69 +868,6 @@
     "cerrados": 0,
     "abiertos": 11,
     "atrasados": 11,
-    "enPlazo": 0,
-    "sinCompromiso": 0
-   },
-   {
-    "sub": "1-3716D-018",
-    "total": 10,
-    "cerrados": 0,
-    "abiertos": 10,
-    "atrasados": 10,
-    "enPlazo": 0,
-    "sinCompromiso": 0
-   },
-   {
-    "sub": "1-3716D-011",
-    "total": 8,
-    "cerrados": 0,
-    "abiertos": 8,
-    "atrasados": 8,
-    "enPlazo": 0,
-    "sinCompromiso": 0
-   },
-   {
-    "sub": "1-3716D-015",
-    "total": 7,
-    "cerrados": 0,
-    "abiertos": 7,
-    "atrasados": 7,
-    "enPlazo": 0,
-    "sinCompromiso": 0
-   },
-   {
-    "sub": "1-3716D-013",
-    "total": 7,
-    "cerrados": 0,
-    "abiertos": 7,
-    "atrasados": 7,
-    "enPlazo": 0,
-    "sinCompromiso": 0
-   },
-   {
-    "sub": "1-3716C-023",
-    "total": 5,
-    "cerrados": 0,
-    "abiertos": 5,
-    "atrasados": 5,
-    "enPlazo": 0,
-    "sinCompromiso": 0
-   },
-   {
-    "sub": "1-3716D-020",
-    "total": 5,
-    "cerrados": 0,
-    "abiertos": 5,
-    "atrasados": 5,
-    "enPlazo": 0,
-    "sinCompromiso": 0
-   },
-   {
-    "sub": "1-3716D-017",
-    "total": 5,
-    "cerrados": 0,
-    "abiertos": 5,
-    "atrasados": 5,
     "enPlazo": 0,
     "sinCompromiso": 0
    },
@@ -977,30 +881,93 @@
     "sinCompromiso": 0
    },
    {
+    "sub": "1-3716D-020",
+    "total": 4,
+    "cerrados": 0,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716D-017",
+    "total": 4,
+    "cerrados": 0,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716D-013",
+    "total": 4,
+    "cerrados": 0,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716D-022",
+    "total": 4,
+    "cerrados": 0,
+    "abiertos": 4,
+    "atrasados": 4,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716B-024",
+    "total": 4,
+    "cerrados": 0,
+    "abiertos": 4,
+    "atrasados": 3,
+    "enPlazo": 1,
+    "sinCompromiso": 1
+   },
+   {
+    "sub": "1-5900A-003",
+    "total": 3,
+    "cerrados": 0,
+    "abiertos": 3,
+    "atrasados": 3,
+    "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
     "sub": "1-3716C-021",
-    "total": 4,
+    "total": 3,
     "cerrados": 0,
-    "abiertos": 4,
-    "atrasados": 4,
+    "abiertos": 3,
+    "atrasados": 3,
     "enPlazo": 0,
     "sinCompromiso": 0
    },
    {
-    "sub": "1-3716D-019",
-    "total": 4,
+    "sub": "1-3716D-018",
+    "total": 3,
     "cerrados": 0,
-    "abiertos": 4,
-    "atrasados": 4,
+    "abiertos": 3,
+    "atrasados": 3,
     "enPlazo": 0,
     "sinCompromiso": 0
    },
    {
-    "sub": "1-3716D-021",
-    "total": 4,
+    "sub": "1-3716D-011",
+    "total": 3,
     "cerrados": 0,
-    "abiertos": 4,
-    "atrasados": 4,
+    "abiertos": 3,
+    "atrasados": 3,
     "enPlazo": 0,
+    "sinCompromiso": 0
+   },
+   {
+    "sub": "1-3716D-023",
+    "total": 3,
+    "cerrados": 0,
+    "abiertos": 3,
+    "atrasados": 2,
+    "enPlazo": 1,
     "sinCompromiso": 0
    }
   ]
@@ -1028,9 +995,9 @@
    "Al día",
    {
     "total": 61,
-    "cerrados": 60,
-    "abiertos": 1,
-    "atrasados": 1,
+    "cerrados": 61,
+    "abiertos": 0,
+    "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
    },
@@ -1045,16 +1012,16 @@
    "Al día",
    {
     "total": 62,
-    "cerrados": 61,
-    "abiertos": 1,
+    "cerrados": 62,
+    "abiertos": 0,
     "atrasados": 0,
-    "enPlazo": 1,
+    "enPlazo": 0,
     "sinCompromiso": 0
    },
    {
     "exigible": 25,
     "agendadas": 0,
-    "avanceExigible": 92.0
+    "avanceExigible": 100.0
    }
   ],
   "IMPULSIÓN ADUCCIÓN": [
@@ -1095,17 +1062,17 @@
    "crit",
    "Crítico",
    {
-    "total": 78,
-    "cerrados": 39,
-    "abiertos": 39,
-    "atrasados": 23,
-    "enPlazo": 16,
+    "total": 80,
+    "cerrados": 57,
+    "abiertos": 23,
+    "atrasados": 22,
+    "enPlazo": 1,
     "sinCompromiso": 0
    },
    {
-    "exigible": 18,
-    "agendadas": 4,
-    "avanceExigible": 83.3
+    "exigible": 15,
+    "agendadas": 7,
+    "avanceExigible": 100.0
    }
   ],
   "POZOS": [
@@ -1164,25 +1131,24 @@
   "contraste": [
    {
     "que": "DT abiertos (hoja DT del archivo de STATUS)",
-    "declarado": "342",
-    "calculado": "343",
+    "declarado": "343",
+    "calculado": "285",
     "ok": false
-   },
-   {
-    "que": "DT P1 abiertos: hoja STATUS vs. registro",
-    "declarado": "42",
-    "calculado": "42",
-    "ok": true
    }
   ],
   "incoherentes": 0,
   "estadoPropio": false,
-  "ultimaEmisionDT": "07-09-2026",
+  "ultimaEmisionDT": "15-09-2026",
   "difDT": [
    {
+    "prio": "P1",
+    "status": 42,
+    "registro": 24
+   },
+   {
     "prio": "P2",
-    "status": 86,
-    "registro": 87
+    "status": 87,
+    "registro": 47
    }
   ],
   "subsEnStatus": 218,
