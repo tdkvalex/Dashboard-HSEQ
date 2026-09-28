@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-21 14:39",
+ "generado": "2026-09-28 13:54",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -7,24 +7,24 @@
    "nombre": "Desaladora",
    "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
-    "kpi": 0,
-    "universo": 18758,
-    "enFalta": 5,
-    "avance": 13017,
-    "remanente": 5736,
-    "base": 13022,
+    "kpi": 0.1,
+    "universo": 18851,
+    "enFalta": 13,
+    "avance": 13271,
+    "remanente": 5567,
+    "base": 13284,
     "estados": {
-     "S": 5736,
-     "C": 11825,
-     "P": 0,
-     "AP": 5,
-     "AE": 1192,
+     "S": 5567,
+     "C": 12153,
+     "P": 1,
+     "AP": 12,
+     "AE": 1118,
      "rv": 0
     },
-    "actualizado": "21-sep-2026",
+    "actualizado": "28-sep-2026",
     "sem": [
      "good",
-     "Cumple"
+     "Aceptable"
     ]
    },
    "qaqc": "DES",
@@ -92,21 +92,21 @@
    "nombre": "Talabre",
    "cliente": "CODELCO",
    "protocolos": {
-    "kpi": 1.9,
-    "universo": 14433,
-    "enFalta": 249,
-    "avance": 13075,
-    "remanente": 515,
-    "base": 13324,
+    "kpi": 1.7,
+    "universo": 14681,
+    "enFalta": 231,
+    "avance": 13419,
+    "remanente": 437,
+    "base": 13650,
     "estados": {
-     "S": 515,
-     "C": 12723,
-     "P": 113,
-     "AP": 136,
-     "AE": 352,
+     "S": 437,
+     "C": 13039,
+     "P": 75,
+     "AP": 156,
+     "AE": 380,
      "rv": 594
     },
-    "actualizado": "21-sep-2026",
+    "actualizado": "28-sep-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -147,17 +147,17 @@
    },
    "noConformidades": {
     "nombre": "Talabre",
-    "cliente": 199,
+    "cliente": 200,
     "obra": true,
-    "total": 251,
-    "cerradas": 244,
-    "abiertas": 7,
-    "atrasadas": 5,
-    "pctCierre": 97.2,
+    "total": 252,
+    "cerradas": 250,
+    "abiertas": 2,
+    "atrasadas": 1,
+    "pctCierre": 99.2,
     "internas": 52,
-    "externas": 199,
+    "externas": 200,
     "subcontrato": 0,
-    "abiertasCliente": 7,
+    "abiertasCliente": 2,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 0,
     "costo": 5818.3,
@@ -166,8 +166,8 @@
     "promedioCierre": 51,
     "maxCierre": 407,
     "sem": [
-     "warn",
-     "Atención"
+     "good",
+     "Al día"
     ]
    }
   },
@@ -178,20 +178,20 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.2,
-    "universo": 28999,
-    "enFalta": 59,
-    "avance": 24681,
-    "remanente": 4259,
-    "base": 24740,
+    "universo": 29041,
+    "enFalta": 57,
+    "avance": 25273,
+    "remanente": 3711,
+    "base": 25330,
     "estados": {
-     "S": 4259,
-     "C": 20956,
-     "P": 54,
-     "AP": 5,
-     "AE": 3725,
+     "S": 3711,
+     "C": 21744,
+     "P": 55,
+     "AP": 2,
+     "AE": 3529,
      "rv": 0
     },
-    "actualizado": "21-sep-2026",
+    "actualizado": "28-sep-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -235,20 +235,20 @@
     "cliente": 79,
     "obra": true,
     "total": 172,
-    "cerradas": 135,
-    "abiertas": 37,
-    "atrasadas": 35,
-    "pctCierre": 78.5,
+    "cerradas": 142,
+    "abiertas": 30,
+    "atrasadas": 30,
+    "pctCierre": 82.6,
     "internas": 53,
     "externas": 119,
     "subcontrato": 40,
-    "abiertasCliente": 36,
+    "abiertasCliente": 29,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 1,
     "costo": 3391.8,
     "conCosto": 44,
-    "medianaCierre": 140,
-    "promedioCierre": 141,
+    "medianaCierre": 142,
+    "promedioCierre": 145,
     "maxCierre": 419,
     "sem": [
      "crit",
@@ -261,12 +261,12 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 62190,
-   "enFalta": 313,
-   "avance": 50773,
-   "remanente": 10510,
-   "base": 51086,
-   "actualizado": "21-sep-2026",
+   "universo": 62573,
+   "enFalta": 301,
+   "avance": 51963,
+   "remanente": 9715,
+   "base": 52264,
+   "actualizado": "28-sep-2026",
    "kpi": 0.6
   },
   "cierre": {
@@ -286,17 +286,17 @@
   "noConformidades": {
    "activo": true,
    "proyectos": 3,
-   "total": 505,
-   "cerradas": 460,
-   "abiertas": 45,
-   "pctCierre": 91.1,
+   "total": 506,
+   "cerradas": 473,
+   "abiertas": 33,
+   "pctCierre": 93.5,
    "costo": 10613.4,
    "medianaCierre": 30,
-   "conOficina": 513,
+   "conOficina": 514,
    "atrasoCalculable": true,
-   "atrasadas": 41,
+   "atrasadas": 32,
    "plazoRespuesta": 10,
-   "corte": "21-09-2026"
+   "corte": "28-09-2026"
   }
  }
 }
