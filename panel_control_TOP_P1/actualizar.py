@@ -235,7 +235,9 @@ def leer(ruta, respaldo=None):
         g = lambda k: fila[cc[k]] if cc[k] < len(fila) else None
         caminatas.append({
             "clasificacion": (g("clasificacion") or "").strip(),
-            "area": str(g("area")).strip(),
+            # Vacío se guarda vacío, no como el texto «None»: así el aviso del
+            # desglose por área dice «(vacío)» y no un valor inventado.
+            "area": str(g("area")).strip() if g("area") not in (None, "") else "",
             "subsistema": str(g("subsistema")).strip(),
             "c80": mapear(g("c80"), CAMINATA_MAP, "Caminata 80%"),
             "c100": mapear(g("c100"), CAMINATA_MAP, "Caminata 100%"),
@@ -258,7 +260,9 @@ def leer(ruta, respaldo=None):
                           f"contabilizado como ABIERTO por precaución")
         vence = as_fecha(g("vence"))
         detalles.append({
-            "area": str(g("area")).strip(),
+            # Vacío se guarda vacío, no como el texto «None»: así el aviso del
+            # desglose por área dice «(vacío)» y no un valor inventado.
+            "area": str(g("area")).strip() if g("area") not in (None, "") else "",
             "tipo": (g("tipo") or "").strip(),
             "especialidad": mapear(g("especialidad"), ESPECIALIDAD_MAP, "Especialidad"),
             "estado": estado,
@@ -329,6 +333,20 @@ def construir(corte, caminatas, detalles):
                       f"{len(caminatas) - _tramos} subsistema(s) quedan fuera de los tres "
                       f"tramos por estatus sin homologar — {', '.join(repr(x) for x in _fuera)}")
 
+    # AREAS es una lista fija. Los detalles cuyo área no está en ella —al corte
+    # 28-09-2026 llegan 49 sin área, 29 de ellos P1 abiertos— entran igual en los
+    # totales, que es lo correcto, pero **desaparecen del desglose por área**: la
+    # tabla suma 590 P1 abiertos mientras la tarjeta dice 619. La hoja Resumen del
+    # cliente tampoco los tabula, así que el hueco se ve idéntico en las dos
+    # fuentes y por eso es fácil de no notar. Se declara con nombre y cantidad.
+    fuera = [d for d in detalles if d["area"] not in AREAS]
+    fuera_p1 = [d for d in fuera if d["tipo"] == "P1" and d["grupo"] == "abierto"]
+    if fuera:
+        etiquetas = sorted({d["area"] or "(vacío)" for d in fuera})
+        avisos.append(f"{len(fuera)} detalle(s) con área fuera de {'/'.join(AREAS)} "
+                      f"—{', '.join(repr(x) for x in etiquetas)}—: suman a los totales pero "
+                      f"no aparecen en el desglose por área ({len(fuera_p1)} son P1 abiertos)")
+
     heat = []
     for e in ESPECIALIDADES:
         heat.append([sum(1 for d in p1 if d["especialidad"] == e
@@ -342,6 +360,13 @@ def construir(corte, caminatas, detalles):
             "generado": datetime.now().strftime("%Y-%m-%d %H:%M"),
         },
         "areas": AREAS,
+        # Lo que queda fuera del desglose por área, para que la diferencia entre
+        # la suma de las áreas y el total esté explicada en el propio JSON.
+        "fueraDeArea": {
+            "detalles": len(fuera),
+            "p1Abiertos": len(fuera_p1),
+            "etiquetas": sorted({d["area"] or "(vacío)" for d in fuera}),
+        },
         "areaNames": AREA_NOMBRES,
         "cam": {
             "global": {

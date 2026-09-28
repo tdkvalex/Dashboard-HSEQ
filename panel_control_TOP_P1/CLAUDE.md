@@ -92,6 +92,13 @@ valores nuevos que no reconoce y los cruces que dejaron de cuadrar.
 Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el panel
 (desplegable «Cómo se homologaron los tres proyectos») y en el README.
 
+- **Arqueros: `AREAS` es una lista fija (`2000/3000/4000/8000`) y lo que cae fuera no aparece en
+  el desglose por área.** Al corte 28-09-2026 llegan **49 detalles sin área, 29 de ellos P1
+  abiertos**: entran en los totales —que es lo correcto— pero la tabla por área suma 590
+  mientras la tarjeta dice 619. **La hoja Resumen del cliente los omite igual**, así que el
+  hueco se ve idéntico en las dos fuentes y por eso es fácil de no notar: sus cuatro áreas
+  cuadran exacto con las mías y solo el total discrepa. `actualizar.py` lo declara en un aviso y
+  en `fueraDeArea`, y `auditoria_datos.py` comprueba que áreas + fuera de área = total.
 - **Arqueros: mientras el estatus no diga `Cerrado`, el detalle está ABIERTO.** `Trabajo
   requerido`, `Iniciado`, `Trabajo no aceptado`, `Listo para revisión` y `Listo para cerrar`
   son todos abiertos. Antes los dos últimos formaban un tercer grupo «en trámite» y el panel

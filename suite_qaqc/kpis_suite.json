@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-28 13:54",
+ "generado": "2026-09-28 14:03",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -29,32 +29,32 @@
    },
    "qaqc": "DES",
    "cierre": {
-    "corte": "15-09-2026",
+    "corte": "22-09-2026",
     "subs": 95,
     "cam": {
-     "realizada": 72,
+     "realizada": 75,
      "aplica": 94
     },
     "p1": {
-     "total": 1384,
-     "cerrados": 961,
-     "abiertos": 423,
-     "atrasados": 168
+     "total": 1536,
+     "cerrados": 1080,
+     "abiertos": 456,
+     "atrasados": 139
     },
     "det": {
-     "total": 2197,
-     "cerrados": 1533,
-     "abiertos": 664,
-     "atrasados": 292,
-     "enPlazo": 372,
+     "total": 2419,
+     "cerrados": 1721,
+     "abiertos": 698,
+     "atrasados": 240,
+     "enPlazo": 458,
      "sinFecha": 0
     },
     "carpeta": {
      "tipo": "estado",
-     "entregadas": 54,
+     "entregadas": 58,
      "total": 95
     },
-    "cierrePct": 69.4,
+    "cierrePct": 70.3,
     "sem": [
      "warn",
      "Atención"
@@ -199,32 +199,32 @@
    },
    "qaqc": "MASA",
    "cierre": {
-    "corte": "21-09-2026",
+    "corte": "28-09-2026",
     "subs": 136,
     "cam": {
-     "realizada": 100,
+     "realizada": 105,
      "aplica": 136
     },
     "p1": {
-     "total": 2025,
-     "cerrados": 1362,
-     "abiertos": 663,
+     "total": 2056,
+     "cerrados": 1437,
+     "abiertos": 619,
      "tramite": 0,
-     "atrasados": 533
+     "atrasados": 477
     },
     "det": {
-     "total": 3050,
-     "cerrados": 1626,
-     "abiertos": 1424,
+     "total": 3106,
+     "cerrados": 1720,
+     "abiertos": 1386,
      "tramite": 0,
-     "atrasados": 936
+     "atrasados": 875
     },
     "carpeta": {
      "tipo": "estado",
-     "entregadas": 37,
+     "entregadas": 39,
      "total": 136
     },
-    "cierrePct": 67.3,
+    "cierrePct": 69.9,
     "sem": [
      "crit",
      "Crítico"
@@ -273,15 +273,15 @@
    "activo": true,
    "proyectos": 3,
    "subs": 449,
-   "detalles": 7362,
-   "cerrados": 4989,
-   "abiertos": 2373,
+   "detalles": 7640,
+   "cerrados": 5271,
+   "abiertos": 2369,
    "tramite": 0,
-   "atrasados": 1301,
-   "p1Total": 3818,
-   "p1Cerrados": 2708,
+   "atrasados": 1188,
+   "p1Total": 4001,
+   "p1Cerrados": 2902,
    "p1Tramite": 0,
-   "p1Atrasados": 724
+   "p1Atrasados": 639
   },
   "noConformidades": {
    "activo": true,

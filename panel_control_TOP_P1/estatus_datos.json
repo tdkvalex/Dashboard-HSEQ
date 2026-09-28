@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-09-21",
-  "corte_texto": "21-09-2026",
-  "generado": "2026-09-21 14:39"
+  "corte": "2026-09-28",
+  "corte_texto": "28-09-2026",
+  "generado": "2026-09-28 14:02"
  },
  "areas": [
   "2000",
@@ -10,6 +10,13 @@
   "4000",
   "8000"
  ],
+ "fueraDeArea": {
+  "detalles": 49,
+  "p1Abiertos": 29,
+  "etiquetas": [
+   "(vacío)"
+  ]
+ },
  "areaNames": {
   "2000": "Chancado (Área Seca)",
   "3000": "Molienda–Flotación (Área Húmeda)",
@@ -20,24 +27,24 @@
   "global": {
    "subs": 136,
    "c80": 136,
-   "c100": 100,
-   "prox": 33,
-   "prog": 3
+   "c100": 105,
+   "prox": 29,
+   "prog": 2
   },
   "byArea": {
    "2000": {
     "subs": 35,
     "c80": 35,
-    "c100": 35,
-    "prox": 0,
+    "c100": 33,
+    "prox": 2,
     "prog": 0
    },
    "3000": {
     "subs": 77,
     "c80": 77,
-    "c100": 45,
-    "prox": 29,
-    "prog": 3
+    "c100": 51,
+    "prox": 24,
+    "prog": 2
    },
    "4000": {
     "subs": 22,
@@ -49,20 +56,30 @@
    "8000": {
     "subs": 2,
     "c80": 2,
-    "c100": 1,
-    "prox": 1,
+    "c100": 2,
+    "prox": 0,
     "prog": 0
    }
   },
   "pend": [
    [
-    "3000",
-    "3000-3100-S01 Molino de Bolas",
+    "2000",
+    "2000-2400-S05 Correa de Transporte 2400-CV-004",
+    "Próxima a realizar"
+   ],
+   [
+    "2000",
+    "2000-2700-S01 Sala Eléctrica Área Chancado",
     "Próxima a realizar"
    ],
    [
     "3000",
-    "3000-3100-S06 Analizador de Partículas",
+    "3000-3100-S02 Cajón de Alimentación Hidrociclones",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3100-S04 Sistema de Izamiento Molienda",
     "Próxima a realizar"
    ],
    [
@@ -77,12 +94,17 @@
    ],
    [
     "3000",
-    "3000-3200-S09 Molino de Remolienda",
+    "3000-3200-S07 Batería de Hidrociclones de Remolienda",
     "Próxima a realizar"
    ],
    [
     "3000",
-    "3000-3200-S11 Flotación 2 – 1 Cleaner",
+    "3000-3200-S10 Transferencia Producto de Remolienda a 2 – 1 Cleaner",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
+    "3000-3200-S12 Transferencia Concentrado 2 – 1 Cleaner a 2 – 2 Cleaner",
     "Próxima a realizar"
    ],
    [
@@ -92,12 +114,7 @@
    ],
    [
     "3000",
-    "3000-3200-S18 Flotación de Limpieza",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3200-S20 Sistema de Muestreo en Línea",
+    "3000-3200-S16 Transferencia Relave Final a Relaveducto",
     "Próxima a realizar"
    ],
    [
@@ -112,8 +129,13 @@
    ],
    [
     "3000",
+    "3000-3300-S03 Transferencia Concentrado Espesado a Filtro Prensa",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
     "3000-3300-S04 Filtro Prensa de Concentrado",
-    "Por programar"
+    "Próxima a realizar"
    ],
    [
     "3000",
@@ -122,23 +144,8 @@
    ],
    [
     "3000",
-    "3000-3300-S06 Sistema de Compresores Filtro Prensa",
+    "3000-3300-S09 Sistema de Agua Recuperada",
     "Por programar"
-   ],
-   [
-    "3000",
-    "3000-3300-S07 Sistema de Pesaje de Camiones",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3300-S10 Sistema para Derrames",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3600-S01 Planta de NaSH",
-    "Próxima a realizar"
    ],
    [
     "3000",
@@ -152,17 +159,22 @@
    ],
    [
     "3000",
+    "3000-3600-S04 Planta de Floculante",
+    "Próxima a realizar"
+   ],
+   [
+    "3000",
     "3000-3600-S05 Planta de Tratamiento de Agua Potable",
     "Próxima a realizar"
    ],
    [
     "3000",
-    "3000-3600-S06 Duchas de Emergencia",
-    "Por programar"
+    "3000-3600-S07 Sala de Compresores",
+    "Próxima a realizar"
    ],
    [
     "3000",
-    "3000-3600-S07 Sala de Compresores",
+    "3000-3600-S08 Sala de Sopladores",
     "Próxima a realizar"
    ],
    [
@@ -182,52 +194,22 @@
    ],
    [
     "3000",
-    "3000-3600-S12 Piscina de Agua de Procesos",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
     "3000-3600-S13 Piscina de Emergencia de Derrame de Pulpas",
-    "Próxima a realizar"
+    "Por programar"
    ],
    [
-    "3000",
-    "3000-3600-S14 Piscina de Emergencia de Concentrado",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3700-S01 Sala Eléctrica Planta Concentradora",
+    "4000",
+    "4000-4200-S05 Sistema de Agua Recuperada",
     "Próxima a realizar"
    ],
    [
     "4000",
-    "4000-4200-S01 Alimentación a Espesador de Relaves",
+    "4000-4700-S02  NIOs y JB Área Relaves",
     "Próxima a realizar"
    ],
    [
     "4000",
-    "4000-4200-S02 Espesador de Relaves",
-    "Próxima a realizar"
-   ],
-   [
-    "4000",
-    "4000-4700-S03 Sistema Alumbrado y alimentación Eléctrica",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3700-S02 NIOs y JB Area Húmeda",
-    "Próxima a realizar"
-   ],
-   [
-    "3000",
-    "3000-3700-S03 Sistema de Alumbrado y Alimentación Eléctrica",
-    "Próxima a realizar"
-   ],
-   [
-    "8000",
-    "8000-8200-S01 Sala de Telecomunicaciones",
+    "4000-4700-S01 Sala Eléctrica Área Relaves",
     "Próxima a realizar"
    ],
    [
@@ -240,20 +222,20 @@
  "ctop": {
   "global": {
    "total": 136,
-   "entregadas": 37,
-   "conRespuesta": 20,
+   "entregadas": 39,
+   "conRespuesta": 22,
    "rev": 17,
    "obs": 1,
-   "rech": 19,
+   "rech": 21,
    "aprob": 0,
-   "pend": 99
+   "pend": 97
   },
   "byArea": {
    "2000": {
     "total": 35,
     "rev": 16,
     "obs": 0,
-    "rech": 11,
+    "rech": 13,
     "aprob": 0
    },
    "3000": {
@@ -292,7 +274,7 @@
    [
     "2000",
     "2000-2200/2300-F01-F02 Movimiento de Tierras - Hormigón",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -371,12 +353,7 @@
    ],
    [
     "2000",
-    "2000-2400-S05 Correa de Transporte 2400-CV-004",
-    "En revisión"
-   ],
-   [
-    "2000",
-    "2000-2400-S06 Correa de Transporte 2400-CV-005",
+    "2000-2200-S01 Chancador Secundario",
     "En revisión"
    ],
    [
@@ -387,7 +364,7 @@
    [
     "2000",
     "2000-2400-S02 Correa de Transporte 2400-CV-001",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -396,7 +373,22 @@
    ],
    [
     "2000",
+    "2000-2400-S03 Correa de Transporte 2400-CV-002",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2400-S07 Cortador de Muestra 2400-SA-001",
+    "En revisión"
+   ],
+   [
+    "2000",
     "2000-2200-S02 Correa de Transporte 2200-CV-001",
+    "En revisión"
+   ],
+   [
+    "2000",
+    "2000-2500-S02 Correa de Transporte 2500-CV-001",
     "En revisión"
    ],
    [
@@ -468,121 +460,121 @@
  },
  "dt": {
   "global": {
-   "total": 3050,
-   "cerrados": 1626,
+   "total": 3106,
+   "cerrados": 1720,
    "tramite": 0,
-   "esperandoCliente": 54,
-   "abiertos": 1424,
-   "vencidos": 936
+   "esperandoCliente": 92,
+   "abiertos": 1386,
+   "vencidos": 875
   },
   "tipos": {
    "P1": {
-    "total": 2025,
-    "cerrados": 1362,
+    "total": 2056,
+    "cerrados": 1437,
     "tramite": 0,
-    "esperandoCliente": 30,
-    "abiertos": 663,
-    "vencidos": 533
+    "esperandoCliente": 26,
+    "abiertos": 619,
+    "vencidos": 477
    },
    "P2": {
-    "total": 852,
-    "cerrados": 262,
+    "total": 873,
+    "cerrados": 281,
     "tramite": 0,
-    "esperandoCliente": 24,
-    "abiertos": 590,
-    "vencidos": 379
+    "esperandoCliente": 66,
+    "abiertos": 592,
+    "vencidos": 374
    },
    "P3": {
-    "total": 173,
+    "total": 177,
     "cerrados": 2,
     "tramite": 0,
     "esperandoCliente": 0,
-    "abiertos": 171,
+    "abiertos": 175,
     "vencidos": 24
    }
   },
   "p1Esp": {
    "Piping": {
-    "total": 445,
-    "cerrados": 256,
+    "total": 447,
+    "cerrados": 293,
     "tramite": 0,
-    "esperandoCliente": 24,
-    "abiertos": 189,
-    "vencidos": 156
+    "esperandoCliente": 5,
+    "abiertos": 154,
+    "vencidos": 126
    },
    "Eléctrica": {
-    "total": 429,
-    "cerrados": 240,
+    "total": 442,
+    "cerrados": 258,
     "tramite": 0,
     "esperandoCliente": 2,
-    "abiertos": 189,
-    "vencidos": 155
+    "abiertos": 184,
+    "vencidos": 141
    },
    "Instrumentación y Control": {
     "total": 427,
-    "cerrados": 264,
+    "cerrados": 273,
     "tramite": 0,
-    "esperandoCliente": 1,
-    "abiertos": 163,
-    "vencidos": 139
+    "esperandoCliente": 2,
+    "abiertos": 154,
+    "vencidos": 133
    },
    "Mecánica": {
-    "total": 514,
-    "cerrados": 421,
+    "total": 519,
+    "cerrados": 429,
     "tramite": 0,
-    "esperandoCliente": 0,
-    "abiertos": 93,
-    "vencidos": 78
+    "esperandoCliente": 9,
+    "abiertos": 90,
+    "vencidos": 70
    },
    "Estructura": {
-    "total": 140,
-    "cerrados": 128,
+    "total": 151,
+    "cerrados": 131,
     "tramite": 0,
-    "esperandoCliente": 3,
-    "abiertos": 12,
-    "vencidos": 5
+    "esperandoCliente": 6,
+    "abiertos": 20,
+    "vencidos": 7
    },
    "Obras Civiles": {
     "total": 70,
     "cerrados": 53,
     "tramite": 0,
-    "esperandoCliente": 0,
+    "esperandoCliente": 2,
     "abiertos": 17,
     "vencidos": 0
    }
   },
   "p1Area": {
    "2000": {
-    "total": 570,
-    "cerrados": 565,
-    "tramite": 0,
-    "esperandoCliente": 2,
-    "abiertos": 5,
-    "vencidos": 3
-   },
-   "3000": {
-    "total": 1049,
-    "cerrados": 463,
-    "tramite": 0,
-    "esperandoCliente": 24,
-    "abiertos": 586,
-    "vencidos": 503
-   },
-   "4000": {
-    "total": 357,
-    "cerrados": 308,
-    "tramite": 0,
-    "esperandoCliente": 0,
-    "abiertos": 49,
-    "vencidos": 26
-   },
-   "8000": {
-    "total": 12,
-    "cerrados": 12,
+    "total": 575,
+    "cerrados": 575,
     "tramite": 0,
     "esperandoCliente": 0,
     "abiertos": 0,
     "vencidos": 0
+   },
+   "3000": {
+    "total": 1072,
+    "cerrados": 529,
+    "tramite": 0,
+    "esperandoCliente": 25,
+    "abiertos": 543,
+    "vencidos": 450
+   },
+   "4000": {
+    "total": 366,
+    "cerrados": 321,
+    "tramite": 0,
+    "esperandoCliente": 1,
+    "abiertos": 45,
+    "vencidos": 25
+   },
+   "8000": {
+    "total": 14,
+    "cerrados": 12,
+    "tramite": 0,
+    "esperandoCliente": 0,
+    "abiertos": 2,
+    "vencidos": 2
    }
   },
   "hm": {
@@ -597,31 +589,31 @@
    "vals": [
     [
      0,
-     175,
-     3,
+     151,
+     1,
      0
     ],
     [
-     5,
-     156,
+     0,
+     145,
      23,
+     2
+    ],
+    [
+     0,
+     136,
+     18,
      0
     ],
     [
      0,
-     142,
-     20,
-     0
-    ],
-    [
-     0,
-     85,
+     82,
      3,
      0
     ],
     [
      0,
-     11,
+     12,
      0,
      0
     ],
@@ -634,8 +626,8 @@
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 549,
-   "Caminata 2 (100%)": 114
+   "Caminata 1 (80%)": 488,
+   "Caminata 2 (100%)": 131
   }
  },
  "semaforo": {
@@ -652,27 +644,27 @@
    "Atención"
   ],
   "8000": [
-   "crit",
-   "Crítico"
+   "warn",
+   "Atención"
   ]
  },
  "previo": {
-  "corte": "2026-09-19",
-  "corte_texto": "19-09-2026",
+  "corte": "2026-09-21",
+  "corte_texto": "21-09-2026",
   "cam80": 136,
-  "cam100": 95,
+  "cam100": 100,
   "subs": 136,
-  "camProx": 41,
-  "camProg": 0,
+  "camProx": 33,
+  "camProg": 3,
   "topEntregadas": 37,
   "topRev": 17,
   "topObs": 1,
   "topRech": 19,
   "topAprob": 0,
   "topConRespuesta": 20,
-  "p1Total": 2008,
-  "p1Cerrados": 1316,
-  "p1Abiertos": 690,
-  "p1Vencidos": 569
+  "p1Total": 2025,
+  "p1Cerrados": 1362,
+  "p1Abiertos": 663,
+  "p1Vencidos": 533
  }
 }

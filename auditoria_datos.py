@@ -311,6 +311,17 @@ ac = arq["cam"]["global"]
 chk(ac["c100"] + ac["prox"] + ac["prog"] == ac["subs"],
     "Arqueros · los tramos de caminata suman el universo",
     f'{ac["c100"]}+{ac["prox"]}+{ac["prog"]} vs {ac["subs"]}')
+# El desglose por área omite los detalles cuya área no está en la lista fija, y
+# la hoja Resumen del cliente los omite igual, así que el hueco se ve idéntico en
+# las dos fuentes. Al corte 28-09-2026 son 49 detalles, 29 de ellos P1 abiertos:
+# la tabla por área suma 590 mientras la tarjeta dice 619. La diferencia tiene que
+# estar declarada, no aparecer como un descuadre sin explicación.
+_fa = arq.get("fueraDeArea", {})
+_sa = sum(v["abiertos"] for v in arq["dt"]["p1Area"].values())
+chk(_sa + _fa.get("p1Abiertos", 0) == arq["dt"]["tipos"]["P1"]["abiertos"],
+    "Arqueros · las áreas más lo declarado fuera de área suman los P1 abiertos",
+    f'{_sa}+{_fa.get("p1Abiertos", 0)} vs {arq["dt"]["tipos"]["P1"]["abiertos"]}')
+
 at = arq["ctop"]["global"]
 chk(at["rev"] + at["obs"] + at["rech"] + at["aprob"] == at["entregadas"],
     "Arqueros · el desglose de carpetas TOP suma las entregadas")
