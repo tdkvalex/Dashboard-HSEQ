@@ -2,7 +2,7 @@
  "meta": {
   "corte": "2026-09-28",
   "corte_texto": "28-09-2026",
-  "generado": "2026-09-28 14:02"
+  "generado": "2026-09-28 14:51"
  },
  "areas": [
   "2000",
@@ -27,16 +27,16 @@
   "global": {
    "subs": 136,
    "c80": 136,
-   "c100": 105,
-   "prox": 29,
+   "c100": 107,
+   "prox": 27,
    "prog": 2
   },
   "byArea": {
    "2000": {
     "subs": 35,
     "c80": 35,
-    "c100": 33,
-    "prox": 2,
+    "c100": 35,
+    "prox": 0,
     "prog": 0
    },
    "3000": {
@@ -62,16 +62,6 @@
    }
   },
   "pend": [
-   [
-    "2000",
-    "2000-2400-S05 Correa de Transporte 2400-CV-004",
-    "Próxima a realizar"
-   ],
-   [
-    "2000",
-    "2000-2700-S01 Sala Eléctrica Área Chancado",
-    "Próxima a realizar"
-   ],
    [
     "3000",
     "3000-3100-S02 Cajón de Alimentación Hidrociclones",

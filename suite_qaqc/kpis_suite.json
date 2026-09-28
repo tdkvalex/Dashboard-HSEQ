@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-28 14:17",
+ "generado": "2026-09-28 14:51",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -202,7 +202,7 @@
     "corte": "28-09-2026",
     "subs": 136,
     "cam": {
-     "realizada": 105,
+     "realizada": 107,
      "aplica": 136
     },
     "p1": {
