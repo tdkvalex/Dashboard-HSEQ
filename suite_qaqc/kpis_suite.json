@@ -1,5 +1,5 @@
 {
- "generado": "2026-10-05 14:29",
+ "generado": "2026-10-05 14:48",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -117,7 +117,7 @@
     "corte": "05-10-2026",
     "subs": 218,
     "cam": {
-     "realizada": 214,
+     "realizada": 215,
      "aplica": 218
     },
     "p1": {
@@ -136,7 +136,7 @@
     },
     "carpeta": {
      "tipo": "avance",
-     "promedio": 95,
+     "promedio": 95.3,
      "total": 218
     },
     "cierrePct": 91.8,

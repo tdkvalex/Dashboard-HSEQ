@@ -10,7 +10,7 @@
   "corteTexto": "05-10-2026",
   "hoy": "05-10-2026",
   "ultimaAgenda": "03-10-2026",
-  "generado": "2026-10-05 14:24"
+  "generado": "2026-10-05 14:48"
  },
  "subsistemas": {
   "total": 218,
@@ -50,13 +50,13 @@
   },
   "2": {
    "total": 218,
-   "realizada": 214,
+   "realizada": 215,
    "programada": 0,
-   "vencida": 4,
+   "vencida": 3,
    "pendiente": 0,
-   "pct": 98.2,
+   "pct": 98.6,
    "exigible": 218,
-   "pctExigible": 98.2
+   "pctExigible": 98.6
   }
  },
  "caminatasPorArea": {
@@ -167,9 +167,9 @@
    },
    "2": {
     "total": 22,
-    "realizada": 21,
+    "realizada": 22,
     "programada": 0,
-    "vencida": 1,
+    "vencida": 0,
     "pendiente": 0,
     "exigible": 22
    }
@@ -252,29 +252,20 @@
    "pec": 0.37
   },
   {
-   "id": "3716D-012",
-   "area": "PISCINAS Y SEDIMENTADOR",
-   "alcance": "Alimentación Eléctrica - Iluminación",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "30-09-2026",
-   "pec": 0.85
-  },
-  {
    "id": "3716E-23-009",
    "area": "PQS",
    "alcance": "OO.CC. de piscina QS",
    "cam": 2,
    "estado": "Vencida",
    "fecha": "03-10-2026",
-   "pec": 0
+   "pec": 0.52
   }
  ],
  "carpetas": {
   "tipo": "avance",
   "total": 218,
   "conDato": 218,
-  "promedio": 95.0,
+  "promedio": 95.3,
   "sobre95": 193,
   "sobre80": 215,
   "bajo80": 3,
@@ -336,7 +327,7 @@
    },
    "PQS": {
     "subs": 13,
-    "promedio": 87.6,
+    "promedio": 91.6,
     "sobre95": 8,
     "sobre80": 12,
     "bajo80": 1
@@ -351,16 +342,16 @@
   },
   "rezagados": [
    {
-    "id": "3716E-23-009",
-    "area": "PQS",
-    "pec": 0,
-    "obs": "pendiente geomembrana"
-   },
-   {
     "id": "5900I-001",
     "area": "CERRO VERDE/PS2",
     "pec": 37.0,
     "obs": ""
+   },
+   {
+    "id": "3716E-23-009",
+    "area": "PQS",
+    "pec": 52.0,
+    "obs": "pendiente geomembrana"
    },
    {
     "id": "3716E-24-002",
@@ -991,7 +982,7 @@
    {
     "exigible": 22,
     "agendadas": 0,
-    "avanceExigible": 95.5
+    "avanceExigible": 100.0
    }
   ],
   "POZOS": [
@@ -1050,26 +1041,27 @@
   "contraste": [
    {
     "que": "DT abiertos (hoja DT del archivo de STATUS)",
-    "declarado": "296",
+    "declarado": "313",
     "calculado": "313",
-    "ok": false
+    "ok": true
+   },
+   {
+    "que": "DT P1 abiertos: hoja STATUS vs. registro",
+    "declarado": "36",
+    "calculado": "36",
+    "ok": true
+   },
+   {
+    "que": "DT P2 abiertos: hoja STATUS vs. registro",
+    "declarado": "63",
+    "calculado": "63",
+    "ok": true
    }
   ],
   "incoherentes": 0,
   "estadoPropio": false,
   "ultimaEmisionDT": "30-09-2026",
-  "difDT": [
-   {
-    "prio": "P1",
-    "status": 32,
-    "registro": 36
-   },
-   {
-    "prio": "P2",
-    "status": 50,
-    "registro": 63
-   }
-  ],
+  "difDT": [],
   "subsEnStatus": 218,
   "areasStatus": 9,
   "areasDT": 9,
