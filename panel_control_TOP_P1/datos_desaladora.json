@@ -6,12 +6,12 @@
   "codigo": "P2416",
   "cliente": "ANTOFAGASTA MINERALS",
   "contrato": "VPP-1001-03-CC-088",
-  "corte": "2026-09-29",
-  "corteTexto": "29-09-2026",
+  "corte": "2026-10-13",
+  "corteTexto": "13-10-2026",
   "cortePunch": "2026-10-11",
   "cortePunchTexto": "11-10-2026",
   "hoy": "12-10-2026",
-  "generado": "2026-10-13 15:03"
+  "generado": "2026-10-13 17:43"
  },
  "subsistemas": {
   "total": 95,
@@ -79,18 +79,18 @@
    "pct": 13.7
   },
   "2": {
-   "aplica": 79,
-   "realizada": 66,
-   "pendiente": 13,
-   "noAplica": 16,
-   "pct": 83.5
+   "aplica": 80,
+   "realizada": 72,
+   "pendiente": 8,
+   "noAplica": 15,
+   "pct": 90.0
   },
   "3": {
-   "aplica": 79,
+   "aplica": 80,
    "realizada": 4,
-   "pendiente": 75,
-   "noAplica": 16,
-   "pct": 5.1
+   "pendiente": 76,
+   "noAplica": 15,
+   "pct": 5.0
   }
  },
  "caminatasPorTipo": {
@@ -103,16 +103,16 @@
     "pct": 1.3
    },
    "2": {
-    "aplica": 79,
-    "realizada": 66,
-    "pendiente": 13,
-    "pct": 83.5
+    "aplica": 80,
+    "realizada": 72,
+    "pendiente": 8,
+    "pct": 90.0
    },
    "3": {
-    "aplica": 79,
+    "aplica": 80,
     "realizada": 4,
-    "pendiente": 75,
-    "pct": 5.1
+    "pendiente": 76,
+    "pct": 5.0
    },
    "vigente": "2"
   },
@@ -149,8 +149,8 @@
    },
    "2": {
     "aplica": 64,
-    "realizada": 57,
-    "pendiente": 7
+    "realizada": 62,
+    "pendiente": 2
    },
    "3": {
     "aplica": 64,
@@ -166,46 +166,18 @@
     "pendiente": 17
    },
    "2": {
-    "aplica": 15,
-    "realizada": 9,
+    "aplica": 16,
+    "realizada": 10,
     "pendiente": 6
    },
    "3": {
-    "aplica": 15,
+    "aplica": 16,
     "realizada": 1,
-    "pendiente": 14
+    "pendiente": 15
    }
   }
  },
  "caminatasPendientes": [
-  {
-   "id": "0584-WYT-202",
-   "tipo": "Operable",
-   "zona": "Desaladora",
-   "desc": "SWRO Tren 4",
-   "caminata": 2
-  },
-  {
-   "id": "0586-CY-201",
-   "tipo": "Operable",
-   "zona": "Desaladora",
-   "desc": "Dosificación de Antiincrustante",
-   "caminata": 2
-  },
-  {
-   "id": "0586-CY-202",
-   "tipo": "Operable",
-   "zona": "Desaladora",
-   "desc": "Dosificación de Cloruro Férrico",
-   "caminata": 2
-  },
-  {
-   "id": "0586-CY-207",
-   "tipo": "Operable",
-   "zona": "Desaladora",
-   "desc": "Dosificación de Metabisulfito de Sodio",
-   "caminata": 2
-  },
   {
    "id": "0586-CY-208",
    "tipo": "Operable",
@@ -218,13 +190,6 @@
    "tipo": "Operable",
    "zona": "Desaladora",
    "desc": "Dosificación de Inhibidor de Corrosión",
-   "caminata": 2
-  },
-  {
-   "id": "0587-EEC-201",
-   "tipo": "Operable",
-   "zona": "Desaladora",
-   "desc": "Sistema de CCTV Desalinizadora",
    "caminata": 2
   },
   {
@@ -256,17 +221,17 @@
    "caminata": 2
   },
   {
-   "id": "4515-EFD-201",
-   "tipo": "Operable",
-   "zona": "EB-2",
-   "desc": "Sistema de Voz y Data",
-   "caminata": 2
-  },
-  {
    "id": "8280-ESC-201",
    "tipo": "Operable",
    "zona": "EB-2",
    "desc": "Sistema de Distribución 33kV",
+   "caminata": 2
+  },
+  {
+   "id": "8280-JD-201",
+   "tipo": "Operable",
+   "zona": "EB-2",
+   "desc": "Sistema SCADA",
    "caminata": 2
   },
   {
@@ -294,38 +259,38 @@
  "carpetas": {
   "total": 95,
   "estados": {
-   "Aprobada": 46,
-   "En revisión": 11,
-   "Rechazada": 6,
-   "En preparación": 15,
-   "Sin entregar": 17
+   "Aprobada": 51,
+   "En revisión": 10,
+   "Rechazada": 7,
+   "En preparación": 16,
+   "Sin entregar": 11
   },
-  "entregadas": 63,
-  "aprobadas": 46,
-  "rechazadas": 6,
-  "enRevision": 11,
-  "enPreparacion": 15,
-  "sinEntregar": 17,
-  "tarjetaVerde": 46,
+  "entregadas": 68,
+  "aprobadas": 51,
+  "rechazadas": 7,
+  "enRevision": 10,
+  "enPreparacion": 16,
+  "sinEntregar": 11,
+  "tarjetaVerde": 52,
   "porZona": {
    "Desaladora": {
-    "Aprobada": 35,
-    "En revisión": 10,
+    "Aprobada": 40,
+    "En revisión": 9,
     "Rechazada": 6,
-    "En preparación": 14,
-    "Sin entregar": 9
+    "En preparación": 15,
+    "Sin entregar": 4
    },
    "EB-2": {
     "Aprobada": 11,
     "En revisión": 1,
-    "Rechazada": 0,
+    "Rechazada": 1,
     "En preparación": 1,
-    "Sin entregar": 8
+    "Sin entregar": 7
    }
   },
   "detalle": [
    {
-    "id": "0570-PFW-201",
+    "id": "0570-PW-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -338,6 +303,12 @@
    },
    {
     "id": "0582-PA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0582-WO-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -374,6 +345,12 @@
    },
    {
     "id": "0583-WR-206",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-WR-207",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -416,6 +393,12 @@
    },
    {
     "id": "0583-WR-215",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0583-WR-216",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -481,6 +464,12 @@
     "estado": "Aprobada"
    },
    {
+    "id": "0587-EFD-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
     "id": "0587-ESA-201",
     "zona": "Desaladora",
     "tipo": "Operable",
@@ -500,6 +489,12 @@
    },
    {
     "id": "0587-JD-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
+    "id": "0587-JD-202",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -601,25 +596,37 @@
     "estado": "Aprobada"
    },
    {
-    "id": "0570-PW-201",
+    "id": "0570-PFW-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
    },
    {
-    "id": "0582-WO-201",
+    "id": "0570-XP-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
    },
    {
-    "id": "0583-WR-207",
+    "id": "0582-WO-202",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
    },
    {
-    "id": "0583-WR-216",
+    "id": "0583-PA-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0583-WR-203",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0583-WR-208",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
@@ -637,33 +644,15 @@
     "estado": "En revisión"
    },
    {
-    "id": "0586-CY-205",
+    "id": "0587-EWS-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
    },
    {
-    "id": "0587-EFD-201",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "En revisión"
-   },
-   {
-    "id": "0587-JD-202",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "En revisión"
-   },
-   {
-    "id": "4511-NZ-201",
-    "zona": "Desaladora",
-    "tipo": "Facility",
-    "estado": "En revisión"
-   },
-   {
-    "id": "4515-NZ-201",
+    "id": "4515-EFD-201",
     "zona": "EB-2",
-    "tipo": "Facility",
+    "tipo": "Operable",
     "estado": "En revisión"
    },
    {
@@ -679,15 +668,15 @@
     "estado": "Rechazada"
    },
    {
-    "id": "0583-PA-201",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "Rechazada"
-   },
-   {
     "id": "0584-NZ-201",
     "zona": "Desaladora",
     "tipo": "Facility",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "0586-CY-205",
+    "zona": "Desaladora",
+    "tipo": "Operable",
     "estado": "Rechazada"
    },
    {
@@ -697,25 +686,19 @@
     "estado": "Rechazada"
    },
    {
-    "id": "0587-EWS-201",
+    "id": "4511-NZ-201",
     "zona": "Desaladora",
-    "tipo": "Operable",
+    "tipo": "Facility",
+    "estado": "Rechazada"
+   },
+   {
+    "id": "4515-NZ-201",
+    "zona": "EB-2",
+    "tipo": "Facility",
     "estado": "Rechazada"
    },
    {
     "id": "0570-XH-201",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "En preparación"
-   },
-   {
-    "id": "0570-XP-201",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "En preparación"
-   },
-   {
-    "id": "0582-WO-202",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En preparación"
@@ -733,19 +716,7 @@
     "estado": "En preparación"
    },
    {
-    "id": "0583-WR-203",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "En preparación"
-   },
-   {
     "id": "0583-WR-204",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "En preparación"
-   },
-   {
-    "id": "0583-WR-208",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En preparación"
@@ -769,13 +740,43 @@
     "estado": "En preparación"
    },
    {
+    "id": "0584-WYT-202",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
     "id": "0585-WS-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En preparación"
    },
    {
+    "id": "0586-CY-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0586-CY-202",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
     "id": "0586-CY-203",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0586-CY-207",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
+    "id": "0587-EEC-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En preparación"
@@ -1359,9 +1360,9 @@
    {
     "tipo": "Operable",
     "caminata": "2",
-    "declarado": "66/80",
-    "calculado": "66/79",
-    "ok": false
+    "declarado": "72/80",
+    "calculado": "72/80",
+    "ok": true
    },
    {
     "tipo": "Facility",
@@ -1374,23 +1375,18 @@
   "difPunch": [
    {
     "cat": "P0",
-    "reporte": "21C / 2A",
+    "reporte": "23C / 1A",
     "punch": "22C / 2A"
    },
    {
     "cat": "P1",
-    "reporte": "1091C / 446A",
+    "reporte": "1252C / 443A",
     "punch": "1224C / 416A"
    },
    {
     "cat": "P2",
-    "reporte": "587C / 216A",
+    "reporte": "648C / 291A",
     "punch": "643C / 241A"
-   },
-   {
-    "cat": "P3",
-    "reporte": "32C / 24A",
-    "punch": "35C / 21A"
    }
   ]
  },

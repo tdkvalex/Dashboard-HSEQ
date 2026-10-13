@@ -1,5 +1,5 @@
 {
- "generado": "2026-10-13 17:40",
+ "generado": "2026-10-13 17:43",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -29,11 +29,11 @@
    },
    "qaqc": "DES",
    "cierre": {
-    "corte": "29-09-2026",
+    "corte": "13-10-2026",
     "subs": 95,
     "cam": {
-     "realizada": 78,
-     "aplica": 94
+     "realizada": 84,
+     "aplica": 95
     },
     "p1": {
      "total": 1640,
@@ -51,7 +51,7 @@
     },
     "carpeta": {
      "tipo": "estado",
-     "entregadas": 63,
+     "entregadas": 68,
      "total": 95
     },
     "cierrePct": 74.6,
