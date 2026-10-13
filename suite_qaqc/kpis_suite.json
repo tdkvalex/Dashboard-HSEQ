@@ -1,5 +1,5 @@
 {
- "generado": "2026-10-13 14:39",
+ "generado": "2026-10-13 15:04",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -36,17 +36,17 @@
      "aplica": 94
     },
     "p1": {
-     "total": 1572,
-     "cerrados": 1129,
-     "abiertos": 443,
-     "atrasados": 206
+     "total": 1640,
+     "cerrados": 1224,
+     "abiertos": 416,
+     "atrasados": 260
     },
     "det": {
-     "total": 2481,
-     "cerrados": 1792,
-     "abiertos": 689,
-     "atrasados": 366,
-     "enPlazo": 323,
+     "total": 2605,
+     "cerrados": 1925,
+     "abiertos": 680,
+     "atrasados": 440,
+     "enPlazo": 240,
      "sinFecha": 0
     },
     "carpeta": {
@@ -54,7 +54,7 @@
      "entregadas": 63,
      "total": 95
     },
-    "cierrePct": 71.8,
+    "cierrePct": 74.6,
     "sem": [
      "warn",
      "Atención"
@@ -273,15 +273,15 @@
    "activo": true,
    "proyectos": 3,
    "subs": 449,
-   "detalles": 7770,
-   "cerrados": 5472,
-   "abiertos": 2298,
+   "detalles": 7894,
+   "cerrados": 5605,
+   "abiertos": 2289,
    "tramite": 0,
-   "atrasados": 1253,
-   "p1Total": 4068,
-   "p1Cerrados": 3032,
+   "atrasados": 1327,
+   "p1Total": 4136,
+   "p1Cerrados": 3127,
    "p1Tramite": 0,
-   "p1Atrasados": 660
+   "p1Atrasados": 714
   },
   "noConformidades": {
    "activo": true,

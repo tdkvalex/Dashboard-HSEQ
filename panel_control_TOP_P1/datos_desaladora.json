@@ -8,10 +8,10 @@
   "contrato": "VPP-1001-03-CC-088",
   "corte": "2026-09-29",
   "corteTexto": "29-09-2026",
-  "cortePunch": "2026-10-04",
-  "cortePunchTexto": "04-10-2026",
-  "hoy": "05-10-2026",
-  "generado": "2026-10-05 14:26"
+  "cortePunch": "2026-10-11",
+  "cortePunchTexto": "11-10-2026",
+  "hoy": "12-10-2026",
+  "generado": "2026-10-13 15:03"
  },
  "subsistemas": {
   "total": 95,
@@ -796,44 +796,44 @@
  },
  "punch": {
   "global": {
-   "total": 2481,
-   "cerrados": 1792,
-   "abiertos": 689,
-   "atrasados": 366,
-   "enPlazo": 323,
+   "total": 2605,
+   "cerrados": 1925,
+   "abiertos": 680,
+   "atrasados": 440,
+   "enPlazo": 240,
    "sinFecha": 0
   },
   "porCategoria": {
    "P0": {
-    "total": 23,
+    "total": 24,
     "cerrados": 22,
-    "abiertos": 1,
+    "abiertos": 2,
     "atrasados": 1,
-    "enPlazo": 0,
+    "enPlazo": 1,
     "sinFecha": 0
    },
    "P1": {
-    "total": 1572,
-    "cerrados": 1129,
-    "abiertos": 443,
-    "atrasados": 206,
-    "enPlazo": 237,
+    "total": 1640,
+    "cerrados": 1224,
+    "abiertos": 416,
+    "atrasados": 260,
+    "enPlazo": 156,
     "sinFecha": 0
    },
    "P2": {
-    "total": 829,
-    "cerrados": 605,
-    "abiertos": 224,
-    "atrasados": 144,
-    "enPlazo": 80,
+    "total": 884,
+    "cerrados": 643,
+    "abiertos": 241,
+    "atrasados": 162,
+    "enPlazo": 79,
     "sinFecha": 0
    },
    "P3": {
     "total": 56,
     "cerrados": 35,
     "abiertos": 21,
-    "atrasados": 15,
-    "enPlazo": 6,
+    "atrasados": 17,
+    "enPlazo": 4,
     "sinFecha": 0
    },
    "Sin categoría": {
@@ -847,40 +847,40 @@
   },
   "porDisciplina": {
    "Eléctrica": {
-    "total": 1436,
-    "cerrados": 1237,
-    "abiertos": 199,
-    "atrasados": 132,
-    "enPlazo": 67,
+    "total": 1547,
+    "cerrados": 1323,
+    "abiertos": 224,
+    "atrasados": 146,
+    "enPlazo": 78,
     "sinFecha": 0
    },
    "Piping": {
-    "total": 622,
-    "cerrados": 309,
-    "abiertos": 313,
-    "atrasados": 142,
-    "enPlazo": 171,
+    "total": 630,
+    "cerrados": 351,
+    "abiertos": 279,
+    "atrasados": 170,
+    "enPlazo": 109,
     "sinFecha": 0
    },
    "Obras Civiles": {
-    "total": 182,
-    "cerrados": 110,
-    "abiertos": 72,
-    "atrasados": 54,
-    "enPlazo": 18,
+    "total": 186,
+    "cerrados": 112,
+    "abiertos": 74,
+    "atrasados": 62,
+    "enPlazo": 12,
     "sinFecha": 0
    },
    "Mecánica": {
     "total": 126,
-    "cerrados": 56,
-    "abiertos": 70,
-    "atrasados": 12,
-    "enPlazo": 58,
+    "cerrados": 58,
+    "abiertos": 68,
+    "atrasados": 31,
+    "enPlazo": 37,
     "sinFecha": 0
    },
    "Estructura": {
-    "total": 48,
-    "cerrados": 26,
+    "total": 49,
+    "cerrados": 27,
     "abiertos": 22,
     "atrasados": 21,
     "enPlazo": 1,
@@ -890,68 +890,68 @@
     "total": 67,
     "cerrados": 54,
     "abiertos": 13,
-    "atrasados": 5,
-    "enPlazo": 8,
+    "atrasados": 10,
+    "enPlazo": 3,
     "sinFecha": 0
    }
   },
   "p1PorDisciplina": {
    "Eléctrica": {
-    "total": 902,
-    "cerrados": 788,
-    "abiertos": 114,
-    "atrasados": 83,
-    "enPlazo": 31,
+    "total": 959,
+    "cerrados": 843,
+    "abiertos": 116,
+    "atrasados": 89,
+    "enPlazo": 27,
     "sinFecha": 0
    },
    "Piping": {
-    "total": 462,
-    "cerrados": 230,
-    "abiertos": 232,
-    "atrasados": 84,
-    "enPlazo": 148,
+    "total": 470,
+    "cerrados": 267,
+    "abiertos": 203,
+    "atrasados": 110,
+    "enPlazo": 93,
     "sinFecha": 0
    },
    "Obras Civiles": {
-    "total": 54,
+    "total": 57,
     "cerrados": 39,
-    "abiertos": 15,
-    "atrasados": 14,
-    "enPlazo": 1,
+    "abiertos": 18,
+    "atrasados": 15,
+    "enPlazo": 3,
     "sinFecha": 0
    },
    "Mecánica": {
     "total": 94,
-    "cerrados": 35,
-    "abiertos": 59,
-    "atrasados": 11,
-    "enPlazo": 48,
+    "cerrados": 37,
+    "abiertos": 57,
+    "atrasados": 27,
+    "enPlazo": 30,
     "sinFecha": 0
    },
    "Estructura": {
     "total": 20,
-    "cerrados": 10,
-    "abiertos": 10,
+    "cerrados": 11,
+    "abiertos": 9,
     "atrasados": 9,
-    "enPlazo": 1,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "Instrumentación y Control": {
     "total": 40,
     "cerrados": 27,
     "abiertos": 13,
-    "atrasados": 5,
-    "enPlazo": 8,
+    "atrasados": 10,
+    "enPlazo": 3,
     "sinFecha": 0
    }
   },
   "p1PorArea": {
    "0570A": {
     "total": 61,
-    "cerrados": 35,
-    "abiertos": 26,
-    "atrasados": 6,
-    "enPlazo": 20,
+    "cerrados": 39,
+    "abiertos": 22,
+    "atrasados": 22,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "0580A": {
@@ -972,34 +972,34 @@
    },
    "0583A": {
     "total": 503,
-    "cerrados": 371,
-    "abiertos": 132,
-    "atrasados": 71,
-    "enPlazo": 61,
+    "cerrados": 384,
+    "abiertos": 119,
+    "atrasados": 85,
+    "enPlazo": 34,
     "sinFecha": 0
    },
    "0583B": {
     "total": 39,
-    "cerrados": 34,
-    "abiertos": 5,
-    "atrasados": 5,
+    "cerrados": 35,
+    "abiertos": 4,
+    "atrasados": 4,
     "enPlazo": 0,
     "sinFecha": 0
    },
    "0584A": {
     "total": 81,
-    "cerrados": 44,
-    "abiertos": 37,
-    "atrasados": 5,
-    "enPlazo": 32,
+    "cerrados": 47,
+    "abiertos": 34,
+    "atrasados": 30,
+    "enPlazo": 4,
     "sinFecha": 0
    },
    "0584B": {
     "total": 54,
-    "cerrados": 11,
-    "abiertos": 43,
+    "cerrados": 31,
+    "abiertos": 23,
     "atrasados": 0,
-    "enPlazo": 43,
+    "enPlazo": 23,
     "sinFecha": 0
    },
    "0584C": {
@@ -1027,27 +1027,27 @@
     "sinFecha": 0
    },
    "0586A": {
-    "total": 86,
-    "cerrados": 27,
-    "abiertos": 59,
+    "total": 98,
+    "cerrados": 29,
+    "abiertos": 69,
     "atrasados": 1,
-    "enPlazo": 58,
+    "enPlazo": 68,
     "sinFecha": 0
    },
    "0587A": {
     "total": 95,
-    "cerrados": 86,
-    "abiertos": 9,
-    "atrasados": 9,
+    "cerrados": 91,
+    "abiertos": 4,
+    "atrasados": 4,
     "enPlazo": 0,
     "sinFecha": 0
    },
    "0587B": {
-    "total": 72,
-    "cerrados": 60,
-    "abiertos": 12,
+    "total": 107,
+    "cerrados": 79,
+    "abiertos": 28,
     "atrasados": 12,
-    "enPlazo": 0,
+    "enPlazo": 16,
     "sinFecha": 0
    },
    "4510A": {
@@ -1060,10 +1060,10 @@
    },
    "4511A": {
     "total": 86,
-    "cerrados": 45,
-    "abiertos": 41,
-    "atrasados": 29,
-    "enPlazo": 12,
+    "cerrados": 49,
+    "abiertos": 37,
+    "atrasados": 37,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "4511B": {
@@ -1092,15 +1092,15 @@
    },
    "4515B": {
     "total": 206,
-    "cerrados": 172,
-    "abiertos": 34,
-    "atrasados": 34,
+    "cerrados": 175,
+    "abiertos": 31,
+    "atrasados": 31,
     "enPlazo": 0,
     "sinFecha": 0
    },
    "4515C": {
-    "total": 11,
-    "cerrados": 7,
+    "total": 32,
+    "cerrados": 28,
     "abiertos": 4,
     "atrasados": 4,
     "enPlazo": 0,
@@ -1118,18 +1118,18 @@
   "porCaminata": {
    "1": {
     "total": 362,
-    "cerrados": 283,
-    "abiertos": 79,
-    "atrasados": 79,
+    "cerrados": 284,
+    "abiertos": 78,
+    "atrasados": 78,
     "enPlazo": 0,
     "sinFecha": 0
    },
    "2": {
-    "total": 2098,
-    "cerrados": 1492,
-    "abiertos": 606,
-    "atrasados": 287,
-    "enPlazo": 319,
+    "total": 2222,
+    "cerrados": 1624,
+    "abiertos": 598,
+    "atrasados": 362,
+    "enPlazo": 236,
     "sinFecha": 0
    },
    "3": {
@@ -1165,27 +1165,27 @@
    "vals": [
     [
      7,
-     107,
+     109,
      0
     ],
     [
      0,
-     232,
+     203,
      0
     ],
     [
      13,
-     2,
+     5,
      0
     ],
     [
      2,
-     57,
+     55,
      0
     ],
     [
      4,
-     6,
+     5,
      0
     ],
     [
@@ -1197,39 +1197,57 @@
   },
   "antiguedad": {
    "tramos": {
-    "1-30 días": 202,
-    "31-90 días": 82,
+    "1-30 días": 266,
+    "31-90 días": 92,
     "91-180 días": 82,
     ">180 días": 0
    },
-   "max": 148,
-   "mediana": 20
+   "max": 155,
+   "mediana": 12
   },
   "topSubsistemas": [
    {
-    "sub": "4515-ESL-201",
-    "total": 126,
-    "cerrados": 94,
-    "abiertos": 32,
-    "atrasados": 32,
+    "sub": "4511-WW-201",
+    "total": 80,
+    "cerrados": 43,
+    "abiertos": 37,
+    "atrasados": 37,
     "enPlazo": 0,
     "sinFecha": 0
    },
    {
-    "sub": "4511-WW-201",
-    "total": 80,
-    "cerrados": 39,
-    "abiertos": 41,
+    "sub": "4515-ESL-201",
+    "total": 126,
+    "cerrados": 95,
+    "abiertos": 31,
+    "atrasados": 31,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0584-WYT-201",
+    "total": 71,
+    "cerrados": 42,
+    "abiertos": 29,
     "atrasados": 29,
-    "enPlazo": 12,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0583-WR-201",
+    "total": 77,
+    "cerrados": 53,
+    "abiertos": 24,
+    "atrasados": 24,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    {
     "sub": "0583-WR-208",
     "total": 49,
-    "cerrados": 20,
-    "abiertos": 29,
-    "atrasados": 29,
+    "cerrados": 28,
+    "abiertos": 21,
+    "atrasados": 21,
     "enPlazo": 0,
     "sinFecha": 0
    },
@@ -1239,6 +1257,15 @@
     "cerrados": 19,
     "abiertos": 20,
     "atrasados": 20,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0570-XH-201",
+    "total": 46,
+    "cerrados": 28,
+    "abiertos": 18,
+    "atrasados": 18,
     "enPlazo": 0,
     "sinFecha": 0
    },
@@ -1261,15 +1288,6 @@
     "sinFecha": 0
    },
    {
-    "sub": "0583-WR-202",
-    "total": 32,
-    "cerrados": 25,
-    "abiertos": 7,
-    "atrasados": 7,
-    "enPlazo": 0,
-    "sinFecha": 0
-   },
-   {
     "sub": "0583-NZ-201",
     "total": 16,
     "cerrados": 10,
@@ -1279,27 +1297,9 @@
     "sinFecha": 0
    },
    {
-    "sub": "0587-EVC-201",
-    "total": 12,
-    "cerrados": 6,
-    "abiertos": 6,
-    "atrasados": 6,
-    "enPlazo": 0,
-    "sinFecha": 0
-   },
-   {
     "sub": "0587-JD-201",
     "total": 46,
     "cerrados": 40,
-    "abiertos": 6,
-    "atrasados": 6,
-    "enPlazo": 0,
-    "sinFecha": 0
-   },
-   {
-    "sub": "0570-XP-201",
-    "total": 9,
-    "cerrados": 3,
     "abiertos": 6,
     "atrasados": 6,
     "enPlazo": 0,
@@ -1321,11 +1321,11 @@
    "crit",
    "Crítico",
    {
-    "total": 1292,
-    "cerrados": 901,
-    "abiertos": 391,
-    "atrasados": 154,
-    "enPlazo": 237,
+    "total": 1330,
+    "cerrados": 963,
+    "abiertos": 367,
+    "atrasados": 211,
+    "enPlazo": 156,
     "sinFecha": 0
    }
   ],
@@ -1333,23 +1333,25 @@
    "crit",
    "Crítico",
    {
-    "total": 280,
-    "cerrados": 228,
-    "abiertos": 52,
-    "atrasados": 52,
+    "total": 301,
+    "cerrados": 252,
+    "abiertos": 49,
+    "atrasados": 49,
     "enPlazo": 0,
     "sinFecha": 0
    }
   ]
  },
  "control": {
-  "punchTotal": 2481,
+  "punchTotal": 2605,
   "subsEnReporte": 95,
-  "subsConPunch": 79,
-  "subsSinPunch": 16,
-  "punchSinSubsistemaEnReporte": [],
-  "nHuerfanos": 0,
-  "itemsHuerfanos": 0,
+  "subsConPunch": 82,
+  "subsSinPunch": 13,
+  "punchSinSubsistemaEnReporte": [
+   "0587-ECC-201"
+  ],
+  "nHuerfanos": 1,
+  "itemsHuerfanos": 20,
   "filasReporte": 98,
   "fueraDelUniverso": 3,
   "punchEnFueraDelUniverso": 0,
@@ -1373,17 +1375,17 @@
    {
     "cat": "P0",
     "reporte": "21C / 2A",
-    "punch": "22C / 1A"
+    "punch": "22C / 2A"
    },
    {
     "cat": "P1",
     "reporte": "1091C / 446A",
-    "punch": "1129C / 443A"
+    "punch": "1224C / 416A"
    },
    {
     "cat": "P2",
     "reporte": "587C / 216A",
-    "punch": "605C / 224A"
+    "punch": "643C / 241A"
    },
    {
     "cat": "P3",
