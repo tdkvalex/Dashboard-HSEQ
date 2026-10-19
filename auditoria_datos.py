@@ -390,6 +390,17 @@ for f in kp["proyectos"]:
 # de cada nodo diga lo mismo que el árbol muestra. Un panel que se contradice a
 # sí mismo enseña una cifra en la tarjeta y calcula la variación semanal sobre
 # otra, y eso no se ve mirándolo.
+# La base del KPI es AP+P+AE+C: el universo sin el remanente (S) y sin lo que
+# está en revisión del cliente (rv). La resta tiene que cuadrar a la vista, con
+# los dos términos: la línea de la portada decía «universo − remanente» a secas
+# y dejaba 159 sin explicar, que eran justo los rv.
+_P = kp["modulos"]["protocolos"]
+if "rv" in _P:
+    chk(_P["base"] == _P["universo"] - _P["remanente"] - _P["rv"],
+        "Protocolos · base KPI = universo − remanente − en revisión",
+        f'{_P["universo"]}−{_P["remanente"]}−{_P["rv"]}='
+        f'{_P["universo"]-_P["remanente"]-_P["rv"]} vs {_P["base"]}')
+
 print("4 · PROTOCOLOS · COHERENCIA INTERNA DEL PANEL")
 PROT = R / "suite_qaqc/modulos/protocolos.html"
 _ph = PROT.read_text(encoding="utf-8") if PROT.exists() else ""

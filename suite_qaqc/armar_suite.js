@@ -92,7 +92,11 @@ function leerProtocolos() {
       nombre: p.name, cliente: p.client, actualizado: p.updated,
       estados: t,                 // S, C, P, AP, AE, rv — para poder auditarlo
       universo, enFalta, avance: t.C + t.AE, remanente: t.S,
-      base: den,                  // denominador del KPI: universo SIN el remanente
+      // Denominador del KPI = AP+P+AE+C, o sea el universo sin el remanente (S)
+      // y SIN lo que está en revisión del cliente (rv): de esos dos no depende
+      // la gestión. No es «universo − remanente» a secas; decirlo así deja la
+      // resta sin cuadrar por el rv.
+      base: den,
       kpi: pct1(enFalta, den),
     };
   }
@@ -222,6 +226,9 @@ const datos = {
       enFalta: sum((x) => x.protocolos && x.protocolos.enFalta),
       avance: sum((x) => x.protocolos && x.protocolos.avance),
       remanente: sum((x) => x.protocolos && x.protocolos.remanente),
+      // El rv —en revisión del cliente— se publica para que la resta de la base
+      // cuadre a la vista: base = universo − remanente − rv.
+      rv: sum((x) => x.protocolos && x.protocolos.estados && x.protocolos.estados.rv),
       base: sum((x) => x.protocolos && x.protocolos.base),
       actualizado: (filas.find((f) => f.protocolos) || {}).protocolos?.actualizado || null,
     } : { activo: false },
@@ -404,7 +411,9 @@ for (const f of filas) {
 }
 const M = datos.modulos;
 console.log(`\nProtocolos   universo ${nf(M.protocolos.universo)} · en falta ${nf(M.protocolos.enFalta)} ` +
-            `(base KPI ${nf(M.protocolos.base)} = universo − ${nf(M.protocolos.remanente)} remanente) · KPI ${M.protocolos.kpi}%`);
+            `(base KPI ${nf(M.protocolos.base)} = universo − ${nf(M.protocolos.remanente)} remanente` +
+            (M.protocolos.rv ? ` − ${nf(M.protocolos.rv)} en revisión` : ``) +
+            `) · KPI ${M.protocolos.kpi}%`);
 console.log(`Cierre QAQC  ${nf(M.cierre.subs)} subsistemas · ${nf(M.cierre.detalles)} detalles · ` +
             `${nf(M.cierre.cerrados)} cerrados · ${nf(M.cierre.atrasados)} atrasados`);
 const N = M.noConformidades;

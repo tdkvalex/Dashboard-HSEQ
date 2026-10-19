@@ -191,7 +191,8 @@ const acum = (filas, t) => {
   return t;
 };
 const cero = () => ({ S: 0, C: 0, P: 0, AP: 0, AE: 0, rv: 0 });
-/** Universo = S+C+P+AP+AE+rv · En falta = AP+P · Base KPI = universo − S ·
+/** Universo = S+C+P+AP+AE+rv · En falta = AP+P · Base KPI = AP+P+AE+C, que es
+ * el universo sin el remanente (S) y sin lo que está en revisión (rv) ·
  *  KPI = en falta / base. Mismas definiciones que el panel y la portada. */
 function metricas(t) {
   const universo = t.S + t.C + t.P + t.AP + t.AE + t.rv;

@@ -1,5 +1,5 @@
 {
- "generado": "2026-10-19 13:39",
+ "generado": "2026-10-19 13:48",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -265,6 +265,7 @@
    "enFalta": 423,
    "avance": 54795,
    "remanente": 8259,
+   "rv": 159,
    "base": 55218,
    "actualizado": "19-oct-2026",
    "kpi": 0.8
