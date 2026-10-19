@@ -1,5 +1,5 @@
 {
- "generado": "2026-10-19 13:04",
+ "generado": "2026-10-19 13:34",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -7,21 +7,21 @@
    "nombre": "Desaladora",
    "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
-    "kpi": 0.1,
-    "universo": 19239,
-    "enFalta": 11,
-    "avance": 14006,
-    "remanente": 5222,
-    "base": 14017,
+    "kpi": 0.2,
+    "universo": 19214,
+    "enFalta": 23,
+    "avance": 14406,
+    "remanente": 4785,
+    "base": 14429,
     "estados": {
-     "S": 5222,
-     "C": 12762,
-     "P": 1,
-     "AP": 10,
-     "AE": 1244,
+     "S": 4785,
+     "C": 13270,
+     "P": 0,
+     "AP": 23,
+     "AE": 1136,
      "rv": 0
     },
-    "actualizado": "12-oct-2026",
+    "actualizado": "19-oct-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -93,20 +93,20 @@
    "cliente": "CODELCO",
    "protocolos": {
     "kpi": 2.3,
-    "universo": 14658,
-    "enFalta": 312,
-    "avance": 13552,
-    "remanente": 223,
-    "base": 13864,
+    "universo": 14657,
+    "enFalta": 334,
+    "avance": 14000,
+    "remanente": 164,
+    "base": 14334,
     "estados": {
-     "S": 223,
-     "C": 13370,
-     "P": 33,
-     "AP": 279,
-     "AE": 182,
-     "rv": 571
+     "S": 164,
+     "C": 13917,
+     "P": 45,
+     "AP": 289,
+     "AE": 83,
+     "rv": 159
     },
-    "actualizado": "12-oct-2026",
+    "actualizado": "19-oct-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -178,20 +178,20 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.2,
-    "universo": 29818,
-    "enFalta": 43,
-    "avance": 26369,
-    "remanente": 3406,
-    "base": 26412,
+    "universo": 29765,
+    "enFalta": 66,
+    "avance": 26389,
+    "remanente": 3310,
+    "base": 26455,
     "estados": {
-     "S": 3406,
-     "C": 23228,
-     "P": 41,
-     "AP": 2,
-     "AE": 3141,
+     "S": 3310,
+     "C": 23532,
+     "P": 62,
+     "AP": 4,
+     "AE": 2857,
      "rv": 0
     },
-    "actualizado": "12-oct-2026",
+    "actualizado": "19-oct-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -261,13 +261,13 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 63715,
-   "enFalta": 366,
-   "avance": 53927,
-   "remanente": 8851,
-   "base": 54293,
-   "actualizado": "12-oct-2026",
-   "kpi": 0.7
+   "universo": 63636,
+   "enFalta": 423,
+   "avance": 54795,
+   "remanente": 8259,
+   "base": 55218,
+   "actualizado": "19-oct-2026",
+   "kpi": 0.8
   },
   "cierre": {
    "activo": true,
