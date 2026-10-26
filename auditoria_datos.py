@@ -332,6 +332,16 @@ chk(at["entregadas"] + at["pend"] == at["total"],
     "Arqueros · entregadas + sin entregar = universo",
     f'{at["entregadas"]}+{at["pend"]} vs {at["total"]}')
 
+# Talabre puede cargarse sin el archivo de STATUS: los subsistemas, las
+# caminatas y el avance PEC conservan el corte anterior y el JSON lo declara en
+# meta.corteStatus. Si está puesto y difiere del corte, hay que decirlo: media
+# pestaña del panel es de otra fecha y eso no se puede leer en la cifra.
+_cs = tal["meta"].get("corteStatus")
+if _cs and _cs != tal["meta"]["corteTexto"]:
+    nota(f"Talabre · subsistemas, caminatas y avance PEC vienen del corte {_cs}, "
+         f"no del {tal['meta']['corteTexto']}: llegó el registro de DT pero no el "
+         f"archivo de STATUS")
+
 tg = tal["dt"]["global"]
 chk(tg["cerrados"] + tg["abiertos"] == tg["total"], "Talabre · cerrados+abiertos=total")
 chk(tg["atrasados"] + tg["enPlazo"] == tg["abiertos"], "Talabre · atrasados+enPlazo=abiertos")

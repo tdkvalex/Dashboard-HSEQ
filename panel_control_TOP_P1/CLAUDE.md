@@ -183,6 +183,27 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 
 ---
 
+## 3.1 · Talabre sin el archivo de STATUS
+
+El proyecto deja de emitir `STATUS_SUBSISTEMAS_TALABRE` por semanas enteras mientras sigue
+mandando el `Detalle_de_Terminaciones`. **`talabre.py` ya no exige el STATUS**: con solo `--dt`
+recalcula los DT, el control y el semáforo —el registro es la fuente ítem a ítem y la que mueve
+el indicador— y **conserva tal cual** lo único que sale del STATUS: subsistemas, caminatas,
+caminatas por área, pendientes y avance PEC.
+
+Tres cosas que lo hacen honesto:
+
+- El JSON declara en `meta.corteStatus` de qué corte vienen esos bloques, y el script lo avisa
+  por pantalla. `auditoria_datos.py` lo nota cuando difiere del corte.
+- **El contraste contra la hoja DT del STATUS se omite**, no se pone en cero: inventar un cero
+  parecería un descuadre de 36 y 63 abiertos que no existe.
+- El semáforo por área **sí se recalcula**, porque mezcla DT fresco con caminatas y carpetas
+  conservadas; dejarlo del corte anterior escondería el avance de los DT.
+
+Desde `construir()` el código es **el mismo para los dos modos** —se bifurca solo al elegir de
+dónde salen esos seis bloques y entra a `_armar()`—, así que no hay una segunda implementación
+de las reglas que pueda divergir.
+
 ## 4 · Trampas ya descubiertas
 
 ### Columnas de origen (índices 0-based, ya resueltos en los scripts)

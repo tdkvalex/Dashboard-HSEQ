@@ -409,7 +409,25 @@ def resumir(items):
 
 
 def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
-              ultima_emision=None):
+              ultima_emision=None, previo=None):
+    """Arma el JSON del panel.
+
+    `previo` es el JSON de la corrida anterior y se usa cuando el corte llega
+    SIN el archivo de STATUS. En ese caso los bloques que salen de ahí
+    —subsistemas, caminatas y avance PEC— se conservan tal cual y el resto
+    —DT, control y semáforo— se recalcula con el registro nuevo, que es la
+    fuente ítem a ítem. Ni una regla se duplica: desde aquí el código es el
+    mismo para los dos caminos.
+    """
+    if previo is not None:
+        areas = previo["areas"]
+        caminatas, camArea = previo["caminatas"], previo["caminatasPorArea"]
+        pendientes, carpetas = previo["caminatasPendientes"], previo["carpetas"]
+        subsistemas = previo["subsistemas"]
+        return _armar(corte, subsistemas, areas, caminatas, camArea, pendientes,
+                      carpetas, declarado, items, incoherentes, hoy, estado_propio,
+                      ultima_emision, previo, None)
+
     areas = sorted({s["area"] for s in subs})
 
     # ---------- caminatas ----------
@@ -486,6 +504,19 @@ def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
          for s in subs if isinstance(s["pec"], (int, float)) and s["pec"] < 0.80],
         key=lambda x: x["pec"])
 
+    subsistemas = {"total": len(subs),
+                   "porArea": {a: sum(1 for s in subs if s["area"] == a) for a in areas}}
+    dtStatus = {"P1": sum(s["dtP1"] for s in subs),
+                "P2": sum(s["dtP2"] for s in subs)}
+    return _armar(corte, subsistemas, areas, caminatas, camArea, pendientes,
+                  carpetas, declarado, items, incoherentes, hoy, estado_propio,
+                  ultima_emision, None, dtStatus)
+
+
+def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
+           declarado, items, incoherentes, hoy, estado_propio, ultima_emision,
+           previo, dtStatus):
+    """DT, control y semáforo. Único camino para los dos modos de carga."""
     # ---------- DT ----------
     prios = ["P1", "P2", "P3", "P4", "Sin asignar"]
     p1 = [i for i in items if i["prio"] == "P1"]
@@ -598,12 +629,15 @@ def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
     # DT abiertos: la hoja STATUS lleva su propio conteo por subsistema.
     # Si cuadra con el registro se muestra como contraste OK; si no, va en
     # difDT, que el panel pinta como advertencia con su explicación.
-    sP1 = sum(s["dtP1"] for s in subs)
-    sP2 = sum(s["dtP2"] for s in subs)
+    # Sin el archivo de STATUS no hay contra qué contrastar: `dtStatus` llega en
+    # None y el contraste se omite en vez de inventar un cero que parecería un
+    # descuadre de 36 y 63.
     rP1 = dt["porPrioridad"]["P1"]["abiertos"]
     rP2 = dt["porPrioridad"]["P2"]["abiertos"]
     control["difDT"] = []
-    for nom, sv, rv in (("P1", sP1, rP1), ("P2", sP2, rP2)):
+    pares = () if dtStatus is None else (("P1", dtStatus["P1"], rP1),
+                                         ("P2", dtStatus["P2"], rP2))
+    for nom, sv, rv in pares:
         if sv != rv:
             control["difDT"].append({"prio": nom, "status": sv, "registro": rv})
         else:
@@ -615,8 +649,7 @@ def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
                       + ", ".join(d["prio"] for d in control["difDT"])
                       + " — el panel usa el registro de DT, que es la fuente ítem a ítem")
 
-    ids_status = {s["id"] for s in subs}
-    control["subsEnStatus"] = len(ids_status)
+    control["subsEnStatus"] = subsistemas["total"]
     control["areasStatus"] = len(areas)
     control["areasDT"] = len(areasDT)
     control["dtSinCompromiso"] = dt["global"]["sinCompromiso"]
@@ -661,10 +694,14 @@ def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
             "corteTexto": hoy.strftime("%d-%m-%Y"),
             "hoy": hoy.strftime("%d-%m-%Y"),
             "ultimaAgenda": corte.strftime("%d-%m-%Y") if corte else None,
+            # Cuando el corte llega sin el archivo de STATUS, los subsistemas,
+            # las caminatas y el avance PEC conservan el dato de este corte
+            # anterior. Se declara para que nadie lo lea como si fuera de hoy.
+            "corteStatus": (previo or {}).get("meta", {}).get("corteStatus")
+                           or (previo or {}).get("meta", {}).get("corteTexto"),
             "generado": datetime.now().strftime("%Y-%m-%d %H:%M"),
         },
-        "subsistemas": {"total": len(subs), "porArea": {a: sum(1 for s in subs if s["area"] == a)
-                                                        for a in areas}},
+        "subsistemas": subsistemas,
         "areas": areas,
         "caminatas": caminatas,
         "caminatasPorArea": camArea,
@@ -707,7 +744,14 @@ def inyectar_en_html(ruta_html, datos):
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--status", required=True, help="STATUS_SUBSISTEMAS_TALABRE.xlsx")
+    # El proyecto deja de emitir el STATUS por semanas enteras mientras sigue
+    # mandando el registro de DT, que es la fuente ítem a ítem y la que mueve el
+    # indicador. Sin este archivo el módulo se negaba a correr y el frente
+    # quedaba con el corte viejo completo; ahora procesa el registro y conserva
+    # —declarándolo— lo que solo sale del STATUS.
+    ap.add_argument("--status", help="STATUS_SUBSISTEMAS_TALABRE.xlsx (si no llega, "
+                                     "los subsistemas, caminatas y avance PEC "
+                                     "conservan el corte anterior)")
     ap.add_argument("--dt", required=True, help="Detalle_de_TerminacionesBesalco.xlsx")
     ap.add_argument("--hoy", help="Fecha de referencia AAAA-MM-DD (por defecto, hoy)")
     args = ap.parse_args()
@@ -715,12 +759,28 @@ def main():
     hoy = datetime.strptime(args.hoy, "%Y-%m-%d") if args.hoy else \
         datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
-    corte, subs, declarado = leer_status(args.status, hoy)
+    destino = AQUI / "datos_talabre.json"
+    previo = None
+    if not args.status:
+        if not destino.exists():
+            sys.exit("Sin --status y sin datos_talabre.json previo: no hay de dónde "
+                     "sacar los subsistemas, las caminatas ni el avance PEC.")
+        previo = json.loads(destino.read_text(encoding="utf-8"))
+        if "areas" not in previo or "caminatas" not in previo:
+            sys.exit("El datos_talabre.json previo no tiene el esquema que genera este "
+                     "script: pasa --status para rearmarlo completo.")
+        corte, subs, declarado = None, [], {"areas": {}, "total": None}
+        desde = previo["meta"].get("corteStatus") or previo["meta"].get("corteTexto")
+        avisos.append(f"No se pasó --status: los subsistemas, las caminatas y el avance "
+                      f"PEC conservan el dato del corte {desde}. Los DT, el control y el "
+                      f"semáforo se calcularon con el registro de este corte.")
+    else:
+        corte, subs, declarado = leer_status(args.status, hoy)
+
     items, incoherentes, estado_propio, ultima_emision = leer_dt(args.dt, hoy)
     datos = construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
-                      ultima_emision)
+                      ultima_emision, previo)
 
-    destino = AQUI / "datos_talabre.json"
     destino.write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding="utf-8")
     inyectado = inyectar_en_html(AQUI / "index.html", datos)
 
