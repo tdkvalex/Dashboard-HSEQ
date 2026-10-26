@@ -194,7 +194,14 @@ suma `rv` aparte. Restarlo dos veces fue un error real y está documentado en el
 
 ## Entorno
 
-- **Chromium para Playwright:** `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`
-  (el `executable_path` por defecto apunta a una versión que no está instalada).
+- **Chromium para Playwright:** no fijar la ruta. `verificar_suite.py` **busca el binario por
+  su nombre** bajo `PLAYWRIGHT_BROWSERS_PATH` (`chromium()`), porque el contenedor la movió dos
+  veces: cambió la versión —de `chromium-1194` a `chromium-1243`— y la carpeta —de
+  `chrome-linux` a `chrome-linux64`—. Cada vez, con la ruta escrita a mano, el verificador
+  caía con el cartel de «playwright install» en lugar de revisar nada.
+- **Tras reciclarse el contenedor:** `python3` es el 3.11 pero el `pip` del sistema instala
+  para el 3.13, así que las dependencias hay que poner con `python3 -m pip install openpyxl
+  python-pptx playwright` y, si `python-pptx` falla al importar `PIL._imaging`, además
+  `python3 -m pip install --force-reinstall Pillow`.
 - **LibreOffice no abre PPTX** en este contenedor: falta el filtro de Impress. Verificar las
   presentaciones leyendo su XML con `python-pptx`, no intentando convertirlas.

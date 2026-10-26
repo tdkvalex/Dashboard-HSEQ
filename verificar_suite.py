@@ -15,6 +15,7 @@ Opcional:
 """
 
 import argparse
+import os
 import re
 import sys
 import zipfile
@@ -31,7 +32,29 @@ PPTS = [RAIZ / "panel_control_TOP_P1" / "Panel_Control_TOP_P1.pptx",
 PPT_DE_MODULO = {"cierre": PPTS[0], "nc": PPTS[1], "protocolos": PPTS[2]}
 # Protocolos llega de otro equipo y su botón se llama distinto.
 BOTON_INFORME = "#pptBtn, #reportBtn"
-CHROMIUM = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
+def chromium():
+    """El Chromium instalado, buscándolo por el NOMBRE DEL BINARIO.
+
+    La ruta estaba escrita a mano (`chromium-1194/chrome-linux/chrome`) y el
+    contenedor la movió dos veces: cambió la versión —hoy 1243— y además la
+    carpeta, de `chrome-linux` a `chrome-linux64`. Cada vez el verificador caía
+    con el cartel de «playwright install» en lugar de revisar nada. Buscar el
+    binario por su nombre sobrevive a los dos cambios.
+    """
+    raiz = Path(os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers"))
+    if not raiz.is_dir():
+        return None
+    for nombre, prefijo in (("chrome", "chromium-"),
+                            ("headless_shell", "chromium_headless_shell-"),
+                            ("chrome-headless-shell", "chromium_headless_shell-")):
+        hallados = [r for r in raiz.glob(f"{prefijo}*/**/{nombre}")
+                    if r.is_file() and os.access(r, os.X_OK)]
+        if hallados:                      # el build más nuevo primero
+            return str(sorted(hallados, reverse=True)[0])
+    return None
+
+
+CHROMIUM = chromium()
 
 VERDE, ROJO, AMBAR, GRIS, FIN = "\033[32m", "\033[31m", "\033[33m", "\033[90m", "\033[0m"
 OK, MAL, AV = f"{VERDE}✓{FIN}", f"{ROJO}✕{FIN}", f"{AMBAR}▲{FIN}"
@@ -244,7 +267,7 @@ def revisar_suite(anchos):
 
     url = SUITE.as_uri()
     with sync_playwright() as pw:
-        nav = pw.chromium.launch(executable_path=CHROMIUM) if Path(CHROMIUM).exists() \
+        nav = pw.chromium.launch(executable_path=CHROMIUM) if CHROMIUM \
             else pw.chromium.launch()
         for W in anchos:
             pg = nav.new_page(viewport={"width": W, "height": 1000}, accept_downloads=True)
