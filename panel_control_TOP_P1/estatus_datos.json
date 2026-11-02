@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-10-26",
-  "corte_texto": "26-10-2026",
-  "generado": "2026-10-26 13:23"
+  "corte": "2026-11-02",
+  "corte_texto": "02-11-2026",
+  "generado": "2026-11-02 13:37"
  },
  "areas": [
   "2000",
@@ -65,19 +65,19 @@
   "global": {
    "total": 136,
    "entregadas": 49,
-   "conRespuesta": 31,
-   "rev": 18,
+   "conRespuesta": 32,
+   "rev": 17,
    "obs": 1,
-   "rech": 30,
+   "rech": 31,
    "aprob": 0,
    "pend": 87
   },
   "byArea": {
    "2000": {
     "total": 35,
-    "rev": 10,
+    "rev": 9,
     "obs": 0,
-    "rech": 21,
+    "rech": 22,
     "aprob": 0
    },
    "3000": {
@@ -246,7 +246,7 @@
    [
     "2000",
     "2000-2200-S02 Correa de Transporte 2200-CV-001",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -353,85 +353,85 @@
  "dt": {
   "global": {
    "total": 3314,
-   "cerrados": 2336,
+   "cerrados": 2566,
    "tramite": 0,
-   "esperandoCliente": 186,
-   "abiertos": 978,
-   "vencidos": 500
+   "esperandoCliente": 94,
+   "abiertos": 748,
+   "vencidos": 352
   },
   "tipos": {
    "P1": {
     "total": 2182,
-    "cerrados": 2039,
+    "cerrados": 2099,
     "tramite": 0,
-    "esperandoCliente": 55,
-    "abiertos": 143,
-    "vencidos": 86
+    "esperandoCliente": 5,
+    "abiertos": 83,
+    "vencidos": 54
    },
    "P2": {
     "total": 941,
-    "cerrados": 295,
+    "cerrados": 463,
     "tramite": 0,
-    "esperandoCliente": 123,
-    "abiertos": 646,
-    "vencidos": 383
+    "esperandoCliente": 83,
+    "abiertos": 478,
+    "vencidos": 269
    },
    "P3": {
     "total": 191,
-    "cerrados": 2,
+    "cerrados": 4,
     "tramite": 0,
-    "esperandoCliente": 8,
-    "abiertos": 189,
-    "vencidos": 31
+    "esperandoCliente": 6,
+    "abiertos": 187,
+    "vencidos": 29
    }
   },
   "p1Esp": {
    "Piping": {
     "total": 500,
-    "cerrados": 484,
+    "cerrados": 496,
     "tramite": 0,
-    "esperandoCliente": 6,
-    "abiertos": 16,
-    "vencidos": 10
+    "esperandoCliente": 1,
+    "abiertos": 4,
+    "vencidos": 1
    },
    "Eléctrica": {
     "total": 467,
-    "cerrados": 418,
+    "cerrados": 426,
     "tramite": 0,
-    "esperandoCliente": 9,
-    "abiertos": 49,
-    "vencidos": 33
+    "esperandoCliente": 1,
+    "abiertos": 41,
+    "vencidos": 30
    },
    "Instrumentación y Control": {
     "total": 455,
-    "cerrados": 389,
+    "cerrados": 418,
     "tramite": 0,
-    "esperandoCliente": 29,
-    "abiertos": 66,
-    "vencidos": 39
+    "esperandoCliente": 2,
+    "abiertos": 37,
+    "vencidos": 23
    },
    "Mecánica": {
     "total": 539,
-    "cerrados": 536,
+    "cerrados": 539,
     "tramite": 0,
-    "esperandoCliente": 2,
-    "abiertos": 3,
-    "vencidos": 2
+    "esperandoCliente": 0,
+    "abiertos": 0,
+    "vencidos": 0
    },
    "Estructura": {
     "total": 151,
-    "cerrados": 145,
+    "cerrados": 150,
     "tramite": 0,
-    "esperandoCliente": 6,
-    "abiertos": 6,
-    "vencidos": 2
+    "esperandoCliente": 1,
+    "abiertos": 1,
+    "vencidos": 0
    },
    "Obras Civiles": {
     "total": 70,
-    "cerrados": 67,
+    "cerrados": 70,
     "tramite": 0,
-    "esperandoCliente": 3,
-    "abiertos": 3,
+    "esperandoCliente": 0,
+    "abiertos": 0,
     "vencidos": 0
    }
   },
@@ -446,11 +446,11 @@
    },
    "3000": {
     "total": 1228,
-    "cerrados": 1085,
+    "cerrados": 1145,
     "tramite": 0,
-    "esperandoCliente": 55,
-    "abiertos": 143,
-    "vencidos": 86
+    "esperandoCliente": 5,
+    "abiertos": 83,
+    "vencidos": 54
    },
    "4000": {
     "total": 367,
@@ -481,45 +481,45 @@
    "vals": [
     [
      0,
-     16,
+     4,
      0,
      0
     ],
     [
      0,
-     49,
+     41,
      0,
      0
     ],
     [
      0,
-     66,
+     37,
      0,
      0
     ],
     [
      0,
-     3,
+     0,
      0,
      0
     ],
     [
      0,
-     6,
+     1,
      0,
      0
     ],
     [
      0,
-     3,
+     0,
      0,
      0
     ]
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 54,
-   "Caminata 2 (100%)": 89
+   "Caminata 1 (80%)": 36,
+   "Caminata 2 (100%)": 47
   }
  },
  "semaforo": {
@@ -528,8 +528,8 @@
    "Al día"
   ],
   "3000": [
-   "warn",
-   "Atención"
+   "good",
+   "Al día"
   ],
   "4000": [
    "good",
@@ -541,22 +541,22 @@
   ]
  },
  "previo": {
-  "corte": "2026-10-19",
-  "corte_texto": "19-10-2026",
+  "corte": "2026-10-26",
+  "corte_texto": "26-10-2026",
   "cam80": 136,
   "cam100": 136,
   "subs": 136,
   "camProx": 0,
   "camProg": 0,
-  "topEntregadas": 46,
-  "topRev": 15,
+  "topEntregadas": 49,
+  "topRev": 18,
   "topObs": 1,
   "topRech": 30,
   "topAprob": 0,
   "topConRespuesta": 31,
   "p1Total": 2182,
-  "p1Cerrados": 1914,
-  "p1Abiertos": 268,
-  "p1Vencidos": 146
+  "p1Cerrados": 2039,
+  "p1Abiertos": 143,
+  "p1Vencidos": 86
  }
 }
