@@ -6,12 +6,12 @@
   "codigo": "P2407",
   "cliente": "CODELCO",
   "contrato": "4600029355",
-  "corte": "2026-10-26",
-  "corteTexto": "26-10-2026",
-  "hoy": "26-10-2026",
+  "corte": "2026-11-02",
+  "corteTexto": "02-11-2026",
+  "hoy": "02-11-2026",
   "ultimaAgenda": null,
-  "corteStatus": "19-10-2026",
-  "generado": "2026-10-26 13:34"
+  "corteStatus": null,
+  "generado": "2026-11-02 13:30"
  },
  "subsistemas": {
   "total": 218,
@@ -51,13 +51,13 @@
   },
   "2": {
    "total": 218,
-   "realizada": 215,
+   "realizada": 218,
    "programada": 0,
-   "vencida": 3,
+   "vencida": 0,
    "pendiente": 0,
-   "pct": 98.6,
+   "pct": 100.0,
    "exigible": 218,
-   "pctExigible": 98.6
+   "pctExigible": 100.0
   }
  },
  "caminatasPorArea": {
@@ -73,9 +73,9 @@
    },
    "2": {
     "total": 3,
-    "realizada": 1,
+    "realizada": 3,
     "programada": 0,
-    "vencida": 2,
+    "vencida": 0,
     "pendiente": 0,
     "exigible": 3
    }
@@ -206,9 +206,9 @@
    },
    "2": {
     "total": 13,
-    "realizada": 12,
+    "realizada": 13,
     "programada": 0,
-    "vencida": 1,
+    "vencida": 0,
     "pendiente": 0,
     "exigible": 13
    }
@@ -233,110 +233,82 @@
    }
   }
  },
- "caminatasPendientes": [
-  {
-   "id": "5900B-001",
-   "area": "CERRO VERDE/PS2",
-   "alcance": "JUMPER DE F.O EN GABINETE PS4 PARA CONEXIÓN DE SWITCHES CORE",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "03-10-2026",
-   "pec": 0.95
-  },
-  {
-   "id": "5900I-001",
-   "area": "CERRO VERDE/PS2",
-   "alcance": "TELECOMUNICACIONES PS2",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "03-10-2026",
-   "pec": 0.37
-  },
-  {
-   "id": "3716E-23-009",
-   "area": "PQS",
-   "alcance": "OO.CC. de piscina QS",
-   "cam": 2,
-   "estado": "Vencida",
-   "fecha": "03-10-2026",
-   "pec": 0.52
-  }
- ],
+ "caminatasPendientes": [],
  "carpetas": {
   "tipo": "avance",
   "total": 218,
   "conDato": 218,
-  "promedio": 95.3,
-  "sobre95": 193,
+  "promedio": 95.7,
+  "sobre95": 160,
   "sobre80": 215,
   "bajo80": 3,
   "tramos": {
-   "95% o más": 193,
-   "80% a 95%": 22,
+   "95% o más": 160,
+   "80% a 95%": 55,
    "Bajo 80%": 3
   },
   "enRevisionCliente": null,
   "porArea": {
    "CERRO VERDE/PS2": {
     "subs": 3,
-    "promedio": 75.7,
-    "sobre95": 2,
+    "promedio": 75.5,
+    "sobre95": 1,
     "sobre80": 2,
     "bajo80": 1
    },
    "EBMP": {
     "subs": 20,
-    "promedio": 96.4,
-    "sobre95": 20,
+    "promedio": 96.6,
+    "sobre95": 12,
     "sobre80": 20,
     "bajo80": 0
    },
    "EBMS": {
     "subs": 25,
-    "promedio": 93.9,
-    "sobre95": 17,
+    "promedio": 95.6,
+    "sobre95": 16,
     "sobre80": 25,
     "bajo80": 0
    },
    "IMPULSIÓN ADUCCIÓN": {
     "subs": 3,
-    "promedio": 96.3,
-    "sobre95": 3,
+    "promedio": 97.2,
+    "sobre95": 2,
     "sobre80": 3,
     "bajo80": 0
    },
    "LÍNEAS IMPULSIÓN": {
     "subs": 14,
-    "promedio": 93.0,
-    "sobre95": 10,
+    "promedio": 93.5,
+    "sobre95": 7,
     "sobre80": 13,
     "bajo80": 1
    },
    "PISCINAS Y SEDIMENTADOR": {
     "subs": 22,
     "promedio": 92.5,
-    "sobre95": 15,
+    "sobre95": 5,
     "sobre80": 22,
     "bajo80": 0
    },
    "POZOS": {
     "subs": 110,
-    "promedio": 97.0,
-    "sobre95": 110,
+    "promedio": 97.2,
+    "sobre95": 104,
     "sobre80": 110,
     "bajo80": 0
    },
    "PQS": {
     "subs": 13,
     "promedio": 91.6,
-    "sobre95": 8,
+    "sobre95": 6,
     "sobre80": 12,
     "bajo80": 1
    },
    "SALA GAR": {
     "subs": 8,
-    "promedio": 97.6,
-    "sobre95": 8,
+    "promedio": 97.9,
+    "sobre95": 7,
     "sobre80": 8,
     "bajo80": 0
    }
@@ -345,14 +317,14 @@
    {
     "id": "5900I-001",
     "area": "CERRO VERDE/PS2",
-    "pec": 37.0,
+    "pec": 36.7,
     "obs": ""
    },
    {
     "id": "3716E-23-009",
     "area": "PQS",
-    "pec": 52.0,
-    "obs": "pendiente geomembrana"
+    "pec": 52.5,
+    "obs": ""
    },
    {
     "id": "3716E-24-002",
@@ -381,18 +353,18 @@
     "sinCompromiso": 0
    },
    "P2": {
-    "total": 1434,
+    "total": 1433,
     "cerrados": 1433,
-    "abiertos": 1,
-    "atrasados": 1,
+    "abiertos": 0,
+    "atrasados": 0,
     "enPlazo": 0,
     "sinCompromiso": 0
    },
    "P3": {
-    "total": 244,
+    "total": 245,
     "cerrados": 74,
-    "abiertos": 170,
-    "atrasados": 8,
+    "abiertos": 171,
+    "atrasados": 9,
     "enPlazo": 162,
     "sinCompromiso": 162
    },
@@ -765,12 +737,12 @@
   "antiguedad": {
    "tramos": {
     "1-30 días": 2,
-    "31-90 días": 3,
-    "91-180 días": 4,
+    "31-90 días": 0,
+    "91-180 días": 7,
     ">180 días": 0
    },
-   "max": 122,
-   "mediana": 87
+   "max": 129,
+   "mediana": 94
   },
   "topSubsistemas": [
    {
@@ -885,8 +857,8 @@
  },
  "semaforo": {
   "CERRO VERDE/PS2": [
-   "crit",
-   "Crítico",
+   "warn",
+   "Atención",
    {
     "total": 0,
     "cerrados": 0,
@@ -898,7 +870,7 @@
    {
     "exigible": 3,
     "agendadas": 0,
-    "avanceExigible": 33.3
+    "avanceExigible": 100.0
    }
   ],
   "EBMP": [
@@ -1017,7 +989,7 @@
    {
     "exigible": 13,
     "agendadas": 0,
-    "avanceExigible": 92.3
+    "avanceExigible": 100.0
    }
   ],
   "SALA GAR": [
@@ -1039,7 +1011,26 @@
   ]
  },
  "control": {
-  "contraste": [],
+  "contraste": [
+   {
+    "que": "DT abiertos (hoja DT del archivo de STATUS)",
+    "declarado": "219",
+    "calculado": "219",
+    "ok": true
+   },
+   {
+    "que": "DT P1 abiertos: hoja STATUS vs. registro",
+    "declarado": "0",
+    "calculado": "0",
+    "ok": true
+   },
+   {
+    "que": "DT P2 abiertos: hoja STATUS vs. registro",
+    "declarado": "0",
+    "calculado": "0",
+    "ok": true
+   }
+  ],
   "incoherentes": 0,
   "estadoPropio": false,
   "ultimaEmisionDT": "14-10-2026",
