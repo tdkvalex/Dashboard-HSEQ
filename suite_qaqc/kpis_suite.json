@@ -1,5 +1,5 @@
 {
- "generado": "2026-10-26 13:35",
+ "generado": "2026-11-02 13:17",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -232,27 +232,27 @@
    },
    "noConformidades": {
     "nombre": "Arqueros",
-    "cliente": 81,
+    "cliente": 83,
     "obra": true,
-    "total": 174,
+    "total": 176,
     "cerradas": 159,
-    "abiertas": 15,
-    "atrasadas": 13,
-    "pctCierre": 91.4,
+    "abiertas": 17,
+    "atrasadas": 15,
+    "pctCierre": 90.3,
     "internas": 53,
-    "externas": 121,
+    "externas": 123,
     "subcontrato": 40,
-    "abiertasCliente": 14,
+    "abiertasCliente": 16,
     "abiertasSubcontrato": 0,
     "abiertasInternas": 1,
     "costo": 3391.8,
     "conCosto": 44,
     "medianaCierre": 140,
     "promedioCierre": 142,
-    "maxCierre": 445,
+    "maxCierre": 452,
     "sem": [
-     "warn",
-     "Atención"
+     "crit",
+     "Crítico"
     ]
    }
   }
@@ -287,17 +287,17 @@
   "noConformidades": {
    "activo": true,
    "proyectos": 3,
-   "total": 511,
+   "total": 513,
    "cerradas": 493,
-   "abiertas": 18,
-   "pctCierre": 96.5,
+   "abiertas": 20,
+   "pctCierre": 96.1,
    "costo": 10628.4,
    "medianaCierre": 31,
-   "conOficina": 519,
+   "conOficina": 521,
    "atrasoCalculable": true,
-   "atrasadas": 15,
+   "atrasadas": 17,
    "plazoRespuesta": 10,
-   "corte": "26-10-2026"
+   "corte": "02-11-2026"
   }
  }
 }
