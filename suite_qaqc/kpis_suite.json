@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-09 13:50",
+ "generado": "2026-11-09 13:52",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -29,32 +29,32 @@
    },
    "qaqc": "DES",
    "cierre": {
-    "corte": "27-10-2026",
+    "corte": "03-11-2026",
     "subs": 95,
     "cam": {
-     "realizada": 84,
+     "realizada": 86,
      "aplica": 95
     },
     "p1": {
-     "total": 1746,
-     "cerrados": 1434,
-     "abiertos": 312,
-     "atrasados": 265
+     "total": 1769,
+     "cerrados": 1507,
+     "abiertos": 262,
+     "atrasados": 228
     },
     "det": {
-     "total": 2777,
-     "cerrados": 2292,
-     "abiertos": 485,
-     "atrasados": 435,
-     "enPlazo": 50,
+     "total": 2854,
+     "cerrados": 2401,
+     "abiertos": 453,
+     "atrasados": 390,
+     "enPlazo": 63,
      "sinFecha": 0
     },
     "carpeta": {
      "tipo": "estado",
-     "entregadas": 80,
+     "entregadas": 83,
      "total": 95
     },
-    "cierrePct": 82.1,
+    "cierrePct": 85.2,
     "sem": [
      "warn",
      "Atención"
@@ -274,15 +274,15 @@
    "activo": true,
    "proyectos": 3,
    "subs": 449,
-   "detalles": 8272,
-   "cerrados": 7032,
-   "abiertos": 1240,
+   "detalles": 8349,
+   "cerrados": 7141,
+   "abiertos": 1208,
    "tramite": 0,
-   "atrasados": 664,
-   "p1Total": 4372,
-   "p1Cerrados": 3995,
+   "atrasados": 619,
+   "p1Total": 4395,
+   "p1Cerrados": 4068,
    "p1Tramite": 0,
-   "p1Atrasados": 309
+   "p1Atrasados": 272
   },
   "noConformidades": {
    "activo": true,
