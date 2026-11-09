@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-09 13:52",
+ "generado": "2026-11-09 13:55",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -8,20 +8,20 @@
    "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
     "kpi": 0.1,
-    "universo": 19269,
-    "enFalta": 13,
-    "avance": 14738,
-    "remanente": 4518,
-    "base": 14751,
+    "universo": 19282,
+    "enFalta": 10,
+    "avance": 14807,
+    "remanente": 4465,
+    "base": 14817,
     "estados": {
-     "S": 4518,
-     "C": 13895,
+     "S": 4465,
+     "C": 14059,
      "P": 0,
-     "AP": 13,
-     "AE": 843,
+     "AP": 10,
+     "AE": 748,
      "rv": 0
     },
-    "actualizado": "02-nov-2026",
+    "actualizado": "09-nov-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -92,21 +92,21 @@
    "nombre": "Talabre",
    "cliente": "CODELCO",
    "protocolos": {
-    "kpi": 0.9,
-    "universo": 14571,
-    "enFalta": 129,
-    "avance": 14378,
-    "remanente": 34,
-    "base": 14507,
+    "kpi": 0.7,
+    "universo": 14586,
+    "enFalta": 95,
+    "avance": 14377,
+    "remanente": 31,
+    "base": 14472,
     "estados": {
-     "S": 34,
-     "C": 14376,
-     "P": 9,
-     "AP": 120,
+     "S": 31,
+     "C": 14375,
+     "P": 5,
+     "AP": 90,
      "AE": 2,
-     "rv": 30
+     "rv": 83
     },
-    "actualizado": "02-nov-2026",
+    "actualizado": "09-nov-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -178,20 +178,20 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.2,
-    "universo": 30434,
-    "enFalta": 61,
-    "avance": 27023,
-    "remanente": 3350,
-    "base": 27084,
+    "universo": 30581,
+    "enFalta": 51,
+    "avance": 27521,
+    "remanente": 3009,
+    "base": 27572,
     "estados": {
-     "S": 3350,
-     "C": 24711,
-     "P": 57,
-     "AP": 4,
-     "AE": 2312,
+     "S": 3009,
+     "C": 25575,
+     "P": 40,
+     "AP": 11,
+     "AE": 1946,
      "rv": 0
     },
-    "actualizado": "02-nov-2026",
+    "actualizado": "09-nov-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -261,14 +261,14 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 64274,
-   "enFalta": 203,
-   "avance": 56139,
-   "remanente": 7902,
-   "rv": 30,
-   "base": 56342,
-   "actualizado": "02-nov-2026",
-   "kpi": 0.4
+   "universo": 64449,
+   "enFalta": 156,
+   "avance": 56705,
+   "remanente": 7505,
+   "rv": 83,
+   "base": 56861,
+   "actualizado": "09-nov-2026",
+   "kpi": 0.3
   },
   "cierre": {
    "activo": true,
