@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-09 13:39",
+ "generado": "2026-11-09 13:50",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -114,7 +114,7 @@
    },
    "qaqc": "TAL",
    "cierre": {
-    "corte": "02-11-2026",
+    "corte": "09-11-2026",
     "subs": 218,
     "cam": {
      "realizada": 218,
