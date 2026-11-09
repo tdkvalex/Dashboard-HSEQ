@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-11-02",
-  "corte_texto": "02-11-2026",
-  "generado": "2026-11-02 13:37"
+  "corte": "2026-11-09",
+  "corte_texto": "09-11-2026",
+  "generado": "2026-11-09 13:39"
  },
  "areas": [
   "2000",
@@ -65,19 +65,19 @@
   "global": {
    "total": 136,
    "entregadas": 49,
-   "conRespuesta": 32,
-   "rev": 17,
+   "conRespuesta": 35,
+   "rev": 14,
    "obs": 1,
-   "rech": 31,
+   "rech": 34,
    "aprob": 0,
    "pend": 87
   },
   "byArea": {
    "2000": {
     "total": 35,
-    "rev": 9,
+    "rev": 8,
     "obs": 0,
-    "rech": 22,
+    "rech": 23,
     "aprob": 0
    },
    "3000": {
@@ -89,9 +89,9 @@
    },
    "4000": {
     "total": 22,
-    "rev": 8,
+    "rev": 6,
     "obs": 0,
-    "rech": 2,
+    "rech": 4,
     "aprob": 0
    },
    "8000": {
@@ -256,7 +256,7 @@
    [
     "2000",
     "2000-2500-S02 Correa de Transporte 2500-CV-001",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -321,7 +321,7 @@
    [
     "4000",
     "4000-4200-S03 Sistema para Derrames",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "4000",
@@ -336,7 +336,7 @@
    [
     "4000",
     "4000-4600-S04 Sala de Compresores",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -353,62 +353,62 @@
  "dt": {
   "global": {
    "total": 3314,
-   "cerrados": 2566,
+   "cerrados": 2778,
    "tramite": 0,
-   "esperandoCliente": 94,
-   "abiertos": 748,
-   "vencidos": 352
+   "esperandoCliente": 38,
+   "abiertos": 536,
+   "vencidos": 220
   },
   "tipos": {
    "P1": {
     "total": 2182,
-    "cerrados": 2099,
+    "cerrados": 2117,
     "tramite": 0,
-    "esperandoCliente": 5,
-    "abiertos": 83,
-    "vencidos": 54
+    "esperandoCliente": 10,
+    "abiertos": 65,
+    "vencidos": 44
    },
    "P2": {
     "total": 941,
-    "cerrados": 463,
+    "cerrados": 653,
     "tramite": 0,
-    "esperandoCliente": 83,
-    "abiertos": 478,
-    "vencidos": 269
+    "esperandoCliente": 28,
+    "abiertos": 288,
+    "vencidos": 149
    },
    "P3": {
     "total": 191,
-    "cerrados": 4,
+    "cerrados": 8,
     "tramite": 0,
-    "esperandoCliente": 6,
-    "abiertos": 187,
-    "vencidos": 29
+    "esperandoCliente": 0,
+    "abiertos": 183,
+    "vencidos": 27
    }
   },
   "p1Esp": {
    "Piping": {
     "total": 500,
-    "cerrados": 496,
+    "cerrados": 499,
     "tramite": 0,
-    "esperandoCliente": 1,
-    "abiertos": 4,
-    "vencidos": 1
+    "esperandoCliente": 0,
+    "abiertos": 1,
+    "vencidos": 0
    },
    "Eléctrica": {
     "total": 467,
-    "cerrados": 426,
+    "cerrados": 435,
     "tramite": 0,
-    "esperandoCliente": 1,
-    "abiertos": 41,
-    "vencidos": 30
+    "esperandoCliente": 4,
+    "abiertos": 32,
+    "vencidos": 24
    },
    "Instrumentación y Control": {
     "total": 455,
-    "cerrados": 418,
+    "cerrados": 424,
     "tramite": 0,
-    "esperandoCliente": 2,
-    "abiertos": 37,
-    "vencidos": 23
+    "esperandoCliente": 5,
+    "abiertos": 31,
+    "vencidos": 20
    },
    "Mecánica": {
     "total": 539,
@@ -446,11 +446,11 @@
    },
    "3000": {
     "total": 1228,
-    "cerrados": 1145,
+    "cerrados": 1163,
     "tramite": 0,
-    "esperandoCliente": 5,
-    "abiertos": 83,
-    "vencidos": 54
+    "esperandoCliente": 10,
+    "abiertos": 65,
+    "vencidos": 44
    },
    "4000": {
     "total": 367,
@@ -481,19 +481,19 @@
    "vals": [
     [
      0,
-     4,
+     1,
      0,
      0
     ],
     [
      0,
-     41,
+     32,
      0,
      0
     ],
     [
      0,
-     37,
+     31,
      0,
      0
     ],
@@ -518,8 +518,8 @@
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 36,
-   "Caminata 2 (100%)": 47
+   "Caminata 1 (80%)": 30,
+   "Caminata 2 (100%)": 35
   }
  },
  "semaforo": {
@@ -541,22 +541,22 @@
   ]
  },
  "previo": {
-  "corte": "2026-10-26",
-  "corte_texto": "26-10-2026",
+  "corte": "2026-11-02",
+  "corte_texto": "02-11-2026",
   "cam80": 136,
   "cam100": 136,
   "subs": 136,
   "camProx": 0,
   "camProg": 0,
   "topEntregadas": 49,
-  "topRev": 18,
+  "topRev": 17,
   "topObs": 1,
-  "topRech": 30,
+  "topRech": 31,
   "topAprob": 0,
-  "topConRespuesta": 31,
+  "topConRespuesta": 32,
   "p1Total": 2182,
-  "p1Cerrados": 2039,
-  "p1Abiertos": 143,
-  "p1Vencidos": 86
+  "p1Cerrados": 2099,
+  "p1Abiertos": 83,
+  "p1Vencidos": 54
  }
 }
