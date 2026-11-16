@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-09 13:55",
+ "generado": "2026-11-16 15:28",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -248,8 +248,8 @@
     "costo": 3391.8,
     "conCosto": 44,
     "medianaCierre": 140,
-    "promedioCierre": 142,
-    "maxCierre": 459,
+    "promedioCierre": 143,
+    "maxCierre": 464,
     "sem": [
      "crit",
      "Crítico"
@@ -297,7 +297,7 @@
    "atrasoCalculable": true,
    "atrasadas": 20,
    "plazoRespuesta": 10,
-   "corte": "09-11-2026"
+   "corte": "16-11-2026"
   }
  }
 }
