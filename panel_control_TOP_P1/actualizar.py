@@ -110,6 +110,15 @@ def cols_por_encabezado(ws, esperadas, etiqueta):
     return cols
 
 
+# Aviso al pie y al encabezado de la pestaña de Arqueros. El proyecto no está
+# registrando toda la data por directrices internas, así que sus cifras pueden
+# mostrar incongruencias; mientras eso siga, el panel lo declara en vez de
+# presentarlas como si estuvieran completas. *Pedido por el usuario
+# (16-11-2026).* Para quitarlo cuando se resuelva, basta poner AVISO_DATOS = "".
+AVISO_DATOS = ("DATA no completamente registrada por directrices internas del "
+               "proyecto, pudiendo reflejar incongruencias en sus resultados.")
+
+
 CTOP_MAP = {
     "": "Sin entregar",
     # «En proceso» es la carpeta cuyo armado empezó pero que todavía NO se
@@ -359,6 +368,9 @@ def construir(corte, caminatas, detalles):
             "corte_texto": corte.strftime("%d-%m-%Y"),
             "generado": datetime.now().strftime("%Y-%m-%d %H:%M"),
         },
+        # Va en el JSON y no escrito en el HTML: así sobrevive a cada
+        # regeneración y se quita borrando la constante.
+        "avisoDatos": AVISO_DATOS,
         "areas": AREAS,
         # Lo que queda fuera del desglose por área, para que la diferencia entre
         # la suma de las áreas y el total esté explicada en el propio JSON.
