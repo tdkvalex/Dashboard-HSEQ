@@ -1,0 +1,47 @@
+{
+ "nc_data": {
+  "sha256": "78dea8a89397e98afafcf9ed11038a890f2325af20260940ba4398f11495fd3b",
+  "archivo": "Data_NCR.xlsx",
+  "corte": "2026-11-23"
+ },
+ "tal_dt": {
+  "sha256": "c6a1f53e0ea0b9215f43d477a7bd9802f4981d1ef5bb6ec3b43d1a4096399211",
+  "archivo": "Detalle_de_Terminaciones-Besalco.xlsx",
+  "corte": "2026-11-23"
+ },
+ "arq_p1": {
+  "sha256": "45497699e7171910392143b5231ce41f3d27267594b64f4fd7beeb3395ce6cad",
+  "archivo": "Detalles_de_terminacion_P1.xlsx",
+  "corte": "2026-11-23"
+ },
+ "arqueros": {
+  "sha256": "95e9e40c0e66ed2415aa1949b04a60eb862e902b57e39f3cfd89c8a3bda40966",
+  "archivo": "Estatus_Resumen_General_QAQC.xlsx",
+  "corte": "2026-11-23"
+ },
+ "des_punch": {
+  "sha256": "15af15b0613e97ecfd7fa8a3c1cd4ba19cb204ab5af0fb0ea725b5b2c3c2b2f6",
+  "archivo": "Listado_Puntos_Punch_Consolidado_2026_11_23.xlsx",
+  "corte": "2026-11-23"
+ },
+ "nc_externas": {
+  "sha256": "ffbb683dd2a90c173135b930057b719becea8225edf05f20f5838a6ec6b615e7",
+  "archivo": "Log_Control_NC_MASA.xlsm",
+  "corte": "2026-11-23"
+ },
+ "des_reporte": {
+  "sha256": "c0ef285854583d1df7a0f4f83f7eca668b438d08b7c6b3da1c83a04b6a21e784",
+  "archivo": "REPORTE_GERENCIAL_2026-11-16_Rev_0.xlsx",
+  "corte": "2026-11-23"
+ },
+ "tal_status": {
+  "sha256": "ff8a3ddc8f1700174c595621032de3a80384942e2cbecc7259e96ca43cc52991",
+  "archivo": "STATUS_PROTOCOLIZACION.xlsx",
+  "corte": "2026-11-23"
+ },
+ "protocolos": {
+  "sha256": "bdb0ad601d8c237e84786ec2f79b8e1f01ba092e39cd2b0a7c6c4048247e6083",
+  "archivo": "dashboard_protocolos.html",
+  "corte": "2026-11-23"
+ }
+}

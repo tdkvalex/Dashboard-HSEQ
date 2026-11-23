@@ -11,7 +11,7 @@ procesarlos y qué **no** volver a romper.
 | Proyecto | Archivos | Hojas que se leen |
 |---|---|---|
 | **Desaladora** | `REPORTE_GERENCIAL_AAAAMMDD.xlsx` **+** `Listado_Puntos_Punch_Consolidado_AAAA_MM_DD.xlsx` | `REPORTE GERENCIAL`, `Resumen  general` · `LISTADO PUNCH ITEMS` |
-| **Talabre** | `STATUS_SUBSISTEMAS_TALABRE.xlsx` **+** `Detalle_de_TerminacionesBesalco.xlsx` | `STATUS` (y `RESUMEN`/`DT` si vienen, como contraste) · `DT` |
+| **Talabre** | `STATUS_PROTOCOLIZACIÓN.xlsx` (antes `STATUS_SUBSISTEMAS_TALABRE`) **y/o** `Detalle_de_TerminacionesBesalco.xlsx` — basta uno, ver §3.1 | `STATUS` (y `Resumen`/`DT` como contraste) · `DT` |
 | **Arqueros** (cliente MASA) | `Estatus_Resumen_General_QAQC.xlsx` | `BD Caminatas-CTOP`, `BD Detalles Terminación` |
 
 **Desaladora emite sus dos archivos en días distintos, y eso es normal: el REPORTE GERENCIAL
@@ -62,7 +62,7 @@ corre los tres proyectos y la PPT en orden, y se detiene si algo viene viejo. Ve
 ```bash
 python3 desaladora.py --reporte /ruta/REPORTE_GERENCIAL_*.xlsx \
                       --punch   /ruta/Listado_Puntos_Punch_Consolidado_*.xlsx
-python3 talabre.py    --status  /ruta/STATUS_SUBSISTEMAS_TALABRE.xlsx \
+python3 talabre.py    --status  /ruta/STATUS_PROTOCOLIZACION.xlsx \
                       --dt      /ruta/Detalle_de_TerminacionesBesalco.xlsx
 python3 actualizar.py /ruta/Estatus_Resumen_General_QAQC.xlsx   # Arqueros
 node gen_ppt.js        # SIEMPRE al final
@@ -107,6 +107,31 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
   MASA: 5 · 586 · 49 · 0 = **663**. Los que esperan revisión del cliente se siguen informando
   como **subconjunto** de los abiertos (`esperandoCliente`), porque esa pelota no es nuestra,
   pero no salen del conteo. *Regla del usuario (21-09-2026).*
+- **Desaladora: «En revisión» no es un estado único — se declara de dónde viene.** El reporte
+  marca `En Rev. AMSA` tanto a la carpeta que corrige un rechazo como a la que **ya tenía una
+  revisión aprobada** y entró una nueva. Leído plano, un reingreso se ve como una aprobación
+  perdida: al corte 23-11-2026 tres carpetas pasaron de `Aprobada` a `En revisión` y el
+  comentario del propio certificado decía «Rev 0 Aprobada CC. Se ingresa Rev 1». **El estatus
+  publicado sigue siendo el del documento** —es lo que ve el cliente— y la procedencia va como
+  subcondición, igual que «con respuesta del cliente» en Arqueros: de las 12 en revisión, 4
+  vienen de una revisión aprobada y 8 corrigen un rechazo. Se lee del comentario del
+  certificado, que viene con forma estable («Rev X Aprobada|Rechazada. Se ingresa Rev Y»), y se
+  mira lo que está **antes** de «se ingresa». Esa columna es **opcional**: si no llega, se avisa
+  y se sigue. `auditoria_datos.py` comprueba que los tres cubos sumen las que están en revisión.
+  *Criterio del usuario (23-11-2026).*
+- **Talabre: el tramo «≥95%» del avance PEC se publica ESTRICTO, no redondeado.** La hoja
+  `Resumen` del proyecto declara 197 carpetas sobre 95% y el panel publica 163. No es un
+  descuadre: **el proyecto redondea hacia arriba** —un 94,6% entra a su tramo— y nosotros
+  usamos el valor estricto para no adelantar avance. Se guardan las dos cifras y el control de
+  cruce las muestra juntas, de modo que la diferencia quede explicada en vez de parecer un
+  error. Sus tramos 96/97/98/99/100% calzan uno a uno con los nuestros, lo que confirma el
+  redondeo. *Ojo con `round()` de Python: redondea 94,5 a 94 —al par más cercano— y dejaba 3
+  subsistemas fuera; el umbral correcto es `p >= 0.945`.*
+- **Arqueros: el aviso de data incompleta se retiró el 23-11-2026.** Del 16-11 al 23-11 el
+  panel declaró «DATA no completamente registrada por directrices internas del proyecto…»
+  porque el proyecto no registraba todo. El usuario informó que ya se regularizó. El mecanismo
+  queda: `AVISO_DATOS` en `actualizar.py` se activa escribiendo el texto y se apaga dejándolo
+  vacío, sin tocar el HTML.
 - **Arqueros: una carpeta TOP está ENTREGADA desde que está en manos del cliente**, es decir
   con estatus `En Revisión`, `Observada`, `Rechazada` o `Aprobada`. Dentro de las entregadas se
   distingue la subcondición **«con respuesta del cliente»** —`Observada`, `Rechazada`,
@@ -183,18 +208,36 @@ Costaron trabajo establecerlas y el usuario las validó. Están explicadas en el
 
 ---
 
-## 3.1 · Talabre sin el archivo de STATUS
+## 3.1 · Talabre con uno solo de sus dos archivos
 
-El proyecto deja de emitir `STATUS_SUBSISTEMAS_TALABRE` por semanas enteras mientras sigue
-mandando el `Detalle_de_Terminaciones`. **`talabre.py` ya no exige el STATUS**: con solo `--dt`
-recalcula los DT, el control y el semáforo —el registro es la fuente ítem a ítem y la que mueve
-el indicador— y **conserva tal cual** lo único que sale del STATUS: subsistemas, caminatas,
-caminatas por área, pendientes y avance PEC.
+Talabre casi nunca manda los dos. **`talabre.py` corre con cualquiera de los dos**, y el que
+falta conserva su bloque del corte anterior:
+
+| Llega | Se recalcula | Se conserva del corte anterior | Lo declara |
+|---|---|---|---|
+| solo `--status` | subsistemas, caminatas, avance PEC, control, semáforo | el bloque de DT | `meta.corteDT` · `control.dtConservado` |
+| solo `--dt` | DT, control, semáforo | subsistemas, caminatas, avance PEC | `meta.corteStatus` |
+| ninguno | — | — | el script sale sin escribir nada |
+
+**Desde el corte 23-11-2026 el proyecto manda un libro único**, `STATUS_PROTOCOLIZACIÓN.xlsx`,
+con siete hojas: `STATUS` (lo que antes era `STATUS_SUBSISTEMAS_TALABRE`), `Resumen`, `TOP`,
+`PEC`, `DT`, `LOG` e `Item`. **Su hoja `DT` no es el registro**: son solo los pendientes, sin
+fecha de cierre ni de compromiso, así que no sirve como `--dt` y el clasificador la distingue
+del registro por su ancho (10 columnas contra más de 20).
+
+**El registro de DT lleva congelado desde el 02-11-2026** —llegó byte a byte idéntico cuatro
+cortes seguidos— y eso **no es un archivo que no llega**: la hoja `DT` del libro recién emitido
+declara 219 pendientes y son *los mismos 219 ítem por ítem*. El proyecto no ha cerrado un solo
+DT desde entonces. Por eso conservar el bloque no es trabajar a ciegas: el contraste
+«DT abiertos (hoja DT del archivo de STATUS)» compara cada semana lo conservado contra lo que
+el proyecto declara hoy, y **si el proyecto cierra un DT ese contraste falla** y avisa que el
+registro ya hace falta de verdad.
 
 Tres cosas que lo hacen honesto:
 
-- El JSON declara en `meta.corteStatus` de qué corte vienen esos bloques, y el script lo avisa
-  por pantalla. `auditoria_datos.py` lo nota cuando difiere del corte.
+- El JSON declara en `meta.corteStatus` / `meta.corteDT` de qué corte viene cada bloque
+  conservado, y el script lo avisa por pantalla. `auditoria_datos.py` lo nota cuando difiere
+  del corte.
 - **El contraste contra la hoja DT del STATUS se omite**, no se pone en cero: inventar un cero
   parecería un descuadre de 36 y 63 abiertos que no existe.
 - El semáforo por área **sí se recalcula**, porque mezcla DT fresco con caminatas y carpetas

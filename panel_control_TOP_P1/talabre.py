@@ -488,24 +488,30 @@ def resumir(items):
 
 
 def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
-              ultima_emision=None, previo=None):
+              ultima_emision=None, previo=None, conservar=()):
     """Arma el JSON del panel.
 
-    `previo` es el JSON de la corrida anterior y se usa cuando el corte llega
-    SIN el archivo de STATUS. En ese caso los bloques que salen de ahí
-    —subsistemas, caminatas y avance PEC— se conservan tal cual y el resto
-    —DT, control y semáforo— se recalcula con el registro nuevo, que es la
-    fuente ítem a ítem. Ni una regla se duplica: desde aquí el código es el
-    mismo para los dos caminos.
+    `previo` es el JSON de la corrida anterior y `conservar` dice qué bloques
+    salen de ahí en vez de recalcularse, porque su archivo no llegó:
+
+      «status» — sin el archivo de STATUS se conservan subsistemas, caminatas
+                 y avance PEC, y el resto se recalcula con el registro.
+      «dt»     — sin el registro de detalles se conserva el bloque de DT, y
+                 subsistemas, caminatas y avance PEC se recalculan con el
+                 STATUS de este corte.
+
+    Lo que se conserva queda declarado en `meta`, nunca presentado como dato de
+    hoy. Ni una regla se duplica: desde aquí el código es el mismo para los
+    tres caminos.
     """
-    if previo is not None:
+    if "status" in conservar:
         areas = previo["areas"]
         caminatas, camArea = previo["caminatas"], previo["caminatasPorArea"]
         pendientes, carpetas = previo["caminatasPendientes"], previo["carpetas"]
         subsistemas = previo["subsistemas"]
         return _armar(corte, subsistemas, areas, caminatas, camArea, pendientes,
                       carpetas, declarado, items, incoherentes, hoy, estado_propio,
-                      ultima_emision, previo, None)
+                      ultima_emision, previo, None, status_conservado=True)
 
     areas = sorted({s["area"] for s in subs})
 
@@ -596,16 +602,19 @@ def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
                    "porArea": {a: sum(1 for s in subs if s["area"] == a) for a in areas}}
     dtStatus = {"P1": sum(s["dtP1"] for s in subs),
                 "P2": sum(s["dtP2"] for s in subs)}
+    # `previo` viaja incluso por este camino: aquí el STATUS sí llegó, pero el
+    # registro de DT puede no haber llegado y entonces su bloque se conserva.
     return _armar(corte, subsistemas, areas, caminatas, camArea, pendientes,
                   carpetas, declarado, items, incoherentes, hoy, estado_propio,
-                  ultima_emision, None, dtStatus)
+                  ultima_emision, previo, dtStatus)
 
 
-def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
-           declarado, items, incoherentes, hoy, estado_propio, ultima_emision,
-           previo, dtStatus):
-    """DT, control y semáforo. Único camino para los dos modos de carga."""
-    # ---------- DT ----------
+def _bloque_dt(items):
+    """Todo lo que sale del registro de detalles de terminación.
+
+    Vive aparte para que el camino que CONSERVA este bloque —cuando el
+    registro no llega— no tenga que repetir ni una de sus reglas.
+    """
     prios = ["P1", "P2", "P3", "P4", "Sin asignar"]
     p1 = [i for i in items if i["prio"] == "P1"]
     areasDT = sorted({i["area"] for i in items})
@@ -662,17 +671,44 @@ def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
     top = sorted(((s, resumir(v)) for s, v in porsub.items()),
                  key=lambda x: (-x[1]["atrasados"], -x[1]["abiertos"]))[:12]
     dt["topSubsistemas"] = [{"sub": s, **r} for s, r in top]
+    return dt
+
+
+def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
+           declarado, items, incoherentes, hoy, estado_propio, ultima_emision,
+           previo, dtStatus, status_conservado=False):
+    """DT, control y semáforo. Único camino para los modos de carga."""
+    # ---------- DT ----------
+    # `items is None` = el corte llegó SIN el registro de detalles. El bloque de
+    # DT se conserva del corte anterior y todo lo demás se recalcula con el
+    # STATUS nuevo. No es un dato a ciegas: la hoja «DT» del libro de STATUS
+    # declara cuántos pendientes tiene el proyecto HOY y el contraste de más
+    # abajo la compara contra lo conservado. Si el proyecto cierra un DT, ese
+    # contraste falla y avisa que el registro ya hace falta de verdad.
+    dt_conservado = items is None
+    if dt_conservado:
+        dt = previo["dt"]
+    else:
+        dt = _bloque_dt(items)
 
     # ---------- control de calidad del dato ----------
     # estadoPropio: si el registro trae su columna STATUS, la regla de atraso es
     # una VERIFICACIÓN; si no la trae, el estado se calcula con la regla y el
     # panel lo declara en vez de presentar un chequeo que no puede fallar.
-    control = {"contraste": [], "incoherentes": len(incoherentes),
-               "estadoPropio": estado_propio,
-               # Fecha del DT más nuevo del registro. La usa actualizar_semana.py
-               # para avisar si el archivo del corte trae datos más viejos que el
-               # de la semana pasada.
-               "ultimaEmisionDT": ultima_emision.strftime("%d-%m-%Y") if ultima_emision else None}
+    cprev = (previo or {}).get("control", {}) if dt_conservado else {}
+    control = {
+        "contraste": [],
+        "dtConservado": dt_conservado,
+        "incoherentes": cprev.get("incoherentes", 0) if dt_conservado else len(incoherentes),
+        "estadoPropio": (cprev.get("estadoPropio", False) if dt_conservado
+                         else estado_propio),
+        # Fecha del DT más nuevo del registro. La usa actualizar_semana.py
+        # para avisar si el archivo del corte trae datos más viejos que el
+        # de la semana pasada.
+        "ultimaEmisionDT": (cprev.get("ultimaEmisionDT") if dt_conservado
+                            else (ultima_emision.strftime("%d-%m-%Y")
+                                  if ultima_emision else None)),
+    }
     tot = declarado.get("total") or {}
     if tot.get("subs") is not None:
         control["contraste"].append({
@@ -758,7 +794,9 @@ def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
 
     control["subsEnStatus"] = subsistemas["total"]
     control["areasStatus"] = len(areas)
-    control["areasDT"] = len(areasDT)
+    # Las áreas que aparecen en el registro de DT salen del bloque de DT, que
+    # puede venir conservado del corte anterior: se cuentan desde ahí.
+    control["areasDT"] = len(dt.get("porArea", {}))
     control["dtSinCompromiso"] = dt["global"]["sinCompromiso"]
 
     # ---------- semáforo por área ----------
@@ -804,8 +842,14 @@ def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
             # Cuando el corte llega sin el archivo de STATUS, los subsistemas,
             # las caminatas y el avance PEC conservan el dato de este corte
             # anterior. Se declara para que nadie lo lea como si fuera de hoy.
-            "corteStatus": (previo or {}).get("meta", {}).get("corteStatus")
-                           or (previo or {}).get("meta", {}).get("corteTexto"),
+            "corteStatus": ((previo or {}).get("meta", {}).get("corteStatus")
+                            or (previo or {}).get("meta", {}).get("corteTexto")
+                            ) if status_conservado else None,
+            # Y cuando llega sin el registro de detalles, es el bloque de DT el
+            # que conserva el dato de este corte anterior.
+            "corteDT": ((previo or {}).get("meta", {}).get("corteDT")
+                        or (previo or {}).get("meta", {}).get("corteTexto")
+                        ) if dt_conservado else None,
             "generado": datetime.now().strftime("%Y-%m-%d %H:%M"),
         },
         "subsistemas": subsistemas,
@@ -859,7 +903,8 @@ def main():
     ap.add_argument("--status", help="STATUS_SUBSISTEMAS_TALABRE.xlsx (si no llega, "
                                      "los subsistemas, caminatas y avance PEC "
                                      "conservan el corte anterior)")
-    ap.add_argument("--dt", required=True, help="Detalle_de_TerminacionesBesalco.xlsx")
+    ap.add_argument("--dt", help="Detalle_de_TerminacionesBesalco.xlsx (si no llega, "
+                                 "el bloque de DT conserva el del corte anterior)")
     ap.add_argument("--hoy", help="Fecha de referencia AAAA-MM-DD (por defecto, hoy)")
     args = ap.parse_args()
 
@@ -867,15 +912,25 @@ def main():
         datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
     destino = AQUI / "datos_talabre.json"
-    previo = None
-    if not args.status:
+    if not args.status and not args.dt:
+        sys.exit("No se pasó ni --status ni --dt: no hay nada nuevo que cargar.")
+
+    # Cualquiera de los dos archivos puede no llegar. El que falta conserva su
+    # bloque del corte anterior y queda DECLARADO en meta; el que llega se
+    # recalcula completo. Lo que no puede pasar es presentar lo conservado como
+    # si fuera dato de hoy.
+    previo, conservar = None, []
+    if not args.status or not args.dt:
         if not destino.exists():
-            sys.exit("Sin --status y sin datos_talabre.json previo: no hay de dónde "
-                     "sacar los subsistemas, las caminatas ni el avance PEC.")
+            sys.exit(f"Falta {'--status' if not args.status else '--dt'} y no hay "
+                     f"datos_talabre.json previo: no hay de dónde conservar ese bloque.")
         previo = json.loads(destino.read_text(encoding="utf-8"))
+
+    if not args.status:
         if "areas" not in previo or "caminatas" not in previo:
             sys.exit("El datos_talabre.json previo no tiene el esquema que genera este "
                      "script: pasa --status para rearmarlo completo.")
+        conservar.append("status")
         corte, subs, declarado = None, [], {"areas": {}, "total": None}
         desde = previo["meta"].get("corteStatus") or previo["meta"].get("corteTexto")
         avisos.append(f"No se pasó --status: los subsistemas, las caminatas y el avance "
@@ -884,9 +939,22 @@ def main():
     else:
         corte, subs, declarado = leer_status(args.status, hoy)
 
-    items, incoherentes, estado_propio, ultima_emision = leer_dt(args.dt, hoy)
+    if not args.dt:
+        if "dt" not in previo:
+            sys.exit("El datos_talabre.json previo no trae el bloque de DT: pasa --dt "
+                     "para rearmarlo.")
+        conservar.append("dt")
+        items, incoherentes, estado_propio, ultima_emision = None, [], False, None
+        desdeDT = previo["meta"].get("corteDT") or previo["meta"].get("corteTexto")
+        avisos.append(f"No se pasó --dt: el bloque de detalles de terminación conserva "
+                      f"el dato del corte {desdeDT}. Si el libro de STATUS trae su hoja "
+                      f"«DT», el control de cruce compara sus pendientes contra lo "
+                      f"conservado: si no cuadran, el registro ya hace falta.")
+    else:
+        items, incoherentes, estado_propio, ultima_emision = leer_dt(args.dt, hoy)
+
     datos = construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
-                      ultima_emision, previo)
+                      ultima_emision, previo, conservar)
 
     destino.write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding="utf-8")
     inyectado = inyectar_en_html(AQUI / "index.html", datos)

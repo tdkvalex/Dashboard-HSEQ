@@ -53,6 +53,7 @@ OPCIONES
 """
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
@@ -168,6 +169,14 @@ def clasificar(ruta):
     if any(h.startswith("bd caminatas") for h in hn) and \
        any(h.startswith("bd detalles") for h in hn):
         return "arqueros", None
+    # Export de P1 de Arqueros: hoja «Punch list» con «Atrasado» y la fecha de
+    # «Listo Para Revisión», dos columnas que el libro principal no trae. No
+    # alimenta ningún módulo —el libro principal sigue siendo la fuente—: lo usa
+    # auditoria_datos.py para recontar los P1 por una vía independiente.
+    if "punch list" in hn:
+        cab, _ = encabezados(ruta, hn["punch list"], max_filas=2)
+        if "atrasado" in cab and "estatus" in cab and "especialidad" in cab:
+            return "arq_p1", None
     if "observaciones" in hn:
         return "nc_data", fecha_max(ruta, hn["observaciones"], 11)
     if "disposicion nc-externas" in hn:
@@ -197,6 +206,13 @@ ROLES = {
     "nc_data":     "No Conformidades · registro principal",
     "nc_externas": "No Conformidades · planilla del cliente MASA",
     "protocolos":  "Protocolos · dashboard actualizado",
+}
+
+# Archivos que NO alimentan ningún módulo: sirven para contrastar lo calculado
+# por una vía independiente. Que no lleguen no cambia ninguna cifra, así que su
+# ausencia no se anuncia como «se conserva el corte anterior».
+ROLES_CONTRASTE = {
+    "arq_p1": "Arqueros · export de P1 (contraste de la auditoría)",
 }
 
 
@@ -250,6 +266,71 @@ def corte_publicado():
     return out
 
 
+# =============================================================================
+# 2.b) Huellas — el archivo repetido
+# =============================================================================
+# Un archivo que llega byte a byte igual al del corte anterior no rompe nada
+# visible: el módulo recalcula lo mismo y el panel sale entero, con el dato de
+# la semana pasada y la fecha de hoy. Ha pasado de verdad —el registro de DT de
+# Talabre, el Estatus de MASA, y una vez un archivo rotulado «Talabre» que era
+# el libro de MASA—. Se guarda la huella de lo procesado para avisarlo solo.
+# No DETIENE la corrida: repetido no siempre es un error (desde el 23-11-2026
+# el registro de DT de Talabre está legítimamente congelado y el proyecto lo
+# confirma en su propia hoja de pendientes). El archivo más VIEJO que el
+# cargado sí detiene, y eso lo cubre el contraste de fechas de arriba.
+REGISTRO = RAIZ / "cortes_procesados.json"
+
+
+def huella(ruta):
+    """sha256 del archivo tal como llegó."""
+    h = hashlib.sha256()
+    try:
+        with open(ruta, "rb") as f:
+            for trozo in iter(lambda: f.read(1 << 20), b""):
+                h.update(trozo)
+    except OSError:
+        return None
+    return h.hexdigest()
+
+
+def registro_leer():
+    if not REGISTRO.exists():
+        return {}
+    try:
+        return json.loads(REGISTRO.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def registro_guardar(hallados, hoy):
+    """Deja la huella de cada archivo procesado, para contrastar el próximo corte."""
+    reg = registro_leer()
+    for rol, (ruta, _) in hallados.items():
+        hh = huella(ruta)
+        if hh:
+            reg[rol] = {"sha256": hh, "archivo": ruta.name, "corte": hoy}
+    try:
+        REGISTRO.write_text(json.dumps(reg, ensure_ascii=False, indent=1) + "\n",
+                            encoding="utf-8")
+    except OSError as e:
+        print(f"  {AV} No se pudo guardar {REGISTRO.name}: {e}")
+
+
+def repetidos(hallados):
+    """Qué archivos llegan idénticos al que ya se procesó. Avisa, no detiene."""
+    reg, notas = registro_leer(), []
+    for rol, (ruta, _) in sorted(hallados.items()):
+        ant = reg.get(rol)
+        if not ant or ant.get("sha256") != huella(ruta):
+            continue
+        etq = ROLES.get(rol) or ROLES_CONTRASTE.get(rol, rol)
+        notas.append(f"{etq}: «{ruta.name}» llega IDÉNTICO byte a byte al que se "
+                     f"procesó el {ant.get('corte', '—')}. Si el proyecto no emitió "
+                     f"nada nuevo, está bien; si debía haber emitido, es el archivo "
+                     f"equivocado.")
+    return notas
+
+
 def dmy(f):
     return f.strftime("%d-%m-%Y") if isinstance(f, datetime) else "—"
 
@@ -281,8 +362,8 @@ def revisar(hallados, publicado):
         alertas.append("Falta la planilla de NC externas del cliente. Sin ella Arqueros "
                        "pierde las 36 NC que le levanta MASA y sale con 98,9% de cierre "
                        "en vez de 78%.")
+    # Talabre NO entra aquí: procesa con uno solo y declara lo que conserva.
     for par, proyecto, que in (
-        ({"tal_status", "tal_dt"}, "Talabre", "status + registro de DT"),
         ({"des_reporte", "des_punch"}, "Desaladora", "reporte + punch"),
     ):
         if par & hallados.keys() and not par <= hallados.keys():
@@ -343,6 +424,9 @@ def main():
     publicado = corte_publicado()
 
     print("\nARCHIVOS RECONOCIDOS")
+    for rol, etq in ROLES_CONTRASTE.items():
+        if rol in hallados:
+            print(f"  {OK} {etq:46s} {hallados[rol][0].name}")
     for rol, etq in ROLES.items():
         if rol in hallados:
             r, f = hallados[rol]
@@ -357,6 +441,12 @@ def main():
     if sin_rol:
         print(f"\n{GRIS}Sin clasificar (se ignoran): "
               f"{', '.join(r.name for r in sin_rol[:6])}{FIN}")
+
+    notas = repetidos(hallados)
+    if notas:
+        print(f"\n{AMBAR}ARCHIVOS QUE LLEGAN IGUALES AL CORTE ANTERIOR{FIN}")
+        for n in notas:
+            print(f"  {AV} {n}")
 
     alertas = revisar(hallados, publicado)
 
@@ -378,9 +468,17 @@ def main():
         if g("des_reporte") and g("des_punch"):
             pasos.append((["python3", "desaladora.py", "--reporte", g("des_reporte"),
                            "--punch", g("des_punch"), "--hoy", hoy], QAQC, "Desaladora"))
-        if g("tal_status") and g("tal_dt"):
-            pasos.append((["python3", "talabre.py", "--status", g("tal_status"),
-                           "--dt", g("tal_dt"), "--hoy", hoy], QAQC, "Talabre"))
+        # Talabre se procesa con uno solo de sus dos archivos: el que no llega
+        # conserva su bloque del corte anterior y talabre.py lo declara. Desde
+        # el corte 23-11-2026 el proyecto manda un libro único de
+        # PROTOCOLIZACIÓN y su registro de DT puede no venir.
+        if g("tal_status") or g("tal_dt"):
+            cmd = ["python3", "talabre.py", "--hoy", hoy]
+            if g("tal_status"):
+                cmd += ["--status", g("tal_status")]
+            if g("tal_dt"):
+                cmd += ["--dt", g("tal_dt")]
+            pasos.append((cmd, QAQC, "Talabre"))
         if g("arqueros"):
             pasos.append((["python3", "actualizar.py", g("arqueros")], QAQC, "Arqueros"))
         # La PPT va DESPUÉS de los tres: los lee a los tres y se embebe en el panel.
@@ -427,6 +525,8 @@ def main():
     if args.dry_run:
         print(f"\n{GRIS}Dry-run: no se modificó ningún archivo.{FIN}")
         return
+
+    registro_guardar(hallados, hoy)
 
     print("\n" + "=" * 74)
     print(f"  {OK} LISTO — suite_qaqc/Suite_QAQC.html")

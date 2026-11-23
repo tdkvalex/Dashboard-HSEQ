@@ -32,11 +32,26 @@ python3 verificar_suite.py
 python3 auditoria_datos.py <la misma carpeta>
 ```
 
+**Un corte completo va SIEMPRE por `actualizar_semana.py`**, incluso si los archivos llegan de
+a uno: se le pasa la carpeta con lo que haya y procesa lo que reconozca. Los comandos sueltos
+de más abajo son para **reprocesar un módulo**, no para armar el corte. Correr los módulos a
+mano es lo que hizo que el 23-11-2026 se publicara la PPT de Protocolos con las cifras de la
+semana anterior: el orquestador corre `gen_ppt_protocolos.js` solo, y a mano se olvida. La
+auditoría lo pilló, pero costó una vuelta entera.
+
 `actualizar_semana.py` reconoce cada archivo **por su contenido** —los nombres cambian—,
-corre los tres módulos en el orden correcto (los `gen_ppt.js` después de su script de Python
-y `armar_suite.js` al final) y **se detiene** si algún archivo viene más viejo que el ya
-cargado o si falta la planilla de NC externas. Lo que no llega no se toca: ese módulo conserva
-su corte anterior.
+corre los módulos en el orden correcto (los `gen_ppt.js` después de su script de Python,
+`gen_ppt_protocolos.js` después de copiar el dashboard, y `armar_suite.js` al final) y
+**se detiene** si algún archivo viene más viejo que el ya cargado o si falta la planilla de NC
+externas. Lo que no llega no se toca: ese módulo conserva su corte anterior.
+
+Además **avisa —sin detenerse— cuando un archivo llega byte a byte idéntico** al del corte
+anterior, comparando contra las huellas que deja en `cortes_procesados.json`. Es el chequeo que
+antes había que hacer a mano con `md5sum` todas las semanas.
+
+Talabre es el único que **procesa con uno solo de sus dos archivos**: el que falta conserva su
+bloque y el panel declara de qué corte viene. Desde el 23-11-2026 el proyecto manda un libro
+único (`STATUS_PROTOCOLIZACIÓN.xlsx`) y su registro de DT puede no venir.
 
 `verificar_suite.py` revisa las tres PPT y la suite en tres anchos antes de enviar.
 `auditoria_datos.py` cruza la misma cifra en todas las capas —Excel, JSON, portada y PPT— y

@@ -43,36 +43,62 @@ reconoce cada uno por su contenido, no por cómo se llame.
 | Proyecto | A quién | Qué se pide | Cómo se reconoce |
 |---|---|---|---|
 | **P2416 · Desaladora** | Juan Vergara | `REPORTE_GERENCIAL_*.xlsx` **y** `Listado_Puntos_Punch_Consolidado_*.xlsx` | hojas «REPORTE GERENCIAL» y «LISTADO PUNCH ITEMS» |
-| **P2407 · Talabre** | Mauricio Rocha | `STATUS_SUBSISTEMAS_TALABRE.xlsx` **y** `Detalle_de_TerminacionesBesalco.xlsx` | hoja «STATUS» · hoja «DT» con más de 20 columnas |
+| **P2407 · Talabre** | Mauricio Rocha | `STATUS_PROTOCOLIZACIÓN.xlsx` **y/o** `Detalle_de_TerminacionesBesalco.xlsx` — **basta uno** | hoja «STATUS» · hoja «DT» con más de 20 columnas |
 | **P2342 · Arqueros** | José Muñoz | `Estatus_Resumen_General_QAQC.xlsx` | hojas «BD Caminatas-CTOP» + «BD Detalles Terminación» |
 | **No Conformidades** | — | `Data_NCR*.xlsx` **y** la planilla de NC externas del cliente MASA | hoja «Observaciones» · hoja «Disposición NC-Externas» |
 | **Protocolos** | el equipo del dashboard | el `.html` del dashboard actualizado | contiene `PROJECTS` y `NODE_HISTORY` |
+| *opcional* · Arqueros P1 | José Muñoz | `Detalles_de_terminación_-_P1.xlsx` | hoja «Punch list» con «Atrasado» y «Estatus» |
 
-**Desaladora, Talabre y No Conformidades necesitan SUS DOS archivos.** Con uno
-solo el script no procesa ese módulo y lo dice.
+**Desaladora y No Conformidades necesitan SUS DOS archivos.** Con uno solo el
+script no procesa ese módulo y lo dice.
+
+**Talabre, en cambio, procesa con uno solo de los dos.** El que no llegue
+conserva su bloque del corte anterior y el panel lo declara. Desde el
+23-11-2026 el proyecto manda un libro único de PROTOCOLIZACIÓN y su registro de
+DT puede no venir: está congelado desde el 02-11 porque el proyecto no ha
+cerrado ningún DT, no porque falte el archivo. Ver
+[`panel_control_TOP_P1/CLAUDE.md`](panel_control_TOP_P1/CLAUDE.md) §3.1.
+
+**El export de P1 de Arqueros no es fuente, es contraste.** Si llega, la
+auditoría reconta los P1 por esa vía independiente y compara el atraso contra el
+«Atrasado» que declara el proyecto. Si no llega, no cambia ninguna cifra.
 
 **Lo que no llega no se toca.** Si Desaladora no mandó nada, su pestaña conserva
 el corte anterior y el resto se actualiza igual. No hay que hacer nada especial.
 
 ---
 
-## 2 · Las tres trampas que ya costaron un corte
+## 2 · Las trampas que ya costaron un corte
 
 **El `Programa_de_Caminatas.xlsm` de Talabre no es fuente.** Trae una hoja «DT»
 que parece el registro completo pero es una foto vieja. El script compara la
 emisión más nueva de cada candidato contra la que ya está cargada y **se detiene**
 si el archivo viene más viejo. Si aparece ese aviso, pedir el archivo correcto.
 
+**El archivo repetido.** Un archivo que llega byte a byte igual al del corte
+anterior no rompe nada visible: el módulo recalcula lo mismo y el panel sale
+entero, con el dato de la semana pasada y la fecha de hoy. Ha pasado de verdad
+—el registro de DT de Talabre, el Estatus de MASA, y una vez un archivo rotulado
+«Talabre» que era el libro de MASA—. El script guarda la huella de lo procesado
+en `cortes_procesados.json` y **avisa** cuando reconoce un repetido. **No detiene
+la corrida**, porque repetido no siempre es un error: el registro de DT de
+Talabre está legítimamente congelado y el proyecto lo confirma en su propia hoja
+de pendientes. Lo que sí detiene es un archivo más VIEJO que el cargado.
+
 **La planilla de NC externas no es opcional.** Sin ella Arqueros pierde las 36 NC
 que le levanta MASA y aparece con 98,9% de cierre en vez de 78%. También detiene
 la corrida.
 
 **El dashboard de Protocolos es el único que no se puede regenerar aquí.** Llega
-armado de otro equipo y vive solo en `suite_qaqc/modulos/protocolos.html`, que no
-se versiona (pesa 3 MB y no es nuestro). **Guarda una copia fuera del repositorio
-cada vez que llegue uno nuevo.** Si se pierde, la suite no se puede armar hasta
-que ese equipo lo reenvíe — y desde este corte el generador se detiene en vez de
-publicar Protocolos en 0 %, que se lee como «sin avance» y no como «sin dato».
+armado de otro equipo y vive en `suite_qaqc/modulos/protocolos.html`, que **sí se
+versiona** —son 3 MB por corte, pero es la única copia que queda si el equipo no
+lo reenvía—. Aun así, **guarda una copia fuera del repositorio cada vez que
+llegue uno nuevo.** Si se pierde, la suite no se puede armar hasta que ese equipo
+lo reenvíe — y el generador se detiene en vez de publicar Protocolos en 0 %, que
+se lee como «sin avance» y no como «sin dato».
+
+Lo que **no** se versiona es la suite armada (`suite_qaqc/Suite_QAQC.html`): se
+regenera con `node armar_suite.js` a partir de lo que sí está en el repositorio.
 
 **El corte de la portada sale de `corteTexto`, no de `hoy`.** Son cosas distintas: `hoy` es
 la fecha contra la que se calculan los atrasos y `corteTexto` la que declara el archivo de

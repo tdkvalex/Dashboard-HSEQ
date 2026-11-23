@@ -53,11 +53,19 @@ TAL_S = _HALLADOS.get("tal_status")
 TAL_D = _HALLADOS.get("tal_dt")
 DES_R = _HALLADOS.get("des_reporte")
 ARQ_F = _HALLADOS.get("arqueros")
+ARQ_P1 = _HALLADOS.get("arq_p1")
 
 ok, mal, avi = [], [], []
 def chk(cond, titulo, detalle=""):
     (ok if cond else mal).append(f"{titulo}{(' — ' + detalle) if detalle else ''}")
 def nota(t): avi.append(t)
+
+
+def _cols(ws, fila=1):
+    """Columnas de una hoja por el nombre de su encabezado, no por posición."""
+    f = next(ws.iter_rows(min_row=fila, max_row=fila, values_only=True), ())
+    return {" ".join(str(v).split()).lower(): i
+            for i, v in enumerate(f) if v not in (None, "")}
 
 nc  = json.loads((R / "modulo_nc/datos_nc.json").read_text())
 tal = json.loads((R / "panel_control_TOP_P1/datos_talabre.json").read_text())
@@ -197,10 +205,6 @@ if ARQ_F:
     # frentes cuyo lector nadie contrastaba, y es el que peor está. Se reconta
     # aquí resolviendo los encabezados por cuenta propia.
     wba = load_workbook(ARQ_F, data_only=True, read_only=True)
-    def _cols(ws, fila=1):
-        f = next(ws.iter_rows(min_row=fila, max_row=fila, values_only=True), ())
-        return {" ".join(str(v).split()).lower(): i
-                for i, v in enumerate(f) if v not in (None, "")}
     wsd = wba["BD Detalles Terminación"]
     cd = _cols(wsd)
     iT, iE, iS = cd.get("tipo"), cd.get("estatus"), cd.get("subsistema")
@@ -237,11 +241,65 @@ if ARQ_F:
             "Arqueros · carpetas TOP entregadas",
             f"Excel {_ent} · JSON {arq['ctop']['global']['entregadas']}")
 
+# El proyecto manda, desde el corte 23-11-2026, un export aparte sólo de los P1
+# con dos columnas que su libro principal no trae: «Atrasado», declarado por él
+# mismo, y la fecha de «Listo Para Revisión». No es la fuente —el libro
+# principal lo sigue siendo— pero es la única manera de contrastar el atraso
+# contra lo que el propio proyecto considera atrasado. Al corte 23-11 cuadró
+# exacto: 64 abiertos y 25 atrasados por las dos vías, y disciplina por
+# disciplina. Si llega, se contrasta solo.
+if ARQ_P1:
+    wbp = load_workbook(ARQ_P1, data_only=True, read_only=True)
+    wsp = next((wbp[h] for h in wbp.sheetnames
+                if " ".join(h.split()).lower() == "punch list"), None)
+    cp1 = _cols(wsp) if wsp is not None else {}
+    iAt = cp1.get("atrasado")
+    iEs = cp1.get("estatus")
+    if wsp is None or iAt is None or iEs is None:
+        nota("Arqueros · el export de P1 no trae «Atrasado»/«Estatus» en la fila 1: "
+             "no se contrastaron los P1")
+    else:
+        fp = [f for f in wsp.iter_rows(min_row=2, values_only=True)
+              if not all(v is None for v in f)]
+        _ab = len(fp)
+        _at = sum(1 for f in fp
+                  if " ".join(str(f[iAt] or "").split()).lower() in ("si", "sí"))
+        chk(arq["dt"]["tipos"]["P1"]["abiertos"] == _ab,
+            "Arqueros · P1 abiertos cuadran con el export del proyecto",
+            f"export {_ab} · JSON {arq['dt']['tipos']['P1']['abiertos']}")
+        chk(arq["dt"]["tipos"]["P1"]["vencidos"] == _at,
+            "Arqueros · P1 atrasados cuadran con el «Atrasado» que declara el proyecto",
+            f"export {_at} · JSON {arq['dt']['tipos']['P1']['vencidos']}")
+        # Ningún estatus del export puede ser «Cerrado»: son los abiertos. Si
+        # aparece uno, el export dejó de ser sólo de pendientes y el contraste
+        # de arriba pasaría a comparar cosas distintas sin avisar.
+        _cerr = sum(1 for f in fp
+                    if " ".join(str(f[iEs] or "").split()).lower() == "cerrado")
+        chk(_cerr == 0,
+            "Arqueros · el export de P1 trae sólo pendientes",
+            f"{_cerr} fila(s) vienen «Cerrado»: el export cambió de alcance")
+
 if TAL_S:
+    # Se leía con fila y columna fijas (fila 5, columna 2). Funcionó hasta que el
+    # proyecto cambió de libro; la fila del encabezado se busca por su contenido
+    # para que un corrimiento no pase callado, que es lo que ya costó tres veces.
     wbs = load_workbook(TAL_S, data_only=True)
-    subs = [f for f in wbs["STATUS"].iter_rows(min_row=5, values_only=True) if f[2] not in (None, "")]
-    chk(tal["subsistemas"]["total"] == len(subs), "Talabre · subsistemas",
-        f"Excel {len(subs)} · JSON {tal['subsistemas']['total']}")
+    wst = wbs["STATUS"]
+    _nf, _ct = None, {}
+    for _r in range(1, 9):
+        _c = _cols(wst, _r)
+        if "subsistemas" in _c:
+            _nf, _ct = _r, _c
+            break
+    if _nf is None:
+        nota("Talabre · no se encontró el encabezado «SUBSISTEMAS» en las primeras "
+             "8 filas de la hoja STATUS: no se recontaron los subsistemas")
+    else:
+        _is = _ct["subsistemas"]
+        subs = [f for f in wst.iter_rows(min_row=_nf + 1, values_only=True)
+                if _is < len(f) and f[_is] not in (None, "")]
+        chk(tal["subsistemas"]["total"] == len(subs), "Talabre · subsistemas",
+            f"Excel {len(subs)} · JSON {tal['subsistemas']['total']}")
 
 # ═══════════════ 2 · COHERENCIA INTERNA ═══════════════
 print("2 · COHERENCIA INTERNA DE CADA JSON")

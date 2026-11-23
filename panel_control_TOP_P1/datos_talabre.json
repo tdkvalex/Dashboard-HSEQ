@@ -11,7 +11,8 @@
   "hoy": "23-11-2026",
   "ultimaAgenda": null,
   "corteStatus": null,
-  "generado": "2026-11-23 13:51"
+  "corteDT": null,
+  "generado": "2026-11-23 18:28"
  },
  "subsistemas": {
   "total": 218,
@@ -1057,6 +1058,7 @@
     "ok": true
    }
   ],
+  "dtConservado": false,
   "incoherentes": 0,
   "estadoPropio": false,
   "ultimaEmisionDT": "14-10-2026",
