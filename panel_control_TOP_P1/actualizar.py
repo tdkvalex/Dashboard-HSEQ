@@ -110,13 +110,14 @@ def cols_por_encabezado(ws, esperadas, etiqueta):
     return cols
 
 
-# Aviso al pie y al encabezado de la pestaña de Arqueros. El proyecto no está
-# registrando toda la data por directrices internas, así que sus cifras pueden
-# mostrar incongruencias; mientras eso siga, el panel lo declara en vez de
-# presentarlas como si estuvieran completas. *Pedido por el usuario
-# (16-11-2026).* Para quitarlo cuando se resuelva, basta poner AVISO_DATOS = "".
-AVISO_DATOS = ("DATA no completamente registrada por directrices internas del "
-               "proyecto, pudiendo reflejar incongruencias en sus resultados.")
+# Aviso al pie y al encabezado de la pestaña de Arqueros, para cuando el
+# proyecto no esté registrando toda su data y sus cifras puedan mostrar
+# incongruencias: mientras eso pase, el panel lo declara en vez de presentarlas
+# como si estuvieran completas. Se activa poniendo aquí el texto y se apaga
+# dejándolo vacío; el panel lo omite solo si está vacío.
+# Estuvo activo del 16-11-2026 al 23-11-2026, cuando el usuario informó que el
+# registro ya se regularizó. *Las dos fechas, pedidas por el usuario.*
+AVISO_DATOS = ""
 
 
 CTOP_MAP = {
