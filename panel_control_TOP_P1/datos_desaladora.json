@@ -6,12 +6,12 @@
   "codigo": "P2416",
   "cliente": "ANTOFAGASTA MINERALS",
   "contrato": "VPP-1001-03-CC-088",
-  "corte": "2026-11-11",
-  "corteTexto": "11-11-2026",
-  "cortePunch": "2026-11-15",
-  "cortePunchTexto": "15-11-2026",
-  "hoy": "16-11-2026",
-  "generado": "2026-11-16 18:12"
+  "corte": "2026-11-17",
+  "corteTexto": "17-11-2026",
+  "cortePunch": "2026-11-23",
+  "cortePunchTexto": "23-11-2026",
+  "hoy": "23-11-2026",
+  "generado": "2026-11-23 13:46"
  },
  "subsistemas": {
   "total": 95,
@@ -80,17 +80,17 @@
   },
   "2": {
    "aplica": 80,
-   "realizada": 73,
-   "pendiente": 7,
+   "realizada": 74,
+   "pendiente": 6,
    "noAplica": 15,
-   "pct": 91.3
+   "pct": 92.5
   },
   "3": {
    "aplica": 80,
-   "realizada": 12,
-   "pendiente": 68,
+   "realizada": 18,
+   "pendiente": 62,
    "noAplica": 15,
-   "pct": 15.0
+   "pct": 22.5
   }
  },
  "caminatasPorTipo": {
@@ -104,15 +104,15 @@
    },
    "2": {
     "aplica": 80,
-    "realizada": 73,
-    "pendiente": 7,
-    "pct": 91.3
+    "realizada": 74,
+    "pendiente": 6,
+    "pct": 92.5
    },
    "3": {
     "aplica": 80,
-    "realizada": 12,
-    "pendiente": 68,
-    "pct": 15.0
+    "realizada": 18,
+    "pendiente": 62,
+    "pct": 22.5
    },
    "vigente": "2"
   },
@@ -154,8 +154,8 @@
    },
    "3": {
     "aplica": 64,
-    "realizada": 11,
-    "pendiente": 53
+    "realizada": 17,
+    "pendiente": 47
    }
   },
   "EB-2": {
@@ -167,8 +167,8 @@
    },
    "2": {
     "aplica": 16,
-    "realizada": 11,
-    "pendiente": 5
+    "realizada": 12,
+    "pendiente": 4
    },
    "3": {
     "aplica": 16,
@@ -197,13 +197,6 @@
    "tipo": "Operable",
    "zona": "EB-2",
    "desc": "Estación de Impulsión de Agua Desalinizada (EB-2)",
-   "caminata": 2
-  },
-  {
-   "id": "4515-EWS-201",
-   "tipo": "Operable",
-   "zona": "EB-2",
-   "desc": "Sistema de Fibra Optica",
    "caminata": 2
   },
   {
@@ -245,33 +238,33 @@
  "carpetas": {
   "total": 95,
   "estados": {
-   "Aprobada": 65,
-   "En revisión": 9,
-   "Rechazada": 10,
-   "En preparación": 2,
-   "Sin entregar": 9
+   "Aprobada": 64,
+   "En revisión": 12,
+   "Rechazada": 8,
+   "En preparación": 3,
+   "Sin entregar": 8
   },
   "entregadas": 84,
-  "aprobadas": 65,
-  "rechazadas": 10,
-  "enRevision": 9,
-  "enPreparacion": 2,
-  "sinEntregar": 9,
-  "tarjetaVerde": 67,
+  "aprobadas": 64,
+  "rechazadas": 8,
+  "enRevision": 12,
+  "enPreparacion": 3,
+  "sinEntregar": 8,
+  "tarjetaVerde": 68,
   "porZona": {
    "Desaladora": {
-    "Aprobada": 53,
-    "En revisión": 8,
-    "Rechazada": 9,
+    "Aprobada": 51,
+    "En revisión": 12,
+    "Rechazada": 7,
     "En preparación": 1,
     "Sin entregar": 3
    },
    "EB-2": {
-    "Aprobada": 12,
-    "En revisión": 1,
+    "Aprobada": 13,
+    "En revisión": 0,
     "Rechazada": 1,
-    "En preparación": 1,
-    "Sin entregar": 6
+    "En preparación": 2,
+    "Sin entregar": 5
    }
   },
   "detalle": [
@@ -282,7 +275,7 @@
     "estado": "Aprobada"
    },
    {
-    "id": "0570-PW-201",
+    "id": "0570-XP-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -331,12 +324,6 @@
    },
    {
     "id": "0583-NTT-201",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "Aprobada"
-   },
-   {
-    "id": "0583-PA-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -415,12 +402,6 @@
    },
    {
     "id": "0583-WR-214",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "Aprobada"
-   },
-   {
-    "id": "0583-WR-215",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "Aprobada"
@@ -642,6 +623,12 @@
     "estado": "Aprobada"
    },
    {
+    "id": "4515-JQ-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "Aprobada"
+   },
+   {
     "id": "4515-NZ-202",
     "zona": "EB-2",
     "tipo": "Facility",
@@ -666,19 +653,37 @@
     "estado": "Aprobada"
    },
    {
-    "id": "0570-XH-201",
+    "id": "0570-PW-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
    },
    {
-    "id": "0570-XP-201",
+    "id": "0583-PA-201",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
    },
    {
     "id": "0583-WR-212",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0583-WR-215",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0584-WYT-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "En revisión"
+   },
+   {
+    "id": "0584-WYT-202",
     "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
@@ -714,10 +719,16 @@
     "estado": "En revisión"
    },
    {
-    "id": "4515-JQ-201",
-    "zona": "EB-2",
+    "id": "0587-EWS-201",
+    "zona": "Desaladora",
     "tipo": "Operable",
     "estado": "En revisión"
+   },
+   {
+    "id": "0570-XH-201",
+    "zona": "Desaladora",
+    "tipo": "Operable",
+    "estado": "Rechazada"
    },
    {
     "id": "0582-NZ-201",
@@ -738,27 +749,9 @@
     "estado": "Rechazada"
    },
    {
-    "id": "0584-WYT-201",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "Rechazada"
-   },
-   {
-    "id": "0584-WYT-202",
-    "zona": "Desaladora",
-    "tipo": "Operable",
-    "estado": "Rechazada"
-   },
-   {
     "id": "0586-NZ-201",
     "zona": "Desaladora",
     "tipo": "Facility",
-    "estado": "Rechazada"
-   },
-   {
-    "id": "0587-EWS-201",
-    "zona": "Desaladora",
-    "tipo": "Operable",
     "estado": "Rechazada"
    },
    {
@@ -786,53 +779,126 @@
     "estado": "En preparación"
    },
    {
+    "id": "4515-EWS-201",
+    "zona": "EB-2",
+    "tipo": "Operable",
+    "estado": "En preparación"
+   },
+   {
     "id": "8280-ESC-201",
     "zona": "EB-2",
     "tipo": "Operable",
     "estado": "En preparación"
    }
+  ],
+  "enRevisionDesde": {
+   "Aprobada": 4,
+   "Rechazada": 8,
+   "Sin declarar": 0
+  },
+  "enRevisionDetalle": [
+   {
+    "id": "0570-PW-201",
+    "zona": "Desaladora",
+    "desde": "Aprobada"
+   },
+   {
+    "id": "0583-PA-201",
+    "zona": "Desaladora",
+    "desde": "Aprobada"
+   },
+   {
+    "id": "0583-WR-212",
+    "zona": "Desaladora",
+    "desde": "Aprobada"
+   },
+   {
+    "id": "0583-WR-215",
+    "zona": "Desaladora",
+    "desde": "Aprobada"
+   },
+   {
+    "id": "0584-WYT-201",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   },
+   {
+    "id": "0584-WYT-202",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   },
+   {
+    "id": "0586-CY-201",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   },
+   {
+    "id": "0586-CY-202",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   },
+   {
+    "id": "0586-CY-203",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   },
+   {
+    "id": "0586-CY-205",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   },
+   {
+    "id": "0586-CY-207",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   },
+   {
+    "id": "0587-EWS-201",
+    "zona": "Desaladora",
+    "desde": "Rechazada"
+   }
   ]
  },
  "punch": {
   "global": {
-   "total": 2989,
-   "cerrados": 2468,
-   "abiertos": 521,
-   "atrasados": 343,
-   "enPlazo": 178,
+   "total": 3094,
+   "cerrados": 2574,
+   "abiertos": 520,
+   "atrasados": 341,
+   "enPlazo": 179,
    "sinFecha": 0
   },
   "porCategoria": {
    "P0": {
-    "total": 43,
+    "total": 47,
     "cerrados": 25,
-    "abiertos": 18,
-    "atrasados": 1,
-    "enPlazo": 17,
-    "sinFecha": 0
-   },
-   "P1": {
-    "total": 1770,
-    "cerrados": 1539,
-    "abiertos": 231,
-    "atrasados": 211,
+    "abiertos": 22,
+    "atrasados": 2,
     "enPlazo": 20,
     "sinFecha": 0
    },
+   "P1": {
+    "total": 1789,
+    "cerrados": 1558,
+    "abiertos": 231,
+    "atrasados": 210,
+    "enPlazo": 21,
+    "sinFecha": 0
+   },
    "P2": {
-    "total": 1047,
-    "cerrados": 852,
-    "abiertos": 195,
-    "atrasados": 117,
-    "enPlazo": 78,
+    "total": 1112,
+    "cerrados": 937,
+    "abiertos": 175,
+    "atrasados": 113,
+    "enPlazo": 62,
     "sinFecha": 0
    },
    "P3": {
-    "total": 128,
-    "cerrados": 51,
-    "abiertos": 77,
-    "atrasados": 14,
-    "enPlazo": 63,
+    "total": 145,
+    "cerrados": 53,
+    "abiertos": 92,
+    "atrasados": 16,
+    "enPlazo": 76,
     "sinFecha": 0
    },
    "Sin categoría": {
@@ -846,101 +912,101 @@
   },
   "porDisciplina": {
    "Eléctrica": {
-    "total": 1680,
-    "cerrados": 1553,
-    "abiertos": 127,
-    "atrasados": 80,
-    "enPlazo": 47,
+    "total": 1726,
+    "cerrados": 1593,
+    "abiertos": 133,
+    "atrasados": 73,
+    "enPlazo": 60,
     "sinFecha": 0
    },
    "Piping": {
-    "total": 793,
-    "cerrados": 574,
-    "abiertos": 219,
-    "atrasados": 152,
-    "enPlazo": 67,
+    "total": 813,
+    "cerrados": 597,
+    "abiertos": 216,
+    "atrasados": 156,
+    "enPlazo": 60,
     "sinFecha": 0
    },
    "Obras Civiles": {
-    "total": 225,
-    "cerrados": 150,
-    "abiertos": 75,
-    "atrasados": 64,
-    "enPlazo": 11,
+    "total": 226,
+    "cerrados": 152,
+    "abiertos": 74,
+    "atrasados": 67,
+    "enPlazo": 7,
     "sinFecha": 0
    },
    "Mecánica": {
-    "total": 126,
-    "cerrados": 97,
-    "abiertos": 29,
-    "atrasados": 24,
-    "enPlazo": 5,
+    "total": 139,
+    "cerrados": 100,
+    "abiertos": 39,
+    "atrasados": 21,
+    "enPlazo": 18,
     "sinFecha": 0
    },
    "Estructura": {
     "total": 82,
-    "cerrados": 36,
-    "abiertos": 46,
-    "atrasados": 14,
-    "enPlazo": 32,
+    "cerrados": 53,
+    "abiertos": 29,
+    "atrasados": 12,
+    "enPlazo": 17,
     "sinFecha": 0
    },
    "Instrumentación y Control": {
-    "total": 83,
-    "cerrados": 58,
-    "abiertos": 25,
-    "atrasados": 9,
-    "enPlazo": 16,
+    "total": 108,
+    "cerrados": 79,
+    "abiertos": 29,
+    "atrasados": 12,
+    "enPlazo": 17,
     "sinFecha": 0
    }
   },
   "p1PorDisciplina": {
    "Eléctrica": {
-    "total": 1028,
-    "cerrados": 967,
-    "abiertos": 61,
-    "atrasados": 56,
-    "enPlazo": 5,
+    "total": 1045,
+    "cerrados": 974,
+    "abiertos": 71,
+    "atrasados": 52,
+    "enPlazo": 19,
     "sinFecha": 0
    },
    "Piping": {
     "total": 518,
-    "cerrados": 401,
-    "abiertos": 117,
-    "atrasados": 108,
-    "enPlazo": 9,
+    "cerrados": 409,
+    "abiertos": 109,
+    "atrasados": 109,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "Obras Civiles": {
     "total": 70,
     "cerrados": 52,
     "abiertos": 18,
-    "atrasados": 15,
-    "enPlazo": 3,
+    "atrasados": 18,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "Mecánica": {
     "total": 90,
-    "cerrados": 72,
-    "abiertos": 18,
-    "atrasados": 18,
+    "cerrados": 75,
+    "abiertos": 15,
+    "atrasados": 15,
     "enPlazo": 0,
     "sinFecha": 0
    },
    "Estructura": {
     "total": 21,
-    "cerrados": 16,
-    "abiertos": 5,
-    "atrasados": 5,
+    "cerrados": 17,
+    "abiertos": 4,
+    "atrasados": 4,
     "enPlazo": 0,
     "sinFecha": 0
    },
    "Instrumentación y Control": {
-    "total": 43,
+    "total": 45,
     "cerrados": 31,
-    "abiertos": 12,
-    "atrasados": 9,
-    "enPlazo": 3,
+    "abiertos": 14,
+    "atrasados": 12,
+    "enPlazo": 2,
     "sinFecha": 0
    }
   },
@@ -955,10 +1021,10 @@
    },
    "0570A": {
     "total": 84,
-    "cerrados": 59,
-    "abiertos": 25,
-    "atrasados": 16,
-    "enPlazo": 9,
+    "cerrados": 66,
+    "abiertos": 18,
+    "atrasados": 18,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "0580A": {
@@ -971,9 +1037,9 @@
    },
    "0582A": {
     "total": 63,
-    "cerrados": 51,
-    "abiertos": 12,
-    "atrasados": 12,
+    "cerrados": 53,
+    "abiertos": 10,
+    "atrasados": 10,
     "enPlazo": 0,
     "sinFecha": 0
    },
@@ -987,9 +1053,9 @@
    },
    "0583A": {
     "total": 506,
-    "cerrados": 441,
-    "abiertos": 65,
-    "atrasados": 65,
+    "cerrados": 445,
+    "abiertos": 61,
+    "atrasados": 61,
     "enPlazo": 0,
     "sinFecha": 0
    },
@@ -1003,9 +1069,9 @@
    },
    "0584A": {
     "total": 135,
-    "cerrados": 112,
-    "abiertos": 23,
-    "atrasados": 23,
+    "cerrados": 116,
+    "abiertos": 19,
+    "atrasados": 19,
     "enPlazo": 0,
     "sinFecha": 0
    },
@@ -1045,8 +1111,8 @@
     "total": 125,
     "cerrados": 84,
     "abiertos": 41,
-    "atrasados": 32,
-    "enPlazo": 9,
+    "atrasados": 41,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "0587A": {
@@ -1107,18 +1173,18 @@
    },
    "4515B": {
     "total": 206,
-    "cerrados": 189,
-    "abiertos": 17,
-    "atrasados": 17,
+    "cerrados": 191,
+    "abiertos": 15,
+    "atrasados": 15,
     "enPlazo": 0,
     "sinFecha": 0
    },
    "4515C": {
-    "total": 32,
+    "total": 51,
     "cerrados": 31,
-    "abiertos": 1,
+    "abiertos": 20,
     "atrasados": 1,
-    "enPlazo": 0,
+    "enPlazo": 19,
     "sinFecha": 0
    },
    "8280A": {
@@ -1133,26 +1199,26 @@
   "porCaminata": {
    "1": {
     "total": 381,
-    "cerrados": 317,
-    "abiertos": 64,
-    "atrasados": 55,
-    "enPlazo": 9,
+    "cerrados": 320,
+    "abiertos": 61,
+    "atrasados": 61,
+    "enPlazo": 0,
     "sinFecha": 0
    },
    "2": {
-    "total": 2393,
-    "cerrados": 2097,
-    "abiertos": 296,
-    "atrasados": 282,
-    "enPlazo": 14,
+    "total": 2442,
+    "cerrados": 2139,
+    "abiertos": 303,
+    "atrasados": 271,
+    "enPlazo": 32,
     "sinFecha": 0
    },
    "3": {
-    "total": 215,
-    "cerrados": 54,
-    "abiertos": 161,
-    "atrasados": 6,
-    "enPlazo": 155,
+    "total": 271,
+    "cerrados": 115,
+    "abiertos": 156,
+    "atrasados": 9,
+    "enPlazo": 147,
     "sinFecha": 0
    }
   },
@@ -1179,13 +1245,13 @@
    ],
    "vals": [
     [
-     8,
-     52,
+     6,
+     64,
      1
     ],
     [
      0,
-     117,
+     109,
      0
     ],
     [
@@ -1195,30 +1261,30 @@
     ],
     [
      2,
-     16,
+     13,
      0
     ],
     [
      1,
-     4,
+     3,
      0
     ],
     [
      3,
      9,
-     0
+     2
     ]
    ]
   },
   "antiguedad": {
    "tramos": {
-    "1-30 días": 95,
-    "31-90 días": 199,
-    "91-180 días": 40,
-    ">180 días": 9
+    "1-30 días": 103,
+    "31-90 días": 195,
+    "91-180 días": 36,
+    ">180 días": 7
    },
-   "max": 190,
-   "mediana": 47
+   "max": 197,
+   "mediana": 44
   },
   "topSubsistemas": [
    {
@@ -1233,34 +1299,16 @@
    {
     "sub": "4515-ESL-201",
     "total": 126,
-    "cerrados": 109,
-    "abiertos": 17,
-    "atrasados": 17,
-    "enPlazo": 0,
-    "sinFecha": 0
-   },
-   {
-    "sub": "0570-XH-201",
-    "total": 46,
-    "cerrados": 32,
-    "abiertos": 14,
-    "atrasados": 14,
+    "cerrados": 111,
+    "abiertos": 15,
+    "atrasados": 15,
     "enPlazo": 0,
     "sinFecha": 0
    },
    {
     "sub": "0584-WYT-202",
     "total": 54,
-    "cerrados": 40,
-    "abiertos": 14,
-    "atrasados": 14,
-    "enPlazo": 0,
-    "sinFecha": 0
-   },
-   {
-    "sub": "0583-WR-208",
-    "total": 49,
-    "cerrados": 37,
+    "cerrados": 42,
     "abiertos": 12,
     "atrasados": 12,
     "enPlazo": 0,
@@ -1276,18 +1324,45 @@
     "sinFecha": 0
    },
    {
-    "sub": "0582-NZ-201",
-    "total": 17,
-    "cerrados": 7,
+    "sub": "0583-WR-208",
+    "total": 49,
+    "cerrados": 38,
+    "abiertos": 11,
+    "atrasados": 11,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0586-CY-201",
+    "total": 23,
+    "cerrados": 13,
     "abiertos": 10,
     "atrasados": 10,
     "enPlazo": 0,
     "sinFecha": 0
    },
    {
-    "sub": "0584-WYT-201",
-    "total": 71,
-    "cerrados": 63,
+    "sub": "0570-XH-201",
+    "total": 46,
+    "cerrados": 37,
+    "abiertos": 9,
+    "atrasados": 9,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0586-CY-207",
+    "total": 20,
+    "cerrados": 11,
+    "abiertos": 9,
+    "atrasados": 9,
+    "enPlazo": 0,
+    "sinFecha": 0
+   },
+   {
+    "sub": "0582-NZ-201",
+    "total": 17,
+    "cerrados": 9,
     "abiertos": 8,
     "atrasados": 8,
     "enPlazo": 0,
@@ -1303,15 +1378,6 @@
     "sinFecha": 0
    },
    {
-    "sub": "0583-WR-204",
-    "total": 25,
-    "cerrados": 17,
-    "abiertos": 8,
-    "atrasados": 8,
-    "enPlazo": 0,
-    "sinFecha": 0
-   },
-   {
     "sub": "0584-PA-201",
     "total": 51,
     "cerrados": 44,
@@ -1321,9 +1387,9 @@
     "sinFecha": 0
    },
    {
-    "sub": "0583-WR-203",
-    "total": 23,
-    "cerrados": 16,
+    "sub": "0583-WR-204",
+    "total": 25,
+    "cerrados": 18,
     "abiertos": 7,
     "atrasados": 7,
     "enPlazo": 0,
@@ -1337,10 +1403,10 @@
    "Crítico",
    {
     "total": 1437,
-    "cerrados": 1238,
-    "abiertos": 199,
-    "atrasados": 181,
-    "enPlazo": 18,
+    "cerrados": 1255,
+    "abiertos": 182,
+    "atrasados": 182,
+    "enPlazo": 0,
     "sinFecha": 0
    }
   ],
@@ -1348,20 +1414,20 @@
    "warn",
    "Atención",
    {
-    "total": 324,
-    "cerrados": 292,
-    "abiertos": 32,
-    "atrasados": 30,
-    "enPlazo": 2,
+    "total": 343,
+    "cerrados": 294,
+    "abiertos": 49,
+    "atrasados": 28,
+    "enPlazo": 21,
     "sinFecha": 0
    }
   ]
  },
  "control": {
-  "punchTotal": 2989,
+  "punchTotal": 3094,
   "subsEnReporte": 95,
-  "subsConPunch": 85,
-  "subsSinPunch": 10,
+  "subsConPunch": 87,
+  "subsSinPunch": 8,
   "punchSinSubsistemaEnReporte": [
    "0587-ECC-201"
   ],
@@ -1374,8 +1440,8 @@
    {
     "tipo": "Operable",
     "caminata": "2",
-    "declarado": "73/80",
-    "calculado": "73/80",
+    "declarado": "74/80",
+    "calculado": "74/80",
     "ok": true
    },
    {
@@ -1389,23 +1455,23 @@
   "difPunch": [
    {
     "cat": "P0",
-    "reporte": "25C / 6A",
-    "punch": "25C / 18A"
+    "reporte": "25C / 18A",
+    "punch": "25C / 22A"
    },
    {
     "cat": "P1",
-    "reporte": "1501C / 262A",
-    "punch": "1539C / 231A"
+    "reporte": "1534C / 231A",
+    "punch": "1558C / 231A"
    },
    {
     "cat": "P2",
-    "reporte": "828C / 160A",
-    "punch": "852C / 195A"
+    "reporte": "858C / 220A",
+    "punch": "937C / 175A"
    },
    {
     "cat": "P3",
-    "reporte": "48C / 24A",
-    "punch": "51C / 77A"
+    "reporte": "51C / 77A",
+    "punch": "53C / 92A"
    }
   ]
  },

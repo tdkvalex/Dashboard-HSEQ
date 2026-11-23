@@ -322,6 +322,21 @@ chk(_sa + _fa.get("p1Abiertos", 0) == arq["dt"]["tipos"]["P1"]["abiertos"],
     "Arqueros · las áreas más lo declarado fuera de área suman los P1 abiertos",
     f'{_sa}+{_fa.get("p1Abiertos", 0)} vs {arq["dt"]["tipos"]["P1"]["abiertos"]}')
 
+# La subcondición de «En revisión» en Desaladora: de dónde viene cada carpeta.
+# Si los tres cubos no suman las que están en revisión, el panel estaría
+# declarando una subcondición que no cubre el total, que es peor que no declararla.
+_er = des.get("carpetas", {}).get("enRevisionDesde")
+if _er is None:
+    chk(True, "Desaladora · subcondición de «En revisión»",
+        "el JSON no la trae (corte anterior al 23-11-2026)")
+else:
+    chk(sum(_er.values()) == des["carpetas"]["enRevision"],
+        "Desaladora · el antecedente de revisión suma las carpetas en revisión",
+        f'{sum(_er.values())} vs {des["carpetas"]["enRevision"]}')
+    chk(len(des["carpetas"]["enRevisionDetalle"]) == des["carpetas"]["enRevision"],
+        "Desaladora · el detalle de «En revisión» trae una fila por carpeta",
+        f'{len(des["carpetas"]["enRevisionDetalle"])} vs {des["carpetas"]["enRevision"]}')
+
 at = arq["ctop"]["global"]
 chk(at["rev"] + at["obs"] + at["rech"] + at["aprob"] == at["entregadas"],
     "Arqueros · el desglose de carpetas TOP suma las entregadas")

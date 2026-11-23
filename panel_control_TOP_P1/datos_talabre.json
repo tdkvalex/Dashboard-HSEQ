@@ -6,12 +6,12 @@
   "codigo": "P2407",
   "cliente": "CODELCO",
   "contrato": "4600029355",
-  "corte": "2026-11-16",
-  "corteTexto": "16-11-2026",
-  "hoy": "16-11-2026",
+  "corte": "2026-11-23",
+  "corteTexto": "23-11-2026",
+  "hoy": "23-11-2026",
   "ultimaAgenda": null,
   "corteStatus": null,
-  "generado": "2026-11-16 18:17"
+  "generado": "2026-11-23 13:51"
  },
  "subsistemas": {
   "total": 218,
@@ -238,16 +238,17 @@
   "tipo": "avance",
   "total": 218,
   "conDato": 218,
-  "promedio": 96.2,
-  "sobre95": 162,
+  "promedio": 96.3,
+  "sobre95": 163,
+  "sobre95Redondeado": 197,
   "sobre80": 215,
   "bajo80": 3,
   "tramos": {
-   "95% o más": 162,
-   "80% a 95%": 53,
+   "95% o más": 163,
+   "80% a 95%": 52,
    "Bajo 80%": 3
   },
-  "enRevisionCliente": null,
+  "enRevisionCliente": 70,
   "porArea": {
    "CERRO VERDE/PS2": {
     "subs": 3,
@@ -293,8 +294,8 @@
    },
    "POZOS": {
     "subs": 110,
-    "promedio": 98.2,
-    "sobre95": 106,
+    "promedio": 98.5,
+    "sobre95": 107,
     "sobre80": 110,
     "bajo80": 0
    },
@@ -741,8 +742,8 @@
     "91-180 días": 7,
     ">180 días": 0
    },
-   "max": 143,
-   "mediana": 108
+   "max": 150,
+   "mediana": 115
   },
   "topSubsistemas": [
    {
@@ -1012,6 +1013,31 @@
  },
  "control": {
   "contraste": [
+   {
+    "que": "Subsistemas",
+    "declarado": "218",
+    "calculado": "218",
+    "ok": true
+   },
+   {
+    "que": "Caminata 1 realizadas",
+    "declarado": "218",
+    "calculado": "218",
+    "ok": true
+   },
+   {
+    "que": "Caminata 2 realizadas",
+    "declarado": "218",
+    "calculado": "218",
+    "ok": true
+   },
+   {
+    "que": "Carpetas sobre 95%",
+    "declarado": "197",
+    "calculado": "197 redondeando como el proyecto · 163 estricto, que es el que publica el panel",
+    "ok": true,
+    "nota": "el proyecto cuenta el tramo por el porcentaje redondeado; el panel usa el valor estricto para no adelantar avance"
+   },
    {
     "que": "DT abiertos (hoja DT del archivo de STATUS)",
     "declarado": "219",

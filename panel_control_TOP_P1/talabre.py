@@ -239,6 +239,79 @@ def encabezado(ws, requeridas, max_filas=15):
 # =============================================================================
 # 1) STATUS — subsistemas, caminatas y avance de carpeta
 # =============================================================================
+def _ffill(fila):
+    """Encabezado combinado: el grupo solo está en la primera columna del tramo."""
+    out, ult = [], ""
+    for v in fila:
+        if v not in (None, ""):
+            ult = norm(v)
+        out.append(ult)
+    return out
+
+
+def leer_resumen_nuevo(ws):
+    """Hoja «Resumen» del libro de PROTOCOLIZACIÓN, por encabezado.
+
+    Desde el corte 23-11-2026 el proyecto manda un solo libro y su hoja de
+    resumen cambió de nombre y de estructura: ahora declara C1 / C2 / C1+C2 con
+    Total · Realizadas · Pendiente · %Realizado por área, más un bloque de PEC.
+    Se resuelve por encabezado, no por posición: leerla por columna fija dio en
+    Desaladora un panel con las 95 carpetas «Sin entregar».
+    """
+    filas = list(ws.iter_rows(values_only=True))
+    nf = next((i for i, f in enumerate(filas)
+               if any(norm(v) == "area" for v in f) and
+                  any(norm(v) == "realizadas" for v in f)), None)
+    if nf is None:
+        return None
+    grupos = _ffill(filas[nf - 1]) if nf else []
+    iArea = next(i for i, v in enumerate(filas[nf]) if norm(v) == "area")
+    campos = {}
+    for i, v in enumerate(filas[nf]):
+        g = grupos[i] if i < len(grupos) else ""
+        if v not in (None, ""):
+            campos[f"{g}|{norm(v)}"] = i
+    val = lambda f, k: (f[campos[k]] if k in campos and campos[k] < len(f) else None)
+    out = {"areas": {}, "total": None}
+    for f in filas[nf + 1:]:
+        a = str(f[iArea]).strip() if iArea < len(f) and f[iArea] else ""
+        if not a:
+            break
+        fila = {"subs": val(f, "c1|total"),
+                "c1Real": val(f, "c1|realizadas"), "c1Total": val(f, "c1|total"),
+                "c2Real": val(f, "c2|realizadas"), "c2Total": val(f, "c2|total")}
+        if norm(a) == "total":
+            out["total"] = fila
+        else:
+            out["areas"][a] = fila
+
+    # Bloque de PEC: su encabezado es la fila con «Total PEC» y los valores van
+    # en la siguiente. El bloque de TOP, más abajo, tiene los mismos rótulos:
+    # se distingue por «Total PEC» y no por su posición.
+    for i, f in enumerate(filas):
+        if not any(norm(v) == "total pec" for v in f):
+            continue
+        idx = {norm(v): j for j, v in enumerate(f) if v not in (None, "")}
+        if i + 1 >= len(filas):
+            break
+        vf = filas[i + 1]
+        g = lambda k: (vf[idx[k]] if k in idx and idx[k] < len(vf) else None)
+        pec = {
+            "totalPec": g("total pec"),
+            "enRevision": g("carpetas en rev. codelco"),
+            "enRevisionBsmt": g("carpeta en rev. bsmt"),
+            "diasRevPromedio": g("promedio dias en rev. codelco"),
+            "diasRevMaximo": g("mayor cant. dias en rev. codelco"),
+            "sobre95": g("carpetas >= 95%") or g("carpetas ≥ 95%"),
+            "en100": g("carpetas 100%"),
+        }
+        if out["total"] is None:
+            out["total"] = {}
+        out["total"].update({k: v for k, v in pec.items() if v is not None})
+        break
+    return out
+
+
 def leer_status(ruta, hoy):
     wb = libro(ruta)
     ws = hoja(wb, "STATUS", ruta)
@@ -292,8 +365,14 @@ def leer_status(ruta, hoy):
     # Totales que declara el propio archivo, para contrastarlos. La hoja RESUMEN
     # dejó de venir en el archivo nuevo: si no está, se pierde ese contraste.
     declarado = {"areas": {}, "total": None}
-    if "RESUMEN" in wb.sheetnames:
-        for r in wb["RESUMEN"].iter_rows(min_row=3, max_row=12, values_only=True):
+    hRes = next((n for n in wb.sheetnames if norm(n) == "resumen"), None)
+    nuevo = None
+    if hRes is not None:
+        nuevo = leer_resumen_nuevo(wb[hRes])
+    if nuevo is not None:
+        declarado = nuevo
+    elif hRes is not None:
+        for r in wb[hRes].iter_rows(min_row=3, max_row=12, values_only=True):
             vals = [r[i] for i in range(2, 8)]
             if not any(isinstance(v, (int, float)) for v in vals):
                 continue
@@ -303,8 +382,8 @@ def leer_status(ruta, hoy):
                 declarado["areas"][str(r[1]).strip()] = fila
             else:
                 declarado["total"] = fila
-    else:
-        avisos.append("El archivo de STATUS ya no trae la hoja «RESUMEN»: se pierde "
+    if hRes is None:
+        avisos.append("El archivo de STATUS no trae la hoja «Resumen»: se pierde "
                       "el contraste contra los totales que declaraba el proyecto")
 
     # La hoja «DT» del mismo archivo es el extracto de pendientes: sirve para
@@ -484,6 +563,15 @@ def construir(corte, subs, declarado, items, incoherentes, hoy, estado_propio,
         "conDato": len(pecs),
         "promedio": pct1(sum(pecs), len(pecs)) if pecs else 0,
         "sobre95": sum(1 for p in pecs if p >= 0.95),
+        # El proyecto cuenta este tramo por el porcentaje REDONDEADO: un 94,6%
+        # entra a su «≥95%». El panel publica el estricto, que es el que no
+        # adelanta avance; el redondeado se guarda solo para contrastar con la
+        # cifra que declara la hoja Resumen y que no cuadre no sea un misterio.
+        # Umbral 94,5%: el proyecto redondea hacia arriba, como Excel. No se usa
+        # round() de Python, que redondea 94,5 a 94 —al par más cercano— y dejaba
+        # 3 subsistemas fuera, ni p*100+0.5, que en coma flotante da 94,99… para
+        # un 0,945 exacto y los deja fuera igual.
+        "sobre95Redondeado": sum(1 for p in pecs if p >= 0.945 - 1e-9),
         "sobre80": sum(1 for p in pecs if p >= 0.80),
         "bajo80": sum(1 for p in pecs if p < 0.80),
         "tramos": tramos,
@@ -589,7 +677,14 @@ def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
     if tot.get("subs") is not None:
         control["contraste"].append({
             "que": "Subsistemas", "declarado": str(tot["subs"]),
-            "calculado": str(len(subs)), "ok": tot["subs"] == len(subs)})
+            "calculado": str(subsistemas["total"]),
+            "ok": tot["subs"] == subsistemas["total"]})
+    for n, key in ((1, "c1Real"), (2, "c2Real")):
+        if tot.get(key) is not None:
+            real = caminatas[str(n)]["realizada"]
+            control["contraste"].append({
+                "que": f"Caminata {n} realizadas", "declarado": str(tot[key]),
+                "calculado": str(real), "ok": tot[key] == real})
     for n, key in ((1, "c1"), (2, "c2")):
         if tot.get(key) is not None:
             real = caminatas[str(n)]["realizada"]
@@ -601,9 +696,21 @@ def _armar(corte, subsistemas, areas, caminatas, camArea, pendientes, carpetas,
                 "ok": tot[key] <= real + prog,
                 "nota": "el RESUMEN suma las agendadas de la semana; el panel las separa"})
     if tot.get("sobre95") is not None:
+        red = carpetas.get("sobre95Redondeado", carpetas["sobre95"])
+        ok = tot["sobre95"] in (carpetas["sobre95"], red)
         control["contraste"].append({
             "que": "Carpetas sobre 95%", "declarado": str(tot["sobre95"]),
-            "calculado": str(carpetas["sobre95"]), "ok": tot["sobre95"] == carpetas["sobre95"]})
+            "calculado": (f'{red} redondeando como el proyecto · '
+                          f'{carpetas["sobre95"]} estricto, que es el que publica el panel'
+                          if red != carpetas["sobre95"] else str(carpetas["sobre95"])),
+            "ok": ok,
+            "nota": ("el proyecto cuenta el tramo por el porcentaje redondeado; "
+                     "el panel usa el valor estricto para no adelantar avance"
+                     if red != carpetas["sobre95"] else None)})
+        if not ok:
+            avisos.append(f"Carpetas sobre 95%: la hoja Resumen declara {tot['sobre95']} "
+                          f"y el detalle da {carpetas['sobre95']} estricto / {red} "
+                          f"redondeado — revisar")
     if tot.get("sobre80") is not None:
         ok = tot["sobre80"] == carpetas["sobre80"]
         control["contraste"].append({

@@ -183,6 +183,32 @@ def norm(v):
     return " ".join(s.split())
 
 
+# «En revisión» mezcla dos situaciones que no son lo mismo: la carpeta que está
+# corrigiendo un rechazo y la que ya tenía una revisión aprobada y entró una
+# nueva. El reporte solo lo distingue en el comentario del certificado, con una
+# forma estable: «Rev <X> <Aprobada|Rechazada>. Se ingresa Rev <Y> <fecha>». Se
+# mira lo que está ANTES de «se ingresa», que es el destino de la revisión
+# anterior. El estatus publicado NO cambia —manda el documento, que es lo que ve
+# el cliente—: esto se declara aparte, como subcondición.
+# Criterio elegido por el usuario (23-11-2026).
+RE_INGRESA = re.compile(r"\bse\s+ingresa\b")
+
+REV_ANTERIOR_ORDEN = ["Aprobada", "Rechazada", "Sin declarar"]
+
+
+def antecedente_revision(comentario):
+    """Qué pasó con la revisión anterior de una carpeta que hoy está en revisión."""
+    txt = norm(comentario)
+    if not txt or not RE_INGRESA.search(txt):
+        return "Sin declarar"
+    antes = RE_INGRESA.split(txt)[0]
+    if "aprobada" in antes:
+        return "Aprobada"
+    if "rechazada" in antes:
+        return "Rechazada"
+    return "Sin declarar"
+
+
 def disciplina(v):
     d = DISC_MAP.get(norm(v))
     if d:
@@ -257,6 +283,11 @@ COLS_REPORTE = {
     "carpeta": ("|construccion|estatus", 0),
     "tarjeta": ("|construccion|tarjeta verde", 0),
 }
+# Opcionales: no entran en ningún cálculo, así que su ausencia se avisa y se
+# sigue. Por eso van aparte de COLS_REPORTE, cuya falta detiene la lectura.
+COLS_REPORTE_OPC = {
+    "comentario": ("|construccion|comentarios crp", 0),
+}
 
 
 def _ffill(fila):
@@ -288,6 +319,12 @@ def cols_reporte(ws):
             cols[k] = idx[n]
         else:
             faltan.append(f"{k} ({llave})")
+    for k, (llave, n) in COLS_REPORTE_OPC.items():
+        idx = llaves.get(llave, [])
+        cols[k] = idx[n] if len(idx) > n else None
+        if cols[k] is None:
+            avisos.append(f"El REPORTE GERENCIAL no trae la columna {k} ({llave}): "
+                          f"se sigue sin ella")
     if faltan:
         avisos.append("El REPORTE GERENCIAL no trae las columnas " + ", ".join(faltan) +
                       f" en el encabezado de las filas {FILAS_ENCABEZADO}; no se leyó")
@@ -333,7 +370,7 @@ def leer_reporte(ruta):
     C = cols_reporte(ws)
     if C is None:
         sys.exit("El REPORTE GERENCIAL cambió de formato: revisar el encabezado.")
-    col = lambda f, k: f[C[k]] if C[k] < len(f) else None
+    col = lambda f, k: (f[C[k]] if C[k] is not None and C[k] < len(f) else None)
 
     subs, no_reconocidas = [], []
     for f in ws.iter_rows(min_row=max(FILAS_ENCABEZADO) + 1, max_row=181, values_only=True):
@@ -358,6 +395,8 @@ def leer_reporte(ruta):
                     3: estado_cam(col(f, "cam3"))},
             "carpeta": carp,
             "tarjetaVerde": norm(col(f, "tarjeta")) == "si",
+            "revAnterior": (antecedente_revision(col(f, "comentario"))
+                            if carp == "En revisión" else None),
         })
 
     # Un estatus raro suelto es un dato del proyecto; que no se reconozca ninguno
@@ -692,6 +731,15 @@ def construir(corte, todos, items, hoy, declarado, cortePunch=None):
         [{"id": s["id"], "zona": s["zona"], "tipo": s["tipo"], "estado": s["carpeta"]}
          for s in subs if s["carpeta"] != "Sin entregar"],
         key=lambda x: (CARPETA_ORDEN.index(x["estado"]), x["id"]))
+    # Subcondición de «En revisión»: de dónde viene cada una. Una que vuelve a
+    # revisión tras una revisión aprobada no es una aprobación perdida, y una
+    # que corrige un rechazo no es lo mismo que la anterior.
+    enrev = [s for s in subs if s["carpeta"] == "En revisión"]
+    carpetas["enRevisionDesde"] = {
+        k: sum(1 for s in enrev if s["revAnterior"] == k) for k in REV_ANTERIOR_ORDEN}
+    carpetas["enRevisionDetalle"] = sorted(
+        [{"id": s["id"], "zona": s["zona"], "desde": s["revAnterior"]} for s in enrev],
+        key=lambda x: (REV_ANTERIOR_ORDEN.index(x["desde"]), x["id"]))
 
     # ---------- punch ----------
     cats = ["P0", "P1", "P2", "P3"]
@@ -964,6 +1012,10 @@ def main():
     for k in CARPETA_ORDEN:
         if cp["estados"][k]:
             print(f"  {k:16s} {cp['estados'][k]:3d}")
+            if k == "En revisión":
+                d = cp["enRevisionDesde"]
+                print("                     de ellas, su revisión anterior quedó: " +
+                      " · ".join(f"{v} {r.lower()}" for r, v in d.items() if v))
     print(f"  → entregadas al cliente: {cp['entregadas']}/{cp['total']} "
           f"({pc(cp['entregadas'], cp['total'])}) · tarjeta verde: {cp['tarjetaVerde']}")
 

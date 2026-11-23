@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-23 13:23",
+ "generado": "2026-11-23 13:54",
  "proyectos": [
   {
    "id": "DESALADORA",
@@ -7,46 +7,46 @@
    "nombre": "Desaladora",
    "cliente": "ANTOFAGASTA MINERALS",
    "protocolos": {
-    "kpi": 0,
-    "universo": 19406,
-    "enFalta": 0,
-    "avance": 15049,
-    "remanente": 4357,
-    "base": 15049,
+    "kpi": 0.2,
+    "universo": 19357,
+    "enFalta": 29,
+    "avance": 15165,
+    "remanente": 4163,
+    "base": 15194,
     "estados": {
-     "S": 4357,
-     "C": 14199,
+     "S": 4163,
+     "C": 14407,
      "P": 0,
-     "AP": 0,
-     "AE": 850,
+     "AP": 29,
+     "AE": 758,
      "rv": 0
     },
-    "actualizado": "16-nov-2026",
+    "actualizado": "23-nov-2026",
     "sem": [
      "good",
-     "Cumple"
+     "Aceptable"
     ]
    },
    "qaqc": "DES",
    "cierre": {
-    "corte": "11-11-2026",
+    "corte": "17-11-2026",
     "subs": 95,
     "cam": {
-     "realizada": 86,
+     "realizada": 87,
      "aplica": 95
     },
     "p1": {
-     "total": 1770,
-     "cerrados": 1539,
+     "total": 1789,
+     "cerrados": 1558,
      "abiertos": 231,
-     "atrasados": 211
+     "atrasados": 210
     },
     "det": {
-     "total": 2989,
-     "cerrados": 2468,
-     "abiertos": 521,
-     "atrasados": 343,
-     "enPlazo": 178,
+     "total": 3094,
+     "cerrados": 2574,
+     "abiertos": 520,
+     "atrasados": 341,
+     "enPlazo": 179,
      "sinFecha": 0
     },
     "carpeta": {
@@ -54,7 +54,7 @@
      "entregadas": 84,
      "total": 95
     },
-    "cierrePct": 86.9,
+    "cierrePct": 87.1,
     "sem": [
      "warn",
      "Atención"
@@ -92,21 +92,21 @@
    "nombre": "Talabre",
    "cliente": "CODELCO",
    "protocolos": {
-    "kpi": 0.9,
-    "universo": 14595,
-    "enFalta": 130,
-    "avance": 14395,
+    "kpi": 1,
+    "universo": 14596,
+    "enFalta": 149,
+    "avance": 14397,
     "remanente": 31,
-    "base": 14525,
+    "base": 14546,
     "estados": {
      "S": 31,
-     "C": 14393,
+     "C": 14395,
      "P": 3,
-     "AP": 127,
+     "AP": 146,
      "AE": 2,
-     "rv": 39
+     "rv": 19
     },
-    "actualizado": "16-nov-2026",
+    "actualizado": "23-nov-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -114,7 +114,7 @@
    },
    "qaqc": "TAL",
    "cierre": {
-    "corte": "16-11-2026",
+    "corte": "23-11-2026",
     "subs": 218,
     "cam": {
      "realizada": 218,
@@ -136,7 +136,7 @@
     },
     "carpeta": {
      "tipo": "avance",
-     "promedio": 96.2,
+     "promedio": 96.3,
      "total": 218
     },
     "cierrePct": 100,
@@ -178,20 +178,20 @@
    "cliente": "MASA",
    "protocolos": {
     "kpi": 0.2,
-    "universo": 30343,
-    "enFalta": 49,
-    "avance": 27732,
-    "remanente": 2562,
-    "base": 27781,
+    "universo": 30373,
+    "enFalta": 42,
+    "avance": 27827,
+    "remanente": 2504,
+    "base": 27869,
     "estados": {
-     "S": 2562,
-     "C": 25991,
-     "P": 39,
-     "AP": 10,
-     "AE": 1741,
+     "S": 2504,
+     "C": 26268,
+     "P": 40,
+     "AP": 2,
+     "AE": 1559,
      "rv": 0
     },
-    "actualizado": "16-nov-2026",
+    "actualizado": "23-nov-2026",
     "sem": [
      "good",
      "Aceptable"
@@ -199,32 +199,32 @@
    },
    "qaqc": "MASA",
    "cierre": {
-    "corte": "09-11-2026",
+    "corte": "23-11-2026",
     "subs": 136,
     "cam": {
      "realizada": 136,
      "aplica": 136
     },
     "p1": {
-     "total": 2182,
-     "cerrados": 2117,
-     "abiertos": 65,
+     "total": 2381,
+     "cerrados": 2317,
+     "abiertos": 64,
      "tramite": 0,
-     "atrasados": 44
+     "atrasados": 25
     },
     "det": {
-     "total": 3314,
-     "cerrados": 2778,
-     "abiertos": 536,
+     "total": 4397,
+     "cerrados": 3699,
+     "abiertos": 698,
      "tramite": 0,
-     "atrasados": 220
+     "atrasados": 123
     },
     "carpeta": {
      "tipo": "estado",
-     "entregadas": 49,
+     "entregadas": 54,
      "total": 136
     },
-    "cierrePct": 97,
+    "cierrePct": 97.3,
     "sem": [
      "good",
      "Al día"
@@ -261,28 +261,28 @@
   "protocolos": {
    "activo": true,
    "proyectos": 3,
-   "universo": 64344,
-   "enFalta": 179,
-   "avance": 57176,
-   "remanente": 6950,
-   "rv": 39,
-   "base": 57355,
-   "actualizado": "16-nov-2026",
-   "kpi": 0.3
+   "universo": 64326,
+   "enFalta": 220,
+   "avance": 57389,
+   "remanente": 6698,
+   "rv": 19,
+   "base": 57609,
+   "actualizado": "23-nov-2026",
+   "kpi": 0.4
   },
   "cierre": {
    "activo": true,
    "proyectos": 3,
    "subs": 449,
-   "detalles": 8484,
-   "cerrados": 7208,
-   "abiertos": 1276,
+   "detalles": 9672,
+   "cerrados": 8235,
+   "abiertos": 1437,
    "tramite": 0,
-   "atrasados": 572,
-   "p1Total": 4396,
-   "p1Cerrados": 4100,
+   "atrasados": 473,
+   "p1Total": 4614,
+   "p1Cerrados": 4319,
    "p1Tramite": 0,
-   "p1Atrasados": 255
+   "p1Atrasados": 235
   },
   "noConformidades": {
    "activo": true,

@@ -1,8 +1,8 @@
 {
  "meta": {
-  "corte": "2026-11-09",
-  "corte_texto": "09-11-2026",
-  "generado": "2026-11-16 18:10"
+  "corte": "2026-11-23",
+  "corte_texto": "23-11-2026",
+  "generado": "2026-11-23 13:32"
  },
  "avisoDatos": "DATA no completamente registrada por directrices internas del proyecto, pudiendo reflejar incongruencias en sus resultados.",
  "areas": [
@@ -65,33 +65,33 @@
  "ctop": {
   "global": {
    "total": 136,
-   "entregadas": 49,
-   "conRespuesta": 35,
-   "rev": 14,
+   "entregadas": 54,
+   "conRespuesta": 29,
+   "rev": 25,
    "obs": 1,
-   "rech": 34,
+   "rech": 28,
    "aprob": 0,
-   "pend": 87
+   "pend": 82
   },
   "byArea": {
    "2000": {
     "total": 35,
-    "rev": 8,
+    "rev": 15,
     "obs": 0,
-    "rech": 23,
+    "rech": 17,
     "aprob": 0
    },
    "3000": {
     "total": 77,
-    "rev": 0,
-    "obs": 1,
+    "rev": 3,
+    "obs": 0,
     "rech": 7,
     "aprob": 0
    },
    "4000": {
     "total": 22,
-    "rev": 6,
-    "obs": 0,
+    "rev": 7,
+    "obs": 1,
     "rech": 4,
     "aprob": 0
    },
@@ -107,7 +107,7 @@
    [
     "2000",
     "2000-2100-F01-F02 Movimiento de Tierras - Hormigón",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
@@ -117,32 +117,32 @@
    [
     "2000",
     "2000-2200/2300-F01-F02 Movimiento de Tierras - Hormigón",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
     "2000-2200/2300-F03 Estructuras Metálicas",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
     "2000-2400-F01-F02 Movimiento de Tierras - Hormigón",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
     "2000-2400-F03 Estructuras Metálicas",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
     "2000-2500-F01-F02 Movimiento de Tierras - Hormigón",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
     "2000-2500-F03 Estructuras Metálicas",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
@@ -157,7 +157,7 @@
    [
     "2000",
     "2000-2700-F01-F02 Movimiento de Tierras - Hormigón",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
@@ -172,7 +172,7 @@
    [
     "4000",
     "4000-4100-F03 Estructuras Metálicas",
-    "En revisión"
+    "Observada"
    ],
    [
     "4000",
@@ -192,7 +192,7 @@
    [
     "4000",
     "4000-4700-F03 Estructuras Metálicas",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -227,7 +227,7 @@
    [
     "2000",
     "2000-2300-S01 Chancador Terciario",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -252,7 +252,7 @@
    [
     "2000",
     "2000-2500-S01 Acopio y alimentadores",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "2000",
@@ -281,6 +281,11 @@
    ],
    [
     "3000",
+    "3000-3100-S03 Sistema para Derrames",
+    "En revisión"
+   ],
+   [
+    "3000",
     "3000-3100-S08 Cajón de Distribución",
     "Rechazada"
    ],
@@ -292,7 +297,7 @@
    [
     "3000",
     "3000-3200-S05 Transferencia Cola Rougher – Scavenger a Cajón de Transferencia Relave Final",
-    "Observada"
+    "En revisión"
    ],
    [
     "3000",
@@ -303,6 +308,11 @@
     "3000",
     "3000-3200-S15 Transferencia Cola Cleaner – Scavenger a Relaves",
     "Rechazada"
+   ],
+   [
+    "3000",
+    "3000-3200-S16 Transferencia Relave Final a Relaveducto",
+    "En revisión"
    ],
    [
     "3000",
@@ -322,12 +332,12 @@
    [
     "4000",
     "4000-4200-S03 Sistema para Derrames",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "4000",
     "4000-4200-S04 Piscina de Emergencia",
-    "En revisión"
+    "Rechazada"
    ],
    [
     "4000",
@@ -336,8 +346,18 @@
    ],
    [
     "4000",
+    "4000-4600-S01 Sistema Contra Incendios",
+    "En revisión"
+   ],
+   [
+    "4000",
+    "4000-4600-S03 Planta de Floculante",
+    "En revisión"
+   ],
+   [
+    "4000",
     "4000-4600-S04 Sala de Compresores",
-    "Rechazada"
+    "En revisión"
    ],
    [
     "2000",
@@ -348,88 +368,93 @@
     "2000",
     "2000-2700-S03 NIOs y JB Piscinas 3661, 3662 y Planta de Tratamiento de Agua Potable",
     "Rechazada"
+   ],
+   [
+    "2000",
+    "2000-2700-S04 Sistema Alumbrado y alimentación Eléctrica",
+    "En revisión"
    ]
   ]
  },
  "dt": {
   "global": {
-   "total": 3314,
-   "cerrados": 2778,
+   "total": 4397,
+   "cerrados": 3699,
    "tramite": 0,
-   "esperandoCliente": 38,
-   "abiertos": 536,
-   "vencidos": 220
+   "esperandoCliente": 95,
+   "abiertos": 698,
+   "vencidos": 123
   },
   "tipos": {
    "P1": {
-    "total": 2182,
-    "cerrados": 2117,
+    "total": 2381,
+    "cerrados": 2317,
     "tramite": 0,
-    "esperandoCliente": 10,
-    "abiertos": 65,
-    "vencidos": 44
+    "esperandoCliente": 20,
+    "abiertos": 64,
+    "vencidos": 25
    },
    "P2": {
-    "total": 941,
-    "cerrados": 653,
+    "total": 1731,
+    "cerrados": 1326,
     "tramite": 0,
-    "esperandoCliente": 28,
-    "abiertos": 288,
-    "vencidos": 149
+    "esperandoCliente": 72,
+    "abiertos": 405,
+    "vencidos": 71
    },
    "P3": {
-    "total": 191,
-    "cerrados": 8,
+    "total": 242,
+    "cerrados": 27,
     "tramite": 0,
-    "esperandoCliente": 0,
-    "abiertos": 183,
+    "esperandoCliente": 3,
+    "abiertos": 215,
     "vencidos": 27
    }
   },
   "p1Esp": {
    "Piping": {
-    "total": 500,
-    "cerrados": 499,
+    "total": 539,
+    "cerrados": 522,
     "tramite": 0,
-    "esperandoCliente": 0,
-    "abiertos": 1,
+    "esperandoCliente": 8,
+    "abiertos": 17,
     "vencidos": 0
    },
    "Eléctrica": {
-    "total": 467,
-    "cerrados": 435,
+    "total": 548,
+    "cerrados": 521,
     "tramite": 0,
     "esperandoCliente": 4,
-    "abiertos": 32,
-    "vencidos": 24
+    "abiertos": 27,
+    "vencidos": 15
    },
    "Instrumentación y Control": {
-    "total": 455,
-    "cerrados": 424,
+    "total": 483,
+    "cerrados": 467,
     "tramite": 0,
-    "esperandoCliente": 5,
-    "abiertos": 31,
-    "vencidos": 20
+    "esperandoCliente": 8,
+    "abiertos": 16,
+    "vencidos": 10
    },
    "Mecánica": {
-    "total": 539,
-    "cerrados": 539,
+    "total": 570,
+    "cerrados": 566,
+    "tramite": 0,
+    "esperandoCliente": 0,
+    "abiertos": 4,
+    "vencidos": 0
+   },
+   "Estructura": {
+    "total": 169,
+    "cerrados": 169,
     "tramite": 0,
     "esperandoCliente": 0,
     "abiertos": 0,
     "vencidos": 0
    },
-   "Estructura": {
-    "total": 151,
-    "cerrados": 150,
-    "tramite": 0,
-    "esperandoCliente": 1,
-    "abiertos": 1,
-    "vencidos": 0
-   },
    "Obras Civiles": {
-    "total": 70,
-    "cerrados": 70,
+    "total": 72,
+    "cerrados": 72,
     "tramite": 0,
     "esperandoCliente": 0,
     "abiertos": 0,
@@ -438,27 +463,27 @@
   },
   "p1Area": {
    "2000": {
-    "total": 575,
-    "cerrados": 575,
+    "total": 657,
+    "cerrados": 657,
     "tramite": 0,
     "esperandoCliente": 0,
     "abiertos": 0,
     "vencidos": 0
    },
    "3000": {
-    "total": 1228,
-    "cerrados": 1163,
+    "total": 1260,
+    "cerrados": 1197,
     "tramite": 0,
-    "esperandoCliente": 10,
-    "abiertos": 65,
-    "vencidos": 44
+    "esperandoCliente": 19,
+    "abiertos": 63,
+    "vencidos": 25
    },
    "4000": {
-    "total": 367,
-    "cerrados": 367,
+    "total": 452,
+    "cerrados": 451,
     "tramite": 0,
-    "esperandoCliente": 0,
-    "abiertos": 0,
+    "esperandoCliente": 1,
+    "abiertos": 1,
     "vencidos": 0
    },
    "8000": {
@@ -482,31 +507,31 @@
    "vals": [
     [
      0,
+     17,
+     0,
+     0
+    ],
+    [
+     0,
+     27,
+     0,
+     0
+    ],
+    [
+     0,
+     15,
      1,
-     0,
      0
     ],
     [
      0,
-     32,
-     0,
-     0
-    ],
-    [
-     0,
-     31,
+     4,
      0,
      0
     ],
     [
      0,
      0,
-     0,
-     0
-    ],
-    [
-     0,
-     1,
      0,
      0
     ],
@@ -519,8 +544,9 @@
    ]
   },
   "p1AbiertosPorOrigen": {
-   "Caminata 1 (80%)": 30,
-   "Caminata 2 (100%)": 35
+   "Caminata 2 (100%)": 19,
+   "Caminata 1 (80%)": 14,
+   "Caminata Término Construcción": 31
   }
  },
  "semaforo": {
@@ -542,22 +568,22 @@
   ]
  },
  "previo": {
-  "corte": "2026-11-02",
-  "corte_texto": "02-11-2026",
+  "corte": "2026-11-09",
+  "corte_texto": "09-11-2026",
   "cam80": 136,
   "cam100": 136,
   "subs": 136,
   "camProx": 0,
   "camProg": 0,
   "topEntregadas": 49,
-  "topRev": 17,
+  "topRev": 14,
   "topObs": 1,
-  "topRech": 31,
+  "topRech": 34,
   "topAprob": 0,
-  "topConRespuesta": 32,
+  "topConRespuesta": 35,
   "p1Total": 2182,
-  "p1Cerrados": 2099,
-  "p1Abiertos": 83,
-  "p1Vencidos": 54
+  "p1Cerrados": 2117,
+  "p1Abiertos": 65,
+  "p1Vencidos": 44
  }
 }
