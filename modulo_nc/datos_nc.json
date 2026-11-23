@@ -4,10 +4,10 @@
   "nombre": "No Conformidades",
   "descripcion": "Hallazgos de calidad y su corrección",
   "cliente": "Besalco Montajes",
-  "hoy": "16-11-2026",
-  "corte": "2026-11-16",
-  "corteTexto": "16-11-2026",
-  "generado": "2026-11-16 15:28",
+  "hoy": "23-11-2026",
+  "corte": "2026-11-23",
+  "corteTexto": "23-11-2026",
+  "generado": "2026-11-23 13:23",
   "fuente": "Data_NCR.xlsx"
  },
  "orden": [
@@ -25,39 +25,39 @@
    "obra": true,
    "resumen": {
     "total": 84,
-    "cerradas": 82,
-    "abiertas": 2,
+    "cerradas": 83,
+    "abiertas": 1,
     "atrasadas": 1,
-    "pctCierre": 97.6,
+    "pctCierre": 98.8,
     "internas": 56,
     "externas": 27,
     "cliente": 19,
     "subcontrato": 8,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 2,
-    "costo": 1418.2,
-    "conCosto": 65,
-    "medianaCierre": 19,
+    "abiertasInternas": 1,
+    "costo": 1420.4,
+    "conCosto": 66,
+    "medianaCierre": 18,
     "promedioCierre": 39,
     "maxCierre": 250
    },
    "porTipo": {
     "No Conformidad": {
      "total": 54,
-     "cerradas": 52,
-     "abiertas": 2,
+     "cerradas": 53,
+     "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 96.3,
+     "pctCierre": 98.1,
      "internas": 32,
      "externas": 22,
      "cliente": 19,
      "subcontrato": 3,
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
-     "abiertasInternas": 2,
-     "costo": 1178.7,
-     "conCosto": 39,
+     "abiertasInternas": 1,
+     "costo": 1180.9,
+     "conCosto": 40,
      "medianaCierre": 21,
      "promedioCierre": 41,
      "maxCierre": 167
@@ -123,19 +123,19 @@
    "porOrigen": {
     "Interna": {
      "total": 56,
-     "cerradas": 54,
-     "abiertas": 2,
+     "cerradas": 55,
+     "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 96.4,
+     "pctCierre": 98.2,
      "internas": 56,
      "externas": 0,
      "cliente": 0,
      "subcontrato": 0,
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
-     "abiertasInternas": 2,
-     "costo": 791.1,
-     "conCosto": 46,
+     "abiertasInternas": 1,
+     "costo": 793.3,
+     "conCosto": 47,
      "medianaCierre": 18,
      "promedioCierre": 40,
      "maxCierre": 250
@@ -182,19 +182,19 @@
    "porEmision": {
     "Interna BSMT": {
      "total": 56,
-     "cerradas": 54,
-     "abiertas": 2,
+     "cerradas": 55,
+     "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 96.4,
+     "pctCierre": 98.2,
      "internas": 56,
      "externas": 0,
      "cliente": 0,
      "subcontrato": 0,
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
-     "abiertasInternas": 2,
-     "costo": 791.1,
-     "conCosto": 46,
+     "abiertasInternas": 1,
+     "costo": 793.3,
+     "conCosto": 47,
      "medianaCierre": 18,
      "promedioCierre": 40,
      "maxCierre": 250
@@ -356,21 +356,21 @@
     },
     "ELÉCTRICA": {
      "total": 17,
-     "cerradas": 15,
-     "abiertas": 2,
+     "cerradas": 16,
+     "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 88.2,
+     "pctCierre": 94.1,
      "internas": 10,
      "externas": 7,
      "cliente": 7,
      "subcontrato": 0,
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
-     "abiertasInternas": 2,
-     "costo": 250.0,
-     "conCosto": 9,
-     "medianaCierre": 28,
-     "promedioCierre": 47,
+     "abiertasInternas": 1,
+     "costo": 252.2,
+     "conCosto": 10,
+     "medianaCierre": 26,
+     "promedioCierre": 45,
      "maxCierre": 250
     },
     "ESTRUCTURA": {
@@ -603,11 +603,11 @@
     }
    },
    "porEstatus": {
-    "Iniciado": 2
+    "Iniciado": 1
    },
    "antiguedad": {
-    "1-30 días": 2,
-    "31-90 días": 0,
+    "1-30 días": 0,
+    "31-90 días": 1,
     "91-180 días": 0,
     "181-365 días": 0,
     "Más de un año": 0
@@ -637,47 +637,47 @@
      "maxCierre": null
     },
     "mes": {
-     "total": 2,
-     "cerradas": 0,
-     "abiertas": 2,
-     "atrasadas": 1,
-     "pctCierre": 0.0,
-     "internas": 2,
+     "total": 1,
+     "cerradas": 1,
+     "abiertas": 0,
+     "atrasadas": 0,
+     "pctCierre": 100.0,
+     "internas": 1,
      "externas": 0,
      "cliente": 0,
      "subcontrato": 0,
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
-     "abiertasInternas": 2,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": null,
-     "promedioCierre": null,
-     "maxCierre": null
+     "abiertasInternas": 0,
+     "costo": 2.2,
+     "conCosto": 1,
+     "medianaCierre": 12,
+     "promedioCierre": 12,
+     "maxCierre": 12
     },
     "trimestre": {
      "total": 2,
-     "cerradas": 0,
-     "abiertas": 2,
+     "cerradas": 1,
+     "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 0.0,
+     "pctCierre": 50.0,
      "internas": 2,
      "externas": 0,
      "cliente": 0,
      "subcontrato": 0,
      "abiertasCliente": 0,
      "abiertasSubcontrato": 0,
-     "abiertasInternas": 2,
-     "costo": 0,
-     "conCosto": 0,
-     "medianaCierre": null,
-     "promedioCierre": null,
-     "maxCierre": null
+     "abiertasInternas": 1,
+     "costo": 2.2,
+     "conCosto": 1,
+     "medianaCierre": 12,
+     "promedioCierre": 12,
+     "maxCierre": 12
     }
    },
    "semana": {
-    "desde": "09-11-2026",
-    "hasta": "15-11-2026",
+    "desde": "16-11-2026",
+    "hasta": "22-11-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -694,8 +694,8 @@
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "21-09",
-      "hasta": "11-10",
+      "desde": "28-09",
+      "hasta": "18-10",
       "semanas": 3,
       "acumulada": true,
       "total": 0,
@@ -707,19 +707,6 @@
      },
      {
       "etiqueta": "Hace 4 semanas",
-      "desde": "12-10",
-      "hasta": "18-10",
-      "semanas": 1,
-      "acumulada": false,
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "cliente": 0,
-      "subcontrato": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 3 semanas",
       "desde": "19-10",
       "hasta": "25-10",
       "semanas": 1,
@@ -732,7 +719,7 @@
       "abiertas": 1
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "26-10",
       "hasta": "01-11",
       "semanas": 1,
@@ -745,7 +732,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "02-11",
       "hasta": "08-11",
       "semanas": 1,
@@ -755,12 +742,25 @@
       "externas": 0,
       "cliente": 0,
       "subcontrato": 0,
-      "abiertas": 1
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Semana anterior",
+      "desde": "09-11",
+      "hasta": "15-11",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "cliente": 0,
+      "subcontrato": 0,
+      "abiertas": 0
      },
      {
       "etiqueta": "Última semana",
-      "desde": "09-11",
-      "hasta": "15-11",
+      "desde": "16-11",
+      "hasta": "22-11",
       "semanas": 1,
       "acumulada": false,
       "total": 0,
@@ -977,11 +977,13 @@
     },
     "2026-11": {
      "total": 1,
-     "costo": 0.0,
-     "conMonto": 0,
+     "costo": 2.18,
+     "conMonto": 1,
      "enCero": 0,
-     "sinDeclarar": 1,
-     "porEspecialidad": {}
+     "sinDeclarar": 0,
+     "porEspecialidad": {
+      "ELÉCTRICA": 2.18
+     }
     }
    }
   },
@@ -1434,14 +1436,14 @@
      "maxCierre": null
     },
     "trimestre": {
-     "total": 10,
-     "cerradas": 9,
+     "total": 6,
+     "cerradas": 5,
      "abiertas": 1,
      "atrasadas": 1,
-     "pctCierre": 90.0,
+     "pctCierre": 83.3,
      "internas": 0,
-     "externas": 10,
-     "cliente": 10,
+     "externas": 6,
+     "cliente": 6,
      "subcontrato": 0,
      "abiertasCliente": 1,
      "abiertasSubcontrato": 0,
@@ -1449,13 +1451,13 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 6,
-     "promedioCierre": 14,
-     "maxCierre": 33
+     "promedioCierre": 7,
+     "maxCierre": 13
     }
    },
    "semana": {
-    "desde": "09-11-2026",
-    "hasta": "15-11-2026",
+    "desde": "16-11-2026",
+    "hasta": "22-11-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -1472,8 +1474,8 @@
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "21-09",
-      "hasta": "11-10",
+      "desde": "28-09",
+      "hasta": "18-10",
       "semanas": 3,
       "acumulada": true,
       "total": 2,
@@ -1481,23 +1483,10 @@
       "externas": 2,
       "cliente": 2,
       "subcontrato": 0,
-      "abiertas": 1
-     },
-     {
-      "etiqueta": "Hace 4 semanas",
-      "desde": "12-10",
-      "hasta": "18-10",
-      "semanas": 1,
-      "acumulada": false,
-      "total": 1,
-      "internas": 0,
-      "externas": 1,
-      "cliente": 1,
-      "subcontrato": 0,
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 3 semanas",
+      "etiqueta": "Hace 4 semanas",
       "desde": "19-10",
       "hasta": "25-10",
       "semanas": 1,
@@ -1510,7 +1499,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "26-10",
       "hasta": "01-11",
       "semanas": 1,
@@ -1523,7 +1512,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "02-11",
       "hasta": "08-11",
       "semanas": 1,
@@ -1536,9 +1525,22 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Última semana",
+      "etiqueta": "Semana anterior",
       "desde": "09-11",
       "hasta": "15-11",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "cliente": 0,
+      "subcontrato": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Última semana",
+      "desde": "16-11",
+      "hasta": "22-11",
       "semanas": 1,
       "acumulada": false,
       "total": 0,
@@ -1765,7 +1767,7 @@
     "conCosto": 44,
     "medianaCierre": 140,
     "promedioCierre": 143,
-    "maxCierre": 464
+    "maxCierre": 473
    },
    "porTipo": {
     "No Conformidad": {
@@ -1822,8 +1824,8 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 181,
-     "promedioCierre": 194,
-     "maxCierre": 464
+     "promedioCierre": 196,
+     "maxCierre": 473
     }
    },
    "porOrigen": {
@@ -1862,8 +1864,8 @@
      "costo": 2840.0,
      "conCosto": 35,
      "medianaCierre": 177,
-     "promedioCierre": 179,
-     "maxCierre": 464
+     "promedioCierre": 180,
+     "maxCierre": 473
     }
    },
    "porEmision": {
@@ -1902,8 +1904,8 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 148,
-     "promedioCierre": 164,
-     "maxCierre": 464
+     "promedioCierre": 165,
+     "maxCierre": 473
     },
     "Externa Subcontrato": {
      "total": 40,
@@ -1943,7 +1945,7 @@
      "costo": 551.8,
      "conCosto": 6,
      "medianaCierre": 91,
-     "promedioCierre": 106,
+     "promedioCierre": 107,
      "maxCierre": 315
     },
     "EXPEDITORÍA": {
@@ -1981,8 +1983,8 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 133,
-     "promedioCierre": 149,
-     "maxCierre": 464
+     "promedioCierre": 150,
+     "maxCierre": 473
     },
     "CALIDAD": {
      "total": 1,
@@ -2019,8 +2021,8 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 28,
-     "promedioCierre": 102,
-     "maxCierre": 320
+     "promedioCierre": 103,
+     "maxCierre": 329
     },
     "ESTRUCTURA": {
      "total": 19,
@@ -2038,8 +2040,8 @@
      "costo": 0,
      "conCosto": 0,
      "medianaCierre": 153,
-     "promedioCierre": 166,
-     "maxCierre": 452
+     "promedioCierre": 168,
+     "maxCierre": 461
     },
     "TOPOGRAFÍA": {
      "total": 4,
@@ -2296,10 +2298,10 @@
     "Pendiente": 2
    },
    "antiguedad": {
-    "1-30 días": 4,
-    "31-90 días": 2,
-    "91-180 días": 2,
-    "181-365 días": 8,
+    "1-30 días": 2,
+    "31-90 días": 4,
+    "91-180 días": 1,
+    "181-365 días": 9,
     "Más de un año": 1
    },
    "porAnio": {
@@ -2328,16 +2330,16 @@
      "maxCierre": null
     },
     "mes": {
-     "total": 4,
+     "total": 2,
      "cerradas": 0,
-     "abiertas": 4,
-     "atrasadas": 4,
+     "abiertas": 2,
+     "atrasadas": 2,
      "pctCierre": 0.0,
      "internas": 0,
-     "externas": 4,
-     "cliente": 4,
+     "externas": 2,
+     "cliente": 2,
      "subcontrato": 0,
-     "abiertasCliente": 4,
+     "abiertasCliente": 2,
      "abiertasSubcontrato": 0,
      "abiertasInternas": 0,
      "costo": 0,
@@ -2367,8 +2369,8 @@
     }
    },
    "semana": {
-    "desde": "09-11-2026",
-    "hasta": "15-11-2026",
+    "desde": "16-11-2026",
+    "hasta": "22-11-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -2385,8 +2387,8 @@
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "21-09",
-      "hasta": "11-10",
+      "desde": "28-09",
+      "hasta": "18-10",
       "semanas": 3,
       "acumulada": true,
       "total": 0,
@@ -2398,19 +2400,6 @@
      },
      {
       "etiqueta": "Hace 4 semanas",
-      "desde": "12-10",
-      "hasta": "18-10",
-      "semanas": 1,
-      "acumulada": false,
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "cliente": 0,
-      "subcontrato": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 3 semanas",
       "desde": "19-10",
       "hasta": "25-10",
       "semanas": 1,
@@ -2423,7 +2412,7 @@
       "abiertas": 2
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "26-10",
       "hasta": "01-11",
       "semanas": 1,
@@ -2436,7 +2425,7 @@
       "abiertas": 2
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "02-11",
       "hasta": "08-11",
       "semanas": 1,
@@ -2449,9 +2438,22 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Última semana",
+      "etiqueta": "Semana anterior",
       "desde": "09-11",
       "hasta": "15-11",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "cliente": 0,
+      "subcontrato": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Última semana",
+      "desde": "16-11",
+      "hasta": "22-11",
       "semanas": 1,
       "acumulada": false,
       "total": 0,
@@ -2903,8 +2905,8 @@
     }
    },
    "semana": {
-    "desde": "09-11-2026",
-    "hasta": "15-11-2026",
+    "desde": "16-11-2026",
+    "hasta": "22-11-2026",
     "total": 0,
     "internas": 0,
     "externas": 0,
@@ -2921,8 +2923,8 @@
     "tendencia": [
      {
       "etiqueta": "5 semanas o más",
-      "desde": "21-09",
-      "hasta": "11-10",
+      "desde": "28-09",
+      "hasta": "18-10",
       "semanas": 3,
       "acumulada": true,
       "total": 0,
@@ -2934,19 +2936,6 @@
      },
      {
       "etiqueta": "Hace 4 semanas",
-      "desde": "12-10",
-      "hasta": "18-10",
-      "semanas": 1,
-      "acumulada": false,
-      "total": 0,
-      "internas": 0,
-      "externas": 0,
-      "cliente": 0,
-      "subcontrato": 0,
-      "abiertas": 0
-     },
-     {
-      "etiqueta": "Hace 3 semanas",
       "desde": "19-10",
       "hasta": "25-10",
       "semanas": 1,
@@ -2959,7 +2948,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Hace 2 semanas",
+      "etiqueta": "Hace 3 semanas",
       "desde": "26-10",
       "hasta": "01-11",
       "semanas": 1,
@@ -2972,7 +2961,7 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Semana anterior",
+      "etiqueta": "Hace 2 semanas",
       "desde": "02-11",
       "hasta": "08-11",
       "semanas": 1,
@@ -2985,9 +2974,22 @@
       "abiertas": 0
      },
      {
-      "etiqueta": "Última semana",
+      "etiqueta": "Semana anterior",
       "desde": "09-11",
       "hasta": "15-11",
+      "semanas": 1,
+      "acumulada": false,
+      "total": 0,
+      "internas": 0,
+      "externas": 0,
+      "cliente": 0,
+      "subcontrato": 0,
+      "abiertas": 0
+     },
+     {
+      "etiqueta": "Última semana",
+      "desde": "16-11",
+      "hasta": "22-11",
       "semanas": 1,
       "acumulada": false,
       "total": 0,
@@ -3044,39 +3046,39 @@
  "global": {
   "resumen": {
    "total": 522,
-   "cerradas": 501,
-   "abiertas": 21,
+   "cerradas": 502,
+   "abiertas": 20,
    "atrasadas": 20,
-   "pctCierre": 96.0,
+   "pctCierre": 96.2,
    "internas": 161,
    "externas": 352,
    "cliente": 304,
    "subcontrato": 48,
    "abiertasCliente": 18,
    "abiertasSubcontrato": 0,
-   "abiertasInternas": 3,
-   "costo": 10628.4,
-   "conCosto": 252,
+   "abiertasInternas": 2,
+   "costo": 10630.5,
+   "conCosto": 253,
    "medianaCierre": 33,
    "promedioCierre": 78,
-   "maxCierre": 464
+   "maxCierre": 473
   },
   "porTipo": {
    "No Conformidad": {
     "total": 334,
-    "cerradas": 316,
-    "abiertas": 18,
+    "cerradas": 317,
+    "abiertas": 17,
     "atrasadas": 17,
-    "pctCierre": 94.6,
+    "pctCierre": 94.9,
     "internas": 133,
     "externas": 193,
     "cliente": 187,
     "subcontrato": 6,
     "abiertasCliente": 15,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 3,
-    "costo": 7154.3,
-    "conCosto": 139,
+    "abiertasInternas": 2,
+    "costo": 7156.4,
+    "conCosto": 140,
     "medianaCierre": 30,
     "promedioCierre": 65,
     "maxCierre": 409
@@ -3116,8 +3118,8 @@
     "costo": 3.0,
     "conCosto": 19,
     "medianaCierre": 77,
-    "promedioCierre": 127,
-    "maxCierre": 464
+    "promedioCierre": 128,
+    "maxCierre": 473
    },
    "Reporte HSE Nivel Alto": {
     "total": 1,
@@ -3142,21 +3144,21 @@
   "porOrigen": {
    "Interna": {
     "total": 161,
-    "cerradas": 158,
-    "abiertas": 3,
+    "cerradas": 159,
+    "abiertas": 2,
     "atrasadas": 2,
-    "pctCierre": 98.1,
+    "pctCierre": 98.8,
     "internas": 161,
     "externas": 0,
     "cliente": 0,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 3,
-    "costo": 1367.9,
-    "conCosto": 85,
+    "abiertasInternas": 2,
+    "costo": 1370.1,
+    "conCosto": 86,
     "medianaCierre": 28,
-    "promedioCierre": 70,
+    "promedioCierre": 69,
     "maxCierre": 407
    },
    "Externa": {
@@ -3176,7 +3178,7 @@
     "conCosto": 167,
     "medianaCierre": 35,
     "promedioCierre": 82,
-    "maxCierre": 464
+    "maxCierre": 473
    },
    "Sin clasificar": {
     "total": 9,
@@ -3201,21 +3203,21 @@
   "porEmision": {
    "Interna BSMT": {
     "total": 161,
-    "cerradas": 158,
-    "abiertas": 3,
+    "cerradas": 159,
+    "abiertas": 2,
     "atrasadas": 2,
-    "pctCierre": 98.1,
+    "pctCierre": 98.8,
     "internas": 161,
     "externas": 0,
     "cliente": 0,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 3,
-    "costo": 1367.9,
-    "conCosto": 85,
+    "abiertasInternas": 2,
+    "costo": 1370.1,
+    "conCosto": 86,
     "medianaCierre": 28,
-    "promedioCierre": 70,
+    "promedioCierre": 69,
     "maxCierre": 407
    },
    "Externa Cliente": {
@@ -3235,7 +3237,7 @@
     "conCosto": 125,
     "medianaCierre": 30,
     "promedioCierre": 66,
-    "maxCierre": 464
+    "maxCierre": 473
    },
    "Externa Subcontrato": {
     "total": 48,
@@ -3332,8 +3334,8 @@
     "costo": 0.0,
     "conCosto": 2,
     "medianaCierre": 119,
-    "promedioCierre": 129,
-    "maxCierre": 464
+    "promedioCierre": 130,
+    "maxCierre": 473
    },
    "CALIDAD": {
     "total": 35,
@@ -3371,25 +3373,25 @@
     "conCosto": 8,
     "medianaCierre": 28,
     "promedioCierre": 61,
-    "maxCierre": 320
+    "maxCierre": 329
    },
    "ELÉCTRICA": {
     "total": 28,
-    "cerradas": 26,
-    "abiertas": 2,
+    "cerradas": 27,
+    "abiertas": 1,
     "atrasadas": 1,
-    "pctCierre": 92.9,
+    "pctCierre": 96.4,
     "internas": 10,
     "externas": 18,
     "cliente": 18,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 2,
-    "costo": 250.0,
-    "conCosto": 10,
-    "medianaCierre": 41,
-    "promedioCierre": 51,
+    "abiertasInternas": 1,
+    "costo": 252.2,
+    "conCosto": 11,
+    "medianaCierre": 39,
+    "promedioCierre": 50,
     "maxCierre": 250
    },
    "ESTRUCTURA": {
@@ -3408,8 +3410,8 @@
     "costo": 38.0,
     "conCosto": 3,
     "medianaCierre": 61,
-    "promedioCierre": 123,
-    "maxCierre": 452
+    "promedioCierre": 124,
+    "maxCierre": 461
    },
    "TOPOGRAFÍA": {
     "total": 13,
@@ -3775,15 +3777,15 @@
   },
   "porEstatus": {
    "Listo para revisión": 13,
-   "Iniciado": 3,
+   "Iniciado": 2,
    "Observada": 3,
    "Pendiente": 2
   },
   "antiguedad": {
-   "1-30 días": 6,
-   "31-90 días": 3,
-   "91-180 días": 3,
-   "181-365 días": 8,
+   "1-30 días": 2,
+   "31-90 días": 6,
+   "91-180 días": 2,
+   "181-365 días": 9,
    "Más de un año": 1
   },
   "porAnio": {
@@ -3813,47 +3815,47 @@
     "maxCierre": null
    },
    "mes": {
-    "total": 6,
-    "cerradas": 0,
-    "abiertas": 6,
-    "atrasadas": 5,
-    "pctCierre": 0.0,
-    "internas": 2,
-    "externas": 4,
-    "cliente": 4,
+    "total": 3,
+    "cerradas": 1,
+    "abiertas": 2,
+    "atrasadas": 2,
+    "pctCierre": 33.3,
+    "internas": 1,
+    "externas": 2,
+    "cliente": 2,
     "subcontrato": 0,
-    "abiertasCliente": 4,
+    "abiertasCliente": 2,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 2,
-    "costo": 0,
-    "conCosto": 0,
-    "medianaCierre": null,
-    "promedioCierre": null,
-    "maxCierre": null
+    "abiertasInternas": 0,
+    "costo": 2.2,
+    "conCosto": 1,
+    "medianaCierre": 12,
+    "promedioCierre": 12,
+    "maxCierre": 12
    },
    "trimestre": {
-    "total": 24,
-    "cerradas": 15,
-    "abiertas": 9,
+    "total": 20,
+    "cerradas": 12,
+    "abiertas": 8,
     "atrasadas": 8,
-    "pctCierre": 62.5,
+    "pctCierre": 60.0,
     "internas": 2,
-    "externas": 22,
-    "cliente": 22,
+    "externas": 18,
+    "cliente": 18,
     "subcontrato": 0,
     "abiertasCliente": 7,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 2,
-    "costo": 0,
-    "conCosto": 0,
-    "medianaCierre": 23,
-    "promedioCierre": 19,
+    "abiertasInternas": 1,
+    "costo": 2.2,
+    "conCosto": 1,
+    "medianaCierre": 13,
+    "promedioCierre": 17,
     "maxCierre": 35
    }
   },
   "semana": {
-   "desde": "09-11-2026",
-   "hasta": "15-11-2026",
+   "desde": "16-11-2026",
+   "hasta": "22-11-2026",
    "total": 0,
    "internas": 0,
    "externas": 0,
@@ -3870,8 +3872,8 @@
    "tendencia": [
     {
      "etiqueta": "5 semanas o más",
-     "desde": "21-09",
-     "hasta": "11-10",
+     "desde": "28-09",
+     "hasta": "18-10",
      "semanas": 3,
      "acumulada": true,
      "total": 2,
@@ -3879,23 +3881,10 @@
      "externas": 2,
      "cliente": 2,
      "subcontrato": 0,
-     "abiertas": 1
-    },
-    {
-     "etiqueta": "Hace 4 semanas",
-     "desde": "12-10",
-     "hasta": "18-10",
-     "semanas": 1,
-     "acumulada": false,
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "cliente": 1,
-     "subcontrato": 0,
      "abiertas": 0
     },
     {
-     "etiqueta": "Hace 3 semanas",
+     "etiqueta": "Hace 4 semanas",
      "desde": "19-10",
      "hasta": "25-10",
      "semanas": 1,
@@ -3908,7 +3897,7 @@
      "abiertas": 3
     },
     {
-     "etiqueta": "Hace 2 semanas",
+     "etiqueta": "Hace 3 semanas",
      "desde": "26-10",
      "hasta": "01-11",
      "semanas": 1,
@@ -3921,7 +3910,7 @@
      "abiertas": 2
     },
     {
-     "etiqueta": "Semana anterior",
+     "etiqueta": "Hace 2 semanas",
      "desde": "02-11",
      "hasta": "08-11",
      "semanas": 1,
@@ -3931,12 +3920,25 @@
      "externas": 0,
      "cliente": 0,
      "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Semana anterior",
+     "desde": "09-11",
+     "hasta": "15-11",
+     "semanas": 1,
+     "acumulada": false,
+     "total": 0,
+     "internas": 0,
+     "externas": 0,
+     "cliente": 0,
+     "subcontrato": 0,
+     "abiertas": 0
     },
     {
      "etiqueta": "Última semana",
-     "desde": "09-11",
-     "hasta": "15-11",
+     "desde": "16-11",
+     "hasta": "22-11",
      "semanas": 1,
      "acumulada": false,
      "total": 0,
@@ -4258,50 +4260,52 @@
    },
    "2026-11": {
     "total": 1,
-    "costo": 0.0,
-    "conMonto": 0,
+    "costo": 2.18,
+    "conMonto": 1,
     "enCero": 0,
-    "sinDeclarar": 1,
-    "porEspecialidad": {}
+    "sinDeclarar": 0,
+    "porEspecialidad": {
+     "ELÉCTRICA": 2.18
+    }
    }
   }
  },
  "obra": {
   "resumen": {
    "total": 514,
-   "cerradas": 493,
-   "abiertas": 21,
+   "cerradas": 494,
+   "abiertas": 20,
    "atrasadas": 20,
-   "pctCierre": 95.9,
+   "pctCierre": 96.1,
    "internas": 161,
    "externas": 352,
    "cliente": 304,
    "subcontrato": 48,
    "abiertasCliente": 18,
    "abiertasSubcontrato": 0,
-   "abiertasInternas": 3,
-   "costo": 10628.4,
-   "conCosto": 252,
+   "abiertasInternas": 2,
+   "costo": 10630.5,
+   "conCosto": 253,
    "medianaCierre": 31,
    "promedioCierre": 78,
-   "maxCierre": 464
+   "maxCierre": 473
   },
   "porTipo": {
    "No Conformidad": {
     "total": 326,
-    "cerradas": 308,
-    "abiertas": 18,
+    "cerradas": 309,
+    "abiertas": 17,
     "atrasadas": 17,
-    "pctCierre": 94.5,
+    "pctCierre": 94.8,
     "internas": 133,
     "externas": 193,
     "cliente": 187,
     "subcontrato": 6,
     "abiertasCliente": 15,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 3,
-    "costo": 7154.3,
-    "conCosto": 139,
+    "abiertasInternas": 2,
+    "costo": 7156.4,
+    "conCosto": 140,
     "medianaCierre": 30,
     "promedioCierre": 65,
     "maxCierre": 409
@@ -4341,8 +4345,8 @@
     "costo": 3.0,
     "conCosto": 19,
     "medianaCierre": 77,
-    "promedioCierre": 127,
-    "maxCierre": 464
+    "promedioCierre": 128,
+    "maxCierre": 473
    },
    "Reporte HSE Nivel Alto": {
     "total": 1,
@@ -4367,21 +4371,21 @@
   "porOrigen": {
    "Interna": {
     "total": 161,
-    "cerradas": 158,
-    "abiertas": 3,
+    "cerradas": 159,
+    "abiertas": 2,
     "atrasadas": 2,
-    "pctCierre": 98.1,
+    "pctCierre": 98.8,
     "internas": 161,
     "externas": 0,
     "cliente": 0,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 3,
-    "costo": 1367.9,
-    "conCosto": 85,
+    "abiertasInternas": 2,
+    "costo": 1370.1,
+    "conCosto": 86,
     "medianaCierre": 28,
-    "promedioCierre": 70,
+    "promedioCierre": 69,
     "maxCierre": 407
    },
    "Externa": {
@@ -4401,7 +4405,7 @@
     "conCosto": 167,
     "medianaCierre": 35,
     "promedioCierre": 82,
-    "maxCierre": 464
+    "maxCierre": 473
    },
    "Sin clasificar": {
     "total": 1,
@@ -4426,21 +4430,21 @@
   "porEmision": {
    "Interna BSMT": {
     "total": 161,
-    "cerradas": 158,
-    "abiertas": 3,
+    "cerradas": 159,
+    "abiertas": 2,
     "atrasadas": 2,
-    "pctCierre": 98.1,
+    "pctCierre": 98.8,
     "internas": 161,
     "externas": 0,
     "cliente": 0,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 3,
-    "costo": 1367.9,
-    "conCosto": 85,
+    "abiertasInternas": 2,
+    "costo": 1370.1,
+    "conCosto": 86,
     "medianaCierre": 28,
-    "promedioCierre": 70,
+    "promedioCierre": 69,
     "maxCierre": 407
    },
    "Externa Cliente": {
@@ -4460,7 +4464,7 @@
     "conCosto": 125,
     "medianaCierre": 30,
     "promedioCierre": 66,
-    "maxCierre": 464
+    "maxCierre": 473
    },
    "Externa Subcontrato": {
     "total": 48,
@@ -4557,8 +4561,8 @@
     "costo": 0.0,
     "conCosto": 2,
     "medianaCierre": 119,
-    "promedioCierre": 129,
-    "maxCierre": 464
+    "promedioCierre": 130,
+    "maxCierre": 473
    },
    "CALIDAD": {
     "total": 35,
@@ -4596,25 +4600,25 @@
     "conCosto": 8,
     "medianaCierre": 28,
     "promedioCierre": 61,
-    "maxCierre": 320
+    "maxCierre": 329
    },
    "ELÉCTRICA": {
     "total": 28,
-    "cerradas": 26,
-    "abiertas": 2,
+    "cerradas": 27,
+    "abiertas": 1,
     "atrasadas": 1,
-    "pctCierre": 92.9,
+    "pctCierre": 96.4,
     "internas": 10,
     "externas": 18,
     "cliente": 18,
     "subcontrato": 0,
     "abiertasCliente": 0,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 2,
-    "costo": 250.0,
-    "conCosto": 10,
-    "medianaCierre": 41,
-    "promedioCierre": 51,
+    "abiertasInternas": 1,
+    "costo": 252.2,
+    "conCosto": 11,
+    "medianaCierre": 39,
+    "promedioCierre": 50,
     "maxCierre": 250
    },
    "ESTRUCTURA": {
@@ -4633,8 +4637,8 @@
     "costo": 38.0,
     "conCosto": 3,
     "medianaCierre": 61,
-    "promedioCierre": 123,
-    "maxCierre": 452
+    "promedioCierre": 124,
+    "maxCierre": 461
    },
    "TOPOGRAFÍA": {
     "total": 13,
@@ -4981,15 +4985,15 @@
   },
   "porEstatus": {
    "Listo para revisión": 13,
-   "Iniciado": 3,
+   "Iniciado": 2,
    "Observada": 3,
    "Pendiente": 2
   },
   "antiguedad": {
-   "1-30 días": 6,
-   "31-90 días": 3,
-   "91-180 días": 3,
-   "181-365 días": 8,
+   "1-30 días": 2,
+   "31-90 días": 6,
+   "91-180 días": 2,
+   "181-365 días": 9,
    "Más de un año": 1
   },
   "porAnio": {
@@ -5018,47 +5022,47 @@
     "maxCierre": null
    },
    "mes": {
-    "total": 6,
-    "cerradas": 0,
-    "abiertas": 6,
-    "atrasadas": 5,
-    "pctCierre": 0.0,
-    "internas": 2,
-    "externas": 4,
-    "cliente": 4,
+    "total": 3,
+    "cerradas": 1,
+    "abiertas": 2,
+    "atrasadas": 2,
+    "pctCierre": 33.3,
+    "internas": 1,
+    "externas": 2,
+    "cliente": 2,
     "subcontrato": 0,
-    "abiertasCliente": 4,
+    "abiertasCliente": 2,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 2,
-    "costo": 0,
-    "conCosto": 0,
-    "medianaCierre": null,
-    "promedioCierre": null,
-    "maxCierre": null
+    "abiertasInternas": 0,
+    "costo": 2.2,
+    "conCosto": 1,
+    "medianaCierre": 12,
+    "promedioCierre": 12,
+    "maxCierre": 12
    },
    "trimestre": {
-    "total": 24,
-    "cerradas": 15,
-    "abiertas": 9,
+    "total": 20,
+    "cerradas": 12,
+    "abiertas": 8,
     "atrasadas": 8,
-    "pctCierre": 62.5,
+    "pctCierre": 60.0,
     "internas": 2,
-    "externas": 22,
-    "cliente": 22,
+    "externas": 18,
+    "cliente": 18,
     "subcontrato": 0,
     "abiertasCliente": 7,
     "abiertasSubcontrato": 0,
-    "abiertasInternas": 2,
-    "costo": 0,
-    "conCosto": 0,
-    "medianaCierre": 23,
-    "promedioCierre": 19,
+    "abiertasInternas": 1,
+    "costo": 2.2,
+    "conCosto": 1,
+    "medianaCierre": 13,
+    "promedioCierre": 17,
     "maxCierre": 35
    }
   },
   "semana": {
-   "desde": "09-11-2026",
-   "hasta": "15-11-2026",
+   "desde": "16-11-2026",
+   "hasta": "22-11-2026",
    "total": 0,
    "internas": 0,
    "externas": 0,
@@ -5075,8 +5079,8 @@
    "tendencia": [
     {
      "etiqueta": "5 semanas o más",
-     "desde": "21-09",
-     "hasta": "11-10",
+     "desde": "28-09",
+     "hasta": "18-10",
      "semanas": 3,
      "acumulada": true,
      "total": 2,
@@ -5084,23 +5088,10 @@
      "externas": 2,
      "cliente": 2,
      "subcontrato": 0,
-     "abiertas": 1
-    },
-    {
-     "etiqueta": "Hace 4 semanas",
-     "desde": "12-10",
-     "hasta": "18-10",
-     "semanas": 1,
-     "acumulada": false,
-     "total": 1,
-     "internas": 0,
-     "externas": 1,
-     "cliente": 1,
-     "subcontrato": 0,
      "abiertas": 0
     },
     {
-     "etiqueta": "Hace 3 semanas",
+     "etiqueta": "Hace 4 semanas",
      "desde": "19-10",
      "hasta": "25-10",
      "semanas": 1,
@@ -5113,7 +5104,7 @@
      "abiertas": 3
     },
     {
-     "etiqueta": "Hace 2 semanas",
+     "etiqueta": "Hace 3 semanas",
      "desde": "26-10",
      "hasta": "01-11",
      "semanas": 1,
@@ -5126,7 +5117,7 @@
      "abiertas": 2
     },
     {
-     "etiqueta": "Semana anterior",
+     "etiqueta": "Hace 2 semanas",
      "desde": "02-11",
      "hasta": "08-11",
      "semanas": 1,
@@ -5136,12 +5127,25 @@
      "externas": 0,
      "cliente": 0,
      "subcontrato": 0,
-     "abiertas": 1
+     "abiertas": 0
+    },
+    {
+     "etiqueta": "Semana anterior",
+     "desde": "09-11",
+     "hasta": "15-11",
+     "semanas": 1,
+     "acumulada": false,
+     "total": 0,
+     "internas": 0,
+     "externas": 0,
+     "cliente": 0,
+     "subcontrato": 0,
+     "abiertas": 0
     },
     {
      "etiqueta": "Última semana",
-     "desde": "09-11",
-     "hasta": "15-11",
+     "desde": "16-11",
+     "hasta": "22-11",
      "semanas": 1,
      "acumulada": false,
      "total": 0,
@@ -5454,11 +5458,13 @@
    },
    "2026-11": {
     "total": 1,
-    "costo": 0.0,
-    "conMonto": 0,
+    "costo": 2.18,
+    "conMonto": 1,
     "enCero": 0,
-    "sinDeclarar": 1,
-    "porEspecialidad": {}
+    "sinDeclarar": 0,
+    "porEspecialidad": {
+     "ELÉCTRICA": 2.18
+    }
    }
   }
  },
@@ -5521,9 +5527,9 @@
    "titulo": "Inspección grout de los recesos de las celdas columnas",
    "estatus": "Listo para revisión",
    "creada": "16-10-2025",
-   "dias": 396,
+   "dias": 403,
    "atrasada": true,
-   "diasAtraso": 386,
+   "diasAtraso": 393,
    "costo": null
   },
   {
@@ -5538,9 +5544,9 @@
    "titulo": "Tolerancia transversal en chutes de descarga harneros",
    "estatus": "Listo para revisión",
    "creada": "17-12-2025",
-   "dias": 334,
+   "dias": 341,
    "atrasada": true,
-   "diasAtraso": 324,
+   "diasAtraso": 331,
    "costo": null
   },
   {
@@ -5555,9 +5561,9 @@
    "titulo": "Perforaciones faltantes en estructura soporte chutes descarga 2500-CH-004/005/006",
    "estatus": "Observada",
    "creada": "15-01-2026",
-   "dias": 305,
+   "dias": 312,
    "atrasada": true,
-   "diasAtraso": 295,
+   "diasAtraso": 302,
    "costo": null
   },
   {
@@ -5572,9 +5578,9 @@
    "titulo": "FISURACIÓN DE RADIER CELDAS COLUMNAS Y VIGA FOSO REMOLIENDA",
    "estatus": "Listo para revisión",
    "creada": "15-01-2026",
-   "dias": 305,
+   "dias": 312,
    "atrasada": true,
-   "diasAtraso": 295,
+   "diasAtraso": 302,
    "costo": null
   },
   {
@@ -5589,9 +5595,9 @@
    "titulo": "Interferencia línea de cañería en Planta Floculante (3612-VP-001)",
    "estatus": "Listo para revisión",
    "creada": "05-02-2026",
-   "dias": 284,
+   "dias": 291,
    "atrasada": true,
-   "diasAtraso": 274,
+   "diasAtraso": 281,
    "costo": null
   },
   {
@@ -5606,9 +5612,9 @@
    "titulo": "Interferencia estructura con red de incendio planta POI",
    "estatus": "Listo para revisión",
    "creada": "06-03-2026",
-   "dias": 255,
+   "dias": 262,
    "atrasada": true,
-   "diasAtraso": 245,
+   "diasAtraso": 252,
    "costo": null
   },
   {
@@ -5623,9 +5629,9 @@
    "titulo": "NIVELACIÓN DE LAS PLACAS BASE DE LOS CHANCADORES SECUNDARIO, TERCIARIO #1 Y TERCIARIO #2 HP500",
    "estatus": "Listo para revisión",
    "creada": "10-03-2026",
-   "dias": 251,
+   "dias": 258,
    "atrasada": true,
-   "diasAtraso": 241,
+   "diasAtraso": 248,
    "costo": null
   },
   {
@@ -5640,9 +5646,9 @@
    "titulo": "DESCARGAS DE TUBERÍAS CELDAS DE FLOTACIÓN A CANALETAS DE CONDUCCIÓN",
    "estatus": "Listo para revisión",
    "creada": "10-03-2026",
-   "dias": 251,
+   "dias": 258,
    "atrasada": true,
-   "diasAtraso": 241,
+   "diasAtraso": 248,
    "costo": null
   },
   {
@@ -5657,9 +5663,9 @@
    "titulo": "Condicioón fundación de riel grúa portal molienda",
    "estatus": "Pendiente",
    "creada": "09-04-2026",
-   "dias": 221,
+   "dias": 228,
    "atrasada": true,
-   "diasAtraso": 211,
+   "diasAtraso": 218,
    "costo": null
   },
   {
@@ -5674,9 +5680,9 @@
    "titulo": "Incumplimiento en requisito para ejecución de soldadura por extrusión HDPE",
    "estatus": "Iniciado",
    "creada": "25-05-2026",
-   "dias": 175,
+   "dias": 182,
    "atrasada": true,
-   "diasAtraso": 165,
+   "diasAtraso": 172,
    "costo": null
   },
   {
@@ -5691,9 +5697,9 @@
    "titulo": "Geomembrana presenta sectores en los vértices y cambios de pendiente sin apoyo sobre el sustrato, permaneciendo suspendida (\"en el aire\"), y se verifi",
    "estatus": "Listo para revisión",
    "creada": "30-06-2026",
-   "dias": 139,
+   "dias": 146,
    "atrasada": true,
-   "diasAtraso": 129,
+   "diasAtraso": 136,
    "costo": null
   },
   {
@@ -5708,9 +5714,9 @@
    "titulo": "Desviación respecto a la ingeniería en uniones vitaulic del área molienda.",
    "estatus": "Observada",
    "creada": "31-07-2026",
-   "dias": 108,
+   "dias": 115,
    "atrasada": true,
-   "diasAtraso": 98,
+   "diasAtraso": 105,
    "costo": null
   },
   {
@@ -5725,9 +5731,9 @@
    "titulo": "Perdida de torque en pernos",
    "estatus": "Listo para revisión",
    "creada": "01-09-2026",
-   "dias": 76,
+   "dias": 83,
    "atrasada": true,
-   "diasAtraso": 66,
+   "diasAtraso": 73,
    "costo": null
   },
   {
@@ -5742,9 +5748,9 @@
    "titulo": "Desviación en línea de succión de las bombas 4310-PU-001/002",
    "estatus": "Observada",
    "creada": "01-09-2026",
-   "dias": 76,
+   "dias": 83,
    "atrasada": true,
-   "diasAtraso": 66,
+   "diasAtraso": 73,
    "costo": null
   },
   {
@@ -5759,9 +5765,9 @@
    "titulo": "No se dispone de una planificación integrada del cierre que consolide los pendientes, responsables, prioridades y fechas comprometidas, considerando l",
    "estatus": "Listo para revisión",
    "creada": "23-09-2026",
-   "dias": 54,
+   "dias": 61,
    "atrasada": true,
-   "diasAtraso": 44,
+   "diasAtraso": 51,
    "costo": null
   },
   {
@@ -5776,9 +5782,9 @@
    "titulo": "Desviación en plano As-Built",
    "estatus": "Pendiente",
    "creada": "21-10-2026",
-   "dias": 26,
+   "dias": 33,
    "atrasada": true,
-   "diasAtraso": 16,
+   "diasAtraso": 23,
    "costo": null
   },
   {
@@ -5793,9 +5799,9 @@
    "titulo": "Pruebas 2400-CV-001",
    "estatus": "Listo para revisión",
    "creada": "21-10-2026",
-   "dias": 26,
+   "dias": 33,
    "atrasada": true,
-   "diasAtraso": 16,
+   "diasAtraso": 23,
    "costo": null
   },
   {
@@ -5810,9 +5816,9 @@
    "titulo": "Inconsistencias en los registros de medición de resistencia de devanados de motores eléctricos",
    "estatus": "Iniciado",
    "creada": "23-10-2026",
-   "dias": 24,
+   "dias": 31,
    "atrasada": true,
-   "diasAtraso": 14,
+   "diasAtraso": 21,
    "costo": null
   },
   {
@@ -5827,9 +5833,9 @@
    "titulo": "Desviaciones de Precom en correas 2400-CV-003, 2400-CV-004 y 2100-CV-001",
    "estatus": "Listo para revisión",
    "creada": "27-10-2026",
-   "dias": 20,
+   "dias": 27,
    "atrasada": true,
-   "diasAtraso": 10,
+   "diasAtraso": 17,
    "costo": null
   },
   {
@@ -5844,26 +5850,9 @@
    "titulo": "Falta de conexionado de termistores y JOG en sala eléctrica 2700",
    "estatus": "Listo para revisión",
    "creada": "27-10-2026",
-   "dias": 20,
+   "dias": 27,
    "atrasada": true,
-   "diasAtraso": 10,
-   "costo": null
-  },
-  {
-   "proy": "DESALADORA",
-   "proyNombre": "Desaladora",
-   "n": "97",
-   "tipo": "No Conformidad",
-   "origen": "Interna",
-   "emision": "Interna BSMT",
-   "especialidad": "ELÉCTRICA",
-   "responsable": "Alfonso Novoa .",
-   "titulo": "Aplicación de tensión de ensayo superior al rango normativo recomendado en pruebas de resistencia de aislamiento de motores de media tensión",
-   "estatus": "Iniciado",
-   "creada": "08-11-2026",
-   "dias": 8,
-   "atrasada": false,
-   "diasAtraso": null,
+   "diasAtraso": 17,
    "costo": null
   }
  ],
@@ -5871,37 +5860,32 @@
   {
    "nombre": "Sin asignar",
    "abiertas": 16,
-   "dias": 396
+   "dias": 403
   },
   {
    "nombre": "Renato Muñoz F.",
    "abiertas": 1,
-   "dias": 175
+   "dias": 182
   },
   {
    "nombre": "Mauricio Rocha A.",
    "abiertas": 1,
-   "dias": 139
+   "dias": 146
   },
   {
    "nombre": "Mauricio Soto B.",
    "abiertas": 1,
-   "dias": 54
+   "dias": 61
   },
   {
    "nombre": "Luis Carrasco",
    "abiertas": 1,
-   "dias": 24
-  },
-  {
-   "nombre": "Alfonso Novoa .",
-   "abiertas": 1,
-   "dias": 8
+   "dias": 31
   }
  ],
  "control": {
   "registros": 522,
-  "abiertas": 21,
+  "abiertas": 20,
   "plazoRespuesta": 10,
   "atrasoCalculable": true,
   "abiertasSinFechaEmision": 0,
@@ -5910,7 +5894,7 @@
    "08-11-2026"
   ],
   "excluidos": {
-   "Opción de Mejora": 14
+   "Opción de Mejora": 15
   },
   "clienteSoloDelLog": {
    "proyecto": "ARQUEROS",
@@ -5920,14 +5904,14 @@
    ]
   },
   "excluidosPorProyecto": {
-   "Desaladora": 13,
+   "Desaladora": 14,
    "Talabre": 1
   },
   "tiposExcluidos": [
    "Opción de Mejora"
   ],
-  "sinCosto": 270,
-  "costoConMonto": 109,
+  "sinCosto": 269,
+  "costoConMonto": 110,
   "costoEnCero": 143,
   "sinEspecialidad": 8,
   "externasCliente": {
